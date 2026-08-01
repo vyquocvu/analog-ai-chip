@@ -1,60 +1,120 @@
-# Analog AI Chip
+# Analog AI Machine
 
 [![CI](https://github.com/vyquocvu/analog-ai-chip/actions/workflows/ci.yml/badge.svg)](https://github.com/vyquocvu/analog-ai-chip/actions/workflows/ci.yml)
 
-Analog AI Chip is an executable book for learning ReRAM crossbars, analog in-memory computing (AIMC), and the architecture of practical AI accelerators.
+**Build a modular analog neural computer at home, one circuit at a time.**
 
-The method is simple: predict the result, calculate a tiny example by hand, reproduce it in Python, then deliberately introduce a hardware non-ideality and study what changes. Assertions connect the equations in each chapter to runnable code.
+This repository is an executable DIY book for learning analog AI by building real low-voltage hardware: first one weighted sum, then a crossbar tile, then a USB-controlled modular machine capable of running tiny neural networks.
 
-> This repository models analog compute behavior; it does not claim that a digital PyTorch or NumPy operation is a transistor-level circuit simulation.
+The project starts with breadboards, resistors, op-amps, ADCs, DACs, and microcontrollers. Actual ReRAM and custom silicon are advanced research modules, not prerequisites.
 
-## Lessons
+> The initial machine is a hybrid analog-digital educational accelerator. It demonstrates real analog matrix-vector multiplication, but it is not a fabricated ReRAM chip and does not claim to outperform GPUs.
 
-| # | Lesson | You compute by hand | Status |
+## What you will build
+
+```text
+Laptop / Raspberry Pi
+        │ USB / Serial
+        ▼
+Controller → DAC → Analog crossbar → Current summing → ADC
+                          │
+                    stackable tiles
+```
+
+The target machine is modular:
+
+- a safe 5 V power and reference module;
+- a microcontroller-based controller;
+- DAC input channels;
+- fixed-resistor and programmable-conductance crossbar tiles;
+- transimpedance/current-summing outputs;
+- ADC measurement channels;
+- optional analog activation modules;
+- a backplane for stacking multiple tiles;
+- Python software for calibration, weight mapping, execution, and verification.
+
+## Build path
+
+| # | Build | Physical result | Status |
 |---|---|---|---|
-| 0001 | [Ohm + Kirchhoff = matrix-vector multiplication](lessons/0001-crossbar-mvm) | A 2×2 crossbar from voltages and conductances | done |
-| 0002 | [Signed weights with differential pairs](lessons/0002-differential-pairs) | Mapping positive and negative weights to G+ and G− | done |
-| 0003 | [DAC, ADC, quantization, and noise](lessons/0003-converters-and-noise) | Quantization error and noisy inference | done |
-| 0004 | [Tiling a matrix across physical arrays](lessons/0004-tiling) | Partial sums for a matrix larger than one crossbar | done |
-| 0005 | Static LLM layers on ReRAM | GPT-style projections and MLP layers | planned |
-| 0006 | Dynamic attention and KV cache | What cannot be preloaded as static conductance | planned |
-| 0007 | Energy and latency ledger | ADC/DAC, memory, NoC, and accumulation costs | planned |
-| 0008 | Hardware-aware fine-tuning | Recovering accuracy under non-idealities | planned |
+| 0000 | [Define the machine](book/0000-what-we-are-building) | System boundaries, modules, and safety rules | done |
+| 0001 | [Build one analog neuron](book/0001-one-analog-neuron) | A breadboard weighted-sum circuit | started |
+| 0002 | Build a 2×2 fixed crossbar | Real Ohm/Kirchhoff matrix-vector multiplication | planned |
+| 0003 | Add signed weights | Differential G+ / G− paths | planned |
+| 0004 | Add a microcontroller | Automated input and measurement | planned |
+| 0005 | Add DAC and ADC modules | Repeatable digital-to-analog inference | planned |
+| 0006 | Build a programmable 4×4 tile | Software-programmable weights | planned |
+| 0007 | Calibrate the machine | Offset, gain, noise, and clipping correction | planned |
+| 0008 | Run a tiny neural network | Hybrid analog-digital inference | planned |
+| 0009 | Stack multiple tiles | Tiled layers and partial sums | planned |
+| 0010 | Design the first PCB kit | Reproducible modular hardware | planned |
+| 0011 | Experimental memory modules | Memristor/ReRAM evaluation devices | research |
 
-## Run it
+The existing executable lessons under [`lessons/`](lessons) remain the mathematical and software foundation. The new [`book/`](book) path turns those ideas into physical builds.
+
+## Repository layout
+
+```text
+analog-ai-chip/
+├── book/               step-by-step DIY chapters
+├── hardware/           schematics, KiCad projects, BOMs, assembly guides
+├── firmware/           controller firmware and wire protocol
+├── software/           host tools, compiler, calibration, and CLI
+├── analog_ai/          reusable functional models
+├── lessons/            executable theory and simulation lessons
+├── experiments/        measured hardware results
+├── maths/              plain-language reference shelf
+├── tests/              deterministic software checks
+└── docs/               architecture, module standard, safety, roadmap
+```
+
+## Chapter discipline
+
+Every hardware chapter must include:
+
+1. what is being built;
+2. why the circuit works;
+3. schematic and wiring diagram;
+4. bill of materials;
+5. expected voltages/currents;
+6. firmware and host commands;
+7. Python verification;
+8. calibration procedure;
+9. common failure modes;
+10. measurements to record;
+11. experiments to try;
+12. an explicit statement of what the build does not prove.
+
+## First target
+
+The first complete release is **Homebrew Analog AI v0.1**:
+
+- one USB-connected controller;
+- one 4×4 signed-weight tile;
+- low-voltage operation;
+- automated calibration;
+- Python CLI;
+- a reproducible tiny classifier demo;
+- open schematics, firmware, BOM, and measurement data.
+
+## Safety and scope
+
+The project is intentionally limited to low-voltage circuits powered from USB or a current-limited bench supply. Do not connect breadboards directly to mains electricity. See [`docs/SAFETY.md`](docs/SAFETY.md).
+
+The project distinguishes carefully between:
+
+- resistor/digital-pot crossbars and actual ReRAM devices;
+- functional models and circuit simulation;
+- one resident crossbar operation and end-to-end model latency;
+- educational measurements and competitive accelerator benchmarks.
+
+## Run the software foundation
 
 ```bash
 python -m pip install -e '.[dev]'
 pytest
 python lessons/0001-crossbar-mvm/train.py
-python lessons/0004-tiling/train.py
 ```
-
-Python 3.11+ and NumPy are sufficient for the first four lessons.
-
-## Layout
-
-```text
-analog-ai-chip/
-├── analog_ai/          reusable functional models
-├── lessons/            executable chapters
-├── maths/              plain-language reference shelf
-├── tests/              independent checks for book arithmetic
-├── docs/ROADMAP.md     curriculum and implementation roadmap
-├── pyproject.toml
-└── .github/workflows/  CI for lessons and package tests
-```
-
-Each completed lesson contains a readable `README.md` and a `train.py` program whose assertions reproduce the chapter's hand calculations.
-
-## Scope
-
-The project begins at the device/array abstraction and grows toward system architecture. It distinguishes carefully between:
-
-- ideal crossbar MVM and end-to-end transformer latency;
-- static model weights and dynamic activations/KV cache;
-- functional error models and circuit-accurate simulation;
-- theoretical parallelism and physical ADC/DAC/interconnect costs.
 
 ## License
 
