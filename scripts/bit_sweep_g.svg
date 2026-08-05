@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="Menlo,Consolas,monospace">
+<rect width="960" height="540" fill="#ffffff"/>
+<text x="480" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#111">Accuracy vs conductance resolution</text>
+<text x="480" y="52" text-anchor="middle" font-size="12" fill="#7f8c8d">max |logit error| vs conductance levels (2^g_bits)</text>
+<line x1="150.0" y1="70.0" x2="860.0" y2="70.0" stroke="#333" stroke-width="1.5"/>
+<line x1="150.0" y1="70.0" x2="150.0" y2="500.0" stroke="#333" stroke-width="1.5"/>
+<text x="860.0" y="526.0" text-anchor="end" fill="#333">conductance levels (2^g_bits) (log)</text>
+<text x="140.0" y="84.0" fill="#333">max logit error</text>
+<text x="150.0" y="86.0" text-anchor="middle" fill="#666" font-size="11">4</text>
+<text x="268.33333333333337" y="86.0" text-anchor="middle" fill="#666" font-size="11">16</text>
+<text x="386.66666666666663" y="86.0" text-anchor="middle" fill="#666" font-size="11">64</text>
+<text x="505.0" y="86.0" text-anchor="middle" fill="#666" font-size="11">256</text>
+<text x="623.3333333333334" y="86.0" text-anchor="middle" fill="#666" font-size="11">1024</text>
+<text x="741.6666666666666" y="86.0" text-anchor="middle" fill="#666" font-size="11">4096</text>
+<text x="860.0" y="86.0" text-anchor="middle" fill="#666" font-size="11">16384</text>
+<polyline points="150.0,70.0 268.3,239.3 386.7,476.5 505.0,491.4 623.3,493.1 741.7,493.3 860.0,492.3" fill="none" stroke="#1a5276" stroke-width="3"/>
+</svg>

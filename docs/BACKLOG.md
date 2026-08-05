@@ -73,7 +73,14 @@ see how MACs / conductance cells grow, so I understand the crossbar view.
 ### B1 — Bit sweep: accuracy-vs-cost with the simulator  `[S]`
 **As a** designer, **I want** a `scripts/bit_sweep.py` that sweeps
 `g_bits`/`adc_bits` and reports the accuracy-vs-cost curve.
-**AC:** a runnable script + a small report; closes ROADMAP M4.
+
+**AC:**
+- [x] runnable `scripts/bit_sweep.py` sweeping `g_bits` and `adc_bits`;
+- [x] reports token agreement + max logit error vs cost, with guardrails
+      (more bits => lower error);
+- [x] SVG curves `bit_sweep_g.svg` / `bit_sweep_adc.svg`; pytest
+      (`tests/test_bit_sweep.py`, always);
+- [x] ROADMAP M4 bit-sweep item closed.
 
 ### B2 — Per-non-ideality ablation  `[S]`
 **AC:** toggle each non-ideality independently and report each one's
@@ -153,13 +160,6 @@ ledger with `tile_count > 1`; closes ROADMAP M2.
 
 ---
 
-## Current Sprint — Sprint 4
-Goal: give chapter 0005 **concrete build files** so it is breadboardable.
-
-| Id | Item | Size | Status |
-|---|---|---|---|
-| A4 | Breadboard wiring + BOM + test points | M | **done** |
-
 ## Sprint 4 (completed) — Review & Retrospective
 
 **Increment (A4, doD met):**
@@ -178,14 +178,14 @@ concrete-deliverable gap (a physical build + measurements remain).
 
 ---
 
-## Current Sprint — Sprint 5
+## Sprint 5 (completed) — Review & Retrospective
 Goal: scale one neuron into a **layer of many neurons** (10/100/1000).
 
 | Id | Item | Size | Status |
 |---|---|---|---|
 | A5 | Chapter 0006: many neurons | M | **done** |
 
-## Sprint 5 — Review & Retrospective
+### Sprint 5 — Review & Retrospective
 
 **Increment delivered (doD met):**
 - `book/0006-many-neurons/layer_neuron.py` — numpy layer for N=10/100/1000,
@@ -206,3 +206,33 @@ Goal: scale one neuron into a **layer of many neurons** (10/100/1000).
   tied the book's neuron view to the simulator's tile view in one step.
 - Improve: next, run the same scaling through `analog_llm` delib (B-series:
   B1 bit sweep, B3 multi-tile demo) to finish the simulator milestones.
+
+---
+
+## Current Sprint — Sprint 6
+Goal: quantify the **accuracy-vs-cost** trade-off of the simulator (ROADMAP M4).
+
+| Id | Item | Size | Status |
+|---|---|---|---|
+| B1 | Bit sweep: accuracy-vs-cost | S | **done** |
+
+## Sprint 6 — Review & Retrospective
+
+**Increment delivered (doD met):**
+- `scripts/bit_sweep.py` — sweeps `g_bits` and `adc_bits`, reports token
+  agreement + max logit error vs cost; guardrails; writes `bit_sweep_g.svg` /
+  `bit_sweep_adc.svg`.
+- pytest `tests/test_bit_sweep.py` (always runs); ROADMAP M4 bit-sweep `[x]`.
+
+**Sprint Review (demo summary):**
+- g_bits: 2→0.391, 4→0.237, 6→0.021, 8+→~0.007 (clear knee; more bits cost,
+  buy less).
+- adc_bits: needs ≥10 for low error; below is noisy (~0.3–0.5).
+- Conclusion: conductance resolution (g_bits) is the dominant, cheapest-to-fix
+  lever; converter bits matter above a floor.
+
+**Retrospective — what went well / to improve:**
+- Well: quick win closing M4; the knee curve is a concrete, honest
+  accuracy-vs-cost result (no energy claim).
+- Improve: next, B2 (per-non-ideality ablation) to attribute the error to each
+  source, and B3 (multi-tile demo) to close M2.
