@@ -1,7 +1,10 @@
 # 0005 — Build One Analog Neuron
 
-> **Reading time:** ~15 min · **Simulate:** `python book/0005-one-analog-neuron/sim_neuron.py`
+> **Reading time:** ~20 min · **Simulate:** `book/0005-one-analog-neuron/sim_neuron*.py`
 > **Bản tiếng Việt:** [`README.vi.md`](README.vi.md)
+
+> Status: **circuit designed, simulated, and BOM'd**; a real build/measurement
+> is still outstanding. See the build files below and `calibration.md`.
 
 ## Goal
 
@@ -139,6 +142,30 @@ headroom down = VREF − 0   = 2.5 V
 Keep `|Vout − VREF| ≤ 2.5 V` to stay linear. For the gnd-referenced
 configuration `headroom down = 0`, which is exactly why it clips on any positive
 input.
+
+## Build files (simulated design, ready to breadboard)
+
+The full single-supply circuit (2.5 V reference buffer + inverting summer,
+LM358) has a schematic, BOM, wiring, test points, and calibration procedure:
+
+![Full 0005 build schematic](diagrams/full_schematic.svg)
+
+| File | Contains |
+|---|---|
+| [`diagrams/full_schematic.svg`](diagrams/full_schematic.svg) | full schematic with test points |
+| [`bom.csv`](bom.csv) | parts + substitutes |
+| [`breadboard.md`](breadboard.md) | pin-by-pin LM358 wiring |
+| [`testpoints.md`](testpoints.md) | TP1–TP9 expected/actual table |
+| [`calibration.md`](calibration.md) | bring-up, calibration record, power-down |
+
+| Part | Value | Role |
+|---|---|---|
+| U1 | LM358 (dual) | A = reference buffer, B = summer |
+| R1 / R2 / Rf | 2 k / 4 k / 1 k | w = [0.50, 0.25] |
+| R3 / R4 | 10 k / 10 k | 2.5 V reference divider |
+
+The build must use the **virtual reference** (not a gnd-referenced inverting
+summer), exactly as scenarios 1–3 of the non-ideal sim demonstrated.
 
 ## Learning result
 

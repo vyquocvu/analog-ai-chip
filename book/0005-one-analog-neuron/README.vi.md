@@ -1,6 +1,9 @@
 # 0005 — Xây một neuron analog
 
-> **Thời gian đọc:** ~15 phút · **Mô phỏng:** `python book/0005-one-analog-neuron/sim_neuron.py`
+> **Thời gian đọc:** ~20 phút · **Mô phỏng:** `book/0005-one-analog-neuron/sim_neuron*.py`
+
+> Trạng thái: **đã thiết kế mạch, mô phỏng và lập BOM**; phần build/đo linh kiện
+> thật vẫn còn chờ. Xem các file build dưới và `calibration.md`.
 
 ## Mục tiêu
 
@@ -138,6 +141,30 @@ headroom xuống = VREF − 0   = 2.5 V
 
 Giữ `|Vout − VREF| ≤ 2.5 V` để còn tuyến tính. Với cấu hình tham chiếu đất,
 `headroom xuống = 0`, đúng là lý do nó bão hoà với mọi đầu vào dương.
+
+## Các file build (thiết kế đã mô phỏng, sẵn sàng lên breadboard)
+
+Mạch nguồn đơn đầy đủ (buffer mức chuẩn 2.5 V + bộ cộng đảo, LM358) có sơ đồ,
+BOM, cách nối dây, test point và quy trình hiệu chuẩn:
+
+![Sơ đồ build đầy đủ 0005](diagrams/full_schematic.svg)
+
+| File | Nội dung |
+|---|---|
+| [`diagrams/full_schematic.svg`](diagrams/full_schematic.svg) | sơ đồ đầy đủ kèm test point |
+| [`bom.csv`](bom.csv) | linh kiện + lựa chọn thay thế |
+| [`breadboard.md`](breadboard.md) | cách nối dây theo từng chân LM358 |
+| [`testpoints.md`](testpoints.md) | bảng TP1–TP9 dự kiến/thực tế |
+| [`calibration.md`](calibration.md) | bring-up, sổ hiệu chuẩn, tắt nguồn |
+
+| Linh kiện | Giá trị | Vai trò |
+|---|---|---|
+| U1 | LM358 (kép) | A = buffer chuẩn, B = bộ cộng |
+| R1 / R2 / Rf | 2 k / 4 k / 1 k | w = [0.50, 0.25] |
+| R3 / R4 | 10 k / 10 k | bộ chia mức chuẩn 2.5 V |
+
+Bản build phải dùng **mức chuẩn ảo** (không phải bộ cộng đảo tham chiếu đất),
+đúng như kịch bản 1–3 của mô phỏng phi lý tưởng đã chứng minh.
 
 ## Kết quả học được
 

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 640" width="1040" height="640" font-family="Menlo,Consolas,monospace">
+<rect width="1040" height="640" fill="#ffffff"/>
+<style>.w{stroke:#333;stroke-width:2.5;fill:none;}.lab{fill:#ca6f1e;font-size:12px;font-weight:bold;}.tp{fill:#1e8449;font-size:11px;font-weight:bold;}.o{fill:#eaf2f8;stroke:#1a5276;stroke-width:2;}.cap{fill:#7f8c8d;font-size:12px;}</style>
+<text x="520" y="30" text-anchor="middle" font-size="19" font-weight="bold" fill="#111">0005 Build: reference buffer + inverting summer (LM358, single 5 V)</text>
+<line x1="40" y1="90" x2="1000" y2="90" class="w"/>
+<line x1="40" y1="570" x2="1000" y2="570" class="w"/>
+<text x="40" y="82" class="lab">+5 V</text>
+<text x="40" y="588" class="cap">0 V (gnd)</text>
+<line x1="150" y1="90" x2="150" y2="400" class="w"/>
+<rect x="143" y="320" width="14" height="40" fill="#fdebd0" stroke="#1a5276" stroke-width="2"/>
+<text x="150" y="376" text-anchor="middle" class="lab" font-size="12">R3 10k</text>
+<line x1="150" y1="380" x2="150" y2="470" class="w"/>
+<rect x="143" y="490" width="14" height="40" fill="#fdebd0" stroke="#1a5276" stroke-width="2"/>
+<text x="150" y="546" text-anchor="middle" class="lab" font-size="12">R4 10k</text>
+<line x1="150" y1="530" x2="150" y2="570" class="w"/>
+<circle cx="150" cy="400" r="4" fill="#333"/>
+<text x="166" y="386" class="tp">REF</text>
+<line x1="150" y1="400" x2="250" y2="190" class="w"/>
+<path class="o" d="M330,190 L330,290 L430,240 Z"/>
+<text x="340" y="280" font-size="14" font-weight="bold" fill="#1a5276">−</text>
+<text x="340" y="206" font-size="14" font-weight="bold" fill="#1a5276">+</text>
+<text x="336" y="234" class="lab" font-size="12">U1A</text>
+<line x1="250" y1="190" x2="330" y2="190" class="w"/>
+<line x1="330" y1="190" x2="330" y2="290" class="w"/>
+<line x1="330" y1="190" x2="330" y2="190" class="w"/>
+<line x1="330" y1="290" x2="330" y2="470" class="w"/>
+<line x1="330" y1="470" x2="430" y2="470" class="w"/>
+<line x1="430" y1="470" x2="430" y2="240" class="w"/>
+<line x1="430" y1="240" x2="430" y2="240" class="w"/>
+<line x1="430" y1="240" x2="520" y2="250" class="w"/>
+<circle cx="430" cy="240" r="4" fill="#333"/>
+<circle cx="90" cy="680" r="16" fill="#fdf2e9" stroke="#ca6f1e" stroke-width="2.5"/>
+<text x="90" y="685" text-anchor="middle" class="lab" font-size="12">x1</text>
+<circle cx="90" cy="770" r="16" fill="#fdf2e9" stroke="#ca6f1e" stroke-width="2.5"/>
+<text x="90" y="775" text-anchor="middle" class="lab" font-size="12">x2</text>
+<line x1="106" y1="680" x2="180" y2="680" class="w"/>
+<rect x="173" y="660" width="14" height="40" fill="#fdebd0" stroke="#1a5276" stroke-width="2"/>
+<text x="180" y="716" text-anchor="middle" class="lab" font-size="12">R1 2k</text>
+<line x1="220" y1="680" x2="540" y2="680" class="w"/>
+<line x1="106" y1="770" x2="180" y2="770" class="w"/>
+<rect x="173" y="750" width="14" height="40" fill="#fdebd0" stroke="#1a5276" stroke-width="2"/>
+<text x="180" y="806" text-anchor="middle" class="lab" font-size="12">R2 4k</text>
+<line x1="220" y1="770" x2="540" y2="770" class="w"/>
+<line x1="540" y1="680" x2="540" y2="560" class="w"/>
+<line x1="540" y1="770" x2="540" y2="560" class="w"/>
+<circle cx="540" cy="560" r="4" fill="#333"/>
+<text x="566" y="634" class="tp">n (TP5)</text>
+<line x1="540" y1="560" x2="660" y2="560" class="w"/>
+<path class="o" d="M730,330 L730,430 L830,380 Z"/>
+<text x="740" y="420" font-size="14" font-weight="bold" fill="#1a5276">−</text>
+<text x="740" y="346" font-size="14" font-weight="bold" fill="#1a5276">+</text>
+<text x="736" y="374" class="lab" font-size="12">U1B</text>
+<line x1="520" y1="250" x2="700" y2="250" class="w"/>
+<line x1="700" y1="250" x2="700" y2="330" class="w"/>
+<line x1="700" y1="330" x2="730" y2="330" class="w"/>
+<line x1="830" y1="380" x2="920" y2="380" class="w"/>
+<text x="936" y="368" class="tp">Vout (TP8)</text>
+<line x1="920" y1="380" x2="920" y2="560" class="w"/>
+<line x1="920" y1="560" x2="660" y2="560" class="w"/>
+<text x="935" y="520" class="lab">Rf 1k</text>
+<text x="116" y="104" class="tp">TP1 +5V</text>
+<text x="116" y="594" class="tp">TP2 gnd</text>
+<text x="520" y="620" text-anchor="middle" class="cap">Vout = 2.5 − (0.5·(x1−2.5) + 0.25·(x2−2.5)) · n ≈ 2.5 V virtual ground</text>
+</svg>

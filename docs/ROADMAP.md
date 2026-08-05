@@ -17,6 +17,9 @@ executable evidence (tests + a runnable demo/report), never by prose alone.
 - [x] Virtual-ground and rail-headroom check: summing node error vs open-loop
       gain + headroom up/down on the 5 V supply
       (`book/0005-one-analog-neuron/headroom_neuron.py` + `diagrams/virtual_ground.svg`)
+- [x] Build files for 0005: full schematic, BOM (`bom.csv`), pin-by-pin
+      wiring (`breadboard.md`), test points (`testpoints.md`), and bring-up /
+      calibration + power-down (`calibration.md`)
 
 Exit: a builder can reproduce the circuit's expected voltages in simulation
 before assembling hardware.

@@ -47,7 +47,16 @@ at the reference in the linear region and report the rail headroom.
 - [x] chapter + ROADMAP updated.
 
 ### A4 — Breadboard wiring + BOM + test-point table for 0005  `[M]`
-**AC:** chapter 0005 gets `breadboard.md`, `bom.csv`, and a test-point table.
+**As a** builder, **I want** concrete build files so I can assemble the circuit
+from parts and verify it.
+
+**AC:**
+- [x] `bom.csv` with parts + substitutes and correct designators;
+- [x] `breadboard.md` with pin-by-pin LM358 wiring (virtual-reference design);
+- [x] `testpoints.md` (TP1–TP9 expected/actual) + `calibration.md` bring-up /
+      power-down;
+- [x] full schematic SVG + data-file pytest (validated, no engine needed);
+- [x] chapter (EN + VI) and ROADMAP updated.
 
 ### B1 — Bit sweep: accuracy-vs-cost with the simulator  `[S]`
 **As a** designer, **I want** a `scripts/bit_sweep.py` that sweeps
@@ -113,29 +122,51 @@ ledger with `tile_count > 1`; closes ROADMAP M2.
 
 ---
 
-## Current Sprint — Sprint 3
-Goal: verify the neuron's **virtual ground and rail headroom** before building.
+## Sprint 3 (completed) — Review & Retrospective
 
-| Id | Item | Size | Status |
-|---|---|---|---|
-| A3 | Virtual-ground / rail-headroom check | S | **done** |
-
-## Sprint 3 — Review & Retrospective
-
-**Increment delivered (doD met):**
+**Increment (A3, doD met):**
 - `book/0005-one-analog-neuron/headroom_neuron.py` — virtual-ground error vs
-  open-loop gain + rail-headroom report.
-- `diagrams/virtual_ground.svg` — annotated `n − VREF` error plot.
+  open-loop gain + rail-headroom report; `diagrams/virtual_ground.svg`.
 - pytest `test_neuron_virtual_ground_and_headroom` (auto-skip without engine).
 
 **Sprint Review (demo summary):**
 - Virtual-ground error: Aol 1e4 → 0.37 mV; Aol 1e3 → 3.74 mV (scales 1/Aol).
 - Rail headroom up = down = 2.5 V; gnd-reference headroom down = 0 (clips).
-- Ready to record the same quantities on real hardware.
 
 **Retrospective — what went well / to improve:**
 - Well: A3 cleanly reuses A1/A2; the 1/Aol error scaling is a nice, physical
   teaching point.
-- Improve: next, the chapter still lacks concrete breadboard/BOM/test-point
-  deliverables (A4, M) — the biggest remaining piece to make 0005 a real,
-  buildable chapter.
+- Improve: next, 0005 still lacked concrete breadboard/BOM/test-point
+  deliverables — fulfilled by A4 (Sprint 4).
+
+---
+
+## Current Sprint — Sprint 4
+Goal: give chapter 0005 **concrete build files** so it is breadboardable.
+
+| Id | Item | Size | Status |
+|---|---|---|---|
+| A4 | Breadboard wiring + BOM + test points | M | **done** |
+
+## Sprint 4 — Review & Retrospective
+
+**Increment delivered (doD met):**
+- `bom.csv`, `breadboard.md`, `testpoints.md`, `calibration.md`,
+  `diagrams/full_schematic.svg` — full single-supply LM358 build (2.5 V
+  reference buffer + inverting summer, w = [0.50, 0.25]).
+- data-file pytest `tests/test_chapter_files.py` (validates BOM/docs/SVGs,
+  no engine required); chapter 0005 (EN + VI) updated with a "Build files"
+  section and status.
+
+**Sprint Review (demo summary):**
+- All build data files present and machine-checked; designators consistent
+  (`U1`); BOM = 12 lines.
+- This satisfies the last "design-only" gap in 0005 aside from an actual
+  physical build + measurements.
+
+**Retrospective — what went well / to improve:**
+- Well: A4 closes chapter 0005's concrete-deliverable gap; the no-engine
+  data test keeps DoD measurable without ngspice.
+- Improve: the only remaining 0005 step is a **real build + `measurements.csv`**
+  (physical evidence), which needs hardware — a new non-sim sprint (or
+  acceptance by a builder).
