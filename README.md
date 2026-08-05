@@ -37,6 +37,8 @@ chapter 0005 turns one weighted sum into a measurable analog circuit.
 
 Reference: `maths/`, `docs/MODULE_STANDARD.md`, `docs/SAFETY.md`.
 
+> **Tiếng Việt:** mỗi chương đều có `README.vi.md` ở cùng thư mục (bản tiếng Việt) bên cạnh `README.md` (tiếng Anh).
+
 ```bash
 python book/0001-crossbar-mvm/train.py
 python book/0002-differential-pairs/train.py

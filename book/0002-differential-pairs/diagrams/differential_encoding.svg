@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="Menlo, Consolas, monospace">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="960" height="600" fill="#ffffff"/>
+  <style>
+    .cell { stroke:#1a5276; stroke-width:1.5; }
+    .cellpos { fill:#eafaf1; }
+    .cellneg { fill:#fdedec; }
+    .cellzero{ fill:#f4f6f7; }
+    .txt { fill:#111; font-size:15px; }
+    .lbl { fill:#1a5276; font-weight:bold; font-size:14px; }
+    .zero{ fill:#7f8c8d; font-size:13px; }
+  </style>
+
+  <text x="480" y="28" text-anchor="middle" font-size="20" font-weight="bold" fill="#111">Differential-pair encoding: W = (G+ − G−) / scale</text>
+  <text x="480" y="50" text-anchor="middle" class="zero">scale = 4 — positive parts go to G+, |negative parts| go to G−, both stay ≥ 0</text>
+
+  <!-- ===== W grid ===== -->
+  <g>
+    <text x="84" y="100" text-anchor="middle" class="lbl">W (signed)</text>
+    <!-- hdr: input0, input1 -->
+    <text x="64" y="118" text-anchor="middle" class="zero">in0</text>
+    <text x="148" y="118" text-anchor="middle" class="zero">in1</text>
+    <rect class="cell cellpos" x="40" y="124" width="84" height="48"/><text x="82" y="153" text-anchor="middle" class="txt"> 1.0</text>
+    <rect class="cell cellneg" x="124" y="124" width="84" height="48"/><text x="166" y="153" text-anchor="middle" class="txt">−2.0</text>
+    <rect class="cell cellneg" x="40" y="172" width="84" height="48"/><text x="82" y="201" text-anchor="middle" class="txt">−0.5</text>
+    <rect class="cell cellpos" x="124" y="172" width="84" height="48"/><text x="166" y="201" text-anchor="middle" class="txt"> 3.0</text>
+    <text x="64" y="240" text-anchor="middle" class="zero">out0</text>
+    <text x="148" y="240" text-anchor="middle" class="zero">out1</text>
+  </g>
+
+  <!-- arrow W -> G+ -->
+  <line x1="232" y1="150" x2="320" y2="150" stroke="#333" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="276" y="140" text-anchor="middle" class="zero" font-size="12">× scale</text>
+
+  <!-- ===== G+ grid ===== -->
+  <g>
+    <text x="396" y="100" text-anchor="middle" class="lbl">G+ (non-negative)</text>
+    <text x="376" y="118" text-anchor="middle" class="zero">in0</text>
+    <text x="460" y="118" text-anchor="middle" class="zero">in1</text>
+    <rect class="cell cellpos" x="352" y="124" width="84" height="48"/><text x="394" y="153" text-anchor="middle" class="txt">4.0</text>
+    <rect class="cell cellzero" x="436" y="124" width="84" height="48"/><text x="478" y="153" text-anchor="middle" class="txt">0.0</text>
+    <rect class="cell cellzero" x="352" y="172" width="84" height="48"/><text x="394" y="201" text-anchor="middle" class="txt">0.0</text>
+    <rect class="cell cellpos" x="436" y="172" width="84" height="48"/><text x="478" y="201" text-anchor="middle" class="txt">12.0</text>
+  </g>
+
+  <!-- arrow W -> G- (below) -->
+  <line x1="232" y1="230" x2="320" y2="230" stroke="#333" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="276" y="248" text-anchor="middle" class="zero" font-size="12">× |neg|</text>
+
+  <!-- ===== G- grid ===== -->
+  <g>
+    <text x="396" y="220" text-anchor="middle" class="lbl">G− (non-negative)</text>
+    <text x="376" y="238" text-anchor="middle" class="zero">in0</text>
+    <text x="460" y="238" text-anchor="middle" class="zero">in1</text>
+    <rect class="cell cellzero" x="352" y="244" width="84" height="48"/><text x="394" y="273" text-anchor="middle" class="txt">0.0</text>
+    <rect class="cell cellpos" x="436" y="244" width="84" height="48"/><text x="478" y="273" text-anchor="middle" class="txt">8.0</text>
+    <rect class="cell cellpos" x="352" y="292" width="84" height="48"/><text x="394" y="321" text-anchor="middle" class="txt">2.0</text>
+    <rect class="cell cellzero" x="436" y="292" width="84" height="48"/><text x="478" y="321" text-anchor="middle" class="txt">0.0</text>
+  </g>
+
+  <!-- reconstruction equations (right side) -->
+  <g>
+    <text x="590" y="140" class="zero" font-size="13">W = (G+ − G−) / scale</text>
+    <text x="590" y="162" class="txt" font-size="13">row0: (4−0)/4, (0−8)/4 = [1.0, −2.0]</text>
+    <text x="590" y="182" class="txt" font-size="13">row1: (0−2)/4, (12−0)/4 = [−0.5, 3.0]</text>
+    <text x="590" y="210" class="lbl" font-size="13">W recovered exactly ✓</text>
+  </g>
+
+  <!-- ===== applying input x ===== -->
+  <line x1="40" y1="420" x2="920" y2="420" stroke="#bbb" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <text x="480" y="440" text-anchor="middle" font-size="16" font-weight="bold" fill="#111">Apply input x = [2, 1]</text>
+  <text x="480" y="468" text-anchor="middle" class="txt" font-size="14">I+ = G+ · x = [ 4·2+0·1 , 0·2+12·1 ] = [ 8 , 12 ]</text>
+  <text x="480" y="490" text-anchor="middle" class="txt" font-size="14">I− = G− · x = [ 0·2+8·1 , 2·2+0·1 ] = [ 8 ,  4 ]</text>
+  <text x="480" y="514" text-anchor="middle" class="txt" font-size="15" font-weight="bold" fill="#1a5276">
+    output = (I+ − I−) / scale = [ (8−8)/4 , (12−4)/4 ] = [ 0 , 2 ]
+  </text>
+  <text x="480" y="540" text-anchor="middle" class="zero" font-size="13">matches W @ x = [1·2+(−2)·1, (−0.5)·2+3·1] = [0, 2]</text>
+</svg>

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="Menlo,Consolas,monospace">
+<rect width="960" height="600" fill="#ffffff"/>
+<style>
+ .ztxt{fill:#7f8c8d;}
+ .hl{fill:#111;font-size:15px;}
+</style>
+<text x="480" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#111">Symmetric b-bit quantization staircase (b = 4, qmax = 7)</text>
+<text x="480" y="50" text-anchor="middle" class="ztxt">x̂ = round(x/scale)·scale, scale = max|x|/qmax — red dashed: ideal y = x</text>
+<line x1="170" y1="300" x2="830" y2="300" stroke="#333" stroke-width="1.5"/>
+<line x1="500" y1="495" x2="500" y2="105" stroke="#333" stroke-width="1.5"/>
+<text x="836.6" y="318.0" class="ztxt" font-size="14">x (input)</text>
+<text x="518.0" y="101.1" class="ztxt" font-size="14">x̂ (code×scale)</text>
+<line x1="170.0" y1="495.0" x2="193.6" y2="495.0" stroke="#1a5276" stroke-width="3"/>
+<line x1="193.6" y1="467.1" x2="240.7" y2="467.1" stroke="#1a5276" stroke-width="3"/>
+<line x1="193.6" y1="495.0" x2="193.6" y2="467.1" stroke="#1a5276" stroke-width="3"/>
+<line x1="240.7" y1="439.3" x2="287.9" y2="439.3" stroke="#1a5276" stroke-width="3"/>
+<line x1="240.7" y1="467.1" x2="240.7" y2="439.3" stroke="#1a5276" stroke-width="3"/>
+<line x1="287.9" y1="411.4" x2="335.0" y2="411.4" stroke="#1a5276" stroke-width="3"/>
+<line x1="287.9" y1="439.3" x2="287.9" y2="411.4" stroke="#1a5276" stroke-width="3"/>
+<line x1="335.0" y1="383.6" x2="382.1" y2="383.6" stroke="#1a5276" stroke-width="3"/>
+<line x1="335.0" y1="411.4" x2="335.0" y2="383.6" stroke="#1a5276" stroke-width="3"/>
+<line x1="382.1" y1="355.7" x2="429.3" y2="355.7" stroke="#1a5276" stroke-width="3"/>
+<line x1="382.1" y1="383.6" x2="382.1" y2="355.7" stroke="#1a5276" stroke-width="3"/>
+<line x1="429.3" y1="327.9" x2="476.4" y2="327.9" stroke="#1a5276" stroke-width="3"/>
+<line x1="429.3" y1="355.7" x2="429.3" y2="327.9" stroke="#1a5276" stroke-width="3"/>
+<line x1="476.4" y1="300.0" x2="523.6" y2="300.0" stroke="#1a5276" stroke-width="3"/>
+<line x1="476.4" y1="327.9" x2="476.4" y2="300.0" stroke="#1a5276" stroke-width="3"/>
+<line x1="523.6" y1="272.1" x2="570.7" y2="272.1" stroke="#1a5276" stroke-width="3"/>
+<line x1="523.6" y1="300.0" x2="523.6" y2="272.1" stroke="#1a5276" stroke-width="3"/>
+<line x1="570.7" y1="244.3" x2="617.9" y2="244.3" stroke="#1a5276" stroke-width="3"/>
+<line x1="570.7" y1="272.1" x2="570.7" y2="244.3" stroke="#1a5276" stroke-width="3"/>
+<line x1="617.9" y1="216.4" x2="665.0" y2="216.4" stroke="#1a5276" stroke-width="3"/>
+<line x1="617.9" y1="244.3" x2="617.9" y2="216.4" stroke="#1a5276" stroke-width="3"/>
+<line x1="665.0" y1="188.6" x2="712.1" y2="188.6" stroke="#1a5276" stroke-width="3"/>
+<line x1="665.0" y1="216.4" x2="665.0" y2="188.6" stroke="#1a5276" stroke-width="3"/>
+<line x1="712.1" y1="160.7" x2="759.3" y2="160.7" stroke="#1a5276" stroke-width="3"/>
+<line x1="712.1" y1="188.6" x2="712.1" y2="160.7" stroke="#1a5276" stroke-width="3"/>
+<line x1="759.3" y1="132.9" x2="806.4" y2="132.9" stroke="#1a5276" stroke-width="3"/>
+<line x1="759.3" y1="160.7" x2="759.3" y2="132.9" stroke="#1a5276" stroke-width="3"/>
+<line x1="806.4" y1="105.0" x2="830.0" y2="105.0" stroke="#1a5276" stroke-width="3"/>
+<line x1="806.4" y1="132.9" x2="806.4" y2="105.0" stroke="#1a5276" stroke-width="3"/>
+<line x1="170" y1="105" x2="830" y2="105" stroke="#d5d8dc" stroke-width="1" stroke-dasharray="4,4"/>
+<line x1="170" y1="495" x2="830" y2="495" stroke="#d5d8dc" stroke-width="1" stroke-dasharray="4,4"/>
+<line x1="170" y1="495" x2="830" y2="105" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="6,4"/>
+<circle cx="170.0" cy="495.0" r="4.5" fill="#e74c3c"/>
+<circle cx="401.0" cy="355.7" r="4.5" fill="#e74c3c"/>
+<circle cx="500.0" cy="300.0" r="4.5" fill="#e74c3c"/>
+<circle cx="566.0" cy="272.1" r="4.5" fill="#e74c3c"/>
+<circle cx="830.0" cy="105.0" r="4.5" fill="#e74c3c"/>
+<text x="596" y="245" class="ztxt" font-size="13">x=0.2 → 1/7</text>
+<text x="251" y="334" class="ztxt" font-size="13">x=−0.3 → −2/7</text>
+<text x="260" y="479" class="ztxt" font-size="13">x=−1.0 → −1</text>
+<text x="480" y="572" text-anchor="middle" class="hl">max rounding error = scale/2 = 1/(2×7) ≈ 0.0714, achieved at x = 0.2 → 1/7</text>
+</svg>

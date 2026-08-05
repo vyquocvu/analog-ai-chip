@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" width="960" height="560" font-family="Menlo, Consolas, monospace">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
+    </marker>
+  </defs>
+
+  <!-- background -->
+  <rect x="0" y="0" width="960" height="560" fill="#ffffff"/>
+
+  <style>
+    .grid { stroke:#e0e0e0; stroke-width:1; }
+    .wire { stroke:#333; stroke-width:2.5; fill:none; }
+    .res  { fill:#e8f4ff; stroke:#1a5276; stroke-width:2; }
+    .text { fill:#111; font-size:15px; }
+    .lab  { fill:#1a5276; font-size:13px; font-weight:bold; }
+    .cap  { fill:#7f8c8d; font-size:12px; }
+  </style>
+
+  <!-- title -->
+  <text x="480" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#111">2 × 2 conductance crossbar: I = G · V</text>
+  <text x="480" y="50" text-anchor="middle" class="cap">row-voltages (inputs) × cell-conductances → summed column-currents (outputs)</text>
+
+  <!-- row wires (inputs) -->
+  <line class="wire" x1="90" y1="150" x2="880" y2="150"/>
+  <line class="wire" x1="90" y1="360" x2="880" y2="360"/>
+
+  <!-- column wires (outputs), go down toward ammeters -->
+  <line class="wire" x1="360" y1="150" x2="360" y2="470"/>
+  <line class="wire" x1="620" y1="150" x2="620" y2="470"/>
+
+  <!-- input voltage sources (left) -->
+  <g>
+    <circle cx="48" cy="150" r="22" fill="#fdf2e9" stroke="#ca6f1e" stroke-width="2.5"/>
+    <text x="48" y="134" text-anchor="middle" class="lab" font-size="14">+</text>
+    <text x="48" y="176" text-anchor="middle" class="lab" font-size="14">−</text>
+    <text x="48" y="112" text-anchor="middle" class="text" font-size="13">V0</text>
+    <text x="48" y="199" text-anchor="middle" class="text" font-size="12" fill="#ca6f1e">= 0.2 V</text>
+  </g>
+  <g>
+    <circle cx="48" cy="360" r="22" fill="#fdf2e9" stroke="#ca6f1e" stroke-width="2.5"/>
+    <text x="48" y="344" text-anchor="middle" class="lab" font-size="14">+</text>
+    <text x="48" y="386" text-anchor="middle" class="lab" font-size="14">−</text>
+    <text x="48" y="322" text-anchor="middle" class="text" font-size="13">V1</text>
+    <text x="48" y="409" text-anchor="middle" class="text" font-size="12" fill="#ca6f1e">= 0.5 V</text>
+  </g>
+
+  <!-- top and bottom return bus -->
+  <line class="grid" x1="90" y1="70" x2="880" y2="70"/>
+  <line class="grid" x1="90" y1="470" x2="880" y2="470"/>
+  <text x="880" y="66" text-anchor="end" class="cap">return (0 V)</text>
+
+  <!-- conductance cells (rotated rectangles) -->
+  <!-- row0: col0=2.0, col1=0.5 -->
+  <g transform="translate(360,150) rotate(45)">
+    <rect class="res" x="-18" y="-7" width="36" height="14"/>
+  </g>
+  <text x="360" y="130" text-anchor="middle" class="lab">2.0</text>
+  <text x="360" y="116" text-anchor="middle" class="cap">G00 (in0→out0)</text>
+  <g transform="translate(620,150) rotate(45)">
+    <rect class="res" x="-18" y="-7" width="36" height="14"/>
+  </g>
+  <text x="620" y="130" text-anchor="middle" class="lab">0.5</text>
+  <text x="620" y="116" text-anchor="middle" class="cap">G10 (in0→out1)</text>
+
+  <!-- row1: col0=1.0, col1=3.0 -->
+  <g transform="translate(360,360) rotate(45)">
+    <rect class="res" x="-18" y="-7" width="36" height="14"/>
+  </g>
+  <text x="360" y="380" text-anchor="middle" class="lab">1.0</text>
+  <text x="360" y="398" text-anchor="middle" class="cap">G01 (in1→out0)</text>
+  <g transform="translate(620,360) rotate(45)">
+    <rect class="res" x="-18" y="-7" width="36" height="14"/>
+  </g>
+  <text x="620" y="380" text-anchor="middle" class="lab">3.0</text>
+  <text x="620" y="398" text-anchor="middle" class="cap">G11 (in1→out1)</text>
+
+  <!-- column index labels at top -->
+  <text x="360" y="60" text-anchor="middle" class="text" font-weight="bold">column 0 = output 0</text>
+  <text x="620" y="60" text-anchor="middle" class="text" font-weight="bold">column 1 = output 1</text>
+
+  <!-- current arrows + ammeters at bottom of each column -->
+  <g>
+    <line class="wire" x1="360" y1="470" x2="360" y2="500" marker-end="url(#arrow)"/>
+    <circle cx="360" cy="525" r="20" fill="#eafaf1" stroke="#1e8449" stroke-width="2.5"/>
+    <text x="360" y="530" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e8449">A</text>
+    <text x="360" y="560" text-anchor="middle" class="text" font-size="14" font-weight="bold">I0 = 0.9</text>
+  </g>
+  <g>
+    <line class="wire" x1="620" y1="470" x2="620" y2="500" marker-end="url(#arrow)"/>
+    <circle cx="620" cy="525" r="20" fill="#eafaf1" stroke="#1e8449" stroke-width="2.5"/>
+    <text x="620" y="530" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e8449">A</text>
+    <text x="620" y="560" text-anchor="middle" class="text" font-size="14" font-weight="bold">I1 = 1.6</text>
+  </g>
+
+  <!-- output equations -->
+  <text x="820" y="500" text-anchor="end" class="text" font-size="13" fill="#1a5276">
+    I0 = 2.0×V0 + 1.0×V1 = 0.9
+  </text>
+  <text x="820" y="518" text-anchor="end" class="text" font-size="13" fill="#1a5276">
+    I1 = 0.5×V0 + 3.0×V1 = 1.6
+  </text>
+  <text x="820" y="540" text-anchor="end" class="cap">G is indexed [output, input]</text>
+</svg>

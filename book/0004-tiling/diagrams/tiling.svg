@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 420" width="980" height="420" font-family="Menlo,Consolas,monospace">
+<rect width="980" height="420" fill="#ffffff"/>
+<text x="480" y="40" text-anchor="middle" font-size="20" font-weight="bold" fill="#111">Tiling a 4×5 matrix over 2×3 physical tiles</text>
+<text x="480" y="62" text-anchor="middle" font-size="13" fill="#7f8c8d">red lines = tile boundaries · column-group tiles are partial sums added across columns</text>
+<text x="480" y="100" text-anchor="middle" font-size="13" fill="#7f8c8d">input x has 5 entries (split x[0:3], x[3:5]); each of the 4 output rows needs 2 column partials</text>
+<rect x="180" y="130" width="52" height="34" fill="#eaf2f8" stroke="#b0bec5" stroke-width="1"/>
+<text x="206.0" y="152.0" text-anchor="middle" font-size="14" fill="#333">1</text>
+<rect x="232" y="130" width="52" height="34" fill="#eaf2f8" stroke="#b0bec5" stroke-width="1"/>
+<text x="258.0" y="152.0" text-anchor="middle" font-size="14" fill="#333">2</text>
+<rect x="284" y="130" width="52" height="34" fill="#eaf2f8" stroke="#b0bec5" stroke-width="1"/>
+<text x="310.0" y="152.0" text-anchor="middle" font-size="14" fill="#333">3</text>
+<rect x="336" y="130" width="52" height="34" fill="#fef9e7" stroke="#b0bec5" stroke-width="1"/>
+<text x="362.0" y="152.0" text-anchor="middle" font-size="14" fill="#333">4</text>
+<rect x="388" y="130" width="52" height="34" fill="#fef9e7" stroke="#b0bec5" stroke-width="1"/>
+<text x="414.0" y="152.0" text-anchor="middle" font-size="14" fill="#333">5</text>
+<rect x="180" y="164" width="52" height="34" fill="#eaf2f8" stroke="#b0bec5" stroke-width="1"/>
+<text x="206.0" y="186.0" text-anchor="middle" font-size="14" fill="#333">6</text>
+<rect x="232" y="164" width="52" height="34" fill="#eaf2f8" stroke="#b0bec5" stroke-width="1"/>
+<text x="258.0" y="186.0" text-anchor="middle" font-size="14" fill="#333">7</text>
+<rect x="284" y="164" width="52" height="34" fill="#eaf2f8" stroke="#b0bec5" stroke-width="1"/>
+<text x="310.0" y="186.0" text-anchor="middle" font-size="14" fill="#333">8</text>
+<rect x="336" y="164" width="52" height="34" fill="#fef9e7" stroke="#b0bec5" stroke-width="1"/>
+<text x="362.0" y="186.0" text-anchor="middle" font-size="14" fill="#333">9</text>
+<rect x="388" y="164" width="52" height="34" fill="#fef9e7" stroke="#b0bec5" stroke-width="1"/>
+<text x="414.0" y="186.0" text-anchor="middle" font-size="14" fill="#333">10</text>
+<rect x="180" y="198" width="52" height="34" fill="#eaf2f8" stroke="#b0bec5" stroke-width="1"/>
+<text x="206.0" y="220.0" text-anchor="middle" font-size="14" fill="#333">11</text>
+<rect x="232" y="198" width="52" height="34" fill="#eaf2f8" stroke="#b0bec5" stroke-width="1"/>
+<text x="258.0" y="220.0" text-anchor="middle" font-size="14" fill="#333">12</text>
+<rect x="284" y="198" width="52" height="34" fill="#eaf2f8" stroke="#b0bec5" stroke-width="1"/>
+<text x="310.0" y="220.0" text-anchor="middle" font-size="14" fill="#333">13</text>
+<rect x="336" y="198" width="52" height="34" fill="#fef9e7" stroke="#b0bec5" stroke-width="1"/>
+<text x="362.0" y="220.0" text-anchor="middle" font-size="14" fill="#333">14</text>
+<rect x="388" y="198" width="52" height="34" fill="#fef9e7" stroke="#b0bec5" stroke-width="1"/>
+<text x="414.0" y="220.0" text-anchor="middle" font-size="14" fill="#333">15</text>
+<rect x="180" y="232" width="52" height="34" fill="#eaf2f8" stroke="#b0bec5" stroke-width="1"/>
+<text x="206.0" y="254.0" text-anchor="middle" font-size="14" fill="#333">16</text>
+<rect x="232" y="232" width="52" height="34" fill="#eaf2f8" stroke="#b0bec5" stroke-width="1"/>
+<text x="258.0" y="254.0" text-anchor="middle" font-size="14" fill="#333">17</text>
+<rect x="284" y="232" width="52" height="34" fill="#eaf2f8" stroke="#b0bec5" stroke-width="1"/>
+<text x="310.0" y="254.0" text-anchor="middle" font-size="14" fill="#333">18</text>
+<rect x="336" y="232" width="52" height="34" fill="#fef9e7" stroke="#b0bec5" stroke-width="1"/>
+<text x="362.0" y="254.0" text-anchor="middle" font-size="14" fill="#333">19</text>
+<rect x="388" y="232" width="52" height="34" fill="#fef9e7" stroke="#b0bec5" stroke-width="1"/>
+<text x="414.0" y="254.0" text-anchor="middle" font-size="14" fill="#333">20</text>
+<line x1="180" y1="198" x2="440" y2="198" stroke="#c0392b" stroke-width="3"/>
+<line x1="336" y1="130" x2="336" y2="266" stroke="#c0392b" stroke-width="3"/>
+<text x="258" y="169" text-anchor="middle" font-size="13" font-weight="bold" fill="#c0392b">T00</text>
+<text x="388" y="169" text-anchor="middle" font-size="13" font-weight="bold" fill="#c0392b">T01</text>
+<text x="258" y="237" text-anchor="middle" font-size="13" font-weight="bold" fill="#c0392b">T10</text>
+<text x="388" y="237" text-anchor="middle" font-size="13" font-weight="bold" fill="#c0392b">T11</text>
+<text x="470" y="150" font-size="15" fill="#111" >matrix = 4 × 5 = 20 weights</text>
+<text x="470" y="172" font-size="15" fill="#111" >physical tile = 2 × 3</text>
+<text x="470" y="194" font-size="15" fill="#1a5276" font-weight="bold">2 row-groups × 2 col-groups = 4 tiles</text>
+<text x="470" y="222" font-size="13" fill="#7f8c8d">T00, T01 each compute a partial MVM</text>
+<text x="470" y="242" font-size="13" fill="#7f8c8d">output[rows 0:2] = T00 + T01 (accumulate)</text>
+<text x="470" y="262" font-size="13" fill="#7f8c8d">output[rows 2:4] = T10 + T11</text>
+<text x="480" y="400" text-anchor="middle" font-size="13" fill="#7f8c8d">train.py: tiled_mvm(matrix, vector, 2, 3) must equal matrix @ vector</text>
+</svg>
