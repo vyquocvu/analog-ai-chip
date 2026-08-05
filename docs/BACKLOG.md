@@ -603,3 +603,36 @@ and the two analysis items (M2 scheduler, M3 per-token latency est.).
 - Improve: everything remains a simulator; producing a real physical ledger
   (silicon or a real SPICE build with `measurements.csv`) is the only
   meaningful next step.
+
+---
+
+## Current Sprint — Sprint 16
+Goal: upgrade the circuit design — the physical MVM cell (chapter 0007).
+
+| Id | Item | Size | Status |
+|---|---|---|---|
+| 0007 | Current-mode differential crossbar column | M | **done** |
+
+## Sprint 16 — Review & Retrospective
+
+**Increment delivered (doD met):**
+- `book/0007-crossbar-column/crossbar_column.py` — SPICE model of a current-mode
+  differential crossbar column: G+/G- conductance cells (`G+ − G- = w·GSCALE`),
+  two transimpedance stages, differential readout `Vout = Rf·Gscale·Σ w_i·(x_i−VREF)`.
+- `diagrams/crossbar_column.svg`; `README.md` + `README.vi.md`.
+- pytest `tests/test_crossbar_column.py` (2 always-on data tests + 2 optional
+  engine tests); ROADMAP book-track item added.
+
+**Sprint Review (demo summary):**
+- SPICE `Vout = 0.1501 V` vs hand calc `0.1500 V` (err `1e-4` V); negative
+  weight flips sign; `G+ − G- = w·GSCALE` holds to `7e-21 S`.
+- Design note: ngspice's DC solve is numerically degenerate with two ideal/OTA
+  gain loops in one netlist; the two TIA stages are independent, so each is
+  solved in its own netlist and combined by superposition (exact, not
+  approximate) — documented.
+
+**Retrospective — what went well / to improve:**
+- Well: turns the abstract MVM into an actual current-mode IMC cell tied to the
+  simulator's differential mapping, verified in SPICE.
+- Improve: a full 2D crossbar (multiple columns sharing input rows) and a
+  current-mirror single-amp readout are natural next circuit upgrades.

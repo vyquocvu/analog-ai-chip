@@ -23,6 +23,10 @@ executable evidence (tests + a runnable demo/report), never by prose alone.
 - [x] Chapter 0006: many neurons (10/100/1000) as a layer — numpy scaling
       ledger (cells/MACs/tiles), growth plot, and a 2-neuron SPICE check
       (`book/0006-many-neurons/`)
+- [x] Chapter 0007: current-mode differential crossbar column — the physical
+      MVM cell (G+/G- conductance cells + transimpedance + differential
+      readout), SPICE-verified vs hand calc and vs the simulator's
+      differential mapping (`book/0007-crossbar-column/crossbar_column.py` + schematic)
 
 Exit: a builder can reproduce the circuit's expected voltages in simulation
 before assembling hardware.
