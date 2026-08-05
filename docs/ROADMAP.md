@@ -95,8 +95,11 @@ Exit: a real open checkpoint runs through the simulated accelerator with a
 documented accuracy-vs-baseline table.
 
 ## M6 — Energy / latency product estimate (measured assumptions only)
-- [ ] Model converter count, tile programming cost, and reuse in the ledger
-- [ ] Sensitivity of system latency to tile capacity and parallelism
-- [ ] No GPU comparison without measured physical assumptions
+- [x] Model converter count, tile programming cost, and reuse in the ledger
+      (`acc.programs`; `analog_llm/latency.py`)
+- [x] Sensitivity of system latency to tile capacity and parallelism
+      (`scripts/energy_latency.py` + `latency_sensitivity.svg`)
+- [x] No GPU comparison without measured physical assumptions
+      (report is a relative-unit model estimate labelled as such)
 
 Exit: the roadmap's `O(1)`-style claims are replaced by explicit formulas.

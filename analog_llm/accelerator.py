@@ -47,6 +47,7 @@ class Accelerator:
         self.macs = 0
         self.tile_cycles = 0
         self.rewrites = 0
+        self.programs = 0
 
     def _blocks(
         self, w: NDArray[np.float64], x: NDArray[np.float64]
@@ -93,4 +94,5 @@ class Accelerator:
 
         self.macs += sum(int((r_end - ri) * (c_end - ci)) for (ri, r_end, ci, c_end), _, _ in blocks)
         self.tile_cycles += int(np.ceil(n_blocks / self.tile_count))
+        self.programs += n_blocks  # each block is programmed onto a tile
         return result

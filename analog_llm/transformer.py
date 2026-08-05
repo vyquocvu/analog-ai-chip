@@ -39,11 +39,13 @@ class Metrics:
     macs: int = 0
     cycles: int = 0
     rewrites: int = 0
+    programs: int = 0
 
     def update(self, acc: Accelerator) -> None:
         self.macs += acc.macs
         self.cycles += acc.tile_cycles
         self.rewrites += acc.rewrites
+        self.programs += acc.programs
 
 
 @dataclass

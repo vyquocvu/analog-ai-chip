@@ -140,6 +140,16 @@ see how MACs / conductance cells grow, so I understand the crossbar view.
 - [x] pytest `tests/test_gpt_loader.py` + `tests/test_tokenizer.py`; ROADMAP M5
       items, checkpoint staged under `data/gpt2-tiny`.
 
+### M6 — Energy / latency product estimate  `[M]`
+**AC:**
+- [x] ledger extended with tile `programs`; `analog_llm/latency.py` gives an
+      explicit latency/energy formula from design assumptions, all shown and
+      labelled as relative units (tu/eu), no GPU comparison;
+- [x] `scripts/energy_latency.py` reports converter/program/reuse accounting
+      and the sensitivity of latency est. to tile parallelism and capacity
+      (`latency_sensitivity.svg`);
+- [x] pytest `tests/test_latency.py`; ROADMAP M6 items closed.
+
 ### D1 — CI runs the circuit sim when ngspice is available  `[S]`
 **AC:** CI's optional job exercises `sim_neuron*.py` (or skips cleanly).
 
@@ -479,3 +489,42 @@ Goal: publish the weight-side accuracy-vs-cost curve (ROADMAP M1).
 - Improve: the remaining milestone is M6 (energy/latency with measured-only
   assumptions) and M3 per-token latency (depends on M6 timing); the roadmap's
   simulator milestones are otherwise complete.
+
+---
+
+## Current Sprint — Sprint 13
+Goal: close the roadmap with a system latency/energy estimate from measured-
+input assumptions only (ROADMAP M6), with no GPU comparison.
+
+| Id | Item | Size | Status |
+|---|---|---|---|
+| M6 | Energy / latency estimate | M | **done** |
+
+## Sprint 13 — Review & Retrospective
+
+**Increment delivered (doD met):**
+- Ledger extended with tile **programs** (`Accelerator.programs`,
+  `Metrics.programs`, shown in `report.format_report`).
+- `analog_llm/latency.py` — explicit latency/energy formula from designer
+  assumptions (relative units tu/eu), with validation and a disclaimer that
+  nothing is measured and there is no GPU comparison.
+- `scripts/energy_latency.py` (+ `latency_sensitivity.svg`) — converter /
+  program / reuse accounting and the sensitivity of the latency estimate to
+  tile parallelism and capacity.
+- pytest `tests/test_latency.py`; ROADMAP M6 items closed.
+
+**Sprint Review (demo summary, 1L/48D workload, 48x48 tile):**
+- Accounting: 192 converters on board (2x 48 DACs + 48 ADCs), 56 tile programs
+  (20 reuse), latency est. 43.2 tu (32 MVM-cycles + 11.2 program-time).
+- Parallelism: tile_count 1->8 lowers cycles 56->20 and latency 67.2->31.2 tu
+  but adds converters; latency plateaus once cycles floor at 20 (parallelism
+  saturated => more tiles buy nothing).
+- Capacity: 16->64 tile cuts programs 480->44 and latency 340->40.8 tu.
+- Energy only shown because per-op values were supplied as assumptions; units
+  relative, labelled not measured, no GPU comparison.
+
+**Retrospective — what went well / to improve:**
+- Well: closes M6 (and thus all simulator milestones) with an explicit,
+  assumption-labelled formula that never claims a real speed/energy/GPU result.
+- Improve: real numbers need actual silicon timing/energy measurements and a
+  committed ledger; D1 (CI circuit sim job) remains for the book track.

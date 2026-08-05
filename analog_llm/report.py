@@ -48,6 +48,7 @@ def format_report(
         lines.append(f"  analog MACs executed : {metrics.macs}")
         lines.append(f"  tile MVM cycles      : {metrics.cycles}")
         lines.append(f"  tile rewrites        : {metrics.rewrites}")
+        lines.append(f"  tile programs        : {metrics.programs}")
     if tiles_used is not None:
         lines.append(f"  tiles used           : {tiles_used}")
     if accuracy:
