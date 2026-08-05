@@ -65,7 +65,8 @@ Exit: analog route matches float baseline at high precision.
 
 ## M4 — Accuracy / sensitivity study
 - [x] High-precision vs budget-constrained configuration in demo
-- [ ] Per-non-ideality ablation (bits, noise, gain/offset independently)
+- [x] Per-non-ideality ablation (bits, noise, gain/offset independently)
+      (`scripts/ablation.py` + `ablation.svg`)
 - [x] Bit sweep producing an accuracy-vs-cost curve
       (`scripts/bit_sweep.py` + `bit_sweep_g.svg` / `bit_sweep_adc.svg`)
 - [ ] Guardrail that prevents claiming GPU-equivalence from the ledger

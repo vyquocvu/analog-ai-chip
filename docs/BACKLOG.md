@@ -83,8 +83,12 @@ see how MACs / conductance cells grow, so I understand the crossbar view.
 - [x] ROADMAP M4 bit-sweep item closed.
 
 ### B2 — Per-non-ideality ablation  `[S]`
-**AC:** toggle each non-ideality independently and report each one's
-contribution to logit error.
+**AC:**
+- [x] `scripts/ablation.py` toggles each non-ideality independently
+      (leave-one-out: weight bits, DAC bits, ADC bits, noise, gain, offset,
+      clipping) and reports the logit-error contribution / share of each;
+- [x] guardrails on residuals, an ablation bar-chart SVG `ablation.svg`;
+- [x] pytest `tests/test_ablation.py` (always); ROADMAP M4 ablation item closed.
 
 ### B3 — Multi-tile demo  `[M]`
 **AC:** a demo runs a matrix larger than one physical tile and reports the
@@ -236,3 +240,36 @@ Goal: quantify the **accuracy-vs-cost** trade-off of the simulator (ROADMAP M4).
   accuracy-vs-cost result (no energy claim).
 - Improve: next, B2 (per-non-ideality ablation) to attribute the error to each
   source, and B3 (multi-tile demo) to close M2.
+
+---
+
+## Current Sprint — Sprint 7
+Goal: attribute the budget-config logit error to each non-ideality (ROADMAP M4).
+
+| Id | Item | Size | Status |
+|---|---|---|---|
+| B2 | Per-non-ideality ablation | S | **done** |
+
+## Sprint 7 — Review & Retrospective
+
+**Increment delivered (doD met):**
+- `scripts/ablation.py` — leave-one-out ablation over 7 non-idealities
+  (g_bits, dac_bits, adc_bits, noise, gain, offset, clipping), reports each
+  one's contribution + share to max logit error; guardrails; `ablation.svg`.
+- pytest `tests/test_ablation.py` (always); ROADMAP M4 ablation `[x]`.
+
+**Sprint Review (demo summary):**
+- ideal (all off) logit_err 0.0002, agreement 1.000; budget (all on) 0.516.
+- Dominant standalone contributors (budget config, n_embd 32):
+  ADC bits 25.8% > offset 24.7% > noise 17.6% ≈ weight bits 17.6% > clipping 14.4%;
+  DAC bits and gain error ~0 here (not the binding constraint).
+- One-at-a-time shares sum >100% because non-idealities interact → reported as
+  standalone attribution, not a strict partition (honest framing).
+- Modeling insight: `vout_max` trades off against ADC resolution (larger range
+  => coarser step), so "clipping" is only cleanly isolated at enough headroom.
+
+**Retrospective — what went well / to improve:**
+- Well: closes M4 with a concrete, honest error attribution; the
+  offset>noise>bits ordering is actionable for a design.
+- Improve: next, B3 (multi-tile demo, ROADMAP M2) — a matrix larger than one
+  tile with the physical ledger (tile_count > 1).

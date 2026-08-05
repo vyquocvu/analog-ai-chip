@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 434.0" width="960" height="434.0" font-family="Menlo,Consolas,monospace">
+<rect width="960" height="434.0" fill="#ffffff"/>
+<text x="480" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#111">Per-non-ideality contribution to logit error (leave-one-out)</text>
+<text x="480" y="52" text-anchor="middle" font-size="12" fill="#7f8c8d">normalized share of the budget-config error; bar length scaled to the largest share</text>
+<rect x="340.0" y="80.0" width="560.0" height="28.0" fill="#1a5276" rx="3"/>
+<rect x="340.0" y="122.0" width="535.4" height="28.0" fill="#1a5276" rx="3"/>
+<rect x="340.0" y="164.0" width="381.4" height="28.0" fill="#1a5276" rx="3"/>
+<rect x="340.0" y="206.0" width="380.9" height="28.0" fill="#1a5276" rx="3"/>
+<rect x="340.0" y="248.0" width="311.8" height="28.0" fill="#1a5276" rx="3"/>
+<rect x="340.0" y="290.0" width="0.0" height="28.0" fill="#1a5276" rx="3"/>
+<rect x="340.0" y="332.0" width="0.0" height="28.0" fill="#1a5276" rx="3"/>
+<line x1="340.0" y1="70.0" x2="900.0" y2="70.0" stroke="#333" stroke-width="1.5"/>
+<text x="330.0" y="98.0" text-anchor="end" fill="#333" font-size="13">output ADC bits</text>
+<text x="908.0" y="98.0" fill="#111" font-size="13">25.8%</text>
+<text x="330.0" y="140.0" text-anchor="end" fill="#333" font-size="13">converter offset error</text>
+<text x="883.417666358795" y="140.0" fill="#111" font-size="13">24.7%</text>
+<text x="330.0" y="182.0" text-anchor="end" fill="#333" font-size="13">ADC noise</text>
+<text x="729.4456883022654" y="182.0" fill="#111" font-size="13">17.6%</text>
+<text x="330.0" y="224.0" text-anchor="end" fill="#333" font-size="13">weight resolution (g_bits)</text>
+<text x="728.9041102967202" y="224.0" fill="#111" font-size="13">17.6%</text>
+<text x="330.0" y="266.0" text-anchor="end" fill="#333" font-size="13">output clipping</text>
+<text x="659.8163616375267" y="266.0" fill="#111" font-size="13">14.4%</text>
+<text x="330.0" y="308.0" text-anchor="end" fill="#333" font-size="13">input DAC bits</text>
+<text x="348.0" y="308.0" fill="#111" font-size="13">0.0%</text>
+<text x="330.0" y="350.0" text-anchor="end" fill="#333" font-size="13">converter gain error</text>
+<text x="348.0" y="350.0" fill="#111" font-size="13">0.0%</text>
+</svg>
