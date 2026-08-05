@@ -101,7 +101,14 @@ see how MACs / conductance cells grow, so I understand the crossbar view.
       (always); ROADMAP M2 multi-tile demo item closed.
 
 ### B5 — KV-cache path in the transformer  `[M]`
-**AC:** generation no longer recomputes full context each step.
+**AC:**
+- [x] `TinyGPT.generate_kvcache` caches per-layer K/V so each generated token
+      runs a single-position forward (no full-context recompute);
+- [x] greedy and sampling output parity with the no-cache `generate` about
+      identical RNG (tested);
+- [x] `scripts/kv_cache_demo.py` reports the query-row redundancy ledger and a
+      reduction bar (`kv_cache.svg`); pytest `tests/test_kv_cache.py` (always);
+      ROADMAP M3 KV-cache item closed.
 
 ### B6 — Per-token ledger trace  `[S]`
 **AC:** a report traces MACs/cycles per generated token through a layer.
@@ -312,3 +319,30 @@ Goal: demonstrate and ledger a matrix larger than one physical tile (ROADMAP M2)
 - Improve: M2's remaining "multi-tile parallelism / temporal-reuse scheduler
   analysis" is analysis-heavy; pair it with M3's per-token trace (B6) once
   wanted, or start M5 (real pretrained weights).
+
+---
+
+## Current Sprint — Sprint 9
+Goal: remove redundant per-step context recompute in generation (ROADMAP M3).
+
+| Id | Item | Size | Status |
+|---|---|---|---|
+| B5 | KV-cache path | M | **done** |
+
+## Sprint 9 — Review & Retrospective
+
+**Increment delivered (doD met):**
+- `TinyGPT._step` + `TinyGPT.generate_kvcache` — per-layer K/V cache; each new
+  token runs a single-position forward reusing cached keys/values.
+- `scripts/kv_cache_demo.py` (+ `kv_cache.svg`); pytest `tests/test_kv_cache.py`
+  (always); ROADMAP M3 KV-cache `[x]`.
+
+**Sprint Review (demo summary, P=5, G=6):**
+- Attention query-rows: no-cache 45 vs with KV-cache 11 → **4.09x** reduction
+  (logical-work ledger, not wall-clock/energy).
+- Greedy and sampling output **identical** to the no-cache baseline (same math).
+
+**Retrospective — what went well / to improve:**
+- Well: a clean, honest efficiency change — same tokens, fewer forward rows.
+- Improve: B6 (per-token ledger trace) can now show KV-cache reuse in the
+  per-token MAC/cycle trace; the remaining M2 scheduler analysis can ride on it.

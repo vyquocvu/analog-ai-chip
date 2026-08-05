@@ -180,3 +180,81 @@ class TinyGPT:
                 nxt = int(rng.choice(len(p), p=p))
             out.append(nxt)
         return np.asarray(out, dtype=np.int64)
+
+    # -- KV-cache generation (no full-context recompute) ---------------------
+    def _init_kv_cache(self) -> dict[str, list]:
+        return {"k": [None] * self.cfg.n_layer, "v": [None] * self.cfg.n_layer}
+
+    def _step(self, token: int, pos: int, cache, accelerator: Accelerator | None) -> NDArray[np.float64]:
+        """One position's forward using the running K/V cache; returns logits."""
+        cfg = self.cfg
+        if pos >= cfg.block_size:
+            raise ValueError(f"position {pos} exceeds block_size {cfg.block_size}")
+        w = self.weights
+        lin = self._bound_lin(accelerator)
+        x = w["tok_emb"][token] + w["pos_emb"][pos]  # [C]
+        for i in range(cfg.n_layer):
+            p = f"{i}."
+            h = self._layernorm(x[None, :], w[p + "ln1"], w[p + "ln1b"])[0]
+            qkv = lin(p + "wqkv", h[None, :])[0]  # [3C]
+            C = cfg.n_embd
+            q, k, v = qkv[:C], qkv[C:2 * C], qkv[2 * C:]
+            nh, hd = cfg.n_head, C // cfg.n_head
+            q = q.reshape(nh, hd)
+            k = k.reshape(nh, hd)
+            v = v.reshape(nh, hd)
+            if cache["k"][i] is None:
+                cache["k"][i] = k[None, :, :]
+                cache["v"][i] = v[None, :, :]
+            else:
+                cache["k"][i] = np.concatenate([cache["k"][i], k[None, :, :]], axis=0)
+                cache["v"][i] = np.concatenate([cache["v"][i], v[None, :, :]], axis=0)
+            K = cache["k"][i]  # [pos+1, nh, hd]
+            V = cache["v"][i]
+            scores = np.einsum("hd,phd->hp", q, K) / math.sqrt(hd)  # [nh, pos+1]
+            scores = scores - scores.max(axis=-1, keepdims=True)
+            probs = np.exp(scores)
+            probs = probs / probs.sum(axis=-1, keepdims=True)
+            attn = np.einsum("hp,phd->hd", probs, V).reshape(C)
+            x = x + lin(p + "wo", attn[None, :])[0]
+            h2 = self._layernorm(x[None, :], w[p + "ln2"], w[p + "ln2b"])[0]
+            up = lin(p + "wup", h2[None, :])[0]
+            x = x + lin(p + "wdown", self._gelu(up)[None, :])[0]
+        x = self._layernorm(x[None, :], w["lnf"], w["lnfb"])[0]
+        return lin("head", x[None, :])[0]
+
+    def generate_kvcache(
+        self, prompt: NDArray[np.int64], max_new: int = 8, greedy: bool = True,
+        accelerator: Accelerator | None = None, rng: np.random.Generator | None = None,
+    ) -> NDArray[np.int64]:
+        """Autoregressive generation with a KV cache (no per-step full-ctx recompute).
+
+        Matches ``generate`` (same math); each new token runs a single-position
+        forward that reuses cached keys/values instead of re-embedding and
+        re-attending over the whole context.
+        """
+        prompt = np.asarray(prompt, dtype=np.int64).reshape(-1)
+        cfg = self.cfg
+        if prompt.size == 0 or prompt.size > cfg.block_size:
+            raise ValueError(f"sequence length must be in [1, {cfg.block_size}]")
+        cache = self._init_kv_cache()
+        out = list(prompt.tolist())
+        pos = 0
+        logits: NDArray[np.float64] = np.zeros(cfg.vocab_size)
+        for tok in prompt:
+            logits = self._step(int(tok), pos, cache, accelerator)
+            pos += 1
+        for _ in range(max_new):
+            if greedy:
+                nxt = int(np.argmax(logits))
+            else:
+                if rng is None:
+                    raise ValueError("rng required for sampling")
+                p = np.exp(logits - logits.max())
+                p = p / p.sum()
+                nxt = int(rng.choice(len(p), p=p))
+            out.append(nxt)
+            if pos < cfg.block_size:
+                logits = self._step(nxt, pos, cache, accelerator)
+                pos += 1
+        return np.asarray(out, dtype=np.int64)

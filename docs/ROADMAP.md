@@ -59,7 +59,8 @@ Exit: tiling matches dense reference within the configured error bound.
 - [x] Hybrid forward: all linears through tiles, rest digital
 - [x] Autoregressive generation (no KV cache, documented)
 - [x] Unified demo report with float baseline
-- [ ] KV-cache path to remove redundant recompute
+- [x] KV-cache path to remove redundant recompute
+      (`analog_llm.transformer.generate_kvcache` + `scripts/kv_cache_demo.py`)
 - [ ] Per-token latency and ledger trace through a full layer
 
 Exit: analog route matches float baseline at high precision.
