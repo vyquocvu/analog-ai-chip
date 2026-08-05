@@ -20,6 +20,9 @@ executable evidence (tests + a runnable demo/report), never by prose alone.
 - [x] Build files for 0005: full schematic, BOM (`bom.csv`), pin-by-pin
       wiring (`breadboard.md`), test points (`testpoints.md`), and bring-up /
       calibration + power-down (`calibration.md`)
+- [x] Chapter 0006: many neurons (10/100/1000) as a layer — numpy scaling
+      ledger (cells/MACs/tiles), growth plot, and a 2-neuron SPICE check
+      (`book/0006-many-neurons/`)
 
 Exit: a builder can reproduce the circuit's expected voltages in simulation
 before assembling hardware.

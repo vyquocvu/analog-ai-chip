@@ -16,6 +16,7 @@ _MODULE = Path(__file__).resolve().parent.parent / "book" / "0005-one-analog-neu
 _MODULE_NI = Path(__file__).resolve().parent.parent / "book" / "0005-one-analog-neuron" / "sim_neuron_nonideal.py"
 _MODULE_SW = Path(__file__).resolve().parent.parent / "book" / "0005-one-analog-neuron" / "sweep_neuron.py"
 _MODULE_HR = Path(__file__).resolve().parent.parent / "book" / "0005-one-analog-neuron" / "headroom_neuron.py"
+_MODULE_LYR = Path(__file__).resolve().parent.parent / "book" / "0006-many-neurons" / "layer_neuron_spice.py"
 
 
 def _load(path):
@@ -32,6 +33,7 @@ neuron = _load(_MODULE)
 neuron_ni = _load(_MODULE_NI)
 neuron_sw = _load(_MODULE_SW) if neuron_ni is not None else None
 neuron_hr = _load(_MODULE_HR) if neuron_ni is not None else None
+neuron_lyr = _load(_MODULE_LYR) if neuron_ni is not None else None
 
 
 @pytest.mark.skipif(neuron is None, reason="PySpice/ngspice not available")
@@ -61,6 +63,14 @@ def test_neuron_nonideal_linear_and_rails() -> None:
 
     gnd_clip = neuron_ni.clamp(neuron_ni.run_linear(0.5, 1.0, 0.0)[0])
     assert abs(gnd_clip - 0.0) <= 5e-3, "gnd-referenced inverting summer clips at 0 V"
+
+
+@pytest.mark.skipif(neuron_lyr is None, reason="PySpice/ngspice not available")
+def test_two_neuron_layer_matches_ideal() -> None:
+    v0, v1 = neuron_lyr.run_layer(3.0, 2.1)
+    i0 = neuron_lyr.ideal_out(3.0, 2.1, 0.50, 0.25)
+    assert abs(v0 - i0) <= 5e-3
+    assert abs(v1 - i0) <= 5e-3
 
 
 @pytest.mark.skipif(neuron_hr is None, reason="PySpice/ngspice not available")

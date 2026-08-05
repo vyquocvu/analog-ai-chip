@@ -58,6 +58,18 @@ from parts and verify it.
 - [x] full schematic SVG + data-file pytest (validated, no engine needed);
 - [x] chapter (EN + VI) and ROADMAP updated.
 
+### A5 — Chapter 0006: many neurons (10 / 100 / 1000) as a layer  `[M]`
+**As a** builder, **I want** to scale one neuron up to a layer of N neurons and
+see how MACs / conductance cells grow, so I understand the crossbar view.
+
+**AC:**
+- [x] a numpy layer model computes `y = W @ x` for N = 10, 100, 1000 and
+      matches the float reference (tiled via `analog_llm`);
+- [x] reports the scaling ledger (cells, differential cells, MACs, tiles);
+- [x] a growth plot (SVG) shows cells/MACs vs N on a log scale;
+- [x] a small SPICE 2-neuron layer sanity check (optional engine test);
+- [x] chapter 0006 README (EN + VI), ROADMAP, and data/numpy pytest.
+
 ### B1 — Bit sweep: accuracy-vs-cost with the simulator  `[S]`
 **As a** designer, **I want** a `scripts/bit_sweep.py` that sweeps
 `g_bits`/`adc_bits` and reports the accuracy-vs-cost curve.
@@ -148,25 +160,49 @@ Goal: give chapter 0005 **concrete build files** so it is breadboardable.
 |---|---|---|---|
 | A4 | Breadboard wiring + BOM + test points | M | **done** |
 
-## Sprint 4 — Review & Retrospective
+## Sprint 4 (completed) — Review & Retrospective
 
-**Increment delivered (doD met):**
-- `bom.csv`, `breadboard.md`, `testpoints.md`, `calibration.md`,
-  `diagrams/full_schematic.svg` — full single-supply LM358 build (2.5 V
-  reference buffer + inverting summer, w = [0.50, 0.25]).
-- data-file pytest `tests/test_chapter_files.py` (validates BOM/docs/SVGs,
-  no engine required); chapter 0005 (EN + VI) updated with a "Build files"
-  section and status.
+**Increment (A4, doD met):**
+- Build files for 0005: `bom.csv`, `breadboard.md`, `testpoints.md`,
+  `calibration.md`, `diagrams/full_schematic.svg`; data-file pytest
+  (`tests/test_chapter_files.py`, no engine). Chapter EN + VI updated.
 
-**Sprint Review (demo summary):**
-- All build data files present and machine-checked; designators consistent
-  (`U1`); BOM = 12 lines.
-- This satisfies the last "design-only" gap in 0005 aside from an actual
-  physical build + measurements.
+**Sprint Review:** all build data present and machine-checked; closes 0005's
+concrete-deliverable gap (a physical build + measurements remain).
 
 **Retrospective — what went well / to improve:**
-- Well: A4 closes chapter 0005's concrete-deliverable gap; the no-engine
-  data test keeps DoD measurable without ngspice.
-- Improve: the only remaining 0005 step is a **real build + `measurements.csv`**
-  (physical evidence), which needs hardware — a new non-sim sprint (or
-  acceptance by a builder).
+- Well: A4 closes 0005's deliverable gap; no-engine data test keeps DoD
+  measurable.
+- Improve: the only remaining 0005 step is a real build + `measurements.csv`
+  (needs hardware).
+
+---
+
+## Current Sprint — Sprint 5
+Goal: scale one neuron into a **layer of many neurons** (10/100/1000).
+
+| Id | Item | Size | Status |
+|---|---|---|---|
+| A5 | Chapter 0006: many neurons | M | **done** |
+
+## Sprint 5 — Review & Retrospective
+
+**Increment delivered (doD met):**
+- `book/0006-many-neurons/layer_neuron.py` — numpy layer for N=10/100/1000,
+  tiled via `analog_llm.Accelerator`, matching float (~6e-4); reports
+  cells/MACs/tiles ledger; writes `diagrams/growth.svg`.
+- `book/0006-many-neurons/layer_neuron_spice.py` — 2-neuron layer on one LM358
+  (shared 2.5 V reference) verified in SPICE.
+- pytest `tests/test_layer.py` (numpy, always) + optional 2-neuron SPICE test;
+  chapter 0006 README (EN + VI).
+
+**Sprint Review (demo summary):**
+- cells/MACs scale linearly: N=10→160, N=100→1600, N=1000→16000.
+- 2-neuron SPICE: both outputs 2.3496 vs ideal 2.3500 (err 4e-4).
+- Key insight: "many neurons" == "a matrix" == "a crossbar" (bridge 0001→0005→0006→analog_llm).
+
+**Retrospective — what went well / to improve:**
+- Well: A5 reuses `analog_llm` (Accelerator) and 0005's summer pattern, so it
+  tied the book's neuron view to the simulator's tile view in one step.
+- Improve: next, run the same scaling through `analog_llm` delib (B-series:
+  B1 bit sweep, B3 multi-tile demo) to finish the simulator milestones.

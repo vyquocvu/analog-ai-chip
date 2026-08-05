@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="Menlo,Consolas,monospace">
+<rect width="960" height="540" fill="#ffffff"/>
+<text x="480" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#111">Layer growth: cells and MACs vs number of neurons (M = 16)</text>
+<text x="480" y="52" text-anchor="middle" font-size="12" fill="#7f8c8d">blue = conductance cells · green dashed = MACs · both linear in N (log axes)</text>
+<line x1="150.0" y1="70.0" x2="860.0" y2="70.0" stroke="#333" stroke-width="1.5"/>
+<line x1="150.0" y1="70.0" x2="150.0" y2="500.0" stroke="#333" stroke-width="1.5"/>
+<text x="860.0" y="526.0" text-anchor="end" fill="#333">neurons N (log)</text>
+<text x="140.0" y="84.0" fill="#333">cells / MACs (log)</text>
+<text x="150.0" y="86.0" text-anchor="middle" fill="#666" font-size="11">10</text>
+<text x="327.5" y="86.0" text-anchor="middle" fill="#666" font-size="11">100</text>
+<text x="505.0" y="86.0" text-anchor="middle" fill="#666" font-size="11">1000</text>
+<text x="142.0" y="374.5571018644881" text-anchor="end" fill="#666" font-size="11">160</text>
+<text x="142.0" y="267.0571018644881" text-anchor="end" fill="#666" font-size="11">1600</text>
+<text x="142.0" y="159.55710186448806" text-anchor="end" fill="#666" font-size="11">16000</text>
+<polyline points="150.0,370.6 327.5,263.1 505.0,155.6" fill="none" stroke="#1a5276" stroke-width="3"/>
+<polyline points="150.0,370.6 327.5,263.1 505.0,155.6" fill="none" stroke="#1e8449" stroke-width="3" stroke-dasharray="5,4"/>
+<text x="511.0" y="149.55710186448806" fill="#1a5276" font-size="13">cells = N·16</text>
+<text x="511.0" y="163.55710186448806" fill="#1e8449" font-size="13">MACs = N·16</text>
+</svg>

@@ -34,6 +34,7 @@ chapter 0005 turns one weighted sum into a measurable analog circuit.
 | 0003 | DAC/ADC, quantization, noise | `book/0003-converters-and-noise/` |
 | 0004 | Tiling a matrix across arrays | `book/0004-tiling/` |
 | 0005 | One analog neuron (hardware) | `book/0005-one-analog-neuron/` |
+| 0006 | Many neurons: a layer (10/100/1000) | `book/0006-many-neurons/` |
 
 Reference: `maths/`, `docs/MODULE_STANDARD.md`, `docs/SAFETY.md`.
 
