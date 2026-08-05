@@ -61,7 +61,9 @@ Exit: tiling matches dense reference within the configured error bound.
 - [x] Unified demo report with float baseline
 - [x] KV-cache path to remove redundant recompute
       (`analog_llm.transformer.generate_kvcache` + `scripts/kv_cache_demo.py`)
-- [ ] Per-token latency and ledger trace through a full layer
+- [ ] Per-token latency trace (needs measured timing assumptions; M6)
+- [x] Per-token ledger trace through a full layer
+      (`scripts/token_trace.py` + `token_trace.svg`; B5/B6)
 
 Exit: analog route matches float baseline at high precision.
 

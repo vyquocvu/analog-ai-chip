@@ -111,7 +111,13 @@ see how MACs / conductance cells grow, so I understand the crossbar view.
       ROADMAP M3 KV-cache item closed.
 
 ### B6 — Per-token ledger trace  `[S]`
-**AC:** a report traces MACs/cycles per generated token through a layer.
+**AC:**
+- [x] `scripts/token_trace.py` traces MACs / tile-cycles / rewrites per generated
+      token through a full layer, for the no-KV (grows with context) and
+      KV-cache (constant single-position) paths;
+- [x] guardrails (per-token no-KV MACs grow; KV single-position <= full forward);
+      `token_trace.svg`; pytest `tests/test_token_trace.py` (always);
+      ROADMAP M3 per-token ledger trace item closed.
 
 ### D1 — CI runs the circuit sim when ngspice is available  `[S]`
 **AC:** CI's optional job exercises `sim_neuron*.py` (or skips cleanly).
@@ -346,3 +352,37 @@ Goal: remove redundant per-step context recompute in generation (ROADMAP M3).
 - Well: a clean, honest efficiency change — same tokens, fewer forward rows.
 - Improve: B6 (per-token ledger trace) can now show KV-cache reuse in the
   per-token MAC/cycle trace; the remaining M2 scheduler analysis can ride on it.
+
+---
+
+## Current Sprint — Sprint 10
+Goal: trace the physical ledger per generated token through a full layer,
+contrasting no-KV and KV-cache paths (ROADMAP M3).
+
+| Id | Item | Size | Status |
+|---|---|---|---|
+| B6 | Per-token ledger trace | S | **done** |
+
+## Sprint 10 — Review & Retrospective
+
+**Increment delivered (doD met):**
+- `scripts/token_trace.py` — for each generated token, captures the
+  accelerator ledger delta (MACs / tile-cycles / rewrites) of a full-layer
+  forward, for both the no-KV (full-context) and KV-cache (single-position)
+  paths; writes `token_trace.svg`.
+- pytest `tests/test_token_trace.py` (always); ROADMAP M3 per-token ledger
+  trace `[x]` (latency sub-part deferred to M6 as it needs measured timing).
+
+**Sprint Review (demo summary, 2L/64D/4H, tile 32x32 x4, P=4):**
+- Per-token no-KV MACs grow linearly with context: token 0 -> 425,984 … token 4
+  -> 851,968 (each step +106,496 = one position).
+- KV-cache single-position forward is constant: 106,496; at ctx 8 that is 8.0x
+  fewer MACs than the no-KV full forward.
+- The trace makes the B5 redundancy visible per token (tile-MVM work only,
+  not digital softmax/scores).
+
+**Retrospective — what went well / to improve:**
+- Well: B6 makes the KV-cache efficiency concrete per token and reuses the
+  Accelerator ledger as-is (M2/M3 tie).
+- Improve: remaining work is M1 g_bits-vs-error curve, M3 per-token latency
+  (needs M6 timing assumptions), and M5 (real pretrained weights).
