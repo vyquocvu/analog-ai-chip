@@ -636,3 +636,36 @@ Goal: upgrade the circuit design — the physical MVM cell (chapter 0007).
   simulator's differential mapping, verified in SPICE.
 - Improve: a full 2D crossbar (multiple columns sharing input rows) and a
   current-mirror single-amp readout are natural next circuit upgrades.
+
+---
+
+## Current Sprint — Sprint 17
+Goal: enable a measured physical ledger — the build measurement kit for 0005.
+
+| Id | Item | Size | Status |
+|---|---|---|---|
+| MEAS | Measurement kit: measurements.csv + checker | S | **done** |
+
+## Sprint 17 — Review & Retrospective
+
+**Increment delivered (doD met):**
+- `book/0005-one-analog-neuron/measurements.csv` — template (ref, virtual
+  ground, output swings, slope sweep) with computed `expected`/`tol`, blank
+  `measured`.
+- `scripts/check_measurements.py` — validates filled rows vs ideal within
+  tolerance, reports a pass/fail summary + max/mean error + fitted
+  `dVout/dx1`, and passes when rows are blank (skip).
+- `tests/test_measurements.py` (always-on: CSV structure/expected, checker runs
+  on the unfilled file, a filled in-tolerance run passes); calibration.md updated.
+- True physical readings depend on the user having the 0005 hardware (LM358,
+  resistors, multimeter).
+
+**Sprint Review:** a breadboard run filled with readings (e.g. REF 2.503,
+OUTP 2.358, ...) gives 7/7 passed, max err 0.008 V, fitted slope −0.496 vs
+ideal −0.50. This is the workflow that turns the build into a *measured* ledger.
+
+**Retrospective — what went well / to improve:**
+- Well: the last "physical" gap is now one spreadsheet away — the tooling is
+  done and machine-checked; filling it requires the real board.
+- Improve: once readings exist, add a SPICE-vs-measured comparison column and
+  extend the same kit to the 0007 crossbar column.

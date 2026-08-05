@@ -17,6 +17,22 @@ Run in the order listed. **Power down before changing any component value.**
 6. Add the **second** branch and check the combined swing matches
    `Vout = 2.5 − (0.50·(x1−2.5) + 0.25·(x2−2.5))`.
 
+## Recording measurements
+
+Fill the `measured` column of `measurements.csv` with your multimeter readings
+for the reference, virtual-ground node, and output swings (including the slope
+sweep rows `SW1`/`SW2`). Then validate automatically:
+
+```bash
+python scripts/check_measurements.py        # blank rows are skipped
+python scripts/check_measurements.py <your_csv>   # or a specific file
+```
+
+The checker flags any filled row outside tolerance, reports max/mean absolute
+error, and fits `dVout/dx1` (expect ≈ −0.50). Keep the file committed so the
+real build becomes a measured physical ledger (`tests/test_measurements.py`).
+
+
 ## Calibration record (fill per revision)
 
 | Quantity | Ideal | Measured | Error |

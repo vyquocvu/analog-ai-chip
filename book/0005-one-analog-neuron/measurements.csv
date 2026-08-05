@@ -1,0 +1,8 @@
+id,kind,x1,x2,expected,tol,measured,note
+REF,vref,,,2.5,0.05,,TP3 reference divider (pin 3)
+VNODE,vgnd,2.5,2.5,2.5,0.05,,TP5 summing node (pin 6) virtual ground
+OUT0,vout,2.5,2.5,2.5,0.05,,no swing (x1=x2=VREF)
+OUTP,vout,3.0,2.1,2.350,0.05,,positive swing: 2.5-(0.5*0.5+0.25*-0.4)
+OUTN,vout,2.0,2.6,2.725,0.05,,negative swing: 2.5-(0.5*-0.5+0.25*0.1)
+SW1,vout,3.0,2.5,2.250,0.05,,slope sweep x1 above ref x2=ref
+SW2,vout,2.0,2.5,2.750,0.05,,slope sweep x1 below ref x2=ref
