@@ -91,8 +91,14 @@ see how MACs / conductance cells grow, so I understand the crossbar view.
 - [x] pytest `tests/test_ablation.py` (always); ROADMAP M4 ablation item closed.
 
 ### B3 — Multi-tile demo  `[M]`
-**AC:** a demo runs a matrix larger than one physical tile and reports the
-ledger with `tile_count > 1`; closes ROADMAP M2.
+**AC:**
+- [x] `scripts/multi_tile_demo.py` runs a matrix larger than one physical tile
+      (24x16 over 8x8) and reports the ledger with `tile_count > 1` and
+      tile_cycles/rewrites;
+- [x] both parallel (no rewrites) and temporal-reuse (rewrites>0) scenarios
+      match the dense reference; guardrails on MACs/cycles/rewrites;
+- [x] tiling-layout SVG `multi_tile_layout.svg`; pytest `tests/test_multi_tile.py`
+      (always); ROADMAP M2 multi-tile demo item closed.
 
 ### B5 — KV-cache path in the transformer  `[M]`
 **AC:** generation no longer recomputes full context each step.
@@ -273,3 +279,36 @@ Goal: attribute the budget-config logit error to each non-ideality (ROADMAP M4).
   offset>noise>bits ordering is actionable for a design.
 - Improve: next, B3 (multi-tile demo, ROADMAP M2) — a matrix larger than one
   tile with the physical ledger (tile_count > 1).
+
+---
+
+## Current Sprint — Sprint 8
+Goal: demonstrate and ledger a matrix larger than one physical tile (ROADMAP M2).
+
+| Id | Item | Size | Status |
+|---|---|---|---|
+| B3 | Multi-tile demo | M | **done** |
+
+## Sprint 8 — Review & Retrospective
+
+**Increment delivered (doD met):**
+- `scripts/multi_tile_demo.py` — 24x16 matrix over 8x8 tiles (6 blocks), runs
+  parallel (tile_count=6) and temporal-reuse (tile_count=2) scenarios, reports
+  the physical ledger and checks both against the dense reference.
+- `multi_tile_layout.svg`; pytest `tests/test_multi_tile.py` (always); ROADMAP
+  M2 multi-tile demo `[x]`.
+
+**Sprint Review (demo summary):**
+- Ledger (same 384-MAC matrix):
+  parallel  -> 6 tiles, cycles 1, rewrites 0;
+  reuse     -> 2 tiles, cycles 3, rewrites 4.
+- Both match dense within 5.4e-4; MACs identical (independent of tile_count).
+- Insight: adding tiles cuts latency lower-bound (cycles) but never the work
+  (MACs); the trade-off is silicon vs timing, shown as honest ledger numbers.
+
+**Retrospective — what went well / to improve:**
+- Well: closes M2's demo item with a concrete ledger contrast (parallel vs
+  temporal reuse) that is honest about the MAC-vs-cycles trade.
+- Improve: M2's remaining "multi-tile parallelism / temporal-reuse scheduler
+  analysis" is analysis-heavy; pair it with M3's per-token trace (B6) once
+  wanted, or start M5 (real pretrained weights).

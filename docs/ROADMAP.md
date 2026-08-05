@@ -49,7 +49,8 @@ Exit: a tile's output is attributable and bounded by its configuration.
 - [x] Pad edge blocks to the physical tile size
 - [x] Physical ledger: MACs, tile cycles, rewrites, tiles used
 - [ ] Multi-tile parallelism model and temporal-reuse scheduler analysis
-- [ ] Report a matrix larger than one physical tile (multi-tile demo)
+- [x] Report a matrix larger than one physical tile (multi-tile demo)
+      (`scripts/multi_tile_demo.py` + `multi_tile_layout.svg`)
 
 Exit: tiling matches dense reference within the configured error bound.
 
