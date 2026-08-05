@@ -78,10 +78,16 @@ Exit: analog route matches float baseline at high precision.
 Exit: each non-ideality's contribution to logit error is quantified.
 
 ## M5 — Larger / pretrained weights (experimental)
-- [ ] Loader for real checkpoint weights (e.g. GPT-2 class) via safetensors
-- [ ] tokenizer + numeric parity check against a reference forward pass
-- [ ] Map a real small model's layers to tiles and report full-sequence
-- [ ] Failure analysis, not only best-case results
+- [x] Loader for real checkpoint weights (e.g. GPT-2 class) via safetensors
+      (`analog_llm/gpt_loader.py`; Conv1D[in,out]->[out,in], head tying,
+      fail-closed)
+- [x] tokenizer + numeric parity check against a reference forward pass
+      (`analog_llm/tokenizer.py`, `analog_llm/reference_gpt2.py`: exact parity
+      on the real checkpoint)
+- [x] Map a real small model's layers to tiles and report full-sequence
+      (`scripts/run_real_model.py`)
+- [x] Failure analysis, not only best-case results (budget config flips,
+      logged in the report)
 
 Exit: a real open checkpoint runs through the simulated accelerator with a
 documented accuracy-vs-baseline table.

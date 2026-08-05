@@ -110,6 +110,19 @@ see how MACs / conductance cells grow, so I understand the crossbar view.
       reduction bar (`kv_cache.svg`); pytest `tests/test_kv_cache.py` (always);
       ROADMAP M3 KV-cache item closed.
 
+### M5 — Real pretrained weights through the simulator  `[L]`
+**AC:**
+- [x] safetensors loader `load_gpt2` (Conv1D transpose, head tying, block_size,
+      fail-closed) maps a real GPT-2 checkpoint into `TinyGPT`;
+- [x] minimal byte-level BPE tokenizer + numeric parity vs an independent
+      reference forward — **exact** on the real checkpoint;
+- [x] `scripts/run_real_model.py` runs a real trained tiny GPT-2
+      (`pszemraj/tiny-gpt2-magicprompt`) through the tile accelerator and
+      reports full-sequence accuracy-vs-baseline;
+- [x] failure analysis (budget config flips, ledger) included;
+- [x] pytest `tests/test_gpt_loader.py` + `tests/test_tokenizer.py`; ROADMAP M5
+      items, checkpoint staged under `data/gpt2-tiny`.
+
 ### B6 — Per-token ledger trace  `[S]`
 **AC:**
 - [x] `scripts/token_trace.py` traces MACs / tile-cycles / rewrites per generated
@@ -386,3 +399,43 @@ contrasting no-KV and KV-cache paths (ROADMAP M3).
   Accelerator ledger as-is (M2/M3 tie).
 - Improve: remaining work is M1 g_bits-vs-error curve, M3 per-token latency
   (needs M6 timing assumptions), and M5 (real pretrained weights).
+
+---
+
+## Current Sprint — Sprint 11
+Goal: run a real pretrained GPT-2 through the simulator with parity and an
+accuracy-vs-baseline table (ROADMAP M5).
+
+| Id | Item | Size | Status |
+|---|---|---|---|
+| M5 | Real pretrained weights | L | **done** |
+
+## Sprint 11 — Review & Retrospective
+
+**Increment delivered (doD met):**
+- `analog_llm/gpt_loader.py` — safetensors loader mapping HuggingFace GPT-2
+  tensors into `TinyGPT` (Conv1D `[in,out]` -> `[out,in]` transpose, head tied
+  to wte, block_size slice, fail-closed).
+- `analog_llm/reference_gpt2.py` — independent pure-numpy reference forward;
+  `analog_llm/tokenizer.py` — minimal byte-level BPE tokenizer.
+- `scripts/run_real_model.py` — runs the real trained tiny GPT-2
+  (`pszemraj/tiny-gpt2-magicprompt`, ~4 MB) through the accelerator; checkpoint
+  cached under `data/gpt2-tiny`.
+- pytest `tests/test_gpt_loader.py` + `tests/test_tokenizer.py`; ROADMAP M5
+  items closed.
+
+**Sprint Review (demo summary):**
+- Numeric parity between `load_gpt2` forward and the independent reference is
+  **exact (0.0)** on the real checkpoint (validates transpose/tying mapping).
+- Full-sequence through the accelerator (tile 1024x8 x4): high-precision
+  matches float exactly (agreement 1.000, logit err 0.0001); budget config
+  degrades (agreement 0.385) and flips all 8 generated positions (failure
+  analysis).
+- Real encoded prompt: "Once upon a time," -> "… time, stairs stairs …"
+  (tiny model loops; honest).
+
+**Retrospective — what went well / to improve:**
+- Well: a genuine open checkpoint now runs end-to-end with exact mapping
+  parity; the independent reference caught a real residual-add bug.
+- Improve: M1 g_bits-vs-error curve and M3 per-token latency (via M6 timing)
+  remain; also consider a larger real model for a less degenerate demo.
