@@ -5,9 +5,9 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "analog-ai-chip"
 version = "0.1.0"
-description = "Executable lessons and functional models for ReRAM analog AI accelerators"
+description = "Simulator for an analog in-memory-computing product that runs language models"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.9"
 license = {text = "MIT"}
 authors = [{name = "Vy Quoc Vu"}]
 dependencies = ["numpy>=1.26"]
@@ -16,7 +16,7 @@ dependencies = ["numpy>=1.26"]
 dev = ["pytest>=8.0", "ruff>=0.6"]
 
 [tool.setuptools.packages.find]
-include = ["analog_ai*"]
+include = ["analog_ai*", "analog_llm*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -24,4 +24,4 @@ addopts = "-q"
 
 [tool.ruff]
 line-length = 100
-target-version = "py311"
+target-version = "py39"

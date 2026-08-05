@@ -1,117 +1,65 @@
-# Roadmap — Build an Analog AI Machine at Home
+# Roadmap — Analog LLM Accelerator (simulation)
 
-## Product definition
+The product is a hybrid analog-digital accelerator for running a small LLM,
+simulated end to end in NumPy. Each milestone is done only when backed by
+executable evidence (tests + a runnable demo/report), never by prose alone.
 
-The project builds a safe, modular, low-voltage hybrid analog-digital neural computer from accessible parts. Version 0.x uses resistors or digital potentiometers as programmable conductances. ReRAM is an optional research backend, not a prerequisite.
+## M0 — Contracts and honest framing
+- [x] Define simulator scope and unit conventions (PRODUCT_SPEC.md)
+- [x] Converter model: DAC/ADC bits, clipping, noise, gain/offset
+- [x] Differential conductance weight model with finite resolution
+- [x] Fail-closed validation on invalid inputs
+- [ ] Freeze error-budget and reporting format (ledger + token agreement)
 
-## M0 — Contracts and safety
+Exit: repository layout, matrix convention, and metric definitions are stable.
 
-- [x] Define system boundary and honest claims
-- [x] Define chapter format
-- [x] Add low-voltage safety rules
-- [ ] Freeze voltage, conductance, matrix orientation, and signed-weight conventions
-- [ ] Define module electrical and communication interfaces
+## M1 — Crossbar and tile
+- [x] Weight normalization to [-1,1] and differential encoding
+- [x] Single programmable tile with all converter non-idealities
+- [x] Hand-computable tile tests (positive/negative/zero weights)
+- [ ] Sweep `g_bits` vs effective-weight error and publish the curve
 
-Exit: simulator, diagrams, and future hardware use the same units and conventions.
+Exit: a tile's output is attributable and bounded by its configuration.
 
-## M1 — One analog neuron
+## M2 — Accelerator and tiling
+- [x] Split a logical matrix into physical tiles with digital partial sums
+- [x] Pad edge blocks to the physical tile size
+- [x] Physical ledger: MACs, tile cycles, rewrites, tiles used
+- [ ] Multi-tile parallelism model and temporal-reuse scheduler analysis
+- [ ] Report a matrix larger than one physical tile (multi-tile demo)
 
-- [ ] Select accessible op-amp and component values
-- [ ] Publish schematic and breadboard wiring
-- [ ] Publish BOM with acceptable substitutes
-- [ ] Build weighted sum `y = w1*x1 + w2*x2 + b`
-- [ ] Add expected measurement table and Python verifier
-- [ ] Measure resistor tolerance, offset, saturation, and noise
+Exit: tiling matches dense reference within the configured error bound.
 
-Exit: two independent builders can reproduce the circuit and remain within the documented error bound.
+## M3 — Tiny transformer on the accelerator
+- [x] Deterministic nanoGPT-style model (numpy, seeded)
+- [x] Hybrid forward: all linears through tiles, rest digital
+- [x] Autoregressive generation (no KV cache, documented)
+- [x] Unified demo report with float baseline
+- [ ] KV-cache path to remove redundant recompute
+- [ ] Per-token latency and ledger trace through a full layer
 
-## M2 — Fixed 2×2 crossbar
+Exit: analog route matches float baseline at high precision.
 
-- [ ] Build unsigned 2×2 conductance array
-- [ ] Add current summing/transimpedance stage
-- [ ] Compare measured MVM with hand calculation and simulator
-- [ ] Document loading, virtual-ground, and op-amp limitations
+## M4 — Accuracy / sensitivity study
+- [x] High-precision vs budget-constrained configuration in demo
+- [ ] Per-non-ideality ablation (bits, noise, gain/offset independently)
+- [ ] Bit sweep producing an accuracy-vs-cost curve
+- [ ] Guardrail that prevents claiming GPU-equivalence from the ledger
 
-Exit: measured outputs reproduce at least four documented input vectors.
+Exit: each non-ideality's contribution to logit error is quantified.
 
-## M3 — Signed weights
+## M5 — Larger / pretrained weights (experimental)
+- [ ] Loader for real checkpoint weights (e.g. GPT-2 class) via safetensors
+- [ ] tokenizer + numeric parity check against a reference forward pass
+- [ ] Map a real small model's layers to tiles and report full-sequence
+- [ ] Failure analysis, not only best-case results
 
-- [ ] Implement differential `G+ - G-` encoding
-- [ ] Add differential output stage
-- [ ] Calibrate zero weight and gain mismatch
-- [ ] Measure common-mode and subtraction error
+Exit: a real open checkpoint runs through the simulated accelerator with a
+documented accuracy-vs-baseline table.
 
-Exit: tile represents positive, zero, and negative weights reproducibly.
+## M6 — Energy / latency product estimate (measured assumptions only)
+- [ ] Model converter count, tile programming cost, and reuse in the ledger
+- [ ] Sensitivity of system latency to tile capacity and parallelism
+- [ ] No GPU comparison without measured physical assumptions
 
-## M4 — Digital control
-
-- [ ] Choose controller board
-- [ ] Define USB/serial protocol
-- [ ] Add DAC input module
-- [ ] Add ADC output module
-- [ ] Implement `detect`, `measure`, and `self-test`
-
-Exit: a host program sends vectors and receives timestamped measurements.
-
-## M5 — Programmable 4×4 tile
-
-- [ ] Evaluate digital potentiometer or resistor-switch network
-- [ ] Implement weight programming
-- [ ] Store per-cell calibration coefficients
-- [ ] Add clipping and range validation
-- [ ] Publish PCB-ready schematic
-
-Exit: software loads a 4×4 signed matrix without manual resistor replacement.
-
-## M6 — Calibration and experiments
-
-- [ ] Automated offset/gain calibration
-- [ ] Noise-floor and repeatability experiment
-- [ ] Temperature-drift experiment
-- [ ] ADC/DAC precision experiment
-- [ ] Machine-readable experiment manifests and CSV results
-
-Exit: every inference result can be traced to a calibration record and hardware revision.
-
-## M7 — Tiny neural network
-
-- [ ] Map one linear layer to the tile
-- [ ] Perform activation digitally first
-- [ ] Run a two-layer tiny classifier
-- [ ] Compare accuracy against float and quantized software baselines
-- [ ] Publish failure analysis, not only best-case results
-
-Exit: end-to-end inference uses the physical analog tile for matrix-vector multiplication.
-
-## M8 — Modular stack
-
-- [ ] Define backplane power, addressing, and analog signal rules
-- [ ] Implement tile discovery
-- [ ] Add matrix tiling and partial-sum scheduler
-- [ ] Validate multi-tile accumulation
-
-Exit: two or more tiles execute a matrix larger than one physical array.
-
-## M9 — Reproducible PCB kit
-
-- [ ] KiCad source
-- [ ] Gerbers and manufacturing notes
-- [ ] BOM and approved substitutions
-- [ ] Assembly and bring-up guide
-- [ ] Enclosure and test jig
-
-Exit: Homebrew Analog AI v0.1 is reproducible without relying on the original breadboard.
-
-## M10 — Research modules
-
-- [ ] FPGA digital shell
-- [ ] MOSFET/floating-gate programmable conductance
-- [ ] Memristor/ReRAM evaluation module
-- [ ] Hardware-aware training
-- [ ] Energy and latency ledger with measured assumptions
-
-These milestones must never block the accessible home-build path.
-
-## Definition of done
-
-A hardware milestone is complete only when it includes schematics, BOM, assembly instructions, expected measurements, actual measurements, calibration, software verification, failure modes, safety notes, and a precise limitations statement.
+Exit: the roadmap's `O(1)`-style claims are replaced by explicit formulas.

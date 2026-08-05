@@ -11,7 +11,7 @@ rows 2:4, cols 0:3    rows 2:4, cols 3:5
 
 The two column tiles for each row range are added to recover the logical output.
 
-Run `python lessons/0004-tiling/train.py`. It prints each reference output and verifies the tiled implementation exactly matches dense multiplication.
+Run `python book/0004-tiling/train.py`. It prints each reference output and verifies the tiled implementation exactly matches dense multiplication.
 
 ## Why O(1) needs qualification
 

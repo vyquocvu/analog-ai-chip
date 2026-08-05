@@ -2,119 +2,107 @@
 
 [![CI](https://github.com/vyquocvu/analog-ai-chip/actions/workflows/ci.yml/badge.svg)](https://github.com/vyquocvu/analog-ai-chip/actions/workflows/ci.yml)
 
-**Build a modular analog neural computer at home, one circuit at a time.**
+**Study analog AI step by step, and design (in simulation) a product that runs
+language models on crossbar tiles.** This repository contains two
+complementary tracks:
 
-This repository is an executable DIY book for learning analog AI by building real low-voltage hardware: first one weighted sum, then a crossbar tile, then a USB-controlled modular machine capable of running tiny neural networks.
+1. **`book/` — sequential study track**: one ordered set of chapters — theory
+   with executable `train.py` assertions plus DIY hardware builds — backed by
+   `maths/` (a plain-language reference shelf). Read these in order.
+2. **`analog_llm/` — product simulator**: the simulated design of a hybrid
+   analog-digital accelerator that runs a small language model (transformer),
+   with explicit converter/conductance non-idealities, plus a physical ledger
+   and accuracy report.
 
-The project starts with breadboards, resistors, op-amps, ADCs, DACs, and microcontrollers. Actual ReRAM and custom silicon are advanced research modules, not prerequisites.
+> Every model here is software. No claim that this is "faster / more efficient
+> than a GPU" is made unless backed by a measured (not assumed) ledger. NumPy
+> computation is never described as physical analog acceleration.
 
-> The initial machine is a hybrid analog-digital educational accelerator. It demonstrates real analog matrix-vector multiplication, but it is not a fabricated ReRAM chip and does not claim to outperform GPUs.
+---
 
-## What you will build
+## Track 1 — Sequential study (`book/`)
 
-```text
-Laptop / Raspberry Pi
-        │ USB / Serial
-        ▼
-Controller → DAC → Analog crossbar → Current summing → ADC
-                          │
-                    stackable tiles
+The book is one ordered path. It is also executable: theory chapters 0001–0004
+start from a tiny hand-computable example encoded as an assertion in `train.py`;
+chapter 0005 turns one weighted sum into a measurable analog circuit.
+
+| # | Topic | Path |
+|---|---|---|
+| 0000 | System and boundaries | `book/0000-what-we-are-building/` |
+| 0001 | Ohm + Kirchhoff = MVM | `book/0001-crossbar-mvm/` |
+| 0002 | Signed differential weights | `book/0002-differential-pairs/` |
+| 0003 | DAC/ADC, quantization, noise | `book/0003-converters-and-noise/` |
+| 0004 | Tiling a matrix across arrays | `book/0004-tiling/` |
+| 0005 | One analog neuron (hardware) | `book/0005-one-analog-neuron/` |
+
+Reference: `maths/`, `docs/MODULE_STANDARD.md`, `docs/SAFETY.md`.
+
+```bash
+python book/0001-crossbar-mvm/train.py
+python book/0002-differential-pairs/train.py
+python book/0003-converters-and-noise/train.py
+python book/0004-tiling/train.py
 ```
 
-The target machine is modular:
+## Track 2 — Analog LLM product simulator (`analog_llm/`)
 
-- a safe 5 V power and reference module;
-- a microcontroller-based controller;
-- DAC input channels;
-- fixed-resistor and programmable-conductance crossbar tiles;
-- transimpedance/current-summing outputs;
-- ADC measurement channels;
-- optional analog activation modules;
-- a backplane for stacking multiple tiles;
-- Python software for calibration, weight mapping, execution, and verification.
-
-## Build path
-
-| # | Build | Physical result | Status |
-|---|---|---|---|
-| 0000 | [Define the machine](book/0000-what-we-are-building) | System boundaries, modules, and safety rules | done |
-| 0001 | [Build one analog neuron](book/0001-one-analog-neuron) | A breadboard weighted-sum circuit | started |
-| 0002 | Build a 2×2 fixed crossbar | Real Ohm/Kirchhoff matrix-vector multiplication | planned |
-| 0003 | Add signed weights | Differential G+ / G− paths | planned |
-| 0004 | Add a microcontroller | Automated input and measurement | planned |
-| 0005 | Add DAC and ADC modules | Repeatable digital-to-analog inference | planned |
-| 0006 | Build a programmable 4×4 tile | Software-programmable weights | planned |
-| 0007 | Calibrate the machine | Offset, gain, noise, and clipping correction | planned |
-| 0008 | Run a tiny neural network | Hybrid analog-digital inference | planned |
-| 0009 | Stack multiple tiles | Tiled layers and partial sums | planned |
-| 0010 | Design the first PCB kit | Reproducible modular hardware | planned |
-| 0011 | Experimental memory modules | Memristor/ReRAM evaluation devices | research |
-
-The existing executable lessons under [`lessons/`](lessons) remain the mathematical and software foundation. The new [`book/`](book) path turns those ideas into physical builds.
-
-## Repository layout
+A decoder-only transformer (nanoGPT-style) runs end to end in NumPy. Every
+dense matrix-vector multiplication — attention QKV, attention output, MLP
+up/down, and the head — is routed through simulated crossbar tiles with
+non-idealities. Layer-norm, softmax, GELU, bias/residual adds, and the
+embedding lookup are digital.
 
 ```text
-analog-ai-chip/
-├── book/               step-by-step DIY chapters
-├── hardware/           schematics, KiCad projects, BOMs, assembly guides
-├── firmware/           controller firmware and wire protocol
-├── software/           host tools, compiler, calibration, and CLI
-├── analog_ai/          reusable functional models
-├── lessons/            executable theory and simulation lessons
-├── experiments/        measured hardware results
-├── maths/              plain-language reference shelf
-├── tests/              deterministic software checks
-└── docs/               architecture, module standard, safety, roadmap
+tokens ─► embedding
+          └─► [LN ─► QKV ─► attention ─► out ─► LM]
+                    └► [LN ─► MLP up ─► GELU ─► MLP down]
+                                │
+                       all linears routed through
+                     DAC → crossbar tiles → ADC (partial sums digital)
 ```
 
-## Chapter discipline
+Simulated non-idealities: programmable-conductance resolution (`g_bits`),
+differential `G+/G−` encoding, DAC bits + clipping, ADC bits + clipping +
+noise + gain/offset. Details: [`docs/PRODUCT_SPEC.md`](docs/PRODUCT_SPEC.md).
 
-Every hardware chapter must include:
+```bash
+python scripts/run_llm_sim.py   # LLM-on-tiles demo + ledger/accuracy report
+```
 
-1. what is being built;
-2. why the circuit works;
-3. schematic and wiring diagram;
-4. bill of materials;
-5. expected voltages/currents;
-6. firmware and host commands;
-7. Python verification;
-8. calibration procedure;
-9. common failure modes;
-10. measurements to record;
-11. experiments to try;
-12. an explicit statement of what the build does not prove.
+```text
+analog_llm/
+├── converters.py      DAC/ADC bits, clipping, noise, gain/offset
+├── crossbar.py        weight → conductance, differential MVM
+├── tile.py            one programmable rows×cols crossbar tile
+├── accelerator.py     tiling, partial sums, temporal reuse, ledger
+├── transformer.py     TinyGPT, hybrid float/analog inference
+└── report.py          config + physical ledger + accuracy
+```
 
-## First target
+---
 
-The first complete release is **Homebrew Analog AI v0.1**:
-
-- one USB-connected controller;
-- one 4×4 signed-weight tile;
-- low-voltage operation;
-- automated calibration;
-- Python CLI;
-- a reproducible tiny classifier demo;
-- open schematics, firmware, BOM, and measurement data.
-
-## Safety and scope
-
-The project is intentionally limited to low-voltage circuits powered from USB or a current-limited bench supply. Do not connect breadboards directly to mains electricity. See [`docs/SAFETY.md`](docs/SAFETY.md).
-
-The project distinguishes carefully between:
-
-- resistor/digital-pot crossbars and actual ReRAM devices;
-- functional models and circuit simulation;
-- one resident crossbar operation and end-to-end model latency;
-- educational measurements and competitive accelerator benchmarks.
-
-## Run the software foundation
+## Install and verify
 
 ```bash
 python -m pip install -e '.[dev]'
-pytest
-python lessons/0001-crossbar-mvm/train.py
+pytest                 # run tests for both tracks
+ruff check .           # lint
+python scripts/run_llm_sim.py
 ```
+
+The demo reports a high-precision accelerator (should match float) and a
+budget-constrained one (realistic degradation), together with
+[`docs/ROADMAP.md`](docs/ROADMAP.md) and
+[`docs/PRODUCT_SPEC.md`](docs/PRODUCT_SPEC.md).
+
+## Honesty principles
+
+- Distinguish three levels of claim: *functional*, *circuit/device*, *system*.
+- Simulate non-idealities explicitly; never hide resolution/noise/clipping
+  behind a single scalar "error".
+- Do not derive `O(1)` or end-to-end energy/latency advantage from one ideal
+  crossbar operation; every report must quote the physical ledger (MACs, tile
+  MVM cycles, rewrites) and state its assumptions.
 
 ## License
 

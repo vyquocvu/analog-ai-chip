@@ -1,4 +1,4 @@
-# 0001 — Build One Analog Neuron
+# 0005 — Build One Analog Neuron
 
 Status: design chapter. Component selection and measured evidence are not complete yet.
 

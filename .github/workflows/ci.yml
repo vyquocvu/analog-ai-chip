@@ -17,7 +17,8 @@ jobs:
       - run: ruff check .
       - run: pytest
       - run: |
-          python lessons/0001-crossbar-mvm/train.py
-          python lessons/0002-differential-pairs/train.py
-          python lessons/0003-converters-and-noise/train.py
-          python lessons/0004-tiling/train.py
+          python book/0001-crossbar-mvm/train.py
+          python book/0002-differential-pairs/train.py
+          python book/0003-converters-and-noise/train.py
+          python book/0004-tiling/train.py
+          python scripts/run_llm_sim.py

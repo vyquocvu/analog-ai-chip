@@ -12,7 +12,7 @@ x_hat = code × scale
 
 The maximum rounding error of an unsaturated ideal converter is half one quantization step.
 
-Run `python lessons/0003-converters-and-noise/train.py` to verify the bound and compare a deterministic noisy output with the ideal result.
+Run `python book/0003-converters-and-noise/train.py` to verify the bound and compare a deterministic noisy output with the ideal result.
 
 ## What this model does not include
 

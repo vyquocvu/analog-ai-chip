@@ -16,8 +16,8 @@ W @ x = [1×2 + (-2)×1, (-0.5)×2 + 3×1] = [0, 2]
 
 The two arrays independently produce currents, then a digital or mixed-signal subtraction recovers the signed result.
 
-Run `python lessons/0002-differential-pairs/train.py`.
+Run `python book/0002-differential-pairs/train.py`.
 
 ## Cost revealed
 
-A differential mapping doubles the number of programmed conductance cells for the simple representation used here. Later lessons will track this area and energy cost rather than treating signed weights as free.
+A differential mapping doubles the number of programmed conductance cells for the simple representation used here. Later chapters will track this area and energy cost rather than treating signed weights as free.

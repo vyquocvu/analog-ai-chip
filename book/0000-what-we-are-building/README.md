@@ -71,4 +71,4 @@ Homebrew Analog AI v0.1 succeeds when a second builder can:
 
 ## Before continuing
 
-Read [`docs/SAFETY.md`](../../docs/SAFETY.md) and [`docs/MODULE_STANDARD.md`](../../docs/MODULE_STANDARD.md). Then continue to chapter 0001, where one weighted sum becomes a measurable circuit.
+Read [`docs/SAFETY.md`](../../docs/SAFETY.md) and [`docs/MODULE_STANDARD.md`](../../docs/MODULE_STANDARD.md). Then continue through the book in order: the theory chapters 0001–0004 build the executable mathematical foundation, and chapter 0005 turns one weighted sum into a measurable analog circuit.
