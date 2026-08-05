@@ -1,6 +1,6 @@
 # 0005 — Xây một neuron analog
 
-Trạng thái: chương thiết kế. Việc chọn linh kiện và bằng chứng đo đạc chưa hoàn tất.
+> **Thời gian đọc:** ~15 phút · **Mô phỏng:** `python book/0005-one-analog-neuron/sim_neuron.py`
 
 ## Mục tiêu
 
@@ -11,6 +11,133 @@ y = w1*x1 + w2*x2 + b
 ```
 
 Bản sửa đầu tiên có thể bỏ qua ngõ vào bias và thêm nó sau khi đã xác nhận tổng có trọng số hai ngõ vào.
+
+## Mô phỏng trước khi xây
+
+Chương này giờ kiểm chứng mạch trong SPICE (qua PySpice + ngspice) *trước khi*
+bạn chạm vào breadboard. Mạch đề xuất đầu tiên là một **bộ khuếch đại cộng đảo**
+hai ngõ vào trên nguồn 5 V:
+
+![Bộ khuếch đại cộng đảo](diagrams/summer.svg)
+
+```text
+         Rf = 1 k
+x1 ── R1=2k ──(+)── out      với  w1 = Rf/R1 = 0.50
+x2 ── R2=4k ──(+)              w2 = Rf/R2 = 0.25
+               (op-amp)        Vout = −(w1·x1 + w2·x2)
+```
+
+Với hợp đồng tính tay `x = [0.5, 1.0]`:
+
+```text
+|Vout| = 0.5·0.5 + 0.25·1.0 = 0.25 + 0.25 = 0.5 V
+```
+
+Cài engine và chạy phép kiểm chứng:
+
+```bash
+brew install ngspice                # engine SPICE (macOS/Homebrew)
+python -m pip install -e '.[sim]'   # PySpice + package
+python book/0005-one-analog-neuron/sim_neuron.py
+```
+
+Kết quả (6 case đầu vào đều khớp phép toán bằng tay):
+
+```text
+  x1     x2    |Vout|(sim)  y(hand)   match
+ 0.50  1.00     0.5000     0.50    OK
+ 0.20  0.80     0.3000     0.30    OK
+ 1.00  0.00     0.5000     0.50    OK
+ 0.00  2.00     0.5000     0.50    OK
+ 0.60  1.20     0.6000     0.60    OK
+ 0.80  0.40     0.5000     0.50    OK
+```
+
+> Mô phỏng dùng **model op-amp lý tưởng** — nó kiểm chứng *quan hệ cộng*, không
+> phải saturation/common-mode/offset của linh kiện thật. Những giới hạn đó
+> chính là thứ mà trình tự đưa mạch vào hoạt động (§ dưới) phải xác nhận trên
+> phần cứng thật. Nếu chưa cài ngspice, script thông báo và bỏ qua một cách
+> sạch sẽ thay vì lỗi.
+
+### Op-amp phi lý tưởng: một chip thật thực sự làm gì
+
+Model lý tưởng không bao giờ bão hoà và không có offset — chip thật thì có.
+Chương giờ cũng kiểm chứng một model **phi lý tưởng** (độ lợi vòng hở hữu hạn,
+một offset ngõ vào `Vos`, và một rail đầu ra `0..5 V`) trong `sim_neuron_nonideal.py`:
+
+```bash
+python book/0005-one-analog-neuron/sim_neuron_nonideal.py
+```
+
+Đo được (tất cả đều tường minh, không giấu gì):
+
+| Kịch bản | Kết quả |
+|---|---|
+| 1 — tuyến tính @ mức chuẩn 2.5 V | `out = 2.3496` vs lý tưởng `2.3500` (lỗi 0.4 mV) |
+| 2 — đầu ra vượt rail 5 V | lý tưởng `5.875` → **bão hoà tại `5.000`** |
+| 3 — tham chiếu đất, nguồn đơn 5 V | đầu vào dương → **bão hoà tại `0`** (đúng cảnh báo chương) |
+| 4 — `Vos = 10 mV` | dịch đầu ra lên `+0.0175 V` |
+
+Kết quả then chốt của Kịch bản 3 là cảnh báo của chương trở thành con số đo
+được: một bộ cộng **đảo** trong sách giáo khoa tham chiếu xuống đất không thể
+xuất giá trị âm trên nguồn đơn 5 V, nên nó bão hoà tại `0 V`. Đó là lý do bản
+build kiểm chứng phải dùng một **mức chuẩn ảo** (vd. VDD/2) như kịch bản 1–2 —
+và vì sao trình tự đưa mạch vào hoạt động thật phải ghi lại nơi saturation thực
+sự xảy ra.
+
+### DC sweep: nhìn thấy vùng tuyến tính và các rail
+
+Quét một đầu vào trên toàn dải nguồn biến "vùng tuyến tính" thành thứ bạn đọc
+được trực tiếp từ đồ thị:
+
+```bash
+python book/0005-one-analog-neuron/sweep_neuron.py
+```
+
+![Vout vs x1: vùng tuyến tính và điểm bão hoà rail](diagrams/sweep.svg)
+
+Giữ mức chuẩn 2.5 V ở đầu vào kia (nên `x2` không đóng góp), đầu ra tuân theo
+`Vout = 2.5 − 0.5·(x1 − 2.5)`:
+
+- **độ dốc vùng tuyến tính = −0.500**, khớp `−w1 = −0.5`;
+- **bão hoà tại rail 5 V** khi `x1 ≤ −2.5 V`;
+- **bão hoà tại rail 0 V** khi `x1 ≥ 7.5 V`.
+
+**Headroom** quanh mức chuẩn 2.5 V là `2.5 V` lên rail 5 V và `2.5 V` xuống đất —
+nên đầu vào phải làm đầu ra dao động trong ±2.5 V quanh mức chuẩn để giữ tuyến
+tính. Đây chính là đại lượng cần ghi lại trên phần cứng thật (task A3), nơi dao
+động sẽ nhỏ hơn lý tưởng.
+
+### Virtual ground và rail headroom
+
+Hai tính chất mà người xây kiểm tra lúc đưa mạch vào hoạt động — giờ đã kiểm
+chứng trong mô phỏng:
+
+```bash
+python book/0005-one-analog-neuron/headroom_neuron.py
+```
+
+![Virtual-ground error theo độ lợi vòng hở](diagrams/virtual_ground.svg)
+
+**Virtual ground.** Trong vùng tuyến tính, nút tổng `n` phải nằm tại mức chuẩn
+2.5 V. Với model độ lợi hữu hạn, sai số nhỏ và tăng theo `1/Aol`:
+
+- `Aol = 1e4`: `max |n − VREF| = 0.37 mV`
+- `Aol = 1e3`: `max |n − VREF| = 3.74 mV`
+
+Đây là lý do chất lượng op-amp/nguồn chuẩn (độ lợi vòng hở, offset) hiện ra như
+một độ lệch nhỏ ở nút tổng — đo được, nhưng thường nhỏ so với dung sai điện
+trở.
+
+**Rail headroom.** Trên nguồn 5 V với mức chuẩn 2.5 V:
+
+```text
+headroom lên  = VDD − VREF = 2.5 V
+headroom xuống = VREF − 0   = 2.5 V
+```
+
+Giữ `|Vout − VREF| ≤ 2.5 V` để còn tuyến tính. Với cấu hình tham chiếu đất,
+`headroom xuống = 0`, đúng là lý do nó bão hoà với mọi đầu vào dương.
 
 ## Kết quả học được
 

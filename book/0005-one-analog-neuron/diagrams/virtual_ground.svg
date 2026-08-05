@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="Menlo,Consolas,monospace">
+<rect width="960" height="540" fill="#ffffff"/>
+<text x="480" y="28" text-anchor="middle" font-size="18" font-weight="bold" fill="#111">Virtual-ground error  n − VREF  across the linear sweep</text>
+<text x="480" y="48" text-anchor="middle" font-size="12" fill="#7f8c8d">green = Aol 1e4 · orange = Aol 1e3 · red dashed = perfect virtual ground</text>
+<line x1="150.0" y1="60.0" x2="150.0" y2="500.0" stroke="#333" stroke-width="1.5"/>
+<line x1="150.0" y1="280.0" x2="860.0" y2="280.0" stroke="#333" stroke-width="1.5"/>
+<text x="860.0" y="76.0" text-anchor="end" fill="#333">x1 (V)</text>
+<text x="158.0" y="494.0" fill="#333">n − VREF (mV)</text>
+<text x="150.0" y="74.0" text-anchor="middle" fill="#666" font-size="11">0</text>
+<text x="292.0" y="74.0" text-anchor="middle" fill="#666" font-size="11">1</text>
+<text x="434.0" y="74.0" text-anchor="middle" fill="#666" font-size="11">2</text>
+<text x="576.0" y="74.0" text-anchor="middle" fill="#666" font-size="11">3</text>
+<text x="718.0" y="74.0" text-anchor="middle" fill="#666" font-size="11">4</text>
+<text x="860.0" y="74.0" text-anchor="middle" fill="#666" font-size="11">5</text>
+<text x="144.0" y="449.0" text-anchor="end" fill="#666" font-size="11">-1.5</text>
+<text x="144.0" y="394.0" text-anchor="end" fill="#666" font-size="11">-1.0</text>
+<text x="144.0" y="339.0" text-anchor="end" fill="#666" font-size="11">-0.5</text>
+<text x="144.0" y="284.0" text-anchor="end" fill="#666" font-size="11">0.0</text>
+<text x="144.0" y="229.0" text-anchor="end" fill="#666" font-size="11">0.5</text>
+<text x="144.0" y="174.0" text-anchor="end" fill="#666" font-size="11">1.0</text>
+<text x="144.0" y="119.0" text-anchor="end" fill="#666" font-size="11">1.5</text>
+<line x1="150.0" y1="280.0" x2="860.0" y2="280.0" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="4,4"/>
+<polyline points="150.0,280.0 185.5,280.0 221.0,280.0 256.5,280.0 292.0,280.0 327.5,280.0 363.0,280.0 398.5,280.0 434.0,280.0 469.5,280.0 505.0,280.0 540.5,280.0 576.0,280.0 611.5,280.0 647.0,280.0 682.5,280.0 718.0,280.0 753.5,280.0 789.0,280.0 824.5,280.0 860.0,280.0" fill="none" stroke="#1e8449" stroke-width="3"/>
+<polyline points="150.0,280.4 185.5,280.4 221.0,280.4 256.5,280.4 292.0,280.4 327.5,280.3 363.0,280.3 398.5,280.3 434.0,280.3 469.5,280.3 505.0,280.3 540.5,280.3 576.0,280.2 611.5,280.2 647.0,280.2 682.5,280.2 718.0,280.2 753.5,280.2 789.0,280.2 824.5,280.2 860.0,280.1" fill="none" stroke="#e67e22" stroke-width="2.5"/>
+</svg>

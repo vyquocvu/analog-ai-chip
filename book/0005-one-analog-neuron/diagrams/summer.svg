@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="960" height="520" font-family="Menlo,Consolas,monospace">
+  <rect x="0" y="0" width="960" height="520" fill="#ffffff"/>
+  <style>
+    .wire{stroke:#333;stroke-width:2.5;fill:none;}
+    .res{fill:#fdebd0;stroke:#1a5276;stroke-width:2;}
+    .txt{fill:#111;font-size:15px;}
+    .lab{fill:#ca6f1e;font-size:14px;font-weight:bold;}
+    .cap{fill:#7f8c8d;font-size:12px;}
+    .opamp{fill:#eaf2f8;stroke:#1a5276;stroke-width:2;}
+  </style>
+  <text x="480" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#111">Inverting summing amplifier (single supply 5 V)</text>
+  <text x="480" y="50" text-anchor="middle" class="cap">Vout = −(Rf/R1·x1 + Rf/R2·x2)  with  Rf=1k, R1=2k, R2=4k  →  w = [0.50, 0.25]</text>
+
+  <!-- ground rails -->
+  <line x1="80" y1="150" x2="900" y2="150" class="wire" stroke="#bbb"/>
+  <line x1="80" y1="420" x2="900" y2="420" class="wire" stroke="#bbb"/>
+  <text x="80" y="143" class="cap">0 V (gnd)</text>
+
+  <!-- input sources + resistors x1 branch (top) -->
+  <circle cx="120" cy="210" r="18" fill="#fdf2e9" stroke="#ca6f1e" stroke-width="2.5"/>
+  <text x="120" y="215" text-anchor="middle" class="lab" font-size="13">x1</text>
+  <line x1="138" y1="210" x2="200" y2="210" class="wire"/>
+  <rect class="res" x="200" y="198" width="60" height="24"/>
+  <text x="230" y="188" text-anchor="middle" class="lab" font-size="12">R1=2k</text>
+  <line x1="260" y1="210" x2="410" y2="210" class="wire"/>
+
+  <!-- input sources + resistors x2 branch (bottom) -->
+  <circle cx="120" cy="330" r="18" fill="#fdf2e9" stroke="#ca6f1e" stroke-width="2.5"/>
+  <text x="120" y="335" text-anchor="middle" class="lab" font-size="13">x2</text>
+  <line x1="138" y1="330" x2="200" y2="330" class="wire"/>
+  <rect class="res" x="200" y="318" width="60" height="24"/>
+  <text x="230" y="308" text-anchor="middle" class="lab" font-size="12">R2=4k</text>
+  <line x1="260" y1="330" x2="410" y2="330" class="wire"/>
+
+  <!-- summing node vertical connecting x1 and x2 -->
+  <line x1="410" y1="210" x2="410" y2="330" class="wire"/>
+  <circle cx="410" cy="270" r="3.5" fill="#333"/>
+  <text x="410" y="258" text-anchor="middle" class="cap">n (virtual gnd)</text>
+
+  <!-- from summing node into op-amp inverting input -->
+  <line x1="410" y1="270" x2="520" y2="270" class="wire"/>
+
+  <!-- op-amp triangle -->
+  <path class="opamp" d="M520,210 L520,330 L660,270 Z"/>
+  <!-- + and - labels -->
+  <text x="530" y="300" class="lab" font-size="14">−</text>
+  <text x="530" y="230" class="lab" font-size="14">+</text>
+  <line x1="520" y1="240" x2="480" y2="240" class="wire"/><text x="470" y="244" text-anchor="end" class="cap">(gnd)</text>
+
+  <!-- feedback resistor from out to n -->
+  <line x1="660" y1="270" x2="720" y2="270" class="wire"/>
+  <line x1="720" y1="270" x2="830" y2="270" class="wire"/>
+  <rect class="res" x="720" y="190" width="24" height="60"/>
+  <text x="755" y="180" text-anchor="middle" class="lab" font-size="12">Rf=1k</text>
+  <line x1="744" y1="270" x2="720" y2="270" class="wire"/>
+
+  <!-- output -->
+  <text x="660" y="292" text-anchor="start" class="cap">out ──►</text>
+  <line x1="660" y1="270" x2="900" y2="270" class="wire"/>
+  <text x="900" y="262" text-anchor="end" class="txt" font-weight="bold">Vout ≈ −0.5 V</text>
+
+  <!-- supply rails note -->
+  <text x="520" y="360" text-anchor="middle" class="cap">op-amp rails: VDD = 5 V and gnd (ideal model)</text>
+
+  <!-- equation box bottom -->
+  <g transform="translate(120,450)">
+    <text x="0" y="0" class="txt" font-size="14">|Vout| = w1·x1 + w2·x2 = 0.5·0.5 + 0.25·1.0 = 0.25 + 0.25 = 0.5 V</text>
+    <text x="0" y="22" class="cap" font-size="13">Task 1: keep inputs ≥ 0 and |Vout| ≤ ~1 V, well inside the 5 V rail (no clipping).</text>
+  </g>
+</svg>

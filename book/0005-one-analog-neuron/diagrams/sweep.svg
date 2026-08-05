@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="Menlo,Consolas,monospace">
+<rect width="960" height="540" fill="#ffffff"/>
+<text x="480" y="28" text-anchor="middle" font-size="18" font-weight="bold" fill="#111">Vout vs x1 (x2 = 2.5 V reference)</text>
+<text x="480" y="48" text-anchor="middle" font-size="12" fill="#7f8c8d">green solid = chip output (clamped) · blue dashed = ideal linear · pink = rails</text>
+<line x1="368.46153846153845" y1="60.0" x2="368.46153846153845" y2="500.0" stroke="#333" stroke-width="1.5"/>
+<line x1="150.0" y1="437.14285714285717" x2="860.0" y2="437.14285714285717" stroke="#333" stroke-width="1.5"/>
+<text x="860.0" y="76.0" text-anchor="end" fill="#333">x1 (V)</text>
+<text x="158.0" y="494.0" fill="#333">Vout (V)</text>
+<text x="150.0" y="74.0" text-anchor="middle" fill="#666" font-size="11">-4</text>
+<text x="259.2307692307692" y="74.0" text-anchor="middle" fill="#666" font-size="11">-2</text>
+<text x="368.46153846153845" y="74.0" text-anchor="middle" fill="#666" font-size="11">0</text>
+<text x="477.69230769230774" y="74.0" text-anchor="middle" fill="#666" font-size="11">2</text>
+<text x="586.9230769230769" y="74.0" text-anchor="middle" fill="#666" font-size="11">4</text>
+<text x="696.1538461538462" y="74.0" text-anchor="middle" fill="#666" font-size="11">6</text>
+<text x="805.3846153846155" y="74.0" text-anchor="middle" fill="#666" font-size="11">8</text>
+<text x="144.0" y="441.14285714285717" text-anchor="end" fill="#666" font-size="11">0</text>
+<text x="144.0" y="378.2857142857143" text-anchor="end" fill="#666" font-size="11">1</text>
+<text x="144.0" y="315.42857142857144" text-anchor="end" fill="#666" font-size="11">2</text>
+<text x="144.0" y="252.57142857142858" text-anchor="end" fill="#666" font-size="11">3</text>
+<text x="144.0" y="189.71428571428572" text-anchor="end" fill="#666" font-size="11">4</text>
+<text x="144.0" y="126.85714285714289" text-anchor="end" fill="#666" font-size="11">5</text>
+<line x1="150.0" y1="437.14285714285717" x2="860.0" y2="437.14285714285717" stroke="#ffd0d0" stroke-width="1.5"/>
+<line x1="150.0" y1="122.85714285714289" x2="860.0" y2="122.85714285714289" stroke="#ffd0d0" stroke-width="1.5"/>
+<text x="860.0" y="440.14285714285717" text-anchor="end" fill="#c0392b" font-size="12">rail 0 V</text>
+<text x="860.0" y="138.8571428571429" text-anchor="end" fill="#c0392b" font-size="12">rail 5 V</text>
+<polyline points="150.0,75.7 168.2,86.2 186.4,96.7 204.6,107.1 222.8,117.6 241.0,128.1 259.2,138.6 277.4,149.0 295.6,159.5 313.8,170.0 332.1,180.5 350.3,191.0 368.5,201.4 386.7,211.9 404.9,222.4 423.1,232.9 441.3,243.3 459.5,253.8 477.7,264.3 495.9,274.8 514.1,285.2 532.3,295.7 550.5,306.2 568.7,316.7 586.9,327.1 605.1,337.6 623.3,348.1 641.5,358.6 659.7,369.0 677.9,379.5 696.2,390.0 714.4,400.5 732.6,411.0 750.8,421.4 769.0,431.9 787.2,442.4 805.4,452.9 823.6,463.3 841.8,473.8 860.0,484.3" fill="none" stroke="#1a5276" stroke-dasharray="5,4" stroke-width="2"/>
+<polyline points="150.0,122.9 168.2,122.9 186.4,122.9 204.6,122.9 222.8,122.9 241.0,128.1 259.2,138.6 277.4,149.1 295.6,159.6 313.8,170.0 332.1,180.5 350.3,191.0 368.5,201.5 386.7,211.9 404.9,222.4 423.1,232.9 441.3,243.4 459.5,253.8 477.7,264.3 495.9,274.8 514.1,285.3 532.3,295.7 550.5,306.2 568.7,316.7 586.9,327.2 605.1,337.6 623.3,348.1 641.5,358.6 659.7,369.1 677.9,379.5 696.2,390.0 714.4,400.5 732.6,411.0 750.8,421.4 769.0,431.9 787.2,437.1 805.4,437.1 823.6,437.1 841.8,437.1 860.0,437.1" fill="none" stroke="#1e8449" stroke-width="3"/>
+</svg>

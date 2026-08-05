@@ -1,6 +1,7 @@
 # 0005 — Build One Analog Neuron
 
-Status: design chapter. Component selection and measured evidence are not complete yet.
+> **Reading time:** ~15 min · **Simulate:** `python book/0005-one-analog-neuron/sim_neuron.py`
+> **Bản tiếng Việt:** [`README.vi.md`](README.vi.md)
 
 ## Goal
 
@@ -11,6 +12,133 @@ y = w1*x1 + w2*x2 + b
 ```
 
 The first revision may omit the bias input and add it after the two-input weighted sum is validated.
+
+## Simulate before you build
+
+This chapter now verifies the circuit in SPICE (via PySpice + ngspice) *before*
+you touch a breadboard. The proposed first circuit is a two-input **inverting
+summing amplifier** on a 5 V supply:
+
+![Inverting summing amplifier](diagrams/summer.svg)
+
+```text
+         Rf = 1 k
+x1 ── R1=2k ──(+)── out      with  w1 = Rf/R1 = 0.50
+x2 ── R2=4k ──(+)              w2 = Rf/R2 = 0.25
+               (op-amp)        Vout = −(w1·x1 + w2·x2)
+```
+
+For the hand contract `x = [0.5, 1.0]`:
+
+```text
+|Vout| = 0.5·0.5 + 0.25·1.0 = 0.25 + 0.25 = 0.5 V
+```
+
+Install the engine and run the check:
+
+```bash
+brew install ngspice                # the SPICE engine (macOS/Homebrew)
+python -m pip install -e '.[sim]'   # PySpice + package
+python book/0005-one-analog-neuron/sim_neuron.py
+```
+
+Result (6 input cases all match the hand arithmetic):
+
+```text
+  x1     x2    |Vout|(sim)  y(hand)   match
+ 0.50  1.00     0.5000     0.50    OK
+ 0.20  0.80     0.3000     0.30    OK
+ 1.00  0.00     0.5000     0.50    OK
+ 0.00  2.00     0.5000     0.50    OK
+ 0.60  1.20     0.6000     0.60    OK
+ 0.80  0.40     0.5000     0.50    OK
+```
+
+> The simulation uses an **ideal op-amp model** — it verifies the *summing
+> relation*, not saturation/common-mode/offset of a real device. Those limits
+> are exactly what the bring-up sequence (§ below) must confirm on real
+> hardware. If ngspice is not installed the script reports it and skips
+> cleanly rather than failing.
+
+### Non-ideal op-amp: what a real chip actually does
+
+An ideal model never saturates and has no offset — a real chip does. The chapter
+now also checks a **non-ideal** model (finite open-loop gain, a `Vos` input
+offset, and a `0..5 V` output rail) in `sim_neuron_nonideal.py`:
+
+```bash
+python book/0005-one-analog-neuron/sim_neuron_nonideal.py
+```
+
+Measured (all explicit, nothing hidden):
+
+| Scenario | Result |
+|---|---|
+| 1 — linear @ 2.5 V reference | `out = 2.3496` vs ideal `2.3500` (err 0.4 mV) |
+| 2 — output past 5 V rail | ideal `5.875` → **clips at `5.000`** |
+| 3 — gnd-referenced, single 5 V supply | positive input → **clips at `0`** (the chapter's warning) |
+| 4 — `Vos = 10 mV` | shifts the output by `+0.0175 V` |
+
+The key result of Scenario 3 is the chapter's warning made measurable: a
+textbook **inverting** summer referenced to ground cannot output a negative
+value on a single 5 V supply, so it clips at `0 V`. That is why the tested build
+must use a **virtual reference** (e.g. VDD/2) as in scenarios 1–2 — and why the
+real bring-up sequence must record where saturation actually happens.
+
+### DC sweep: seeing the linear region and the rails
+
+Sweeping one input across the whole supply range turns the "linear region" into
+something you can read off a plot:
+
+```bash
+python book/0005-one-analog-neuron/sweep_neuron.py
+```
+
+![Vout vs x1: linear region and rail clip points](diagrams/sweep.svg)
+
+Holding the 2.5 V reference on the other input (so `x2` contributes nothing),
+the output follows `Vout = 2.5 − 0.5·(x1 − 2.5)`:
+
+- **linear-region slope = −0.500**, matching `−w1 = −0.5`;
+- it **clips at the 5 V rail** for `x1 ≤ −2.5 V`;
+- it **clips at the 0 V rail** for `x1 ≥ 7.5 V`.
+
+The **headroom** around the 2.5 V reference is `2.5 V` up to the 5 V rail and
+`2.5 V` down to ground — so inputs must swing the output within ±2.5 V of the
+reference to stay linear. This is exactly the quantity to record on real
+hardware (task A3), where the swing will be smaller than ideal.
+
+### Virtual ground and rail headroom
+
+Two properties a builder checks at bring-up — now verified in simulation:
+
+```bash
+python book/0005-one-analog-neuron/headroom_neuron.py
+```
+
+![Virtual-ground error vs open-loop gain](diagrams/virtual_ground.svg)
+
+**Virtual ground.** In the linear region the summing node `n` must sit at the
+2.5 V reference. With the finite-gain model the error is small and grows as
+`1/Aol`:
+
+- `Aol = 1e4`: `max |n − VREF| = 0.37 mV`
+- `Aol = 1e3`: `max |n − VREF| = 3.74 mV`
+
+This is why the reference/op-amp quality (open-loop gain, offset) shows up as a
+tiny offset at the summing node — measurable, but usually small compared to
+resistor tolerance.
+
+**Rail headroom.** On a 5 V supply with a 2.5 V reference:
+
+```text
+headroom up   = VDD − VREF = 2.5 V
+headroom down = VREF − 0   = 2.5 V
+```
+
+Keep `|Vout − VREF| ≤ 2.5 V` to stay linear. For the gnd-referenced
+configuration `headroom down = 0`, which is exactly why it clips on any positive
+input.
 
 ## Learning result
 

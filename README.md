@@ -37,6 +37,11 @@ chapter 0005 turns one weighted sum into a measurable analog circuit.
 
 Reference: `maths/`, `docs/MODULE_STANDARD.md`, `docs/SAFETY.md`.
 
+**Circuit simulation:** chapter 0005 verifies the neuron circuit in SPICE
+(before building) through PySpice + ngspice — see
+`book/0005-one-analog-neuron/sim_neuron.py`. Optional:
+`brew install ngspice` then `pip install -e '.[sim]'`.
+
 > **Tiếng Việt:** mỗi chương đều có `README.vi.md` ở cùng thư mục (bản tiếng Việt) bên cạnh `README.md` (tiếng Anh).
 
 ```bash

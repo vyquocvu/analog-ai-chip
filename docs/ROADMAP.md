@@ -4,6 +4,23 @@ The product is a hybrid analog-digital accelerator for running a small LLM,
 simulated end to end in NumPy. Each milestone is done only when backed by
 executable evidence (tests + a runnable demo/report), never by prose alone.
 
+## Book track — hardware verification (SPICE, before building)
+- [x] Verify the 0005 weighted-sum circuit in ngspice/PySpice against the hand
+      arithmetic (6 input cases within ~5 mV)
+- [x] Ship the circuit schematic and a runnable `sim_neuron.py` as a chapter
+      deliverable
+- [x] Add a real (non-ideal) op-amp model (finite Aol, offset, rail saturation)
+      and demonstrate saturation/offset against the ideal result
+      (`book/0005-one-analog-neuron/sim_neuron_nonideal.py`)
+- [x] DC sweep showing the linear region and both rail clip points
+      (`book/0005-one-analog-neuron/sweep_neuron.py` + `diagrams/sweep.svg`)
+- [x] Virtual-ground and rail-headroom check: summing node error vs open-loop
+      gain + headroom up/down on the 5 V supply
+      (`book/0005-one-analog-neuron/headroom_neuron.py` + `diagrams/virtual_ground.svg`)
+
+Exit: a builder can reproduce the circuit's expected voltages in simulation
+before assembling hardware.
+
 ## M0 — Contracts and honest framing
 - [x] Define simulator scope and unit conventions (PRODUCT_SPEC.md)
 - [x] Converter model: DAC/ADC bits, clipping, noise, gain/offset
