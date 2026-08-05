@@ -151,7 +151,11 @@ see how MACs / conductance cells grow, so I understand the crossbar view.
 - [x] pytest `tests/test_latency.py`; ROADMAP M6 items closed.
 
 ### D1 — CI runs the circuit sim when ngspice is available  `[S]`
-**AC:** CI's optional job exercises `sim_neuron*.py` (or skips cleanly).
+**AC:**
+- [x] `.github/workflows/ci.yml` adds an optional `circuit-sim` job that installs
+      ngspice and runs `pytest tests/test_circuit_sim.py`; the SPICE tests skip
+      cleanly (exit 0) when the engine/shared library is unavailable, so the job
+      never hard-fails on a dependency-light runner.
 
 ---
 
@@ -528,3 +532,35 @@ input assumptions only (ROADMAP M6), with no GPU comparison.
   assumption-labelled formula that never claims a real speed/energy/GPU result.
 - Improve: real numbers need actual silicon timing/energy measurements and a
   committed ledger; D1 (CI circuit sim job) remains for the book track.
+
+---
+
+## Current Sprint — Sprint 14
+Goal: close the last backlog item — an optional CI job that runs the SPICE
+circuit sims when ngspice is available (or skips cleanly).
+
+| Id | Item | Size | Status |
+|---|---|---|---|
+| D1 | CI runs circuit sim when ngspice available | S | **done** |
+
+## Sprint 14 — Review & Retrospective
+
+**Increment delivered (doD met):**
+- `.github/workflows/ci.yml` adds an optional `circuit-sim` job: installs
+  `ngspice` (best-effort, `|| true`), installs `.[dev,sim]`, and runs
+  `pytest tests/test_circuit_sim.py`. The SPICE tests auto-skip when PySpice or
+  the ngspice shared library is missing (already the case), so the job stays
+  green either way.
+- ROADMAP/BACKLOG: the numeric backlog (A1-A5, B1-B6, M1-M6, D1) is now fully
+  closed.
+
+**Sprint Review:** the sim scripts' loader auto-detects
+`/usr/lib/x86_64-linux-gnu/libngspice.so` on Linux (see `sim_neuron.py`), so an
+Ubuntu runner with `ngspice` installed runs the 0005/0006 SPICE assertions, and
+a runner without it skips them rather than failing.
+
+**Retrospective — what went well / to improve:**
+- Well: closes the last backlog item; CI now covers both the numpy suite and
+  (optionally) the SPICE book track with a clean skip path.
+- Improve: there is intentionally no platform with a measured silicon ledger
+  yet; the whole roadmap remains a simulator until physical measurements exist.
