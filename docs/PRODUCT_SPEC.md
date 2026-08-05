@@ -90,3 +90,27 @@ advantage over a GPU may be claimed from them.
 - A budget-constrained accelerator shows monotone, bounded degradation so the
   sensitivity to each non-ideality is visible.
 - Every reported metric states its assumptions and units.
+
+## 8. Frozen v0.1 reporting format
+
+The report format below is frozen for v0.1 so every claim is comparable,
+auditable, and honest. A report must state at minimum:
+
+**Accuracy (vs float baseline, fixed seed):**
+- `token agreement`: fraction of generated positions matching the float model;
+- `max |logit error|`: max absolute logit difference over the traced sequence.
+
+**Physical ledger (per run):**
+- `macs`: resolved differential conductance cells executed (only `G+ - G-`);
+- `tile cycles`: lower bound on sequential block-MVM cycles,
+  `ceil(blocks / tile_count)` per MVM, summed;
+- `rewrites`: number of physical tiles re-programmed (temporal reuse);
+- `programs`: number of weight blocks programmed onto tiles (`>= rewrites`).
+
+**Invariants (enforced by `analog_llm/guardrail.py` and the demo scripts):**
+- Every number is a *simulation* quantity in its stated units; no wall-clock or
+  energy value may be presented as measured; the system estimate uses relative
+  units (`tu`/`eu`) from supplied assumptions, never a GPU comparison.
+- No performance claim (faster-than / GPU-equivalent / O(1) compute/energy)
+  may appear without a measured, committed ledger + explicit disclaimer.
+- Every run is deterministic (fixed seed) and fail-closed on invalid inputs.

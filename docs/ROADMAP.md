@@ -32,7 +32,8 @@ before assembling hardware.
 - [x] Converter model: DAC/ADC bits, clipping, noise, gain/offset
 - [x] Differential conductance weight model with finite resolution
 - [x] Fail-closed validation on invalid inputs
-- [ ] Freeze error-budget and reporting format (ledger + token agreement)
+- [x] Freeze error-budget and reporting format (ledger + token agreement)
+      (`docs/PRODUCT_SPEC.md` §8 + `tests/test_report_format.py`)
 
 Exit: repository layout, matrix convention, and metric definitions are stable.
 
@@ -50,7 +51,8 @@ Exit: a tile's output is attributable and bounded by its configuration.
 - [x] Split a logical matrix into physical tiles with digital partial sums
 - [x] Pad edge blocks to the physical tile size
 - [x] Physical ledger: MACs, tile cycles, rewrites, tiles used
-- [ ] Multi-tile parallelism model and temporal-reuse scheduler analysis
+- [x] Multi-tile parallelism model and temporal-reuse scheduler analysis
+      (`docs/TILING.md` + `tests/test_tiling_analysis.py`)
 - [x] Report a matrix larger than one physical tile (multi-tile demo)
       (`scripts/multi_tile_demo.py` + `multi_tile_layout.svg`)
 
@@ -63,7 +65,8 @@ Exit: tiling matches dense reference within the configured error bound.
 - [x] Unified demo report with float baseline
 - [x] KV-cache path to remove redundant recompute
       (`analog_llm.transformer.generate_kvcache` + `scripts/kv_cache_demo.py`)
-- [ ] Per-token latency trace (needs measured timing assumptions; M6)
+- [x] Per-token latency (est.) trace through a full layer (relative tu, from
+      the M6 model; `scripts/token_trace.py`)
 - [x] Per-token ledger trace through a full layer
       (`scripts/token_trace.py` + `token_trace.svg`; B5/B6)
 
@@ -75,7 +78,8 @@ Exit: analog route matches float baseline at high precision.
       (`scripts/ablation.py` + `ablation.svg`)
 - [x] Bit sweep producing an accuracy-vs-cost curve
       (`scripts/bit_sweep.py` + `bit_sweep_g.svg` / `bit_sweep_adc.svg`)
-- [ ] Guardrail that prevents claiming GPU-equivalence from the ledger
+- [x] Guardrail that prevents claiming GPU-equivalence from the ledger
+      (`analog_llm/guardrail.py` + `tests/test_guardrail.py`)
 
 Exit: each non-ideality's contribution to logit error is quantified.
 

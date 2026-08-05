@@ -564,3 +564,42 @@ a runner without it skips them rather than failing.
   (optionally) the SPICE book track with a clean skip path.
 - Improve: there is intentionally no platform with a measured silicon ledger
   yet; the whole roadmap remains a simulator until physical measurements exist.
+
+---
+
+## Current Sprint — Sprint 15
+Goal: close the last four roadmap items — honest-framing guardrails (M4, M0)
+and the two analysis items (M2 scheduler, M3 per-token latency est.).
+
+| Id | Item | Size | Status |
+|---|---|---|---|
+| M4 | GPU-equivalence guardrail | S | **done** |
+| M0 | Freeze error-budget + reporting format | S | **done** |
+| M2 | Multi-tile / temporal-reuse scheduler analysis | S | **done** |
+| M3 | Per-token latency trace (est., M6 model) | S | **done** |
+
+## Sprint 15 — Review & Retrospective
+
+**Increment delivered (doD met):**
+- `analog_llm/guardrail.py` + `tests/test_guardrail.py` — rejects performance
+  claims (faster-than / GPU-equivalent / O(1) compute·energy·latency) in code
+  and reports; disclaimers ("no GPU comparison") pass; scans our .py tree.
+- `docs/PRODUCT_SPEC.md` §8 — frozen v0.1 reporting format (accuracy + ledger +
+  invariants); `tests/test_report_format.py` pins `format_report` fields.
+- `docs/TILING.md` + `tests/test_tiling_analysis.py` — block decomposition,
+  linear-scan schedule, `cycles = ceil(blocks/T)`, `rewrites = max(0, blocks-T)`,
+  programming cost formula; verified against the accelerator.
+- `scripts/token_trace.py` now prints a per-token latency estimate (relative
+  `tu` from the M6 model) next to the ledger.
+- ROADMAP M0/M2/M3/M4 items closed; the roadmap is now fully checked.
+
+**Sprint Review (per-token latency est., P=4, tile 32x32 x4):**
+- no-KV per-token latency grows with context: 187.2 -> 374.4 tu.
+- KV single-position is constant 46.8 tu (8.0x lower at ctx 8).
+
+**Retrospective — what went well / to improve:**
+- Well: the roadmap is now fully complete, and the guardrail makes the
+  "honest framing" rule an enforceable check rather than a guideline.
+- Improve: everything remains a simulator; producing a real physical ledger
+  (silicon or a real SPICE build with `measurements.csv`) is the only
+  meaningful next step.

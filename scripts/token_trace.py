@@ -17,9 +17,19 @@ not wall-clock time or energy; no GPU comparison is claimed.
 
 import numpy as np
 
-from analog_llm import Accelerator, CrossbarTile, TinyGPT, TinyGPTConfig
+from analog_llm import Accelerator, CrossbarTile, Metrics, TinyGPT, TinyGPTConfig
+from analog_llm.latency import PhysicsAssumptions, system_analysis
 
 TILE_ROWS, TILE_COLS, TILE_COUNT = 32, 32, 4
+
+# designer-supplied relative timings (assumptions, not measured)
+_ASSUME = PhysicsAssumptions(mvm_cycle_time=1.0, program_time=0.2)
+
+
+def latency_est(ledger: dict) -> float:
+    m = Metrics(macs=ledger["macs"], cycles=ledger["cycles"],
+                rewrites=ledger["rewrites"], programs=ledger.get("programs", ledger["rewrites"]))
+    return system_analysis(m, TILE_ROWS, TILE_COLS, TILE_COUNT, _ASSUME)["latency"]
 
 
 def build_acc() -> Accelerator:
@@ -34,14 +44,16 @@ def trace_full_forward(model, out, step, acc) -> dict:
     ctx = np.asarray(out[: step + 1], dtype=np.int64)[-model.cfg.block_size:]
     acc.reset_ledger()
     model.forward_logits(ctx, accelerator=acc)
-    return {"macs": acc.macs, "cycles": acc.tile_cycles, "rewrites": acc.rewrites}
+    return {"macs": acc.macs, "cycles": acc.tile_cycles, "rewrites": acc.rewrites,
+            "programs": acc.programs}
 
 
 def trace_single_position(model, token, acc) -> dict:
     """Ledger delta for a *single-position* forward (KV-cache step)."""
     acc.reset_ledger()
     model.forward_logits(np.asarray([token], dtype=np.int64), accelerator=acc)
-    return {"macs": acc.macs, "cycles": acc.tile_cycles, "rewrites": acc.rewrites}
+    return {"macs": acc.macs, "cycles": acc.tile_cycles, "rewrites": acc.rewrites,
+            "programs": acc.programs}
 
 
 def make_svg(rows: list, kv_row: dict, path: str) -> None:
@@ -103,19 +115,26 @@ def main() -> None:
     print("B6 — per-token ledger trace through a full layer")
     print("=" * 70)
     print(f"model: {cfg.n_layer}L {cfg.n_embd}D {cfg.n_head}H; tile {TILE_ROWS}x{TILE_COLS} x{TILE_COUNT}")
-    print(f"{'token':<7}{'ctx':<7}{'MACs':>10}{'cycles':>9}{'rewrites':>10}")
+    print("latency est. = cycles*1.0 tu + programs*0.2 tu (assumptions, not measured)")
+    print(f"{'token':<7}{'ctx':<7}{'MACs':>10}{'cycles':>9}{'rewrites':>10}{'latency(tu)':>13}")
     for i, r in enumerate(rows):
         ctx_len = prompt.size + i
-        print(f"{i:<7}{ctx_len:<7}{r['macs']:>10}{r['cycles']:>9}{r['rewrites']:>10}")
+        rows[i]["latency"] = latency_est(r)
+        print(f"{i:<7}{ctx_len:<7}{r['macs']:>10}{r['cycles']:>9}"
+              f"{r['rewrites']:>10}{r['latency']:>13.3f}")
+    kv_row["latency"] = latency_est(kv_row)
     print("-" * 70)
     print(f"KV-cache single-position forward  : MACs={kv_row['macs']} "
-          f"cycles={kv_row['cycles']} rewrites={kv_row['rewrites']}")
+          f"cycles={kv_row['cycles']} rewrites={kv_row['rewrites']} "
+          f"latency={kv_row['latency']:.3f} tu")
     print(f"0th authentic token full-forward  : MACs={rows[0]['macs']} "
-          f"cycles={rows[0]['cycles']} rewrites={rows[0]['rewrites']}")
+          f"cycles={rows[0]['cycles']} rewrites={rows[0]['rewrites']} "
+          f"latency={rows[0]['latency']:.3f} tu")
     last = rows[-1]
     print("-" * 70)
     print(f"last-token MACs, no KV vs KV: {last['macs']} vs {kv_row['macs']} "
-          f"({last['macs'] / kv_row['macs']:.1f}x at ctx {prompt.size + max_new - 1})")
+          f"({last['macs'] / kv_row['macs']:.1f}x at ctx {prompt.size + max_new - 1}); "
+          f"latency {last['latency']:.1f} vs {kv_row['latency']:.1f} tu")
 
     # guardrails: per-token no-KV MACs grow with context; KV is constant & lower
     assert all(rows[i + 1]["macs"] > rows[i]["macs"] for i in range(len(rows) - 1)), \
