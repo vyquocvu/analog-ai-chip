@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="Menlo,Consolas,monospace">
+<rect width="960" height="540" fill="#ffffff"/>
+<text x="480" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#111">Effective-weight error vs conductance resolution</text>
+<text x="480" y="52" text-anchor="middle" font-size="12" fill="#7f8c8d">max |w - w_eff| over [-1,1] vs number of conductance levels 2^g_bits (log-log)</text>
+<line x1="150.0" y1="70.0" x2="870.0" y2="70.0" stroke="#333" stroke-width="1.5"/>
+<line x1="150.0" y1="70.0" x2="150.0" y2="500.0" stroke="#333" stroke-width="1.5"/>
+<text x="150.0" y="86.0" text-anchor="middle" font-size="11" fill="#666">4</text>
+<text x="210.0" y="86.0" text-anchor="middle" font-size="11" fill="#666">8</text>
+<text x="270.0" y="86.0" text-anchor="middle" font-size="11" fill="#666">16</text>
+<text x="330.0" y="86.0" text-anchor="middle" font-size="11" fill="#666">32</text>
+<text x="390.0" y="86.0" text-anchor="middle" font-size="11" fill="#666">64</text>
+<text x="510.0" y="86.0" text-anchor="middle" font-size="11" fill="#666">256</text>
+<text x="630.0" y="86.0" text-anchor="middle" font-size="11" fill="#666">1024</text>
+<text x="750.0" y="86.0" text-anchor="middle" font-size="11" fill="#666">4096</text>
+<text x="870.0" y="86.0" text-anchor="middle" font-size="11" fill="#666">16384</text>
+<polyline points="150.0,171.4 210.0,219.3 270.0,262.4 330.0,303.5 390.0,343.6 510.0,422.7 630.0,500.0 750.0,500.0 870.0,500.0" fill="none" stroke="#7f8c8d" stroke-width="2" stroke-dasharray="5 5"/>
+<polyline points="150.0,171.4 210.0,219.3 270.0,262.4 330.0,303.5 390.0,343.6 510.0,422.7 630.0,500.0 750.0,500.0 870.0,500.0" fill="none" stroke="#1a5276" stroke-width="3"/>
+<rect x="150" y="330" width="12" height="12" fill="#1a5276"/><text x="168" y="341" font-size="12" fill="#333">measured max |w - w_eff|</text>
+<rect x="150" y="356" width="12" height="12" fill="#7f8c8d"/><text x="168" y="367" font-size="12" fill="#333">analytic bound 1 / (2 (2^g_bits - 1))</text>
+</svg>

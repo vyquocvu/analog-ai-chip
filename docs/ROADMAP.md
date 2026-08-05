@@ -40,7 +40,9 @@ Exit: repository layout, matrix convention, and metric definitions are stable.
 - [x] Weight normalization to [-1,1] and differential encoding
 - [x] Single programmable tile with all converter non-idealities
 - [x] Hand-computable tile tests (positive/negative/zero weights)
-- [ ] Sweep `g_bits` vs effective-weight error and publish the curve
+- [x] Sweep `g_bits` vs effective-weight error and publish the curve
+      (`scripts/gbits_sweep.py` + `gbits.svg`; matches the analytic bound
+       `1/(2(2^g_bits-1))`)
 
 Exit: a tile's output is attributable and bounded by its configuration.
 

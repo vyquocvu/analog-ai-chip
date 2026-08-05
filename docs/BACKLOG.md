@@ -110,6 +110,23 @@ see how MACs / conductance cells grow, so I understand the crossbar view.
       reduction bar (`kv_cache.svg`); pytest `tests/test_kv_cache.py` (always);
       ROADMAP M3 KV-cache item closed.
 
+### B6 — Per-token ledger trace  `[S]`
+**AC:**
+- [x] `scripts/token_trace.py` traces MACs / tile-cycles / rewrites per generated
+      token through a full layer, for the no-KV (grows with context) and
+      KV-cache (constant single-position) paths;
+- [x] guardrails (per-token no-KV MACs grow; KV single-position <= full forward);
+      `token_trace.svg`; pytest `tests/test_token_trace.py` (always);
+      ROADMAP M3 per-token ledger trace item closed.
+
+### M1 — g_bits vs effective-weight error curve  `[S]`
+**AC:**
+- [x] `scripts/gbits_sweep.py` sweeps `g_bits` (2..14) and reports max
+      |w - w_eff| (normalized by the conductance span, as the tile does);
+- [x] curve matches the analytic bound `1/(2(2^g_bits-1))` and falls
+      geometrically; `gbits.svg`;
+- [x] pytest `tests/test_gbits_sweep.py` (always); ROADMAP M1 sweep item closed.
+
 ### M5 — Real pretrained weights through the simulator  `[L]`
 **AC:**
 - [x] safetensors loader `load_gpt2` (Conv1D transpose, head tying, block_size,
@@ -122,15 +139,6 @@ see how MACs / conductance cells grow, so I understand the crossbar view.
 - [x] failure analysis (budget config flips, ledger) included;
 - [x] pytest `tests/test_gpt_loader.py` + `tests/test_tokenizer.py`; ROADMAP M5
       items, checkpoint staged under `data/gpt2-tiny`.
-
-### B6 — Per-token ledger trace  `[S]`
-**AC:**
-- [x] `scripts/token_trace.py` traces MACs / tile-cycles / rewrites per generated
-      token through a full layer, for the no-KV (grows with context) and
-      KV-cache (constant single-position) paths;
-- [x] guardrails (per-token no-KV MACs grow; KV single-position <= full forward);
-      `token_trace.svg`; pytest `tests/test_token_trace.py` (always);
-      ROADMAP M3 per-token ledger trace item closed.
 
 ### D1 — CI runs the circuit sim when ngspice is available  `[S]`
 **AC:** CI's optional job exercises `sim_neuron*.py` (or skips cleanly).
@@ -439,3 +447,35 @@ accuracy-vs-baseline table (ROADMAP M5).
   parity; the independent reference caught a real residual-add bug.
 - Improve: M1 g_bits-vs-error curve and M3 per-token latency (via M6 timing)
   remain; also consider a larger real model for a less degenerate demo.
+
+---
+
+## Current Sprint — Sprint 12
+Goal: publish the weight-side accuracy-vs-cost curve (ROADMAP M1).
+
+| Id | Item | Size | Status |
+|---|---|---|---|
+| M1 | g_bits vs effective-weight error curve | S | **done** |
+
+## Sprint 12 — Review & Retrospective
+
+**Increment delivered (doD met):**
+- `scripts/gbits_sweep.py` — sweeps `g_bits` (2..14) over a dense+random weight
+  grid in [-1,1], reports max |w - w_eff| normalized by the conductance span
+  (as the tile does), writes `gbits.svg`.
+- pytest `tests/test_gbits_sweep.py` (always); ROADMAP M1 sweep item `[x]`.
+
+**Sprint Review (demo summary):**
+- Measured max effective-weight error **exactly matches** the analytic bound
+  `1/(2 (2^g_bits - 1))` and falls geometrically: 2b->0.167, 4b->0.0333,
+  6b->0.00794, 8b->0.00196, 10b->0.00049.
+- Modeling note: the raw error plateaus at `gmin` (=0.05) due to a DC offset
+  (`w=1` -> `G+ - G- = gmax-gmin`); the tile absorbs it by the span
+  normalization, so the resolution (quantization) error is what scales 2^-g_bits.
+
+**Retrospective — what went well / to improve:**
+- Well: closes M1 with a clean closed-form result; the gmin-offset vs
+  quantization distinction is a useful, honest modeling point.
+- Improve: the remaining milestone is M6 (energy/latency with measured-only
+  assumptions) and M3 per-token latency (depends on M6 timing); the roadmap's
+  simulator milestones are otherwise complete.
