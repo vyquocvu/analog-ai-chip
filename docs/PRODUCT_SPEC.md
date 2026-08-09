@@ -1,92 +1,144 @@
-# Product Specification — Homebrew Analog LLM Accelerator (simulation)
+# Product Specification — Analog LLM Accelerator (simulation-verified design)
 
-Status: draft for v0.1. All numbers below are simulation targets, not silicon
-measurements. Nothing here is a claim of speed or efficiency over a GPU.
+Status: draft for v0.1. The product is a hybrid analog-digital accelerator concept for running a decoder-only language model. The repository aims to establish simulation-backed physical feasibility by tracing system parameters to circuit/device evidence wherever possible.
+
+Nothing here is a claim of fabricated silicon performance.
 
 ## 1. Purpose
 
-A hybrid analog-digital accelerator concept for running a small decoder-only
-language model (transformer). Dense matrix-vector multiplications — attention
-QKV, attention output, MLP up/down, and the head — are executed on crossbar
-tiles of programmable conductance. Layer-norm, softmax, GELU, residual/bias
-adds, and the embedding lookup are digital.
+Dense matrix-vector multiplications — attention QKV, attention output, MLP up/down, and the head — are mapped onto programmable-conductance crossbar tiles. Layer norm, softmax, GELU, residual/bias adds, control, and embedding lookup remain digital unless a later design explicitly replaces them.
 
-The product is simulated end to end in NumPy so the mapping rules, the
-non-ideality model, and the accuracy/latency/energy trade-offs are exact and
-reproducible before any hardware exists.
+The design is verified at multiple levels:
+
+1. analytical and NumPy functional reference;
+2. behavioral non-ideal model;
+3. SPICE circuit simulation;
+4. variation/corner analysis;
+5. circuit/device parameter extraction;
+6. architecture and model-level simulation;
+7. feasibility reporting.
+
+See `docs/SIMULATION_STACK.md`.
 
 ## 2. Matrix convention
 
-For every linear layer we compute one or more `y = W @ x` with:
+For every linear layer compute `y = W @ x` with:
 
-- each input element drives one crossbar **row** (via a DAC),
-- each output is collected from one crossbar **column** (via the output stage),
-- weights are stored as `[output, input]`.
+- each input element driving one crossbar row through a DAC/input stage;
+- each output collected from one crossbar column through an output stage/ADC;
+- weights stored as `[output, input]`.
 
-Signed weights use differential encoding on two conductance arrays:
+Signed weights use differential encoding:
 
 ```text
-W_eff = G_pos - G_neg        (normalized to [-1, 1] by the conductance span)
+W_eff ∝ G_pos - G_neg
 ```
 
-## 3. Non-ideal component model
+The proportionality, conductance window, converter ranges and gain stages must be explicit in any physical profile.
 
-| Block | Non-idealities | Parameters | Units |
-|---|---|---|---|
-| Weight storage | Finite resolution of programmable conductance | `g_bits`, `gmin`, `gmax` | conductance levels |
-| Input DAC | Resolution, range clipping | `dac_bits`, `vin_max` | bits, V |
-| Crossbar | Differential subtraction | (part of weight model) | — |
-| Output ADC | Resolution, clipping, additive noise, gain/offset | `adc_bits`, `vout_max`, `adc_noise_std`, `adc_gain`, `adc_offset` | bits, V |
+## 3. Circuit-to-system profile contract
 
-Explicitly **not** modelled (out of scope for v0.1): INL/DNL, IR drop, stuck
-cells, conductance drift over temperature, converter energy, and circuit timing.
+Physical/system parameters must not be silently embedded as convenient constants. `analog_llm/` should consume validated entries from `device_profiles/` for any run intended to represent a proposed physical implementation.
 
-## 4. Signal envelope (v0.1 target values)
+Evidence classes:
 
-| Quantity | Target | Notes |
+| Class | Meaning | May support physical claim? |
 |---|---|---|
-| Supply | single low-voltage rail | not simulated numerically |
-| Input voltage range | `[-vin_max, vin_max]` | `vin_max = 1.0` (normalized) |
-| Output ADC range | `[-vout_max, vout_max]` | chosen to fit headroom |
-| Conductance range | `[gmin, gmax] = [0.05, 1.0]` | arbitrary normalized units |
-| Weight resolution | `g_bits` (e.g. 6–14) | dominant weight-side error |
-| ADC/DAC resolution | `adc_bits` / `dac_bits` | dominant activation-side error |
+| `measured` | extracted from real hardware | yes |
+| `spice` | extracted from named circuit/device simulation | yes, simulation-backed |
+| `derived` | computed from traceable inputs | yes, with derivation |
+| `assumed` | design/sensitivity assumption | no |
 
-The error budget is reported as max absolute logit error and token agreement
-against a float baseline on a fixed seed.
+Each profile records tool, source model/netlist, analysis, conditions, extraction command, units and limitations.
 
-## 5. Physical ledger
+## 4. Non-ideal component model
 
-Every run must report:
+Target mechanisms include:
 
-- `macs`: multiplies and accumulates performed on tiles (resolved `G+ - G-`
-  cells only; zero padding adds no useful work);
-- `tile_cycles`: lower bound on sequential block-MVM latency assuming uniform
-  parallel tiles (`ceil(blocks / tile_count)`);
-- `rewrites`: number of times a physical tile had to be re-programmed
-  (temporal reuse when a matrix needs more tiles than on board);
-- `tiles_used`: number of physical tile instances consumed.
+| Block | Non-idealities / quantities |
+|---|---|
+| Weight storage | `gmin/gmax`, finite states, programming variation, read variation, drift, stuck states |
+| Input DAC | resolution/ENOB, range, clipping, offset/gain error, INL/DNL when modelled, settling |
+| Crossbar/interconnect | differential subtraction, line resistance, IR drop, parasitic capacitance, sneak/current-path effects where applicable |
+| Output stage / ADC | range, resolution/ENOB, clipping, noise, offset/gain error, settling, bandwidth |
+| Supply / environment | supply variation, temperature and device/process-model corners |
 
-These are *simulation* metrics, not wall-clock time or energy. No energy/latency
-advantage over a GPU may be claimed from them.
+A mechanism may be absent from an early milestone, but its absence must be explicit. Unknown behavior is not zero behavior.
 
-## 6. Module boundary
+## 5. Simulation tools
+
+- KiCad: schematic and later layout/PCB design artifacts.
+- ngspice: default small/medium circuit backend.
+- PySpice: Python automation and machine-readable extraction.
+- Xyce: larger arrays and parallel SPICE workloads.
+- NumPy/PyTorch: functional, architecture and model-level simulation.
+
+SPICE and external binaries are installed separately from the Python package.
+
+## 6. Signal envelope
+
+Normalized values may be used for functional studies. A run intended to support physical feasibility must instead obtain voltage/conductance/current/time ranges from a validated profile.
+
+The current functional reference uses values such as:
+
+- normalized input range around `[-1, 1]`;
+- configurable differential conductance resolution;
+- configurable DAC/ADC bit depth and clipping;
+- configurable output-stage noise/gain/offset.
+
+These are not hardware properties unless backed by profile provenance.
+
+## 7. Physical ledger
+
+Every architecture run must report at minimum:
+
+- useful MACs;
+- physical tile MVM operations/cycles under stated parallelism;
+- tile programming / rewrites;
+- tiles used;
+- digital partial-sum operations.
+
+As the design matures, add:
+
+- converter operations and settling assumptions;
+- SRAM/buffer capacity and traffic;
+- NoC/interconnect traffic;
+- estimated latency;
+- estimated energy;
+- area and thermal assumptions.
+
+Every number must be tagged or traceable as measured, SPICE-derived, derived, or assumed.
+
+## 8. Module boundary
 
 | Module | Scope |
 |---|---|
-| `converters` | DAC/ADC quantization, clipping, noise, gain/offset |
-| `crossbar` | weight -> conductance mapping, differential MVM |
-| `tile` | one physical `rows x cols` programmable tile |
-| `accelerator` | tiling, partial sums, temporal reuse, ledger |
-| `transformer` | TinyGPT model, hybrid float/analog forward + generate |
-| `report` | text report of config, ledger, and accuracy |
+| `converters` | behavioral DAC/ADC model |
+| `crossbar` | weight-to-conductance mapping and MVM |
+| `tile` | one physical-array abstraction |
+| `accelerator` | tiling, scheduling, partial sums, reuse and ledger |
+| `device_profile` | provenance validation for circuit/device parameters |
+| `transformer` | TinyGPT / imported-model hybrid forward |
+| `report` | configuration, accuracy and physical-ledger reporting |
 
-## 7. Acceptance
+## 9. Verification status
+
+Reports should use explicit status language:
+
+- `FUNCTIONAL_ONLY`
+- `CIRCUIT_SIMULATED`
+- `VARIATION_SIMULATED`
+- `SYSTEM_SIMULATED`
+- `HARDWARE_MEASURED`
+
+A system-level simulation built from `assumed` component values remains a sensitivity study; it is not promoted to circuit-verified simply because an LLM executes successfully.
+
+## 10. Acceptance
 
 - `pytest` and `ruff check .` pass.
-- A high-precision, noiseless accelerator reproduces the float baseline
-  (token agreement ~1.0, logit error ~0) on the tiny model — this validates
-  correct tiling and mapping, not a fabrication claim.
-- A budget-constrained accelerator shows monotone, bounded degradation so the
-  sensitivity to each non-ideality is visible.
-- Every reported metric states its assumptions and units.
+- High-precision functional configuration reproduces the digital baseline closely enough to validate mapping/tiling.
+- Budget/non-ideal configurations produce attributable degradation.
+- Circuit milestones include source circuit/model, deterministic automation and asserted extracted measurements.
+- Reusable physical parameters are serialized into validated device profiles with provenance.
+- Any physical-feasibility claim identifies which supporting values are SPICE-derived/derived versus assumed.
+- No GPU speed/energy comparison is made without comparable measured or sufficiently grounded physical inputs.
