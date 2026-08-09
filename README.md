@@ -2,48 +2,63 @@
 
 [![CI](https://github.com/vyquocvu/analog-ai-chip/actions/workflows/ci.yml/badge.svg)](https://github.com/vyquocvu/analog-ai-chip/actions/workflows/ci.yml)
 
-**Study analog AI step by step, and design (in simulation) a product that runs
-language models on crossbar tiles.** This repository contains two
-complementary tracks:
+**Design and simulate an analog AI accelerator from first principles — from Ohm's law and SPICE circuits to crossbar tiles and language-model inference.**
 
-1. **`book/` — sequential study track**: one ordered set of chapters — theory
-   with executable `train.py` assertions plus DIY hardware builds — backed by
-   `maths/` (a plain-language reference shelf). Read these in order.
-2. **`analog_llm/` — product simulator**: the simulated design of a hybrid
-   analog-digital accelerator that runs a small language model (transformer),
-   with explicit converter/conductance non-idealities, plus a physical ledger
-   and accuracy report.
+The repository is built around one engineering question:
 
-> Every model here is software. No claim that this is "faster / more efficient
-> than a GPU" is made unless backed by a measured (not assumed) ledger. NumPy
-> computation is never described as physical analog acceleration.
+> Can the proposed analog AI architecture plausibly operate as a physical device, and can every system-level parameter be traced back to circuit/device evidence or an explicitly labeled assumption?
+
+The project does not claim silicon verification. It builds a reproducible proof chain:
+
+```text
+equation
+  ↓
+functional reference
+  ↓
+circuit design
+  ↓
+ngspice / Xyce
+  ↓
+variation + parameter extraction
+  ↓
+device_profiles
+  ↓
+analog_llm architecture simulator
+  ↓
+Transformer / LLM inference
+  ↓
+physical feasibility report
+```
+
+## Simulation stack
+
+- **KiCad** — schematic and later PCB/layout design artifacts.
+- **ngspice** — default SPICE backend for circuit verification, sweeps, transient/noise analysis and compact models.
+- **PySpice** — Python automation, assertions, extraction and reproducible experiment orchestration.
+- **Xyce** — large-array / parallel SPICE backend when ngspice becomes impractical.
+- **NumPy / PyTorch** — functional references, architecture simulation, model mapping and accuracy studies.
+
+See [`docs/SIMULATION_STACK.md`](docs/SIMULATION_STACK.md) for the verification ladder and evidence rules.
 
 ---
 
-## Track 1 — Sequential study (`book/`)
+## Track 1 — Sequential design book (`book/`)
 
-The book is one ordered path. It is also executable: theory chapters 0001–0004
-start from a tiny hand-computable example encoded as an assertion in `train.py`;
-chapter 0005 turns one weighted sum into a measurable analog circuit.
+The book builds the machine in dependency order. Early chapters establish the math and behavioral model; later chapters turn those assumptions into circuit simulations and increasingly realistic device/array/system models.
 
 | # | Topic | Path |
 |---|---|---|
-| 0000 | System and boundaries | `book/0000-what-we-are-building/` |
+| 0000 | System and verification boundaries | `book/0000-what-we-are-building/` |
 | 0001 | Ohm + Kirchhoff = MVM | `book/0001-crossbar-mvm/` |
 | 0002 | Signed differential weights | `book/0002-differential-pairs/` |
 | 0003 | DAC/ADC, quantization, noise | `book/0003-converters-and-noise/` |
 | 0004 | Tiling a matrix across arrays | `book/0004-tiling/` |
-| 0005 | One analog neuron (hardware) | `book/0005-one-analog-neuron/` |
-| 0006 | Many neurons: a layer (10/100/1000) | `book/0006-many-neurons/` |
+| 0005 | One analog neuron — SPICE | `book/0005-one-analog-neuron/` |
+| 0006 | Many neurons: a layer | `book/0006-many-neurons/` |
 
-Reference: `maths/`, `docs/MODULE_STANDARD.md`, `docs/SAFETY.md`.
+Chapter 0005 already verifies the weighted-sum circuit with PySpice + ngspice and explores non-ideal op-amp behavior, rail clipping and headroom. The next design work should progressively replace normalized/assumed parameters with circuit-derived profiles.
 
-**Circuit simulation:** chapter 0005 verifies the neuron circuit in SPICE
-(before building) through PySpice + ngspice — see
-`book/0005-one-analog-neuron/sim_neuron.py`. Optional:
-`brew install ngspice` then `pip install -e '.[sim]'`.
-
-> **Tiếng Việt:** mỗi chương đều có `README.vi.md` ở cùng thư mục (bản tiếng Việt) bên cạnh `README.md` (tiếng Anh).
+> **Tiếng Việt:** each book chapter has `README.vi.md` beside the English `README.md` where available.
 
 ```bash
 python book/0001-crossbar-mvm/train.py
@@ -52,65 +67,79 @@ python book/0003-converters-and-noise/train.py
 python book/0004-tiling/train.py
 ```
 
-## Track 2 — Analog LLM product simulator (`analog_llm/`)
+## Track 2 — Analog LLM architecture simulator (`analog_llm/`)
 
-A decoder-only transformer (nanoGPT-style) runs end to end in NumPy. Every
-dense matrix-vector multiplication — attention QKV, attention output, MLP
-up/down, and the head — is routed through simulated crossbar tiles with
-non-idealities. Layer-norm, softmax, GELU, bias/residual adds, and the
-embedding lookup are digital.
+A decoder-only transformer runs end to end in software. Dense matrix-vector operations are routed through simulated crossbar tiles; layer norm, softmax, GELU, residual/bias operations and embeddings remain digital.
 
 ```text
 tokens ─► embedding
           └─► [LN ─► QKV ─► attention ─► out ─► LM]
                     └► [LN ─► MLP up ─► GELU ─► MLP down]
                                 │
-                       all linears routed through
-                     DAC → crossbar tiles → ADC (partial sums digital)
+                         dense linears via
+                     DAC → crossbar → ADC
 ```
 
-Simulated non-idealities: programmable-conductance resolution (`g_bits`),
-differential `G+/G−` encoding, DAC bits + clipping, ADC bits + clipping +
-noise + gain/offset. Details: [`docs/PRODUCT_SPEC.md`](docs/PRODUCT_SPEC.md).
+The architecture simulator is not the source of physical truth. For physical/system claims it should consume validated entries from [`device_profiles/`](device_profiles) whose values are extracted from SPICE, derived from traceable evidence, or explicitly marked as assumptions.
 
 ```bash
-python scripts/run_llm_sim.py   # LLM-on-tiles demo + ledger/accuracy report
+python scripts/run_llm_sim.py
 ```
+
+## Device profiles and provenance
+
+`device_profiles/` is the bridge between circuit simulation and the product simulator.
+
+Evidence classes:
+
+- `measured` — physical hardware measurement;
+- `spice` — extracted from a named circuit simulation;
+- `derived` — calculated from traceable evidence;
+- `assumed` — sensitivity-study input only.
+
+The validator intentionally rejects an `assumed` or `FUNCTIONAL_ONLY` profile when code attempts to use it as support for a physical claim.
+
+## Verification evidence
+
+Use [`verification/`](verification) for reproducible evidence grouped by level: functional, circuit, Monte Carlo, corners, architecture, model accuracy and generated reports.
+
+Preferred artifact chain:
 
 ```text
-analog_llm/
-├── converters.py      DAC/ADC bits, clipping, noise, gain/offset
-├── crossbar.py        weight → conductance, differential MVM
-├── tile.py            one programmable rows×cols crossbar tile
-├── accelerator.py     tiling, partial sums, temporal reuse, ledger
-├── transformer.py     TinyGPT, hybrid float/analog inference
-└── report.py          config + physical ledger + accuracy
+source schematic/netlist/model
+      + deterministic script
+      + machine-readable result
+      + generated figure
+      + validated device profile
 ```
 
----
+A plot without reproducible source/result data is not sufficient evidence.
 
 ## Install and verify
 
 ```bash
 python -m pip install -e '.[dev]'
-pytest                 # run tests for both tracks
-ruff check .           # lint
+pytest
+ruff check .
 python scripts/run_llm_sim.py
 ```
 
-The demo reports a high-precision accelerator (should match float) and a
-budget-constrained one (realistic degradation), together with
-[`docs/ROADMAP.md`](docs/ROADMAP.md) and
-[`docs/PRODUCT_SPEC.md`](docs/PRODUCT_SPEC.md).
+Optional circuit automation:
+
+```bash
+python -m pip install -e '.[sim]'
+# install ngspice separately; install Xyce when large-circuit runs need it
+```
 
 ## Honesty principles
 
-- Distinguish three levels of claim: *functional*, *circuit/device*, *system*.
-- Simulate non-idealities explicitly; never hide resolution/noise/clipping
-  behind a single scalar "error".
-- Do not derive `O(1)` or end-to-end energy/latency advantage from one ideal
-  crossbar operation; every report must quote the physical ledger (MACs, tile
-  MVM cycles, rewrites) and state its assumptions.
+- Keep *functional*, *circuit/device*, and *system* claims separate.
+- Never describe NumPy/PyTorch execution as physical analog acceleration.
+- Never infer end-to-end `O(1)` latency from one resident crossbar operation.
+- Never turn an assumed ADC/crossbar parameter into a verified hardware claim.
+- Every feasibility report must identify what is simulated, derived, assumed, and measured.
+
+Until physical measurements exist, the strongest supported status is **simulation-backed physical feasibility**, not silicon verification.
 
 ## License
 
