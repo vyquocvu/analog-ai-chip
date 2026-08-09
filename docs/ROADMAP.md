@@ -9,7 +9,37 @@ math → functional model → circuit/SPICE → variation → extracted profile
      → architecture → model inference → physical-feasibility report
 ```
 
-See `docs/SIMULATION_STACK.md`.
+Implementation follows the curriculum hierarchy in [`docs/CURRICULUM.md`](CURRICULUM.md):
+
+```text
+Math
+ ↓
+Ideal functional model
+ ↓
+Circuit design
+ ↓
+SPICE simulation
+ ↓
+Non-ideal device model
+ ↓
+ADC / DAC
+ ↓
+Crossbar tile
+ ↓
+Multi-tile accelerator
+ ↓
+Digital control + dataflow
+ ↓
+Transformer layer
+ ↓
+Small LLM
+ ↓
+Physical feasibility report
+ ↓
+FPGA / PCB / silicon prototype
+```
+
+See `docs/SIMULATION_STACK.md` for tooling and evidence rules. Chapter numbering in `docs/CURRICULUM.md` is the canonical dependency order; the milestones below track implementation status across those layers.
 
 ## V0 — Verification contract and provenance
 
@@ -19,6 +49,7 @@ See `docs/SIMULATION_STACK.md`.
 - [x] Add `device_profiles/` provenance contract
 - [x] Add fail-closed validation preventing assumed/functional-only profiles from supporting physical claims
 - [x] Define verification evidence layout under `verification/`
+- [x] Define canonical engineering curriculum / dependency hierarchy
 - [ ] Add generated machine-readable verification summary/report format
 - [ ] Tag every existing physical/system constant in `analog_llm/` as profile-derived or assumed
 
@@ -40,6 +71,8 @@ Exit: book-level circuit results become reusable machine-readable evidence rathe
 
 ## V1 — Converter circuit design
 
+Corresponds primarily to curriculum chapters 0007–0008 and 0016.
+
 - [ ] Specify DAC architecture and design envelope
 - [ ] ngspice DC/transient simulation for DAC transfer and settling
 - [ ] Extract range, gain/offset, resolution/ENOB-equivalent metrics and settling into a `spice` profile
@@ -48,10 +81,13 @@ Exit: book-level circuit results become reusable machine-readable evidence rathe
 - [ ] Extract ADC profile with provenance
 - [ ] Add parameter sweeps for supply and temperature
 - [ ] Add Monte Carlo variation for component/device mismatch where models permit
+- [ ] Add converter non-linearity study when a sufficiently detailed model exists
 
 Exit: architecture-level DAC/ADC parameters no longer rely only on arbitrary normalized values.
 
 ## V2 — Crossbar/device realism
+
+Corresponds primarily to curriculum chapters 0009–0016.
 
 - [ ] Select explicit conductance-cell abstraction/compact model for the first physical design candidate
 - [ ] Validate `gmin/gmax` and state/resolution behavior with SPICE/compact-model sweeps
@@ -66,6 +102,8 @@ Exit: crossbar non-idealities used downstream trace to an explicit device/circui
 
 ## M0 — Functional contracts
 
+Corresponds primarily to curriculum chapters 0000–0004.
+
 - [x] Define matrix convention and unit conventions
 - [x] Behavioral DAC/ADC bits, clipping, noise, gain/offset
 - [x] Differential conductance weight model with finite resolution
@@ -75,6 +113,8 @@ Exit: crossbar non-idealities used downstream trace to an explicit device/circui
 Exit: mathematical mapping is stable and clearly separated from physical evidence.
 
 ## M1 — Crossbar and tile
+
+Corresponds primarily to curriculum chapters 0010 and 0017–0018.
 
 - [x] Weight normalization and differential encoding
 - [x] Single programmable tile with converter non-idealities
@@ -87,6 +127,8 @@ Exit: tile behavior is both functionally correct and calibratable to circuit evi
 
 ## M2 — Accelerator and tiling
 
+Corresponds primarily to curriculum chapters 0018–0022.
+
 - [x] Split logical matrix into physical tiles with digital partial sums
 - [x] Pad edge blocks
 - [x] Physical ledger: MACs, tile cycles, rewrites, tiles used
@@ -94,10 +136,13 @@ Exit: tile behavior is both functionally correct and calibratable to circuit evi
 - [ ] Multi-tile parallelism model and temporal-reuse scheduler analysis
 - [ ] Add converter settling and profile-derived timing into cycle model
 - [ ] Add SRAM/buffer and interconnect traffic accounting
+- [ ] Add calibration flow driven by circuit/profile evidence
 
 Exit: architecture costs are explicit rather than inferred from ideal crossbar parallelism.
 
-## M3 — Tiny transformer on accelerator
+## M3 — Neural-network and transformer mapping
+
+Corresponds primarily to curriculum chapters 0023–0028.
 
 - [x] Deterministic nanoGPT-style model
 - [x] Hybrid forward: linears through tiles, nonlinear/control operations digital
@@ -105,16 +150,20 @@ Exit: architecture costs are explicit rather than inferred from ideal crossbar p
 - [x] Float baseline and unified report
 - [x] KV-cache path
 - [x] Per-token ledger trace
+- [ ] Add explicit mapping evidence for Linear, MLP, Q/K/V, attention and full transformer-block boundaries
 - [ ] Per-token latency trace driven by profile-derived or explicitly assumed component timing
 
-Exit: the model runs end to end with traceable architecture assumptions.
+Exit: the model runs end to end with traceable architecture assumptions and clear analog/digital boundaries.
 
-## M4 — Accuracy / sensitivity
+## M4 — LLM accuracy / sensitivity
+
+Corresponds primarily to curriculum chapters 0029–0032.
 
 - [x] High-precision and budget-constrained configurations
 - [x] Per-non-ideality ablation
 - [x] Bit sweeps / accuracy-vs-cost curves
 - [ ] Repeat sensitivity studies using SPICE-derived converter/crossbar profiles
+- [ ] Add hardware-aware training/recovery experiment using verified non-idealities
 - [ ] Add guardrail in reports preventing GPU-equivalence claims from functional ledgers
 
 Exit: accuracy degradation is attributable to named physical mechanisms and evidence classes.
@@ -131,6 +180,8 @@ Exit: real-model feasibility is evaluated using traceable proposed-device parame
 
 ## M6 — Latency / energy / area feasibility
 
+Corresponds primarily to curriculum chapters 0033–0037.
+
 - [x] Model converter count, tile programming and reuse in ledger
 - [x] Relative latency sensitivity to tile capacity and parallelism
 - [x] No GPU comparison without measured physical assumptions
@@ -138,16 +189,20 @@ Exit: real-model feasibility is evaluated using traceable proposed-device parame
 - [ ] Add energy model whose coefficients are tagged `spice`, `derived`, `measured`, or `assumed`
 - [ ] Add area model with explicit process/layout assumptions
 - [ ] Add thermal/power-density sanity checks
+- [ ] Version process/device assumptions
 - [ ] Generate a feasibility report separating verified evidence from assumptions
 
 Exit: the project can state a simulation-backed physical-feasibility case with an auditable evidence chain.
 
 ## M7 — Toward implementation
 
+Corresponds primarily to curriculum chapters 0038–0039.
+
 - [ ] KiCad reference schematics for the selected board-level prototype path
 - [ ] FPGA/digital-shell model for scheduler, buffers and data movement
 - [ ] Correlate FPGA/board measurements with simulator when hardware exists
 - [ ] Upgrade relevant profile evidence classes from `spice`/`assumed` to `measured`
 - [ ] Define criteria for any future IC/layout/tape-out exploration
+- [ ] Produce implementation-readiness report with open risks, unsupported assumptions and required experiments
 
 Exit: simulation predictions can be compared directly with real hardware measurements rather than treated as final truth.
