@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "name": "ideal-functional-reference",
+  "version": "0.1.0",
+  "evidence_class": "assumed",
+  "status": "FUNCTIONAL_ONLY",
+  "provenance": {
+    "tool": "analytic",
+    "analysis": "functional_reference",
+    "sources": ["docs/PRODUCT_SPEC.md"],
+    "command": null,
+    "conditions": {},
+    "limitations": "Ideal normalized reference only; not a physical device profile."
+  },
+  "dac": {
+    "bits": 16,
+    "input_range_v": 1.0,
+    "clip": true
+  },
+  "crossbar": {
+    "g_bits": 16,
+    "g_min_s": 0.05,
+    "g_max_s": 1.0,
+    "program_sigma_fraction": 0.0,
+    "read_sigma_fraction": 0.0
+  },
+  "adc": {
+    "bits": 16,
+    "input_range_v": 8.0,
+    "noise_rms_v": 0.0,
+    "gain": 1.0,
+    "offset_v": 0.0
+  }
+}
