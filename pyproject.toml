@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "analog-ai-chip"
 version = "0.1.0"
-description = "Simulator for an analog in-memory-computing product that runs language models"
+description = "Design and simulation verification framework for an analog AI accelerator running language models"
 readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "MIT"}
