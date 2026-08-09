@@ -30,6 +30,40 @@ Transformer / LLM inference
 physical feasibility report
 ```
 
+## Engineering hierarchy
+
+The curriculum and implementation plan follow one dependency-ordered hierarchy:
+
+```text
+Math
+ ↓
+Ideal functional model
+ ↓
+Circuit design
+ ↓
+SPICE simulation
+ ↓
+Non-ideal device model
+ ↓
+ADC / DAC
+ ↓
+Crossbar tile
+ ↓
+Multi-tile accelerator
+ ↓
+Digital control + dataflow
+ ↓
+Transformer layer
+ ↓
+Small LLM
+ ↓
+Physical feasibility report
+ ↓
+FPGA / PCB / silicon prototype
+```
+
+See [`docs/CURRICULUM.md`](docs/CURRICULUM.md) for the full chapter sequence from 0000 through 0039 and the verification target required at each level. `docs/ROADMAP.md` tracks implementation status against this hierarchy.
+
 ## Simulation stack
 
 - **KiCad** — schematic and later PCB/layout design artifacts.
