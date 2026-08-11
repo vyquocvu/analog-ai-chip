@@ -1,125 +1,149 @@
 # Curriculum — from first principles to physical feasibility
 
-This repository is organized as a dependency-ordered engineering curriculum. The goal is not to jump from an ideal NumPy crossbar to a hardware claim; each layer must produce evidence that constrains the next one.
+This repository is a dependency-ordered engineering curriculum for designing and verifying an analog AI accelerator. The goal is not to jump from an ideal NumPy crossbar to a hardware claim; each layer must produce evidence that constrains the next one.
 
 ```text
-Math
- ↓
-Ideal functional model
- ↓
-Circuit design
- ↓
-SPICE simulation
- ↓
-Non-ideal device model
- ↓
-ADC / DAC
- ↓
-Crossbar tile
- ↓
-Multi-tile accelerator
- ↓
-Digital control + dataflow
- ↓
-Transformer layer
- ↓
-Small LLM
- ↓
-Physical feasibility report
- ↓
-FPGA / PCB / silicon prototype
+Math / ideal reference
+        ↓
+Circuit primitives
+        ↓
+SPICE-verified current-mode crossbar
+        ↓
+Circuit-to-profile extraction
+        ↓
+DAC / ADC signal path
+        ↓
+Small crossbar arrays
+        ↓
+Device realism + variation
+        ↓
+Profile-driven tile
+        ↓
+Multi-tile accelerator + data movement
+        ↓
+Transformer / LLM mapping
+        ↓
+Latency / energy / area feasibility
+        ↓
+FPGA / PCB / silicon correlation
 ```
 
-## Part I — Physics and mathematics
+Chapter numbering below is canonical. Existing chapters keep their numbers; future work must not renumber implemented evidence.
+
+## Part I — Math and functional reference
+
+| # | Chapter | Verification target | Status |
+|---|---|---|---|
+| 0000 | What are we designing? | system boundaries, claim levels, evidence chain | done |
+| 0001 | Ohm + Kirchhoff = MVM | hand-computable current sums agree with executable reference | done |
+| 0002 | Signed differential weights | `G+ / G-` mapping reproduces signed weights | done |
+| 0003 | DAC/ADC quantization and noise | explicit error mechanisms remain separated | done |
+| 0004 | Matrix tiling | tiled partial sums match dense reference | done |
+
+## Part II — Circuit primitives and current-mode compute
+
+| # | Chapter | Verification target | Status |
+|---|---|---|---|
+| 0005 | One analog neuron | SPICE weighted-sum output matches hand arithmetic; headroom and non-ideal op-amp behavior characterized | done |
+| 0006 | Many neurons / current summation | scaling ledger plus multi-output SPICE evidence | done |
+| 0007 | Current-mode differential crossbar column | `I = V·G`, differential conductance, TIA readout and signed output agree with hand reference | done |
+| 0008 | Circuit evidence → device profile | extract versioned SPICE-backed parameters and provenance from 0005/0007 | next |
+
+`0008` is the bridge chapter: it proves that circuit evidence can become machine-readable parameters consumed downstream. Higher-level physical claims must not bypass this bridge.
+
+## Part III — Converter signal path
 
 | # | Chapter | Verification target |
 |---|---|---|
-| 0000 | What are we designing? | system boundaries, claim levels, evidence chain |
-| 0001 | Ohm + Kirchhoff | hand-computable current sums agree with executable reference |
-| 0002 | Analog matrix-vector multiplication | ideal crossbar MVM matches dense reference |
-| 0003 | Signed weights | differential `G+ / G-` mapping reproduces signed weights |
-| 0004 | Noise, precision, and error | explicit error sources remain separated and measurable |
+| 0009 | DAC architecture | transfer curve, range, gain/offset, settling and supply sensitivity characterized in SPICE |
+| 0010 | ADC / TIA output path | transfer, clipping, noise, settling and effective precision characterized in SPICE |
+| 0011 | Converter variation | Monte Carlo/corner evidence for mismatch and converter error |
 
-## Part II — Circuit design
+## Part IV — Small physical crossbar arrays
 
 | # | Chapter | Verification target |
 |---|---|---|
-| 0005 | One analog neuron | SPICE output matches hand arithmetic within stated tolerance |
-| 0006 | Op-amp current summation / many neurons | summing behavior, headroom, and scaling remain valid |
-| 0007 | DAC design | transfer, clipping, settling, gain/offset characterized in SPICE |
-| 0008 | ADC/output-stage design | transfer, noise, clipping, settling characterized in SPICE |
-| 0009 | Differential crossbar cell | one signed cell has an explicit physical circuit/device model |
-| 0010 | 4×4 crossbar | small array agrees with behavioral model under circuit non-idealities |
+| 0012 | 2×2 differential crossbar | shared input rows and multiple columns agree with behavioral reference |
+| 0013 | 4×4 differential crossbar | array-level MVM remains correct under circuit non-idealities |
+| 0014 | Array timing and loading | column loading, TIA headroom and settling are bounded |
 
-## Part III — Device realism
+## Part V — Device realism
 
 | # | Chapter | Verification target |
 |---|---|---|
-| 0011 | Conductance programming | `gmin/gmax`, levels, and programming behavior have provenance |
-| 0012 | Device variation | Monte Carlo distributions quantify mismatch/program variation |
-| 0013 | Drift | time-dependent conductance error is bounded or explicitly excluded |
-| 0014 | IR drop | line resistance impact is quantified versus array dimensions |
-| 0015 | Parasitics | RC and settling constraints are extracted from circuit models |
-| 0016 | Converter non-linearity | INL/DNL or equivalent limitations are modeled when evidence exists |
+| 0015 | Programmable conductance model | explicit cell/compact-model choice with `gmin/gmax` and state behavior provenance |
+| 0016 | Programming/read variation | Monte Carlo distributions quantify mismatch and state uncertainty |
+| 0017 | IR drop | line resistance error quantified versus array dimensions |
+| 0018 | Parasitics | RC/settling impact extracted from circuit model |
+| 0019 | Drift, stuck states and non-linearity | each supported mechanism modeled separately or explicitly excluded |
+| 0020 | Crossbar-v1 profile | publish a validated profile with evidence classes, conditions and limitations |
 
-## Part IV — Accelerator architecture
-
-| # | Chapter | Verification target |
-|---|---|---|
-| 0017 | Tile architecture | tile contract consumes circuit-derived device profiles |
-| 0018 | Partial sums | tiled result matches dense reference within profile-derived error |
-| 0019 | Tile scheduler | temporal reuse and parallelism are explicit and deterministic |
-| 0020 | SRAM / buffers | storage capacity and traffic are accounted for |
-| 0021 | NoC / interconnect | data movement is included in timing/energy accounting |
-| 0022 | Calibration | correction procedure improves measured/simulated error reproducibly |
-
-## Part V — Neural-network mapping
+## Part VI — Profile-driven accelerator architecture
 
 | # | Chapter | Verification target |
 |---|---|---|
-| 0023 | Linear layer | one dense layer maps exactly onto accelerator contracts |
-| 0024 | MLP | up/down projections preserve reference behavior within error budget |
-| 0025 | Q/K/V projections | transformer projections route through the analog path correctly |
-| 0026 | Attention | static and dynamic computations are separated honestly |
-| 0027 | KV cache | dynamic state storage/traffic is explicitly modeled |
-| 0028 | Transformer block | end-to-end block error is attributable to named mechanisms |
+| 0021 | Physical tile contract | behavioral tile consumes validated DAC/ADC/crossbar profiles |
+| 0022 | Partial sums | tiled result matches dense reference within profile-derived error |
+| 0023 | Scheduler / temporal reuse | parallelism and rewrites are explicit and deterministic |
+| 0024 | SRAM / buffers | capacity and traffic are accounted for |
+| 0025 | NoC / interconnect | data movement enters timing/energy accounting |
+| 0026 | Calibration | correction procedure improves simulated/measured error reproducibly |
 
-## Part VI — LLM inference
-
-| # | Chapter | Verification target |
-|---|---|---|
-| 0029 | Tiny transformer | deterministic end-to-end reference and analog-path parity |
-| 0030 | Full inference path | token generation has a complete architecture ledger |
-| 0031 | Quantization | accuracy/cost trade-offs are reproducible |
-| 0032 | Hardware-aware training | recovery under verified non-idealities is measurable |
-
-## Part VII — Physical feasibility
+## Part VII — Neural-network and Transformer mapping
 
 | # | Chapter | Verification target |
 |---|---|---|
-| 0033 | Latency ledger | timing coefficients are profile-derived or explicitly assumed |
-| 0034 | Power / energy ledger | energy coefficients carry evidence class and provenance |
-| 0035 | Area estimate | area is tied to explicit process/layout assumptions |
-| 0036 | Thermal considerations | power density and operating envelope receive sanity checks |
-| 0037 | Process assumptions | device/process dependencies are documented and versioned |
-| 0038 | FPGA / digital shell | scheduler/buffer/control assumptions can be tested independently |
-| 0039 | Implementation / tape-out feasibility | report separates verified evidence, derived quantities, and open assumptions |
+| 0027 | Linear layer | one dense layer maps exactly to the accelerator contract |
+| 0028 | MLP | up/down projections preserve reference behavior within error budget |
+| 0029 | Q/K/V projections | transformer projections route through the analog path correctly |
+| 0030 | Attention boundary | static analog-friendly work and dynamic digital work are separated honestly |
+| 0031 | KV cache | dynamic state capacity and traffic are explicitly modeled |
+| 0032 | Transformer block | block-level error is attributable to named mechanisms |
 
-## Chapter completion rule
+## Part VIII — LLM inference and robustness
 
-A chapter is not complete because prose or a plot exists. The required evidence depends on its layer:
+| # | Chapter | Verification target |
+|---|---|---|
+| 0033 | Tiny transformer | deterministic float/reference and analog-path parity |
+| 0034 | Full autoregressive path | token generation has complete architecture ledger |
+| 0035 | Real pretrained checkpoint | model runs using profile-driven accelerator configuration |
+| 0036 | Sensitivity and quantization | accuracy/cost trade-offs are reproducible with physical profiles |
+| 0037 | Hardware-aware recovery | training/calibration recovery under verified non-idealities is measurable |
+
+## Part IX — Physical feasibility
+
+| # | Chapter | Verification target |
+|---|---|---|
+| 0038 | Latency ledger | timing coefficients are SPICE/derived/measured or explicitly assumed |
+| 0039 | Energy / power ledger | coefficients carry evidence class and provenance |
+| 0040 | Area / process model | area tied to explicit layout/process assumptions |
+| 0041 | Thermal / power density | operating envelope receives sanity checks |
+| 0042 | Integrated feasibility report | separates verified evidence, derived quantities and assumptions |
+
+## Part X — Correlation with implementation
+
+| # | Chapter | Verification target |
+|---|---|---|
+| 0043 | FPGA / digital shell | scheduler, buffers and control assumptions are executable independently |
+| 0044 | PCB / board correlation | measured converter/crossbar behavior can replace SPICE evidence where available |
+| 0045 | IC / tape-out readiness | open risks, required models, PDK/layout assumptions and missing evidence are explicit |
+
+## Chapter completion rules
+
+A chapter is not complete because prose or a plot exists.
 
 - **Math / functional:** hand calculation + executable assertion + tests.
-- **Circuit:** schematic/netlist + ngspice/PySpice or Xyce run + machine-readable extracted results.
+- **Circuit:** schematic/netlist/model + deterministic ngspice/PySpice or Xyce run + machine-readable result.
+- **Profile bridge:** extracted values + provenance + evidence class + validator + downstream consumer test.
 - **Device realism:** sweep/Monte Carlo/corner evidence + explicit model provenance.
 - **Architecture:** deterministic simulator + ledger + profile-driven parameters.
-- **Model:** float/reference comparison + error/accuracy report.
-- **Physical feasibility:** latency/energy/area quantities with evidence classes and limitations.
+- **Model:** float/reference comparison + accuracy/error report.
+- **Physical feasibility:** latency/energy/area values with evidence classes and limitations.
 
-The evidence chain must remain auditable:
+The auditable chain is:
 
 ```text
-equation → circuit → SPICE → device profile → accelerator → LLM → feasibility report
+equation → circuit → SPICE → validated profile → accelerator → LLM → feasibility report
 ```
 
-See `docs/SIMULATION_STACK.md`, `docs/PRODUCT_SPEC.md`, and `docs/ROADMAP.md` for implementation status and tooling.
+See `docs/SIMULATION_STACK.md`, `docs/PRODUCT_SPEC.md`, and `docs/ROADMAP.md` for tooling and current implementation status.

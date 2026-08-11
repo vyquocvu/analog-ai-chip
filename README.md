@@ -19,50 +19,62 @@ circuit design
   ↓
 ngspice / Xyce
   ↓
-variation + parameter extraction
+validated device profiles
   ↓
-device_profiles
-  ↓
-analog_llm architecture simulator
+profile-driven accelerator
   ↓
 Transformer / LLM inference
   ↓
 physical feasibility report
 ```
 
-## Engineering hierarchy
+## Current status
 
-The curriculum and implementation plan follow one dependency-ordered hierarchy:
+The repository has completed the functional foundations and its first SPICE-verified current-mode compute primitive:
 
 ```text
-Math
- ↓
-Ideal functional model
- ↓
-Circuit design
- ↓
-SPICE simulation
- ↓
-Non-ideal device model
- ↓
-ADC / DAC
- ↓
-Crossbar tile
- ↓
-Multi-tile accelerator
- ↓
-Digital control + dataflow
- ↓
-Transformer layer
- ↓
-Small LLM
- ↓
-Physical feasibility report
- ↓
-FPGA / PCB / silicon prototype
+0005 voltage-mode weighted sum ─┐
+0006 multi-neuron scaling       ├─► circuit foundation
+0007 differential crossbar col ┘
+                                  ↓
+                         NEXT: extract SPICE profile
+                                  ↓
+                            analog_llm consumes it
 ```
 
-See [`docs/CURRICULUM.md`](docs/CURRICULUM.md) for the full chapter sequence from 0000 through 0039 and the verification target required at each level. `docs/ROADMAP.md` tracks implementation status against this hierarchy.
+`book/0007-crossbar-column/` is the first circuit chapter that matches the current-mode differential conductance architecture modeled by `analog_llm`: conductance cells generate `I = V·G`, column currents sum, and TIA/differential readout produces the signed result.
+
+The **active roadmap gate is R1: close the circuit → profile → simulator proof chain**. See [`docs/ROADMAP.md`](docs/ROADMAP.md).
+
+## Engineering hierarchy
+
+```text
+Math / ideal reference
+        ↓
+Circuit primitives
+        ↓
+SPICE-verified current-mode crossbar
+        ↓
+Circuit-to-profile extraction
+        ↓
+DAC / ADC signal path
+        ↓
+Small crossbar arrays
+        ↓
+Device realism + variation
+        ↓
+Profile-driven tile
+        ↓
+Multi-tile accelerator + data movement
+        ↓
+Transformer / LLM mapping
+        ↓
+Latency / energy / area feasibility
+        ↓
+FPGA / PCB / silicon correlation
+```
+
+See [`docs/CURRICULUM.md`](docs/CURRICULUM.md) for the canonical chapter sequence and [`docs/ROADMAP.md`](docs/ROADMAP.md) for implementation gates.
 
 ## Simulation stack
 
@@ -72,34 +84,29 @@ See [`docs/CURRICULUM.md`](docs/CURRICULUM.md) for the full chapter sequence fro
 - **Xyce** — large-array / parallel SPICE backend when ngspice becomes impractical.
 - **NumPy / PyTorch** — functional references, architecture simulation, model mapping and accuracy studies.
 
-See [`docs/SIMULATION_STACK.md`](docs/SIMULATION_STACK.md) for the verification ladder and evidence rules.
+See [`docs/SIMULATION_STACK.md`](docs/SIMULATION_STACK.md).
 
 ---
 
 ## Track 1 — Sequential design book (`book/`)
 
-The book builds the machine in dependency order. Early chapters establish the math and behavioral model; later chapters turn those assumptions into circuit simulations and increasingly realistic device/array/system models.
+| # | Topic | Status | Path |
+|---|---|---|---|
+| 0000 | System and verification boundaries | done | `book/0000-what-we-are-building/` |
+| 0001 | Ohm + Kirchhoff = MVM | done | `book/0001-crossbar-mvm/` |
+| 0002 | Signed differential weights | done | `book/0002-differential-pairs/` |
+| 0003 | DAC/ADC quantization and noise | done | `book/0003-converters-and-noise/` |
+| 0004 | Tiling a matrix across arrays | done | `book/0004-tiling/` |
+| 0005 | One analog neuron — SPICE | done | `book/0005-one-analog-neuron/` |
+| 0006 | Many neurons / scaling | done | `book/0006-many-neurons/` |
+| 0007 | Current-mode differential crossbar column | done | `book/0007-crossbar-column/` |
+| 0008 | Circuit evidence → device profile | **next** | planned |
+| 0009 | DAC architecture | queued | planned |
+| 0010 | ADC / TIA output path | queued | planned |
+| 0012 | 2×2 differential crossbar | queued | planned |
+| 0013 | 4×4 differential crossbar | queued | planned |
 
-| # | Topic | Path |
-|---|---|---|
-| 0000 | System and verification boundaries | `book/0000-what-we-are-building/` |
-| 0001 | Ohm + Kirchhoff = MVM | `book/0001-crossbar-mvm/` |
-| 0002 | Signed differential weights | `book/0002-differential-pairs/` |
-| 0003 | DAC/ADC, quantization, noise | `book/0003-converters-and-noise/` |
-| 0004 | Tiling a matrix across arrays | `book/0004-tiling/` |
-| 0005 | One analog neuron — SPICE | `book/0005-one-analog-neuron/` |
-| 0006 | Many neurons: a layer | `book/0006-many-neurons/` |
-
-Chapter 0005 already verifies the weighted-sum circuit with PySpice + ngspice and explores non-ideal op-amp behavior, rail clipping and headroom. The next design work should progressively replace normalized/assumed parameters with circuit-derived profiles.
-
-> **Tiếng Việt:** each book chapter has `README.vi.md` beside the English `README.md` where available.
-
-```bash
-python book/0001-crossbar-mvm/train.py
-python book/0002-differential-pairs/train.py
-python book/0003-converters-and-noise/train.py
-python book/0004-tiling/train.py
-```
+> **Tiếng Việt:** chapters include `README.vi.md` beside the English `README.md` where available.
 
 ## Track 2 — Analog LLM architecture simulator (`analog_llm/`)
 
@@ -114,7 +121,7 @@ tokens ─► embedding
                      DAC → crossbar → ADC
 ```
 
-The architecture simulator is not the source of physical truth. For physical/system claims it should consume validated entries from [`device_profiles/`](device_profiles) whose values are extracted from SPICE, derived from traceable evidence, or explicitly marked as assumptions.
+Existing transformer/LLM code is a functional architecture foundation. It is **not yet the source of physical truth**. Physical/system claims become eligible only when the simulator consumes validated profiles extracted from circuit/device evidence.
 
 ```bash
 python scripts/run_llm_sim.py
@@ -122,7 +129,7 @@ python scripts/run_llm_sim.py
 
 ## Device profiles and provenance
 
-`device_profiles/` is the bridge between circuit simulation and the product simulator.
+`device_profiles/` is the bridge between circuit simulation and the architecture simulator.
 
 Evidence classes:
 
@@ -131,13 +138,11 @@ Evidence classes:
 - `derived` — calculated from traceable evidence;
 - `assumed` — sensitivity-study input only.
 
-The validator intentionally rejects an `assumed` or `FUNCTIONAL_ONLY` profile when code attempts to use it as support for a physical claim.
+The current repository contains the profile contract and an ideal reference profile. The next milestone is to publish the first **SPICE-backed crossbar-column profile** from 0007 and make `analog_llm` consume it.
 
 ## Verification evidence
 
-Use [`verification/`](verification) for reproducible evidence grouped by level: functional, circuit, Monte Carlo, corners, architecture, model accuracy and generated reports.
-
-Preferred artifact chain:
+Preferred evidence chain:
 
 ```text
 source schematic/netlist/model
@@ -145,6 +150,7 @@ source schematic/netlist/model
       + machine-readable result
       + generated figure
       + validated device profile
+      + downstream consumer test
 ```
 
 A plot without reproducible source/result data is not sufficient evidence.
@@ -162,7 +168,7 @@ Optional circuit automation:
 
 ```bash
 python -m pip install -e '.[sim]'
-# install ngspice separately; install Xyce when large-circuit runs need it
+# install ngspice separately; use Xyce when circuit scale requires it
 ```
 
 ## Honesty principles

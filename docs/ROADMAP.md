@@ -1,208 +1,274 @@
-# Roadmap — Analog AI Machine (design + simulation verification)
+# Roadmap — Analog AI Machine
 
-The project designs a hybrid analog-digital accelerator and verifies it from circuit primitives through LLM inference. A milestone is done only when backed by executable evidence; prose or an illustrative plot alone is not completion.
+This roadmap tracks **implementation readiness**, not topic coverage. `docs/CURRICULUM.md` defines the canonical learning/design sequence; this file defines which evidence gate is active and what must be proven before higher-level work becomes eligible.
 
-The governing chain is:
-
-```text
-math → functional model → circuit/SPICE → variation → extracted profile
-     → architecture → model inference → physical-feasibility report
-```
-
-Implementation follows the curriculum hierarchy in [`docs/CURRICULUM.md`](CURRICULUM.md):
+## Governing rule
 
 ```text
-Math
- ↓
-Ideal functional model
- ↓
-Circuit design
- ↓
-SPICE simulation
- ↓
-Non-ideal device model
- ↓
-ADC / DAC
- ↓
-Crossbar tile
- ↓
-Multi-tile accelerator
- ↓
-Digital control + dataflow
- ↓
-Transformer layer
- ↓
-Small LLM
- ↓
-Physical feasibility report
- ↓
-FPGA / PCB / silicon prototype
+math/reference
+    ↓
+circuit/SPICE
+    ↓
+validated device profile
+    ↓
+profile-driven tile
+    ↓
+accelerator
+    ↓
+Transformer / LLM
+    ↓
+physical feasibility
 ```
 
-See `docs/SIMULATION_STACK.md` for tooling and evidence rules. Chapter numbering in `docs/CURRICULUM.md` is the canonical dependency order; the milestones below track implementation status across those layers.
+A higher gate may contain exploratory code, but it is not considered physically verified until all lower gates it depends on are closed.
 
-## V0 — Verification contract and provenance
+Evidence classes remain: `measured`, `spice`, `derived`, `assumed`. `assumed` is allowed for sensitivity studies but cannot support a verified physical claim.
 
-- [x] Define functional/circuit/system claim levels
-- [x] Define ngspice + PySpice as the default circuit-verification path
-- [x] Define Xyce as the large-array/parallel SPICE backend
-- [x] Add `device_profiles/` provenance contract
-- [x] Add fail-closed validation preventing assumed/functional-only profiles from supporting physical claims
-- [x] Define verification evidence layout under `verification/`
-- [x] Define canonical engineering curriculum / dependency hierarchy
-- [ ] Add generated machine-readable verification summary/report format
-- [ ] Tag every existing physical/system constant in `analog_llm/` as profile-derived or assumed
+---
 
-Exit: no parameter can silently cross from architecture software into a physical claim.
+## R0 — Functional and circuit foundation — COMPLETE
 
-## Book track — current circuit evidence
+### Proven
 
-- [x] Verify the 0005 weighted-sum circuit in ngspice/PySpice against hand arithmetic
-- [x] Ship schematic and runnable `sim_neuron.py`
-- [x] Add non-ideal op-amp model with finite gain, offset and rail saturation
-- [x] DC sweep showing linear region and clip points
-- [x] Virtual-ground and rail-headroom analysis
-- [x] BOM/wiring/test-point/calibration artifacts for 0005
-- [x] Chapter 0006 scaling from one neuron to many-neuron layer, including 2-neuron SPICE check
-- [ ] Extract the verified 0005/0006 circuit quantities into a versioned device profile
-- [ ] Make downstream behavioral/system tests consume that profile
+- [x] Matrix convention, ideal MVM and deterministic reference arithmetic
+- [x] Differential `G+ / G-` signed-weight mapping
+- [x] Behavioral quantization/noise and explicit tiling/partial sums
+- [x] 0005 voltage-mode weighted-sum neuron verified in ngspice/PySpice
+- [x] 0005 finite-gain/offset/rail/headroom studies
+- [x] 0006 many-neuron scaling ledger and small SPICE check
+- [x] 0007 current-mode differential crossbar column
+- [x] 0007 TIA/differential readout agrees with hand calculation (`~1e-4 V` reported chapter error)
+- [x] Device-profile schema, evidence classes and fail-closed validator exist
+- [x] Measurement capture/checking workflow exists for 0005; actual hardware readings remain optional/pending
 
-Exit: book-level circuit results become reusable machine-readable evidence rather than isolated chapter plots.
+### Important limitation
 
-## V1 — Converter circuit design
+The repository has circuit evidence and a profile contract, but the two are not yet connected. `device_profiles/` still contains only the ideal reference profile, so the architecture simulator is not yet driven by extracted SPICE evidence.
 
-Corresponds primarily to curriculum chapters 0007–0008 and 0016.
+**Exit status:** complete as a foundation, not complete as a physical product claim.
 
-- [ ] Specify DAC architecture and design envelope
-- [ ] ngspice DC/transient simulation for DAC transfer and settling
-- [ ] Extract range, gain/offset, resolution/ENOB-equivalent metrics and settling into a `spice` profile
-- [ ] Specify ADC/output-stage architecture and design envelope
-- [ ] ngspice/Xyce simulation for transfer, clipping, settling and noise where the model supports it
-- [ ] Extract ADC profile with provenance
-- [ ] Add parameter sweeps for supply and temperature
-- [ ] Add Monte Carlo variation for component/device mismatch where models permit
-- [ ] Add converter non-linearity study when a sufficiently detailed model exists
+---
 
-Exit: architecture-level DAC/ADC parameters no longer rely only on arbitrary normalized values.
+# R1 — Close the circuit → profile → simulator proof chain — ACTIVE
 
-## V2 — Crossbar/device realism
+This is the only next-ready physical-verification milestone.
 
-Corresponds primarily to curriculum chapters 0009–0016.
+### WP1.1 — Extract first SPICE-backed profile
 
-- [ ] Select explicit conductance-cell abstraction/compact model for the first physical design candidate
-- [ ] Validate `gmin/gmax` and state/resolution behavior with SPICE/compact-model sweeps
-- [ ] Add programming/read variation model backed by named simulation or cited device assumptions
-- [ ] Add line resistance / IR-drop study
-- [ ] Add parasitic RC / settling study
-- [ ] Add drift/stuck-state experiments when supported by the device model
-- [ ] Use Xyce for array sizes where ngspice becomes impractical
-- [ ] Publish `crossbar-v1` profile with limitations and conditions
+- [ ] Define machine-readable extraction outputs for 0005 and 0007
+- [ ] Extract voltage/current gain, output range/headroom, offset/error and relevant settling/timing values when supported by the circuit model
+- [ ] Create a versioned profile such as `device_profiles/crossbar-column-v1.json`
+- [ ] Record simulator/backend, source chapter/netlist/script, supply, reference voltage, model assumptions and commit provenance
+- [ ] Mark every field `spice`, `derived`, `measured`, or `assumed`
 
-Exit: crossbar non-idealities used downstream trace to an explicit device/circuit model.
+### WP1.2 — Consume the profile downstream
 
-## M0 — Functional contracts
+- [ ] Add profile → `analog_llm` configuration adapter
+- [ ] Remove or explicitly label duplicate physical constants that currently bypass profile provenance
+- [ ] Add deterministic tests showing the same profile produces the same tile/system configuration
+- [ ] Fail closed when required physical fields are missing or only functional-only evidence is supplied
 
-Corresponds primarily to curriculum chapters 0000–0004.
+### WP1.3 — Verification summary
 
-- [x] Define matrix convention and unit conventions
-- [x] Behavioral DAC/ADC bits, clipping, noise, gain/offset
-- [x] Differential conductance weight model with finite resolution
-- [x] Fail-closed validation on invalid inputs
-- [ ] Freeze error-budget and reporting format (ledger + token agreement + provenance)
+- [ ] Generate a machine-readable verification summary (JSON) plus readable report
+- [ ] Report evidence coverage by component and claim level
+- [ ] Separate `VERIFIED_BY_SPICE`, `DERIVED`, `ASSUMED`, `MEASUREMENT_PENDING`
+- [ ] Link report values back to source profile/evidence artifacts
 
-Exit: mathematical mapping is stable and clearly separated from physical evidence.
+### Gate R1 exit
 
-## M1 — Crossbar and tile
+A single end-to-end test must demonstrate:
 
-Corresponds primarily to curriculum chapters 0010 and 0017–0018.
+```text
+0007 SPICE evidence
+      ↓ extraction
+validated crossbar-column profile
+      ↓ adapter
+analog_llm tile/system configuration
+      ↓
+reproducible verification report
+```
 
-- [x] Weight normalization and differential encoding
-- [x] Single programmable tile with converter non-idealities
-- [x] Hand-computable tile tests
-- [x] Sweep conductance bits vs effective-weight error
-- [ ] Add profile-driven tile configuration path
-- [ ] Compare behavioral tile output against SPICE-derived small-array cases
+No manual copy-paste of physical constants is allowed in the proof path.
 
-Exit: tile behavior is both functionally correct and calibratable to circuit evidence.
+---
 
-## M2 — Accelerator and tiling
+# R2 — Converter signal path — QUEUED
 
-Corresponds primarily to curriculum chapters 0018–0022.
+Eligible only after R1 closes.
 
-- [x] Split logical matrix into physical tiles with digital partial sums
-- [x] Pad edge blocks
-- [x] Physical ledger: MACs, tile cycles, rewrites, tiles used
-- [x] Multi-tile demo
-- [ ] Multi-tile parallelism model and temporal-reuse scheduler analysis
-- [ ] Add converter settling and profile-derived timing into cycle model
-- [ ] Add SRAM/buffer and interconnect traffic accounting
-- [ ] Add calibration flow driven by circuit/profile evidence
+## 0009 — DAC architecture
 
-Exit: architecture costs are explicit rather than inferred from ideal crossbar parallelism.
+- [ ] Choose a first design candidate (baseline recommendation: simple R-2R or explicit behavioral-to-transistor progression)
+- [ ] Hand reference for code → voltage transfer
+- [ ] ngspice DC sweep across all codes for a small-bit prototype
+- [ ] Transient settling study
+- [ ] Gain/offset/range extraction
+- [ ] Supply sensitivity
+- [ ] Monte Carlo / resistor mismatch where supported
+- [ ] Publish `dac-v1` SPICE profile
 
-## M3 — Neural-network and transformer mapping
+## 0010 — ADC / TIA output path
 
-Corresponds primarily to curriculum chapters 0023–0028.
+- [ ] Define first ADC/output-stage architecture and input envelope
+- [ ] Transfer/clipping characterization
+- [ ] Settling/conversion timing model
+- [ ] Noise/effective-resolution study appropriate to model detail
+- [ ] Supply/temperature/corner study where supported
+- [ ] Publish `adc-v1` SPICE profile
 
-- [x] Deterministic nanoGPT-style model
-- [x] Hybrid forward: linears through tiles, nonlinear/control operations digital
-- [x] Autoregressive generation
-- [x] Float baseline and unified report
-- [x] KV-cache path
-- [x] Per-token ledger trace
-- [ ] Add explicit mapping evidence for Linear, MLP, Q/K/V, attention and full transformer-block boundaries
-- [ ] Per-token latency trace driven by profile-derived or explicitly assumed component timing
+## 0011 — Converter variation
 
-Exit: the model runs end to end with traceable architecture assumptions and clear analog/digital boundaries.
+- [ ] Monte Carlo mismatch distributions
+- [ ] Separate gain, offset, quantization, noise and non-linearity mechanisms
+- [ ] Define calibration candidates
 
-## M4 — LLM accuracy / sensitivity
+### Gate R2 exit
 
-Corresponds primarily to curriculum chapters 0029–0032.
+`analog_llm` can run with converter parameters sourced from validated DAC/ADC profiles rather than arbitrary normalized defaults.
 
-- [x] High-precision and budget-constrained configurations
-- [x] Per-non-ideality ablation
-- [x] Bit sweeps / accuracy-vs-cost curves
-- [ ] Repeat sensitivity studies using SPICE-derived converter/crossbar profiles
-- [ ] Add hardware-aware training/recovery experiment using verified non-idealities
-- [ ] Add guardrail in reports preventing GPU-equivalence claims from functional ledgers
+---
 
-Exit: accuracy degradation is attributable to named physical mechanisms and evidence classes.
+# R3 — Small crossbar arrays — QUEUED
 
-## M5 — Real pretrained checkpoint
+Depends on R1; R2 is required for full signal-path claims but not for early array-only studies.
 
-- [x] Loader for real checkpoint weights
-- [x] Tokenizer + numeric reference parity
-- [x] Map a real small model through tiles and report full sequence
-- [x] Failure analysis for constrained configuration
-- [ ] Run the same checkpoint using the first circuit-derived device profile
+## 0012 — 2×2 differential crossbar
 
-Exit: real-model feasibility is evaluated using traceable proposed-device parameters.
+- [ ] Shared input rows, two independent output columns
+- [ ] SPICE MVM versus hand/NumPy reference
+- [ ] Signed-weight cases, zero/balanced cases and boundary envelope
+- [ ] Output-stage loading/headroom checks
 
-## M6 — Latency / energy / area feasibility
+## 0013 — 4×4 differential crossbar
 
-Corresponds primarily to curriculum chapters 0033–0037.
+- [ ] Scale the validated 2×2 topology
+- [ ] Compare SPICE output to behavioral model over deterministic vectors/matrices
+- [ ] Quantify max/RMS MVM error
+- [ ] Record current and settling behavior
 
-- [x] Model converter count, tile programming and reuse in ledger
-- [x] Relative latency sensitivity to tile capacity and parallelism
-- [x] No GPU comparison without measured physical assumptions
-- [ ] Replace relative timing with SPICE-derived settling/conversion timing where available
-- [ ] Add energy model whose coefficients are tagged `spice`, `derived`, `measured`, or `assumed`
-- [ ] Add area model with explicit process/layout assumptions
-- [ ] Add thermal/power-density sanity checks
-- [ ] Version process/device assumptions
-- [ ] Generate a feasibility report separating verified evidence from assumptions
+## 0014 — Array timing/loading
 
-Exit: the project can state a simulation-backed physical-feasibility case with an auditable evidence chain.
+- [ ] Sweep number of rows/columns
+- [ ] Quantify TIA loading and headroom
+- [ ] Establish the point where ngspice becomes impractical and Xyce becomes preferred
 
-## M7 — Toward implementation
+### Gate R3 exit
 
-Corresponds primarily to curriculum chapters 0038–0039.
+A 4×4 current-mode differential array has reproducible SPICE evidence and a behavioral-equivalence error report.
 
-- [ ] KiCad reference schematics for the selected board-level prototype path
-- [ ] FPGA/digital-shell model for scheduler, buffers and data movement
-- [ ] Correlate FPGA/board measurements with simulator when hardware exists
-- [ ] Upgrade relevant profile evidence classes from `spice`/`assumed` to `measured`
-- [ ] Define criteria for any future IC/layout/tape-out exploration
-- [ ] Produce implementation-readiness report with open risks, unsupported assumptions and required experiments
+---
 
-Exit: simulation predictions can be compared directly with real hardware measurements rather than treated as final truth.
+# R4 — Device realism and crossbar-v1 — QUEUED
+
+Depends on R3.
+
+- [ ] Select explicit programmable-conductance abstraction / compact model
+- [ ] Establish `gmin`, `gmax`, state count/resolution and programming assumptions
+- [ ] Programming/read variation Monte Carlo
+- [ ] IR-drop / line resistance versus array dimensions
+- [ ] Parasitic RC and settling
+- [ ] Drift, stuck states and non-linearity where supported
+- [ ] Temperature/process/model corners where meaningful
+- [ ] Publish `crossbar-v1` profile with limitations
+
+### Gate R4 exit
+
+Every crossbar non-ideality used by the architecture simulator traces to a named model/evidence source or is explicitly marked assumed.
+
+---
+
+# R5 — Profile-driven physical tile — QUEUED
+
+Depends on R2 + R4.
+
+- [ ] Tile configuration consumes `dac-v1`, `adc-v1`, `crossbar-v1`
+- [ ] Behavioral tile reproduces small-array SPICE cases within a frozen error budget
+- [ ] Calibration flow consumes profile evidence
+- [ ] Partial-sum precision and clipping rules are explicit
+- [ ] Freeze tile-level validation report
+
+### Gate R5 exit
+
+The tile simulator is a calibrated abstraction of the proposed circuit/device stack, not an independent collection of hand-chosen parameters.
+
+---
+
+# R6 — Accelerator architecture and data movement — QUEUED
+
+Depends on R5.
+
+Existing functional work (tiling, multi-tile demo, ledgers, KV cache) is useful evidence but must be revalidated with profile-driven timing/error parameters.
+
+- [ ] Freeze tile parallelism / temporal-reuse scheduler
+- [ ] SRAM/buffer capacity model
+- [ ] NoC/interconnect traffic model
+- [ ] Profile-derived converter/tile timing in per-token trace
+- [ ] Programming/rewrite costs
+- [ ] End-to-end architecture ledger with provenance
+
+### Gate R6 exit
+
+For any layer, the simulator can state where time, storage, traffic, rewrites and error come from.
+
+---
+
+# R7 — Transformer and LLM validation — QUEUED
+
+Depends on R6.
+
+Existing TinyGPT, checkpoint loader, KV cache, ablations and real-model mapping are functional foundations.
+
+- [ ] Re-run linear/MLP/QKV mappings with R5/R6 physical profiles
+- [ ] Explicit analog/digital boundary report for attention
+- [ ] Full transformer-block error attribution
+- [ ] Tiny transformer profile-driven parity/error study
+- [ ] Real pretrained checkpoint using physical profiles
+- [ ] Hardware-aware calibration/training recovery experiment
+
+### Gate R7 exit
+
+Model accuracy degradation is attributable to named circuit/device/architecture mechanisms rather than generic noise knobs.
+
+---
+
+# R8 — Physical feasibility report — QUEUED
+
+Depends on R7 and evidence from R2–R6.
+
+- [ ] Latency model with evidence-tagged timing coefficients
+- [ ] Energy/power model with evidence-tagged coefficients
+- [ ] Area model with explicit topology/process/layout assumptions
+- [ ] Thermal/power-density sanity checks
+- [ ] Sensitivity ranges for all still-assumed parameters
+- [ ] No GPU/ASIC superiority claim without comparable measured evidence
+- [ ] Generate integrated feasibility report
+
+The strongest status available without fabricated hardware is:
+
+**SIMULATION-BACKED PHYSICAL FEASIBILITY**
+
+not silicon verification.
+
+---
+
+# R9 — Implementation correlation — FUTURE
+
+- [ ] FPGA/digital-shell prototype for scheduler/buffer/control
+- [ ] KiCad board/reference circuits when useful for correlation
+- [ ] Replace SPICE evidence with measured profiles where hardware exists
+- [ ] SPICE-vs-measured correlation report
+- [ ] Define PDK/layout/device requirements for any IC exploration
+- [ ] Tape-out readiness review only after required evidence exists
+
+---
+
+## Work-selection rule
+
+When choosing the next task:
+
+1. Select the first incomplete work package in the **Active** gate whose dependencies are proven.
+2. Do not implement a queued physical claim merely because higher-level functional code already exists.
+3. One PR should close one meaningful vertical slice with deterministic evidence.
+4. If a required simulator/model is unavailable, record the blocker; do not replace missing evidence with a silent assumption.
+5. Update this roadmap only after the evidence exists in the repository.
