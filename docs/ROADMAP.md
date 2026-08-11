@@ -109,11 +109,11 @@ R1 is closed; the first DAC slice (below) is eligible.
 - [x] Choose a first design candidate: R-2R ladder (`book/0009-dac-r2r/r2r_dac.py`, single source of truth for SPICE solves) — two resistor values `R`/`2R` + `VREF`, no exotic components
 - [x] Hand reference for code → voltage transfer: `Vout(code) = VREF*code/2^N` encoded as `ideal_output` and asserted against SPICE for all 16 codes
 - [x] ngspice DC sweep across all codes for a small-bit prototype: 4-bit ladder, all 16 codes, worst `|SPICE − hand calc|` `4.44e-16 V` (`spice`)
-- [ ] Transient settling study (deferred: DC operating-point solves only, documented as limitation)
+- [x] Transient settling study: single-pole hand model `t = 2R·CL·ln(ΔV/band)` vs SPICE transient, `Rth = 2R` from two-point DC load line (`spice`); settling reported as an ASSUMED-`CL` sensitivity study in the extract JSON only (1 pF load, 0.5 LSB band, full-scale step: SPICE 68.7 ns vs hand 68.0 ns) and deliberately excluded from the profile so `physical_claim` stays valid
 - [x] Gain/offset/range extraction: `lsb_v = 0.15625 V/code`, `full_scale_v = 2.34375 V`, `offset_v = 0 V`, `gain_v_per_v = 1`, `max_inl_v = 4.4e-16 V`, `max_dnl_v = 4.2e-16 V` (`spice`)
 - [ ] Supply sensitivity (deferred)
 - [ ] Monte Carlo / resistor mismatch (deferred)
-- [x] Publish SPICE profile: `device_profiles/dac-r2r-v1.json` (name `dac-r2r-v1`, version `0.1.0`), 10 fields all carrying `evidence_class`, emitted by `verification/circuit/extract_dac_r2r.py`
+- [x] Publish SPICE profile: `device_profiles/dac-r2r-v1.json` (name `dac-r2r-v1`, version `0.1.0`), 11 fields all carrying `evidence_class` (incl. `rth_ohm = 20000 ohm`, `spice`), emitted by `verification/circuit/extract_dac_r2r.py`
 
 ## 0010 — ADC / TIA output path
 

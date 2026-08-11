@@ -30,6 +30,7 @@ REQUIRED_FIELDS = {
     "max_inl_v",
     "max_dnl_v",
     "max_abs_error_v",
+    "rth_ohm",
 }
 
 
@@ -83,6 +84,28 @@ def test_dac_profile_hand_reference_values() -> None:
     assert fields["gain_v_per_v"]["value"] == pytest.approx(1.0)
 
 
+def test_dac_profile_rth_is_two_r() -> None:
+    profile = load_device_profile(_PROFILE)
+    r_ohm = profile["fields"]["r_ohm"]["value"]
+    assert profile["fields"]["rth_ohm"]["value"] == pytest.approx(2 * r_ohm)
+    assert profile["fields"]["rth_ohm"]["evidence_class"] == "spice"
+
+
+def test_dac_extract_settling_is_assumed_sensitivity() -> None:
+    """The settling study uses an assumed CL, so it lives in the extract JSON
+    only and is not a physical profile field."""
+    extract = json.loads(_EXTRACT.read_text("utf-8"))
+    profile = load_device_profile(_PROFILE)
+    assert "settling" in extract
+    rows = extract["settling"]
+    assert len(rows) == 3
+    for row in rows:
+        assert row["settle_time_s"] == pytest.approx(row["hand_tau_s"], rel=0.05)
+    assert "settling" not in profile
+    assert "cl_farad" not in profile["fields"]
+    assert any("ASSUMED" in line for line in [profile["provenance"]["limitations"]])
+
+
 def test_dac_profile_extract_results_are_committed_and_consistent() -> None:
     extract = json.loads(_EXTRACT.read_text("utf-8"))
     assert len(extract["sweep_v"]) == 2 ** extract["bits"]
@@ -101,3 +124,6 @@ def test_dac_extraction_reproduces_committed_profile() -> None:
     # raw sweep must match the committed extract too
     extract = json.loads(_EXTRACT.read_text("utf-8"))
     assert measured["sweep_v"] == pytest.approx(extract["sweep_v"], rel=2e-3, abs=1e-12)
+    # settling rows must reproduce within tolerance
+    settling = extractor.measure_settling()
+    assert settling == pytest.approx(extract["settling"], rel=5e-2, abs=1e-9)

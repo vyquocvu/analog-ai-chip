@@ -9,10 +9,14 @@ signal path needs downstream:
   * LSB (voltage per code),
   * full-scale and offset (output range),
   * linearity: INL and DNL,
-  * worst |SPICE - hand calc| DC error.
+  * worst |SPICE - hand calc| DC error,
+  * Thevenin output resistance (two-point DC load line),
+  * transient settling vs the single-pole hand reference
+    (assumed load capacitance, reported as a sensitivity study, not a profile
+    field -- assumed evidence fails closed under ``physical_claim``).
 
 Emits:
-  * verification/circuit/results/dac-r2r-v1-extract.json  (raw sweep)
+  * verification/circuit/results/dac-r2r-v1-extract.json  (raw sweep + settling)
   * device_profiles/dac-r2r-v1.json                       (versioned profile)
 
 Run:  python verification/circuit/extract_dac_r2r.py
@@ -26,10 +30,24 @@ from pathlib import Path
 
 _REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(_REPO / "book" / "0009-dac-r2r"))
-from r2r_dac import BITS, R_OHM, VREF, ideal_output, sweep
+from r2r_dac import (
+    BITS,
+    R_OHM,
+    VREF,
+    ideal_output,
+    output_resistance_ohm,
+    settle_time,
+    settle_time_hand,
+    sweep,
+)
 
 RESULTS_DIR = _REPO / "verification" / "circuit" / "results"
 PROFILE_PATH = _REPO / "device_profiles" / "dac-r2r-v1.json"
+
+# Settling study conditions (load capacitance is assumed -- no device evidence).
+CL_FARAD = 1e-12
+SETTLE_BAND_V = VREF / (2 ** (BITS + 1))  # 0.5 LSB
+SETTLE_STEPS = ((0, 8), (8, 15), (0, 15))
 
 
 def measure() -> dict[str, float]:
@@ -50,8 +68,24 @@ def measure() -> dict[str, float]:
         "max_inl_v": inl_max,
         "max_dnl_v": dnl_max,
         "max_abs_error_v": inl_max,
+        "rth_ohm": output_resistance_ohm(0, BITS, R_OHM, VREF),
         "sweep_v": volts,
     }
+
+
+def measure_settling() -> list[dict[str, float]]:
+    """Transient settling for representative steps (assumed CL), in seconds."""
+    rows = []
+    for code_from, code_to in SETTLE_STEPS:
+        rows.append({
+            "code_from": float(code_from),
+            "code_to": float(code_to),
+            "cl_farad": CL_FARAD,
+            "band_v": SETTLE_BAND_V,
+            "settle_time_s": settle_time(code_from, code_to, SETTLE_BAND_V, CL_FARAD),
+            "hand_tau_s": settle_time_hand(code_from, code_to, SETTLE_BAND_V, CL_FARAD),
+        })
+    return rows
 
 
 def _field(value, unit, evidence_class, note):
@@ -79,9 +113,12 @@ def build_profile(measured: dict[str, float]) -> dict[str, object]:
                 "backend": "ngspice (libngspice)",
             },
             "limitations": (
-                "DC operating-point solves with ideal switch sources only; "
-                "no transient settling, switch resistance, resistor mismatch, "
-                "temperature, supply sensitivity or Monte Carlo evidence yet."
+                "DC operating-point solves with ideal switch sources plus a "
+                "transient settling study at an ASSUMED load capacitance "
+                "(1 pF, reported in the extract JSON only -- it fails closed "
+                "under physical_claim because CL has no device evidence yet). "
+                "No switch resistance, resistor mismatch, temperature, supply "
+                "sensitivity or Monte Carlo evidence yet."
             ),
         },
         "fields": {
@@ -112,6 +149,11 @@ def build_profile(measured: dict[str, float]) -> dict[str, object]:
                 measured["max_abs_error_v"], "V", "spice",
                 "worst |SPICE - hand calc| over all codes",
             ),
+            "rth_ohm": _field(
+                measured["rth_ohm"], "ohm", "spice",
+                "Thevenin output resistance from a two-point DC load line "
+                "(equals 2R for this ladder orientation, code-independent)",
+            ),
         },
     }
 
@@ -119,11 +161,18 @@ def build_profile(measured: dict[str, float]) -> dict[str, object]:
 def main() -> None:
     measured = measure()
     assert measured["max_abs_error_v"] <= 1e-9, "R-2R ladder must match hand calc"
+    assert abs(measured["rth_ohm"] - 2 * R_OHM) / (2 * R_OHM) < 1e-6, "Rth must equal 2R"
+    settling = measure_settling()
+    for row in settling:
+        assert abs(row["settle_time_s"] - row["hand_tau_s"]) <= 10e-9, (
+            f"transient settle must match single-pole hand for "
+            f"{int(row['code_from'])}->{int(row['code_to'])}"
+        )
     profile = build_profile(measured)
 
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
     sweep_only = {k: v for k, v in measured.items() if k != "sweep_v"}
-    extract = {**sweep_only, "sweep_v": measured["sweep_v"]}
+    extract = {**sweep_only, "sweep_v": measured["sweep_v"], "settling": settling}
     result_path = RESULTS_DIR / "dac-r2r-v1-extract.json"
     result_path.write_text(json.dumps(extract, indent=2, sort_keys=True) + "\n", "utf-8")
     PROFILE_PATH.write_text(json.dumps(profile, indent=2, sort_keys=True) + "\n", "utf-8")
@@ -131,8 +180,13 @@ def main() -> None:
     print(f"wrote {result_path}")
     print(f"wrote {PROFILE_PATH}")
     for k in ("bits", "r_ohm", "vref_v", "lsb_v", "full_scale_v", "offset_v",
-              "gain_v_per_v", "max_inl_v", "max_dnl_v", "max_abs_error_v"):
+              "gain_v_per_v", "max_inl_v", "max_dnl_v", "max_abs_error_v", "rth_ohm"):
         print(f"  {k:18s} = {measured[k]:.6g}")
+    print("  settling (assumed CL = 1 pF, band = 0.5 LSB):")
+    for row in settling:
+        print(f"    {int(row['code_from'])}->{int(row['code_to']):2d}: "
+              f"spice {row['settle_time_s']*1e9:6.1f} ns, "
+              f"hand {row['hand_tau_s']*1e9:6.1f} ns")
 
 
 if __name__ == "__main__":

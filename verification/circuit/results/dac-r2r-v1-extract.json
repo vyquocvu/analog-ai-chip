@@ -8,6 +8,33 @@
   "max_inl_v": 4.440892098500626e-16,
   "offset_v": 0.0,
   "r_ohm": 10000.0,
+  "rth_ohm": 19999.999999999993,
+  "settling": [
+    {
+      "band_v": 0.078125,
+      "cl_farad": 1e-12,
+      "code_from": 0.0,
+      "code_to": 8.0,
+      "hand_tau_s": 5.545177444479562e-08,
+      "settle_time_s": 5.573200000000005e-08
+    },
+    {
+      "band_v": 0.078125,
+      "cl_farad": 1e-12,
+      "code_from": 8.0,
+      "code_to": 15.0,
+      "hand_tau_s": 5.278114659230517e-08,
+      "settle_time_s": 5.3732000000000054e-08
+    },
+    {
+      "band_v": 0.078125,
+      "cl_farad": 1e-12,
+      "code_from": 0.0,
+      "code_to": 15.0,
+      "hand_tau_s": 6.802394763324311e-08,
+      "settle_time_s": 6.873200000000004e-08
+    }
+  ],
   "sweep_v": [
     0.0,
     0.15624999999999997,

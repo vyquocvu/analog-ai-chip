@@ -51,15 +51,24 @@ GND     sw(bit0) sw(bit1) sw(bit2)  + 2R to GND terminates at n0
 - **SPICE vs hand**: all 16 codes, `worst |SPICE − ideal| = 4.44e-16 V` (DC
   operating-point solves with ideal switch sources).
 - `Vout(0) = 0`, monotonic by construction, `Vout(15) = 2.34375 V`.
+- **Output resistance**: two-point DC load line gives `Rth = 2R = 20 kΩ`,
+  code-independent (the ladder orientation — termination at the LSB end, output
+  at the MSB end — puts `Rth = R + Z` with `Z = 2R ‖ (R + Z)`).
+- **Transient settling**: with an *assumed* load `CL = 1 pF` and a 0.5 LSB band,
+  a full-scale step settles in 68.7 ns (SPICE) vs 68.0 ns from the single-pole
+  hand model `t = 2R·CL·ln(ΔV/band)`. The `CL` value has no device evidence yet,
+  so settling is a sensitivity study only: it lives in the extract JSON and is
+  deliberately NOT a profile field (it would fail `physical_claim` validation).
 - Always-on data tests + optional engine tests in `tests/test_dac_r2r_profile.py`.
 
 ## What this chapter does NOT do yet
 
-- Transient settling (switch/ladder RC time constant) — deferred study.
 - Resistor mismatch / Monte Carlo — R-2R's whole point is ratio tolerance; the
   numeric sensitivity is a separate chapter.
 - Supply sensitivity of `VREF` — deferred.
 - Non-zero switch resistance — real switches add offset and INL; ideal sources
   are the DC model here.
+- Device-backed load capacitance for settling — `CL` is assumed; a measured
+  ADC-input / parasitic `CL` would promote settling to a physical claim.
 
 These are tracked as open items in the R2 gate.
