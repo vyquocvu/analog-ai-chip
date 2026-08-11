@@ -13,6 +13,8 @@ R-2R ladder of chapter 0009. It digitizes the **differential** output of the
  +/-2.5 V (signed)     unipolar [0, VREF]      floor(Vin/LSB)
 ```
 
+![SAR ADC architecture (0010)](diagrams/sar_architecture.svg)
+
 - The 0007 column's differential output `Vout = Vm − Vp` is signed and can span
   `±2.5 V` around the virtual reference (the crossbar-column profile headroom).
 - The R-2R reference ladder (0009) is *unipolar* `0 .. VREF`, so the input
@@ -45,6 +47,15 @@ code   = floor(Vin / LSB),              clipped to [0, 2^N - 1]
 V_hat  = (code + 0.5) * LSB             unipolar reconstruction
 Vdiff_hat = 2 * (V_hat - VREF/2)        differential-domain reconstruction
 ```
+
+![SAR ADC transfer (0010)](diagrams/transfer.svg)
+
+The top panel is the SPICE SAR code staircase over the `[0, VREF]` envelope —
+the circuit reproduces `floor(Vin/LSB)` code-for-code at every one of the 129
+samples. The bottom panel shows the differential-domain reconstruction error
+staying at or below the `LSB` quantization bound (see below). Both plots are
+regenerated from the committed extract (`verification/circuit/results/
+adc-sar-v1-extract.json`) by `book/0010-adc-sar/diagrams/make_transfer.py`.
 
 Quantization error is bounded by `LSB = 0.15625 V` in the differential domain:
 the input front scales by `1/2`, so one differential code spans `2·LSB` and the

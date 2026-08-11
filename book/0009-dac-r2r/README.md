@@ -31,20 +31,25 @@ All values are simulation targets; nothing here is a measured silicon result.
 
 ## Circuit
 
-```
-n0 --R-- n1 --R-- n2 --R-- n3 --R-- n4          (series chain)
-|        |        |        |
-2R       2R       2R       2R                    (bit legs)
-|        |        |        |
-GND     sw(bit0) sw(bit1) sw(bit2)  + 2R to GND terminates at n0
-```
+![R-2R ladder schematic](diagrams/ladder_schematic.svg)
 
 - Each node `n_i` has a `2R` leg switched between `VREF` (bit = 1) and ground
-  (bit = 0). Bit 0 is at the terminated end; the output is taken at `n4`.
+  (bit = 0). Bit 0 is at the terminated end (the `2R` termination to GND); the
+  output is taken at `out`.
 - The ladder divides current exponentially, so each bit contributes
   `VREF · 2^i / 2^N` at the output.
 
 `Run: book/0009-dac-r2r/r2r_dac.py`
+
+### Sample transfer
+
+![DAC transfer: Vout vs code](diagrams/transfer.svg)
+
+The 4-bit transfer staircase rises one LSB (`0.15625 V`) per code, exactly
+overlayed by the ideal line `Vout = VREF·code/16`. The plot is regenerated from
+the committed extract (`verification/circuit/results/dac-r2r-v1-extract.json`)
+by `book/0009-dac-r2r/diagrams/make_transfer.py`, so it always shows the
+numbers the tests verify.
 
 ## Verification
 

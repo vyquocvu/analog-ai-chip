@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" width="960" height="460" font-family="Menlo,Consolas,monospace">
+<rect width="960" height="460" fill="#ffffff"/>
+<text x="480" y="28" text-anchor="middle" font-size="18" font-weight="bold" fill="#111">Converter mismatch and calibration (0011)</text>
+<text x="480" y="48" text-anchor="middle" font-size="12" fill="#7f8c8d">64-sample R-2R mismatch MC · sigma 1% assumed Gaussian · seed 7 · VREF = 2.5 V</text>
+
+
+<text x="480" y="62" text-anchor="middle" font-size="13" fill="#111">SPICE mismatch transfer envelope (min..max over 64 samples) vs ideal ladder</text>
+<line x1="90" y1="70" x2="870" y2="70" stroke="#333" stroke-width="1.5"/>
+<line x1="90" y1="70" x2="90" y2="220" stroke="#333" stroke-width="1.5"/>
+<text x="870" y="238" text-anchor="end" fill="#333" font-size="12">code</text>
+<text x="84" y="80" text-anchor="end" fill="#333" font-size="12">Vout (V)</text>
+<polygon points="90.0,220.0 142.0,210.9 194.0,201.6 246.0,192.3 298.0,183.1 350.0,173.7 402.0,164.4 454.0,155.0 506.0,145.9 558.0,136.5 610.0,127.2 662.0,117.8 714.0,108.1 766.0,98.5 818.0,89.1 870.0,79.6 870.0,79.1 818.0,88.3 766.0,97.7 714.0,107.0 662.0,116.1 610.0,125.4 558.0,134.8 506.0,144.3 454.0,153.5 402.0,163.0 350.0,172.3 298.0,181.7 246.0,191.3 194.0,200.9 142.0,210.4 90.0,220.0" fill="#e8f6f3" stroke="#1e8449" stroke-width="1.5" opacity="0.9"/>
+<polyline points="90.0,220.0 142.0,210.6 194.0,201.2 246.0,191.9 298.0,182.5 350.0,173.1 402.0,163.8 454.0,154.4 506.0,145.0 558.0,135.6 610.0,126.2 662.0,116.9 714.0,107.5 766.0,98.1 818.0,88.8 870.0,79.4" fill="none" stroke="#1a5276" stroke-dasharray="6,4" stroke-width="2"/>
+<text x="98" y="88" fill="#1e8449" font-size="12">64-sample envelope (green band)</text>
+<text x="98" y="104" fill="#1a5276" font-size="12">ideal Vout = VREF·code/16 (dashed)</text>
+<text x="98" y="212" fill="#7f8c8d" font-size="11">offset = 0 (all legs grounded at code 0) · gain error mean -1.14e-05 (std 7.18e-04)</text>
+
+
+<text x="480" y="262" text-anchor="middle" font-size="13" fill="#111">worst |error| per code after calibration: raw vs two-point vs lookup table</text>
+<line x1="90" y1="270" x2="870" y2="270" stroke="#333" stroke-width="1.5"/>
+<line x1="90" y1="270" x2="90" y2="420" stroke="#333" stroke-width="1.5"/>
+<text x="870" y="438" text-anchor="end" fill="#333" font-size="12">code</text>
+<text x="84" y="280" text-anchor="end" fill="#333" font-size="12">|err| (V)</text>
+<line x1="90" y1="351.8" x2="870" y2="351.8" stroke="#c0392b" stroke-dasharray="6,4" stroke-width="2"/>
+<text x="98" y="345.8181818181818" fill="#c0392b" font-size="12">LSB = 0.15625 V</text>
+<polyline points="90.0,420.0 142.0,418.2 194.0,417.5 246.0,416.0 298.0,414.2 350.0,414.1 402.0,414.6 454.0,413.7 506.0,413.3 558.0,413.4 610.0,412.9 662.0,413.0 714.0,415.7 766.0,416.9 818.0,416.8 870.0,418.0" fill="none" stroke="#c0392b" stroke-width="2.5"/>
+<polyline points="90.0,420.0 142.0,418.1 194.0,417.4 246.0,415.9 298.0,413.9 350.0,413.7 402.0,414.1 454.0,413.6 506.0,413.6 558.0,414.1 610.0,413.7 662.0,413.9 714.0,415.9 766.0,417.4 818.0,418.1 870.0,420.0" fill="none" stroke="#ca6f1e" stroke-width="2.5"/>
+<polyline points="90.0,420.0 142.0,420.0 194.0,420.0 246.0,420.0 298.0,420.0 350.0,420.0 402.0,420.0 454.0,420.0 506.0,420.0 558.0,420.0 610.0,420.0 662.0,420.0 714.0,420.0 766.0,420.0 818.0,420.0 870.0,420.0" fill="none" stroke="#1e8449" stroke-width="2.5"/>
+<text x="98" y="412" fill="#c0392b" font-size="12">raw (worst 1.62e-02 V)  ·  two-point (worst 1.47e-02 V, = INL scaled)  ·  LUT (worst 0.00e+00 V)</text>
+</svg>

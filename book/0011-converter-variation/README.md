@@ -52,6 +52,18 @@ For `sigma = 0` the study reproduces the ideal ladder (fail-closed sanity
 check), and the statistics computed from SPICE transfers match the hand-solver
 statistics to `1e-12`.
 
+![R-2R mismatch transfer envelope and calibration residuals (0011)](diagrams/mismatch_transfer.svg)
+
+The top panel is the 64-sample SPICE mismatch transfer envelope (min..max per
+code over the deterministic draws) against the ideal ladder — the spread grows
+toward full scale (pure gain error; offset is exactly 0). The bottom panel shows
+the worst per-code error after each calibration candidate: raw spread vs the
+two-point correction (left equal to max|INL| scaled) vs the full LUT (zero). The
+plot is regenerated from the committed extract
+(`verification/circuit/results/converter-variation-0011-extract.json`) by
+`book/0011-converter-variation/diagrams/make_plots.py`, which reuses the
+chapter's `calibration` module, so the figure always shows the tested numbers.
+
 ## Units and assumptions
 
 - `R = 10 kΩ`, `2R = 20 kΩ`, `VREF = 2.5 V`, `BITS = 4` (matches 0009/0010).
