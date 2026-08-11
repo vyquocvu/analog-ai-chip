@@ -5,13 +5,18 @@ weight ``w`` is encoded differentially in two arrays ``(G+, G-)`` of
 programmable conductances that resolve to ``w_eff = G+ - G-``.
 
 Physical units
---------------
-Conductance ``G`` is expressed in the range ``[gmin, gmax]`` (both positive),
-where ``gmin`` is the balanced zero-weight cell and ``gmax`` the strongest
-cell. ``bits`` selects how many programmable conductance levels exist between
-them, so the effective weight resolution is finite. This is the dominant
-weight-side non-ideality: conductance quantization.
-"""
+    --------------
+    Conductance ``G`` is expressed in the range ``[gmin, gmax]`` (both positive),
+    where ``gmin`` is the balanced zero-weight cell and ``gmax`` the strongest
+    cell. ``bits`` selects how many programmable conductance levels exist between
+    them, so the effective weight resolution is finite. This is the dominant
+    weight-side non-ideality: conductance quantization.
+
+    The ``gmin``/``gmax`` defaults here (``0.05``/``1.0``) are functional
+    reference values mirrored by ``device_profiles/ideal.json``, not device
+    evidence. Physical simulations must take the conductance window from a
+    validated device profile via ``analog_llm.profile_adapter``.
+    """
 
 from __future__ import annotations
 

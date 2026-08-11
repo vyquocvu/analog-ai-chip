@@ -63,10 +63,10 @@ This is the only next-ready physical-verification milestone.
 
 ### WP1.2 — Consume the profile downstream
 
-- [ ] Add profile → `analog_llm` configuration adapter
-- [ ] Remove or explicitly label duplicate physical constants that currently bypass profile provenance
-- [ ] Add deterministic tests showing the same profile produces the same tile/system configuration
-- [ ] Fail closed when required physical fields are missing or only functional-only evidence is supplied
+- [x] Add profile → `analog_llm` configuration adapter: `analog_llm/profile_adapter.py` maps validated profile `fields` to `CrossbarTile` kwargs (`gmin = g0_s`, `gmax = g0_s + gscale_s_per_w`, envelopes from rail headroom) and legacy `dac/crossbar/adc` sections for the functional reference; exposed via `build_tile_factory`/`tile_config_from_profile`
+- [x] Remove or explicitly label duplicate physical constants that currently bypass profile provenance: `scripts/run_llm_sim.py` now builds tiles only through the adapter (SPICE profile for the physical run, `ideal.json` for the functional run); `CrossbarTile`/`map_differential` docstrings label their defaults as functional reference values mirrored by `device_profiles/ideal.json`
+- [x] Add deterministic tests showing the same profile produces the same tile/system configuration: `tests/test_profile_adapter.py` and `tests/test_profile_consumer.py` (identical config from repeated calls, identical tile forward outputs, identical TinyGPT token sequences with fixed seeds)
+- [x] Fail closed when required physical fields are missing or only functional-only evidence is supplied: missing `REQUIRED_FIELDS` -> `ValueError`; `ideal.json` cannot drive a physical tile (`assumed`/`FUNCTIONAL_ONLY`); bits must be explicit
 
 ### WP1.3 — Verification summary
 

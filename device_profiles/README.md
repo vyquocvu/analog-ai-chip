@@ -44,6 +44,20 @@ deterministically from 0007 column solves (plus the 0005 rail model) by
 `verification/circuit/extract_crossbar_column.py`. Regenerate with
 `python verification/circuit/extract_crossbar_column.py`.
 
+`analog_llm.profile_adapter` maps a physical profile's `fields` into
+`CrossbarTile` configuration (e.g. `gmin = g0_s`, `gmax = g0_s + gscale_s_per_w`,
+converter envelopes from the rail headroom). The legacy `dac`/`crossbar`/`adc`
+section layout (`ideal.json`) maps the functional reference only and cannot
+support a physical tile configuration. Consume with:
+
+```python
+from analog_llm import build_tile_factory
+factory = build_tile_factory(
+    "device_profiles/crossbar-column-v1.json", 64, 64,
+    g_bits=8, dac_bits=8, adc_bits=8,
+)  # physical_claim=True by default; fails closed otherwise
+```
+
 ## Rule for claims
 
 `assumed` profiles are allowed for exploration but cannot support claims such as "the proposed ADC has X ENOB" or "the accelerator consumes Y energy/token". Such claims require `spice`, `derived` from verified inputs, or `measured` evidence.

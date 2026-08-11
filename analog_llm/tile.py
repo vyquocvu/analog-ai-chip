@@ -22,6 +22,12 @@ class CrossbarTile:
     to ``[-vin_max, vin_max]``. The normalized result is scaled back by ``A``
     and passed through the output ADC (``adc_bits``, ``vout_max``, noise,
     gain/offset).
+
+    Constructor defaults (``gmin=0.05``, ``gmax=1.0``, ...) are the
+    functional reference values mirrored by ``device_profiles/ideal.json``;
+    they are NOT device evidence. A run intended to represent a proposed
+    physical implementation must configure tiles from a validated device
+    profile via ``analog_llm.profile_adapter.tile_config_from_profile``.
     """
 
     def __init__(
