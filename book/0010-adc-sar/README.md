@@ -72,7 +72,13 @@ that topology and adds the comparator decision as new circuit-level evidence.
 - **Transfer sweep**: 129 samples across `[0, VREF]`, SAR code equals hand
   `ideal_code` at every point — worst deviation 0 codes.
 - **Example**: `Vdiff = +2.0 V` → `Vin = 2.25 V` → code 14 →
-  `Vdiff_hat = +2.0312 V`, error 0.0312 V ≤ LSB/2.
+  `Vdiff_hat = +2.0312 V`, error 0.0312 V ≤ LSB.
+- **Reference settling**: the R-2R reference at the comparator node settles
+  like the 0009 ladder (`τ = 2R·CL`); SPICE matches the single-pole hand model
+  within 10 ns for each bit trial at an *assumed* `CL = 1 pF`.
+- **Conversion time**: 4 sequential bit trials, worst-case reference step per
+  bit, sum to `140.9 ns` (SPICE) vs `138.6 ns` (hand). The `CL` value has no
+  device evidence yet, so settling/conversion time is a sensitivity study only.
 - Always-on data tests + optional engine tests in `tests/test_adc_sar.py`.
 
 `Run: book/0010-adc-sar/sar_adc.py`
@@ -81,7 +87,6 @@ that topology and adds the comparator decision as new circuit-level evidence.
 
 - TIA→ADC output-stage circuit (the `1/2` + `VREF/2` front is assumed, not
   SPICE) — next item in this chapter.
-- Settling / conversion timing.
 - Noise / effective-resolution (ENOB) study.
 - Supply/temperature/corner sweep.
 - `adc-v1` profile publication.

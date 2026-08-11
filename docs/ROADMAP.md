@@ -119,7 +119,7 @@ R1 is closed; the first DAC slice (below) is eligible.
 
 - [x] Define first ADC/output-stage architecture and input envelope: 4-bit SAR ADC with the 0009 R-2R ladder as internal reference and a VCVS comparator (`book/0010-adc-sar/sar_adc.py`); input front `Vin = VREF/2 + Vdiff/2` maps the TIA differential `±2.5 V` envelope (crossbar-column-v1 headroom, derived) onto the ladder's unipolar `[0, VREF]`
 - [x] Transfer/clipping characterization: hand `code = floor(Vin/LSB)` clipped to `[0, 15]`; SPICE comparator decision == hand `Vin >= Vref(code)` on representative trials; 129-sample transfer sweep reproduces the hand code at every point (worst deviation 0 codes); differential-domain quantization bound `LSB = 0.15625 V` (front gain 1/2 doubles the unipolar LSB/2 bound)
-- [ ] Settling/conversion timing model
+- [x] Settling/conversion timing model: R-2R reference settles as `τ = 2R·CL` (`spice` matches single-pole hand within 10 ns per bit trial); SAR conversion time = sum over 4 bit trials of worst-case reference steps, SPICE `140.9 ns` vs hand `138.6 ns` at ASSUMED `CL = 1 pF` (sensitivity study only, no device evidence yet)
 - [ ] Noise/effective-resolution study appropriate to model detail
 - [ ] Supply/temperature/corner study where supported
 - [ ] Publish `adc-v1` SPICE profile

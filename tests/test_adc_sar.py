@@ -9,6 +9,7 @@ import importlib.util
 import inspect
 from pathlib import Path
 
+import numpy as np
 import pytest
 
 _MODULE = Path(__file__).resolve().parent.parent / "book" / "0010-adc-sar" / "sar_adc.py"
@@ -108,3 +109,33 @@ def test_spice_sar_example() -> None:
     assert code == 14
     bound = mod.VREF / (2**mod.BITS)  # differential-domain error bound
     assert mod.vdiff_from_code(code) == pytest.approx(2.0, abs=bound)
+
+
+@pytest.mark.skipif(mod is None, reason="PySpice/ngspice not available")
+def test_spice_reference_settling_matches_hand() -> None:
+    cl = 1e-12
+    band = 0.5 * mod.LSB
+    for code in (8, 4, 2, 1):
+        ts = mod.reference_settle_time(0, code, band, cl)
+        th = mod.reference_settle_time_hand(mod.reference_v(code), band, cl)
+        assert ts == pytest.approx(th, abs=10e-9), f"settle 0->{code}"
+
+
+@pytest.mark.skipif(mod is None, reason="PySpice/ngspice not available")
+def test_spice_conversion_time_matches_hand() -> None:
+    t_spice, t_hand = mod.conversion_time(1e-12)
+    assert t_spice == pytest.approx(t_hand, abs=40e-9)
+    assert 100e-9 < t_spice < 200e-9  # 4 trials, CL = 1 pF
+
+
+def test_conversion_time_hand_is_deterministic_sum() -> None:
+    # always-on: the hand sum is tau*ln(dV/band) over each bit trial
+    cl, r, band_frac = 1e-12, mod.R_OHM, 0.5
+    band = band_frac * mod.LSB
+    tau = 2 * r * cl
+    expected = sum(
+        tau * np.log(mod.VREF / (2.0 ** (mod.BITS - i)) / band)
+        for i in range(mod.BITS - 1, -1, -1)
+    )
+    _, hand = mod.conversion_time(cl)
+    assert hand == pytest.approx(expected)
