@@ -139,3 +139,36 @@ def test_conversion_time_hand_is_deterministic_sum() -> None:
     )
     _, hand = mod.conversion_time(cl)
     assert hand == pytest.approx(expected)
+
+
+def test_enob_hand_ideal_quantizer_is_n_bits() -> None:
+    # always-on: a full-scale sine through an ideal N-bit quantizer has ENOB ~ N
+    for bits in (4, 6, 8):
+        assert mod.enob_hand(bits, noise_std=0.0) == pytest.approx(bits, abs=0.02)
+
+
+def test_enob_hand_monotonic_in_noise() -> None:
+    assert mod.enob_hand(noise_std=0.0) > mod.enob_hand(noise_std=0.05)
+
+
+def test_enob_hand_accepts_zero_noise_and_finite_signal() -> None:
+    assert mod.enob_hand(noise_std=0.0) == pytest.approx(4.0, abs=0.02)
+    assert np.isfinite(mod.enob_hand())
+
+
+def test_snr_db_rejects_shape_mismatch() -> None:
+    with pytest.raises(ValueError):
+        mod.snr_db(np.zeros(4), np.zeros(3))
+
+
+def test_enob_study_is_deterministic_and_tracks_hand() -> None:
+    # always-on: fixed seed => reproducible, and measured tracks hand model
+    a = mod.enob_study()
+    b = mod.enob_study()
+    assert a == b
+    assert len(a) == 3
+    for row in a:
+        assert abs(row["enob_bits"] - row["enob_hand_bits"]) <= 0.5
+    # noise must degrade measured ENOB monotonically
+    enobs = [row["enob_bits"] for row in a]
+    assert enobs[0] >= enobs[-1]

@@ -77,12 +77,17 @@ def vdiff_from_code(code: int, bits: int = BITS, vref: float = VREF) -> float:
     return 2.0 * ((int(code) + 0.5) * (vref / (2**bits)) - vref / 2.0)
 
 
-def ideal_code(v_in: float, bits: int = BITS, vref: float = VREF) -> int:
-    """Hand reference: ``floor(Vin / LSB)`` clipped to the code range."""
-    if not np.isfinite(v_in):
+def ideal_code(v_in, bits: int = BITS, vref: float = VREF):
+    """Hand reference: ``floor(Vin / LSB)`` clipped to the code range.
+
+    Accepts a scalar or a NumPy array (element-wise).
+    """
+    x = np.asarray(v_in, dtype=float)
+    if not np.all(np.isfinite(x)):
         raise ValueError(f"v_in must be finite, got {v_in}")
     lsb = vref / (2**bits)
-    return int(np.clip(np.floor(v_in / lsb), 0, 2**bits - 1))
+    codes = np.clip(np.floor(x / lsb), 0, 2**bits - 1).astype(int)
+    return codes if x.ndim else int(codes)
 
 
 def _reference_netlist(code: int, bits: int = BITS, r_ohm: float = R_OHM,
@@ -237,6 +242,78 @@ def conversion_time(cl_farad: float, bits: int = BITS, r_ohm: float = R_OHM,
     return t_spice, t_hand
 
 
+def full_scale_sine(n_samples: int = 65536, bits: int = BITS,
+                    vref: float = VREF, cycles: int = 1007) -> np.ndarray:
+    """A full-scale (peak VREF) single-tone input for SNR/ENOB testing.
+
+    ``cycles`` complete sine cycles over the window, an odd prime coprime to
+    the (power-of-two) sample count, so the samples sweep every quantization
+    level uniformly and the quantization error decorrelates from the signal.
+    """
+    t = np.arange(n_samples)
+    phase = 2.0 * np.pi * cycles * t / n_samples
+    return (vref / 2.0) * (1.0 + np.sin(phase))
+
+
+def snr_db(clean: np.ndarray, hat: np.ndarray) -> float:
+    """SNR of ``hat`` relative to ``clean`` (both 1-D, same length)."""
+    if clean.shape != hat.shape:
+        raise ValueError("clean and hat must have the same shape")
+    sig = float(np.sum(clean**2))
+    noise = float(np.sum((hat - clean) ** 2))
+    if noise <= 0.0:
+        return float("inf")
+    return 10.0 * np.log10(sig / noise)
+
+
+def enob_from_snr(snr: float) -> float:
+    """Effective number of bits from SNR: ENOB = (SNR_dB - 1.76) / 6.02."""
+    if not np.isfinite(snr):
+        return float("inf")
+    return (snr - 1.76) / 6.02
+
+
+def enob_hand(bits: int = BITS, vref: float = VREF, noise_std: float = 0.0,
+              n_samples: int = 65536) -> float:
+    """Hand reference ENOB from additive error powers.
+
+    Signal power is that of a full-scale sine (peak ``vref``):
+    ``P_sig = (vref/2)^2 / 2``. Error power is the ideal quantization power
+    ``LSB^2/12`` plus any input-referred Gaussian noise ``noise_std^2``.
+    The ideal quantizer gives ``SNR = 1.5 * 2^(2N)``, i.e. ``ENOB ~ bits``.
+    """
+    psig = (vref / 2.0) ** 2 / 2.0
+    lsb = vref / (2**bits)
+    perr = lsb**2 / 12.0 + noise_std**2
+    return enob_from_snr(10.0 * np.log10(psig / perr))
+
+
+def enob_study(bits: int = BITS, vref: float = VREF,
+               noise_stds: tuple[float, ...] = (0.0, 0.01, 0.05),
+               seed: int = 7) -> list[dict[str, float]]:
+    """Measured ENOB (quantizer + additive input noise) vs the hand model.
+
+    Deterministic: fixed sine and fixed noise seed, so results reproduce. The
+    additive Gaussian input noise mirrors ``analog_llm.converters.adc``.
+    """
+    rng = np.random.default_rng(seed)
+    clean = full_scale_sine(bits=bits, vref=vref)
+    ac = clean - np.mean(clean)  # AC signal power only (the DC offset is not signal)
+    rows = []
+    for noise_std in noise_stds:
+        noisy = clean + rng.normal(0.0, noise_std, size=clean.shape)
+        hat = np.asarray([(code + 0.5) * (vref / (2**bits))
+                          for code in ideal_code(noisy, bits, vref)])
+        snr = snr_db(ac, hat - np.mean(clean))
+        rows.append({
+            "noise_std_v": float(noise_std),
+            "snr_db": snr,
+            "enob_bits": enob_from_snr(snr),
+            "enob_hand_bits": enob_hand(bits, vref, noise_std),
+        })
+    return rows
+
+
 def main() -> None:
     print(f"SAR ADC, {BITS} bits, VREF = {VREF} V, R = {R_OHM/1e3:.0f} kOhm, "
           f"LSB = {LSB:.6f} V")
@@ -274,6 +351,15 @@ def main() -> None:
     print(f"  SAR conversion (4 trials): spice = {t_spice*1e9:6.1f} ns, "
           f"hand = {t_hand*1e9:6.1f} ns")
     assert abs(t_spice - t_hand) <= 40e-9, "conversion time must match hand sum"
+
+    print("\nENOB (quantizer + additive input noise, functional study):")
+    for row in enob_study():
+        print(f"  noise_std = {row['noise_std_v']:.3f} V  "
+              f"ENOB = {row['enob_bits']:.2f} bits  "
+              f"hand = {row['enob_hand_bits']:.2f} bits")
+        assert abs(row["enob_bits"] - row["enob_hand_bits"]) <= 0.5, (
+            f"measured ENOB must track hand model, noise_std={row['noise_std_v']}"
+        )
     print("OK")
 
 

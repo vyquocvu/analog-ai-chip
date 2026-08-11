@@ -79,6 +79,11 @@ that topology and adds the comparator decision as new circuit-level evidence.
 - **Conversion time**: 4 sequential bit trials, worst-case reference step per
   bit, sum to `140.9 ns` (SPICE) vs `138.6 ns` (hand). The `CL` value has no
   device evidence yet, so settling/conversion time is a sensitivity study only.
+- **Effective resolution**: a coherent full-scale sine (odd-prime cycles over a
+  power-of-two sample count, so all quantization levels are swept uniformly)
+  gives `ENOB = 3.91 bits` for the 4-bit quantizer (hand upper bound 4.00);
+  additive input-referred Gaussian noise at `0.05 V` degrades it to `3.46`
+  (hand `3.42`). The additive-noise model mirrors `analog_llm.converters.adc`.
 - Always-on data tests + optional engine tests in `tests/test_adc_sar.py`.
 
 `Run: book/0010-adc-sar/sar_adc.py`
@@ -87,7 +92,9 @@ that topology and adds the comparator decision as new circuit-level evidence.
 
 - TIA→ADC output-stage circuit (the `1/2` + `VREF/2` front is assumed, not
   SPICE) — next item in this chapter.
-- Noise / effective-resolution (ENOB) study.
+- Noise as a *device* mechanism: the ENOB study adds input-referred Gaussian
+  noise functionally (matching `converters.adc`); comparator thermal/kT-C
+  noise, reference noise and their spectra are not yet SPICE models.
 - Supply/temperature/corner sweep.
 - `adc-v1` profile publication.
 
