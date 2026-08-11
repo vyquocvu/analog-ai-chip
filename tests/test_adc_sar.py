@@ -172,3 +172,15 @@ def test_enob_study_is_deterministic_and_tracks_hand() -> None:
     # noise must degrade measured ENOB monotonically
     enobs = [row["enob_bits"] for row in a]
     assert enobs[0] >= enobs[-1]
+
+
+@pytest.mark.skipif(mod is None, reason="PySpice/ngspice not available")
+def test_spice_supply_sensitivity_tracks_hand() -> None:
+    # a VREF shift is a pure gain error on the ratio-based ladder: measured
+    # gain error must equal dVREF/VREF, and the sweep must be deterministic
+    a = mod.supply_sensitivity()
+    b = mod.supply_sensitivity()
+    assert a == b
+    assert len(a) == 5
+    for row in a:
+        assert row["gain_error"] == pytest.approx(row["gain_error_hand"], abs=1e-9)

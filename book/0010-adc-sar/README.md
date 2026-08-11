@@ -84,6 +84,11 @@ that topology and adds the comparator decision as new circuit-level evidence.
   gives `ENOB = 3.91 bits` for the 4-bit quantizer (hand upper bound 4.00);
   additive input-referred Gaussian noise at `0.05 V` degrades it to `3.46`
   (hand `3.42`). The additive-noise model mirrors `analog_llm.converters.adc`.
+- **VREF supply sensitivity**: because the ladder is ratio-based and the
+  comparator ideal, a VREF shift is a *pure gain error* — measured (SPICE)
+  `gain_error` equals `dVREF/VREF` at ±10% to within `1e-9`. Temperature and
+  process corner have **no** modelable effect on ideal resistors/VCVS by
+  construction; that is documented as out of scope, not swept as fake evidence.
 - Always-on data tests + optional engine tests in `tests/test_adc_sar.py`.
 
 `Run: book/0010-adc-sar/sar_adc.py`
@@ -95,7 +100,9 @@ that topology and adds the comparator decision as new circuit-level evidence.
 - Noise as a *device* mechanism: the ENOB study adds input-referred Gaussian
   noise functionally (matching `converters.adc`); comparator thermal/kT-C
   noise, reference noise and their spectra are not yet SPICE models.
-- Supply/temperature/corner sweep.
+- Temperature/process-corner sweep: the ideal resistor + VCVS models have no
+  temperature or corner dependence by construction, so only the VREF-supply
+  sensitivity (a pure gain error) is swept.
 - `adc-v1` profile publication.
 
 These are tracked as open items in the R2 gate; nothing here is promoted to a

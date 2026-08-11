@@ -121,7 +121,7 @@ R1 is closed; the first DAC slice (below) is eligible.
 - [x] Transfer/clipping characterization: hand `code = floor(Vin/LSB)` clipped to `[0, 15]`; SPICE comparator decision == hand `Vin >= Vref(code)` on representative trials; 129-sample transfer sweep reproduces the hand code at every point (worst deviation 0 codes); differential-domain quantization bound `LSB = 0.15625 V` (front gain 1/2 doubles the unipolar LSB/2 bound)
 - [x] Settling/conversion timing model: R-2R reference settles as `τ = 2R·CL` (`spice` matches single-pole hand within 10 ns per bit trial); SAR conversion time = sum over 4 bit trials of worst-case reference steps, SPICE `140.9 ns` vs hand `138.6 ns` at ASSUMED `CL = 1 pF` (sensitivity study only, no device evidence yet)
 - [x] Noise/effective-resolution study appropriate to model detail: coherent full-scale sine (`cycles` odd-prime over power-of-two sample count) gives `ENOB = 3.91 bits` vs hand upper bound `4.00`; additive input-referred Gaussian noise (`converters.adc`-compatible) degrades ENOB to `3.46` at `0.05 V` (hand `3.42`); deterministic (seed 7), measured tracks hand within 0.5 bits
-- [ ] Supply/temperature/corner study where supported
+- [x] Supply/temperature/corner study where supported: ratio ladder + ideal comparator give a *pure* VREF gain error — SPICE `gain_error = dVREF/VREF` at ±10% within 1e-9; temperature/corner have no modelable effect on ideal models (documented, not fabricated)
 - [ ] Publish `adc-v1` SPICE profile
 
 ## 0011 — Converter variation

@@ -314,6 +314,44 @@ def enob_study(bits: int = BITS, vref: float = VREF,
     return rows
 
 
+def _ladder_volts(bits: int = BITS, r_ohm: float = R_OHM,
+                  vref: float = VREF) -> list[float]:
+    """SPICE reference node voltages for every code at a given VREF."""
+    return [
+        float(np.ravel(np.asarray(
+            _reference_netlist(code, bits, r_ohm, vref).simulator()
+            .operating_point()["ref"]))[0])
+        for code in range(2**bits)
+    ]
+
+
+def supply_sensitivity(bits: int = BITS, vref: float = VREF,
+                       r_ohm: float = R_OHM,
+                       deviations: tuple[float, ...] = (-0.10, -0.05, 0.0, 0.05, 0.10),
+                       ) -> list[dict[str, float]]:
+    """VREF supply sensitivity: does a VREF shift translate into gain error?
+
+    The R-2R ladder is ratio-based and the comparator is ideal, so the transfer
+    scales linearly with VREF. Measured (SPICE) gain error is the deviation of
+    the measured LSB from its nominal value; the hand model predicts
+    ``gain_error = dVREF/VREF``. Temperature and process corner have no effect
+    on the ideal resistor/VCVS model by construction -- documented, not swept.
+    """
+    nominal = vref / (2**bits)
+    rows = []
+    for dev in deviations:
+        vs = vref * (1.0 + dev)
+        volts = _ladder_volts(bits, r_ohm, vs)
+        lsb = (volts[-1] - volts[0]) / (2**bits - 1)
+        rows.append({
+            "vref_v": float(vs),
+            "lsb_v": float(lsb),
+            "gain_error": float((lsb - nominal) / nominal),
+            "gain_error_hand": float(dev),
+        })
+    return rows
+
+
 def main() -> None:
     print(f"SAR ADC, {BITS} bits, VREF = {VREF} V, R = {R_OHM/1e3:.0f} kOhm, "
           f"LSB = {LSB:.6f} V")
@@ -359,6 +397,15 @@ def main() -> None:
               f"hand = {row['enob_hand_bits']:.2f} bits")
         assert abs(row["enob_bits"] - row["enob_hand_bits"]) <= 0.5, (
             f"measured ENOB must track hand model, noise_std={row['noise_std_v']}"
+        )
+
+    print("\nVREF supply sensitivity (gain error, SPICE):")
+    for row in supply_sensitivity():
+        print(f"  dVREF/VREF = {row['gain_error_hand']:+.0%}  "
+              f"gain_err = {row['gain_error']:+.2e}  "
+              f"(hand {row['gain_error_hand']:+.2e})")
+        assert abs(row["gain_error"] - row["gain_error_hand"]) <= 1e-9, (
+            f"gain error must equal dVREF/VREF for VREF = {row['vref_v']}"
         )
     print("OK")
 
