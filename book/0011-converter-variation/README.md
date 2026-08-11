@@ -62,6 +62,24 @@ statistics to `1e-12`.
 - Mismatch is applied to resistors only; switch resistance, comparator offset,
   and temperature remain out of scope.
 
+## Separating error mechanisms
+
+A measured transfer mixes independent error sources; `decomposition.py`
+separates them and proves the split exact.
+
+**DAC** (`decompose_dac_transfer`): the endpoint-fit line
+`L(code) = offset + slope·code` captures offset + gain; everything left is
+non-linearity (`INL = V − L`). On the 64-sample SPICE mismatch study the
+separation gives offset `0`, gain error mean `−1.1e-5` (std `7.2e-4`), and
+`max|INL| = 1.5e-2 V`, with `V == line + INL` to `1e-12` — the decomposition
+is exact by construction.
+
+**ADC** (`separate_adc_error`): a full-scale sine through the 4-bit quantizer
+plus input-referred Gaussian noise accumulates error power from two
+uncorrelated mechanisms, `P_total = P_quant + P_noise` with `P_quant =
+LSB²/12`. Measured power tracks the hand sum (e.g. `noise_std = 0.05 V`:
+measured `4.25e-3` vs hand `4.54e-3 V²`, sampling tolerance).
+
 ## Artifacts
 
 - `book/0011-converter-variation/variation.py` — single source of truth for the
