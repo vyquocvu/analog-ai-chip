@@ -1,0 +1,205 @@
+{
+  "coverage": {
+    "by_component": {
+      "conductance_cell": {
+        "DERIVED": 2
+      },
+      "differential_mapping": {
+        "DERIVED": 1,
+        "VERIFIED_BY_SPICE": 1
+      },
+      "rail_headroom": {
+        "DERIVED": 3
+      },
+      "readout": {
+        "DERIVED": 1,
+        "VERIFIED_BY_SPICE": 2
+      }
+    },
+    "claim_levels": {
+      "circuit/device": {
+        "DERIVED": 7,
+        "VERIFIED_BY_SPICE": 3
+      },
+      "system": {
+        "ASSUMED": 3,
+        "DERIVED": 0,
+        "VERIFIED_BY_SPICE": 0
+      }
+    },
+    "counts": {
+      "ASSUMED": 0,
+      "DERIVED": 7,
+      "VERIFIED_BY_SPICE": 3
+    }
+  },
+  "evidence": {
+    "ASSUMED": [],
+    "DERIVED": [
+      {
+        "component": "readout",
+        "evidence_class": "derived",
+        "field": "rf_nominal_ohm",
+        "source": "device_profiles/crossbar-column-v1.json#/fields/rf_nominal_ohm",
+        "unit": "ohm",
+        "value": 10000.0
+      },
+      {
+        "component": "differential_mapping",
+        "evidence_class": "derived",
+        "field": "differential_mapping_error_s_max",
+        "source": "device_profiles/crossbar-column-v1.json#/fields/differential_mapping_error_s_max",
+        "unit": "S",
+        "value": 6.776263578034403e-21
+      },
+      {
+        "component": "conductance_cell",
+        "evidence_class": "derived",
+        "field": "g0_s",
+        "source": "device_profiles/crossbar-column-v1.json#/fields/g0_s",
+        "unit": "S",
+        "value": 0.0001
+      },
+      {
+        "component": "conductance_cell",
+        "evidence_class": "derived",
+        "field": "gscale_s_per_w",
+        "source": "device_profiles/crossbar-column-v1.json#/fields/gscale_s_per_w",
+        "unit": "S",
+        "value": 0.0001
+      },
+      {
+        "component": "rail_headroom",
+        "evidence_class": "derived",
+        "field": "vref_v",
+        "source": "device_profiles/crossbar-column-v1.json#/fields/vref_v",
+        "unit": "V",
+        "value": 2.5
+      },
+      {
+        "component": "rail_headroom",
+        "evidence_class": "derived",
+        "field": "output_headroom_up_v",
+        "source": "device_profiles/crossbar-column-v1.json#/fields/output_headroom_up_v",
+        "unit": "V",
+        "value": 2.5
+      },
+      {
+        "component": "rail_headroom",
+        "evidence_class": "derived",
+        "field": "output_headroom_down_v",
+        "source": "device_profiles/crossbar-column-v1.json#/fields/output_headroom_down_v",
+        "unit": "V",
+        "value": 2.5
+      }
+    ],
+    "VERIFIED_BY_SPICE": [
+      {
+        "component": "readout",
+        "evidence_class": "spice",
+        "field": "transimpedance_gain_ohm",
+        "source": "device_profiles/crossbar-column-v1.json#/fields/transimpedance_gain_ohm",
+        "unit": "ohm",
+        "value": 10019.984807877327
+      },
+      {
+        "component": "readout",
+        "evidence_class": "spice",
+        "field": "gain_v_per_v_per_unit_weight",
+        "source": "device_profiles/crossbar-column-v1.json#/fields/gain_v_per_v_per_unit_weight",
+        "unit": "V/V per weight",
+        "value": 0.999500229909245
+      },
+      {
+        "component": "differential_mapping",
+        "evidence_class": "spice",
+        "field": "dc_error_v_max",
+        "source": "device_profiles/crossbar-column-v1.json#/fields/dc_error_v_max",
+        "unit": "V",
+        "value": 0.0007996801323315594
+      }
+    ]
+  },
+  "extract": {
+    "crosscheck": "all profile fields match extracted values within 1e-12 rel",
+    "source": "verification/circuit/results/crossbar-column-v1-extract.json",
+    "source_solves": [
+      "book/0007-crossbar-column/crossbar_column.py (column solves)",
+      "book/0005-one-analog-neuron/sim_neuron_nonideal.py (rail model)"
+    ]
+  },
+  "generator": "verification/reports/generate_crossbar_column_summary.py",
+  "limitations": "DC operating-point solves only; no transient/settling, noise, temperature or Monte Carlo evidence yet. Rail limits taken from the 0005 non-ideal model; headroom is derived from VDD and VREF, not measured on the 0007 column directly.",
+  "measurement_pending": [
+    {
+      "detail": "physical measurement of the 0007 column readout (breadboard workflow)",
+      "kind": "hardware_readout"
+    },
+    {
+      "detail": "DC operating-point solves only; no transient/settling evidence",
+      "kind": "transient_settling"
+    },
+    {
+      "detail": "no noise, temperature corner or Monte Carlo evidence yet",
+      "kind": "noise_temperature_variation"
+    }
+  ],
+  "name": "crossbar-column-v1-verification-summary",
+  "profile": {
+    "analysis": "op",
+    "evidence_class": "spice",
+    "name": "crossbar-column-v1",
+    "source": "device_profiles/crossbar-column-v1.json",
+    "spice_tool": "PySpice/ngspice",
+    "status": "CIRCUIT_SIMULATED",
+    "validation": "passed (physical_claim=True, fail-closed)",
+    "version": "0.1.0"
+  },
+  "schema_version": 1,
+  "tile_config": {
+    "consumer": "analog_llm.crossbar.CrossbarTile via analog_llm.profile_adapter",
+    "derivation": {
+      "bits": {
+        "evidence_class": "assumed",
+        "expression": "explicit programming choices"
+      },
+      "gmax": {
+        "expression": "g0_s + gscale_s_per_w",
+        "from_fields": [
+          "g0_s",
+          "gscale_s_per_w"
+        ]
+      },
+      "gmin": {
+        "expression": "g0_s",
+        "from_fields": [
+          "g0_s"
+        ]
+      },
+      "vin_max": {
+        "expression": "min(headroom_up, headroom_down)",
+        "from_fields": [
+          "output_headroom_up_v",
+          "output_headroom_down_v"
+        ]
+      },
+      "vout_max": {
+        "expression": "min(headroom_up, headroom_down)",
+        "from_fields": [
+          "output_headroom_up_v",
+          "output_headroom_down_v"
+        ]
+      }
+    },
+    "kwargs": {
+      "adc_bits": 8,
+      "dac_bits": 8,
+      "g_bits": 6,
+      "gmax": 0.0002,
+      "gmin": 0.0001,
+      "vin_max": 2.5,
+      "vout_max": 2.5
+    },
+    "source_adapter": "analog_llm/profile_adapter.py"
+  }
+}

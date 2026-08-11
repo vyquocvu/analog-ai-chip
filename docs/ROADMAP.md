@@ -49,9 +49,10 @@ The repository has circuit evidence and a profile contract, but the two are not 
 
 ---
 
-# R1 — Close the circuit → profile → simulator proof chain — ACTIVE
+# R1 — Close the circuit → profile → simulator proof chain — COMPLETE
 
-This is the only next-ready physical-verification milestone.
+The circuit → profile → simulator chain is closed with SPICE-backed evidence and a
+reproducible verification report.
 
 ### WP1.1 — Extract first SPICE-backed profile
 
@@ -70,10 +71,10 @@ This is the only next-ready physical-verification milestone.
 
 ### WP1.3 — Verification summary
 
-- [ ] Generate a machine-readable verification summary (JSON) plus readable report
-- [ ] Report evidence coverage by component and claim level
-- [ ] Separate `VERIFIED_BY_SPICE`, `DERIVED`, `ASSUMED`, `MEASUREMENT_PENDING`
-- [ ] Link report values back to source profile/evidence artifacts
+- [x] Generate a machine-readable verification summary (JSON) plus readable report: `verification/reports/generate_crossbar_column_summary.py` emits `crossbar-column-v1-summary.json` (machine-readable) and `crossbar-column-v1-summary.md` (readable); deterministic, no timestamps, reads only committed artifacts
+- [x] Report evidence coverage by component and claim level: JSON `coverage` gives counts per bucket and per component (`readout`, `differential_mapping`, `conductance_cell`, `rail_headroom`) plus separate `circuit/device` vs `system` claim levels
+- [x] Separate `VERIFIED_BY_SPICE`, `DERIVED`, `ASSUMED`, `MEASUREMENT_PENDING`: 3 `VERIFIED_BY_SPICE` (transimpedance gain, unit-weight gain, dc error), 7 `DERIVED`, 0 `ASSUMED` in circuit/device; system-level `assumed` bits are explicit programming choices; pending items (hardware readout, transient settling, noise/temperature/Monte Carlo) listed explicitly
+- [x] Link report values back to source profile/evidence artifacts: every evidence entry carries `source` pointing at `device_profiles/crossbar-column-v1.json#/fields/<name>`; `_crosscheck` fails closed if any profile value diverges from the raw extract result; tile config is produced by `profile_adapter`, not hand-copied
 
 ### Gate R1 exit
 
@@ -90,6 +91,12 @@ reproducible verification report
 ```
 
 No manual copy-paste of physical constants is allowed in the proof path.
+
+R1 gate evidence: `tests/test_verification_summary.py` — 9 always-on tests prove the
+committed profile matches the extract, the adapter derives the tile config from profile
+fields, the summary is deterministic, every value links back to its profile artifact,
+the generator writes the committed JSON/markdown, and functional-only profiles fail
+closed. R1 is complete (WP1.1 + WP1.2 + WP1.3 closed).
 
 ---
 
