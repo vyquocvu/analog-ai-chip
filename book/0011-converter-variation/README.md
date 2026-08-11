@@ -80,10 +80,30 @@ uncorrelated mechanisms, `P_total = P_quant + P_noise` with `P_quant =
 LSB²/12`. Measured power tracks the hand sum (e.g. `noise_std = 0.05 V`:
 measured `4.25e-3` vs hand `4.54e-3 V²`, sampling tolerance).
 
+## Calibration candidates
+
+Mismatch is static per chip, so it is correctable. `calibration.py` defines
+and exercises three candidates on the SPICE mismatch draws:
+
+| Candidate | Correction | Residual on 64-sample SPICE study |
+|---|---|---|
+| raw (uncorrected) | — | `1.6e-2 V` |
+| two-point (gain + offset) | fit endpoints, `V_corr = (V−offset)·LSB/slope` | `1.5e-2 V` = max\|INL\| (scaled) |
+| full transfer LUT | subtract per-code deviation from ideal | `0.0 V` (static mismatch) |
+| reference trim (VREF) | digital gain factor (from 0010: `gain_error = dVREF/VREF`) | design note, not re-measured |
+
+The two-point scheme removes the gain/offset share and leaves exactly the
+non-linearity; the full LUT zeroes static mismatch entirely. Both are proven
+exact in `tests/test_converter_calibration.py`.
+
 ## Artifacts
 
 - `book/0011-converter-variation/variation.py` — single source of truth for the
   SPICE solves (run `python book/0011-converter-variation/variation.py`).
+- `book/0011-converter-variation/decomposition.py` — separates error mechanisms
+  (run `python book/0011-converter-variation/decomposition.py`).
+- `book/0011-converter-variation/calibration.py` — defines calibration
+  candidates (run `python book/0011-converter-variation/calibration.py`).
 - `verification/circuit/extract_converter_variation.py` — deterministic
   extraction; emits
   `verification/circuit/results/converter-variation-0011-extract.json`
