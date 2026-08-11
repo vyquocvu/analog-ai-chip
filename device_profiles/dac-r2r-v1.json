@@ -1,0 +1,85 @@
+{
+  "evidence_class": "spice",
+  "fields": {
+    "bits": {
+      "evidence_class": "derived",
+      "note": "ladder width (design choice)",
+      "unit": "bits",
+      "value": 4.0
+    },
+    "full_scale_v": {
+      "evidence_class": "spice",
+      "note": "output voltage at maximum code",
+      "unit": "V",
+      "value": 2.3437499999999996
+    },
+    "gain_v_per_v": {
+      "evidence_class": "spice",
+      "note": "measured step normalized to the ideal VREF/2^N step",
+      "unit": "V/V per LSB",
+      "value": 0.9999999999999998
+    },
+    "lsb_v": {
+      "evidence_class": "spice",
+      "note": "average output step per code over the full sweep",
+      "unit": "V/code",
+      "value": 0.15624999999999997
+    },
+    "max_abs_error_v": {
+      "evidence_class": "spice",
+      "note": "worst |SPICE - hand calc| over all codes",
+      "unit": "V",
+      "value": 4.440892098500626e-16
+    },
+    "max_dnl_v": {
+      "evidence_class": "spice",
+      "note": "worst |step - LSB| differential non-linearity",
+      "unit": "V",
+      "value": 4.163336342344337e-16
+    },
+    "max_inl_v": {
+      "evidence_class": "spice",
+      "note": "worst |Vout - VREF*code/2^N| integral non-linearity",
+      "unit": "V",
+      "value": 4.440892098500626e-16
+    },
+    "offset_v": {
+      "evidence_class": "spice",
+      "note": "output voltage at code 0",
+      "unit": "V",
+      "value": 0.0
+    },
+    "r_ohm": {
+      "evidence_class": "derived",
+      "note": "unit resistor (design choice)",
+      "unit": "ohm",
+      "value": 10000.0
+    },
+    "vref_v": {
+      "evidence_class": "derived",
+      "note": "reference voltage (design choice)",
+      "unit": "V",
+      "value": 2.5
+    }
+  },
+  "name": "dac-r2r-v1",
+  "provenance": {
+    "analysis": "op",
+    "command": "python verification/circuit/extract_dac_r2r.py",
+    "conditions": {
+      "backend": "ngspice (libngspice)",
+      "bits": 4,
+      "r_ohm": 10000.0,
+      "supply_v": 2.5,
+      "vref_v": 2.5
+    },
+    "limitations": "DC operating-point solves with ideal switch sources only; no transient settling, switch resistance, resistor mismatch, temperature, supply sensitivity or Monte Carlo evidence yet.",
+    "sources": [
+      "book/0009-dac-r2r/r2r_dac.py (R-2R ladder solves)"
+    ],
+    "tool": "PySpice/ngspice"
+  },
+  "schema_version": 1,
+  "status": "CIRCUIT_SIMULATED",
+  "version": "0.1.0"
+}

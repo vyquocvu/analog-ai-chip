@@ -100,20 +100,20 @@ closed. R1 is complete (WP1.1 + WP1.2 + WP1.3 closed).
 
 ---
 
-# R2 — Converter signal path — QUEUED
+# R2 — Converter signal path — ACTIVE
 
-Eligible only after R1 closes.
+R1 is closed; the first DAC slice (below) is eligible.
 
 ## 0009 — DAC architecture
 
-- [ ] Choose a first design candidate (baseline recommendation: simple R-2R or explicit behavioral-to-transistor progression)
-- [ ] Hand reference for code → voltage transfer
-- [ ] ngspice DC sweep across all codes for a small-bit prototype
-- [ ] Transient settling study
-- [ ] Gain/offset/range extraction
-- [ ] Supply sensitivity
-- [ ] Monte Carlo / resistor mismatch where supported
-- [ ] Publish `dac-v1` SPICE profile
+- [x] Choose a first design candidate: R-2R ladder (`book/0009-dac-r2r/r2r_dac.py`, single source of truth for SPICE solves) — two resistor values `R`/`2R` + `VREF`, no exotic components
+- [x] Hand reference for code → voltage transfer: `Vout(code) = VREF*code/2^N` encoded as `ideal_output` and asserted against SPICE for all 16 codes
+- [x] ngspice DC sweep across all codes for a small-bit prototype: 4-bit ladder, all 16 codes, worst `|SPICE − hand calc|` `4.44e-16 V` (`spice`)
+- [ ] Transient settling study (deferred: DC operating-point solves only, documented as limitation)
+- [x] Gain/offset/range extraction: `lsb_v = 0.15625 V/code`, `full_scale_v = 2.34375 V`, `offset_v = 0 V`, `gain_v_per_v = 1`, `max_inl_v = 4.4e-16 V`, `max_dnl_v = 4.2e-16 V` (`spice`)
+- [ ] Supply sensitivity (deferred)
+- [ ] Monte Carlo / resistor mismatch (deferred)
+- [x] Publish SPICE profile: `device_profiles/dac-r2r-v1.json` (name `dac-r2r-v1`, version `0.1.0`), 10 fields all carrying `evidence_class`, emitted by `verification/circuit/extract_dac_r2r.py`
 
 ## 0010 — ADC / TIA output path
 

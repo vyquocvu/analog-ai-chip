@@ -58,6 +58,12 @@ factory = build_tile_factory(
 )  # physical_claim=True by default; fails closed otherwise
 ```
 
+`dac-r2r-v1.json` is the first SPICE-backed converter profile: a 4-bit R-2R
+ladder DAC (`book/0009-dac-r2r/r2r_dac.py`) swept over all 16 codes, emitted by
+`verification/circuit/extract_dac_r2r.py`. It captures `lsb_v`, `full_scale_v`,
+`offset_v`, `gain_v_per_v`, `max_inl_v` and `max_dnl_v` (`spice`); settling,
+supply sensitivity and mismatch are deferred (documented in `provenance.limitations`).
+
 ## Rule for claims
 
 `assumed` profiles are allowed for exploration but cannot support claims such as "the proposed ADC has X ENOB" or "the accelerator consumes Y energy/token". Such claims require `spice`, `derived` from verified inputs, or `measured` evidence.
