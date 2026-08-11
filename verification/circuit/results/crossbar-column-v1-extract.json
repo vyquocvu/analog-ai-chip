@@ -1,0 +1,12 @@
+{
+  "dc_error_v_max": 0.0007996801323315594,
+  "differential_mapping_error_s_max": 6.776263578034403e-21,
+  "g0_s": 0.0001,
+  "gain_v_per_v_per_unit_weight": 0.999500229909245,
+  "gscale_s_per_w": 0.0001,
+  "output_headroom_down_v": 2.5,
+  "output_headroom_up_v": 2.5,
+  "rf_nominal_ohm": 10000.0,
+  "transimpedance_gain_ohm": 10019.984807877327,
+  "vref_v": 2.5
+}

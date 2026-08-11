@@ -55,11 +55,11 @@ This is the only next-ready physical-verification milestone.
 
 ### WP1.1 — Extract first SPICE-backed profile
 
-- [ ] Define machine-readable extraction outputs for 0005 and 0007
-- [ ] Extract voltage/current gain, output range/headroom, offset/error and relevant settling/timing values when supported by the circuit model
-- [ ] Create a versioned profile such as `device_profiles/crossbar-column-v1.json`
-- [ ] Record simulator/backend, source chapter/netlist/script, supply, reference voltage, model assumptions and commit provenance
-- [ ] Mark every field `spice`, `derived`, `measured`, or `assumed`
+- [x] Define machine-readable extraction outputs for 0005 and 0007: `verification/circuit/extract_crossbar_column.py` emits `verification/circuit/results/crossbar-column-v1-extract.json` (raw measurements) and `device_profiles/crossbar-column-v1.json`
+- [x] Extract voltage/current gain, output range/headroom, offset/error: transimpedance gain `10020 ohm` and gain `0.9995 V/V per weight` (`spice`), max `|SPICE - hand calc|` `8.0e-4 V` over 5 deterministic cases (`spice`), headroom `±2.5 V` derived from `VDD=5 V`/`VREF=2.5 V` (`derived`); settling not extracted — DC OP-only model, documented as limitation
+- [x] Create a versioned profile: `device_profiles/crossbar-column-v1.json` (name `crossbar-column-v1`, version `0.1.0`)
+- [x] Record simulator/backend, source chapter/netlist/script, supply, reference voltage, model assumptions and commit provenance, in `provenance` (`ngspice` via PySpice, `op`, sources, command, conditions `{supply_v: 5.0, vref_v: 2.5}`, limitations)
+- [x] Mark every field `spice`, `derived`, `measured`, or `assumed`: all 10 fields carry per-field `evidence_class`; validator `_validate_fields` enforces this and fails closed on missing/invalid/`assumed` field evidence for physical claims
 
 ### WP1.2 — Consume the profile downstream
 

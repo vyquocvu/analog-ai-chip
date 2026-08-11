@@ -1,0 +1,85 @@
+{
+  "evidence_class": "spice",
+  "fields": {
+    "dc_error_v_max": {
+      "evidence_class": "spice",
+      "note": "worst |SPICE - hand calc| over parameterized cases",
+      "unit": "V",
+      "value": 0.0007996801323315594
+    },
+    "differential_mapping_error_s_max": {
+      "evidence_class": "derived",
+      "note": "worst |(G+ - G-) - w*GSCALE| over extracted weights",
+      "unit": "S",
+      "value": 6.776263578034403e-21
+    },
+    "g0_s": {
+      "evidence_class": "derived",
+      "note": "balanced-zero conductance per 0007 netlist",
+      "unit": "S",
+      "value": 0.0001
+    },
+    "gain_v_per_v_per_unit_weight": {
+      "evidence_class": "spice",
+      "note": "slope of Vout vs (x-VREF) for a unit weight",
+      "unit": "V/V per weight",
+      "value": 0.999500229909245
+    },
+    "gscale_s_per_w": {
+      "evidence_class": "derived",
+      "note": "weight->conductance scale per 0007 netlist",
+      "unit": "S",
+      "value": 0.0001
+    },
+    "output_headroom_down_v": {
+      "evidence_class": "derived",
+      "note": "VREF - 0 V, assumes 0 V rail",
+      "unit": "V",
+      "value": 2.5
+    },
+    "output_headroom_up_v": {
+      "evidence_class": "derived",
+      "note": "VDD - VREF, assumes VDD=5 V rail",
+      "unit": "V",
+      "value": 2.5
+    },
+    "rf_nominal_ohm": {
+      "evidence_class": "derived",
+      "note": "transimpedance feedback resistor from 0007 netlist",
+      "unit": "ohm",
+      "value": 10000.0
+    },
+    "transimpedance_gain_ohm": {
+      "evidence_class": "spice",
+      "note": "dVout/dIsum measured over one unit-weight cell",
+      "unit": "ohm",
+      "value": 10019.984807877327
+    },
+    "vref_v": {
+      "evidence_class": "derived",
+      "note": "virtual reference from 0005/0007 designs",
+      "unit": "V",
+      "value": 2.5
+    }
+  },
+  "name": "crossbar-column-v1",
+  "provenance": {
+    "analysis": "op",
+    "command": "python verification/circuit/extract_crossbar_column.py",
+    "conditions": {
+      "backend": "ngspice (libngspice)",
+      "supply_v": 5.0,
+      "temperature_c": "nominal (no temperature model)",
+      "vref_v": 2.5
+    },
+    "limitations": "DC operating-point solves only; no transient/settling, noise, temperature or Monte Carlo evidence yet. Rail limits taken from the 0005 non-ideal model; headroom is derived from VDD and VREF, not measured on the 0007 column directly.",
+    "sources": [
+      "book/0007-crossbar-column/crossbar_column.py (column solves)",
+      "book/0005-one-analog-neuron/sim_neuron_nonideal.py (rail model)"
+    ],
+    "tool": "PySpice/ngspice"
+  },
+  "schema_version": 1,
+  "status": "CIRCUIT_SIMULATED",
+  "version": "0.1.0"
+}

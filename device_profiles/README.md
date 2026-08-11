@@ -25,6 +25,25 @@ Every profile must state:
 - units for physical quantities;
 - limitations.
 
+## Field-level evidence
+
+Each physical parameter in a profile's `fields` map must carry a `value`,
+`unit`, and `evidence_class`. A profile intended to support a physical claim
+(`physical_claim=True`) must:
+
+- include a non-empty `fields` map;
+- mark every field `measured`, `spice`, or `derived`;
+- never mark a field `assumed` (assumed evidence fails closed);
+
+Per-field validation is enforced by `analog_llm/device_profile.py`.
+
+## Contract example
+
+`crossbar-column-v1.json` is the first SPICE-backed profile: extracted
+deterministically from 0007 column solves (plus the 0005 rail model) by
+`verification/circuit/extract_crossbar_column.py`. Regenerate with
+`python verification/circuit/extract_crossbar_column.py`.
+
 ## Rule for claims
 
 `assumed` profiles are allowed for exploration but cannot support claims such as "the proposed ADC has X ENOB" or "the accelerator consumes Y energy/token". Such claims require `spice`, `derived` from verified inputs, or `measured` evidence.
