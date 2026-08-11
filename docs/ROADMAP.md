@@ -122,7 +122,7 @@ R1 is closed; the first DAC slice (below) is eligible.
 - [x] Settling/conversion timing model: R-2R reference settles as `τ = 2R·CL` (`spice` matches single-pole hand within 10 ns per bit trial); SAR conversion time = sum over 4 bit trials of worst-case reference steps, SPICE `140.9 ns` vs hand `138.6 ns` at ASSUMED `CL = 1 pF` (sensitivity study only, no device evidence yet)
 - [x] Noise/effective-resolution study appropriate to model detail: coherent full-scale sine (`cycles` odd-prime over power-of-two sample count) gives `ENOB = 3.91 bits` vs hand upper bound `4.00`; additive input-referred Gaussian noise (`converters.adc`-compatible) degrades ENOB to `3.46` at `0.05 V` (hand `3.42`); deterministic (seed 7), measured tracks hand within 0.5 bits
 - [x] Supply/temperature/corner study where supported: ratio ladder + ideal comparator give a *pure* VREF gain error — SPICE `gain_error = dVREF/VREF` at ±10% within 1e-9; temperature/corner have no modelable effect on ideal models (documented, not fabricated)
-- [ ] Publish `adc-v1` SPICE profile
+- [x] Publish `adc-v1` SPICE profile: `device_profiles/adc-sar-v1.json` from `verification/circuit/extract_adc_sar.py` — SPICE transfer gives `max_code_error_codes = 0` and `max_abs_error_v = LSB` (differential-domain quantization bound); derived design fields (`bits`, `r_ohm`, `vref_v`, `lsb_v`, `input_range_v`, `quantization_error_v`); assumed-CL settling / functional ENOB / supply-deviation studies live in the extract JSON only (fail closed under `physical_claim`); committed extract + always-on/engine-gated tests in `tests/test_adc_sar_profile.py`
 
 ## 0011 — Converter variation
 

@@ -1,0 +1,73 @@
+{
+  "evidence_class": "spice",
+  "fields": {
+    "bits": {
+      "evidence_class": "derived",
+      "note": "ADC width (design choice)",
+      "unit": "bits",
+      "value": 4.0
+    },
+    "input_range_v": {
+      "evidence_class": "derived",
+      "note": "signed differential input envelope +/-VREF, sourced from the crossbar-column-v1 output headroom",
+      "unit": "V",
+      "value": 2.5
+    },
+    "lsb_v": {
+      "evidence_class": "derived",
+      "note": "VREF/2^N, voltage per code of the reference ladder",
+      "unit": "V/code",
+      "value": 0.15625
+    },
+    "max_abs_error_v": {
+      "evidence_class": "spice",
+      "note": "worst |Vdiff - Vdiff_hat| over the transfer sweep (equals the quantization bound)",
+      "unit": "V",
+      "value": 0.15625
+    },
+    "max_code_error_codes": {
+      "evidence_class": "spice",
+      "note": "worst |code_spice - code_hand| over the 129-sample transfer sweep",
+      "unit": "codes",
+      "value": 0.0
+    },
+    "quantization_error_v": {
+      "evidence_class": "derived",
+      "note": "differential-domain quantization bound = LSB (input front gain 1/2 doubles the unipolar LSB/2 bound)",
+      "unit": "V",
+      "value": 0.15625
+    },
+    "r_ohm": {
+      "evidence_class": "derived",
+      "note": "unit resistor (design choice)",
+      "unit": "ohm",
+      "value": 10000.0
+    },
+    "vref_v": {
+      "evidence_class": "derived",
+      "note": "reference voltage (design choice)",
+      "unit": "V",
+      "value": 2.5
+    }
+  },
+  "name": "adc-sar-v1",
+  "provenance": {
+    "analysis": "op",
+    "command": "python verification/circuit/extract_adc_sar.py",
+    "conditions": {
+      "backend": "ngspice (libngspice)",
+      "bits": 4,
+      "r_ohm": 10000.0,
+      "supply_v": 2.5,
+      "vref_v": 2.5
+    },
+    "limitations": "DC operating-point solves with an ideal VCVS comparator and ideal switches. The differential input front (1/2 gain, VREF/2 level shift) is assumed, not SPICE. Reference-node settling at an ASSUMED load capacitance (1 pF), additive-noise ENOB and VREF supply deviation are sensitivity/functional studies reported in the extract JSON only -- they are not profile fields because they fail closed under physical_claim. No comparator noise, reference noise, switch resistance, resistor mismatch, temperature or Monte Carlo evidence yet.",
+    "sources": [
+      "book/0010-adc-sar/sar_adc.py (R-2R reference + comparator solves)"
+    ],
+    "tool": "PySpice/ngspice"
+  },
+  "schema_version": 1,
+  "status": "CIRCUIT_SIMULATED",
+  "version": "0.1.0"
+}

@@ -1,0 +1,743 @@
+{
+  "bits": 4.0,
+  "enob": [
+    {
+      "enob_bits": 3.9126858156078153,
+      "enob_hand_bits": 4.000550206590583,
+      "noise_std_v": 0.0,
+      "snr_db": 25.314368609959047
+    },
+    {
+      "enob_bits": 3.888820870746315,
+      "enob_hand_bits": 3.9659349028301083,
+      "noise_std_v": 0.01,
+      "snr_db": 25.170701641892816
+    },
+    {
+      "enob_bits": 3.464531013027726,
+      "enob_hand_bits": 3.422359012105719,
+      "noise_std_v": 0.05,
+      "snr_db": 22.61647669842691
+    }
+  ],
+  "input_range_v": 2.5,
+  "lsb_v": 0.15625,
+  "max_abs_error_v": 0.15625,
+  "max_code_error_codes": 0.0,
+  "quantization_error_v": 0.15625,
+  "r_ohm": 10000.0,
+  "settling": [
+    {
+      "band_v": 0.078125,
+      "cl_farad": 1e-12,
+      "code_from": 0.0,
+      "code_to": 8.0,
+      "hand_tau_s": 5.545177444479562e-08,
+      "settle_time_s": 5.573200000000005e-08
+    },
+    {
+      "band_v": 0.078125,
+      "cl_farad": 1e-12,
+      "code_from": 0.0,
+      "code_to": 4.0,
+      "hand_tau_s": 4.1588830833596717e-08,
+      "settle_time_s": 4.1732000000000026e-08
+    },
+    {
+      "band_v": 0.078125,
+      "cl_farad": 1e-12,
+      "code_from": 0.0,
+      "code_to": 2.0,
+      "hand_tau_s": 2.772588722239781e-08,
+      "settle_time_s": 2.8731999999999995e-08
+    },
+    {
+      "band_v": 0.078125,
+      "cl_farad": 1e-12,
+      "code_from": 0.0,
+      "code_to": 1.0,
+      "hand_tau_s": 1.3862943611198906e-08,
+      "settle_time_s": 1.4732000000000007e-08
+    }
+  ],
+  "supply_sensitivity": [
+    {
+      "gain_error": -0.1,
+      "gain_error_hand": -0.1,
+      "lsb_v": 0.140625,
+      "vref_v": 2.25
+    },
+    {
+      "gain_error": -0.050000000000000176,
+      "gain_error_hand": -0.05,
+      "lsb_v": 0.14843749999999997,
+      "vref_v": 2.375
+    },
+    {
+      "gain_error": -1.7763568394002506e-16,
+      "gain_error_hand": 0.0,
+      "lsb_v": 0.15624999999999997,
+      "vref_v": 2.5
+    },
+    {
+      "gain_error": 0.05,
+      "gain_error_hand": 0.05,
+      "lsb_v": 0.1640625,
+      "vref_v": 2.625
+    },
+    {
+      "gain_error": 0.09999999999999983,
+      "gain_error_hand": 0.1,
+      "lsb_v": 0.17187499999999997,
+      "vref_v": 2.75
+    }
+  ],
+  "transfer": [
+    {
+      "code_hand": 0.0,
+      "code_spice": 0.0,
+      "v_in_v": 0.0
+    },
+    {
+      "code_hand": 0.0,
+      "code_spice": 0.0,
+      "v_in_v": 0.01953125
+    },
+    {
+      "code_hand": 0.0,
+      "code_spice": 0.0,
+      "v_in_v": 0.0390625
+    },
+    {
+      "code_hand": 0.0,
+      "code_spice": 0.0,
+      "v_in_v": 0.05859375
+    },
+    {
+      "code_hand": 0.0,
+      "code_spice": 0.0,
+      "v_in_v": 0.078125
+    },
+    {
+      "code_hand": 0.0,
+      "code_spice": 0.0,
+      "v_in_v": 0.09765625
+    },
+    {
+      "code_hand": 0.0,
+      "code_spice": 0.0,
+      "v_in_v": 0.1171875
+    },
+    {
+      "code_hand": 0.0,
+      "code_spice": 0.0,
+      "v_in_v": 0.13671875
+    },
+    {
+      "code_hand": 1.0,
+      "code_spice": 1.0,
+      "v_in_v": 0.15625
+    },
+    {
+      "code_hand": 1.0,
+      "code_spice": 1.0,
+      "v_in_v": 0.17578125
+    },
+    {
+      "code_hand": 1.0,
+      "code_spice": 1.0,
+      "v_in_v": 0.1953125
+    },
+    {
+      "code_hand": 1.0,
+      "code_spice": 1.0,
+      "v_in_v": 0.21484375
+    },
+    {
+      "code_hand": 1.0,
+      "code_spice": 1.0,
+      "v_in_v": 0.234375
+    },
+    {
+      "code_hand": 1.0,
+      "code_spice": 1.0,
+      "v_in_v": 0.25390625
+    },
+    {
+      "code_hand": 1.0,
+      "code_spice": 1.0,
+      "v_in_v": 0.2734375
+    },
+    {
+      "code_hand": 1.0,
+      "code_spice": 1.0,
+      "v_in_v": 0.29296875
+    },
+    {
+      "code_hand": 2.0,
+      "code_spice": 2.0,
+      "v_in_v": 0.3125
+    },
+    {
+      "code_hand": 2.0,
+      "code_spice": 2.0,
+      "v_in_v": 0.33203125
+    },
+    {
+      "code_hand": 2.0,
+      "code_spice": 2.0,
+      "v_in_v": 0.3515625
+    },
+    {
+      "code_hand": 2.0,
+      "code_spice": 2.0,
+      "v_in_v": 0.37109375
+    },
+    {
+      "code_hand": 2.0,
+      "code_spice": 2.0,
+      "v_in_v": 0.390625
+    },
+    {
+      "code_hand": 2.0,
+      "code_spice": 2.0,
+      "v_in_v": 0.41015625
+    },
+    {
+      "code_hand": 2.0,
+      "code_spice": 2.0,
+      "v_in_v": 0.4296875
+    },
+    {
+      "code_hand": 2.0,
+      "code_spice": 2.0,
+      "v_in_v": 0.44921875
+    },
+    {
+      "code_hand": 3.0,
+      "code_spice": 3.0,
+      "v_in_v": 0.46875
+    },
+    {
+      "code_hand": 3.0,
+      "code_spice": 3.0,
+      "v_in_v": 0.48828125
+    },
+    {
+      "code_hand": 3.0,
+      "code_spice": 3.0,
+      "v_in_v": 0.5078125
+    },
+    {
+      "code_hand": 3.0,
+      "code_spice": 3.0,
+      "v_in_v": 0.52734375
+    },
+    {
+      "code_hand": 3.0,
+      "code_spice": 3.0,
+      "v_in_v": 0.546875
+    },
+    {
+      "code_hand": 3.0,
+      "code_spice": 3.0,
+      "v_in_v": 0.56640625
+    },
+    {
+      "code_hand": 3.0,
+      "code_spice": 3.0,
+      "v_in_v": 0.5859375
+    },
+    {
+      "code_hand": 3.0,
+      "code_spice": 3.0,
+      "v_in_v": 0.60546875
+    },
+    {
+      "code_hand": 4.0,
+      "code_spice": 4.0,
+      "v_in_v": 0.625
+    },
+    {
+      "code_hand": 4.0,
+      "code_spice": 4.0,
+      "v_in_v": 0.64453125
+    },
+    {
+      "code_hand": 4.0,
+      "code_spice": 4.0,
+      "v_in_v": 0.6640625
+    },
+    {
+      "code_hand": 4.0,
+      "code_spice": 4.0,
+      "v_in_v": 0.68359375
+    },
+    {
+      "code_hand": 4.0,
+      "code_spice": 4.0,
+      "v_in_v": 0.703125
+    },
+    {
+      "code_hand": 4.0,
+      "code_spice": 4.0,
+      "v_in_v": 0.72265625
+    },
+    {
+      "code_hand": 4.0,
+      "code_spice": 4.0,
+      "v_in_v": 0.7421875
+    },
+    {
+      "code_hand": 4.0,
+      "code_spice": 4.0,
+      "v_in_v": 0.76171875
+    },
+    {
+      "code_hand": 5.0,
+      "code_spice": 5.0,
+      "v_in_v": 0.78125
+    },
+    {
+      "code_hand": 5.0,
+      "code_spice": 5.0,
+      "v_in_v": 0.80078125
+    },
+    {
+      "code_hand": 5.0,
+      "code_spice": 5.0,
+      "v_in_v": 0.8203125
+    },
+    {
+      "code_hand": 5.0,
+      "code_spice": 5.0,
+      "v_in_v": 0.83984375
+    },
+    {
+      "code_hand": 5.0,
+      "code_spice": 5.0,
+      "v_in_v": 0.859375
+    },
+    {
+      "code_hand": 5.0,
+      "code_spice": 5.0,
+      "v_in_v": 0.87890625
+    },
+    {
+      "code_hand": 5.0,
+      "code_spice": 5.0,
+      "v_in_v": 0.8984375
+    },
+    {
+      "code_hand": 5.0,
+      "code_spice": 5.0,
+      "v_in_v": 0.91796875
+    },
+    {
+      "code_hand": 6.0,
+      "code_spice": 6.0,
+      "v_in_v": 0.9375
+    },
+    {
+      "code_hand": 6.0,
+      "code_spice": 6.0,
+      "v_in_v": 0.95703125
+    },
+    {
+      "code_hand": 6.0,
+      "code_spice": 6.0,
+      "v_in_v": 0.9765625
+    },
+    {
+      "code_hand": 6.0,
+      "code_spice": 6.0,
+      "v_in_v": 0.99609375
+    },
+    {
+      "code_hand": 6.0,
+      "code_spice": 6.0,
+      "v_in_v": 1.015625
+    },
+    {
+      "code_hand": 6.0,
+      "code_spice": 6.0,
+      "v_in_v": 1.03515625
+    },
+    {
+      "code_hand": 6.0,
+      "code_spice": 6.0,
+      "v_in_v": 1.0546875
+    },
+    {
+      "code_hand": 6.0,
+      "code_spice": 6.0,
+      "v_in_v": 1.07421875
+    },
+    {
+      "code_hand": 7.0,
+      "code_spice": 7.0,
+      "v_in_v": 1.09375
+    },
+    {
+      "code_hand": 7.0,
+      "code_spice": 7.0,
+      "v_in_v": 1.11328125
+    },
+    {
+      "code_hand": 7.0,
+      "code_spice": 7.0,
+      "v_in_v": 1.1328125
+    },
+    {
+      "code_hand": 7.0,
+      "code_spice": 7.0,
+      "v_in_v": 1.15234375
+    },
+    {
+      "code_hand": 7.0,
+      "code_spice": 7.0,
+      "v_in_v": 1.171875
+    },
+    {
+      "code_hand": 7.0,
+      "code_spice": 7.0,
+      "v_in_v": 1.19140625
+    },
+    {
+      "code_hand": 7.0,
+      "code_spice": 7.0,
+      "v_in_v": 1.2109375
+    },
+    {
+      "code_hand": 7.0,
+      "code_spice": 7.0,
+      "v_in_v": 1.23046875
+    },
+    {
+      "code_hand": 8.0,
+      "code_spice": 8.0,
+      "v_in_v": 1.25
+    },
+    {
+      "code_hand": 8.0,
+      "code_spice": 8.0,
+      "v_in_v": 1.26953125
+    },
+    {
+      "code_hand": 8.0,
+      "code_spice": 8.0,
+      "v_in_v": 1.2890625
+    },
+    {
+      "code_hand": 8.0,
+      "code_spice": 8.0,
+      "v_in_v": 1.30859375
+    },
+    {
+      "code_hand": 8.0,
+      "code_spice": 8.0,
+      "v_in_v": 1.328125
+    },
+    {
+      "code_hand": 8.0,
+      "code_spice": 8.0,
+      "v_in_v": 1.34765625
+    },
+    {
+      "code_hand": 8.0,
+      "code_spice": 8.0,
+      "v_in_v": 1.3671875
+    },
+    {
+      "code_hand": 8.0,
+      "code_spice": 8.0,
+      "v_in_v": 1.38671875
+    },
+    {
+      "code_hand": 9.0,
+      "code_spice": 9.0,
+      "v_in_v": 1.40625
+    },
+    {
+      "code_hand": 9.0,
+      "code_spice": 9.0,
+      "v_in_v": 1.42578125
+    },
+    {
+      "code_hand": 9.0,
+      "code_spice": 9.0,
+      "v_in_v": 1.4453125
+    },
+    {
+      "code_hand": 9.0,
+      "code_spice": 9.0,
+      "v_in_v": 1.46484375
+    },
+    {
+      "code_hand": 9.0,
+      "code_spice": 9.0,
+      "v_in_v": 1.484375
+    },
+    {
+      "code_hand": 9.0,
+      "code_spice": 9.0,
+      "v_in_v": 1.50390625
+    },
+    {
+      "code_hand": 9.0,
+      "code_spice": 9.0,
+      "v_in_v": 1.5234375
+    },
+    {
+      "code_hand": 9.0,
+      "code_spice": 9.0,
+      "v_in_v": 1.54296875
+    },
+    {
+      "code_hand": 10.0,
+      "code_spice": 10.0,
+      "v_in_v": 1.5625
+    },
+    {
+      "code_hand": 10.0,
+      "code_spice": 10.0,
+      "v_in_v": 1.58203125
+    },
+    {
+      "code_hand": 10.0,
+      "code_spice": 10.0,
+      "v_in_v": 1.6015625
+    },
+    {
+      "code_hand": 10.0,
+      "code_spice": 10.0,
+      "v_in_v": 1.62109375
+    },
+    {
+      "code_hand": 10.0,
+      "code_spice": 10.0,
+      "v_in_v": 1.640625
+    },
+    {
+      "code_hand": 10.0,
+      "code_spice": 10.0,
+      "v_in_v": 1.66015625
+    },
+    {
+      "code_hand": 10.0,
+      "code_spice": 10.0,
+      "v_in_v": 1.6796875
+    },
+    {
+      "code_hand": 10.0,
+      "code_spice": 10.0,
+      "v_in_v": 1.69921875
+    },
+    {
+      "code_hand": 11.0,
+      "code_spice": 11.0,
+      "v_in_v": 1.71875
+    },
+    {
+      "code_hand": 11.0,
+      "code_spice": 11.0,
+      "v_in_v": 1.73828125
+    },
+    {
+      "code_hand": 11.0,
+      "code_spice": 11.0,
+      "v_in_v": 1.7578125
+    },
+    {
+      "code_hand": 11.0,
+      "code_spice": 11.0,
+      "v_in_v": 1.77734375
+    },
+    {
+      "code_hand": 11.0,
+      "code_spice": 11.0,
+      "v_in_v": 1.796875
+    },
+    {
+      "code_hand": 11.0,
+      "code_spice": 11.0,
+      "v_in_v": 1.81640625
+    },
+    {
+      "code_hand": 11.0,
+      "code_spice": 11.0,
+      "v_in_v": 1.8359375
+    },
+    {
+      "code_hand": 11.0,
+      "code_spice": 11.0,
+      "v_in_v": 1.85546875
+    },
+    {
+      "code_hand": 12.0,
+      "code_spice": 12.0,
+      "v_in_v": 1.875
+    },
+    {
+      "code_hand": 12.0,
+      "code_spice": 12.0,
+      "v_in_v": 1.89453125
+    },
+    {
+      "code_hand": 12.0,
+      "code_spice": 12.0,
+      "v_in_v": 1.9140625
+    },
+    {
+      "code_hand": 12.0,
+      "code_spice": 12.0,
+      "v_in_v": 1.93359375
+    },
+    {
+      "code_hand": 12.0,
+      "code_spice": 12.0,
+      "v_in_v": 1.953125
+    },
+    {
+      "code_hand": 12.0,
+      "code_spice": 12.0,
+      "v_in_v": 1.97265625
+    },
+    {
+      "code_hand": 12.0,
+      "code_spice": 12.0,
+      "v_in_v": 1.9921875
+    },
+    {
+      "code_hand": 12.0,
+      "code_spice": 12.0,
+      "v_in_v": 2.01171875
+    },
+    {
+      "code_hand": 13.0,
+      "code_spice": 13.0,
+      "v_in_v": 2.03125
+    },
+    {
+      "code_hand": 13.0,
+      "code_spice": 13.0,
+      "v_in_v": 2.05078125
+    },
+    {
+      "code_hand": 13.0,
+      "code_spice": 13.0,
+      "v_in_v": 2.0703125
+    },
+    {
+      "code_hand": 13.0,
+      "code_spice": 13.0,
+      "v_in_v": 2.08984375
+    },
+    {
+      "code_hand": 13.0,
+      "code_spice": 13.0,
+      "v_in_v": 2.109375
+    },
+    {
+      "code_hand": 13.0,
+      "code_spice": 13.0,
+      "v_in_v": 2.12890625
+    },
+    {
+      "code_hand": 13.0,
+      "code_spice": 13.0,
+      "v_in_v": 2.1484375
+    },
+    {
+      "code_hand": 13.0,
+      "code_spice": 13.0,
+      "v_in_v": 2.16796875
+    },
+    {
+      "code_hand": 14.0,
+      "code_spice": 14.0,
+      "v_in_v": 2.1875
+    },
+    {
+      "code_hand": 14.0,
+      "code_spice": 14.0,
+      "v_in_v": 2.20703125
+    },
+    {
+      "code_hand": 14.0,
+      "code_spice": 14.0,
+      "v_in_v": 2.2265625
+    },
+    {
+      "code_hand": 14.0,
+      "code_spice": 14.0,
+      "v_in_v": 2.24609375
+    },
+    {
+      "code_hand": 14.0,
+      "code_spice": 14.0,
+      "v_in_v": 2.265625
+    },
+    {
+      "code_hand": 14.0,
+      "code_spice": 14.0,
+      "v_in_v": 2.28515625
+    },
+    {
+      "code_hand": 14.0,
+      "code_spice": 14.0,
+      "v_in_v": 2.3046875
+    },
+    {
+      "code_hand": 14.0,
+      "code_spice": 14.0,
+      "v_in_v": 2.32421875
+    },
+    {
+      "code_hand": 15.0,
+      "code_spice": 15.0,
+      "v_in_v": 2.34375
+    },
+    {
+      "code_hand": 15.0,
+      "code_spice": 15.0,
+      "v_in_v": 2.36328125
+    },
+    {
+      "code_hand": 15.0,
+      "code_spice": 15.0,
+      "v_in_v": 2.3828125
+    },
+    {
+      "code_hand": 15.0,
+      "code_spice": 15.0,
+      "v_in_v": 2.40234375
+    },
+    {
+      "code_hand": 15.0,
+      "code_spice": 15.0,
+      "v_in_v": 2.421875
+    },
+    {
+      "code_hand": 15.0,
+      "code_spice": 15.0,
+      "v_in_v": 2.44140625
+    },
+    {
+      "code_hand": 15.0,
+      "code_spice": 15.0,
+      "v_in_v": 2.4609375
+    },
+    {
+      "code_hand": 15.0,
+      "code_spice": 15.0,
+      "v_in_v": 2.48046875
+    },
+    {
+      "code_hand": 15.0,
+      "code_spice": 15.0,
+      "v_in_v": 2.5
+    }
+  ],
+  "vref_v": 2.5
+}

@@ -89,6 +89,14 @@ that topology and adds the comparator decision as new circuit-level evidence.
   `gain_error` equals `dVREF/VREF` at ±10% to within `1e-9`. Temperature and
   process corner have **no** modelable effect on ideal resistors/VCVS by
   construction; that is documented as out of scope, not swept as fake evidence.
+- **Profile**: `device_profiles/adc-sar-v1.json` (extract
+  `verification/circuit/results/adc-sar-v1-extract.json`). The SPICE transfer
+  gives `max_code_error_codes = 0` and `max_abs_error_v = LSB` (the
+  differential-domain quantization bound); `bits`, `r_ohm`, `vref_v`, `lsb_v`,
+  `input_range_v`, `quantization_error_v` are derived design choices. The
+  assumed-CL settling, functional ENOB and supply-deviation studies stay in the
+  extract JSON only — they carry no physical evidence and fail closed under
+  `physical_claim`. Run: `python verification/circuit/extract_adc_sar.py`.
 - Always-on data tests + optional engine tests in `tests/test_adc_sar.py`.
 
 `Run: book/0010-adc-sar/sar_adc.py`
@@ -103,7 +111,6 @@ that topology and adds the comparator decision as new circuit-level evidence.
 - Temperature/process-corner sweep: the ideal resistor + VCVS models have no
   temperature or corner dependence by construction, so only the VREF-supply
   sensitivity (a pure gain error) is swept.
-- `adc-v1` profile publication.
 
 These are tracked as open items in the R2 gate; nothing here is promoted to a
 verified physical claim.
