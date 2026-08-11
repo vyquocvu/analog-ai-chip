@@ -126,7 +126,7 @@ R1 is closed; the first DAC slice (below) is eligible.
 
 ## 0011 — Converter variation
 
-- [ ] Monte Carlo mismatch distributions
+- [x] Monte Carlo mismatch distributions: `book/0011-converter-variation/variation.py` — fixed seed draws one set of per-resistor relative mismatch vectors (assumed Gaussian `sigma = 1%`, `R=10k/2R=20k/VREF=2.5/BITS=4`) driving BOTH the mismatched SPICE ladder and an independent NumPy conductance-matrix solver; agreement `2.2e-15 V` over 1024 (sample×code) pairs; statistics (endpoint gain error mean −1.1e-5, std 7.2e-4; max|INL| mean 6.3e-3 V; max|DNL| mean 1.1e-2 V) match the hand solver to 1e-12; `sigma=0` reproduces the ideal ladder (fail-closed); 1-bit closed form `Vout = VREF*a/(a+c)` asserted as the anchor; committed extract `converter-variation-0011-extract.json` + always-on/engine-gated tests (`tests/test_converter_variation.py`); sigma is assumed, so it is a sensitivity study that fails closed under `physical_claim` and publishes no profile
 - [ ] Separate gain, offset, quantization, noise and non-linearity mechanisms
 - [ ] Define calibration candidates
 
