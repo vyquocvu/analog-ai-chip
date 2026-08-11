@@ -64,6 +64,28 @@ ladder DAC (`book/0009-dac-r2r/r2r_dac.py`) swept over all 16 codes, emitted by
 `offset_v`, `gain_v_per_v`, `max_inl_v` and `max_dnl_v` (`spice`); settling,
 supply sensitivity and mismatch are deferred (documented in `provenance.limitations`).
 
+`adc-sar-v1.json` is the second SPICE-backed converter profile: a 4-bit SAR ADC
+with the 0009 ladder as reference (`book/0010-adc-sar/sar_adc.py`), emitted by
+`verification/circuit/extract_adc_sar.py`. The SPICE transfer gives
+`max_code_error_codes = 0` and `max_abs_error_v = LSB` (differential-domain
+quantization bound); derived design fields carry the reference and envelope.
+Assumed-CL settling, functional ENOB and supply-deviation studies live in the
+extract JSON only (they fail closed under `physical_claim`).
+
+With both converter profiles validated, `analog_llm` can run with converter
+parameters sourced from them (gate R2 exit) instead of normalized defaults:
+
+```python
+from analog_llm import build_tile_factory_from_converter_profiles
+factory = build_tile_factory_from_converter_profiles(
+    "device_profiles/crossbar-column-v1.json",
+    "device_profiles/dac-r2r-v1.json",
+    "device_profiles/adc-sar-v1.json",
+    64, 64,
+    g_bits=6,
+)  # dac_bits/adc_bits/vin_max/vout_max come from the converter profiles
+```
+
 ## Rule for claims
 
 `assumed` profiles are allowed for exploration but cannot support claims such as "the proposed ADC has X ENOB" or "the accelerator consumes Y energy/token". Such claims require `spice`, `derived` from verified inputs, or `measured` evidence.

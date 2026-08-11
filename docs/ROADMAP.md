@@ -134,6 +134,8 @@ R1 is closed; the first DAC slice (below) is eligible.
 
 `analog_llm` can run with converter parameters sourced from validated DAC/ADC profiles rather than arbitrary normalized defaults.
 
+- [x] `converter_config_from_profiles` maps the validated `dac-r2r-v1` / `adc-sar-v1` profile fields to converter parameters (`dac_bits`/`adc_bits`, `vin_max = full_scale_v = 2.34375 V`, `vout_max = input_range_v = 2.5 V`); `build_tile_factory_from_converter_profiles` combines the crossbar-column conductance window with these converter envelopes — no normalized 1.0 converter default remains; fails closed on missing fields and on functional-only profiles; proven end to end by `tests/test_r2_gate_exit.py` (accelerator MVM + deterministic TinyGPT generation + ledger on profile-sourced converters)
+
 ---
 
 # R3 — Small crossbar arrays — QUEUED

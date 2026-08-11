@@ -6,13 +6,17 @@ circuit/device evidence instead of hand-chosen constants.
 
 Mapping contract
 ----------------
-Two profile layouts are supported:
+Three profile layouts are supported:
 
 - ``fields`` (physical, e.g. ``crossbar-column-v1.json``): the conductance
   window ``[gmin, gmax]`` is the physical cell range realized by the
   differential pair: balanced zero ``g0_s`` for weight 0 and
   ``g0_s + gscale_s_per_w`` for the strongest ``|w| = 1`` cell. The input/output
   converter envelopes are bounded by the linear rail headroom.
+- converter ``fields`` profiles (``dac-r2r-v1.json``, ``adc-sar-v1.json``):
+  sourced through ``converter_config_from_profiles`` so the tile's converter
+  resolution and voltage envelopes come from validated SPICE evidence rather
+  than arbitrary normalized defaults.
 - legacy sections (``dac``/``crossbar``/``adc``, e.g. ``ideal.json``): the
   functional reference maps sections directly onto converter bits, ranges and
   the conductance window.
@@ -45,6 +49,57 @@ REQUIRED_FIELDS = frozenset(
         "output_headroom_down_v",
     }
 )
+
+# Fields the validated DAC/ADC converter profiles must provide so the tile can
+# be configured from converter evidence instead of normalized defaults.
+REQUIRED_DAC_FIELDS = frozenset({"bits", "full_scale_v"})
+REQUIRED_ADC_FIELDS = frozenset({"bits", "input_range_v", "quantization_error_v"})
+
+
+def converter_config_from_profiles(
+    dac_profile: dict[str, Any] | str | Path,
+    adc_profile: dict[str, Any] | str | Path,
+    *,
+    physical_claim: bool = True,
+) -> dict[str, Any]:
+    """Return converter parameters sourced from validated DAC/ADC profiles.
+
+    Reads ``dac_bits``/``adc_bits`` and the voltage envelopes from the
+    converter profiles' ``fields`` (``dac-r2r-v1``, ``adc-sar-v1``) so a tile
+    can run on SPICE-extracted converter evidence. Fails closed when a required
+    converter field is missing or the profile cannot support the claim.
+    """
+    dac = _load_converter_profile(dac_profile, physical_claim=physical_claim)
+    adc = _load_converter_profile(adc_profile, physical_claim=physical_claim)
+    dac_fields = dac.get("fields")
+    adc_fields = adc.get("fields")
+    if physical_claim and (dac_fields is None or adc_fields is None):
+        raise ValueError(
+            "converter profiles require per-field evidence to configure a tile"
+        )
+    missing_dac = REQUIRED_DAC_FIELDS - set(dac_fields or {})
+    missing_adc = REQUIRED_ADC_FIELDS - set(adc_fields or {})
+    if missing_dac or missing_adc:
+        raise ValueError(
+            f"converter profiles missing required field(s): "
+            f"DAC {sorted(missing_dac)}, ADC {sorted(missing_adc)}"
+        )
+    return {
+        "dac_bits": int(dac_fields["bits"]["value"]),
+        "adc_bits": int(adc_fields["bits"]["value"]),
+        "vin_max": float(dac_fields["full_scale_v"]["value"]),
+        "vout_max": float(adc_fields["input_range_v"]["value"]),
+    }
+
+
+def _load_converter_profile(
+    profile: dict[str, Any] | str | Path, *, physical_claim: bool
+) -> dict[str, Any]:
+    """Load a converter profile from a path, or validate an in-memory dict."""
+    if isinstance(profile, (str, Path)):
+        return load_device_profile(profile, physical_claim=physical_claim)
+    validate_device_profile(profile, physical_claim=physical_claim)
+    return profile
 
 
 def tile_config_from_profile(
@@ -152,6 +207,43 @@ def build_tile_factory(
         adc_bits=adc_bits,
         physical_claim=physical_claim,
     )
+
+    def factory() -> CrossbarTile:
+        return CrossbarTile(rows, cols, **kwargs)
+
+    return factory
+
+
+def build_tile_factory_from_converter_profiles(
+    column_profile: dict[str, Any] | str | Path,
+    dac_profile: dict[str, Any] | str | Path,
+    adc_profile: dict[str, Any] | str | Path,
+    rows: int,
+    cols: int,
+    *,
+    g_bits: int,
+    physical_claim: bool = True,
+) -> Callable[[], CrossbarTile]:
+    """Return a tile factory whose converter parameters come from the profiles.
+
+    The conductance window ``[gmin, gmax]`` comes from the crossbar-column
+    profile (as in ``tile_config_from_profile``); the converter bits and
+    voltage envelopes come from the validated DAC/ADC profiles via
+    ``converter_config_from_profiles``. Nothing on the converter path is a
+    hand-picked normalized default (gate R2 exit).
+    """
+    base = tile_config_from_profile(
+        column_profile,
+        g_bits=g_bits,
+        dac_bits=1,  # overridden below; only gmin/gmax/g_bits are kept
+        adc_bits=1,
+        physical_claim=physical_claim,
+    )
+    converter = converter_config_from_profiles(
+        dac_profile, adc_profile, physical_claim=physical_claim
+    )
+    kwargs = {"g_bits": base["g_bits"], "gmin": base["gmin"], "gmax": base["gmax"]}
+    kwargs.update(converter)
 
     def factory() -> CrossbarTile:
         return CrossbarTile(rows, cols, **kwargs)
