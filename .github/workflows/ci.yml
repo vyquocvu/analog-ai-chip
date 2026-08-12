@@ -23,10 +23,12 @@ jobs:
           python book/0004-tiling/train.py
           python scripts/run_llm_sim.py
 
-  # Circuit-level verification. PySpice 1.5 opens `libngspice.so`; Ubuntu's
-  # unversioned linker name is supplied by libngspice0-dev, not the CLI alone.
+  # Circuit-level verification. PySpice 1.5 reads NGSPICE_LIBRARY_PATH and
+  # otherwise guesses `libngspice.so`; pin the Ubuntu path explicitly.
   circuit-sim:
     runs-on: ubuntu-latest
+    env:
+      NGSPICE_LIBRARY_PATH: /usr/lib/x86_64-linux-gnu/libngspice.so
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
