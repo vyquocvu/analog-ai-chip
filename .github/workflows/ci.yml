@@ -23,9 +23,8 @@ jobs:
           python book/0004-tiling/train.py
           python scripts/run_llm_sim.py
 
-  # Optional job: exercises the 0005/0006 SPICE circuit sims when the ngspice
-  # engine is available. If ngspice or its shared library is missing, the tests
-  # skip cleanly (exit 0), so this never hard-fails on a dependency-light runner.
+  # Circuit-level verification. PySpice uses ngspice's shared library, so both
+  # the CLI package and libngspice0 are installed explicitly on Ubuntu runners.
   circuit-sim:
     runs-on: ubuntu-latest
     steps:
@@ -34,6 +33,6 @@ jobs:
         with:
           python-version: '3.11'
           cache: pip
-      - run: sudo apt-get update && sudo apt-get install -y ngspice || true
+      - run: sudo apt-get update && sudo apt-get install -y ngspice libngspice0
       - run: python -m pip install -e '.[dev,sim]'
       - run: pytest tests/test_circuit_sim.py -q
