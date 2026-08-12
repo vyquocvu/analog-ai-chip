@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "chapter": "0012-crossbar-2x2",
+  "evidence_class": "spice",
+  "simulator": {
+    "name": "ngspice",
+    "version": "42+ds-3build1",
+    "interface": "cli-batch"
+  },
+  "analysis": "dc-operating-point",
+  "source": {
+    "branch_commit": "23dabfcf8c137c04ba0d51825da52f1338b911ff",
+    "github_actions_run_id": 31618050735,
+    "job": "crossbar-2x2-spice",
+    "extractor": "scripts/extract_crossbar_2x2.py"
+  },
+  "conditions": {
+    "vref_v": 2.5,
+    "supply_envelope_v": [0.0, 5.0],
+    "g0_s": 0.0001,
+    "gscale_s_per_weight": 0.0001,
+    "rf_ohm": 10000.0,
+    "input_v": [3.0, 2.1],
+    "weights": [[0.5, 0.25], [-0.5, 0.25]]
+  },
+  "results": {
+    "expected_output_v": [0.15000000000000002, -0.35],
+    "spice_output_v": [0.15012300000000023, -0.34994000000000014],
+    "error_v": [0.00012300000000020628, 0.00005999999999983796],
+    "max_abs_error_v": 0.00012300000000020628,
+    "vp_v": [2.249157, 2.499188],
+    "vm_v": [2.39928, 2.149248],
+    "low_margin_v": 2.149248,
+    "high_margin_v": 2.500812,
+    "within_rails": true,
+    "row_conductance_s": [0.0005, 0.00045],
+    "row_current_a": [0.00025, -0.00017999999999999996],
+    "max_abs_row_current_a": 0.00025
+  },
+  "model": {
+    "input_driver": "ideal_voltage_source",
+    "tia": "high-gain VCVS, Aol=1e4",
+    "signed_encoding": "differential G+/G-"
+  },
+  "limitations": [
+    "ideal input voltage drivers; no source-resistance droop",
+    "no line resistance or IR drop",
+    "no parasitic RC or transient settling",
+    "no programmable-memory compact model",
+    "no device variation or drift"
+  ]
+}
