@@ -84,8 +84,29 @@ def ideal_branch_voltages(
     return vp, vm
 
 
+def row_loading_report(
+    xs: Iterable[float], weights: Iterable[Iterable[float]]
+) -> dict[str, object]:
+    """Quantify the DC conductance/current load seen by each shared input row.
+
+    The current model uses ideal voltage drivers, so this is a load ledger, not
+    a finite-driver droop model. Source resistance and row-voltage sag belong
+    to 0014.
+    """
+    x = _inputs_2(xs)
+    gp, gm = conductance_matrices(weights)
+    row_g = np.sum(gp + gm, axis=0)
+    row_i = (x - VREF) * row_g
+    return {
+        "row_conductance_s": row_g.tolist(),
+        "row_current_a": row_i.tolist(),
+        "max_abs_row_current_a": float(np.max(np.abs(row_i))),
+        "driver_model": "ideal_voltage_source",
+    }
+
+
 def headroom_report(xs: Iterable[float], weights: Iterable[Iterable[float]]) -> dict[str, object]:
-    """Report whether all TIA branch outputs remain within the 0–5 V envelope."""
+    """Report whether all ideal TIA branch outputs remain within the 0–5 V envelope."""
     vp, vm = ideal_branch_voltages(xs, weights)
     branches = np.concatenate((vp, vm))
     low_margin = float(np.min(branches - VLO))
@@ -161,16 +182,57 @@ def _tia(xs: np.ndarray, conductances: np.ndarray) -> float:
     return _parse_vout(result.stdout + "\n" + result.stderr)
 
 
-def run_array(xs: Iterable[float], weights: Iterable[Iterable[float]]) -> np.ndarray:
-    """Run the 2×2 DC SPICE array, returning one differential voltage per column."""
+def run_branch_voltages(
+    xs: Iterable[float], weights: Iterable[Iterable[float]]
+) -> tuple[np.ndarray, np.ndarray]:
+    """Run ngspice for all four TIA branches, returning ``(Vp, Vm)``."""
     x = _inputs_2(xs)
     gp, gm = conductance_matrices(weights)
-    outputs = []
-    for j in range(2):
-        vp = _tia(x, gp[j])
-        vm = _tia(x, gm[j])
-        outputs.append(vm - vp)
-    return np.asarray(outputs)
+    vp = np.asarray([_tia(x, gp[j]) for j in range(2)])
+    vm = np.asarray([_tia(x, gm[j]) for j in range(2)])
+    return vp, vm
+
+
+def run_array(xs: Iterable[float], weights: Iterable[Iterable[float]]) -> np.ndarray:
+    """Run the 2×2 DC SPICE array, returning one differential voltage per column."""
+    vp, vm = run_branch_voltages(xs, weights)
+    return vm - vp
+
+
+def spice_evidence(xs: Iterable[float], weights: Iterable[Iterable[float]]) -> dict[str, object]:
+    """Return a machine-readable SPICE-vs-reference evidence record."""
+    x = _inputs_2(xs)
+    w = _weights_2x2(weights)
+    expected = ideal_mvm(x, w)
+    vp, vm = run_branch_voltages(x, w)
+    actual = vm - vp
+    err = actual - expected
+    branches = np.concatenate((vp, vm))
+    low_margin = float(np.min(branches - VLO))
+    high_margin = float(np.min(VHI - branches))
+    return {
+        "evidence_class": "spice",
+        "simulator": "ngspice-cli",
+        "analysis": "dc-operating-point",
+        "input_v": x.tolist(),
+        "weights": w.tolist(),
+        "expected_output_v": expected.tolist(),
+        "spice_output_v": actual.tolist(),
+        "error_v": err.tolist(),
+        "max_abs_error_v": float(np.max(np.abs(err))),
+        "vp_v": vp.tolist(),
+        "vm_v": vm.tolist(),
+        "low_margin_v": low_margin,
+        "high_margin_v": high_margin,
+        "within_rails": bool(low_margin >= 0.0 and high_margin >= 0.0),
+        "loading": row_loading_report(x, w),
+        "limitations": [
+            "ideal input voltage drivers",
+            "high-gain VCVS TIA model",
+            "no line resistance or parasitic RC",
+            "no programmable-memory compact model",
+        ],
+    }
 
 
 def main() -> None:
@@ -181,13 +243,14 @@ def main() -> None:
     print(f"W = {weights}")
     print(f"ideal = {ideal.tolist()} V")
     print(f"headroom = {headroom_report(xs, weights)}")
+    print(f"loading = {row_loading_report(xs, weights)}")
     try:
-        spice = run_array(xs, weights)
+        evidence = spice_evidence(xs, weights)
     except (OSError, RuntimeError) as exc:
         print(f"SPICE unavailable/failed: {exc}")
         return
-    print(f"spice = {spice.tolist()} V")
-    print(f"max |SPICE-ideal| = {float(np.max(np.abs(spice - ideal))):.6g} V")
+    print(f"spice = {evidence['spice_output_v']} V")
+    print(f"max |SPICE-ideal| = {evidence['max_abs_error_v']:.6g} V")
 
 
 if __name__ == "__main__":
