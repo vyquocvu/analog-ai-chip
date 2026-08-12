@@ -41,9 +41,9 @@ Evidence classes remain: `measured`, `spice`, `derived`, `assumed`. `assumed` is
 - [x] Device-profile schema, evidence classes and fail-closed validator exist
 - [x] Measurement capture/checking workflow exists for 0005; actual hardware readings remain optional/pending
 
-### Important limitation
+### Limitation at the R0 boundary
 
-The repository has circuit evidence and a profile contract, but the two are not yet connected. `device_profiles/` still contains only the ideal reference profile, so the architecture simulator is not yet driven by extracted SPICE evidence.
+R0 created circuit evidence and the profile contract but did not yet connect them. R1 subsequently closed that gap with the first SPICE-backed profile and downstream adapter.
 
 **Exit status:** complete as a foundation, not complete as a physical product claim.
 
@@ -51,8 +51,7 @@ The repository has circuit evidence and a profile contract, but the two are not 
 
 # R1 — Close the circuit → profile → simulator proof chain — COMPLETE
 
-The circuit → profile → simulator chain is closed with SPICE-backed evidence and a
-reproducible verification report.
+The circuit → profile → simulator chain is closed with SPICE-backed evidence and a reproducible verification report.
 
 ### WP1.1 — Extract first SPICE-backed profile
 
@@ -92,17 +91,13 @@ reproducible verification report
 
 No manual copy-paste of physical constants is allowed in the proof path.
 
-R1 gate evidence: `tests/test_verification_summary.py` — 9 always-on tests prove the
-committed profile matches the extract, the adapter derives the tile config from profile
-fields, the summary is deterministic, every value links back to its profile artifact,
-the generator writes the committed JSON/markdown, and functional-only profiles fail
-closed. R1 is complete (WP1.1 + WP1.2 + WP1.3 closed).
+R1 gate evidence: `tests/test_verification_summary.py` — 9 always-on tests prove the committed profile matches the extract, the adapter derives the tile config from profile fields, the summary is deterministic, every value links back to its profile artifact, the generator writes the committed JSON/markdown, and functional-only profiles fail closed. R1 is complete (WP1.1 + WP1.2 + WP1.3 closed).
 
 ---
 
-# R2 — Converter signal path — ACTIVE
+# R2 — Converter signal path — COMPLETE
 
-R1 is closed; the first DAC slice (below) is eligible.
+R1 is closed and the DAC/ADC path is profile-driven through the R2 gate exit.
 
 ## 0009 — DAC architecture
 
@@ -111,8 +106,8 @@ R1 is closed; the first DAC slice (below) is eligible.
 - [x] ngspice DC sweep across all codes for a small-bit prototype: 4-bit ladder, all 16 codes, worst `|SPICE − hand calc|` `4.44e-16 V` (`spice`)
 - [x] Transient settling study: single-pole hand model `t = 2R·CL·ln(ΔV/band)` vs SPICE transient, `Rth = 2R` from two-point DC load line (`spice`); settling reported as an ASSUMED-`CL` sensitivity study in the extract JSON only (1 pF load, 0.5 LSB band, full-scale step: SPICE 68.7 ns vs hand 68.0 ns) and deliberately excluded from the profile so `physical_claim` stays valid
 - [x] Gain/offset/range extraction: `lsb_v = 0.15625 V/code`, `full_scale_v = 2.34375 V`, `offset_v = 0 V`, `gain_v_per_v = 1`, `max_inl_v = 4.4e-16 V`, `max_dnl_v = 4.2e-16 V` (`spice`)
-- [ ] Supply sensitivity (deferred)
-- [ ] Monte Carlo / resistor mismatch (deferred)
+- [ ] Supply sensitivity (deferred; not required for R2 exit)
+- [ ] Monte Carlo / resistor mismatch (covered as an assumed sensitivity study in 0011; no physical profile claim)
 - [x] Publish SPICE profile: `device_profiles/dac-r2r-v1.json` (name `dac-r2r-v1`, version `0.1.0`), 11 fields all carrying `evidence_class` (incl. `rth_ohm = 20000 ohm`, `spice`), emitted by `verification/circuit/extract_dac_r2r.py`
 
 ## 0010 — ADC / TIA output path
@@ -136,20 +131,28 @@ R1 is closed; the first DAC slice (below) is eligible.
 
 - [x] `converter_config_from_profiles` maps the validated `dac-r2r-v1` / `adc-sar-v1` profile fields to converter parameters (`dac_bits`/`adc_bits`, `vin_max = full_scale_v = 2.34375 V`, `vout_max = input_range_v = 2.5 V`); `build_tile_factory_from_converter_profiles` combines the crossbar-column conductance window with these converter envelopes — no normalized 1.0 converter default remains; fails closed on missing fields and on functional-only profiles; proven end to end by `tests/test_r2_gate_exit.py` (accelerator MVM + deterministic TinyGPT generation + ledger on profile-sourced converters)
 
+**R2 exit status:** complete. Deferred supply/mismatch sensitivity work does not block the profile-driven converter contract and must not be promoted into physical claims.
+
 ---
 
-# R3 — Small crossbar arrays — QUEUED
+# R3 — Small crossbar arrays — ACTIVE
 
-Depends on R1; R2 is required for full signal-path claims but not for early array-only studies.
+Depends on R1; R2 is now closed and available for later full signal-path integration. R3 first verifies array topology independently of converter integration.
 
-## 0012 — 2×2 differential crossbar
+## 0012 — 2×2 differential crossbar — COMPLETE
 
-- [ ] Shared input rows, two independent output columns
-- [ ] SPICE MVM versus hand/NumPy reference
-- [ ] Signed-weight cases, zero/balanced cases and boundary envelope
-- [ ] Output-stage loading/headroom checks
+- [x] Shared input rows, two independent output columns: `book/0012-crossbar-2x2/crossbar_2x2.py` uses the canonical `[output,input]` convention and differential `G+/G-` mapping
+- [x] SPICE MVM versus hand/NumPy reference: CI job `crossbar-2x2-spice` runs ngspice 42 directly; reference `[0.150000, -0.350000] V`, SPICE `[0.150123, -0.349940] V`, max absolute error `123 µV`
+- [x] Signed-weight cases, zero/balanced cases and boundary envelope: deterministic tests in `tests/test_crossbar_2x2.py`
+- [x] Loading/headroom ledger: all four TIA branch voltages remain inside the `[0,5] V` envelope for the reference case; low margin `2.149248 V`, high margin `2.500812 V`; shared-row conductance `[0.5, 0.45] mS` and max absolute row current `250 µA` with the explicitly ideal voltage-driver model
+- [x] Machine-readable evidence: `verification/circuit/crossbar-2x2-v1.json`, reproduced by `scripts/extract_crossbar_2x2.py`; source limitations explicitly defer source-resistance droop, IR drop, parasitic RC and programmable-device physics
+- [x] Strict TDD RED observed before implementation: initial PR commit failed because `book/0012-crossbar-2x2/crossbar_2x2.py` did not exist; focused SPICE job is GREEN after implementation
 
-## 0013 — 4×4 differential crossbar
+### 0012 infrastructure finding
+
+PySpice 1.5's legacy parsers are not compatible with ngspice 42 output on the current Ubuntu runner (`Note:` precedes the raw header). 0012 therefore invokes the ngspice CLI directly and parses an explicit scalar `print v(out)` result. This is a scoped workaround for 0012, not a silent rewrite of legacy 0005/0006 evidence. The legacy `circuit-sim` job remains a separate CI maintenance issue.
+
+## 0013 — 4×4 differential crossbar — NEXT ELIGIBLE
 
 - [ ] Scale the validated 2×2 topology
 - [ ] Compare SPICE output to behavioral model over deterministic vectors/matrices
@@ -159,7 +162,7 @@ Depends on R1; R2 is required for full signal-path claims but not for early arra
 ## 0014 — Array timing/loading
 
 - [ ] Sweep number of rows/columns
-- [ ] Quantify TIA loading and headroom
+- [ ] Quantify TIA loading and headroom with finite row-driver/source resistance
 - [ ] Establish the point where ngspice becomes impractical and Xyce becomes preferred
 
 ### Gate R3 exit
