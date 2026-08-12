@@ -1,8 +1,8 @@
-"""Optional end-to-end check of the 0005 circuit simulation.
+"""Optional end-to-end checks of circuit simulations.
 
 Skipped (not failed) when PySpice or the ngspice engine is unavailable, so the
 core suite and CI stay dependency-light. Install with `pip install -e '.[sim]'`
-plus the ngspice engine to enable it.
+plus the ngspice engine to enable them.
 """
 
 import importlib.util
@@ -12,11 +12,13 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-_MODULE = Path(__file__).resolve().parent.parent / "book" / "0005-one-analog-neuron" / "sim_neuron.py"
-_MODULE_NI = Path(__file__).resolve().parent.parent / "book" / "0005-one-analog-neuron" / "sim_neuron_nonideal.py"
-_MODULE_SW = Path(__file__).resolve().parent.parent / "book" / "0005-one-analog-neuron" / "sweep_neuron.py"
-_MODULE_HR = Path(__file__).resolve().parent.parent / "book" / "0005-one-analog-neuron" / "headroom_neuron.py"
-_MODULE_LYR = Path(__file__).resolve().parent.parent / "book" / "0006-many-neurons" / "layer_neuron_spice.py"
+_REPO = Path(__file__).resolve().parent.parent
+_MODULE = _REPO / "book" / "0005-one-analog-neuron" / "sim_neuron.py"
+_MODULE_NI = _REPO / "book" / "0005-one-analog-neuron" / "sim_neuron_nonideal.py"
+_MODULE_SW = _REPO / "book" / "0005-one-analog-neuron" / "sweep_neuron.py"
+_MODULE_HR = _REPO / "book" / "0005-one-analog-neuron" / "headroom_neuron.py"
+_MODULE_LYR = _REPO / "book" / "0006-many-neurons" / "layer_neuron_spice.py"
+_MODULE_2X2 = _REPO / "book" / "0012-crossbar-2x2" / "crossbar_2x2.py"
 
 
 def _load(path):
@@ -34,6 +36,7 @@ neuron_ni = _load(_MODULE_NI)
 neuron_sw = _load(_MODULE_SW) if neuron_ni is not None else None
 neuron_hr = _load(_MODULE_HR) if neuron_ni is not None else None
 neuron_lyr = _load(_MODULE_LYR) if neuron_ni is not None else None
+crossbar_2x2 = _load(_MODULE_2X2)
 
 
 @pytest.mark.skipif(neuron is None, reason="PySpice/ngspice not available")
@@ -92,5 +95,14 @@ def test_neuron_dc_sweep_slope_and_rails() -> None:
     assert abs(slope - (-neuron_sw.W1)) < 0.02, f"slope {slope:.3f}"
     assert np.all(outs_chip <= neuron_sw.VHI + 1e-9)
     assert np.all(outs_chip >= neuron_sw.VLO - 1e-9)
-    assert np.any(outs_chip >= neuron_sw.VHI - 1e-9)  # high-rail clip seen
-    assert np.any(outs_chip <= neuron_sw.VLO + 1e-9)  # low-rail clip seen
+    assert np.any(outs_chip >= neuron_sw.VHI - 1e-9)
+    assert np.any(outs_chip <= neuron_sw.VLO + 1e-9)
+
+
+@pytest.mark.skipif(crossbar_2x2 is None, reason="PySpice/ngspice not available")
+def test_crossbar_2x2_spice_matches_two_column_reference() -> None:
+    xs = [3.0, 2.1]
+    weights = [[0.50, 0.25], [-0.50, 0.25]]
+    actual = crossbar_2x2.run_array(xs, weights)
+    expected = crossbar_2x2.ideal_mvm(xs, weights)
+    np.testing.assert_allclose(actual, expected, atol=2e-2, rtol=0.0)
