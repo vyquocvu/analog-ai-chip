@@ -3,6 +3,12 @@
 Skipped (not failed) when PySpice or the ngspice engine is unavailable, so the
 core suite and CI stay dependency-light. Install with `pip install -e '.[sim]'`
 plus the ngspice engine to enable them.
+
+CI intentionally uses PySpice's ``ngspice-subprocess`` backend. PySpice 1.5
+defaults to the shared-library backend on Linux, while current Ubuntu runners
+ship a newer ngspice than that shared integration handles cleanly. The
+subprocess backend still executes real ngspice netlists and keeps the circuit
+evidence independent of the shared C API.
 """
 
 import importlib.util
@@ -20,6 +26,11 @@ _MODULE_HR = _REPO / "book" / "0005-one-analog-neuron" / "headroom_neuron.py"
 _MODULE_LYR = _REPO / "book" / "0006-many-neurons" / "layer_neuron_spice.py"
 _MODULE_2X2 = _REPO / "book" / "0012-crossbar-2x2" / "crossbar_2x2.py"
 _HAS_PYSPICE = importlib.util.find_spec("PySpice") is not None
+
+if _HAS_PYSPICE:
+    from PySpice.Spice.Simulation import CircuitSimulator
+
+    CircuitSimulator.DEFAULT_SIMULATOR = "ngspice-subprocess"
 
 
 def _load(path):
