@@ -21,7 +21,7 @@ voltages rather than hidden behind a saturation model.
 from __future__ import annotations
 
 import os
-from typing import Iterable
+from collections.abc import Iterable
 
 import numpy as np
 
