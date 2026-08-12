@@ -71,6 +71,19 @@ def test_headroom_report_distinguishes_safe_and_overdrive_cases() -> None:
     assert min(overdrive["low_margin_v"], overdrive["high_margin_v"]) < 0.0
 
 
+def test_shared_row_loading_is_explicit() -> None:
+    mod = _load_module()
+    report = mod.row_loading_report([3.0, 2.1], [[0.50, 0.25], [-0.50, 0.25]])
+
+    assert report["driver_model"] == "ideal_voltage_source"
+    assert len(report["row_conductance_s"]) == 2
+    assert len(report["row_current_a"]) == 2
+    assert report["max_abs_row_current_a"] > 0.0
+    # Every differential cell includes the balanced G0 baseline, so sharing a
+    # row across two output columns creates a non-zero load even for zero weight.
+    assert all(g >= 4.0 * mod.G0 for g in report["row_conductance_s"])
+
+
 def test_rejects_non_2x2_weight_shape() -> None:
     mod = _load_module()
     with pytest.raises(ValueError, match="2x2"):
@@ -92,9 +105,15 @@ def test_rejects_weight_outside_normalized_range() -> None:
 def test_spice_2x2_matches_ideal_when_engine_available() -> None:
     mod = _load_module()
     try:
-        got = mod.run_array([3.0, 2.1], [[0.50, 0.25], [-0.50, 0.25]])
-    except (ImportError, OSError):
-        pytest.skip("PySpice/ngspice not available")
+        evidence = mod.spice_evidence([3.0, 2.1], [[0.50, 0.25], [-0.50, 0.25]])
+    except OSError:
+        pytest.skip("ngspice not available")
 
-    expected = mod.ideal_mvm([3.0, 2.1], [[0.50, 0.25], [-0.50, 0.25]])
-    np.testing.assert_allclose(got, expected, atol=2e-2, rtol=0.0)
+    assert evidence["evidence_class"] == "spice"
+    assert evidence["simulator"] == "ngspice-cli"
+    assert evidence["within_rails"] is True
+    assert evidence["loading"]["driver_model"] == "ideal_voltage_source"
+    np.testing.assert_allclose(
+        evidence["spice_output_v"], evidence["expected_output_v"], atol=2e-2, rtol=0.0
+    )
+    assert evidence["max_abs_error_v"] <= 2e-2
