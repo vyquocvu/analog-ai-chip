@@ -19,6 +19,7 @@ _MODULE_SW = _REPO / "book" / "0005-one-analog-neuron" / "sweep_neuron.py"
 _MODULE_HR = _REPO / "book" / "0005-one-analog-neuron" / "headroom_neuron.py"
 _MODULE_LYR = _REPO / "book" / "0006-many-neurons" / "layer_neuron_spice.py"
 _MODULE_2X2 = _REPO / "book" / "0012-crossbar-2x2" / "crossbar_2x2.py"
+_HAS_PYSPICE = importlib.util.find_spec("PySpice") is not None
 
 
 def _load(path):
@@ -99,7 +100,10 @@ def test_neuron_dc_sweep_slope_and_rails() -> None:
     assert np.any(outs_chip <= neuron_sw.VLO + 1e-9)
 
 
-@pytest.mark.skipif(crossbar_2x2 is None, reason="PySpice/ngspice not available")
+@pytest.mark.skipif(
+    crossbar_2x2 is None or not _HAS_PYSPICE,
+    reason="PySpice/ngspice not available",
+)
 def test_crossbar_2x2_spice_matches_two_column_reference() -> None:
     xs = [3.0, 2.1]
     weights = [[0.50, 0.25], [-0.50, 0.25]]
