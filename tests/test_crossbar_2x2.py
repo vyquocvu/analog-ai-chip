@@ -47,6 +47,30 @@ def test_differential_conductance_matrix_realizes_signed_weights() -> None:
     assert np.all(gm >= mod.G0)
 
 
+def test_zero_balanced_cells_produce_zero_output() -> None:
+    mod = _load_module()
+    xs = [3.0, 2.0]
+    weights = [[0.0, 0.0], [0.0, 0.0]]
+
+    gp, gm = mod.conductance_matrices(weights)
+    np.testing.assert_allclose(gp, gm, atol=0.0, rtol=0.0)
+    np.testing.assert_allclose(mod.ideal_mvm(xs, weights), [0.0, 0.0], atol=1e-15, rtol=0.0)
+
+
+def test_headroom_report_distinguishes_safe_and_overdrive_cases() -> None:
+    mod = _load_module()
+    safe = mod.headroom_report([3.0, 2.1], [[0.50, 0.25], [-0.50, 0.25]])
+    assert safe["within_rails"] is True
+    assert safe["low_margin_v"] >= 0.0
+    assert safe["high_margin_v"] >= 0.0
+
+    # Full-rail inputs with maximum same-sign weights exceed this ideal TIA's
+    # 0–5 V branch envelope. Detect the limitation instead of silently clipping.
+    overdrive = mod.headroom_report([5.0, 5.0], [[1.0, 1.0], [-1.0, -1.0]])
+    assert overdrive["within_rails"] is False
+    assert min(overdrive["low_margin_v"], overdrive["high_margin_v"]) < 0.0
+
+
 def test_rejects_non_2x2_weight_shape() -> None:
     mod = _load_module()
     with pytest.raises(ValueError, match="2x2"):
@@ -57,6 +81,12 @@ def test_rejects_non_two_input_vector() -> None:
     mod = _load_module()
     with pytest.raises(ValueError, match="2 inputs"):
         mod.ideal_mvm([3.0], [[0.5, 0.25], [-0.5, 0.25]])
+
+
+def test_rejects_weight_outside_normalized_range() -> None:
+    mod = _load_module()
+    with pytest.raises(ValueError, match=r"\[-1, 1\]"):
+        mod.ideal_mvm([3.0, 2.1], [[1.01, 0.0], [0.0, 0.0]])
 
 
 def test_spice_2x2_matches_ideal_when_engine_available() -> None:
