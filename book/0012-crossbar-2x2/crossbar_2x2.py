@@ -20,7 +20,12 @@ voltages rather than hidden behind a saturation model.
 
 from __future__ import annotations
 
+import re
+import shutil
+import subprocess
+import tempfile
 from collections.abc import Iterable
+from pathlib import Path
 
 import numpy as np
 
@@ -94,24 +99,66 @@ def headroom_report(xs: Iterable[float], weights: Iterable[Iterable[float]]) -> 
     }
 
 
-def _tia(xs: np.ndarray, conductances: np.ndarray) -> float:
-    """Solve one independent TIA branch through the ngspice subprocess backend."""
-    try:
-        from PySpice.Spice.Netlist import Circuit
-        from PySpice.Unit import u_kOhm, u_V
-    except ModuleNotFoundError as exc:
-        raise ImportError("PySpice is required for run_array; install .[sim]") from exc
+def _tia_netlist(xs: np.ndarray, conductances: np.ndarray) -> str:
+    """Return the deterministic ngspice netlist for one TIA branch."""
+    r0 = 1.0 / float(conductances[0])
+    r1 = 1.0 / float(conductances[1])
+    return f"""* 0012 2x2 differential crossbar TIA branch
+VREF vref 0 {VREF:.17g}
+VX0 x0 0 {float(xs[0]):.17g}
+VX1 x1 0 {float(xs[1]):.17g}
+RW0 x0 n {r0:.17g}
+RW1 x1 n {r1:.17g}
+RRF n out {RF:.17g}
+EOP out 0 vref n 1e4
+.op
+.control
+set noaskquit
+op
+print v(out)
+quit
+.endc
+.end
+"""
 
-    c = Circuit("crossbar_2x2_tia")
-    c.V("vr", "vref", c.gnd, VREF @ u_V)
-    for i, value in enumerate(xs):
-        c.V(f"x{i}", f"x{i}", c.gnd, float(value) @ u_V)
-    for i, g in enumerate(conductances):
-        c.R(f"w{i}", f"x{i}", "n", (1.0 / float(g) / 1e3) @ u_kOhm)
-    c.R("rf", "n", "out", (RF / 1e3) @ u_kOhm)
-    c.VCVS("op", "out", c.gnd, "vref", "n", 1e4)
-    analysis = c.simulator(simulator="ngspice-subprocess").operating_point()
-    return float(np.ravel(np.asarray(analysis["out"]))[0])
+
+def _parse_vout(stdout: str) -> float:
+    """Parse the explicit ``print v(out)`` scalar from ngspice batch output."""
+    matches = re.findall(
+        r"(?im)^\s*v\(out\)\s*=\s*([-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?)\s*$",
+        stdout,
+    )
+    if not matches:
+        raise RuntimeError("ngspice output did not contain a scalar v(out)")
+    return float(matches[-1])
+
+
+def _tia(xs: np.ndarray, conductances: np.ndarray) -> float:
+    """Solve one independent TIA branch by invoking the ngspice CLI directly."""
+    executable = shutil.which("ngspice")
+    if executable is None:
+        raise OSError("ngspice executable is required for run_array")
+
+    netlist = _tia_netlist(xs, conductances)
+    path: Path | None = None
+    try:
+        with tempfile.NamedTemporaryFile("w", suffix=".cir", delete=False) as handle:
+            handle.write(netlist)
+            path = Path(handle.name)
+        result = subprocess.run(
+            [executable, "-b", str(path)],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+    finally:
+        if path is not None:
+            path.unlink(missing_ok=True)
+
+    if result.returncode != 0:
+        detail = (result.stderr or result.stdout).strip()
+        raise RuntimeError(f"ngspice failed with exit {result.returncode}: {detail}")
+    return _parse_vout(result.stdout + "\n" + result.stderr)
 
 
 def run_array(xs: Iterable[float], weights: Iterable[Iterable[float]]) -> np.ndarray:
@@ -136,8 +183,8 @@ def main() -> None:
     print(f"headroom = {headroom_report(xs, weights)}")
     try:
         spice = run_array(xs, weights)
-    except (ImportError, OSError) as exc:
-        print(f"SPICE unavailable: {exc}")
+    except (OSError, RuntimeError) as exc:
+        print(f"SPICE unavailable/failed: {exc}")
         return
     print(f"spice = {spice.tolist()} V")
     print(f"max |SPICE-ideal| = {float(np.max(np.abs(spice - ideal))):.6g} V")
