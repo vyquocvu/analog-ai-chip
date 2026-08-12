@@ -23,18 +23,30 @@ jobs:
           python book/0004-tiling/train.py
           python scripts/run_llm_sim.py
 
-  # Circuit-level verification. PySpice 1.5 reads NGSPICE_LIBRARY_PATH and
-  # otherwise guesses `libngspice.so`; pin the Ubuntu path explicitly.
+  # Legacy PySpice-backed 0005/0006 checks. Kept unchanged here; R3 does not
+  # silently rewrite their simulation backend while adding the new array.
   circuit-sim:
     runs-on: ubuntu-latest
-    env:
-      NGSPICE_LIBRARY_PATH: /usr/lib/x86_64-linux-gnu/libngspice.so
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: pip
-      - run: sudo apt-get update && sudo apt-get install -y ngspice libngspice0-dev
+      - run: sudo apt-get update && sudo apt-get install -y ngspice || true
       - run: python -m pip install -e '.[dev,sim]'
       - run: pytest tests/test_circuit_sim.py -q
+
+  # R3 evidence path: chapter 0012 invokes the ngspice CLI directly, avoiding
+  # PySpice 1.5's parser/shared-API incompatibility with ngspice 42 on Noble.
+  crossbar-2x2-spice:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: sudo apt-get update && sudo apt-get install -y ngspice
+      - run: python -m pip install -e '.[dev]'
+      - run: pytest tests/test_crossbar_2x2.py -q
