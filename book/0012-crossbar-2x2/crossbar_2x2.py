@@ -8,19 +8,18 @@ For each output column j:
 
     Vout_j = RF * GSCALE * sum_i ((x_i - VREF) * W[j, i])
 
-Each signed cell is differential: ``G+ - G- = W * GSCALE``.  The two columns
+Each signed cell is differential: ``G+ - G- = W * GSCALE``. The two columns
 share the same input voltages but have independent conductance cells and TIA
-readouts.  SPICE solves each independent TIA branch separately, matching the
+readouts. SPICE solves each independent TIA branch separately, matching the
 robust decomposition used by chapter 0007.
 
 The current SPICE model is DC operating-point only and uses an ideal high-gain
-VCVS op-amp.  Rail/headroom is therefore checked explicitly from the branch
+VCVS op-amp. Rail/headroom is therefore checked explicitly from the branch
 voltages rather than hidden behind a saturation model.
 """
 
 from __future__ import annotations
 
-import os
 from collections.abc import Iterable
 
 import numpy as np
@@ -95,22 +94,8 @@ def headroom_report(xs: Iterable[float], weights: Iterable[Iterable[float]]) -> 
     }
 
 
-def _configure_ngspice_library() -> None:
-    if "NGSPICE_LIBRARY_PATH" in os.environ:
-        return
-    for path in (
-        "/opt/homebrew/lib/libngspice.dylib",
-        "/usr/local/lib/libngspice.dylib",
-        "/usr/lib/x86_64-linux-gnu/libngspice.so",
-    ):
-        if os.path.exists(path):
-            os.environ["NGSPICE_LIBRARY_PATH"] = path
-            return
-
-
 def _tia(xs: np.ndarray, conductances: np.ndarray) -> float:
-    """Solve one independent TIA branch in ngspice and return its output voltage."""
-    _configure_ngspice_library()
+    """Solve one independent TIA branch through the ngspice subprocess backend."""
     try:
         from PySpice.Spice.Netlist import Circuit
         from PySpice.Unit import u_kOhm, u_V
@@ -125,7 +110,7 @@ def _tia(xs: np.ndarray, conductances: np.ndarray) -> float:
         c.R(f"w{i}", f"x{i}", "n", (1.0 / float(g) / 1e3) @ u_kOhm)
     c.R("rf", "n", "out", (RF / 1e3) @ u_kOhm)
     c.VCVS("op", "out", c.gnd, "vref", "n", 1e4)
-    analysis = c.simulator().operating_point()
+    analysis = c.simulator(simulator="ngspice-subprocess").operating_point()
     return float(np.ravel(np.asarray(analysis["out"]))[0])
 
 
