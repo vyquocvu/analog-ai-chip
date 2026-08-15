@@ -4,6 +4,8 @@ Mục tiêu không phải là chế tạo một con chip AI hiện đại trong 
 
 ## Cỗ máy
 
+![Kiến trúc hệ thống: host → controller → DAC → tile analog → tầng I/V → ADC](diagrams/system_architecture.svg)
+
 ```text
 Máy tính chủ (Host)
     |

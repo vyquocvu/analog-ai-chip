@@ -1,5 +1,7 @@
 # 0011 — Converter variation: R-2R resistor mismatch
 
+> **Bản tiếng Việt:** [`README.vi.md`](README.vi.md)
+
 Real silicon resistors are not exact: every resistor carries a relative
 mismatch `delta ~ N(0, sigma)`. The 0009/0010 chapters verified the *nominal*
 R-2R ladder; this chapter measures how mismatch propagates into the converter

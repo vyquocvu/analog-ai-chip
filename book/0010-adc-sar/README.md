@@ -1,5 +1,7 @@
 # 0010 — SAR ADC for the TIA output path
 
+> **Bản tiếng Việt:** [`README.vi.md`](README.vi.md)
+
 First design candidate for the ADC side of the converter signal path (R2): a
 **successive-approximation (SAR) converter** whose internal reference is the
 R-2R ladder of chapter 0009. It digitizes the **differential** output of the

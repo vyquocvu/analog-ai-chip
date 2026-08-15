@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 640" width="1040" height="640" font-family="Menlo,Consolas,monospace">
-<rect width="1040" height="640" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 830" width="1040" height="830" font-family="Menlo,Consolas,monospace">
+<rect width="1040" height="830" fill="#ffffff"/>
 <style>.w{stroke:#333;stroke-width:2.5;fill:none;}.lab{fill:#ca6f1e;font-size:12px;font-weight:bold;}.tp{fill:#1e8449;font-size:11px;font-weight:bold;}.o{fill:#eaf2f8;stroke:#1a5276;stroke-width:2;}.cap{fill:#7f8c8d;font-size:12px;}</style>
 <text x="520" y="30" text-anchor="middle" font-size="19" font-weight="bold" fill="#111">0005 Build: reference buffer + inverting summer (LM358, single 5 V)</text>
 <line x1="40" y1="90" x2="1000" y2="90" class="w"/>
@@ -61,4 +61,5 @@
 <text x="116" y="104" class="tp">TP1 +5V</text>
 <text x="116" y="594" class="tp">TP2 gnd</text>
 <text x="520" y="620" text-anchor="middle" class="cap">Vout = 2.5 − (0.5·(x1−2.5) + 0.25·(x2−2.5)) · n ≈ 2.5 V virtual ground</text>
+<text x="520" y="815" text-anchor="middle" class="cap">inputs x1 (680), x2 (770) enter through R1 2k, R2 4k and sum at virtual-ground node n (TP5, 560) — LM358 on a single 5 V rail</text>
 </svg>

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" width="960" height="720" font-family="Menlo,Consolas,monospace">
+  <rect width="960" height="720" fill="#ffffff"/>
+  <style>
+    .dig{fill:#eaf2f8;stroke:#1a5276;stroke-width:2;}
+    .ana{fill:#fdf2e9;stroke:#ca6f1e;stroke-width:2;}
+    .ctl{fill:#f4ecf7;stroke:#6c3483;stroke-width:2;}
+    .wire{stroke:#333;stroke-width:2;fill:none;}
+    .txt{fill:#111;font-size:13px;}
+    .lab{fill:#111;font-size:12px;font-weight:bold;}
+    .cap{fill:#7f8c8d;font-size:12px;}
+  </style>
+
+  <text x="480" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#111">The machine: a small modular neural computer (0000)</text>
+  <text x="480" y="52" text-anchor="middle" class="cap">matrix-vector multiplication happens physically — voltages × conductances → summed currents</text>
+
+  <!-- host -->
+  <rect class="dig" x="380" y="80" width="200" height="46" rx="6"/>
+  <text x="480" y="100" text-anchor="middle" class="lab">Host computer</text>
+  <text x="480" y="116" text-anchor="middle" class="cap">compilation · calibration · results</text>
+
+  <!-- USB -->
+  <line class="wire" x1="480" y1="126" x2="480" y2="156"/>
+  <polygon points="475,156 485,156 480,166" fill="#333"/>
+  <text x="490" y="148" class="cap">USB / serial</text>
+
+  <!-- controller -->
+  <rect class="ctl" x="380" y="166" width="200" height="46" rx="6"/>
+  <text x="480" y="186" text-anchor="middle" class="lab">Controller</text>
+  <text x="480" y="202" text-anchor="middle" class="cap">calibration storage · sequencing</text>
+
+  <!-- to DAC -->
+  <line class="wire" x1="480" y1="212" x2="480" y2="242"/>
+  <polygon points="475,242 485,242 480,252" fill="#333"/>
+
+  <!-- DAC -->
+  <rect class="ana" x="380" y="252" width="200" height="46" rx="6"/>
+  <text x="480" y="272" text-anchor="middle" class="lab">DAC / input driver</text>
+  <text x="480" y="288" text-anchor="middle" class="cap">x as row voltages (digital → analog)</text>
+
+  <!-- to tile -->
+  <line class="wire" x1="480" y1="298" x2="480" y2="328"/>
+  <polygon points="475,328 485,328 480,338" fill="#333"/>
+  <text x="490" y="320" class="cap">row voltages x</text>
+
+  <!-- analog tile -->
+  <rect class="ana" x="330" y="338" width="300" height="76" rx="6"/>
+  <text x="480" y="362" text-anchor="middle" class="lab">Analog conductance tile</text>
+  <text x="480" y="380" text-anchor="middle" class="cap">programmed conductances W · column currents</text>
+  <text x="480" y="396" text-anchor="middle" class="cap">I = G·V, Σ at virtual ground (Ohm + Kirchhoff)</text>
+
+  <!-- to I/V -->
+  <line class="wire" x1="480" y1="414" x2="480" y2="444"/>
+  <polygon points="475,444 485,444 480,454" fill="#333"/>
+  <text x="490" y="436" class="cap">column currents</text>
+
+  <!-- I/V stage -->
+  <rect class="ana" x="380" y="454" width="200" height="46" rx="6"/>
+  <text x="480" y="474" text-anchor="middle" class="lab">Current-to-voltage stage</text>
+  <text x="480" y="490" text-anchor="middle" class="cap">transimpedance + differential readout</text>
+
+  <!-- to ADC -->
+  <line class="wire" x1="480" y1="500" x2="480" y2="530"/>
+  <polygon points="475,530 485,530 480,540" fill="#333"/>
+
+  <!-- ADC -->
+  <rect class="ana" x="380" y="540" width="200" height="46" rx="6"/>
+  <text x="480" y="560" text-anchor="middle" class="lab">ADC / measurement</text>
+  <text x="480" y="576" text-anchor="middle" class="cap">Vout → digital activation</text>
+
+  <!-- feedback loop back to host -->
+  <line class="wire" x1="580" y1="563" x2="660" y2="563"/>
+  <line class="wire" x1="660" y1="563" x2="660" y2="103"/>
+  <line class="wire" x1="660" y1="103" x2="585" y2="103"/>
+  <polygon points="585,98 585,108 575,103" fill="#333"/>
+  <text x="670" y="330" class="cap" transform="rotate(90 670 330)">digital activation, control, next layer</text>
+
+  <!-- modular boundary -->
+  <text x="480" y="624" text-anchor="middle" class="lab">Modular boundary — replace any one box without touching the others</text>
+  <text x="480" y="646" class="cap">weight-storage technology · input converter · analog array · output converter · controller · host software</text>
+  <rect x="60" y="660" width="16" height="12" fill="#eaf2f8" stroke="#1a5276"/>
+  <text x="82" y="670" class="cap">digital / control</text>
+  <rect x="190" y="660" width="16" height="12" fill="#fdf2e9" stroke="#ca6f1e"/>
+  <text x="212" y="670" class="cap">analog signal path</text>
+  <rect x="330" y="660" width="16" height="12" fill="#f4ecf7" stroke="#6c3483"/>
+  <text x="352" y="670" class="cap">controller / calibration</text>
+  <text x="480" y="700" text-anchor="middle" class="cap">hybrid v0.1: MVM is analog; control, calibration, activation, scheduling and partial-sum accumulation may stay digital</text>
+</svg>

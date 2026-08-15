@@ -31,6 +31,8 @@ phỏng; không phải kết quả silicon đo thật.
 
 ## Mạch
 
+![Cột crossbar vi sai dòng: ô G+ / G-, hai tầng TIA, đọc vi sai](diagrams/crossbar_column.svg)
+
 - Mỗi `w_i` hiện thực bằng hai conductance: `G+_i − G-_i = w_i·GSCALE`
   (zero cân bằng tại `G0`, đúng như `map_differential`).
 - Ngõ vào lái cả hai ô; dòng cộng tại các node virtual-ground `np` (plus) và

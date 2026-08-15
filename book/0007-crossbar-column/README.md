@@ -1,5 +1,7 @@
 # 0007 — Current-mode differential crossbar column
 
+> **Bản tiếng Việt:** [`README.vi.md`](README.vi.md)
+
 Upgrade from the 0005/0006 **voltage-mode resistor summer** to the architecture
 the simulator (`analog_llm/crossbar.py`, `tile.py`) actually models: a
 **current-mode crossbar column with differential conductance cells** and a
@@ -31,6 +33,8 @@ Signal envelope: `Vout = RF·GSCALE·Σ w_i·(x_i−VREF)`. All values are simul
 targets; nothing here is a real measured silicon result.
 
 ## Circuit
+
+![Current-mode differential crossbar column: G+ / G- cells, two TIA stages, differential readout](diagrams/crossbar_column.svg)
 
 - Each `w_i` realized by two conductances: `G+_i − G-_i = w_i·GSCALE`
   (balanced zero at `G0`, exactly as `map_differential` does).

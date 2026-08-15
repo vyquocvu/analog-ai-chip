@@ -1,8 +1,12 @@
 # 0000 — What We Are Building
 
+> **Bản tiếng Việt:** [`README.vi.md`](README.vi.md)
+
 The goal is not to fabricate a modern AI chip in a garage. The goal is to build a small modular neural computer whose matrix-vector multiplication physically happens through voltages, conductances, and summed currents.
 
 ## The machine
+
+![System architecture: host → controller → DAC → analog tile → I/V stage → ADC](diagrams/system_architecture.svg)
 
 ```text
 Host computer
