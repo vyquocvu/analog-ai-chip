@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" width="960" height="500" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <style>
+      .title { font-size: 20px; font-weight: bold; fill: #0f172a; }
+      .subtitle { font-size: 13px; fill: #64748b; }
+      .box { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 6; }
+      .box-blue { fill: #eff6ff; stroke: #3b82f6; stroke-width: 1.5; rx: 6; }
+      .box-red { fill: #fff1f2; stroke: #f43f5e; stroke-width: 1.5; rx: 6; }
+      .box-green { fill: #ecfdf5; stroke: #10b981; stroke-width: 1.5; rx: 6; }
+      .wire-r { stroke: #2563eb; stroke-width: 2; fill: none; }
+      .wire-c { stroke: #ea580c; stroke-width: 2; fill: none; }
+      .label-bold { font-size: 13px; font-weight: bold; fill: #0f172a; }
+      .label-sub { font-size: 11px; fill: #64748b; }
+      .math-box { font-family: 'Menlo', 'Consolas', monospace; font-size: 11px; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="500" fill="#ffffff"/>
+
+  <!-- Title Header -->
+  <text x="480" y="32" text-anchor="middle" class="title">Distributed Wire Resistance &amp; IR Drop Mesh (0017)</text>
+  <text x="480" y="52" text-anchor="middle" class="subtitle">Parasitic metal interconnect resistances (R_wire) causing spatial voltage degradation</text>
+
+  <!-- Main Schematic Container -->
+  <rect x="40" y="75" width="560" height="400" class="box"/>
+  <text x="55" y="100" class="label-bold">2D Distributed Resistive Crossbar Network</text>
+
+  <!-- Row Drivers (Left) -->
+  <text x="55" y="145" class="math-box" font-weight="bold" fill="#2563eb">Row 0 (V_in,0)</text>
+  <line x1="140" y1="140" x2="170" y2="140" class="wire-r"/>
+
+  <text x="55" y="275" class="math-box" font-weight="bold" fill="#2563eb">Row N-1 (V_in,N-1)</text>
+  <line x1="155" y1="270" x2="170" y2="270" class="wire-r"/>
+
+  <!-- Vertical dots for rows -->
+  <text x="100" y="210" text-anchor="middle" font-size="18" fill="#64748b" font-weight="bold">⋮</text>
+
+  <!-- Crosspoints and Wire Resistors -->
+
+  <!-- Cell (0, 0) - Top Left (BEST CASE) -->
+  <rect x="170" y="133" width="30" height="14" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" rx="2"/>
+  <text x="185" y="144" text-anchor="middle" class="math-box" font-size="9" fill="#2563eb">R_w</text>
+  <circle cx="210" cy="140" r="4" fill="#2563eb"/>
+
+  <rect x="195" y="170" width="30" height="30" class="box-green"/>
+  <text x="210" y="188" text-anchor="middle" class="math-box" font-weight="bold" fill="#047857">G₀₀</text>
+  <line x1="210" y1="140" x2="210" y2="170" stroke="#334155" stroke-width="1.5"/>
+  <line x1="210" y1="200" x2="210" y2="230" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Row 0 Wire Segment to (0, M-1) -->
+  <line x1="210" y1="140" x2="250" y2="140" class="wire-r"/>
+  <rect x="250" y="133" width="30" height="14" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" rx="2"/>
+  <text x="265" y="144" text-anchor="middle" class="math-box" font-size="9" fill="#2563eb">R_w</text>
+  <line x1="280" y1="140" x2="330" y2="140" class="wire-r"/>
+  <text x="360" y="144" text-anchor="middle" font-size="16" fill="#64748b" font-weight="bold">⋯</text>
+  <line x1="390" y1="140" x2="430" y2="140" class="wire-r"/>
+  <rect x="430" y="133" width="30" height="14" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" rx="2"/>
+  <text x="445" y="144" text-anchor="middle" class="math-box" font-size="9" fill="#2563eb">R_w</text>
+  <circle cx="475" cy="140" r="4" fill="#2563eb"/>
+
+  <!-- Cell (0, M-1) - Top Right -->
+  <rect x="460" y="170" width="30" height="30" class="box"/>
+  <text x="475" y="188" text-anchor="middle" class="math-box" font-weight="bold">G₀,ₘ</text>
+  <line x1="475" y1="140" x2="475" y2="170" stroke="#334155" stroke-width="1.5"/>
+  <line x1="475" y1="200" x2="475" y2="230" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Vertical Column Dots -->
+  <text x="210" y="240" text-anchor="middle" font-size="16" fill="#64748b" font-weight="bold">⋮</text>
+  <text x="475" y="240" text-anchor="middle" font-size="16" fill="#64748b" font-weight="bold">⋮</text>
+
+  <!-- Row N-1 -->
+  <rect x="170" y="263" width="30" height="14" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" rx="2"/>
+  <text x="185" y="274" text-anchor="middle" class="math-box" font-size="9" fill="#2563eb">R_w</text>
+  <circle cx="210" cy="270" r="4" fill="#2563eb"/>
+
+  <!-- Cell (N-1, 0) - Bottom Left -->
+  <rect x="195" y="300" width="30" height="30" class="box"/>
+  <text x="210" y="318" text-anchor="middle" class="math-box" font-weight="bold">Gₙ,₀</text>
+  <line x1="210" y1="270" x2="210" y2="300" stroke="#334155" stroke-width="1.5"/>
+  <line x1="210" y1="330" x2="210" y2="360" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Row N-1 Wire to (N-1, M-1) -->
+  <line x1="210" y1="270" x2="250" y2="270" class="wire-r"/>
+  <rect x="250" y="263" width="30" height="14" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" rx="2"/>
+  <text x="265" y="274" text-anchor="middle" class="math-box" font-size="9" fill="#2563eb">R_w</text>
+  <line x1="280" y1="270" x2="330" y2="270" class="wire-r"/>
+  <text x="360" y="274" text-anchor="middle" font-size="16" fill="#64748b" font-weight="bold">⋯</text>
+  <line x1="390" y1="270" x2="430" y2="270" class="wire-r"/>
+  <rect x="430" y="263" width="30" height="14" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" rx="2"/>
+  <text x="445" y="274" text-anchor="middle" class="math-box" font-size="9" fill="#2563eb">R_w</text>
+  <circle cx="475" cy="270" r="4" fill="#2563eb"/>
+
+  <!-- Cell (N-1, M-1) - Bottom Right (WORST CASE CORNER) -->
+  <rect x="460" y="300" width="30" height="30" class="box-red"/>
+  <text x="475" y="318" text-anchor="middle" class="math-box" font-weight="bold" fill="#be123c">Gₙ,ₘ</text>
+  <line x1="475" y1="270" x2="475" y2="300" stroke="#334155" stroke-width="1.5"/>
+  <line x1="475" y1="330" x2="475" y2="360" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Column Outputs with Wire Resistors to TIA -->
+  <!-- Col 0 -->
+  <rect x="203" y="360" width="14" height="24" fill="#ffffff" stroke="#ea580c" stroke-width="1.5" rx="2"/>
+  <text x="210" y="375" text-anchor="middle" class="math-box" font-size="9" fill="#ea580c">R_w</text>
+  <line x1="210" y1="384" x2="210" y2="420" class="wire-c"/>
+  <text x="210" y="440" text-anchor="middle" class="math-box" font-weight="bold" fill="#ea580c">Col 0 TIA</text>
+
+  <!-- Col M-1 -->
+  <rect x="468" y="360" width="14" height="24" fill="#ffffff" stroke="#ea580c" stroke-width="1.5" rx="2"/>
+  <text x="475" y="375" text-anchor="middle" class="math-box" font-size="9" fill="#ea580c">R_w</text>
+  <line x1="475" y1="384" x2="475" y2="420" class="wire-c"/>
+  <text x="475" y="440" text-anchor="middle" class="math-box" font-weight="bold" fill="#ea580c">Col M-1 TIA</text>
+
+  <!-- Right: Physical Analysis Panel -->
+  <rect x="620" y="75" width="300" height="400" class="box"/>
+  <text x="635" y="102" class="label-bold">IR Drop Degradation Mechanics</text>
+
+  <rect x="635" y="125" width="270" height="90" class="box-green"/>
+  <text x="645" y="148" class="label-bold" fill="#047857">1. Near Corner Cell (0, 0):</text>
+  <text x="645" y="170" class="math-box">• Min row wire distance</text>
+  <text x="645" y="188" class="math-box">• Direct connection to driver</text>
+  <text x="645" y="204" class="math-box" font-weight="bold">V_cell(0, 0) ≈ V_in - V_REF</text>
+
+  <rect x="635" y="230" width="270" height="110" class="box-red"/>
+  <text x="645" y="253" class="label-bold" fill="#be123c">2. Far Corner Cell (N-1, M-1):</text>
+  <text x="645" y="275" class="math-box">• Max row voltage drop (M · R_w)</text>
+  <text x="645" y="293" class="math-box">• Max column ground rise (N · R_w)</text>
+  <text x="645" y="313" class="math-box" font-weight="bold" fill="#9f1239">V_cell ≪ V_in - V_REF</text>
+  <text x="645" y="328" class="label-sub" fill="#be123c">Up to 48% voltage loss at 64×64!</text>
+
+  <rect x="635" y="355" width="270" height="105" class="box-blue"/>
+  <text x="645" y="378" class="label-blue">Scaling Law &amp; Tile Limit:</text>
+  <text x="645" y="398" class="math-box" font-weight="bold">Error_IR ∝ N² · R_wire · G_max</text>
+  <text x="645" y="420" class="math-box">• 16×16: ~2.3% error (Good)</text>
+  <text x="645" y="438" class="math-box">• 32×32: ~8.5% error (Tolerable)</text>
+  <text x="645" y="454" class="math-box" fill="#dc2626">• 64×64: ~27.6% error (Breakdown)</text>
+
+</svg>

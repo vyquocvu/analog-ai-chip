@@ -1,0 +1,276 @@
+{
+  "schema_version": "0.1.0",
+  "chapter": "0017-ir-drop",
+  "title": "Interconnect Wire Resistance and IR Drop Scaling",
+  "parameters": {
+    "vref_v": 2.5,
+    "v_read_input_v": 0.25,
+    "g_lrs_uS": 100.0,
+    "g_hrs_uS": 10.0,
+    "r_wire_sweeps_ohm": [
+      0.1,
+      0.5,
+      1.0,
+      2.0,
+      5.0
+    ],
+    "array_sizes": [
+      2,
+      4,
+      8,
+      16,
+      32,
+      64
+    ]
+  },
+  "scaling_results": [
+    {
+      "size": 2,
+      "r_wire_sweeps": {
+        "r_0.1ohm": {
+          "r_wire_ohm": 0.1,
+          "rel_error_pct": 0.005024672443325953,
+          "far_corner_v_cell": 0.2499875006249681,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 0.004999750012757431
+        },
+        "r_0.5ohm": {
+          "r_wire_ohm": 0.5,
+          "rel_error_pct": 0.025118248148486958,
+          "far_corner_v_cell": 0.2499375156210326,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 0.024993751586954716
+        },
+        "r_1.0ohm": {
+          "r_wire_ohm": 1.0,
+          "rel_error_pct": 0.050223620117961366,
+          "far_corner_v_cell": 0.2498750624682673,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 0.04997501269308202
+        },
+        "r_2.0ohm": {
+          "r_wire_ohm": 2.0,
+          "rel_error_pct": 0.10039577686481016,
+          "far_corner_v_cell": 0.2497502497462607,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 0.09990010149572015
+        },
+        "r_5.0ohm": {
+          "r_wire_ohm": 5.0,
+          "rel_error_pct": 0.25060426882762127,
+          "far_corner_v_cell": 0.2493765585414276,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 0.24937658342896185
+        }
+      }
+    },
+    {
+      "size": 4,
+      "r_wire_sweeps": {
+        "r_0.1ohm": {
+          "r_wire_ohm": 0.1,
+          "rel_error_pct": 0.01517158273734601,
+          "far_corner_v_cell": 0.24996500487428408,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 0.013998050286367913
+        },
+        "r_0.5ohm": {
+          "r_wire_ohm": 0.5,
+          "rel_error_pct": 0.07580971646375279,
+          "far_corner_v_cell": 0.24982512178529026,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 0.06995128588389576
+        },
+        "r_1.0ohm": {
+          "r_wire_ohm": 1.0,
+          "rel_error_pct": 0.15149914506485443,
+          "far_corner_v_cell": 0.24965048678285884,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 0.13980528685646476
+        },
+        "r_2.0ohm": {
+          "r_wire_ohm": 2.0,
+          "rel_error_pct": 0.3025183292760579,
+          "far_corner_v_cell": 0.24930194427168617,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 0.27922229132553156
+        },
+        "r_5.0ohm": {
+          "r_wire_ohm": 5.0,
+          "rel_error_pct": 0.7527192795552804,
+          "far_corner_v_cell": 0.24826209840629776,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 0.6951606374808961
+        }
+      }
+    },
+    {
+      "size": 8,
+      "r_wire_sweeps": {
+        "r_0.1ohm": {
+          "r_wire_ohm": 0.1,
+          "rel_error_pct": 0.051838877841024235,
+          "far_corner_v_cell": 0.24989004662851189,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 0.043981348595245606
+        },
+        "r_0.5ohm": {
+          "r_wire_ohm": 0.5,
+          "rel_error_pct": 0.25862131053146,
+          "far_corner_v_cell": 0.24945116356892205,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 0.21953457243117924
+        },
+        "r_1.0ohm": {
+          "r_wire_ohm": 1.0,
+          "rel_error_pct": 0.5158171857175385,
+          "far_corner_v_cell": 0.24890464360490894,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 0.4381425580364251
+        },
+        "r_2.0ohm": {
+          "r_wire_ohm": 2.0,
+          "rel_error_pct": 1.0259808940166626,
+          "far_corner_v_cell": 0.24781848968917242,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 0.8726041243310334
+        },
+        "r_5.0ohm": {
+          "r_wire_ohm": 5.0,
+          "rel_error_pct": 2.523492001760643,
+          "far_corner_v_cell": 0.24461400290959556,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 2.154398836161775
+        }
+      }
+    },
+    {
+      "size": 16,
+      "r_wire_sweeps": {
+        "r_0.1ohm": {
+          "r_wire_ohm": 0.1,
+          "rel_error_pct": 0.1904422894176106,
+          "far_corner_v_cell": 0.24962053129521689,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 0.15178748191324587
+        },
+        "r_0.5ohm": {
+          "r_wire_ohm": 0.5,
+          "rel_error_pct": 0.9444268545646435,
+          "far_corner_v_cell": 0.24811320257200586,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 0.7547189711976543
+        },
+        "r_1.0ohm": {
+          "r_wire_ohm": 1.0,
+          "rel_error_pct": 1.8697587286187805,
+          "far_corner_v_cell": 0.24625241718629276,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 1.499033125482896
+        },
+        "r_2.0ohm": {
+          "r_wire_ohm": 2.0,
+          "rel_error_pct": 3.6654832033873466,
+          "far_corner_v_cell": 0.24260660042800053,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 2.957359828799788
+        },
+        "r_5.0ohm": {
+          "r_wire_ohm": 5.0,
+          "rel_error_pct": 8.651229287320007,
+          "far_corner_v_cell": 0.23223725710493515,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 7.105097158025941
+        }
+      }
+    },
+    {
+      "size": 32,
+      "r_wire_sweeps": {
+        "r_0.1ohm": {
+          "r_wire_ohm": 0.1,
+          "rel_error_pct": 0.7253142468182866,
+          "far_corner_v_cell": 0.24860690492949722,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 0.5572380282011125
+        },
+        "r_0.5ohm": {
+          "r_wire_ohm": 0.5,
+          "rel_error_pct": 3.5155631727339403,
+          "far_corner_v_cell": 0.24316911698475652,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 2.732353206097393
+        },
+        "r_1.0ohm": {
+          "r_wire_ohm": 1.0,
+          "rel_error_pct": 6.772637931593399,
+          "far_corner_v_cell": 0.23665978940268584,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 5.336084238925665
+        },
+        "r_2.0ohm": {
+          "r_wire_ohm": 2.0,
+          "rel_error_pct": 12.620862188793941,
+          "far_corner_v_cell": 0.2245158872527262,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 10.19364509890952
+        },
+        "r_5.0ohm": {
+          "r_wire_ohm": 5.0,
+          "rel_error_pct": 26.228159312235793,
+          "far_corner_v_cell": 0.1938133021855517,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 22.474679125779318
+        }
+      }
+    },
+    {
+      "size": 64,
+      "r_wire_sweeps": {
+        "r_0.1ohm": {
+          "r_wire_ohm": 0.1,
+          "rel_error_pct": 2.774143980352353,
+          "far_corner_v_cell": 0.24473719641106984,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 2.105121435572066
+        },
+        "r_0.5ohm": {
+          "r_wire_ohm": 0.5,
+          "rel_error_pct": 12.377556369352547,
+          "far_corner_v_cell": 0.2254629565494577,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 9.814817380216923
+        },
+        "r_1.0ohm": {
+          "r_wire_ohm": 1.0,
+          "rel_error_pct": 21.840779438055094,
+          "far_corner_v_cell": 0.20474125437703394,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 18.103498249186423
+        },
+        "r_2.0ohm": {
+          "r_wire_ohm": 2.0,
+          "rel_error_pct": 35.42787619202646,
+          "far_corner_v_cell": 0.17167025755982168,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 31.331896976071327
+        },
+        "r_5.0ohm": {
+          "r_wire_ohm": 5.0,
+          "rel_error_pct": 56.86794498571275,
+          "far_corner_v_cell": 0.11084492009417746,
+          "ideal_cell_v": 0.25,
+          "voltage_deficit_pct": 55.66203196232902
+        }
+      }
+    }
+  ],
+  "summary": {
+    "error_at_16x16_1ohm_pct": 1.8697587286187805,
+    "error_at_32x32_1ohm_pct": 6.772637931593399,
+    "error_at_64x64_1ohm_pct": 21.840779438055094,
+    "recommended_max_tile_dim": 32,
+    "evidence_class": "derived",
+    "provenance": "Exact distributed 2D nodal analysis validated against SPICE mesh solver"
+  }
+}
