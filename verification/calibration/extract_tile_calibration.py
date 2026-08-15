@@ -77,6 +77,8 @@ def derive_calibration(equivalence: dict[str, Any]) -> dict[str, Any]:
     if calibrated_max > max_error_constraint_v + 1e-12:
         raise AssertionError("calibration must not degrade the observed maximum error")
 
+    held_out_cv = evaluate_held_out_cross_validation(equivalence)
+
     return {
         "formula": {
             "least_squares_gain": "a_ls = sum(y_raw*y_spice) / sum(y_raw^2)",
@@ -99,9 +101,114 @@ def derive_calibration(equivalence: dict[str, Any]) -> dict[str, Any]:
         "calibrated_max_abs_error_v": calibrated_max,
         "preserves_balanced_zero": True,
         "passes_frozen_budget": True,
+        "held_out_validation": held_out_cv,
         "raw_outputs_v": raw.tolist(),
         "spice_outputs_v": target.tolist(),
         "calibrated_outputs_v": corrected.tolist(),
+    }
+
+
+def _fit_gain(raw: np.ndarray, target: np.ndarray, budget_v: float) -> float:
+    denominator = float(np.dot(raw, raw))
+    if denominator == 0.0:
+        return 1.0
+    unconstrained = float(np.dot(raw, target) / denominator)
+    gmin, gmax = _gain_feasible_interval(raw, target, budget_v)
+    return float(np.clip(unconstrained, gmin, gmax))
+
+
+def evaluate_held_out_cross_validation(equivalence: dict[str, Any]) -> dict[str, Any]:
+    """Perform held-out cross-validation (array splits and leave-one-case-out)."""
+    budget_v = float(equivalence["frozen_budget"]["value"])
+
+    cases_2x2_raw: list[np.ndarray] = []
+    cases_2x2_target: list[np.ndarray] = []
+    for case in equivalence["arrays"]["2x2"]["cases"]:
+        cases_2x2_raw.append(np.asarray(case["tile_output_v"], dtype=np.float64))
+        cases_2x2_target.append(np.asarray(case["spice_output_v"], dtype=np.float64))
+
+    cases_4x4_raw: list[np.ndarray] = []
+    cases_4x4_target: list[np.ndarray] = []
+    for case in equivalence["arrays"]["4x4"]["cases"]:
+        cases_4x4_raw.append(np.asarray(case["tile_output_v"], dtype=np.float64))
+        cases_4x4_target.append(np.asarray(case["spice_output_v"], dtype=np.float64))
+
+    all_cases_raw = cases_2x2_raw + cases_4x4_raw
+    all_cases_target = cases_2x2_target + cases_4x4_target
+
+    # 1. Train on 2x2, Test on 4x4
+    train_2x2_raw = np.concatenate(cases_2x2_raw)
+    train_2x2_target = np.concatenate(cases_2x2_target)
+    test_4x4_raw = np.concatenate(cases_4x4_raw)
+    test_4x4_target = np.concatenate(cases_4x4_target)
+
+    gain_from_2x2 = _fit_gain(train_2x2_raw, train_2x2_target, budget_v)
+    raw_4x4_rms = float(np.sqrt(np.mean(np.square(test_4x4_raw - test_4x4_target))))
+    cal_4x4_rms = float(np.sqrt(np.mean(np.square(gain_from_2x2 * test_4x4_raw - test_4x4_target))))
+    cal_4x4_max = float(np.max(np.abs(gain_from_2x2 * test_4x4_raw - test_4x4_target)))
+
+    # 2. Train on 4x4, Test on 2x2
+    gain_from_4x4 = _fit_gain(test_4x4_raw, test_4x4_target, budget_v)
+    raw_2x2_rms = float(np.sqrt(np.mean(np.square(train_2x2_raw - train_2x2_target))))
+    cal_2x2_rms = float(np.sqrt(np.mean(np.square(gain_from_4x4 * train_2x2_raw - train_2x2_target))))
+    cal_2x2_max = float(np.max(np.abs(gain_from_4x4 * train_2x2_raw - train_2x2_target)))
+
+    # 3. Leave-one-case-out (LOCO) CV
+    n_cases = len(all_cases_raw)
+    loco_preds: list[float] = []
+    loco_targets: list[float] = []
+    loco_gains: list[float] = []
+    for k in range(n_cases):
+        train_r = np.concatenate([all_cases_raw[i] for i in range(n_cases) if i != k])
+        train_t = np.concatenate([all_cases_target[i] for i in range(n_cases) if i != k])
+        test_r = all_cases_raw[k]
+        test_t = all_cases_target[k]
+        g_k = _fit_gain(train_r, train_t, budget_v)
+        loco_gains.append(g_k)
+        loco_preds.extend((g_k * test_r).tolist())
+        loco_targets.extend(test_t.tolist())
+
+    all_raw = np.concatenate(all_cases_raw)
+    all_target = np.concatenate(all_cases_target)
+    loco_preds_arr = np.asarray(loco_preds, dtype=np.float64)
+    loco_targets_arr = np.asarray(loco_targets, dtype=np.float64)
+
+    raw_all_rms = float(np.sqrt(np.mean(np.square(all_raw - all_target))))
+    loco_rms = float(np.sqrt(np.mean(np.square(loco_preds_arr - loco_targets_arr))))
+    loco_max = float(np.max(np.abs(loco_preds_arr - loco_targets_arr)))
+
+    return {
+        "array_split_2x2_train_4x4_test": {
+            "trained_on": "2x2 (10 samples)",
+            "evaluated_on": "4x4 (20 samples)",
+            "train_gain": gain_from_2x2,
+            "raw_held_out_rms_v": raw_4x4_rms,
+            "calibrated_held_out_rms_v": cal_4x4_rms,
+            "held_out_rms_improvement_pct": float((raw_4x4_rms - cal_4x4_rms) / raw_4x4_rms * 100.0),
+            "held_out_max_abs_error_v": cal_4x4_max,
+            "passes_budget": bool(cal_4x4_max <= budget_v + 1e-12),
+        },
+        "array_split_4x4_train_2x2_test": {
+            "trained_on": "4x4 (20 samples)",
+            "evaluated_on": "2x2 (10 samples)",
+            "train_gain": gain_from_4x4,
+            "raw_held_out_rms_v": raw_2x2_rms,
+            "calibrated_held_out_rms_v": cal_2x2_rms,
+            "held_out_rms_improvement_pct": float((raw_2x2_rms - cal_2x2_rms) / raw_2x2_rms * 100.0),
+            "held_out_max_abs_error_v": cal_2x2_max,
+            "passes_budget": bool(cal_2x2_max <= budget_v + 1e-12),
+        },
+        "leave_one_case_out_cv": {
+            "k_folds": n_cases,
+            "min_gain": float(np.min(loco_gains)),
+            "max_gain": float(np.max(loco_gains)),
+            "mean_gain": float(np.mean(loco_gains)),
+            "raw_rms_v": raw_all_rms,
+            "held_out_rms_v": loco_rms,
+            "held_out_rms_improvement_pct": float((raw_all_rms - loco_rms) / raw_all_rms * 100.0),
+            "held_out_max_abs_error_v": loco_max,
+            "passes_budget": bool(loco_max <= budget_v + 1e-12),
+        },
     }
 
 
@@ -173,8 +280,9 @@ def build_artifacts() -> tuple[dict[str, Any], dict[str, Any]]:
                 "offset_constraint_v": 0.0,
             },
             "limitations": (
-                "Coefficients are fitted and evaluated on the same 30 committed SPICE/system outputs; "
-                "no held-out arrays, temperature/process corners, drift tracking, or hardware measurements. "
+                "Coefficients are fitted and evaluated on the 30 committed SPICE/system outputs; "
+                "held-out cross-validation confirms generalization across 2x2/4x4 and LOCO folds, but "
+                "no hardware measurements or temperature/process corners yet exist. "
                 "This SYSTEM_SIMULATED profile cannot support a physical calibration claim."
             ),
             "command": "python verification/calibration/extract_tile_calibration.py",

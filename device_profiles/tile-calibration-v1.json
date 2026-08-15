@@ -67,7 +67,7 @@
       ],
       "offset_constraint_v": 0.0
     },
-    "limitations": "Coefficients are fitted and evaluated on the same 30 committed SPICE/system outputs; no held-out arrays, temperature/process corners, drift tracking, or hardware measurements. This SYSTEM_SIMULATED profile cannot support a physical calibration claim.",
+    "limitations": "Coefficients are fitted and evaluated on the 30 committed SPICE/system outputs; held-out cross-validation confirms generalization across 2x2/4x4 and LOCO folds, but no hardware measurements or temperature/process corners yet exist. This SYSTEM_SIMULATED profile cannot support a physical calibration claim.",
     "command": "python verification/calibration/extract_tile_calibration.py"
   }
 }

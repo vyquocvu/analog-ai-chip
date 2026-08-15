@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 14px; font-weight: 700; }
+.box-text { font-size: 12px; fill: #334155; }
+.formula { font: 12px ui-monospace, monospace; fill: #1e293b; }
+.arrow { stroke: #64748b; stroke-width: 2; marker-end: url(#arrow); }
+</style>
+<defs>
+<marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+  <path d="M0,0 L8,4 L0,8 Z" fill="#64748b"/>
+</marker>
+</defs>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Chapter 0025 — NoC &amp; Spatial Reduction Network</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Partial-sum spatial reduction tree vs 2D mesh data movement and energy ledgers</text>
+
+<!-- Binary Tree Reduction Box -->
+<rect x="50" y="85" width="410" height="420" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="70" y="115" class="box-title" fill="#1d4ed8">1. Spatial Binary Adder Tree (H-Tree)</text>
+<text x="70" y="135" class="sub">Optimized for logarithmic latency across column tile reductions</text>
+
+<rect x="70" y="155" width="370" height="155" rx="8" fill="white" stroke="#93c5fd"/>
+<text x="85" y="180" class="box-title" fill="#1e40af">Reduction Characteristics (TinyGPT 4×4 Tiles)</text>
+<text x="85" y="202" class="box-text">• Column tiles per row: Kc = 4 (Log2 levels = 2)</text>
+<text x="85" y="222" class="box-text">• Partial-sum vector transfers: 4 rows × (4−1) = 12 transfers</text>
+<text x="85" y="242" class="box-text">• Reduction traffic: 144 Bytes</text>
+<text x="85" y="262" class="box-text">• Critical path latency: 2.0 ns (2 hops @ 1.0 ns/hop)</text>
+<text x="85" y="282" class="box-text">• Interconnect energy: 0.1600 nJ</text>
+
+<rect x="70" y="325" width="370" height="160" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="85" y="350" class="box-title">Key Architectural Properties</text>
+<text x="85" y="375" class="box-text">✔ O(log2 Kc) hop latency minimizes pipeline delay</text>
+<text x="85" y="395" class="box-text">✔ Localized adder nodes sum partials in-flight</text>
+<text x="85" y="415" class="box-text">✔ Dedicated point-to-point tree wires eliminate contention</text>
+<text x="85" y="440" class="formula">T_tree = ceil(log2(Kc)) × t_hop</text>
+
+<!-- 2D Mesh & Ring Comparison Box -->
+<rect x="500" y="85" width="410" height="420" rx="12" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="520" y="115" class="box-title" fill="#7e22ce">2. 2D Mesh NoC &amp; Network Comparison</text>
+<text x="520" y="135" class="sub">General-purpose packet-switched routing vs dedicated trees</text>
+
+<rect x="520" y="155" width="370" height="155" rx="8" fill="white" stroke="#d8b4fe"/>
+<text x="535" y="180" class="box-title" fill="#6b21a8">2D Mesh Characteristics (TinyGPT 4×4 Grid)</text>
+<text x="535" y="202" class="box-text">• Average Manhattan hops: (4+4)/3 = 2.67 hops</text>
+<text x="535" y="222" class="box-text">• Critical path latency: 8.0 ns (8 hops)</text>
+<text x="535" y="242" class="box-text">• Total traffic: 176 Bytes</text>
+<text x="535" y="262" class="box-text">• Interconnect energy: 0.2133 nJ</text>
+<text x="535" y="282" class="sub">Higher latency and energy than dedicated tree due to router hops</text>
+
+<rect x="520" y="325" width="370" height="160" rx="8" fill="#fff7ed" stroke="#fdba74"/>
+<text x="535" y="350" class="box-title" fill="#c2410c">Network Scaling Comparison</text>
+<text x="535" y="375" class="box-text">• Binary Tree: Best latency (2 ns) &amp; energy (0.1600 nJ)</text>
+<text x="535" y="395" class="box-text">• 2D Mesh: High flexibility, 4× latency (8 ns)</text>
+<text x="535" y="415" class="box-text">• Ring Bus: Serial bottleneck, O(N) latency</text>
+<text x="535" y="440" class="formula">E_noc = sum(Bytes × Hops) × 0.5 pJ/(B·hop)</text>
+</svg>

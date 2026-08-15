@@ -1,0 +1,100 @@
+{
+  "chapter": "0024-sram-buffers",
+  "formulas": {
+    "accumulator_buffer": "S_acc = R * (B_adc + ceil(log2(K_c)))",
+    "accumulator_word": "B_acc = B_adc + ceil(log2(K_c))",
+    "activation_buffer": "S_act = 2 * C * B_dac",
+    "kv_cache": "S_kv = 2 * L * n_layers * d_model * B_act",
+    "sram_energy": "E_sram = Bytes_total * e_byte",
+    "weight_staging_buffer": "S_weight = 2 * R * C * B_weight"
+  },
+  "kv_cache_capacities": {
+    "llama7b_2048ctx": {
+      "act_bits": 16,
+      "d_model": 4096,
+      "num_layers": 32,
+      "seq_len": 2048,
+      "total_kv_bits": 8589934592,
+      "total_kv_bytes": 1073741824.0,
+      "total_kv_kbytes": 1048576.0
+    },
+    "tinygpt_128ctx": {
+      "act_bits": 16,
+      "d_model": 64,
+      "num_layers": 4,
+      "seq_len": 128,
+      "total_kv_bits": 1048576,
+      "total_kv_bytes": 131072.0,
+      "total_kv_kbytes": 128.0
+    }
+  },
+  "provenance": {
+    "physical_claim": false,
+    "sram_cell_area_model": "assumed_0.12_um2_per_bit",
+    "sram_energy_model": "assumed_1.0_pj_per_byte"
+  },
+  "schema_version": "0.1.0",
+  "tile_capacities": {
+    "16x16_4bit": {
+      "capacity": {
+        "accumulator_buffer_bits": 128,
+        "accumulator_word_bits": 8,
+        "activation_buffer_bits": 128,
+        "sram_area_estimate_um2": 276.48,
+        "total_tile_sram_bits": 2304,
+        "total_tile_sram_bytes": 288.0,
+        "weight_staging_buffer_bits": 2048
+      },
+      "config": {
+        "adc_bits": 4,
+        "dac_bits": 4,
+        "double_buffer_inputs": true,
+        "kc_max": 16,
+        "tile_cols": 16,
+        "tile_rows": 16,
+        "weight_bits": 4
+      }
+    },
+    "32x32_4bit": {
+      "capacity": {
+        "accumulator_buffer_bits": 288,
+        "accumulator_word_bits": 9,
+        "activation_buffer_bits": 256,
+        "sram_area_estimate_um2": 1048.32,
+        "total_tile_sram_bits": 8736,
+        "total_tile_sram_bytes": 1092.0,
+        "weight_staging_buffer_bits": 8192
+      },
+      "config": {
+        "adc_bits": 4,
+        "dac_bits": 4,
+        "double_buffer_inputs": true,
+        "kc_max": 32,
+        "tile_cols": 32,
+        "tile_rows": 32,
+        "weight_bits": 4
+      }
+    }
+  },
+  "title": "SRAM & Buffer Capacity Model",
+  "traffic_ledgers": {
+    "tinygpt_temporal_multiplexed": {
+      "estimated_sram_energy_nj": 13.312,
+      "input_activation_bytes": 512.0,
+      "num_mvm_operations": 64,
+      "num_tile_rewrites": 48,
+      "output_activation_bytes": 512.0,
+      "total_sram_traffic_bytes": 13312.0,
+      "weight_load_bytes": 12288.0
+    },
+    "tinygpt_weight_stationary": {
+      "estimated_sram_energy_nj": 1.024,
+      "input_activation_bytes": 512.0,
+      "num_mvm_operations": 64,
+      "num_tile_rewrites": 0,
+      "output_activation_bytes": 512.0,
+      "total_sram_traffic_bytes": 1024.0,
+      "weight_load_bytes": 0.0
+    }
+  }
+}

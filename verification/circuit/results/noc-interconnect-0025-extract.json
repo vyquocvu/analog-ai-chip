@@ -1,0 +1,115 @@
+{
+  "chapter": "0025-noc-interconnect",
+  "formulas": {
+    "accumulator_word": "B_acc = B_adc + ceil(log2(K_c))",
+    "grid_dimensions": "Kr = ceil(M_out / Tile_R), Kc = ceil(M_in / Tile_C)",
+    "mesh_avg_hops": "H_mesh = (Kr + Kc) / 3",
+    "noc_energy": "E_noc = sum(Bytes * Hops) * e_byte_hop",
+    "reduction_traffic": "T_reduct = Kr * (Kc - 1) * (Tile_R * B_acc / 8)",
+    "reduction_transfers": "N_transfers = Kr * (Kc - 1)",
+    "tree_hop_latency": "T_tree = ceil(log2(Kc)) * t_hop"
+  },
+  "provenance": {
+    "noc_energy_model": "assumed_0.5_pj_per_byte_hop",
+    "noc_hop_latency": "assumed_1.0_ns_per_hop",
+    "physical_claim": false
+  },
+  "schema_version": "0.1.0",
+  "title": "NoC / Interconnect Traffic Model",
+  "workloads": {
+    "llama7b_4096x4096_tile32": {
+      "tiling": {
+        "adc_bits": 4,
+        "dac_bits": 4,
+        "m_in": 4096,
+        "m_out": 4096,
+        "tile_cols": 32,
+        "tile_rows": 32
+      },
+      "topologies": {
+        "binary_tree": {
+          "activation_broadcast_bytes": 2048.0,
+          "avg_hops_per_transfer": 7.0,
+          "b_acc_bits": 11,
+          "critical_path_latency_ns": 7.0,
+          "estimated_noc_energy_nj": 2507.008,
+          "kc": 128,
+          "kr": 128,
+          "reduction_traffic_bytes": 715264.0,
+          "topology": "binary_tree",
+          "total_byte_hops": 5014016.0,
+          "total_tiles": 16384,
+          "total_traffic_bytes": 717312.0
+        },
+        "mesh_2d": {
+          "activation_broadcast_bytes": 2048.0,
+          "avg_hops_per_transfer": 85.33333333333333,
+          "b_acc_bits": 11,
+          "critical_path_latency_ns": 256.0,
+          "estimated_noc_energy_nj": 30561.621333333333,
+          "kc": 128,
+          "kr": 128,
+          "reduction_traffic_bytes": 715264.0,
+          "topology": "mesh_2d",
+          "total_byte_hops": 61123242.666666664,
+          "total_tiles": 16384,
+          "total_traffic_bytes": 717312.0
+        }
+      }
+    },
+    "tinygpt_64x64_tile16": {
+      "tiling": {
+        "adc_bits": 4,
+        "dac_bits": 4,
+        "m_in": 64,
+        "m_out": 64,
+        "tile_cols": 16,
+        "tile_rows": 16
+      },
+      "topologies": {
+        "binary_tree": {
+          "activation_broadcast_bytes": 32.0,
+          "avg_hops_per_transfer": 2.0,
+          "b_acc_bits": 6,
+          "critical_path_latency_ns": 2.0,
+          "estimated_noc_energy_nj": 0.16,
+          "kc": 4,
+          "kr": 4,
+          "reduction_traffic_bytes": 144.0,
+          "topology": "binary_tree",
+          "total_byte_hops": 320.0,
+          "total_tiles": 16,
+          "total_traffic_bytes": 176.0
+        },
+        "mesh_2d": {
+          "activation_broadcast_bytes": 32.0,
+          "avg_hops_per_transfer": 2.6666666666666665,
+          "b_acc_bits": 6,
+          "critical_path_latency_ns": 8.0,
+          "estimated_noc_energy_nj": 0.21333333333333335,
+          "kc": 4,
+          "kr": 4,
+          "reduction_traffic_bytes": 144.0,
+          "topology": "mesh_2d",
+          "total_byte_hops": 426.6666666666667,
+          "total_tiles": 16,
+          "total_traffic_bytes": 176.0
+        },
+        "ring_bus": {
+          "activation_broadcast_bytes": 32.0,
+          "avg_hops_per_transfer": 4.0,
+          "b_acc_bits": 6,
+          "critical_path_latency_ns": 8.0,
+          "estimated_noc_energy_nj": 0.32,
+          "kc": 4,
+          "kr": 4,
+          "reduction_traffic_bytes": 144.0,
+          "topology": "ring_bus",
+          "total_byte_hops": 640.0,
+          "total_tiles": 16,
+          "total_traffic_bytes": 176.0
+        }
+      }
+    }
+  }
+}

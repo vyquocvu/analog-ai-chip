@@ -136,3 +136,13 @@ def test_calibration_formula_and_diagram_are_committed() -> None:
     assert "max_constraint" in result["formula"]
     assert "correction" in result["formula"]
     assert _DIAGRAM.is_file()
+
+
+def test_held_out_cross_validation_recorded() -> None:
+    result = json.loads(_RESULT.read_text("utf-8"))["calibration"]
+    assert "held_out_validation" in result
+    cv = result["held_out_validation"]
+    assert "array_split_2x2_train_4x4_test" in cv
+    assert "array_split_4x4_train_2x2_test" in cv
+    assert "leave_one_case_out_cv" in cv
+    assert cv["leave_one_case_out_cv"]["k_folds"] == 10

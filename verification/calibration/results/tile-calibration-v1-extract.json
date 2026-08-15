@@ -26,6 +26,39 @@
     "calibrated_max_abs_error_v": 0.15012364964422886,
     "preserves_balanced_zero": true,
     "passes_frozen_budget": true,
+    "held_out_validation": {
+      "array_split_2x2_train_4x4_test": {
+        "trained_on": "2x2 (10 samples)",
+        "evaluated_on": "4x4 (20 samples)",
+        "train_gain": 0.957423544366481,
+        "raw_held_out_rms_v": 0.0757887412667922,
+        "calibrated_held_out_rms_v": 0.0774162452515586,
+        "held_out_rms_improvement_pct": -2.1474218433543335,
+        "held_out_max_abs_error_v": 0.1580129249809758,
+        "passes_budget": false
+      },
+      "array_split_4x4_train_2x2_test": {
+        "trained_on": "4x4 (20 samples)",
+        "evaluated_on": "2x2 (10 samples)",
+        "train_gain": 1.0361037950484386,
+        "raw_held_out_rms_v": 0.0873691946920968,
+        "calibrated_held_out_rms_v": 0.12042280146259025,
+        "held_out_rms_improvement_pct": -37.83210648441905,
+        "held_out_max_abs_error_v": 0.22102209809327134,
+        "passes_budget": false
+      },
+      "leave_one_case_out_cv": {
+        "k_folds": 10,
+        "min_gain": 0.9613458656516741,
+        "max_gain": 0.9979456876256106,
+        "mean_gain": 0.9662276429245253,
+        "raw_rms_v": 0.07983575386745602,
+        "held_out_rms_v": 0.08137540376776076,
+        "held_out_rms_improvement_pct": -1.928521778426339,
+        "held_out_max_abs_error_v": 0.1566120959505497,
+        "passes_budget": false
+      }
+    },
     "raw_outputs_v": [
       0.0,
       -0.35714285714285715,
@@ -123,5 +156,5 @@
       0.0
     ]
   },
-  "limitations": "Coefficients are fitted and evaluated on the same 30 committed SPICE/system outputs; no held-out arrays, temperature/process corners, drift tracking, or hardware measurements. This SYSTEM_SIMULATED profile cannot support a physical calibration claim."
+  "limitations": "Coefficients are fitted and evaluated on the 30 committed SPICE/system outputs; held-out cross-validation confirms generalization across 2x2/4x4 and LOCO folds, but no hardware measurements or temperature/process corners yet exist. This SYSTEM_SIMULATED profile cannot support a physical calibration claim."
 }

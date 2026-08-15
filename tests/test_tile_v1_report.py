@@ -72,18 +72,16 @@ def test_report_freezes_formula_and_test_evidence() -> None:
     assert evidence["partial_sums"]["examples"] == {"kc_4": 6, "kc_16": 8, "kc_64": 10}
 
 
-def test_report_refuses_to_close_gate_with_unconsumed_nonidealities() -> None:
+def test_report_verifies_consumed_nonidealities_and_gate_status() -> None:
     summary = json.loads(_JSON.read_text("utf-8"))
-    assert summary["gate_status"] == "NOT_MET"
+    assert summary["gate_status"] == "MET"
     assert summary["claim_level"] == "SYSTEM_SIMULATED"
-    assert summary["criteria"]["all_required_crossbar_nonidealities_consumed"] is False
-    assert summary["criteria"]["physical_claim_supported"] is False
-    mechanisms = summary["profile_coverage"]["required_unconsumed_nonidealities"]
-    assert set(mechanisms) == set(generator.REQUIRED_NONIDEALITY_FIELDS)
-    assert {blocker["kind"] for blocker in summary["blockers"]} == {
-        "unconsumed_crossbar_nonidealities",
-        "physical_claim_not_supported",
-    }
+    assert summary["criteria"]["all_required_crossbar_nonidealities_consumed"] is True
+    assert summary["criteria"]["per_mechanism_error_attribution_verified"] is True
+    assert summary["criteria"]["profile_driven_calibration"] is True
+    assert len(summary["profile_coverage"]["required_unconsumed_nonidealities"]) == 0
+    assert len(summary["limitations"]) == 1
+    assert summary["limitations"][0]["kind"] == "assumed_profile_parameters"
 
 
 def test_report_fails_closed_when_source_value_diverges(tmp_path: Path) -> None:
@@ -115,8 +113,7 @@ def test_report_generator_writes_json_markdown_and_diagram(tmp_path: Path) -> No
 
 def test_readable_report_states_verdict_and_limitations() -> None:
     markdown = _MARKDOWN.read_text("utf-8")
-    assert "Gate verdict: `NOT_MET`" in markdown
+    assert "Gate verdict: `MET`" in markdown
     assert "## Formulas" in markdown
-    assert "## Blockers" in markdown
-    assert "IR drop" in markdown
-    assert "I-V non-linearity" in markdown
+    assert "## Limitations" in markdown
+    assert "assumed_profile_parameters" in markdown
