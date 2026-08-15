@@ -82,8 +82,8 @@ Chapter numbering below is canonical. Existing chapters keep their numbers; futu
 | # | Chapter | Verification target | Status |
 |---|---|---|---|
 | 0021 | Physical tile contract | behavioral tile consumes validated DAC/ADC/crossbar profiles | done |
-| 0022 | Partial sums | tiled result matches dense reference within profile-derived error | next |
-| 0023 | Scheduler / temporal reuse | parallelism and rewrites are explicit and deterministic |
+| 0022 | Partial sums | tiled result matches dense reference within profile-derived error | done |
+| 0023 | Scheduler / temporal reuse | parallelism and rewrites are explicit and deterministic | next |
 | 0024 | SRAM / buffers | capacity and traffic are accounted for |
 | 0025 | NoC / interconnect | data movement enters timing/energy accounting |
 | 0026 | Calibration | correction procedure improves simulated/measured error reproducibly |

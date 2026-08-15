@@ -114,6 +114,7 @@ See [`docs/SIMULATION_STACK.md`](docs/SIMULATION_STACK.md).
 | 0019 | Drift, stuck states and non-linearity | done | `book/0019-drift-faults/` |
 | 0020 | Crossbar-v1 profile and Gate R4 close | done | `book/0020-crossbar-v1/` |
 | 0021 | Physical tile contract | done | `book/0021-physical-tile-contract/` |
+| 0022 | Partial sums | done | `book/0022-partial-sums/` |
 
 > **Tiếng Việt:** every chapter has a `README.vi.md` beside the English `README.md`.
 

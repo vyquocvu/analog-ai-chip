@@ -1,0 +1,123 @@
+{
+  "schema_version": "0.1.0",
+  "chapter": "0022-partial-sums",
+  "title": "Partial Sums and Multi-Tile Spatial Partitioning",
+  "partial_sum_scaling_kc": [
+    {
+      "num_partial_sums_kc": 1,
+      "matrix_input_dim": 16,
+      "mean_error_pct": 15.430595726316534,
+      "std_error_pct": 6.532955139175842,
+      "rms_error_pct": 16.756574450629884,
+      "acc_bits_required": 4,
+      "theoretical_noise_scale": 1.0
+    },
+    {
+      "num_partial_sums_kc": 2,
+      "matrix_input_dim": 32,
+      "mean_error_pct": 14.932707716259698,
+      "std_error_pct": 4.027509601657749,
+      "rms_error_pct": 15.466305096262884,
+      "acc_bits_required": 5,
+      "theoretical_noise_scale": 1.4142135623730951
+    },
+    {
+      "num_partial_sums_kc": 4,
+      "matrix_input_dim": 64,
+      "mean_error_pct": 15.826063571787243,
+      "std_error_pct": 5.372840542096335,
+      "rms_error_pct": 16.71321942861534,
+      "acc_bits_required": 6,
+      "theoretical_noise_scale": 2.0
+    },
+    {
+      "num_partial_sums_kc": 8,
+      "matrix_input_dim": 128,
+      "mean_error_pct": 16.821483690760196,
+      "std_error_pct": 4.32025898472344,
+      "rms_error_pct": 17.36741060876937,
+      "acc_bits_required": 7,
+      "theoretical_noise_scale": 2.8284271247461903
+    },
+    {
+      "num_partial_sums_kc": 16,
+      "matrix_input_dim": 256,
+      "mean_error_pct": 16.297426613331023,
+      "std_error_pct": 4.72388793697867,
+      "rms_error_pct": 16.9682418493503,
+      "acc_bits_required": 8,
+      "theoretical_noise_scale": 4.0
+    },
+    {
+      "num_partial_sums_kc": 32,
+      "matrix_input_dim": 512,
+      "mean_error_pct": 16.961823695715733,
+      "std_error_pct": 4.6227061102680835,
+      "rms_error_pct": 17.580468562198607,
+      "acc_bits_required": 9,
+      "theoretical_noise_scale": 5.656854249492381
+    }
+  ],
+  "monolithic_vs_tiled_comparison": [
+    {
+      "dimension": 16,
+      "tiled_16x16_error_pct": 10.86316185760099,
+      "tiled_16x16_tiles": 1,
+      "tiled_32x32_error_pct": 10.86316185760099,
+      "tiled_32x32_tiles": 1,
+      "monolithic_ir_error_pct": 1.69315,
+      "tiling_advantage": "Comparable"
+    },
+    {
+      "dimension": 32,
+      "tiled_16x16_error_pct": 15.546723626622464,
+      "tiled_16x16_tiles": 4,
+      "tiled_32x32_error_pct": 16.25246217601538,
+      "tiled_32x32_tiles": 1,
+      "monolithic_ir_error_pct": 6.7726,
+      "tiling_advantage": "Comparable"
+    },
+    {
+      "dimension": 64,
+      "tiled_16x16_error_pct": 15.442747982465885,
+      "tiled_16x16_tiles": 16,
+      "tiled_32x32_error_pct": 26.79897176186951,
+      "tiled_32x32_tiles": 4,
+      "monolithic_ir_error_pct": 27.0904,
+      "tiling_advantage": "Tiling avoids quadratic IR drop breakdown"
+    },
+    {
+      "dimension": 128,
+      "tiled_16x16_error_pct": 14.19635070583789,
+      "tiled_16x16_tiles": 64,
+      "tiled_32x32_error_pct": 25.31906009781603,
+      "tiled_32x32_tiles": 16,
+      "monolithic_ir_error_pct": 108.3616,
+      "tiling_advantage": "Tiling avoids quadratic IR drop breakdown"
+    },
+    {
+      "dimension": 256,
+      "tiled_16x16_error_pct": 17.181422497718227,
+      "tiled_16x16_tiles": 256,
+      "tiled_32x32_error_pct": 28.13575946878974,
+      "tiled_32x32_tiles": 64,
+      "monolithic_ir_error_pct": 433.4464,
+      "tiling_advantage": "Tiling avoids quadratic IR drop breakdown"
+    }
+  ],
+  "accumulator_rules": {
+    "adc_bits": 4,
+    "formula": "B_acc >= B_adc + ceil(log2(K_c))",
+    "for_kc_4": 6,
+    "for_kc_16": 8,
+    "for_kc_64": 10
+  },
+  "summary": {
+    "kc_1_mean_error_pct": 15.430595726316534,
+    "kc_16_mean_error_pct": 16.297426613331023,
+    "monolithic_64_ir_error_pct": 27.0904,
+    "tiled_64_16x16_error_pct": 15.442747982465885,
+    "evidence_class": "derived",
+    "provenance": "Profile-driven multi-tile spatial partitioner accumulating digital partial sums across crossbar-v1 tiles"
+  }
+}
