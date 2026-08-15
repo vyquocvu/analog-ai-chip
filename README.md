@@ -113,6 +113,7 @@ See [`docs/SIMULATION_STACK.md`](docs/SIMULATION_STACK.md).
 | 0018 | Parasitic capacitance and RC settling | done | `book/0018-parasitics/` |
 | 0019 | Drift, stuck states and non-linearity | done | `book/0019-drift-faults/` |
 | 0020 | Crossbar-v1 profile and Gate R4 close | done | `book/0020-crossbar-v1/` |
+| 0021 | Physical tile contract | done | `book/0021-physical-tile-contract/` |
 
 > **Tiếng Việt:** every chapter has a `README.vi.md` beside the English `README.md`.
 

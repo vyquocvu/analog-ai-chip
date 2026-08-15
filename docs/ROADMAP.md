@@ -197,7 +197,7 @@ Every crossbar non-ideality used by the architecture simulator traces to a named
 
 Depends on R2 + R4.
 
-- [ ] Tile configuration consumes `dac-v1`, `adc-v1`, `crossbar-v1`
+- [x] Tile configuration consumes `dac-v1`, `adc-v1`, `crossbar-v1`: `analog_llm.CrossbarTile` constructed via `build_tile_factory_from_converter_profiles` consuming validated `crossbar-v1`, `dac-r2r-v1`, `adc-sar-v1` profiles (`book/0021-physical-tile-contract/physical_tile_contract.py`, committed extract `physical-tile-0021-extract.json`)
 - [ ] Behavioral tile reproduces small-array SPICE cases within a frozen error budget
 - [ ] Calibration flow consumes profile evidence
 - [ ] Partial-sum precision and clipping rules are explicit
