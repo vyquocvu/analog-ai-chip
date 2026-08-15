@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "name": "tile-calibration-v1",
+  "version": "0.1.0",
+  "evidence_class": "derived",
+  "status": "SYSTEM_SIMULATED",
+  "fields": {
+    "correction_gain": {
+      "value": 0.9795135153093725,
+      "unit": "1",
+      "evidence_class": "derived",
+      "note": "zero-offset least-squares gain clipped to the ADC-derived max-error constraint"
+    },
+    "correction_offset_v": {
+      "value": 0.0,
+      "unit": "V",
+      "evidence_class": "derived",
+      "note": "fixed at zero to preserve balanced differential cancellation"
+    },
+    "fit_sample_count": {
+      "value": 30,
+      "unit": "outputs",
+      "evidence_class": "derived"
+    },
+    "raw_rms_error_v": {
+      "value": 0.07983575386745602,
+      "unit": "V",
+      "evidence_class": "derived"
+    },
+    "calibrated_rms_error_v": {
+      "value": 0.07579926571408264,
+      "unit": "V",
+      "evidence_class": "derived"
+    },
+    "rms_improvement_pct": {
+      "value": 5.05599052784644,
+      "unit": "%",
+      "evidence_class": "derived"
+    },
+    "frozen_max_error_budget_v": {
+      "value": 0.15625,
+      "unit": "V",
+      "evidence_class": "derived",
+      "source": "device_profiles/adc-sar-v1.json#/fields/quantization_error_v"
+    }
+  },
+  "provenance": {
+    "tool": "NumPy deterministic constrained least-squares extraction",
+    "analysis": "system-level affine output calibration",
+    "sources": [
+      "verification/circuit/results/physical-tile-0021-extract.json#/small_array_spice_equivalence",
+      "device_profiles/adc-sar-v1.json#/fields/quantization_error_v",
+      "verification/calibration/extract_tile_calibration.py"
+    ],
+    "conditions": {
+      "tile_profiles": [
+        "crossbar-v1",
+        "dac-r2r-v1",
+        "adc-sar-v1"
+      ],
+      "g_bits": 4,
+      "dac_bits": 4,
+      "adc_bits": 4,
+      "fit_arrays": [
+        "2x2",
+        "4x4"
+      ],
+      "offset_constraint_v": 0.0
+    },
+    "limitations": "Coefficients are fitted and evaluated on the same 30 committed SPICE/system outputs; no held-out arrays, temperature/process corners, drift tracking, or hardware measurements. This SYSTEM_SIMULATED profile cannot support a physical calibration claim.",
+    "command": "python verification/calibration/extract_tile_calibration.py"
+  }
+}

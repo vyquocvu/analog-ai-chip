@@ -86,6 +86,14 @@ factory = build_tile_factory_from_converter_profiles(
 )  # dac_bits/adc_bits/vin_max/vout_max come from the converter profiles
 ```
 
+`tile-calibration-v1.json` is a `SYSTEM_SIMULATED` output-correction profile
+derived from the committed 2×2/4×4 tile-versus-SPICE evidence. It is consumed
+through `analog_llm.output_calibration_from_profile`; the zero-offset,
+constrained-gain correction reduces RMS error without degrading the existing
+maximum-error bound. Because calibration and evaluation use the same samples
+and there are no hardware measurements or held-out corners, the loader fails
+closed when it is asked to support a physical claim.
+
 ## Rule for claims
 
 `assumed` profiles are allowed for exploration but cannot support claims such as "the proposed ADC has X ENOB" or "the accelerator consumes Y energy/token". Such claims require `spice`, `derived` from verified inputs, or `measured` evidence.

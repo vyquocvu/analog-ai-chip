@@ -92,6 +92,26 @@ y = tile.forward(x)
 
 ---
 
+## 5. Profile-Driven Calibration
+
+![Profile-driven tile calibration](../../verification/calibration/diagrams/tile-calibration-v1.svg)
+
+The calibration extractor consumes the committed tile/SPICE equivalence outputs and the frozen ADC-profile budget. A zero offset preserves exact differential cancellation. The unconstrained least-squares gain and constrained correction are:
+
+$$a_{\mathrm{LS}} = \frac{\sum_i y_{\mathrm{raw},i}y_{\mathrm{SPICE},i}}{\sum_i y_{\mathrm{raw},i}^2}$$
+
+$$E_{\mathrm{constraint}} = \min(E_{\mathrm{raw,max}}, E_{\mathrm{ADC,budget}})$$
+
+$$[a_{\min},a_{\max}] = \bigcap_i \{a: |a y_{\mathrm{raw},i}-y_{\mathrm{SPICE},i}| \le E_{\mathrm{constraint}}\}$$
+
+$$a^*=\operatorname{clip}(a_{\mathrm{LS}},[a_{\min},a_{\max}]), \qquad y_{\mathrm{cal}}=a^*y_{\mathrm{raw}}$$
+
+The generated `tile-calibration-v1` profile supplies $a^*=0.9795135153$ and zero offset. Across the same 30 committed outputs, RMS error falls from $0.079836\text{ V}$ to $0.075799\text{ V}$ (**5.06% improvement**) while maximum error does not degrade ($0.150124\text{ V}$) and stays below the $0.15625\text{ V}$ ADC budget.
+
+This is same-sample `SYSTEM_SIMULATED` calibration evidence, not held-out generalization or a hardware calibration claim. `output_calibration_from_profile(..., physical_claim=True)` therefore fails closed.
+
+---
+
 ## Verification
 
 Run the characterization script and generate plots:
@@ -99,6 +119,9 @@ Run the characterization script and generate plots:
 python book/0021-physical-tile-contract/physical_tile_contract.py
 python book/0021-physical-tile-contract/diagrams/make_plots.py
 python book/0021-physical-tile-contract/diagrams/make_equivalence_diagram.py
+python verification/calibration/extract_tile_calibration.py
+python verification/calibration/diagrams/make_tile_calibration_diagram.py
 ```
 Committed extract: [`verification/circuit/results/physical-tile-0021-extract.json`](../../verification/circuit/results/physical-tile-0021-extract.json).
-Tested by: [`tests/test_physical_tile_contract.py`](../../tests/test_physical_tile_contract.py).
+Calibration profile: [`device_profiles/tile-calibration-v1.json`](../../device_profiles/tile-calibration-v1.json).
+Tested by: [`tests/test_physical_tile_contract.py`](../../tests/test_physical_tile_contract.py) and [`tests/test_tile_calibration.py`](../../tests/test_tile_calibration.py).

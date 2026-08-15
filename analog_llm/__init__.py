@@ -5,6 +5,7 @@ converter and conductance non-idealities change the output.
 """
 
 from .accelerator import Accelerator
+from .calibration import OutputCalibration, output_calibration_from_profile
 from .converters import adc, dac, symmetric_converter
 from .crossbar import map_differential, mvm, scale_weights
 from .device_profile import load_device_profile, validate_device_profile
@@ -21,6 +22,7 @@ __all__ = [
     "Accelerator",
     "CrossbarTile",
     "Metrics",
+    "OutputCalibration",
     "TinyGPT",
     "TinyGPTConfig",
     "adc",
@@ -31,6 +33,7 @@ __all__ = [
     "load_device_profile",
     "map_differential",
     "mvm",
+    "output_calibration_from_profile",
     "scale_weights",
     "symmetric_converter",
     "tile_config_from_profile",

@@ -92,6 +92,26 @@ y = tile.forward(x)
 
 ---
 
+## 5. Hiệu chuẩn Điều khiển bởi Hồ sơ
+
+![Hiệu chuẩn ô điều khiển bởi hồ sơ](../../verification/calibration/diagrams/tile-calibration-v1.svg)
+
+Trình trích xuất hiệu chuẩn tiêu thụ các đầu ra tương đương ô/SPICE đã cam kết và ngưỡng từ hồ sơ ADC. Offset bằng không bảo toàn triệt tiêu vi sai chính xác. Hệ số bình phương tối thiểu và hiệu chỉnh có ràng buộc là:
+
+$$a_{\mathrm{LS}} = \frac{\sum_i y_{\mathrm{raw},i}y_{\mathrm{SPICE},i}}{\sum_i y_{\mathrm{raw},i}^2}$$
+
+$$E_{\mathrm{constraint}} = \min(E_{\mathrm{raw,max}}, E_{\mathrm{ADC,budget}})$$
+
+$$[a_{\min},a_{\max}] = \bigcap_i \{a: |a y_{\mathrm{raw},i}-y_{\mathrm{SPICE},i}| \le E_{\mathrm{constraint}}\}$$
+
+$$a^*=\operatorname{clip}(a_{\mathrm{LS}},[a_{\min},a_{\max}]), \qquad y_{\mathrm{cal}}=a^*y_{\mathrm{raw}}$$
+
+Hồ sơ `tile-calibration-v1` sinh ra cung cấp $a^*=0.9795135153$ và offset bằng không. Trên cùng 30 đầu ra đã cam kết, sai số RMS giảm từ $0.079836\text{ V}$ xuống $0.075799\text{ V}$ (**cải thiện 5.06%**), trong khi sai số cực đại không tăng ($0.150124\text{ V}$) và vẫn dưới ngưỡng ADC $0.15625\text{ V}$.
+
+Đây là bằng chứng hiệu chuẩn cùng tập dữ liệu ở mức `SYSTEM_SIMULATED`, không phải khả năng khái quát trên tập giữ lại hoặc hiệu chuẩn phần cứng. Vì vậy `output_calibration_from_profile(..., physical_claim=True)` sẽ dừng an toàn.
+
+---
+
 ## Kiểm thử & Xác minh
 
 Chạy trích xuất đặc tính và tạo đồ thị:
@@ -99,6 +119,9 @@ Chạy trích xuất đặc tính và tạo đồ thị:
 python book/0021-physical-tile-contract/physical_tile_contract.py
 python book/0021-physical-tile-contract/diagrams/make_plots.py
 python book/0021-physical-tile-contract/diagrams/make_equivalence_diagram.py
+python verification/calibration/extract_tile_calibration.py
+python verification/calibration/diagrams/make_tile_calibration_diagram.py
 ```
 Dữ liệu cam kết: [`verification/circuit/results/physical-tile-0021-extract.json`](../../verification/circuit/results/physical-tile-0021-extract.json).
-Kiểm thử tự động: [`tests/test_physical_tile_contract.py`](../../tests/test_physical_tile_contract.py).
+Hồ sơ hiệu chuẩn: [`device_profiles/tile-calibration-v1.json`](../../device_profiles/tile-calibration-v1.json).
+Kiểm thử tự động: [`tests/test_physical_tile_contract.py`](../../tests/test_physical_tile_contract.py) và [`tests/test_tile_calibration.py`](../../tests/test_tile_calibration.py).
