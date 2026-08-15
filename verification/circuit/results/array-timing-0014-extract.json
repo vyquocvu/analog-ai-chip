@@ -1,0 +1,88 @@
+{
+  "schema_version": "0.1.0",
+  "chapter": "0014-array-timing",
+  "title": "Crossbar Array Timing, Loading, and Scaling Limits",
+  "constants": {
+    "vref_v": 2.5,
+    "g0_s": 0.0001,
+    "gscale_s": 0.0001,
+    "rf_ohm": 10000.0,
+    "a_ol": 10000.0,
+    "c_cell_assumed_f": 1e-13
+  },
+  "row_scaling_sweep": [
+    {
+      "n_rows": 2,
+      "noise_gain": 3.0,
+      "expected_gain_error": 0.00029991002699190244,
+      "v_diff": 0.12505620033698506,
+      "hand_ideal": 0.125,
+      "mvm_abs_error": 5.620033698505722e-05,
+      "vn_plus_err": -0.00018743439796109485,
+      "vn_minus_err": -0.0001999400179948374,
+      "solve_time_sec": 0.094088333
+    },
+    {
+      "n_rows": 4,
+      "noise_gain": 5.0,
+      "expected_gain_error": 0.0004997501249375312,
+      "v_diff": 0.1250062091021391,
+      "hand_ideal": 0.125,
+      "mvm_abs_error": 6.209102139109746e-06,
+      "vn_plus_err": -0.0001374244165708305,
+      "vn_minus_err": -0.00014992503748123553,
+      "solve_time_sec": 0.001502833000000009
+    },
+    {
+      "n_rows": 8,
+      "noise_gain": 9.0,
+      "expected_gain_error": 0.00089919072834449,
+      "v_diff": 0.12490631651962758,
+      "hand_ideal": 0.125,
+      "mvm_abs_error": 9.368348037241958e-05,
+      "vn_plus_err": -3.746440881169377e-05,
+      "vn_minus_err": -4.99550404637894e-05,
+      "solve_time_sec": 0.0021267910000000168
+    },
+    {
+      "n_rows": 16,
+      "noise_gain": 17.0,
+      "expected_gain_error": 0.0016971149046620744,
+      "v_diff": 0.12470689021938597,
+      "hand_ideal": 0.125,
+      "mvm_abs_error": 0.0002931097806140315,
+      "vn_plus_err": 0.00016221612178624056,
+      "vn_minus_err": 0.0001497454327643588,
+      "solve_time_sec": 0.004180666999999999
+    },
+    {
+      "n_rows": 32,
+      "noise_gain": 33.0,
+      "expected_gain_error": 0.0032891458187979668,
+      "v_diff": 0.12430946779932128,
+      "hand_ideal": 0.125,
+      "mvm_abs_error": 0.0006905322006787173,
+      "vn_plus_err": 0.0005606219165792403,
+      "vn_minus_err": 0.0005481909697993004,
+      "solve_time_sec": 0.010543209000000053
+    },
+    {
+      "n_rows": 64,
+      "noise_gain": 65.0,
+      "expected_gain_error": 0.006458022851465474,
+      "v_diff": 0.12352030119291157,
+      "hand_ideal": 0.125,
+      "mvm_abs_error": 0.0014796988070884254,
+      "vn_plus_err": 0.001353633699269885,
+      "vn_minus_err": 0.0013412816691507068,
+      "solve_time_sec": 0.012912374999999976
+    }
+  ],
+  "scaling_summary": {
+    "noise_gain_at_n64": 65.0,
+    "gain_error_at_n64_pct": 0.6458022851465475,
+    "max_virtual_ground_dev_v": 0.001353633699269885,
+    "xyce_transition_recommended_rows": 128,
+    "note": "ngspice solve time scales linearly for independent stages, but coupled multi-column transient matrices scale as O(N^2-N^3), making Xyce parallel execution necessary above N=128."
+  }
+}

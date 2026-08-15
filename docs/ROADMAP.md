@@ -164,9 +164,9 @@ Depends on R1 + R2 (both closed). 0012 and 0013 are both delivered with reproduc
 
 ## 0014 — Array timing/loading
 
-- [ ] Sweep number of rows/columns
-- [ ] Quantify TIA loading and headroom
-- [ ] Establish the point where ngspice becomes impractical and Xyce becomes preferred
+- [x] Sweep number of rows/columns: $N \in [2, 4, 8, 16, 32, 64]$ swept in SPICE; noise gain scales from 3.0 to 65.0 (`book/0014-array-timing/array_timing.py`, committed extract `array-timing-0014-extract.json`)
+- [x] Quantify TIA loading and headroom: closed-loop noise gain $N_G = 1 + N \cdot R_F \cdot G_0$ causes DC gain error to scale as $N_G / (A_{OL} + N_G)$ (0.030% at $N=2$ to 0.646% at $N=64$ with $A_{OL}=10^4$); virtual ground deviation and MVM error verified within envelope
+- [x] Establish the point where ngspice becomes impractical and Xyce becomes preferred: independent columns solve linearly, but coupled line-resistance matrices scale non-linearly, establishing the recommended threshold $N \ge 128$ where parallel Xyce is preferred
 
 ### Gate R3 exit
 
@@ -178,8 +178,8 @@ A 4×4 current-mode differential array has reproducible SPICE evidence and a beh
 
 Depends on R3 (closed).
 
-- [ ] Select explicit programmable-conductance abstraction / compact model
-- [ ] Establish `gmin`, `gmax`, state count/resolution and programming assumptions
+- [x] Select explicit programmable-conductance abstraction / compact model: non-volatile 1T1R memory cell model with $G_{\min}=10.0\,\mu\text{S}$, $G_{\max}=100.0\,\mu\text{S}$, dynamic range $10\times$, $|V_{\text{read}}| \le 0.25\text{ V}$ (`book/0015-conductance-model/conductance_model.py`, committed extract `conductance-model-0015-extract.json`)
+- [x] Establish `gmin`, `gmax`, state count/resolution and programming assumptions: 4-bit (16 states, $\Delta G=6.0\,\mu\text{S}$) and 6-bit (64 states, $\Delta G=1.429\,\mu\text{S}$) discrete allocations; differential $(G^+, G^-)$ mapping with balanced zero ($w=0 \to (G_{\min}, G_{\min})$)
 - [ ] Programming/read variation Monte Carlo
 - [ ] IR-drop / line resistance versus array dimensions
 - [ ] Parasitic RC and settling

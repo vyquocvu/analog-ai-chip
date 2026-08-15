@@ -105,6 +105,8 @@ See [`docs/SIMULATION_STACK.md`](docs/SIMULATION_STACK.md).
 | 0011 | Converter variation | done | `book/0011-converter-variation/` |
 | 0012 | 2×2 differential crossbar | done | `book/0012-crossbar-2x2/` |
 | 0013 | 4×4 differential crossbar | done | `book/0013-crossbar-4x4/` |
+| 0014 | Array timing and loading | done | `book/0014-array-timing/` |
+| 0015 | Programmable conductance compact model | done | `book/0015-conductance-model/` |
 
 > **Tiếng Việt:** every chapter has a `README.vi.md` beside the English `README.md`.
 
@@ -155,20 +157,74 @@ source schematic/netlist/model
 
 A plot without reproducible source/result data is not sufficient evidence.
 
-## Install and verify
+## Python Environment Setup Guide
 
+### 1. Prerequisites
+- **Python 3.9+** (`python3 --version`)
+- **Git** (`git --version`)
+- *(Optional for circuit SPICE sweeps)*: `ngspice` / `libngspice`
+
+### 2. Step-by-Step Installation
+
+#### Step 1: Clone the repository
 ```bash
-python -m pip install -e '.[dev]'
-pytest
-ruff check .
-python scripts/run_llm_sim.py
+git clone https://github.com/vyquocvu/analog-ai-chip.git
+cd analog-ai-chip
 ```
 
-Optional circuit automation:
+#### Step 2: Create and activate a virtual environment
+- **macOS / Linux**:
+  ```bash
+  python3 -m venv .venv
+  source .venv/bin/activate
+  ```
+- **Windows (PowerShell)**:
+  ```powershell
+  python -m venv .venv
+  .venv\Scripts\Activate.ps1
+  ```
 
+#### Step 3: Install Python dependencies
+
+Choose the target configuration for your workflow:
+
+- **Core & Development** (Unit tests, linter, NumPy, model simulation):
+  ```bash
+  pip install --upgrade pip
+  pip install -e '.[dev]'
+  ```
+
+- **Full Simulation Stack** (Adds PySpice for circuit simulation and extraction):
+  ```bash
+  pip install -e '.[dev,sim]'
+  ```
+
+#### Step 4: (Optional) Install `ngspice` for Circuit Simulation
+If running or extracting SPICE netlists (`book/0005`–`0014`, `verification/circuit/`):
+
+- **macOS (Homebrew)**:
+  ```bash
+  brew install libngspice ngspice
+  ```
+  *(The codebase automatically detects `/opt/homebrew/lib/libngspice.dylib` or `/usr/local/lib/libngspice.dylib`)*
+
+- **Ubuntu / Debian**:
+  ```bash
+  sudo apt-get update && sudo apt-get install -y libngspice0-dev ngspice
+  ```
+
+### 3. Verify Installation
+
+Run the test suite and quality checks:
 ```bash
-python -m pip install -e '.[sim]'
-# install ngspice separately; use Xyce when circuit scale requires it
+# 1. Run all unit tests (233 tests across math, circuits, profiles, and LLM)
+pytest
+
+# 2. Run code style & static analysis
+ruff check .
+
+# 3. Execute the profile-driven TinyGPT analog accelerator simulation
+python scripts/run_llm_sim.py
 ```
 
 ## Honesty principles

@@ -23,7 +23,7 @@ _CLAIM_RE = re.compile(
     r"|gpu[- ]?equivalent"
     r"|replac(?:e|es|ing) (a |the )?(real |physical )?gpu"
     r"|comparable to (a |the )?gpu"
-    r"|beats? a (gpu|gpu)"
+    r"|beats? a gpu"
     r"|orders? of magnitude (faster|better|cheaper)"
     r"|o\(1\) (compute|energy|latency|inference)"
     ,

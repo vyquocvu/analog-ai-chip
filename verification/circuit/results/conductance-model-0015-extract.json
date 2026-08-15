@@ -1,0 +1,432 @@
+{
+  "schema_version": "0.1.0",
+  "chapter": "0015-conductance-model",
+  "title": "Programmable Conductance Compact Model and State Discretization",
+  "model_parameters": {
+    "g_min_uS": 10.0,
+    "g_max_uS": 100.0,
+    "span_uS": 90.0,
+    "dynamic_range_ratio": 10.0,
+    "v_read_max_v": 0.25,
+    "bits_4b_step_uS": 6.0,
+    "bits_6b_step_uS": 1.4285714285714286
+  },
+  "states_4bit": [
+    {
+      "state_index": 0,
+      "conductance_uS": 10.0,
+      "resistance_kOhm": 100.0,
+      "current_at_vread_uA": 2.5
+    },
+    {
+      "state_index": 1,
+      "conductance_uS": 16.000000000000004,
+      "resistance_kOhm": 62.499999999999986,
+      "current_at_vread_uA": 4.000000000000001
+    },
+    {
+      "state_index": 2,
+      "conductance_uS": 22.0,
+      "resistance_kOhm": 45.45454545454546,
+      "current_at_vread_uA": 5.5
+    },
+    {
+      "state_index": 3,
+      "conductance_uS": 28.000000000000004,
+      "resistance_kOhm": 35.71428571428571,
+      "current_at_vread_uA": 7.000000000000001
+    },
+    {
+      "state_index": 4,
+      "conductance_uS": 34.0,
+      "resistance_kOhm": 29.41176470588235,
+      "current_at_vread_uA": 8.5
+    },
+    {
+      "state_index": 5,
+      "conductance_uS": 40.0,
+      "resistance_kOhm": 25.0,
+      "current_at_vread_uA": 10.0
+    },
+    {
+      "state_index": 6,
+      "conductance_uS": 46.0,
+      "resistance_kOhm": 21.73913043478261,
+      "current_at_vread_uA": 11.5
+    },
+    {
+      "state_index": 7,
+      "conductance_uS": 52.00000000000001,
+      "resistance_kOhm": 19.23076923076923,
+      "current_at_vread_uA": 13.000000000000002
+    },
+    {
+      "state_index": 8,
+      "conductance_uS": 58.0,
+      "resistance_kOhm": 17.241379310344826,
+      "current_at_vread_uA": 14.5
+    },
+    {
+      "state_index": 9,
+      "conductance_uS": 64.0,
+      "resistance_kOhm": 15.625,
+      "current_at_vread_uA": 16.0
+    },
+    {
+      "state_index": 10,
+      "conductance_uS": 70.00000000000001,
+      "resistance_kOhm": 14.285714285714285,
+      "current_at_vread_uA": 17.500000000000004
+    },
+    {
+      "state_index": 11,
+      "conductance_uS": 76.0,
+      "resistance_kOhm": 13.157894736842106,
+      "current_at_vread_uA": 19.0
+    },
+    {
+      "state_index": 12,
+      "conductance_uS": 82.0,
+      "resistance_kOhm": 12.195121951219512,
+      "current_at_vread_uA": 20.5
+    },
+    {
+      "state_index": 13,
+      "conductance_uS": 88.0,
+      "resistance_kOhm": 11.363636363636365,
+      "current_at_vread_uA": 22.0
+    },
+    {
+      "state_index": 14,
+      "conductance_uS": 94.00000000000001,
+      "resistance_kOhm": 10.638297872340424,
+      "current_at_vread_uA": 23.500000000000004
+    },
+    {
+      "state_index": 15,
+      "conductance_uS": 100.0,
+      "resistance_kOhm": 10.0,
+      "current_at_vread_uA": 25.0
+    }
+  ],
+  "weight_mappings": [
+    {
+      "w_target": -1.0,
+      "w_effective": -1.0,
+      "w_abs_error": 0.0,
+      "g_plus_uS": 10.0,
+      "g_minus_uS": 100.0,
+      "state_plus": 0,
+      "state_minus": 15
+    },
+    {
+      "w_target": -0.9,
+      "w_effective": -0.9333333333333333,
+      "w_abs_error": 0.033333333333333326,
+      "g_plus_uS": 10.0,
+      "g_minus_uS": 94.00000000000001,
+      "state_plus": 0,
+      "state_minus": 14
+    },
+    {
+      "w_target": -0.8,
+      "w_effective": -0.7999999999999999,
+      "w_abs_error": 1.1102230246251565e-16,
+      "g_plus_uS": 10.0,
+      "g_minus_uS": 82.0,
+      "state_plus": 0,
+      "state_minus": 12
+    },
+    {
+      "w_target": -0.7,
+      "w_effective": -0.6666666666666667,
+      "w_abs_error": 0.033333333333333215,
+      "g_plus_uS": 10.0,
+      "g_minus_uS": 70.00000000000001,
+      "state_plus": 0,
+      "state_minus": 10
+    },
+    {
+      "w_target": -0.6,
+      "w_effective": -0.6,
+      "w_abs_error": 0.0,
+      "g_plus_uS": 10.0,
+      "g_minus_uS": 64.0,
+      "state_plus": 0,
+      "state_minus": 9
+    },
+    {
+      "w_target": -0.5,
+      "w_effective": -0.5333333333333333,
+      "w_abs_error": 0.033333333333333326,
+      "g_plus_uS": 10.0,
+      "g_minus_uS": 58.0,
+      "state_plus": 0,
+      "state_minus": 8
+    },
+    {
+      "w_target": -0.3999999999999999,
+      "w_effective": -0.39999999999999997,
+      "w_abs_error": 5.551115123125783e-17,
+      "g_plus_uS": 10.0,
+      "g_minus_uS": 46.0,
+      "state_plus": 0,
+      "state_minus": 6
+    },
+    {
+      "w_target": -0.29999999999999993,
+      "w_effective": -0.26666666666666666,
+      "w_abs_error": 0.03333333333333327,
+      "g_plus_uS": 10.0,
+      "g_minus_uS": 34.0,
+      "state_plus": 0,
+      "state_minus": 4
+    },
+    {
+      "w_target": -0.19999999999999996,
+      "w_effective": -0.20000000000000004,
+      "w_abs_error": 8.326672684688674e-17,
+      "g_plus_uS": 10.0,
+      "g_minus_uS": 28.000000000000004,
+      "state_plus": 0,
+      "state_minus": 3
+    },
+    {
+      "w_target": -0.09999999999999998,
+      "w_effective": -0.06666666666666668,
+      "w_abs_error": 0.0333333333333333,
+      "g_plus_uS": 10.0,
+      "g_minus_uS": 16.000000000000004,
+      "state_plus": 0,
+      "state_minus": 1
+    },
+    {
+      "w_target": 0.0,
+      "w_effective": 0.0,
+      "w_abs_error": 0.0,
+      "g_plus_uS": 10.0,
+      "g_minus_uS": 10.0,
+      "state_plus": 0,
+      "state_minus": 0
+    },
+    {
+      "w_target": 0.10000000000000009,
+      "w_effective": 0.1333333333333333,
+      "w_abs_error": 0.033333333333333215,
+      "g_plus_uS": 22.0,
+      "g_minus_uS": 10.0,
+      "state_plus": 2,
+      "state_minus": 0
+    },
+    {
+      "w_target": 0.20000000000000018,
+      "w_effective": 0.20000000000000004,
+      "w_abs_error": 1.3877787807814457e-16,
+      "g_plus_uS": 28.000000000000004,
+      "g_minus_uS": 10.0,
+      "state_plus": 3,
+      "state_minus": 0
+    },
+    {
+      "w_target": 0.30000000000000004,
+      "w_effective": 0.33333333333333337,
+      "w_abs_error": 0.033333333333333326,
+      "g_plus_uS": 40.0,
+      "g_minus_uS": 10.0,
+      "state_plus": 5,
+      "state_minus": 0
+    },
+    {
+      "w_target": 0.40000000000000013,
+      "w_effective": 0.39999999999999997,
+      "w_abs_error": 1.6653345369377348e-16,
+      "g_plus_uS": 46.0,
+      "g_minus_uS": 10.0,
+      "state_plus": 6,
+      "state_minus": 0
+    },
+    {
+      "w_target": 0.5,
+      "w_effective": 0.5333333333333333,
+      "w_abs_error": 0.033333333333333326,
+      "g_plus_uS": 58.0,
+      "g_minus_uS": 10.0,
+      "state_plus": 8,
+      "state_minus": 0
+    },
+    {
+      "w_target": 0.6000000000000001,
+      "w_effective": 0.6,
+      "w_abs_error": 1.1102230246251565e-16,
+      "g_plus_uS": 64.0,
+      "g_minus_uS": 10.0,
+      "state_plus": 9,
+      "state_minus": 0
+    },
+    {
+      "w_target": 0.7000000000000002,
+      "w_effective": 0.7333333333333334,
+      "w_abs_error": 0.033333333333333215,
+      "g_plus_uS": 76.0,
+      "g_minus_uS": 10.0,
+      "state_plus": 11,
+      "state_minus": 0
+    },
+    {
+      "w_target": 0.8,
+      "w_effective": 0.7999999999999999,
+      "w_abs_error": 1.1102230246251565e-16,
+      "g_plus_uS": 82.0,
+      "g_minus_uS": 10.0,
+      "state_plus": 12,
+      "state_minus": 0
+    },
+    {
+      "w_target": 0.9000000000000001,
+      "w_effective": 0.9333333333333333,
+      "w_abs_error": 0.033333333333333215,
+      "g_plus_uS": 94.00000000000001,
+      "g_minus_uS": 10.0,
+      "state_plus": 14,
+      "state_minus": 0
+    },
+    {
+      "w_target": 1.0,
+      "w_effective": 1.0,
+      "w_abs_error": 0.0,
+      "g_plus_uS": 100.0,
+      "g_minus_uS": 10.0,
+      "state_plus": 15,
+      "state_minus": 0
+    }
+  ],
+  "iv_linearity": {
+    "state_0": {
+      "conductance_uS": 10.0,
+      "voltages_v": [
+        0.0,
+        0.025,
+        0.05,
+        0.07500000000000001,
+        0.1,
+        0.125,
+        0.15000000000000002,
+        0.17500000000000002,
+        0.2,
+        0.225,
+        0.25
+      ],
+      "currents_uA": [
+        0.0,
+        0.25000000000000006,
+        0.5000000000000001,
+        0.7500000000000001,
+        1.0000000000000002,
+        1.25,
+        1.5000000000000002,
+        1.7500000000000007,
+        2.0000000000000004,
+        2.25,
+        2.5
+      ],
+      "max_linearity_deviation_uA": 2.1175823681357508e-16
+    },
+    "state_5": {
+      "conductance_uS": 40.0,
+      "voltages_v": [
+        0.0,
+        0.025,
+        0.05,
+        0.07500000000000001,
+        0.1,
+        0.125,
+        0.15000000000000002,
+        0.17500000000000002,
+        0.2,
+        0.225,
+        0.25
+      ],
+      "currents_uA": [
+        0.0,
+        1.0000000000000002,
+        2.0000000000000004,
+        3.0000000000000004,
+        4.000000000000001,
+        5.0,
+        6.000000000000001,
+        7.000000000000003,
+        8.000000000000002,
+        9.0,
+        10.0
+      ],
+      "max_linearity_deviation_uA": 8.470329472543003e-16
+    },
+    "state_10": {
+      "conductance_uS": 70.00000000000001,
+      "voltages_v": [
+        0.0,
+        0.025,
+        0.05,
+        0.07500000000000001,
+        0.1,
+        0.125,
+        0.15000000000000002,
+        0.17500000000000002,
+        0.2,
+        0.225,
+        0.25
+      ],
+      "currents_uA": [
+        0.0,
+        1.7500000000000002,
+        3.5000000000000004,
+        5.250000000000002,
+        7.000000000000001,
+        8.750000000000002,
+        10.500000000000004,
+        12.250000000000005,
+        14.000000000000002,
+        15.750000000000004,
+        17.500000000000004
+      ],
+      "max_linearity_deviation_uA": 1.6940658945086007e-15
+    },
+    "state_15": {
+      "conductance_uS": 100.0,
+      "voltages_v": [
+        0.0,
+        0.025,
+        0.05,
+        0.07500000000000001,
+        0.1,
+        0.125,
+        0.15000000000000002,
+        0.17500000000000002,
+        0.2,
+        0.225,
+        0.25
+      ],
+      "currents_uA": [
+        0.0,
+        2.5,
+        5.0,
+        7.500000000000002,
+        10.0,
+        12.5,
+        15.000000000000004,
+        17.500000000000004,
+        20.0,
+        22.5,
+        25.0
+      ],
+      "max_linearity_deviation_uA": 3.3881317890172014e-15
+    }
+  },
+  "summary": {
+    "max_weight_quantization_error": 0.033333333333333326,
+    "max_read_current_uA": 25.0,
+    "min_read_current_uA": 2.5,
+    "evidence_class": "spice",
+    "provenance": "Compact model with deterministic pulse-verify discrete levels"
+  }
+}

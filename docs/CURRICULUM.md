@@ -47,32 +47,31 @@ Chapter numbering below is canonical. Existing chapters keep their numbers; futu
 | 0005 | One analog neuron | SPICE weighted-sum output matches hand arithmetic; headroom and non-ideal op-amp behavior characterized | done |
 | 0006 | Many neurons / current summation | scaling ledger plus multi-output SPICE evidence | done |
 | 0007 | Current-mode differential crossbar column | `I = V·G`, differential conductance, TIA readout and signed output agree with hand reference | done |
-| 0008 | Circuit evidence → device profile | extract versioned SPICE-backed parameters and provenance from 0005/0007 | next |
+| 0008 | Circuit evidence → device profile | extract versioned SPICE-backed parameters and provenance from 0005/0007 | done |
 
 `0008` is the bridge chapter: it proves that circuit evidence can become machine-readable parameters consumed downstream. Higher-level physical claims must not bypass this bridge.
 
 ## Part III — Converter signal path
 
-| # | Chapter | Verification target |
-|---|---|---|
-| 0009 | DAC architecture | transfer curve, range, gain/offset, settling and supply sensitivity characterized in SPICE |
-| 0010 | ADC / TIA output path | transfer, clipping, noise, settling and effective precision characterized in SPICE |
-| 0011 | Converter variation | Monte Carlo/corner evidence for mismatch and converter error |
+| # | Chapter | Verification target | Status |
+|---|---|---|---|
+| 0009 | DAC architecture | transfer curve, range, gain/offset, settling and supply sensitivity characterized in SPICE | done |
+| 0010 | ADC / TIA output path | transfer, clipping, noise, settling and effective precision characterized in SPICE | done |
+| 0011 | Converter variation | Monte Carlo/corner evidence for mismatch and converter error | done |
 
 ## Part IV — Small physical crossbar arrays
 
-| # | Chapter | Verification target |
-|---|---|---|
-| 0012 | 2×2 differential crossbar | shared input rows and multiple columns agree with behavioral reference |
-| 0013 | 4×4 differential crossbar | array-level MVM remains correct under circuit non-idealities |
-| 0014 | Array timing and loading | column loading, TIA headroom and settling are bounded |
+| # | Chapter | Verification target | Status |
+| 0012 | 2×2 differential crossbar | shared input rows and multiple columns agree with behavioral reference | done |
+| 0013 | 4×4 differential crossbar | array-level MVM remains correct under circuit non-idealities | done |
+| 0014 | Array timing and loading | column loading, TIA headroom and settling are bounded | done |
 
 ## Part V — Device realism
 
-| # | Chapter | Verification target |
-|---|---|---|
-| 0015 | Programmable conductance model | explicit cell/compact-model choice with `gmin/gmax` and state behavior provenance |
-| 0016 | Programming/read variation | Monte Carlo distributions quantify mismatch and state uncertainty |
+| # | Chapter | Verification target | Status |
+|---|---|---|---|
+| 0015 | Programmable conductance model | explicit cell/compact-model choice with `gmin/gmax` and state behavior provenance | done |
+| 0016 | Programming/read variation | Monte Carlo distributions quantify mismatch and state uncertainty | next |
 | 0017 | IR drop | line resistance error quantified versus array dimensions |
 | 0018 | Parasitics | RC/settling impact extracted from circuit model |
 | 0019 | Drift, stuck states and non-linearity | each supported mechanism modeled separately or explicitly excluded |
