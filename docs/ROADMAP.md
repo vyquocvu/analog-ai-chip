@@ -210,26 +210,24 @@ The tile simulator is a calibrated abstraction of the proposed circuit/device st
 
 ---
 
-# R6 — Accelerator architecture and data movement — ACTIVE
+# R6 — Accelerator architecture and data movement — COMPLETE
 
 Depends on R5.
-
-Existing functional work (tiling, multi-tile demo, ledgers, KV cache) is useful evidence but must be revalidated with profile-driven timing/error parameters.
 
 - [x] Freeze tile parallelism / temporal-reuse scheduler: deterministic sequential-layer cycle count $T_{\text{cycles}} = \sum_l\lceil K_l / N_{\text{tiles}} \rceil$, rewrite tracking $N_{\text{rewrites}} = \sum_l\max(0, K_l - N_{\text{tiles}})$, and an explicitly `assumed` timing sensitivity point ($10\,\mu\text{s}$ write vs $20\text{ ns}$ read; profile/device timing remains pending) (`book/0023-scheduler/scheduler.py`, committed extract `scheduler-0023-extract.json`)
 - [x] SRAM/buffer capacity model: exact sizing for double-buffered input activations $S_{\text{act}} = 2 \cdot C \cdot B_{\text{DAC}}$, accumulator buffers $S_{\text{acc}} = R(B_{\text{ADC}} + \lceil \log_2 K_c \rceil)$, differential weight shadow buffers $S_{\text{weight}} = 2 \cdot R \cdot C \cdot B_{\text{weight}}$, and global KV cache $S_{\text{KV}} = 2 L \cdot n_{\text{layers}} \cdot d_{\text{model}} \cdot B_{\text{act}}$ ($16\times 16$ 4-bit tile requires $288\text{ B}$ SRAM; TinyGPT 128-context KV cache requires $128\text{ KB}$); traffic ledger and energy accounting ($1.0\text{ pJ/B}$, assumed) committed in `book/0024-sram-buffers/sram_buffers.py` and `verification/circuit/results/sram-buffers-0024-extract.json`
 - [x] NoC/interconnect traffic model: spatial partial-sum reduction trees ($T_{\text{reduct}} = K_r(K_c - 1) \cdot R \cdot B_{\text{acc}} / 8$ bytes) and activation multicast ($T_{\text{act}} = K_c \cdot C \cdot B_{\text{DAC}} / 8$ bytes); comparative evaluation of Binary Adder Tree ($T_{\text{tree}} = \lceil \log_2 K_c \rceil \cdot t_{\text{hop}}$), 2D Mesh NoC ($\bar{H}_{\text{mesh}} = \frac{1}{3}(K_r + K_c)$), and shared ring bus with energy accounting ($0.5\text{ pJ/(B}\cdot\text{hop)}$, assumed); committed in `book/0025-noc-interconnect/noc_interconnect.py` and `verification/circuit/results/noc-interconnect-0025-extract.json`
-- [ ] Profile-derived converter/tile timing in per-token trace
-- [ ] Programming/rewrite costs
-- [ ] End-to-end architecture ledger with provenance
+- [x] Profile-derived converter/tile timing in per-token trace: $t_{\text{mvm}} = t_{\text{dac}} (5.0\text{ ns}) + t_{\text{xbar}} (0.05\text{ ns}) + t_{\text{tia}} (5.0\text{ ns}) + t_{\text{adc}} (10.0\text{ ns}) = 20.05\text{ ns}$ derived from DAC/ADC/parasitic profiles (`book/0026-calibration/architecture_ledger.py`, committed extract `architecture-ledger-0026-extract.json`)
+- [x] Programming/rewrite costs: NVM pulse time ($t_{\text{cell}} = 500\text{ ns}$, assumed) and energy ($10\text{ pJ/pair}$, assumed); row-parallel tile reprogramming ($8.0\,\mu\text{s}$, $2.56\text{ nJ/tile}$) integrated into temporal reuse ledger
+- [x] End-to-end architecture ledger with provenance: auditable per-layer and per-token ledger combining timing, energy, SRAM storage, NoC traffic, and output calibration ($a^* = 0.9795135$) with explicit provenance classes (`derived`, `assumed`, `spice`)
 
 ### Gate R6 exit
 
-For any layer, the simulator can state where time, storage, traffic, rewrites and error come from.
+For any layer, the simulator can state where time, storage, traffic, rewrites and error come from. **Met (SYSTEM_SIMULATED):** `architecture-ledger-0026-extract.json` provides an auditable breakdown across all five categories for Transformer workloads with explicit provenance tracking; gate is closed and R7 is now the active gate.
 
 ---
 
-# R7 — Transformer and LLM validation — QUEUED
+# R7 — Transformer and LLM validation — ACTIVE
 
 Depends on R6.
 

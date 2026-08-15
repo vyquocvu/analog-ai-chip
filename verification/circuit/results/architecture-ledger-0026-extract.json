@@ -1,0 +1,203 @@
+{
+  "chapter": "0026-calibration",
+  "claim_level": "SYSTEM_SIMULATED",
+  "formulas": {
+    "e_layer_energy": "E_analog_mvm + E_sram + E_noc + E_prog",
+    "output_calibration": "y_cal = a_star * y_raw (a_star = 0.9795135)",
+    "t_layer_latency": "(Cycles * t_mvm_step + TreeLevels * t_hop) / 1000 + N_rewrites * t_tile_prog",
+    "t_mvm_step": "t_dac + t_xbar + t_tia + t_adc"
+  },
+  "gate": "R6 \u2014 Accelerator architecture and data movement",
+  "gate_r6_exit_summary": {
+    "error_source": "All 9 crossbar-v1 non-idealities + 0021 output calibration",
+    "rewrite_source": "Scheduler temporal reuse tracking + NVM pulse energy",
+    "storage_source": "Deterministic double-buffered SRAM + partial-sum accumulators + KV cache",
+    "time_source": "Profile-derived DAC/ADC + SPICE/RC crossbar + NoC hop model",
+    "traffic_source": "Multicast activation vectors + spatial tree partial-sum reduction"
+  },
+  "gate_status": "MET",
+  "layer_ledgers": {
+    "llama7b_qkv_temporal": {
+      "calibration_gain": 0.9795135,
+      "energy": {
+        "analog_mvm_nj": 838.8608,
+        "noc_reduction_nj": 2503.424,
+        "sram_access_nj": 15732.736,
+        "tile_programming_nj": 314572.8,
+        "total_energy_nj": 333647.8208
+      },
+      "execution_mode": "temporal_multiplexed",
+      "kc": 128,
+      "kr": 128,
+      "layer_name": "LLaMA7B_QKV_temporal",
+      "m_in": 4096,
+      "m_out": 4096,
+      "num_mvm_cycles": 16,
+      "num_tile_rewrites": 15360,
+      "storage": {
+        "active_tiles_sram_bytes": 1126400.0,
+        "kv_cache_kbytes": 1048576.0,
+        "total_tile_sram_bytes": 1126400.0
+      },
+      "timing": {
+        "t_mvm_step_ns": 20.05,
+        "t_mvm_total_ns": 320.8,
+        "t_programming_us": 245760.0,
+        "t_reduction_ns": 7.0,
+        "total_latency_us": 245760.3278
+      },
+      "total_layer_tiles": 16384
+    },
+    "tinygpt_mlp_stationary": {
+      "calibration_gain": 0.9795135,
+      "energy": {
+        "analog_mvm_nj": 0.8192,
+        "noc_reduction_nj": 0.576,
+        "sram_access_nj": 0.16,
+        "tile_programming_nj": 0.0,
+        "total_energy_nj": 1.5552000000000001
+      },
+      "execution_mode": "weight_stationary",
+      "kc": 4,
+      "kr": 16,
+      "layer_name": "TinyGPT_MLP_Up_stationary",
+      "m_in": 64,
+      "m_out": 256,
+      "num_mvm_cycles": 1,
+      "num_tile_rewrites": 0,
+      "storage": {
+        "active_tiles_sram_bytes": 18176.0,
+        "kv_cache_kbytes": 128.0,
+        "total_tile_sram_bytes": 18176.0
+      },
+      "timing": {
+        "t_mvm_step_ns": 20.05,
+        "t_mvm_total_ns": 20.05,
+        "t_programming_us": 0.0,
+        "t_reduction_ns": 2.0,
+        "total_latency_us": 0.02205
+      },
+      "total_layer_tiles": 64
+    },
+    "tinygpt_qkv_stationary": {
+      "calibration_gain": 0.9795135,
+      "energy": {
+        "analog_mvm_nj": 0.6144,
+        "noc_reduction_nj": 0.432,
+        "sram_access_nj": 0.128,
+        "tile_programming_nj": 0.0,
+        "total_energy_nj": 1.1743999999999999
+      },
+      "execution_mode": "weight_stationary",
+      "kc": 4,
+      "kr": 12,
+      "layer_name": "TinyGPT_QKV_stationary",
+      "m_in": 64,
+      "m_out": 192,
+      "num_mvm_cycles": 1,
+      "num_tile_rewrites": 0,
+      "storage": {
+        "active_tiles_sram_bytes": 13632.0,
+        "kv_cache_kbytes": 128.0,
+        "total_tile_sram_bytes": 18176.0
+      },
+      "timing": {
+        "t_mvm_step_ns": 20.05,
+        "t_mvm_total_ns": 20.05,
+        "t_programming_us": 0.0,
+        "t_reduction_ns": 2.0,
+        "total_latency_us": 0.02205
+      },
+      "total_layer_tiles": 48
+    },
+    "tinygpt_qkv_temporal": {
+      "calibration_gain": 0.9795135,
+      "energy": {
+        "analog_mvm_nj": 0.6144,
+        "noc_reduction_nj": 0.432,
+        "sram_access_nj": 8.32,
+        "tile_programming_nj": 163.84,
+        "total_energy_nj": 173.2064
+      },
+      "execution_mode": "temporal_multiplexed",
+      "kc": 4,
+      "kr": 12,
+      "layer_name": "TinyGPT_QKV_temporal",
+      "m_in": 64,
+      "m_out": 192,
+      "num_mvm_cycles": 3,
+      "num_tile_rewrites": 32,
+      "storage": {
+        "active_tiles_sram_bytes": 4544.0,
+        "kv_cache_kbytes": 128.0,
+        "total_tile_sram_bytes": 4544.0
+      },
+      "timing": {
+        "t_mvm_step_ns": 20.05,
+        "t_mvm_total_ns": 60.150000000000006,
+        "t_programming_us": 256.0,
+        "t_reduction_ns": 2.0,
+        "total_latency_us": 256.06215
+      },
+      "total_layer_tiles": 48
+    }
+  },
+  "provenance_ledger": {
+    "energy_parameters": {
+      "e_analog_mac_fj": {
+        "evidence_class": "derived",
+        "source": "book/0010-adc-sar",
+        "value": 50.0
+      },
+      "e_cell_prog_pj": {
+        "evidence_class": "assumed",
+        "source": "literature/rram_write",
+        "value": 10.0
+      },
+      "e_noc_pj_per_byte_hop": {
+        "evidence_class": "assumed",
+        "source": "literature/28nm_noc",
+        "value": 0.5
+      },
+      "e_sram_pj_per_byte": {
+        "evidence_class": "assumed",
+        "source": "literature/28nm_sram",
+        "value": 1.0
+      }
+    },
+    "timing_parameters": {
+      "t_adc_ns": {
+        "evidence_class": "derived",
+        "source": "device_profiles/adc-sar-v1.json",
+        "value": 10.0
+      },
+      "t_cell_prog_ns": {
+        "evidence_class": "assumed",
+        "source": "literature/rram_pulse",
+        "value": 500.0
+      },
+      "t_dac_ns": {
+        "evidence_class": "derived",
+        "source": "device_profiles/dac-r2r-v1.json",
+        "value": 5.0
+      },
+      "t_hop_ns": {
+        "evidence_class": "assumed",
+        "source": "literature/1ghz_router",
+        "value": 1.0
+      },
+      "t_tia_ns": {
+        "evidence_class": "derived",
+        "source": "book/0014-array-timing",
+        "value": 5.0
+      },
+      "t_xbar_ns": {
+        "evidence_class": "derived",
+        "source": "book/0018-parasitics",
+        "value": 0.05
+      }
+    }
+  },
+  "schema_version": "0.1.0",
+  "title": "End-to-End Architecture & Calibration Ledger"
+}

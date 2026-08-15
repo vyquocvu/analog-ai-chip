@@ -86,13 +86,13 @@ Chapter numbering below is canonical. Existing chapters keep their numbers; futu
 | 0023 | Scheduler / temporal reuse | parallelism and rewrites are explicit and deterministic | done |
 | 0024 | SRAM / buffers | capacity and traffic are accounted for | done |
 | 0025 | NoC / interconnect | data movement enters timing/energy accounting | done |
-| 0026 | Calibration | correction procedure improves simulated/measured error reproducibly | next |
+| 0026 | Calibration | correction procedure improves simulated/measured error reproducibly | done |
 
 ## Part VII — Neural-network and Transformer mapping
 
-| # | Chapter | Verification target |
-|---|---|---|
-| 0027 | Linear layer | one dense layer maps exactly to the accelerator contract |
+| # | Chapter | Verification target | Status |
+|---|---|---|---|
+| 0027 | Linear layer | one dense layer maps exactly to the accelerator contract | next |
 | 0028 | MLP | up/down projections preserve reference behavior within error budget |
 | 0029 | Q/K/V projections | transformer projections route through the analog path correctly |
 | 0030 | Attention boundary | static analog-friendly work and dynamic digital work are separated honestly |

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 14px; font-weight: 700; }
+.box-text { font-size: 12px; fill: #334155; }
+.formula { font: 12px ui-monospace, monospace; fill: #1e293b; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Chapter 0026 — End-to-End Architecture &amp; Calibration Ledger</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Gate R6 Exit: Provenance-tracked execution time, energy, storage, traffic, and calibration</text>
+
+<!-- Timing Breakdown Box -->
+<rect x="50" y="85" width="410" height="200" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="70" y="115" class="box-title" fill="#1d4ed8">1. Profile-Derived Timing Breakdown</text>
+<text x="70" y="140" class="box-text">• DAC Settling: 5.0 ns (derived from R-2R profile)</text>
+<text x="70" y="160" class="box-text">• Crossbar Settling: 0.05 ns (derived from 0018 RC parasitics)</text>
+<text x="70" y="178" class="box-text">• TIA Amplifier: 5.0 ns (derived from 0014 noise gain)</text>
+<text x="70" y="198" class="box-text">• SAR ADC Conversion: 10.0 ns (derived from SAR profile)</text>
+<text x="70" y="222" class="box-title" fill="#1e40af">Total Analog MVM Step: 20.05 ns</text>
+<text x="70" y="244" class="sub">+ Spatial Tree Reduction: 2.0 ns (2 hops @ 1.0 ns/hop)</text>
+<text x="70" y="264" class="formula">t_mvm = t_dac + t_xbar + t_tia + t_adc = 20.05 ns</text>
+
+<!-- Energy Breakdown Box -->
+<rect x="500" y="85" width="410" height="200" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="520" y="115" class="box-title" fill="#15803d">2. Full-Stack Energy Ledger</text>
+<text x="520" y="140" class="box-text">• Analog Compute: 50.0 fJ / MAC (derived from ADC profile)</text>
+<text x="520" y="160" class="box-text">• SRAM Access: 1.0 pJ / Byte (assumed 28nm)</text>
+<text x="520" y="178" class="box-text">• NoC Reduction: 0.5 pJ / (Byte·hop) (assumed 28nm)</text>
+<text x="520" y="198" class="box-text">• NVM Cell Program: 10.0 pJ / pair (assumed RRAM write)</text>
+<text x="520" y="222" class="box-title" fill="#166534">TinyGPT QKV Stationary Energy: 1.1744 nJ</text>
+<text x="520" y="244" class="sub">• Analog: 0.6144 nJ | SRAM: 0.1280 nJ | NoC: 0.4320 nJ</text>
+<text x="520" y="264" class="formula">E_layer = E_analog + E_sram + E_noc + E_prog</text>
+
+<!-- Comparison & Exit Summary Box -->
+<rect x="50" y="305" width="860" height="205" rx="12" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="70" y="335" class="box-title" fill="#7e22ce">3. Gate R6 Execution Comparison &amp; Exit Verdict: MET (SYSTEM_SIMULATED)</text>
+
+<rect x="70" y="355" width="400" height="135" rx="8" fill="white" stroke="#d8b4fe"/>
+<text x="85" y="380" class="box-title" fill="#6b21a8">Weight-Stationary vs Temporal Multiplexing</text>
+<text x="85" y="405" class="box-text">• Stationary (64 Tiles): 0.0221 µs latency | 1.1744 nJ</text>
+<text x="85" y="425" class="box-text">• Temporal (16 Tiles): 256.06 µs latency | 173.21 nJ</text>
+<text x="85" y="450" class="sub">Stationary execution eliminates 32 rewrite cycles (256.0 µs overhead)</text>
+<text x="85" y="470" class="box-text">Post-ADC calibration gain: a* = 0.9795135 applied to output vector</text>
+
+<rect x="490" y="355" width="400" height="135" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="505" y="380" class="box-title" fill="#0f172a">Auditable Provenance Ledger</text>
+<text x="505" y="405" class="box-text">✔ Time: Profile-derived converters + SPICE crossbar RC</text>
+<text x="505" y="425" class="box-text">✔ Storage: Sized SRAM (288 B/tile) + KV cache</text>
+<text x="505" y="445" class="box-text">✔ Traffic: Multicast activations + tree partial-sum reduction</text>
+<text x="505" y="465" class="box-text">✔ Rewrites: Exact scheduler tracking + NVM pulse ledger</text>
+</svg>
