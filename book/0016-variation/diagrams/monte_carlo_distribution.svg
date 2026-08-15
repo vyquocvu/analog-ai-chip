@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" width="960" height="620" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="960" height="620" fill="#ffffff"/>
+  <text x="480" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#0f172a">Monte Carlo Programming &amp; Read Variability Sweeps (0016)</text>
+  <text x="480" y="50" text-anchor="middle" font-size="12" fill="#64748b">σ_prog = 3.0%, σ_read = 1.0%, σ_tot = 3.16%, N=1000 trials/state, Seed = 42</text>
+
+  
+    <text x="480" y="60" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f172a">Panel 1: Conductance Std Dev per State (1000-Trial Monte Carlo vs G_k · σ_tot)</text>
+    <line x1="90" y1="80" x2="870" y2="80" stroke="#e2e8f0" stroke-dasharray="4"/>
+    <line x1="90" y1="185.0" x2="870" y2="185.0" stroke="#e2e8f0" stroke-dasharray="4"/>
+    <line x1="90" y1="290" x2="870" y2="290" stroke="#334155" stroke-width="1.5"/>
+    <line x1="90" y1="80" x2="90" y2="290" stroke="#334155" stroke-width="1.5"/>
+    <text x="75" y="185.0" text-anchor="middle" transform="rotate(-90 75 185.0)" font-size="11" fill="#64748b">Std Dev σ_G (uS)</text>
+    
+  
+    <text x="480" y="340" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f172a">Panel 2: Differential Weight Standard Deviation σ_w(w) across Target Weights</text>
+    <line x1="90" y1="360" x2="870" y2="360" stroke="#e2e8f0" stroke-dasharray="4"/>
+    <line x1="90" y1="465.0" x2="870" y2="465.0" stroke="#e2e8f0" stroke-dasharray="4"/>
+    <line x1="90" y1="570" x2="870" y2="570" stroke="#334155" stroke-width="1.5"/>
+    <line x1="90" y1="360" x2="90" y2="570" stroke="#334155" stroke-width="1.5"/>
+    <text x="75" y="465.0" text-anchor="middle" transform="rotate(-90 75 465.0)" font-size="11" fill="#64748b">Weight Std Dev σ_w (%)</text>
+    
+
+  <!-- Panel 1 Legend -->
+  <rect x="760" y="90" width="12" height="12" fill="#3b82f6" opacity="0.8"/>
+  <text x="780" y="100" font-size="11" fill="#0f172a">Empirical Monte Carlo</text>
+  <line x1="760" y1="115" x2="775" y2="115" stroke="#ea580c" stroke-width="2" stroke-dasharray="3"/>
+  <text x="780" y="118" font-size="11" fill="#64748b">Theoretical G_k·σ_tot</text>
+
+  <!-- Panel 2 X-Axis Labels -->
+  <text x="90" y="590" text-anchor="middle" font-size="11" fill="#475569">-1.0</text>
+  <text x="285" y="590" text-anchor="middle" font-size="11" fill="#475569">-0.5</text>
+  <text x="480" y="590" text-anchor="middle" font-size="11" fill="#475569">0.0 (w_target)</text>
+  <text x="675" y="590" text-anchor="middle" font-size="11" fill="#475569">+0.5</text>
+  <text x="870" y="590" text-anchor="middle" font-size="11" fill="#475569">+1.0</text>
+
+  <!-- Panel 2 Legend -->
+  <circle cx="765" cy="375" r="4" fill="#2563eb"/>
+  <text x="780" y="378" font-size="11" fill="#0f172a">Empirical σ_w</text>
+  <line x1="760" y1="395" x2="775" y2="395" stroke="#ea580c" stroke-width="2" stroke-dasharray="4"/>
+  <text x="780" y="398" font-size="11" fill="#64748b">Theoretical σ_w(w)</text>
+
+  <!-- Data elements -->
+  <rect x="78.0" y="273.6" width="24" height="16.4" fill="#3b82f6" opacity="0.8" rx="2"/> <circle cx="90.0" cy="273.4" r="3" fill="#ea580c"/> <text x="90.0" y="308.0" text-anchor="middle" font-size="10" fill="#475569">S0</text> <rect x="130.0" y="262.8" width="24" height="27.2" fill="#3b82f6" opacity="0.8" rx="2"/> <circle cx="142.0" cy="263.4" r="3" fill="#ea580c"/> <text x="142.0" y="308.0" text-anchor="middle" font-size="10" fill="#475569">S1</text> <rect x="182.0" y="253.3" width="24" height="36.7" fill="#3b82f6" opacity="0.8" rx="2"/> <circle cx="194.0" cy="253.5" r="3" fill="#ea580c"/> <text x="194.0" y="308.0" text-anchor="middle" font-size="10" fill="#475569">S2</text> <rect x="234.0" y="242.9" width="24" height="47.1" fill="#3b82f6" opacity="0.8" rx="2"/> <circle cx="246.0" cy="243.5" r="3" fill="#ea580c"/> <text x="246.0" y="308.0" text-anchor="middle" font-size="10" fill="#475569">S3</text> <rect x="286.0" y="233.7" width="24" height="56.3" fill="#3b82f6" opacity="0.8" rx="2"/> <circle cx="298.0" cy="233.6" r="3" fill="#ea580c"/> <text x="298.0" y="308.0" text-anchor="middle" font-size="10" fill="#475569">S4</text> <rect x="338.0" y="222.3" width="24" height="67.7" fill="#3b82f6" opacity="0.8" rx="2"/> <circle cx="350.0" cy="223.6" r="3" fill="#ea580c"/> <text x="350.0" y="308.0" text-anchor="middle" font-size="10" fill="#475569">S5</text> <rect x="390.0" y="214.4" width="24" height="75.6" fill="#3b82f6" opacity="0.8" rx="2"/> <circle cx="402.0" cy="213.6" r="3" fill="#ea580c"/> <text x="402.0" y="308.0" text-anchor="middle" font-size="10" fill="#475569">S6</text> <rect x="442.0" y="203.3" width="24" height="86.7" fill="#3b82f6" opacity="0.8" rx="2"/> <circle cx="454.0" cy="203.7" r="3" fill="#ea580c"/> <text x="454.0" y="308.0" text-anchor="middle" font-size="10" fill="#475569">S7</text> <rect x="494.0" y="192.0" width="24" height="98.0" fill="#3b82f6" opacity="0.8" rx="2"/> <circle cx="506.0" cy="193.7" r="3" fill="#ea580c"/> <text x="506.0" y="308.0" text-anchor="middle" font-size="10" fill="#475569">S8</text> <rect x="546.0" y="184.7" width="24" height="105.3" fill="#3b82f6" opacity="0.8" rx="2"/> <circle cx="558.0" cy="183.7" r="3" fill="#ea580c"/> <text x="558.0" y="308.0" text-anchor="middle" font-size="10" fill="#475569">S9</text> <rect x="598.0" y="174.7" width="24" height="115.3" fill="#3b82f6" opacity="0.8" rx="2"/> <circle cx="610.0" cy="173.8" r="3" fill="#ea580c"/> <text x="610.0" y="308.0" text-anchor="middle" font-size="10" fill="#475569">S10</text> <rect x="650.0" y="170.9" width="24" height="119.1" fill="#3b82f6" opacity="0.8" rx="2"/> <circle cx="662.0" cy="163.8" r="3" fill="#ea580c"/> <text x="662.0" y="308.0" text-anchor="middle" font-size="10" fill="#475569">S11</text> <rect x="702.0" y="152.4" width="24" height="137.6" fill="#3b82f6" opacity="0.8" rx="2"/> <circle cx="714.0" cy="153.9" r="3" fill="#ea580c"/> <text x="714.0" y="308.0" text-anchor="middle" font-size="10" fill="#475569">S12</text> <rect x="754.0" y="137.9" width="24" height="152.1" fill="#3b82f6" opacity="0.8" rx="2"/> <circle cx="766.0" cy="143.9" r="3" fill="#ea580c"/> <text x="766.0" y="308.0" text-anchor="middle" font-size="10" fill="#475569">S13</text> <rect x="806.0" y="135.0" width="24" height="155.0" fill="#3b82f6" opacity="0.8" rx="2"/> <circle cx="818.0" cy="133.9" r="3" fill="#ea580c"/> <text x="818.0" y="308.0" text-anchor="middle" font-size="10" fill="#475569">S14</text> <rect x="858.0" y="120.2" width="24" height="169.8" fill="#3b82f6" opacity="0.8" rx="2"/> <circle cx="870.0" cy="124.0" r="3" fill="#ea580c"/> <text x="870.0" y="308.0" text-anchor="middle" font-size="10" fill="#475569">S15</text> <polyline points="90.0,273.4 142.0,263.4 194.0,253.5 246.0,243.5 298.0,233.6 350.0,223.6 402.0,213.6 454.0,203.7 506.0,193.7 558.0,183.7 610.0,173.8 662.0,163.8 714.0,153.9 766.0,143.9 818.0,133.9 870.0,124.0" fill="none" stroke="#ea580c" stroke-width="2" stroke-dasharray="3"/> <circle cx="90.0" cy="381.2" r="4" fill="#2563eb"/> <circle cx="129.0" cy="392.3" r="4" fill="#2563eb"/> <circle cx="168.0" cy="420.8" r="4" fill="#2563eb"/> <circle cx="207.0" cy="434.9" r="4" fill="#2563eb"/> <circle cx="246.0" cy="451.5" r="4" fill="#2563eb"/> <circle cx="285.0" cy="466.4" r="4" fill="#2563eb"/> <circle cx="324.0" cy="479.7" r="4" fill="#2563eb"/> <circle cx="363.0" cy="498.5" r="4" fill="#2563eb"/> <circle cx="402.0" cy="517.3" r="4" fill="#2563eb"/> <circle cx="441.0" cy="531.2" r="4" fill="#2563eb"/> <circle cx="480.0" cy="544.1" r="4" fill="#2563eb"/> <circle cx="519.0" cy="531.2" r="4" fill="#2563eb"/> <circle cx="558.0" cy="512.8" r="4" fill="#2563eb"/> <circle cx="597.0" cy="502.3" r="4" fill="#2563eb"/> <circle cx="636.0" cy="483.8" r="4" fill="#2563eb"/> <circle cx="675.0" cy="465.8" r="4" fill="#2563eb"/> <circle cx="714.0" cy="444.1" r="4" fill="#2563eb"/> <circle cx="753.0" cy="434.6" r="4" fill="#2563eb"/> <circle cx="792.0" cy="413.7" r="4" fill="#2563eb"/> <circle cx="831.0" cy="402.4" r="4" fill="#2563eb"/> <circle cx="870.0" cy="386.8" r="4" fill="#2563eb"/> <polyline points="90.0,384.6 129.0,401.1 168.0,417.6 207.0,434.1 246.0,450.5 285.0,466.9 324.0,483.2 363.0,499.3 402.0,515.2 441.0,530.4 480.0,543.9 519.0,530.4 558.0,515.2 597.0,499.3 636.0,483.2 675.0,466.9 714.0,450.5 753.0,434.1 792.0,417.6 831.0,401.1 870.0,384.6" fill="none" stroke="#ea580c" stroke-width="2" stroke-dasharray="4"/> <polyline points="90.0,381.2 129.0,392.3 168.0,420.8 207.0,434.9 246.0,451.5 285.0,466.4 324.0,479.7 363.0,498.5 402.0,517.3 441.0,531.2 480.0,544.1 519.0,531.2 558.0,512.8 597.0,502.3 636.0,483.8 675.0,465.8 714.0,444.1 753.0,434.6 792.0,413.7 831.0,402.4 870.0,386.8" fill="none" stroke="#2563eb" stroke-width="2"/>
+</svg>

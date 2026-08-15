@@ -107,6 +107,7 @@ See [`docs/SIMULATION_STACK.md`](docs/SIMULATION_STACK.md).
 | 0013 | 4×4 differential crossbar | done | `book/0013-crossbar-4x4/` |
 | 0014 | Array timing and loading | done | `book/0014-array-timing/` |
 | 0015 | Programmable conductance compact model | done | `book/0015-conductance-model/` |
+| 0016 | Programming and read variation | done | `book/0016-variation/` |
 
 > **Tiếng Việt:** every chapter has a `README.vi.md` beside the English `README.md`.
 

@@ -1,0 +1,335 @@
+{
+  "schema_version": "0.1.0",
+  "chapter": "0016-variation",
+  "title": "NVM Programming and Read Variation (Monte Carlo)",
+  "assumptions": {
+    "sigma_prog_rel": 0.03,
+    "sigma_read_rel": 0.01,
+    "sigma_total_rel": 0.03162277660168379,
+    "num_monte_carlo_draws": 1000,
+    "seed": 42
+  },
+  "state_variation_statistics": [
+    {
+      "state_index": 0,
+      "nominal_uS": 10.0,
+      "empirical_mean_uS": 9.983178008571178,
+      "empirical_std_uS": 0.312404917844725,
+      "expected_std_uS": 0.31622776601683794,
+      "mean_error_pct": 0.16821991428822536,
+      "std_error_pct": 1.2088907372888182
+    },
+    {
+      "state_index": 1,
+      "nominal_uS": 16.000000000000004,
+      "empirical_mean_uS": 16.01613180833646,
+      "empirical_std_uS": 0.5178820853612257,
+      "expected_std_uS": 0.5059644256269408,
+      "mean_error_pct": 0.10082380210285403,
+      "std_error_pct": 2.3554343212010984
+    },
+    {
+      "state_index": 2,
+      "nominal_uS": 22.0,
+      "empirical_mean_uS": 21.996803799906242,
+      "empirical_std_uS": 0.6990849647866293,
+      "expected_std_uS": 0.6957010852370434,
+      "mean_error_pct": 0.014528182244343385,
+      "std_error_pct": 0.48639848656164264
+    },
+    {
+      "state_index": 3,
+      "nominal_uS": 28.000000000000004,
+      "empirical_mean_uS": 27.99999154556964,
+      "empirical_std_uS": 0.8968440729625712,
+      "expected_std_uS": 0.8854377448471463,
+      "mean_error_pct": 3.0194394152068964e-05,
+      "std_error_pct": 1.288213449427101
+    },
+    {
+      "state_index": 4,
+      "nominal_uS": 34.0,
+      "empirical_mean_uS": 34.003415224982746,
+      "empirical_std_uS": 1.0726999681546114,
+      "expected_std_uS": 1.0751744044572489,
+      "mean_error_pct": 0.010044779361020903,
+      "std_error_pct": 0.2301427835688254
+    },
+    {
+      "state_index": 5,
+      "nominal_uS": 40.0,
+      "empirical_mean_uS": 39.97519354271259,
+      "empirical_std_uS": 1.289589166700259,
+      "expected_std_uS": 1.2649110640673518,
+      "mean_error_pct": 0.06201614321854064,
+      "std_error_pct": 1.9509753162846377
+    },
+    {
+      "state_index": 6,
+      "nominal_uS": 46.0,
+      "empirical_mean_uS": 45.95815393050255,
+      "empirical_std_uS": 1.4398991160660777,
+      "expected_std_uS": 1.4546477236774544,
+      "mean_error_pct": 0.09096971629880449,
+      "std_error_pct": 1.0138954862618743
+    },
+    {
+      "state_index": 7,
+      "nominal_uS": 52.00000000000001,
+      "empirical_mean_uS": 51.998493401651345,
+      "empirical_std_uS": 1.6518769272819396,
+      "expected_std_uS": 1.644384383287557,
+      "mean_error_pct": 0.002897304516655988,
+      "std_error_pct": 0.45564431713970044
+    },
+    {
+      "state_index": 8,
+      "nominal_uS": 58.0,
+      "empirical_mean_uS": 58.137421964754324,
+      "empirical_std_uS": 1.866894659872899,
+      "expected_std_uS": 1.83412104289766,
+      "mean_error_pct": 0.23693442199021622,
+      "std_error_pct": 1.786884082822654
+    },
+    {
+      "state_index": 9,
+      "nominal_uS": 64.0,
+      "empirical_mean_uS": 64.11280013977176,
+      "empirical_std_uS": 2.0051062667082697,
+      "expected_std_uS": 2.0238577025077626,
+      "mean_error_pct": 0.17625021839339,
+      "std_error_pct": 0.9265194769502891
+    },
+    {
+      "state_index": 10,
+      "nominal_uS": 70.00000000000001,
+      "empirical_mean_uS": 69.99770577150164,
+      "empirical_std_uS": 2.1958113732888367,
+      "expected_std_uS": 2.2135943621178655,
+      "mean_error_pct": 0.003277469283382433,
+      "std_error_pct": 0.8033535472151573
+    },
+    {
+      "state_index": 11,
+      "nominal_uS": 76.0,
+      "empirical_mean_uS": 76.04100360369593,
+      "empirical_std_uS": 2.269264922444791,
+      "expected_std_uS": 2.403331021727968,
+      "mean_error_pct": 0.05395211012621428,
+      "std_error_pct": 5.57834514143562
+    },
+    {
+      "state_index": 12,
+      "nominal_uS": 82.0,
+      "empirical_mean_uS": 82.11024856765775,
+      "empirical_std_uS": 2.621782528953945,
+      "expected_std_uS": 2.593067681338071,
+      "mean_error_pct": 0.1344494727533493,
+      "std_error_pct": 1.10736976988803
+    },
+    {
+      "state_index": 13,
+      "nominal_uS": 88.0,
+      "empirical_mean_uS": 88.17610398673263,
+      "empirical_std_uS": 2.8971607616768313,
+      "expected_std_uS": 2.7828043409481737,
+      "mean_error_pct": 0.2001181667416239,
+      "std_error_pct": 4.109394938261931
+    },
+    {
+      "state_index": 14,
+      "nominal_uS": 94.00000000000001,
+      "empirical_mean_uS": 93.84801465308614,
+      "empirical_std_uS": 2.952371537703247,
+      "expected_std_uS": 2.9725410005582766,
+      "mean_error_pct": 0.16168653927006743,
+      "std_error_pct": 0.6785259766388793
+    },
+    {
+      "state_index": 15,
+      "nominal_uS": 100.0,
+      "empirical_mean_uS": 100.13926059922817,
+      "empirical_std_uS": 3.235212111968294,
+      "expected_std_uS": 3.162277660168379,
+      "mean_error_pct": 0.1392605992281572,
+      "std_error_pct": 2.306389875834985
+    }
+  ],
+  "weight_variation_statistics": [
+    {
+      "w_target": -1.0,
+      "empirical_mean_w": -0.9995782393421226,
+      "empirical_std_w": 0.03596652122752367,
+      "theoretical_std_w": 0.035311663515712674,
+      "std_error_pct": 1.8545082463181068,
+      "snr_db": 28.882031324114998
+    },
+    {
+      "w_target": -0.9,
+      "empirical_mean_w": -0.8988327654041645,
+      "empirical_std_w": 0.03383941136033857,
+      "theoretical_std_w": 0.03216661869119431,
+      "std_error_pct": 5.200399473763126,
+      "snr_db": 28.496394191978837
+    },
+    {
+      "w_target": -0.8,
+      "empirical_mean_w": -0.7992099202579698,
+      "empirical_std_w": 0.028422695391859962,
+      "theoretical_std_w": 0.029025318875121234,
+      "std_error_pct": 2.0761993549631734,
+      "snr_db": 28.988494525360665
+    },
+    {
+      "w_target": -0.7,
+      "empirical_mean_w": -0.6989685420750404,
+      "empirical_std_w": 0.02573983234502782,
+      "theoretical_std_w": 0.025889127323651655,
+      "std_error_pct": 0.576670572002803,
+      "snr_db": 28.68984652379455
+    },
+    {
+      "w_target": -0.6,
+      "empirical_mean_w": -0.6003100355306269,
+      "empirical_std_w": 0.0225705609902017,
+      "theoretical_std_w": 0.02276015578501221,
+      "std_error_pct": 0.833011850188479,
+      "snr_db": 28.492177936067826
+    },
+    {
+      "w_target": -0.5,
+      "empirical_mean_w": -0.4989245684511504,
+      "empirical_std_w": 0.01973575780644661,
+      "theoretical_std_w": 0.019641855032959652,
+      "std_error_pct": 0.4780748729149389,
+      "snr_db": 28.07432394805677
+    },
+    {
+      "w_target": -0.3999999999999999,
+      "empirical_mean_w": -0.399985873648195,
+      "empirical_std_w": 0.017196233082417658,
+      "theoretical_std_w": 0.016540261391936345,
+      "std_error_pct": 3.965908850758005,
+      "snr_db": 27.332533365952727
+    },
+    {
+      "w_target": -0.29999999999999993,
+      "empirical_mean_w": -0.3003035859813857,
+      "empirical_std_w": 0.013618880963251959,
+      "theoretical_std_w": 0.013466923356556165,
+      "std_error_pct": 1.1283765613904344,
+      "snr_db": 26.85959661606006
+    },
+    {
+      "w_target": -0.19999999999999996,
+      "empirical_mean_w": -0.20073937417250584,
+      "empirical_std_w": 0.010040485091102178,
+      "theoretical_std_w": 0.010446808243149471,
+      "std_error_pct": 3.889447787210424,
+      "snr_db": 25.985506001124207
+    },
+    {
+      "w_target": -0.09999999999999998,
+      "empirical_mean_w": -0.09977047919110624,
+      "empirical_std_w": 0.007394711049419429,
+      "theoretical_std_w": 0.007544108976341312,
+      "std_error_pct": 1.980325673852311,
+      "snr_db": 22.62157583048694
+    },
+    {
+      "w_target": 0.0,
+      "empirical_mean_w": -0.00030940086767058006,
+      "empirical_std_w": 0.004937968042259082,
+      "theoretical_std_w": 0.004969039949999532,
+      "std_error_pct": 0.6253100810842374,
+      "snr_db": 0.0
+    },
+    {
+      "w_target": 0.10000000000000009,
+      "empirical_mean_w": 0.10013161500942419,
+      "empirical_std_w": 0.007388886171487686,
+      "theoretical_std_w": 0.007544108976341315,
+      "std_error_pct": 2.0575366201683347,
+      "snr_db": 22.628420477122333
+    },
+    {
+      "w_target": 0.20000000000000018,
+      "empirical_mean_w": 0.2002553752205688,
+      "empirical_std_w": 0.010904079760315823,
+      "theoretical_std_w": 0.010446808243149478,
+      "std_error_pct": 4.377140907761965,
+      "snr_db": 25.26881952164394
+    },
+    {
+      "w_target": 0.30000000000000004,
+      "empirical_mean_w": 0.29970421716225837,
+      "empirical_std_w": 0.01288983118053738,
+      "theoretical_std_w": 0.013466923356556169,
+      "std_error_pct": 4.285256258905199,
+      "snr_db": 27.33748050658225
+    },
+    {
+      "w_target": 0.40000000000000013,
+      "empirical_mean_w": 0.40009634316581183,
+      "empirical_std_w": 0.016413143509330586,
+      "theoretical_std_w": 0.016540261391936355,
+      "std_error_pct": 0.7685361167734703,
+      "snr_db": 27.737364490673887
+    },
+    {
+      "w_target": 0.5,
+      "empirical_mean_w": 0.49966605724829294,
+      "empirical_std_w": 0.019856266488190954,
+      "theoretical_std_w": 0.019641855032959652,
+      "std_error_pct": 1.091604916498531,
+      "snr_db": 28.021448230728218
+    },
+    {
+      "w_target": 0.6000000000000001,
+      "empirical_mean_w": 0.5994084436466043,
+      "empirical_std_w": 0.023985442126864667,
+      "theoretical_std_w": 0.02276015578501221,
+      "std_error_pct": 5.383470804972793,
+      "snr_db": 27.96407044199277
+    },
+    {
+      "w_target": 0.7000000000000002,
+      "empirical_mean_w": 0.6997413261466598,
+      "empirical_std_w": 0.025789905187564483,
+      "theoretical_std_w": 0.02588912732365166,
+      "std_error_pct": 0.3832579400871844,
+      "snr_db": 28.672965889742947
+    },
+    {
+      "w_target": 0.8,
+      "empirical_mean_w": 0.8002043866581466,
+      "empirical_std_w": 0.029773746654501557,
+      "theoretical_std_w": 0.029025318875121234,
+      "std_error_pct": 2.5785342190394713,
+      "snr_db": 28.585129967298748
+    },
+    {
+      "w_target": 0.9000000000000001,
+      "empirical_mean_w": 0.9010144639934463,
+      "empirical_std_w": 0.031929402690438126,
+      "theoretical_std_w": 0.03216661869119431,
+      "std_error_pct": 0.7374601696047203,
+      "snr_db": 29.00103430510884
+    },
+    {
+      "w_target": 1.0,
+      "empirical_mean_w": 0.999683544090566,
+      "empirical_std_w": 0.034897223135764745,
+      "theoretical_std_w": 0.035311663515712674,
+      "std_error_pct": 1.173664276007601,
+      "snr_db": 29.144182592503782
+    }
+  ],
+  "summary": {
+    "zero_weight_noise_floor_std": 0.004969039949999532,
+    "full_scale_weight_std": 0.035311663515712674,
+    "max_sample_mean_error_pct": 0.23693442199021622,
+    "evidence_class": "assumed",
+    "provenance": "1000-trial Monte Carlo sensitivity study with Gaussian programming and read noise"
+  }
+}

@@ -180,7 +180,7 @@ Depends on R3 (closed).
 
 - [x] Select explicit programmable-conductance abstraction / compact model: non-volatile 1T1R memory cell model with $G_{\min}=10.0\,\mu\text{S}$, $G_{\max}=100.0\,\mu\text{S}$, dynamic range $10\times$, $|V_{\text{read}}| \le 0.25\text{ V}$ (`book/0015-conductance-model/conductance_model.py`, committed extract `conductance-model-0015-extract.json`)
 - [x] Establish `gmin`, `gmax`, state count/resolution and programming assumptions: 4-bit (16 states, $\Delta G=6.0\,\mu\text{S}$) and 6-bit (64 states, $\Delta G=1.429\,\mu\text{S}$) discrete allocations; differential $(G^+, G^-)$ mapping with balanced zero ($w=0 \to (G_{\min}, G_{\min})$)
-- [ ] Programming/read variation Monte Carlo
+- [x] Programming/read variation Monte Carlo: 1000-trial statistical characterization of write dispersion ($\sigma_{\text{prog}}=3\%$) and read noise ($\sigma_{\text{read}}=1\%$); differential variance $\sigma_w(0)=0.497\%$ to $\sigma_w(1)=3.531\%$ (`book/0016-variation/variation.py`, committed extract `variation-0016-extract.json`)
 - [ ] IR-drop / line resistance versus array dimensions
 - [ ] Parasitic RC and settling
 - [ ] Drift, stuck states and non-linearity where supported

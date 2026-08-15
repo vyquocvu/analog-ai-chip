@@ -71,8 +71,8 @@ Chapter numbering below is canonical. Existing chapters keep their numbers; futu
 | # | Chapter | Verification target | Status |
 |---|---|---|---|
 | 0015 | Programmable conductance model | explicit cell/compact-model choice with `gmin/gmax` and state behavior provenance | done |
-| 0016 | Programming/read variation | Monte Carlo distributions quantify mismatch and state uncertainty | next |
-| 0017 | IR drop | line resistance error quantified versus array dimensions |
+| 0016 | Programming/read variation | Monte Carlo distributions quantify mismatch and state uncertainty | done |
+| 0017 | IR drop | line resistance error quantified versus array dimensions | next |
 | 0018 | Parasitics | RC/settling impact extracted from circuit model |
 | 0019 | Drift, stuck states and non-linearity | each supported mechanism modeled separately or explicitly excluded |
 | 0020 | Crossbar-v1 profile | publish a validated profile with evidence classes, conditions and limitations |
