@@ -1,0 +1,103 @@
+{
+  "chapter": "0027-linear-layer",
+  "evaluations": {
+    "sparse_80pct": {
+      "b_acc_bits": 6,
+      "calibrated_nonideal": {
+        "mae": 0.25235569767720384,
+        "max_abs_error": 1.1769399873027488,
+        "rel_l2_error_pct": 67.3918994795522,
+        "snr_db": 3.427846052307077
+      },
+      "calibration_improvement_pct": 2.1202536973936756,
+      "ideal_quantized": {
+        "mae": 0.16463400326970173,
+        "max_abs_error": 0.4931421163659292,
+        "rel_l2_error_pct": 40.56727311157224,
+        "snr_db": 7.836483682442349
+      },
+      "kc": 4,
+      "kr": 4,
+      "layer_name": "Sparse_80pct",
+      "m_in": 64,
+      "m_out": 64,
+      "raw_nonideal": {
+        "mae": 0.2580717927385878,
+        "max_abs_error": 1.2062063940170347,
+        "rel_l2_error_pct": 68.85173084858894,
+        "snr_db": 3.241702752718427
+      },
+      "total_tiles": 16
+    },
+    "tinygpt_mlp_up": {
+      "b_acc_bits": 6,
+      "calibrated_nonideal": {
+        "mae": 0.23881415977967416,
+        "max_abs_error": 1.0436621444541507,
+        "rel_l2_error_pct": 36.53120993766269,
+        "snr_db": 8.74671886862873
+      },
+      "calibration_improvement_pct": 1.7541295354631614,
+      "ideal_quantized": {
+        "mae": 0.1797803188756003,
+        "max_abs_error": 0.625337798917714,
+        "rel_l2_error_pct": 26.311561569382967,
+        "snr_db": 11.59706752263334
+      },
+      "kc": 4,
+      "kr": 16,
+      "layer_name": "TinyGPT_MLP_Up",
+      "m_in": 64,
+      "m_out": 256,
+      "raw_nonideal": {
+        "mae": 0.24347666159590525,
+        "max_abs_error": 1.0363455427755792,
+        "rel_l2_error_pct": 37.183455920266,
+        "snr_db": 8.59300496618761
+      },
+      "total_tiles": 64
+    },
+    "tinygpt_qkv": {
+      "b_acc_bits": 6,
+      "calibrated_nonideal": {
+        "mae": 0.273540948128762,
+        "max_abs_error": 1.1439268364317583,
+        "rel_l2_error_pct": 40.3312125926019,
+        "snr_db": 7.887174407177632
+      },
+      "calibration_improvement_pct": 2.052506183612635,
+      "ideal_quantized": {
+        "mae": 0.18633900611812035,
+        "max_abs_error": 0.6356606171772974,
+        "rel_l2_error_pct": 25.843404666731644,
+        "snr_db": 11.753005440031988
+      },
+      "kc": 4,
+      "kr": 12,
+      "layer_name": "TinyGPT_QKV",
+      "m_in": 64,
+      "m_out": 192,
+      "raw_nonideal": {
+        "mae": 0.27988005165754215,
+        "max_abs_error": 1.121977031396044,
+        "rel_l2_error_pct": 41.176359926275296,
+        "snr_db": 7.707040970681307
+      },
+      "total_tiles": 48
+    }
+  },
+  "formulas": {
+    "calibration": "y_cal_i = a_star * y_tilde_i (a_star = 0.9795135)",
+    "partial_sum": "y_tilde_i = sum_(j=0)^(Kc-1) Tile_ij(x_j)",
+    "rel_l2_error": "||y_pred - y_ref||_2 / ||y_ref||_2 * 100%",
+    "tiling": "Kr = ceil(M_out / R), Kc = ceil(M_in / C)"
+  },
+  "gate": "R7 \u2014 Transformer and LLM validation",
+  "provenance": {
+    "calibration_profile": "device_profiles/tile-calibration-v1.json",
+    "claim_level": "SYSTEM_SIMULATED",
+    "crossbar_profile": "device_profiles/crossbar-v1.json"
+  },
+  "schema_version": "0.1.0",
+  "title": "Linear Layer Mapping"
+}

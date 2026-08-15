@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 14px; font-weight: 700; }
+.box-text { font-size: 12px; fill: #334155; }
+.formula { font: 12px ui-monospace, monospace; fill: #1e293b; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Chapter 0027 — Linear Layer Mapping</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Tiled physical MVM execution under crossbar-v1 non-idealities and output calibration</text>
+
+<!-- Mapping Architecture Box -->
+<rect x="50" y="85" width="410" height="420" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="70" y="115" class="box-title" fill="#1d4ed8">1. Dense Matrix Tiling &amp; MVM Pipeline</text>
+<text x="70" y="135" class="sub">Spatial decomposition into Kr × Kc physical tiles (16×16 each)</text>
+
+<rect x="70" y="155" width="370" height="150" rx="8" fill="white" stroke="#93c5fd"/>
+<text x="85" y="180" class="box-title" fill="#1e40af">Forward Computation Steps</text>
+<text x="85" y="202" class="box-text">1. Input x partitioned into Kc blocks → DAC voltage [0, 2.34V]</text>
+<text x="85" y="222" class="box-text">2. Physical MVM on each tile with all 9 non-idealities</text>
+<text x="85" y="242" class="box-text">3. SAR ADC digitization (4 bits, 2.5V full scale)</text>
+<text x="85" y="262" class="box-text">4. Row spatial reduction: y_tilde = Σ Tile_ij(x_j)</text>
+<text x="85" y="282" class="box-text">5. Post-reduction calibration: y_cal = 0.9795135 × y_tilde</text>
+
+<rect x="70" y="320" width="370" height="165" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="85" y="345" class="box-title">Non-Idealities Simulated</text>
+<text x="85" y="370" class="box-text">• 2D Distributed IR drop (1.0 Ω wire resistance)</text>
+<text x="85" y="390" class="box-text">• Write dispersion (3%) &amp; read noise (1%)</text>
+<text x="85" y="410" class="box-text">• Temporal drift (1s) &amp; stuck defects (HRS/LRS)</text>
+<text x="85" y="430" class="box-text">• Cubic I-V non-linearity (β = 1.0 / V²)</text>
+<text x="85" y="455" class="formula">B_acc = B_adc + ceil(log2(Kc))</text>
+
+<!-- Accuracy Results Box -->
+<rect x="500" y="85" width="410" height="420" rx="12" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="520" y="115" class="box-title" fill="#7e22ce">2. Accuracy &amp; Calibration Results</text>
+<text x="520" y="135" class="sub">Evaluation vs float32 dense matrix reference y = W x</text>
+
+<!-- TinyGPT QKV -->
+<rect x="520" y="155" width="370" height="150" rx="8" fill="white" stroke="#d8b4fe"/>
+<text x="535" y="180" class="box-title" fill="#6b21a8">TinyGPT QKV Projection (192×64 → 48 Tiles)</text>
+<text x="535" y="202" class="box-text">• Ideal Quantized L2 Error: 25.84% (SNR: 11.8 dB)</text>
+<text x="535" y="222" class="box-text">• Raw Non-Ideal L2 Error: 41.18% (SNR: 7.7 dB)</text>
+<text x="535" y="242" class="box-title" fill="#15803d">• Calibrated L2 Error: 40.33% (SNR: 7.9 dB)</text>
+<text x="535" y="262" class="sub">Calibration reduces residual error by 2.1%</text>
+
+<!-- TinyGPT MLP Up -->
+<rect x="520" y="320" width="370" height="165" rx="8" fill="#f0fdf4" stroke="#86efac"/>
+<text x="535" y="345" class="box-title" fill="#166534">TinyGPT MLP Up (256×64 → 64 Tiles)</text>
+<text x="535" y="370" class="box-text">• Ideal Quantized L2 Error: 26.31% (SNR: 11.6 dB)</text>
+<text x="535" y="390" class="box-text">• Raw Non-Ideal L2 Error: 37.18% (SNR: 8.6 dB)</text>
+<text x="535" y="410" class="box-title" fill="#15803d">• Calibrated L2 Error: 36.53% (SNR: 8.7 dB)</text>
+<text x="535" y="430" class="sub">Calibration reduces residual error by 1.8%</text>
+<text x="535" y="455" class="formula">E_L2 = ||y_pred − y_ref||₂ / ||y_ref||₂</text>
+</svg>
