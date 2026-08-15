@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" width="960" height="480" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <style>
+      .title { font-size: 20px; font-weight: bold; fill: #0f172a; }
+      .subtitle { font-size: 13px; fill: #64748b; }
+      .box { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 6; }
+      .box-blue { fill: #eff6ff; stroke: #3b82f6; stroke-width: 1.5; rx: 6; }
+      .box-red { fill: #fff1f2; stroke: #f43f5e; stroke-width: 1.5; rx: 6; }
+      .box-purple { fill: #faf5ff; stroke: #a855f7; stroke-width: 1.5; rx: 6; }
+      .box-green { fill: #ecfdf5; stroke: #10b981; stroke-width: 1.5; rx: 6; }
+      .label-bold { font-size: 13px; font-weight: bold; fill: #0f172a; }
+      .label-sub { font-size: 11px; fill: #64748b; }
+      .label-blue { font-size: 12px; font-weight: bold; fill: #2563eb; }
+      .label-red { font-size: 12px; font-weight: bold; fill: #e11d48; }
+      .label-purple { font-size: 12px; font-weight: bold; fill: #9333ea; }
+      .math-box { font-family: 'Menlo', 'Consolas', monospace; font-size: 11px; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="480" fill="#ffffff"/>
+
+  <!-- Title Header -->
+  <text x="480" y="32" text-anchor="middle" class="title">Long-Term &amp; Defect Non-Idealities (0019)</text>
+  <text x="480" y="52" text-anchor="middle" class="subtitle">Power-law temporal drift, stuck-at defect mapping, and sub-Ohmic I-V non-linearity</text>
+
+  <!-- Left: Temporal Drift Panel -->
+  <rect x="40" y="75" width="280" height="380" class="box"/>
+  <text x="55" y="102" class="label-bold">1. Conductance Drift G(t)</text>
+  <text x="55" y="118" class="label-sub">Power-Law Relaxation over Time</text>
+
+  <!-- Drift Decay Curve Graphic -->
+  <rect x="55" y="135" width="250" height="110" fill="#ffffff" stroke="#cbd5e1" rx="4"/>
+  <line x1="75" y1="225" x2="285" y2="225" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="75" y1="150" x2="75" y2="225" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="285" y="240" text-anchor="end" class="label-sub">log(t)</text>
+  <text x="70" y="148" text-anchor="end" class="label-sub">G(t)</text>
+
+  <!-- LRS decay trace -->
+  <path d="M 80 155 C 130 160, 200 185, 280 200" fill="none" stroke="#2563eb" stroke-width="2"/>
+  <text x="282" y="195" class="math-box" font-size="9" fill="#2563eb">LRS (ν=0.06)</text>
+
+  <!-- HRS trace -->
+  <path d="M 80 215 C 130 216, 200 218, 280 220" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3"/>
+  <text x="282" y="215" class="math-box" font-size="9" fill="#64748b">HRS</text>
+
+  <!-- Drift Details -->
+  <rect x="55" y="260" width="250" height="180" class="box-blue"/>
+  <text x="65" y="280" class="label-blue">Physical Formulation:</text>
+  <text x="65" y="300" class="math-box">G(t) = G(t₀) · (t/t₀)^(-ν)</text>
+  <text x="65" y="325" class="label-blue">Key Observations:</text>
+  <text x="65" y="343" class="math-box">• Structural relaxation</text>
+  <text x="65" y="360" class="math-box">• ν increases with G₀</text>
+  <text x="65" y="378" class="math-box">• Up to ~64% drop in 1 yr</text>
+  <text x="65" y="405" class="label-sub">Mitigation: Periodic drift compensation</text>
+
+  <!-- Middle: Stuck-at Faults Panel -->
+  <rect x="340" y="75" width="280" height="380" class="box"/>
+  <text x="355" y="102" class="label-bold">2. Stuck-at Fault Defects</text>
+  <text x="355" y="118" class="label-sub">Manufacturing Yield &amp; Cell Breakdowns</text>
+
+  <!-- 4x4 Defect Grid Graphic -->
+  <g transform="translate(390, 135)">
+    <!-- Row 0 -->
+    <rect x="0" y="0" width="28" height="24" class="box-green"/>
+    <rect x="34" y="0" width="28" height="24" class="box-green"/>
+    <rect x="68" y="0" width="28" height="24" class="box-red"/>
+    <text x="82" y="16" text-anchor="middle" class="math-box" font-size="8" fill="#e11d48">LRS</text>
+    <rect x="102" y="0" width="28" height="24" class="box-green"/>
+    <!-- Row 1 -->
+    <rect x="0" y="28" width="28" height="24" class="box-green"/>
+    <rect x="34" y="28" width="28" height="24" class="box-green"/>
+    <rect x="68" y="28" width="28" height="24" class="box-green"/>
+    <rect x="102" y="28" width="28" height="24" class="box-green"/>
+    <!-- Row 2 -->
+    <rect x="0" y="56" width="28" height="24" class="box" fill="#cbd5e1"/>
+    <text x="14" y="72" text-anchor="middle" class="math-box" font-size="8" fill="#475569">HRS</text>
+    <rect x="34" y="56" width="28" height="24" class="box-green"/>
+    <rect x="68" y="56" width="28" height="24" class="box-green"/>
+    <rect x="102" y="56" width="28" height="24" class="box-green"/>
+    <!-- Row 3 -->
+    <rect x="0" y="84" width="28" height="24" class="box-green"/>
+    <rect x="34" y="84" width="28" height="24" class="box-green"/>
+    <rect x="68" y="84" width="28" height="24" class="box-green"/>
+    <rect x="102" y="84" width="28" height="24" class="box-green"/>
+  </g>
+
+  <!-- Fault Details -->
+  <rect x="355" y="260" width="250" height="180" class="box-red"/>
+  <text x="365" y="280" class="label-red">Defect Categories:</text>
+  <text x="365" y="300" class="math-box">• Stuck-at-HRS (p ~ 3.0%)</text>
+  <text x="380" y="318" class="label-sub">Open cell (fails to conduct)</text>
+  <text x="365" y="338" class="math-box">• Stuck-at-LRS (p ~ 0.5%)</text>
+  <text x="380" y="355" class="label-sub">Short cell (severe column error)</text>
+  <text x="365" y="380" class="label-red">MVM Degradation:</text>
+  <text x="365" y="398" class="math-box">~9.2% error @ 1% defect rate</text>
+
+  <!-- Right: Non-Linear I-V Panel -->
+  <rect x="640" y="75" width="280" height="380" class="box"/>
+  <text x="655" y="102" class="label-bold">3. I-V Non-Linearity</text>
+  <text x="655" y="118" class="label-sub">Poole-Frenkel / Barrier Conduction</text>
+
+  <!-- I-V Curve Graphic -->
+  <rect x="655" y="135" width="250" height="110" fill="#ffffff" stroke="#cbd5e1" rx="4"/>
+  <line x1="675" y1="190" x2="885" y2="190" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="780" y1="145" x2="780" y2="235" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="880" y="205" text-anchor="end" class="label-sub">V_read</text>
+  <text x="775" y="150" text-anchor="end" class="label-sub">I(V)</text>
+
+  <!-- Linear reference line -->
+  <line x1="695" y1="225" x2="865" y2="155" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3"/>
+  <!-- Non-linear cubic curve -->
+  <path d="M 695 233 Q 780 190 865 147" fill="none" stroke="#9333ea" stroke-width="2"/>
+  <text x="870" y="145" class="math-box" font-size="9" fill="#9333ea">Non-Linear</text>
+
+  <!-- Non-Linear Details -->
+  <rect x="655" y="260" width="250" height="180" class="box-purple"/>
+  <text x="665" y="280" class="label-purple">Mathematical Model:</text>
+  <text x="665" y="300" class="math-box">I(V) = G₀ · V · (1 + β·|V|²)</text>
+  <text x="665" y="325" class="label-purple">Harmonic Distortion:</text>
+  <text x="665" y="343" class="math-box">• β = 1.0 V⁻²</text>
+  <text x="665" y="360" class="math-box">• At V = 0.25 V: +6.25%</text>
+  <text x="665" y="380" class="math-box">Super-linear current alters</text>
+  <text x="665" y="398" class="math-box">effective weight scaling</text>
+
+</svg>
