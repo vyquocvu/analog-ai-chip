@@ -37,21 +37,45 @@ Chương này chính thức mở đầu **Phần VI (Kiến trúc bộ tăng t�
 
 | Lớp Ma trận Chuẩn | Sai số Tương đối Trung bình (4-bit) | Sai số Tương đối Trung bình (6-bit) | Độ tương đồng Cosine |
 |---|---|---|---|
-| **Đơn vị ($W = I$)** | $9.38\%$ | $9.38\%$ | $0.9956$ |
-| **Dương Đều ($W > 0$)** | $3.58\%$ | $3.35\%$ | $0.9994$ |
-| **Âm Đều ($W < 0$)** | $3.58\%$ | $3.35\%$ | $0.9994$ |
+| **Đơn vị ($W = I$)** | $19.92\%$ | $19.92\%$ | $0.9825$ |
+| **Dương Đều ($W > 0$)** | $17.22\%$ | $16.61\%$ | $0.9868$ |
+| **Âm Đều ($W < 0$)** | $17.78\%$ | $17.19\%$ | $0.9867$ |
 | **Dấu Hỗn hợp ($\mathcal{U}[-1, 1]$)** | $15.44\%$ | $15.21\%$ | $0.9882$ |
-| **Hạng 1 ($W = u v^T$)** | $3.46\%$ | $3.46\%$ | $0.9994$ |
-| **Thưa ($90\%$ giá trị 0)** | $18.42\%$ | $18.42\%$ | $0.9835$ |
+| **Hạng 1 ($W = u v^T$)** | $48.33\%$ | $45.41\%$ | $0.8601$ |
+| **Thưa ($90\%$ giá trị 0)** | $17.49\%$ | $17.41\%$ | $0.9860$ |
 | **Ma trận Không ($W = 0$)** | **$0.0000\%$** | **$0.0000\%$** | $1.0000$ |
 
 ### Nhận xét Trọng tâm:
 - **Tính Bất biến Trôi Điểm 0**: Khi $W = 0$, cả hai nhánh dương và âm đều rút dòng rò như nhau $I_{\text{leak}} = G_{\min} \sum V_i$, dẫn đến triệt tiêu vi sai tuyệt đối ($V_{\text{diff}} = 0.000\text{ V}$).
-- **Độ tương đồng Cosine $> 0.988$**: Dù lượng tử hóa 4-bit tương đối thô, độ chính xác định hướng của vector đầu ra vẫn rất cao, bảo toàn thứ hạng kích hoạt của mạng nơ-ron.
+- Lượng tử hóa bộ chuyển đổi 4-bit thể hiện rõ: trường hợp dấu hỗn hợp đạt cosine trung bình $0.9882$, trong khi trường hợp hạng thấp giảm xuống $0.8601$. Đây là kết quả mô phỏng hành vi, không phải phép đo thiết bị.
 
 ---
 
-## 3. Tích hợp Hồ sơ Thiết bị
+## 3. Tương đương với SPICE Mảng Nhỏ
+
+![Sai số ô vật lý so với SPICE mảng nhỏ](diagrams/physical_tile_spice_equivalence.svg)
+
+Ô 4-bit tạo từ `crossbar-v1`, `dac-r2r-v1`, và `adc-sar-v1` được chạy lại trên năm trường hợp 2×2 đã cam kết của 0012 và năm trường hợp 4×4 của 0013. Với trường hợp $c$ và đầu ra $j$:
+
+$$e_c = \max_j |V_{\text{tile},c,j} - V_{\text{SPICE},c,j}|$$
+
+$$E_{\max} = \max_c e_c, \qquad \text{ĐẠT} \iff E_{\max} \le E_{\text{budget}}$$
+
+Ngưỡng được đóng băng trực tiếp từ `adc-sar-v1.json#/fields/quantization_error_v`:
+
+$$E_{\text{budget}} = 0.15625\text{ V}$$
+
+| Tập bằng chứng | Số trường hợp | Sai số cực đại | Sai số RMS |
+|---|---:|---:|---:|
+| SPICE 0012 2×2 | 5 | 0.150124 V | 0.087369 V |
+| SPICE 0013 4×4 | 5 | 0.142807 V | 0.075789 V |
+| Kết hợp | 10 | **0.150124 V — ĐẠT** | 0.079836 V |
+
+Đây là tiêu chí hồi quy `SYSTEM_SIMULATED` cho các trường hợp đã nêu. Kết quả không được nâng thành khẳng định ô vật lý đã xác minh: `crossbar-v1` chứa tham số thiết bị được đánh dấu giả định, và `CrossbarTile` hiện chưa tiêu thụ các trường sụt áp IR, biến thiên, trôi, lỗi kẹt hoặc phi tuyến I-V.
+
+---
+
+## 4. Tích hợp Hồ sơ Thiết bị
 
 Mọi tham số của ô tính toán được tạo tự động thông qua `analog_llm.profile_adapter.build_tile_factory_from_converter_profiles`:
 ```python
@@ -74,6 +98,7 @@ Chạy trích xuất đặc tính và tạo đồ thị:
 ```bash
 python book/0021-physical-tile-contract/physical_tile_contract.py
 python book/0021-physical-tile-contract/diagrams/make_plots.py
+python book/0021-physical-tile-contract/diagrams/make_equivalence_diagram.py
 ```
 Dữ liệu cam kết: [`verification/circuit/results/physical-tile-0021-extract.json`](../../verification/circuit/results/physical-tile-0021-extract.json).
 Kiểm thử tự động: [`tests/test_physical_tile_contract.py`](../../tests/test_physical_tile_contract.py).

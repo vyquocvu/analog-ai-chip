@@ -198,7 +198,7 @@ Every crossbar non-ideality used by the architecture simulator traces to a named
 Depends on R2 + R4.
 
 - [x] Tile configuration consumes `dac-v1`, `adc-v1`, `crossbar-v1`: `analog_llm.CrossbarTile` constructed via `build_tile_factory_from_converter_profiles` consuming validated `crossbar-v1`, `dac-r2r-v1`, `adc-sar-v1` profiles (`book/0021-physical-tile-contract/physical_tile_contract.py`, committed extract `physical-tile-0021-extract.json`)
-- [ ] Behavioral tile reproduces small-array SPICE cases within a frozen error budget
+- [x] Behavioral tile reproduces small-array SPICE cases within a frozen error budget: the 4-bit tile built from `crossbar-v1` + `dac-r2r-v1` + `adc-sar-v1` replays all 5 committed 0012 2×2 and all 5 committed 0013 4×4 cases; $E_{\max}=\max_{c,j}|V_{\text{tile},c,j}-V_{\text{SPICE},c,j}|=0.150124\text{ V}$ is within the frozen ADC-profile budget $E_{\text{budget}}=0.15625\text{ V}$ (combined RMS $0.079836\text{ V}$). Deterministic extract, formula, diagram, limitation, and fail-closed tests live in `book/0021-physical-tile-contract/` and `tests/test_physical_tile_contract.py`; this remains `SYSTEM_SIMULATED`, not a verified device claim, because several `crossbar-v1` mechanisms are assumed/unconsumed.
 - [ ] Calibration flow consumes profile evidence
 - [x] Partial-sum precision and clipping rules are explicit: spatial tiling across $16\times 16$ and $32\times 32$ physical tiles; noise accumulation $\sigma_{\text{accum}} = \sqrt{K_c} \cdot \sigma_{\text{ADC}}$; accumulator word-length bound $B_{\text{acc}} \ge B_{\text{ADC}} + \lceil \log_2 K_c \rceil$ (`book/0022-partial-sums/partial_sums.py`, committed extract `partial-sums-0022-extract.json`)
 - [ ] Freeze tile-level validation report

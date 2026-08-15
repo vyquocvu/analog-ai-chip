@@ -33,7 +33,6 @@ import numpy as np
 
 from analog_llm.profile_adapter import (
     build_tile_factory_from_converter_profiles,
-    tile_config_from_profile,
 )
 
 _REPO = Path(__file__).resolve().parents[2]
@@ -43,6 +42,136 @@ _DAC_PROFILE = _PROFILES_DIR / "dac-r2r-v1.json"
 _ADC_PROFILE = _PROFILES_DIR / "adc-sar-v1.json"
 
 DEFAULT_SEED = 42
+FROZEN_G_BITS = 4
+_SMALL_ARRAY_EXTRACTS = {
+    "2x2": _REPO / "verification" / "circuit" / "results" / "crossbar-2x2-0012-extract.json",
+    "4x4": _REPO / "verification" / "circuit" / "results" / "crossbar-4x4-0013-extract.json",
+}
+
+
+def _evaluate_spice_extract(data: dict[str, Any], dimension: int) -> dict[str, Any]:
+    """Compare one committed small-array SPICE extract with the physical tile.
+
+    For every case ``c`` and output ``j`` the voltage residual is
+    ``e[c,j] = V_tile[c,j] - V_spice[c,j]``. The returned maximum and RMS are
+    computed over every scalar output in the extract.
+    """
+    cases = data.get("cases")
+    if not isinstance(cases, list) or not cases:
+        raise ValueError("small-array extract must contain at least one case")
+    factory = build_tile_factory_from_converter_profiles(
+        _CROSSBAR_PROFILE,
+        _DAC_PROFILE,
+        _ADC_PROFILE,
+        dimension,
+        dimension,
+        g_bits=FROZEN_G_BITS,
+        physical_claim=False,
+    )
+    tile = factory()
+    case_results = []
+    residuals: list[float] = []
+    for index, row in enumerate(cases):
+        weights = np.asarray(row.get("w"), dtype=np.float64)
+        if weights.shape != (dimension, dimension):
+            raise ValueError(
+                f"case {index} expected weights shape {(dimension, dimension)}, got {weights.shape}"
+            )
+        if "u" in row:
+            inputs_v = np.asarray(row["u"], dtype=np.float64)
+        elif "xs" in row and "vref_v" in data:
+            inputs_v = np.asarray(row["xs"], dtype=np.float64) - float(data["vref_v"])
+        else:
+            raise ValueError(f"case {index} requires u or xs plus vref_v")
+        spice_v = np.asarray(row.get("vout_spice"), dtype=np.float64)
+        if inputs_v.shape != (dimension,) or spice_v.shape != (dimension,):
+            raise ValueError(f"case {index} has an invalid input or SPICE output shape")
+
+        tile.program(weights)
+        tile_v = np.asarray(tile.forward(inputs_v), dtype=np.float64)
+        case_residuals = tile_v - spice_v
+        residuals.extend(case_residuals.tolist())
+        case_results.append(
+            {
+                "case_index": index,
+                "tile_output_v": tile_v.tolist(),
+                "spice_output_v": spice_v.tolist(),
+                "max_abs_error_v": float(np.max(np.abs(case_residuals))),
+                "rms_error_v": float(np.sqrt(np.mean(np.square(case_residuals)))),
+            }
+        )
+
+    residual_array = np.asarray(residuals, dtype=np.float64)
+    return {
+        "dimension": dimension,
+        "case_count": len(cases),
+        "output_sample_count": int(residual_array.size),
+        "max_abs_error_v": float(np.max(np.abs(residual_array))),
+        "rms_error_v": float(np.sqrt(np.mean(np.square(residual_array)))),
+        "cases": case_results,
+    }
+
+
+def evaluate_small_array_spice_equivalence() -> dict[str, Any]:
+    """Evaluate the profile-driven 4-bit tile against committed 2x2/4x4 SPICE.
+
+    The acceptance budget is frozen to the ADC profile's differential-domain
+    quantization bound. This is a regression criterion for the named cases,
+    not a proof that every possible input has this bound.
+    """
+    adc_profile = json.loads(_ADC_PROFILE.read_text("utf-8"))
+    budget_field = adc_profile["fields"]["quantization_error_v"]
+    budget_v = float(budget_field["value"])
+    arrays = {}
+    all_residuals: list[float] = []
+    for label, extract_path in _SMALL_ARRAY_EXTRACTS.items():
+        dimension = int(label.split("x", maxsplit=1)[0])
+        data = json.loads(extract_path.read_text("utf-8"))
+        result = _evaluate_spice_extract(data, dimension)
+        result["source"] = str(extract_path.relative_to(_REPO))
+        arrays[label] = result
+        for case in result["cases"]:
+            all_residuals.extend(
+                np.subtract(case["tile_output_v"], case["spice_output_v"]).tolist()
+            )
+
+    residual_array = np.asarray(all_residuals, dtype=np.float64)
+    max_error_v = float(np.max(np.abs(residual_array)))
+    if max_error_v > budget_v + 1e-12:
+        raise AssertionError(
+            f"physical tile/SPICE error {max_error_v:.9g} V exceeds frozen "
+            f"ADC-derived budget {budget_v:.9g} V"
+        )
+    return {
+        "formula": {
+            "case_error": "e_c = max_j |V_tile[c,j] - V_spice[c,j]|",
+            "global_error": "E_max = max_c e_c",
+            "acceptance": "E_max <= E_budget = adc.quantization_error_v",
+        },
+        "frozen_budget": {
+            "value": budget_v,
+            "unit": budget_field["unit"],
+            "evidence_class": budget_field["evidence_class"],
+            "source": "device_profiles/adc-sar-v1.json#/fields/quantization_error_v",
+        },
+        "tile_configuration": {
+            "crossbar_profile": "device_profiles/crossbar-v1.json",
+            "dac_profile": "device_profiles/dac-r2r-v1.json",
+            "adc_profile": "device_profiles/adc-sar-v1.json",
+            "g_bits": FROZEN_G_BITS,
+            "physical_claim": False,
+        },
+        "arrays": arrays,
+        "max_abs_error_v": max_error_v,
+        "rms_error_v": float(np.sqrt(np.mean(np.square(residual_array)))),
+        "passes_frozen_budget": True,
+        "claim_level": "SYSTEM_SIMULATED",
+        "limitation": (
+            "Regression covers the committed ideal-VCVS 2x2/4x4 cases. "
+            "Crossbar-v1 contains assumed device parameters and CrossbarTile does not yet "
+            "apply its IR-drop, variation, drift, fault, or I-V non-linearity fields."
+        ),
+    }
 
 
 def evaluate_canonical_matrices(n: int = 16) -> dict[str, Any]:
@@ -75,7 +204,9 @@ def evaluate_canonical_matrices(n: int = 16) -> dict[str, Any]:
         "negative_uniform": rng.uniform(-1.0, -0.1, size=(n, n)),
         "mixed_sign": rng.uniform(-1.0, 1.0, size=(n, n)),
         "rank_one": np.outer(rng.uniform(-1.0, 1.0, size=n), rng.uniform(-1.0, 1.0, size=n)),
-        "sparse_90pct": rng.choice([0.0, 0.5, -0.5, 1.0, -1.0], size=(n, n), p=[0.90, 0.025, 0.025, 0.025, 0.025]),
+        "sparse_90pct": rng.choice(
+            [0.0, 0.5, -0.5, 1.0, -1.0], size=(n, n), p=[0.90, 0.025, 0.025, 0.025, 0.025]
+        ),
         "zero_matrix": np.zeros((n, n), dtype=np.float64),
     }
 
@@ -141,12 +272,14 @@ def run_physical_tile_extract() -> dict[str, Any]:
     dim_sweeps = []
     for dim in [4, 8, 16, 32]:
         res = evaluate_canonical_matrices(n=dim)
-        dim_sweeps.append({
-            "dimension": dim,
-            "mixed_sign_mean_error_4b_pct": res["mixed_sign"]["mean_error_4b_pct"],
-            "mixed_sign_mean_error_6b_pct": res["mixed_sign"]["mean_error_6b_pct"],
-            "mixed_sign_cosine_sim_4b": res["mixed_sign"]["mean_cosine_sim_4b"],
-        })
+        dim_sweeps.append(
+            {
+                "dimension": dim,
+                "mixed_sign_mean_error_4b_pct": res["mixed_sign"]["mean_error_4b_pct"],
+                "mixed_sign_mean_error_6b_pct": res["mixed_sign"]["mean_error_6b_pct"],
+                "mixed_sign_cosine_sim_4b": res["mixed_sign"]["mean_cosine_sim_4b"],
+            }
+        )
 
     # Linearity sweep for 1D transfer curve plotting
     rng = np.random.default_rng(DEFAULT_SEED)
@@ -172,15 +305,19 @@ def run_physical_tile_extract() -> dict[str, Any]:
         x_vec = s * x_base
         y_ideal = w_fixed @ x_vec
         y_actual = tile.forward(x_vec)
-        transfer_curve.append({
-            "scale": float(s),
-            "ideal_out_0": float(y_ideal[0]),
-            "tile_out_0": float(y_actual[0]),
-            "error_out_0": float(y_actual[0] - y_ideal[0]),
-        })
+        transfer_curve.append(
+            {
+                "scale": float(s),
+                "ideal_out_0": float(y_ideal[0]),
+                "tile_out_0": float(y_actual[0]),
+                "error_out_0": float(y_actual[0] - y_ideal[0]),
+            }
+        )
 
-    # Baseline tile config
-    tile_cfg = tile_config_from_profile(_CROSSBAR_PROFILE, g_bits=4, dac_bits=4, adc_bits=4, physical_claim=False)
+    # Baseline tile config, read from the actual three-profile factory rather
+    # than from the crossbar-only adapter path.
+    baseline_tile = factory()
+    spice_equivalence = evaluate_small_array_spice_equivalence()
 
     extract = {
         "schema_version": "0.1.0",
@@ -192,13 +329,14 @@ def run_physical_tile_extract() -> dict[str, Any]:
             "adc": str(_ADC_PROFILE.relative_to(_REPO)),
         },
         "tile_parameters": {
-            "gmin_s": tile_cfg["gmin"],
-            "gmax_s": tile_cfg["gmax"],
-            "dac_bits": 4,
-            "adc_bits": 4,
-            "vin_max_v": tile_cfg["vin_max"],
-            "vout_max_v": tile_cfg["vout_max"],
+            "gmin_s": baseline_tile.gmin,
+            "gmax_s": baseline_tile.gmax,
+            "dac_bits": baseline_tile.dac_bits,
+            "adc_bits": baseline_tile.adc_bits,
+            "vin_max_v": baseline_tile.vin_max,
+            "vout_max_v": baseline_tile.vout_max,
         },
+        "small_array_spice_equivalence": spice_equivalence,
         "canonical_matrix_results_16x16": matrix_results,
         "dimension_sweeps": dim_sweeps,
         "transfer_curve_50pts": transfer_curve,
@@ -208,6 +346,10 @@ def run_physical_tile_extract() -> dict[str, Any]:
             "mixed_sign_cosine_sim_4b": matrix_results["mixed_sign"]["mean_cosine_sim_4b"],
             "mixed_sign_mean_error_6b_pct": matrix_results["mixed_sign"]["mean_error_6b_pct"],
             "zero_matrix_error": matrix_results["zero_matrix"]["mean_error_4b_pct"],
+            "small_array_spice_max_abs_error_v": spice_equivalence["max_abs_error_v"],
+            "small_array_spice_rms_error_v": spice_equivalence["rms_error_v"],
+            "small_array_spice_budget_v": spice_equivalence["frozen_budget"]["value"],
+            "small_array_spice_budget_pass": spice_equivalence["passes_frozen_budget"],
             "evidence_class": "derived",
             "provenance": "Profile-driven behavioral CrossbarTile execution consuming crossbar-v1, dac-r2r-v1, and adc-sar-v1 profiles",
         },
@@ -229,6 +371,11 @@ def main() -> None:
     print(f"  Mixed-Sign MVM Mean Error (6-bit cell): {s['mixed_sign_mean_error_6b_pct']:.2f}%")
     print(f"  Mixed-Sign Output Cosine Similarity:   {s['mixed_sign_cosine_sim_4b']:.5f}")
     print(f"  Zero Matrix Output Error:             {s['zero_matrix_error']:.6f}")
+    print(
+        "  Small-Array Tile/SPICE Max Error:     "
+        f"{s['small_array_spice_max_abs_error_v']:.6f} V "
+        f"(budget {s['small_array_spice_budget_v']:.6f} V)"
+    )
 
 
 if __name__ == "__main__":

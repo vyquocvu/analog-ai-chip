@@ -34,7 +34,9 @@ mod = _load_module()
 
 
 def test_module_loaded() -> None:
-    assert mod is not None, "Failed to load book/0021-physical-tile-contract/physical_tile_contract.py"
+    assert mod is not None, (
+        "Failed to load book/0021-physical-tile-contract/physical_tile_contract.py"
+    )
 
 
 def test_physical_tile_factory_instantiation() -> None:
@@ -99,6 +101,38 @@ def test_zero_vector_input() -> None:
     assert np.all(y == 0.0)
 
 
+def test_tiny_spice_case_is_hand_checkable() -> None:
+    """First 2x2 case anchors V=Rf*Gscale*W@u with hand arithmetic."""
+    data = json.loads(
+        (
+            _REPO / "verification" / "circuit" / "results" / "crossbar-2x2-0012-extract.json"
+        ).read_text("utf-8")
+    )
+    case = data["cases"][0]
+    u = np.asarray(case["xs"]) - data["vref_v"]
+    hand_v = data["rf_ohm"] * data["gscale_s_per_w"] * (np.asarray(case["w"]) @ u)
+    assert hand_v == pytest.approx(case["vout_hand"], abs=1e-12)
+
+
+def test_small_array_spice_equivalence_holds_frozen_budget() -> None:
+    """Profile-driven tile stays within the ADC-derived budget on 2x2/4x4 SPICE."""
+    assert mod is not None
+    result = mod.evaluate_small_array_spice_equivalence()
+    assert result["passes_frozen_budget"] is True
+    assert result["max_abs_error_v"] <= result["frozen_budget"]["value"]
+    assert result["frozen_budget"]["value"] == pytest.approx(0.15625)
+    assert result["arrays"]["2x2"]["case_count"] == 5
+    assert result["arrays"]["4x4"]["case_count"] == 5
+    assert result["claim_level"] == "SYSTEM_SIMULATED"
+    assert result["tile_configuration"]["physical_claim"] is False
+
+
+def test_small_array_equivalence_rejects_invalid_extract() -> None:
+    assert mod is not None
+    with pytest.raises(ValueError, match="at least one case"):
+        mod._evaluate_spice_extract({"cases": []}, 2)
+
+
 def test_high_cosine_similarity() -> None:
     """Profile-driven tile must maintain high directional cosine similarity (> 0.95)."""
     factory = build_tile_factory_from_converter_profiles(
@@ -120,7 +154,9 @@ def test_high_cosine_similarity() -> None:
         y_ideal = w @ x
         y_actual = tile.forward(x)
 
-        cos_sim = np.dot(y_actual, y_ideal) / (np.linalg.norm(y_actual) * np.linalg.norm(y_ideal) + 1e-12)
+        cos_sim = np.dot(y_actual, y_ideal) / (
+            np.linalg.norm(y_actual) * np.linalg.norm(y_ideal) + 1e-12
+        )
         assert cos_sim > 0.95
 
 
@@ -134,10 +170,25 @@ def test_committed_extract_integrity() -> None:
     assert data["chapter"] == "0021-physical-tile-contract"
     assert data["summary"]["mixed_sign_cosine_sim_4b"] > 0.98
     assert data["summary"]["zero_matrix_error"] == pytest.approx(0.0)
+    assert data["summary"]["small_array_spice_budget_pass"] is True
+    assert (
+        data["summary"]["small_array_spice_max_abs_error_v"]
+        <= data["summary"]["small_array_spice_budget_v"]
+    )
+    assert data["tile_parameters"]["vin_max_v"] == pytest.approx(2.34375)
+    assert mod is not None
+    assert data["small_array_spice_equivalence"] == mod.evaluate_small_array_spice_equivalence()
 
 
 def test_diagram_svgs_exist() -> None:
     """Verify presence of Chapter 0021 SVG diagrams."""
     diag_dir = _REPO / "book" / "0021-physical-tile-contract" / "diagrams"
-    assert (diag_dir / "physical_tile_architecture.svg").is_file(), "Missing physical_tile_architecture.svg"
-    assert (diag_dir / "physical_tile_linearity.svg").is_file(), "Missing physical_tile_linearity.svg"
+    assert (diag_dir / "physical_tile_architecture.svg").is_file(), (
+        "Missing physical_tile_architecture.svg"
+    )
+    assert (diag_dir / "physical_tile_linearity.svg").is_file(), (
+        "Missing physical_tile_linearity.svg"
+    )
+    assert (diag_dir / "physical_tile_spice_equivalence.svg").is_file(), (
+        "Missing SPICE equivalence SVG"
+    )

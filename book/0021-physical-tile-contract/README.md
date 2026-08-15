@@ -37,21 +37,45 @@ This chapter inaugurates **Part VI (Profile-driven accelerator architecture)** a
 
 | Canonical Matrix Class | Mean Relative Error (4-bit cell) | Mean Relative Error (6-bit cell) | Output Cosine Similarity |
 |---|---|---|---|
-| **Identity ($W = I$)** | $9.38\%$ | $9.38\%$ | $0.9956$ |
-| **Positive Uniform ($W > 0$)** | $3.58\%$ | $3.35\%$ | $0.9994$ |
-| **Negative Uniform ($W < 0$)** | $3.58\%$ | $3.35\%$ | $0.9994$ |
+| **Identity ($W = I$)** | $19.92\%$ | $19.92\%$ | $0.9825$ |
+| **Positive Uniform ($W > 0$)** | $17.22\%$ | $16.61\%$ | $0.9868$ |
+| **Negative Uniform ($W < 0$)** | $17.78\%$ | $17.19\%$ | $0.9867$ |
 | **Mixed-Sign ($\mathcal{U}[-1, 1]$)** | $15.44\%$ | $15.21\%$ | $0.9882$ |
-| **Rank-1 ($W = u v^T$)** | $3.46\%$ | $3.46\%$ | $0.9994$ |
-| **Sparse ($90\%$ zeros)** | $18.42\%$ | $18.42\%$ | $0.9835$ |
+| **Rank-1 ($W = u v^T$)** | $48.33\%$ | $45.41\%$ | $0.8601$ |
+| **Sparse ($90\%$ zeros)** | $17.49\%$ | $17.41\%$ | $0.9860$ |
 | **Zero Matrix ($W = 0$)** | **$0.0000\%$** | **$0.0000\%$** | $1.0000$ |
 
 ### Key Observations:
 - **Zero-Drift Invariance**: When $W = 0$, both positive and negative arrays draw identical leakage current $I_{\text{leak}} = G_{\min} \sum V_i$, yielding exact differential cancellation ($V_{\text{diff}} = 0.000\text{ V}$).
-- **Cosine Similarity $> 0.988$**: Despite coarse 4-bit converter and cell quantization, directional fidelity remains exceptionally high, preserving neural activation rank.
+- Coarse 4-bit converter quantization is visible: the mixed-sign case retains $0.9882$ mean cosine similarity, while the low-rank case falls to $0.8601$. These are behavioral results, not device measurements.
 
 ---
 
-## 3. Provenance & Profile Integration
+## 3. Small-Array SPICE Equivalence
+
+![Physical tile versus small-array SPICE error](diagrams/physical_tile_spice_equivalence.svg)
+
+The same 4-bit tile built from `crossbar-v1`, `dac-r2r-v1`, and `adc-sar-v1` is replayed on all five committed 2×2 cases from 0012 and all five committed 4×4 cases from 0013. For case $c$ and output $j$:
+
+$$e_c = \max_j |V_{\text{tile},c,j} - V_{\text{SPICE},c,j}|$$
+
+$$E_{\max} = \max_c e_c, \qquad \text{PASS} \iff E_{\max} \le E_{\text{budget}}$$
+
+The budget is frozen directly from `adc-sar-v1.json#/fields/quantization_error_v`:
+
+$$E_{\text{budget}} = 0.15625\text{ V}$$
+
+| Evidence set | Cases | Max $|V_{\text{tile}}-V_{\text{SPICE}}|$ | RMS error |
+|---|---:|---:|---:|
+| 0012 2×2 SPICE | 5 | 0.150124 V | 0.087369 V |
+| 0013 4×4 SPICE | 5 | 0.142807 V | 0.075789 V |
+| Combined | 10 | **0.150124 V — PASS** | 0.079836 V |
+
+This is a `SYSTEM_SIMULATED` regression criterion for the named cases. It is not promoted to a verified physical-tile claim: `crossbar-v1` contains explicitly assumed device parameters, and the current `CrossbarTile` does not yet consume its IR-drop, variation, drift, stuck-fault, or I-V non-linearity fields.
+
+---
+
+## 4. Provenance & Profile Integration
 
 All tile parameters are sourced directly via `analog_llm.profile_adapter.build_tile_factory_from_converter_profiles`:
 ```python
@@ -74,6 +98,7 @@ Run the characterization script and generate plots:
 ```bash
 python book/0021-physical-tile-contract/physical_tile_contract.py
 python book/0021-physical-tile-contract/diagrams/make_plots.py
+python book/0021-physical-tile-contract/diagrams/make_equivalence_diagram.py
 ```
 Committed extract: [`verification/circuit/results/physical-tile-0021-extract.json`](../../verification/circuit/results/physical-tile-0021-extract.json).
 Tested by: [`tests/test_physical_tile_contract.py`](../../tests/test_physical_tile_contract.py).

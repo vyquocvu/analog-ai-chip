@@ -12,8 +12,205 @@
     "gmax_s": 0.0001,
     "dac_bits": 4,
     "adc_bits": 4,
-    "vin_max_v": 2.5,
+    "vin_max_v": 2.3437499999999996,
     "vout_max_v": 2.5
+  },
+  "small_array_spice_equivalence": {
+    "formula": {
+      "case_error": "e_c = max_j |V_tile[c,j] - V_spice[c,j]|",
+      "global_error": "E_max = max_c e_c",
+      "acceptance": "E_max <= E_budget = adc.quantization_error_v"
+    },
+    "frozen_budget": {
+      "value": 0.15625,
+      "unit": "V",
+      "evidence_class": "derived",
+      "source": "device_profiles/adc-sar-v1.json#/fields/quantization_error_v"
+    },
+    "tile_configuration": {
+      "crossbar_profile": "device_profiles/crossbar-v1.json",
+      "dac_profile": "device_profiles/dac-r2r-v1.json",
+      "adc_profile": "device_profiles/adc-sar-v1.json",
+      "g_bits": 4,
+      "physical_claim": false
+    },
+    "arrays": {
+      "2x2": {
+        "dimension": 2,
+        "case_count": 5,
+        "output_sample_count": 10,
+        "max_abs_error_v": 0.15012364964422886,
+        "rms_error_v": 0.0873691946920968,
+        "cases": [
+          {
+            "case_index": 0,
+            "tile_output_v": [
+              0.0,
+              -0.35714285714285715
+            ],
+            "spice_output_v": [
+              0.15012364964422886,
+              -0.32482945316587575
+            ],
+            "max_abs_error_v": 0.15012364964422886,
+            "rms_error_v": 0.10858468183653433
+          },
+          {
+            "case_index": 1,
+            "tile_output_v": [
+              2.142857142857143,
+              -2.142857142857143
+            ],
+            "spice_output_v": [
+              1.9992003198676684,
+              -1.9992003198676684
+            ],
+            "max_abs_error_v": 0.14365682298947435,
+            "rms_error_v": 0.14365682298947435
+          },
+          {
+            "case_index": 2,
+            "tile_output_v": [
+              0.0,
+              0.0
+            ],
+            "spice_output_v": [
+              0.0,
+              0.0
+            ],
+            "max_abs_error_v": 0.0,
+            "rms_error_v": 0.0
+          },
+          {
+            "case_index": 3,
+            "tile_output_v": [
+              0.35714285714285715,
+              0.0
+            ],
+            "spice_output_v": [
+              0.25001246564715984,
+              9.993503408622928e-05
+            ],
+            "max_abs_error_v": 0.10713039149569731,
+            "rms_error_v": 0.07575265925705979
+          },
+          {
+            "case_index": 4,
+            "tile_output_v": [
+              2.5,
+              0.0
+            ],
+            "spice_output_v": [
+              2.499000399839133,
+              0.0
+            ],
+            "max_abs_error_v": 0.0009996001608669758,
+            "rms_error_v": 0.0007068240522242024
+          }
+        ],
+        "source": "verification/circuit/results/crossbar-2x2-0012-extract.json"
+      },
+      "4x4": {
+        "dimension": 4,
+        "case_count": 5,
+        "output_sample_count": 20,
+        "max_abs_error_v": 0.14280704796900473,
+        "rms_error_v": 0.0757887412667922,
+        "cases": [
+          {
+            "case_index": 0,
+            "tile_output_v": [
+              -0.0,
+              -0.35714285714285715,
+              0.35714285714285715,
+              -0.35714285714285715
+            ],
+            "spice_output_v": [
+              -0.037248089975037146,
+              -0.33719024495076155,
+              0.39977013217139756,
+              -0.22475395878063864
+            ],
+            "max_abs_error_v": 0.1323888983622185,
+            "rms_error_v": 0.07267983201342253
+          },
+          {
+            "case_index": 1,
+            "tile_output_v": [
+              -0.35714285714285715,
+              0.35714285714285715,
+              0.0,
+              -0.35714285714285715
+            ],
+            "spice_output_v": [
+              -0.24960662048397353,
+              0.2499874319510127,
+              0.0,
+              -0.4995878091613122
+            ],
+            "max_abs_error_v": 0.14244495201845503,
+            "rms_error_v": 0.10408757334372383
+          },
+          {
+            "case_index": 2,
+            "tile_output_v": [
+              0.35714285714285715,
+              0.0,
+              -0.35714285714285715,
+              0.0
+            ],
+            "spice_output_v": [
+              0.4999499051118619,
+              0.00024972522078314796,
+              -0.4994504546702956,
+              0.00024972522078314796
+            ],
+            "max_abs_error_v": 0.14280704796900473,
+            "rms_error_v": 0.10080355895133962
+          },
+          {
+            "case_index": 3,
+            "tile_output_v": [
+              0.0,
+              -0.0,
+              0.0,
+              0.0
+            ],
+            "spice_output_v": [
+              0.0625038854086597,
+              -0.031252528380719014,
+              0.031252528380719014,
+              0.0625038854086597
+            ],
+            "max_abs_error_v": 0.0625038854086597,
+            "rms_error_v": 0.04941384533390673
+          },
+          {
+            "case_index": 4,
+            "tile_output_v": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "spice_output_v": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "max_abs_error_v": 0.0,
+            "rms_error_v": 0.0
+          }
+        ],
+        "source": "verification/circuit/results/crossbar-4x4-0013-extract.json"
+      }
+    },
+    "max_abs_error_v": 0.15012364964422886,
+    "rms_error_v": 0.07983575386745602,
+    "passes_frozen_budget": true,
+    "claim_level": "SYSTEM_SIMULATED",
+    "limitation": "Regression covers the committed ideal-VCVS 2x2/4x4 cases. Crossbar-v1 contains assumed device parameters and CrossbarTile does not yet apply its IR-drop, variation, drift, fault, or I-V non-linearity fields."
   },
   "canonical_matrix_results_16x16": {
     "identity": {
@@ -421,6 +618,10 @@
     "mixed_sign_cosine_sim_4b": 0.9882027404612432,
     "mixed_sign_mean_error_6b_pct": 15.21094606133038,
     "zero_matrix_error": 0.0,
+    "small_array_spice_max_abs_error_v": 0.15012364964422886,
+    "small_array_spice_rms_error_v": 0.07983575386745602,
+    "small_array_spice_budget_v": 0.15625,
+    "small_array_spice_budget_pass": true,
     "evidence_class": "derived",
     "provenance": "Profile-driven behavioral CrossbarTile execution consuming crossbar-v1, dac-r2r-v1, and adc-sar-v1 profiles"
   }
