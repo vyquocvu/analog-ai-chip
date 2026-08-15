@@ -1,0 +1,152 @@
+{
+  "schema_version": "0.1.0",
+  "chapter": "0023-scheduler",
+  "title": "Hardware Tile Scheduling and Temporal Reuse",
+  "workload": {
+    "d_model": 128,
+    "d_ffn": 512,
+    "layers": [
+      {
+        "name": "qkv_proj",
+        "shape": "384x128",
+        "blocks_16x16": 192,
+        "macs": 49152
+      },
+      {
+        "name": "out_proj",
+        "shape": "128x128",
+        "blocks_16x16": 64,
+        "macs": 16384
+      },
+      {
+        "name": "mlp_up",
+        "shape": "512x128",
+        "blocks_16x16": 256,
+        "macs": 65536
+      },
+      {
+        "name": "mlp_down",
+        "shape": "128x512",
+        "blocks_16x16": 256,
+        "macs": 65536
+      }
+    ],
+    "total_blocks_16x16": 768,
+    "total_macs": 196608
+  },
+  "timing_assumptions": {
+    "t_mvm_ns": {
+      "value": 20.0,
+      "unit": "ns/cycle",
+      "evidence_class": "assumed",
+      "provenance": "architecture sensitivity-study input; profile-derived timing is pending"
+    },
+    "t_prog_us": {
+      "value": 10.0,
+      "unit": "us/program",
+      "evidence_class": "assumed",
+      "provenance": "architecture sensitivity-study input; device programming evidence is pending"
+    },
+    "write_read_latency_ratio": {
+      "value": 500.0,
+      "unit": "dimensionless",
+      "evidence_class": "derived",
+      "derived_from": [
+        "timing_assumptions/t_mvm_ns",
+        "timing_assumptions/t_prog_us"
+      ]
+    }
+  },
+  "capacity_sweeps": [
+    {
+      "tile_count": 16,
+      "temporal_cycles": 48,
+      "temporal_rewrites": 704,
+      "temporal_utilization": 1.0,
+      "temporal_latency_100tok_us": 768096.0,
+      "stationary_cycles": 48,
+      "stationary_rewrites": 704,
+      "stationary_latency_100tok_us": 768096.0
+    },
+    {
+      "tile_count": 32,
+      "temporal_cycles": 24,
+      "temporal_rewrites": 640,
+      "temporal_utilization": 1.0,
+      "temporal_latency_100tok_us": 768048.0,
+      "stationary_cycles": 24,
+      "stationary_rewrites": 640,
+      "stationary_latency_100tok_us": 768048.0
+    },
+    {
+      "tile_count": 64,
+      "temporal_cycles": 12,
+      "temporal_rewrites": 512,
+      "temporal_utilization": 1.0,
+      "temporal_latency_100tok_us": 768024.0,
+      "stationary_cycles": 12,
+      "stationary_rewrites": 512,
+      "stationary_latency_100tok_us": 768024.0
+    },
+    {
+      "tile_count": 128,
+      "temporal_cycles": 7,
+      "temporal_rewrites": 320,
+      "temporal_utilization": 0.8571428571428571,
+      "temporal_latency_100tok_us": 768014.0,
+      "stationary_cycles": 7,
+      "stationary_rewrites": 320,
+      "stationary_latency_100tok_us": 768014.0
+    },
+    {
+      "tile_count": 256,
+      "temporal_cycles": 4,
+      "temporal_rewrites": 0,
+      "temporal_utilization": 0.75,
+      "temporal_latency_100tok_us": 768008.0,
+      "stationary_cycles": 4,
+      "stationary_rewrites": 0,
+      "stationary_latency_100tok_us": 768008.0
+    },
+    {
+      "tile_count": 512,
+      "temporal_cycles": 4,
+      "temporal_rewrites": 0,
+      "temporal_utilization": 0.375,
+      "temporal_latency_100tok_us": 768008.0,
+      "stationary_cycles": 4,
+      "stationary_rewrites": 0,
+      "stationary_latency_100tok_us": 768008.0
+    },
+    {
+      "tile_count": 768,
+      "temporal_cycles": 4,
+      "temporal_rewrites": 0,
+      "temporal_utilization": 0.25,
+      "temporal_latency_100tok_us": 768008.0,
+      "stationary_cycles": 4,
+      "stationary_rewrites": 0,
+      "stationary_latency_100tok_us": 7688.0
+    },
+    {
+      "tile_count": 1024,
+      "temporal_cycles": 4,
+      "temporal_rewrites": 0,
+      "temporal_utilization": 0.1875,
+      "temporal_latency_100tok_us": 768008.0,
+      "stationary_cycles": 4,
+      "stationary_rewrites": 0,
+      "stationary_latency_100tok_us": 7688.0
+    }
+  ],
+  "summary": {
+    "total_workload_blocks": 768,
+    "min_tiles_for_weight_stationary": 768,
+    "temporal_16tiles_cycles": 48,
+    "temporal_16tiles_rewrites": 704,
+    "speedup_100tok_stationary_vs_temporal": 99.89698231009365,
+    "evidence_class": "derived",
+    "provenance": "Deterministic hardware tile scheduler accounting for MVM cycles, reprogramming overhead, and spatial capacity",
+    "claim_limit": "Timing results are an assumed sensitivity study, not verified physical performance."
+  }
+}

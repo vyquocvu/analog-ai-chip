@@ -115,6 +115,7 @@ See [`docs/SIMULATION_STACK.md`](docs/SIMULATION_STACK.md).
 | 0020 | Crossbar-v1 profile and Gate R4 close | done | `book/0020-crossbar-v1/` |
 | 0021 | Physical tile contract | done | `book/0021-physical-tile-contract/` |
 | 0022 | Partial sums | done | `book/0022-partial-sums/` |
+| 0023 | Scheduler and temporal reuse | done | `book/0023-scheduler/` |
 
 > **Tiếng Việt:** every chapter has a `README.vi.md` beside the English `README.md`.
 

@@ -215,7 +215,7 @@ Depends on R5.
 
 Existing functional work (tiling, multi-tile demo, ledgers, KV cache) is useful evidence but must be revalidated with profile-driven timing/error parameters.
 
-- [ ] Freeze tile parallelism / temporal-reuse scheduler
+- [x] Freeze tile parallelism / temporal-reuse scheduler: deterministic sequential-layer cycle count $T_{\text{cycles}} = \sum_l\lceil K_l / N_{\text{tiles}} \rceil$, rewrite tracking $N_{\text{rewrites}} = \sum_l\max(0, K_l - N_{\text{tiles}})$, and an explicitly `assumed` timing sensitivity point ($10\,\mu\text{s}$ write vs $20\text{ ns}$ read; profile/device timing remains pending) (`book/0023-scheduler/scheduler.py`, committed extract `scheduler-0023-extract.json`)
 - [ ] SRAM/buffer capacity model
 - [ ] NoC/interconnect traffic model
 - [ ] Profile-derived converter/tile timing in per-token trace
