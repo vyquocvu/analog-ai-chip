@@ -1,0 +1,71 @@
+{
+  "chapter": "0028-mlp",
+  "evaluations": {
+    "tinygpt_mlp_gelu": {
+      "activation": "gelu",
+      "block_name": "TinyGPT_MLP_GELU",
+      "calibrated_nonideal": {
+        "mae": 0.5996805038863406,
+        "max_abs_error": 1.7686420457153023,
+        "rel_l2_error_pct": 74.63413510366694,
+        "snr_db": 2.5412499126130976
+      },
+      "calibration_improvement_pct": 5.23981790950428,
+      "d_ffn": 256,
+      "d_model": 64,
+      "ideal_quantized": {
+        "mae": 0.4043193293057576,
+        "max_abs_error": 1.2740278753253595,
+        "rel_l2_error_pct": 51.761011193434356,
+        "snr_db": 5.719944959214085
+      },
+      "raw_nonideal": {
+        "mae": 0.6337828911160885,
+        "max_abs_error": 2.1537232675629765,
+        "rel_l2_error_pct": 78.76107185230136,
+        "snr_db": 2.073767644387781
+      },
+      "total_physical_tiles": 128
+    },
+    "tinygpt_mlp_silu": {
+      "activation": "silu",
+      "block_name": "TinyGPT_MLP_SiLU",
+      "calibrated_nonideal": {
+        "mae": 0.5737814278230761,
+        "max_abs_error": 1.6537576339225963,
+        "rel_l2_error_pct": 75.89262451095168,
+        "snr_db": 2.3960085637334543
+      },
+      "calibration_improvement_pct": 5.825785755726265,
+      "d_ffn": 256,
+      "d_model": 64,
+      "ideal_quantized": {
+        "mae": 0.34052794369474276,
+        "max_abs_error": 1.0434797779934772,
+        "rel_l2_error_pct": 46.434416701418066,
+        "snr_db": 6.663200111803844
+      },
+      "raw_nonideal": {
+        "mae": 0.625549041799652,
+        "max_abs_error": 1.661873795578863,
+        "rel_l2_error_pct": 80.5874783452906,
+        "snr_db": 1.8746486696070308
+      },
+      "total_physical_tiles": 128
+    }
+  },
+  "formulas": {
+    "activation": "h_act = GELU(h1) or SiLU(h1)",
+    "down_projection": "y = a_star * sum(Tile_down(h_act))",
+    "residual": "y_out = x + y",
+    "up_projection": "h1 = a_star * sum(Tile_up(x))"
+  },
+  "gate": "R7 \u2014 Transformer and LLM validation",
+  "provenance": {
+    "calibration_profile": "device_profiles/tile-calibration-v1.json",
+    "claim_level": "SYSTEM_SIMULATED",
+    "crossbar_profile": "device_profiles/crossbar-v1.json"
+  },
+  "schema_version": "0.1.0",
+  "title": "Multi-Layer Perceptron (MLP) Block Mapping"
+}

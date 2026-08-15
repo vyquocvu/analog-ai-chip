@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 14px; font-weight: 700; }
+.box-text { font-size: 12px; fill: #334155; }
+.formula { font: 12px ui-monospace, monospace; fill: #1e293b; }
+.arrow { stroke: #64748b; stroke-width: 2; marker-end: url(#arrow); }
+</style>
+<defs>
+<marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+  <path d="M0,0 L8,4 L0,8 Z" fill="#64748b"/>
+</marker>
+</defs>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Chapter 0028 — Multi-Layer Perceptron (MLP) Mapping</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Two-stage analog projection pipeline with digital non-linear activation and residual sum</text>
+
+<!-- Flow Diagram Box -->
+<rect x="50" y="85" width="410" height="420" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="70" y="115" class="box-title" fill="#1d4ed8">1. Hybrid Analog-Digital Pipeline</text>
+<text x="70" y="135" class="sub">TinyGPT MLP Block: d_model=64, d_ffn=256 (128 Tiles)</text>
+
+<rect x="70" y="155" width="370" height="75" rx="8" fill="white" stroke="#93c5fd"/>
+<text x="85" y="180" class="box-title" fill="#1e40af">Stage 1: Analog Up-Projection (W_up)</text>
+<text x="85" y="202" class="box-text">• Matrix 256×64 → 64 physical 16×16 tiles</text>
+<text x="85" y="220" class="sub">• MVM under crossbar-v1 non-idealities + calibration</text>
+
+<rect x="70" y="245" width="370" height="75" rx="8" fill="#fefce8" stroke="#ca8a04"/>
+<text x="85" y="270" class="box-title" fill="#a16207">Stage 2: Digital Activation (GELU / SiLU)</text>
+<text x="85" y="292" class="box-text">• Non-linear activation evaluated on digital unit</text>
+<text x="85" y="310" class="sub">• Output quantized to 4 bits for down-stage DACs</text>
+
+<rect x="70" y="335" width="370" height="75" rx="8" fill="white" stroke="#93c5fd"/>
+<text x="85" y="360" class="box-title" fill="#1e40af">Stage 3: Analog Down-Projection (W_down)</text>
+<text x="85" y="382" class="box-text">• Matrix 64×256 → 64 physical 16×16 tiles</text>
+<text x="85" y="400" class="sub">• MVM + calibration + digital residual sum (x + y)</text>
+
+<rect x="70" y="425" width="370" height="60" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="85" y="450" class="formula">y_out = x + a* · W_down @ GELU(a* · W_up @ x)</text>
+<text x="85" y="470" class="sub">Total Tiles: 64 Up + 64 Down = 128 tiles</text>
+
+<!-- Accuracy Results Box -->
+<rect x="500" y="85" width="410" height="420" rx="12" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="520" y="115" class="box-title" fill="#7e22ce">2. End-to-End MLP Accuracy &amp; SNR</text>
+<text x="520" y="135" class="sub">Compound error propagation across two analog stages</text>
+
+<!-- GELU Result -->
+<rect x="520" y="155" width="370" height="150" rx="8" fill="white" stroke="#d8b4fe"/>
+<text x="535" y="180" class="box-title" fill="#6b21a8">TinyGPT MLP (GELU Activation)</text>
+<text x="535" y="202" class="box-text">• Ideal Quantized L2 Error: 51.76% (SNR: 5.7 dB)</text>
+<text x="535" y="222" class="box-text">• Raw Non-Ideal L2 Error: 78.76% (SNR: 2.1 dB)</text>
+<text x="535" y="242" class="box-title" fill="#15803d">• Calibrated L2 Error: 74.63% (SNR: 2.5 dB)</text>
+<text x="535" y="262" class="sub">Residual connection dampens error: SNR = 2.5 dB</text>
+
+<!-- SiLU Result -->
+<rect x="520" y="320" width="370" height="165" rx="8" fill="#f0fdf4" stroke="#86efac"/>
+<text x="535" y="345" class="box-title" fill="#166534">TinyGPT MLP (SiLU / Swish Activation)</text>
+<text x="535" y="370" class="box-text">• Ideal Quantized L2 Error: 46.43% (SNR: 6.7 dB)</text>
+<text x="535" y="390" class="box-text">• Raw Non-Ideal L2 Error: 80.59% (SNR: 1.9 dB)</text>
+<text x="535" y="410" class="box-title" fill="#15803d">• Calibrated L2 Error: 75.89% (SNR: 2.4 dB)</text>
+<text x="535" y="430" class="sub">Calibration reduces compound error by 5.8%</text>
+<text x="535" y="455" class="formula">E_L2 = ||y_pred − y_ref||₂ / ||y_ref||₂</text>
+</svg>

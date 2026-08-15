@@ -233,7 +233,7 @@ Depends on R6.
 
 Existing TinyGPT, checkpoint loader, KV cache, ablations and real-model mapping are functional foundations.
 
-- [ ] Re-run linear/MLP/QKV mappings with R5/R6 physical profiles: dense linear layer mapped through physical crossbar tiles with all 9 `crossbar-v1` non-idealities, spatial reduction, and post-ADC output calibration (`book/0027-linear-layer/linear_layer.py`, committed extract `linear-layer-0027-extract.json`); MLP and QKV dedicated mappings queued
+- [ ] Re-run linear/MLP/QKV mappings with R5/R6 physical profiles: dense linear layer (`book/0027-linear-layer/linear_layer.py`, `linear-layer-0027-extract.json`) and two-stage Transformer MLP block with digital GELU/SiLU activations and residual sum (`book/0028-mlp/mlp.py`, `mlp-0028-extract.json`) mapped through physical crossbar tiles with all 9 `crossbar-v1` non-idealities, spatial reduction, and post-ADC output calibration; QKV dedicated mapping queued
 - [ ] Explicit analog/digital boundary report for attention
 - [ ] Full transformer-block error attribution
 - [ ] Tiny transformer profile-driven parity/error study
