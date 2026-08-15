@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" width="960" height="560" font-family="Menlo,Consolas,monospace">
+  <rect width="960" height="560" fill="#ffffff"/>
+  <style>
+    .wire{stroke:#333;stroke-width:2;fill:none;}
+    .box{fill:#eaf2f8;stroke:#1a5276;stroke-width:2;}
+    .box2{fill:#fdf2e9;stroke:#ca6f1e;stroke-width:2;}
+    .box3{fill:#f4f6f7;stroke:#333;stroke-width:2;}
+    .txt{fill:#111;font-size:13px;}
+    .lab{fill:#1a5276;font-size:12px;font-weight:bold;}
+    .cap{fill:#7f8c8d;font-size:12px;}
+    .eq{fill:#111;font-size:12.5px;}
+  </style>
+
+  <text x="480" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#111">2×2 differential crossbar — theory (0012)</text>
+  <text x="480" y="52" text-anchor="middle" class="cap">every cell is a differential conductance pair · column currents sum at virtual ground · TIA readout gives the matrix-vector product</text>
+
+  <!-- flow: inputs -> cells -> column sums -> TIA -> result -->
+  <rect class="box3" x="40" y="110" width="150" height="120" rx="6"/>
+  <text x="115" y="136" text-anchor="middle" class="lab">input rows</text>
+  <text x="115" y="160" text-anchor="middle" class="eq">u_i = x_i − VREF</text>
+  <text x="115" y="182" text-anchor="middle" class="eq">x_i around VREF</text>
+  <text x="115" y="204" text-anchor="middle" class="cap">ideal sources,</text>
+  <text x="115" y="218" text-anchor="middle" class="cap">u ∈ [−2.5, 2.5] V</text>
+
+  <line class="wire" x1="190" y1="170" x2="230" y2="170"/>
+  <polygon points="230,165 240,170 230,175" fill="#333"/>
+
+  <rect class="box" x="240" y="110" width="180" height="120" rx="6"/>
+  <text x="330" y="136" text-anchor="middle" class="lab">conductance cells</text>
+  <text x="330" y="160" text-anchor="middle" class="eq">I_ij = u_i · G_ij</text>
+  <text x="330" y="182" text-anchor="middle" class="eq">w_ij·Gscale = G+_ij − G−_ij</text>
+  <text x="330" y="204" text-anchor="middle" class="cap">G+, G− ∈ [G0, G0+Gscale]</text>
+  <text x="330" y="218" text-anchor="middle" class="cap">balanced zero at G0</text>
+
+  <line class="wire" x1="420" y1="170" x2="460" y2="170"/>
+  <polygon points="460,165 470,170 460,175" fill="#333"/>
+
+  <rect class="box3" x="470" y="110" width="200" height="120" rx="6"/>
+  <text x="570" y="136" text-anchor="middle" class="lab">column current sums</text>
+  <text x="570" y="160" text-anchor="middle" class="eq">Iplus_j = Σ_i u_i·G+_ij</text>
+  <text x="570" y="182" text-anchor="middle" class="eq">Iminus_j = Σ_i u_i·G−_ij</text>
+  <text x="570" y="204" text-anchor="middle" class="cap">virtual ground at VREF</text>
+  <text x="570" y="218" text-anchor="middle" class="cap">one node per half-column</text>
+
+  <line class="wire" x1="670" y1="170" x2="710" y2="170"/>
+  <polygon points="710,165 720,170 710,175" fill="#333"/>
+
+  <rect class="box2" x="720" y="110" width="200" height="120" rx="6"/>
+  <text x="820" y="136" text-anchor="middle" class="lab">TIA readout</text>
+  <text x="820" y="160" text-anchor="middle" class="eq">Vp_j = VREF − Rf·Iplus_j</text>
+  <text x="820" y="182" text-anchor="middle" class="eq">Vm_j = VREF − Rf·Iminus_j</text>
+  <text x="820" y="204" text-anchor="middle" class="eq">Vout_j = Vm_j − Vp_j</text>
+  <text x="820" y="218" text-anchor="middle" class="cap">two stages per column</text>
+
+  <!-- result banner -->
+  <rect class="box" x="240" y="270" width="480" height="70" rx="6"/>
+  <text x="480" y="300" text-anchor="middle" class="lab" font-size="14">matrix-vector product in conductance units</text>
+  <text x="480" y="322" text-anchor="middle" class="eq" font-size="14">Vout_j = Rf · Gscale · Σ_i w_ij · u_i   ⟺   Vout = Rf·Gscale · (W @ u)</text>
+  <text x="480" y="338" text-anchor="middle" class="cap">W is [outputs, inputs]; rows = output columns, cols = input rows (same convention as analog_llm)</text>
+
+  <!-- differential cell panel -->
+  <rect class="box3" x="40" y="270" width="180" height="70" rx="6"/>
+  <text x="130" y="296" text-anchor="middle" class="lab">differential cell</text>
+  <text x="130" y="318" text-anchor="middle" class="eq">w &gt; 0 → G+ = G0 + w·Gscale</text>
+  <text x="130" y="334" text-anchor="middle" class="eq">w &lt; 0 → G− = G0 − w·Gscale</text>
+
+  <!-- worked example -->
+  <rect class="box2" x="40" y="380" width="880" height="120" rx="6"/>
+  <text x="60" y="404" class="lab">worked example (hand-computable):</text>
+  <text x="60" y="428" class="eq">u = x − VREF = [0.5, −0.4] V,   W = [[ 0.50,  0.25], [−0.25, 0.50]]  (RF·Gscale = 1)</text>
+  <text x="60" y="452" class="eq">Vout_0 = 0.50·0.5 + 0.25·(−0.4) = 0.15 V        Vout_1 = (−0.25)·0.5 + 0.50·(−0.4) = −0.325 V</text>
+  <text x="60" y="476" class="cap">SPICE reproduces both to within 1.7e-4 V (VCVS gain 1e4); worst case over the chapter suite is 1.0e-3 V at the ±2.5 V boundary</text>
+
+  <!-- claim separation note -->
+  <text x="480" y="530" text-anchor="middle" class="cap">claim levels: cells + TIA are circuit (ngspice op solves); the column-sum superposition and the W@u matrix form are exact arithmetic</text>
+  <text x="480" y="548" text-anchor="middle" class="cap">half-stage rail finding: a full-scale weight at u = ±2.5 V pushes a G+ half-stage to −2.5 V (below the single 0 V rail) — usable envelope |u| ≤ 1.25 V</text>
+</svg>

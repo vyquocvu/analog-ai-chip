@@ -1,0 +1,93 @@
+{
+  "coverage": {
+    "claim_levels": {
+      "circuit/device": [
+        "SPICE 4x4 MVM (op solves, VCVS gain 1e4)",
+        "column currents from SPICE half-stage outputs",
+        "virtual-ground loading and differential headroom"
+      ],
+      "system/behavioral": [
+        "profile-driven tile error is its 16-bit quantization floor",
+        "no latency/energy claim: timing is 0014/R4-R8"
+      ]
+    },
+    "components": {
+      "behavioral": "profile-driven analog_llm tile vs hand reference (16-bit quantization floor)",
+      "currents": "column currents recovered from SPICE half-stage outputs vs hand sum u*G",
+      "headroom": "differential output envelope +/-2.5 V and virtual-ground loading",
+      "mvm": "SPICE 4x4 MVM vs hand reference Vout = RF*GSCALE*(W @ u)",
+      "regression": "scaled module reproduces the committed 2x2 (0012) results"
+    }
+  },
+  "error_budget": {
+    "current_a": {
+      "budget": 5e-06,
+      "worst": 1.7989206426136703e-07
+    },
+    "mvm_v": {
+      "budget": 0.002,
+      "spice_hand": 0.000549545329704415,
+      "spice_tile": 0.0005190268202284187,
+      "tile_hand": 3.776665547645941e-05
+    }
+  },
+  "errors": {
+    "current_max_a": 1.7989206426136703e-07,
+    "max_abs_vout_v": 0.4999499051118619,
+    "max_cell_current_a": 0.0001,
+    "max_virtual_ground_err_v": 0.00029982010793583314,
+    "regression_2x2_max_abs_err_v": 0.0,
+    "spice_hand": {
+      "max_v": 0.000549545329704415,
+      "rms_v": 0.0003275801195920965
+    },
+    "spice_tile": {
+      "max_v": 0.0005190268202284187,
+      "rms_v": 0.00031404515857927584
+    },
+    "tile_hand": {
+      "max_v": 3.776665547645941e-05,
+      "rms_v": 2.7807610670101922e-05
+    },
+    "worst_2x2_spice_hand_v": 0.0009996001608669758
+  },
+  "extract": {
+    "headroom_v": 2.5,
+    "n_cases": 5,
+    "source": "verification/circuit/results/crossbar-4x4-0013-extract.json",
+    "source_2x2": "verification/circuit/results/crossbar-2x2-0012-extract.json",
+    "vref_v": 2.5
+  },
+  "gate": "R3 (small crossbar arrays) gate exit",
+  "generator": "verification/reports/generate_crossbar_4x4_summary.py",
+  "limitations": "Ideal VCVS op-amp (no bandwidth/clipping model); ideal input sources (no driver impedance); settling recorded but not a claim; no temperature/process/Monte Carlo evidence (R4).",
+  "measurement_pending": [
+    {
+      "detail": "ideal VCVS has no bandwidth model; settling is recorded as a data point, not a claim -- bounded settling is 0014",
+      "kind": "op_amp_bandwidth"
+    },
+    {
+      "detail": "input rows are ideal voltage sources; IR drop / line resistance are R4 items",
+      "kind": "finite_driver_impedance"
+    },
+    {
+      "detail": "no parasitic RC on cells or interconnect yet (R4)",
+      "kind": "parasitic_rc"
+    }
+  ],
+  "name": "crossbar-4x4-0013-verification-summary",
+  "schema_version": 1,
+  "tile": {
+    "bits": {
+      "adc_bits": 16,
+      "dac_bits": 16,
+      "g_bits": 16
+    },
+    "consumer": "analog_llm.tile.CrossbarTile via analog_llm.profile_adapter",
+    "gmax_s": 0.0002,
+    "gmin_s": 0.0001,
+    "profile": "device_profiles/crossbar-column-v1.json",
+    "vin_max_v": 2.5,
+    "vout_max_v": 2.5
+  }
+}

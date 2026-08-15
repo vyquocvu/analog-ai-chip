@@ -1,0 +1,267 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 700" width="1440" height="700" font-family="Menlo,Consolas,monospace">
+  <rect width="1440" height="700" fill="#ffffff"/>
+  <style>
+    .wire{stroke:#333;stroke-width:2;fill:none;}
+    .gp{fill:#eaf2f8;stroke:#1a5276;stroke-width:2;}
+    .gm{fill:#fdecea;stroke:#922b21;stroke-width:2;}
+    .tia{fill:#fdf2e9;stroke:#ca6f1e;stroke-width:2;}
+    .txt{fill:#111;font-size:13px;}
+    .lab{fill:#1a5276;font-size:11px;font-weight:bold;}
+    .cap{fill:#7f8c8d;font-size:12px;}
+  </style>
+
+  <text x="720" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#111">4×4 current-mode differential crossbar array (0013)</text>
+  <text x="720" y="52" text-anchor="middle" class="cap">four shared input rows x0..x3 · four independent output columns · cell = differential G+/G− pair · Vout_j = Rf·Gscale·(W@u)_j</text>
+
+  <!-- VREF dashed rail -->
+  <line x1="40" y1="118" x2="40" y2="505" stroke="#1a5276" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="16" y="122" font-size="12" fill="#1a5276">VREF</text>
+
+  <!-- shared input rails -->
+  <text x="58" y="174" font-size="13" fill="#333">x0</text>
+  <line class="wire" x1="70" y1="170" x2="1400" y2="170"/>
+  <text x="58" y="284" font-size="13" fill="#333">x1</text>
+  <line class="wire" x1="70" y1="280" x2="1400" y2="280"/>
+  <text x="58" y="394" font-size="13" fill="#333">x2</text>
+  <line class="wire" x1="70" y1="390" x2="1400" y2="390"/>
+  <text x="58" y="504" font-size="13" fill="#333">x3</text>
+  <line class="wire" x1="70" y1="500" x2="1400" y2="500"/>
+  <text x="72" y="108" class="cap">u0 = x0 − VREF</text>
+  <text x="72" y="316" class="cap">u1 = x1 − VREF</text>
+  <text x="72" y="426" class="cap">u2 = x2 − VREF</text>
+  <text x="72" y="536" class="cap">u3 = x3 − VREF</text>
+
+  <text x="255" y="90" text-anchor="middle" class="lab" font-size="12" fill="#ca6f1e">output column 0</text>
+  <text x="555" y="90" text-anchor="middle" class="lab" font-size="12" fill="#ca6f1e">output column 1</text>
+  <text x="855" y="90" text-anchor="middle" class="lab" font-size="12" fill="#ca6f1e">output column 2</text>
+  <text x="1155" y="90" text-anchor="middle" class="lab" font-size="12" fill="#ca6f1e">output column 3</text>
+
+  <!-- ============ COLUMNS 0..3 (cells on the shared rails) ============ -->
+  <!-- column j base x = 130 + j*300; Vp bus = bx+100, Vm bus = bx+130 -->
+  <!-- cell rows: ry = 170, 280, 390, 500; G+ (ry-22..ry-2), G- (ry+2..ry+22) -->
+  <rect class="gp" x="130" y="148" width="55" height="20"/><text x="157" y="162" text-anchor="middle" class="lab">G+00</text>
+  <rect class="gm" x="130" y="172" width="55" height="20"/><text x="157" y="186" text-anchor="middle" class="lab" fill="#922b21">G−00</text>
+  <rect class="gp" x="130" y="258" width="55" height="20"/><text x="157" y="272" text-anchor="middle" class="lab">G+10</text>
+  <rect class="gm" x="130" y="282" width="55" height="20"/><text x="157" y="296" text-anchor="middle" class="lab" fill="#922b21">G−10</text>
+  <rect class="gp" x="130" y="368" width="55" height="20"/><text x="157" y="382" text-anchor="middle" class="lab">G+20</text>
+  <rect class="gm" x="130" y="392" width="55" height="20"/><text x="157" y="406" text-anchor="middle" class="lab" fill="#922b21">G−20</text>
+  <rect class="gp" x="130" y="478" width="55" height="20"/><text x="157" y="492" text-anchor="middle" class="lab">G+30</text>
+  <rect class="gm" x="130" y="502" width="55" height="20"/><text x="157" y="516" text-anchor="middle" class="lab" fill="#922b21">G−30</text>
+  <line class="wire" x1="185" y1="158" x2="230" y2="158"/><circle cx="230" cy="158" r="4" fill="#1a5276"/>
+  <line class="wire" x1="185" y1="182" x2="260" y2="182"/><circle cx="260" cy="182" r="4" fill="#922b21"/>
+  <line class="wire" x1="185" y1="268" x2="230" y2="268"/><circle cx="230" cy="268" r="4" fill="#1a5276"/>
+  <line class="wire" x1="185" y1="292" x2="260" y2="292"/><circle cx="260" cy="292" r="4" fill="#922b21"/>
+  <line class="wire" x1="185" y1="378" x2="230" y2="378"/><circle cx="230" cy="378" r="4" fill="#1a5276"/>
+  <line class="wire" x1="185" y1="402" x2="260" y2="402"/><circle cx="260" cy="402" r="4" fill="#922b21"/>
+  <line class="wire" x1="185" y1="488" x2="230" y2="488"/><circle cx="230" cy="488" r="4" fill="#1a5276"/>
+  <line class="wire" x1="185" y1="512" x2="260" y2="512"/><circle cx="260" cy="512" r="4" fill="#922b21"/>
+  <line class="wire" x1="230" y1="118" x2="230" y2="500"/>
+  <line class="wire" x1="260" y1="140" x2="260" y2="520"/>
+  <text x="230" y="108" text-anchor="middle" class="lab">Vp0</text>
+  <text x="260" y="536" text-anchor="middle" class="lab" fill="#922b21">Vm0</text>
+  <!-- TIA+0 / TIA-0 -->
+  <line class="wire" x1="230" y1="161" x2="230" y2="118"/>
+  <line class="wire" x1="230" y1="118" x2="255" y2="118"/>
+  <rect x="255" y="108" width="30" height="20" fill="#fff" stroke="#333"/>
+  <text x="270" y="122" text-anchor="middle" font-size="10" fill="#333">Rf</text>
+  <line class="wire" x1="285" y1="118" x2="365" y2="118"/>
+  <line class="wire" x1="365" y1="118" x2="365" y2="156"/>
+  <rect class="tia" x="305" y="140" width="60" height="32"/>
+  <text x="335" y="160" text-anchor="middle" class="lab" fill="#ca6f1e">A0+</text>
+  <text x="335" y="166" text-anchor="middle" font-size="9" class="cap">TIA+</text>
+  <line class="wire" x1="230" y1="161" x2="305" y2="161"/>
+  <line class="wire" x1="365" y1="156" x2="425" y2="156"/>
+  <line class="wire" x1="365" y1="156" x2="365" y2="118"/>
+  <text x="428" y="160" class="lab">Vp0</text>
+  <line class="wire" x1="260" y1="414" x2="260" y2="428"/>
+  <line class="wire" x1="260" y1="428" x2="285" y2="428"/>
+  <rect x="285" y="436" width="30" height="20" fill="#fff" stroke="#333"/>
+  <text x="300" y="450" text-anchor="middle" font-size="10" fill="#333">Rf</text>
+  <line class="wire" x1="315" y1="428" x2="365" y2="428"/>
+  <line class="wire" x1="365" y1="428" x2="365" y2="414"/>
+  <rect class="tia" x="305" y="398" width="60" height="32"/>
+  <text x="335" y="418" text-anchor="middle" class="lab" fill="#ca6f1e">A0−</text>
+  <text x="335" y="424" text-anchor="middle" font-size="9" class="cap">TIA−</text>
+  <line class="wire" x1="260" y1="414" x2="305" y2="414"/>
+  <line class="wire" x1="365" y1="414" x2="425" y2="414"/>
+  <line class="wire" x1="365" y1="414" x2="365" y2="428"/>
+  <text x="428" y="418" class="lab" fill="#922b21">Vm0</text>
+  <!-- subtractor 0 -->
+  <line class="wire" x1="425" y1="156" x2="425" y2="285"/>
+  <line class="wire" x1="425" y1="414" x2="425" y2="285"/>
+  <circle cx="425" cy="285" r="4" fill="#111"/>
+  <text x="431" y="278" font-size="11" fill="#111">Vout0 = Vm0 − Vp0</text>
+  <line class="wire" x1="425" y1="285" x2="515" y2="285"/>
+  <text x="519" y="289" font-size="13" fill="#111" font-weight="bold">Vout0</text>
+
+  <rect class="gp" x="430" y="148" width="55" height="20"/><text x="457" y="162" text-anchor="middle" class="lab">G+01</text>
+  <rect class="gm" x="430" y="172" width="55" height="20"/><text x="457" y="186" text-anchor="middle" class="lab" fill="#922b21">G−01</text>
+  <rect class="gp" x="430" y="258" width="55" height="20"/><text x="457" y="272" text-anchor="middle" class="lab">G+11</text>
+  <rect class="gm" x="430" y="282" width="55" height="20"/><text x="457" y="296" text-anchor="middle" class="lab" fill="#922b21">G−11</text>
+  <rect class="gp" x="430" y="368" width="55" height="20"/><text x="457" y="382" text-anchor="middle" class="lab">G+21</text>
+  <rect class="gm" x="430" y="392" width="55" height="20"/><text x="457" y="406" text-anchor="middle" class="lab" fill="#922b21">G−21</text>
+  <rect class="gp" x="430" y="478" width="55" height="20"/><text x="457" y="492" text-anchor="middle" class="lab">G+31</text>
+  <rect class="gm" x="430" y="502" width="55" height="20"/><text x="457" y="516" text-anchor="middle" class="lab" fill="#922b21">G−31</text>
+  <line class="wire" x1="485" y1="158" x2="530" y2="158"/><circle cx="530" cy="158" r="4" fill="#1a5276"/>
+  <line class="wire" x1="485" y1="182" x2="560" y2="182"/><circle cx="560" cy="182" r="4" fill="#922b21"/>
+  <line class="wire" x1="485" y1="268" x2="530" y2="268"/><circle cx="530" cy="268" r="4" fill="#1a5276"/>
+  <line class="wire" x1="485" y1="292" x2="560" y2="292"/><circle cx="560" cy="292" r="4" fill="#922b21"/>
+  <line class="wire" x1="485" y1="378" x2="530" y2="378"/><circle cx="530" cy="378" r="4" fill="#1a5276"/>
+  <line class="wire" x1="485" y1="402" x2="560" y2="402"/><circle cx="560" cy="402" r="4" fill="#922b21"/>
+  <line class="wire" x1="485" y1="488" x2="530" y2="488"/><circle cx="530" cy="488" r="4" fill="#1a5276"/>
+  <line class="wire" x1="485" y1="512" x2="560" y2="512"/><circle cx="560" cy="512" r="4" fill="#922b21"/>
+  <line class="wire" x1="530" y1="118" x2="530" y2="500"/>
+  <line class="wire" x1="560" y1="140" x2="560" y2="520"/>
+  <text x="530" y="108" text-anchor="middle" class="lab">Vp1</text>
+  <text x="560" y="536" text-anchor="middle" class="lab" fill="#922b21">Vm1</text>
+  <line class="wire" x1="530" y1="161" x2="530" y2="118"/>
+  <line class="wire" x1="530" y1="118" x2="555" y2="118"/>
+  <rect x="555" y="108" width="30" height="20" fill="#fff" stroke="#333"/>
+  <text x="570" y="122" text-anchor="middle" font-size="10" fill="#333">Rf</text>
+  <line class="wire" x1="585" y1="118" x2="665" y2="118"/>
+  <line class="wire" x1="665" y1="118" x2="665" y2="156"/>
+  <rect class="tia" x="605" y="140" width="60" height="32"/>
+  <text x="635" y="160" text-anchor="middle" class="lab" fill="#ca6f1e">A1+</text>
+  <text x="635" y="166" text-anchor="middle" font-size="9" class="cap">TIA+</text>
+  <line class="wire" x1="530" y1="161" x2="605" y2="161"/>
+  <line class="wire" x1="665" y1="156" x2="725" y2="156"/>
+  <line class="wire" x1="665" y1="156" x2="665" y2="118"/>
+  <text x="728" y="160" class="lab">Vp1</text>
+  <line class="wire" x1="560" y1="414" x2="560" y2="428"/>
+  <line class="wire" x1="560" y1="428" x2="585" y2="428"/>
+  <rect x="585" y="436" width="30" height="20" fill="#fff" stroke="#333"/>
+  <text x="600" y="450" text-anchor="middle" font-size="10" fill="#333">Rf</text>
+  <line class="wire" x1="615" y1="428" x2="665" y2="428"/>
+  <line class="wire" x1="665" y1="428" x2="665" y2="414"/>
+  <rect class="tia" x="605" y="398" width="60" height="32"/>
+  <text x="635" y="418" text-anchor="middle" class="lab" fill="#ca6f1e">A1−</text>
+  <text x="635" y="424" text-anchor="middle" font-size="9" class="cap">TIA−</text>
+  <line class="wire" x1="560" y1="414" x2="605" y2="414"/>
+  <line class="wire" x1="665" y1="414" x2="725" y2="414"/>
+  <line class="wire" x1="665" y1="414" x2="665" y2="428"/>
+  <text x="728" y="418" class="lab" fill="#922b21">Vm1</text>
+  <line class="wire" x1="725" y1="156" x2="725" y2="285"/>
+  <line class="wire" x1="725" y1="414" x2="725" y2="285"/>
+  <circle cx="725" cy="285" r="4" fill="#111"/>
+  <text x="731" y="278" font-size="11" fill="#111">Vout1 = Vm1 − Vp1</text>
+  <line class="wire" x1="725" y1="285" x2="815" y2="285"/>
+  <text x="819" y="289" font-size="13" fill="#111" font-weight="bold">Vout1</text>
+
+  <rect class="gp" x="730" y="148" width="55" height="20"/><text x="757" y="162" text-anchor="middle" class="lab">G+02</text>
+  <rect class="gm" x="730" y="172" width="55" height="20"/><text x="757" y="186" text-anchor="middle" class="lab" fill="#922b21">G−02</text>
+  <rect class="gp" x="730" y="258" width="55" height="20"/><text x="757" y="272" text-anchor="middle" class="lab">G+12</text>
+  <rect class="gm" x="730" y="282" width="55" height="20"/><text x="757" y="296" text-anchor="middle" class="lab" fill="#922b21">G−12</text>
+  <rect class="gp" x="730" y="368" width="55" height="20"/><text x="757" y="382" text-anchor="middle" class="lab">G+22</text>
+  <rect class="gm" x="730" y="392" width="55" height="20"/><text x="757" y="406" text-anchor="middle" class="lab" fill="#922b21">G−22</text>
+  <rect class="gp" x="730" y="478" width="55" height="20"/><text x="757" y="492" text-anchor="middle" class="lab">G+32</text>
+  <rect class="gm" x="730" y="502" width="55" height="20"/><text x="757" y="516" text-anchor="middle" class="lab" fill="#922b21">G−32</text>
+  <line class="wire" x1="785" y1="158" x2="830" y2="158"/><circle cx="830" cy="158" r="4" fill="#1a5276"/>
+  <line class="wire" x1="785" y1="182" x2="860" y2="182"/><circle cx="860" cy="182" r="4" fill="#922b21"/>
+  <line class="wire" x1="785" y1="268" x2="830" y2="268"/><circle cx="830" cy="268" r="4" fill="#1a5276"/>
+  <line class="wire" x1="785" y1="292" x2="860" y2="292"/><circle cx="860" cy="292" r="4" fill="#922b21"/>
+  <line class="wire" x1="785" y1="378" x2="830" y2="378"/><circle cx="830" cy="378" r="4" fill="#1a5276"/>
+  <line class="wire" x1="785" y1="402" x2="860" y2="402"/><circle cx="860" cy="402" r="4" fill="#922b21"/>
+  <line class="wire" x1="785" y1="488" x2="830" y2="488"/><circle cx="830" cy="488" r="4" fill="#1a5276"/>
+  <line class="wire" x1="785" y1="512" x2="860" y2="512"/><circle cx="860" cy="512" r="4" fill="#922b21"/>
+  <line class="wire" x1="830" y1="118" x2="830" y2="500"/>
+  <line class="wire" x1="860" y1="140" x2="860" y2="520"/>
+  <text x="830" y="108" text-anchor="middle" class="lab">Vp2</text>
+  <text x="860" y="536" text-anchor="middle" class="lab" fill="#922b21">Vm2</text>
+  <line class="wire" x1="830" y1="161" x2="830" y2="118"/>
+  <line class="wire" x1="830" y1="118" x2="855" y2="118"/>
+  <rect x="855" y="108" width="30" height="20" fill="#fff" stroke="#333"/>
+  <text x="870" y="122" text-anchor="middle" font-size="10" fill="#333">Rf</text>
+  <line class="wire" x1="885" y1="118" x2="965" y2="118"/>
+  <line class="wire" x1="965" y1="118" x2="965" y2="156"/>
+  <rect class="tia" x="905" y="140" width="60" height="32"/>
+  <text x="935" y="160" text-anchor="middle" class="lab" fill="#ca6f1e">A2+</text>
+  <text x="935" y="166" text-anchor="middle" font-size="9" class="cap">TIA+</text>
+  <line class="wire" x1="830" y1="161" x2="905" y2="161"/>
+  <line class="wire" x1="965" y1="156" x2="1025" y2="156"/>
+  <line class="wire" x1="965" y1="156" x2="965" y2="118"/>
+  <text x="1028" y="160" class="lab">Vp2</text>
+  <line class="wire" x1="860" y1="414" x2="860" y2="428"/>
+  <line class="wire" x1="860" y1="428" x2="885" y2="428"/>
+  <rect x="885" y="436" width="30" height="20" fill="#fff" stroke="#333"/>
+  <text x="900" y="450" text-anchor="middle" font-size="10" fill="#333">Rf</text>
+  <line class="wire" x1="915" y1="428" x2="965" y2="428"/>
+  <line class="wire" x1="965" y1="428" x2="965" y2="414"/>
+  <rect class="tia" x="905" y="398" width="60" height="32"/>
+  <text x="935" y="418" text-anchor="middle" class="lab" fill="#ca6f1e">A2−</text>
+  <text x="935" y="424" text-anchor="middle" font-size="9" class="cap">TIA−</text>
+  <line class="wire" x1="860" y1="414" x2="905" y2="414"/>
+  <line class="wire" x1="965" y1="414" x2="1025" y2="414"/>
+  <line class="wire" x1="965" y1="414" x2="965" y2="428"/>
+  <text x="1028" y="418" class="lab" fill="#922b21">Vm2</text>
+  <line class="wire" x1="1025" y1="156" x2="1025" y2="285"/>
+  <line class="wire" x1="1025" y1="414" x2="1025" y2="285"/>
+  <circle cx="1025" cy="285" r="4" fill="#111"/>
+  <text x="1031" y="278" font-size="11" fill="#111">Vout2 = Vm2 − Vp2</text>
+  <line class="wire" x1="1025" y1="285" x2="1115" y2="285"/>
+  <text x="1119" y="289" font-size="13" fill="#111" font-weight="bold">Vout2</text>
+
+  <rect class="gp" x="1030" y="148" width="55" height="20"/><text x="1057" y="162" text-anchor="middle" class="lab">G+03</text>
+  <rect class="gm" x="1030" y="172" width="55" height="20"/><text x="1057" y="186" text-anchor="middle" class="lab" fill="#922b21">G−03</text>
+  <rect class="gp" x="1030" y="258" width="55" height="20"/><text x="1057" y="272" text-anchor="middle" class="lab">G+13</text>
+  <rect class="gm" x="1030" y="282" width="55" height="20"/><text x="1057" y="296" text-anchor="middle" class="lab" fill="#922b21">G−13</text>
+  <rect class="gp" x="1030" y="368" width="55" height="20"/><text x="1057" y="382" text-anchor="middle" class="lab">G+23</text>
+  <rect class="gm" x="1030" y="392" width="55" height="20"/><text x="1057" y="406" text-anchor="middle" class="lab" fill="#922b21">G−23</text>
+  <rect class="gp" x="1030" y="478" width="55" height="20"/><text x="1057" y="492" text-anchor="middle" class="lab">G+33</text>
+  <rect class="gm" x="1030" y="502" width="55" height="20"/><text x="1057" y="516" text-anchor="middle" class="lab" fill="#922b21">G−33</text>
+  <line class="wire" x1="1085" y1="158" x2="1130" y2="158"/><circle cx="1130" cy="158" r="4" fill="#1a5276"/>
+  <line class="wire" x1="1085" y1="182" x2="1160" y2="182"/><circle cx="1160" cy="182" r="4" fill="#922b21"/>
+  <line class="wire" x1="1085" y1="268" x2="1130" y2="268"/><circle cx="1130" cy="268" r="4" fill="#1a5276"/>
+  <line class="wire" x1="1085" y1="292" x2="1160" y2="292"/><circle cx="1160" cy="292" r="4" fill="#922b21"/>
+  <line class="wire" x1="1085" y1="378" x2="1130" y2="378"/><circle cx="1130" cy="378" r="4" fill="#1a5276"/>
+  <line class="wire" x1="1085" y1="402" x2="1160" y2="402"/><circle cx="1160" cy="402" r="4" fill="#922b21"/>
+  <line class="wire" x1="1085" y1="488" x2="1130" y2="488"/><circle cx="1130" cy="488" r="4" fill="#1a5276"/>
+  <line class="wire" x1="1085" y1="512" x2="1160" y2="512"/><circle cx="1160" cy="512" r="4" fill="#922b21"/>
+  <line class="wire" x1="1130" y1="118" x2="1130" y2="500"/>
+  <line class="wire" x1="1160" y1="140" x2="1160" y2="520"/>
+  <text x="1130" y="108" text-anchor="middle" class="lab">Vp3</text>
+  <text x="1160" y="536" text-anchor="middle" class="lab" fill="#922b21">Vm3</text>
+  <line class="wire" x1="1130" y1="161" x2="1130" y2="118"/>
+  <line class="wire" x1="1130" y1="118" x2="1155" y2="118"/>
+  <rect x="1155" y="108" width="30" height="20" fill="#fff" stroke="#333"/>
+  <text x="1170" y="122" text-anchor="middle" font-size="10" fill="#333">Rf</text>
+  <line class="wire" x1="1185" y1="118" x2="1265" y2="118"/>
+  <line class="wire" x1="1265" y1="118" x2="1265" y2="156"/>
+  <rect class="tia" x="1205" y="140" width="60" height="32"/>
+  <text x="1235" y="160" text-anchor="middle" class="lab" fill="#ca6f1e">A3+</text>
+  <text x="1235" y="166" text-anchor="middle" font-size="9" class="cap">TIA+</text>
+  <line class="wire" x1="1130" y1="161" x2="1205" y2="161"/>
+  <line class="wire" x1="1265" y1="156" x2="1325" y2="156"/>
+  <line class="wire" x1="1265" y1="156" x2="1265" y2="118"/>
+  <text x="1328" y="160" class="lab">Vp3</text>
+  <line class="wire" x1="1160" y1="414" x2="1160" y2="428"/>
+  <line class="wire" x1="1160" y1="428" x2="1185" y2="428"/>
+  <rect x="1185" y="436" width="30" height="20" fill="#fff" stroke="#333"/>
+  <text x="1200" y="450" text-anchor="middle" font-size="10" fill="#333">Rf</text>
+  <line class="wire" x1="1215" y1="428" x2="1265" y2="428"/>
+  <line class="wire" x1="1265" y1="428" x2="1265" y2="414"/>
+  <rect class="tia" x="1205" y="398" width="60" height="32"/>
+  <text x="1235" y="418" text-anchor="middle" class="lab" fill="#ca6f1e">A3−</text>
+  <text x="1235" y="424" text-anchor="middle" font-size="9" class="cap">TIA−</text>
+  <line class="wire" x1="1160" y1="414" x2="1205" y2="414"/>
+  <line class="wire" x1="1265" y1="414" x2="1325" y2="414"/>
+  <line class="wire" x1="1265" y1="414" x2="1265" y2="428"/>
+  <text x="1328" y="418" class="lab" fill="#922b21">Vm3</text>
+  <line class="wire" x1="1325" y1="156" x2="1325" y2="285"/>
+  <line class="wire" x1="1325" y1="414" x2="1325" y2="285"/>
+  <circle cx="1325" cy="285" r="4" fill="#111"/>
+  <text x="1331" y="278" font-size="11" fill="#111">Vout3 = Vm3 − Vp3</text>
+  <line class="wire" x1="1325" y1="285" x2="1400" y2="285"/>
+  <text x="1404" y="289" font-size="13" fill="#111" font-weight="bold">Vout3</text>
+
+  <!-- legend + footer -->
+  <rect x="70" y="575" width="18" height="14" fill="#eaf2f8" stroke="#1a5276"/>
+  <text x="94" y="586" class="cap">G+ cell → Vp bus</text>
+  <rect x="210" y="575" width="18" height="14" fill="#fdecea" stroke="#922b21"/>
+  <text x="234" y="586" class="cap">G− cell → Vm bus</text>
+  <rect x="380" y="575" width="18" height="14" fill="#fdf2e9" stroke="#ca6f1e"/>
+  <text x="404" y="586" class="cap">transimpedance stage (TIA)</text>
+  <text x="70" y="618" class="cap">each cell realizes w_ij·Gscale = G+_ij − G−_ij (balanced zero at G0); every column is an independent 0007 column sharing the input rails</text>
+  <text x="70" y="638" class="cap">each TIA stage is an independent linear network solved in its own netlist and combined by superposition (8 stages, one per half-column)</text>
+  <text x="70" y="658" class="cap">columns are uncoupled: changing column j's weights never changes any Vout_j′ for j′ ≠ j (verified: 0.0e+00 V in the 0013 extract)</text>
+  <text x="720" y="688" text-anchor="middle" class="cap">Vout_j = Vm_j − Vp_j = Rf·Σ_i u_i·(G+_ij − G−_ij) = Rf·Gscale·(W@u)_j</text>
+</svg>

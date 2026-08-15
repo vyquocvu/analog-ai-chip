@@ -30,21 +30,20 @@ physical feasibility report
 
 ## Current status
 
-The repository has completed the functional foundations and its first SPICE-verified current-mode compute primitive:
+The repository has closed the first four evidence gates:
 
 ```text
-0005 voltage-mode weighted sum ─┐
-0006 multi-neuron scaling       ├─► circuit foundation
-0007 differential crossbar col ┘
-                                  ↓
-                         NEXT: extract SPICE profile
-                                  ↓
-                            analog_llm consumes it
+R0 functional + circuit foundation ── COMPLETE
+R1 circuit → profile → simulator   ── COMPLETE  (crossbar-column-v1)
+R2 converter signal path           ── COMPLETE  (dac-r2r-v1, adc-sar-v1)
+R3 small crossbar arrays           ── COMPLETE  (0012 2×2 + 0013 4×4, behavioral-equivalence report)
 ```
 
-`book/0007-crossbar-column/` is the first circuit chapter that matches the current-mode differential conductance architecture modeled by `analog_llm`: conductance cells generate `I = V·G`, column currents sum, and TIA/differential readout produces the signed result.
+The circuit → profile → simulator chain is closed: `device_profiles/crossbar-column-v1.json` is extracted from SPICE solves of the 0007 current-mode differential column, and `analog_llm` builds its tiles through `profile_adapter` — no hand-copied physical constants. The converter path is closed by the SPICE-verified R-2R DAC (`dac-r2r-v1`) and SAR ADC (`adc-sar-v1`) profiles, consumed through `converter_config_from_profiles`.
 
-The **active roadmap gate is R1: close the circuit → profile → simulator proof chain**. See [`docs/ROADMAP.md`](docs/ROADMAP.md).
+`book/0007-crossbar-column/` is the circuit chapter matching the current-mode differential conductance architecture modeled by `analog_llm`: conductance cells generate `I = V·G`, column currents sum, and TIA/differential readout produces the signed result.
+
+The **active roadmap gate is R4: device realism and crossbar-v1** — a programmable-conductance compact model with `gmin`/`gmax`/state resolution, variation, IR drop, parasitic settling and a published `crossbar-v1` profile. See [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
 ## Engineering hierarchy
 
@@ -100,13 +99,14 @@ See [`docs/SIMULATION_STACK.md`](docs/SIMULATION_STACK.md).
 | 0005 | One analog neuron — SPICE | done | `book/0005-one-analog-neuron/` |
 | 0006 | Many neurons / scaling | done | `book/0006-many-neurons/` |
 | 0007 | Current-mode differential crossbar column | done | `book/0007-crossbar-column/` |
-| 0008 | Circuit evidence → device profile | **next** | planned |
-| 0009 | DAC architecture | queued | planned |
-| 0010 | ADC / TIA output path | queued | planned |
-| 0012 | 2×2 differential crossbar | queued | planned |
-| 0013 | 4×4 differential crossbar | queued | planned |
+| 0008 | Circuit evidence → device profile | done | `verification/circuit/` + `device_profiles/` |
+| 0009 | DAC architecture | done | `book/0009-dac-r2r/` |
+| 0010 | ADC / TIA output path | done | `book/0010-adc-sar/` |
+| 0011 | Converter variation | done | `book/0011-converter-variation/` |
+| 0012 | 2×2 differential crossbar | done | `book/0012-crossbar-2x2/` |
+| 0013 | 4×4 differential crossbar | done | `book/0013-crossbar-4x4/` |
 
-> **Tiếng Việt:** chapters include `README.vi.md` beside the English `README.md` where available.
+> **Tiếng Việt:** every chapter has a `README.vi.md` beside the English `README.md`.
 
 ## Track 2 — Analog LLM architecture simulator (`analog_llm/`)
 
@@ -138,7 +138,7 @@ Evidence classes:
 - `derived` — calculated from traceable evidence;
 - `assumed` — sensitivity-study input only.
 
-The current repository contains the profile contract and an ideal reference profile. The next milestone is to publish the first **SPICE-backed crossbar-column profile** from 0007 and make `analog_llm` consume it.
+The repository contains the validated SPICE-backed profiles `crossbar-column-v1`, `dac-r2r-v1` and `adc-sar-v1`, all consumed by `analog_llm` through `profile_adapter` (fail-closed: `assumed`/functional-only evidence cannot support a physical claim). The next profile milestone is `crossbar-v1` (device realism, roadmap R4), once small-array evidence exists.
 
 ## Verification evidence
 

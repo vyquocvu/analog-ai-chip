@@ -100,9 +100,15 @@ closed. R1 is complete (WP1.1 + WP1.2 + WP1.3 closed).
 
 ---
 
-# R2 — Converter signal path — ACTIVE
+# R2 — Converter signal path — COMPLETE
 
-R1 is closed; the first DAC slice (below) is eligible.
+R1 closed the circuit → profile → simulator chain; R2 adds the converter
+signal path on top of it. The R-2R DAC (0009) and SAR ADC (0010) are
+SPICE-verified and published as profiles (`dac-r2r-v1`, `adc-sar-v1`);
+converter variation (0011) separates error mechanisms and defines calibration
+candidates; and the gate-exit test proves `analog_llm` runs with converter
+parameters sourced from the validated profiles — no normalized converter
+default remains.
 
 ## 0009 — DAC architecture
 
@@ -111,8 +117,8 @@ R1 is closed; the first DAC slice (below) is eligible.
 - [x] ngspice DC sweep across all codes for a small-bit prototype: 4-bit ladder, all 16 codes, worst `|SPICE − hand calc|` `4.44e-16 V` (`spice`)
 - [x] Transient settling study: single-pole hand model `t = 2R·CL·ln(ΔV/band)` vs SPICE transient, `Rth = 2R` from two-point DC load line (`spice`); settling reported as an ASSUMED-`CL` sensitivity study in the extract JSON only (1 pF load, 0.5 LSB band, full-scale step: SPICE 68.7 ns vs hand 68.0 ns) and deliberately excluded from the profile so `physical_claim` stays valid
 - [x] Gain/offset/range extraction: `lsb_v = 0.15625 V/code`, `full_scale_v = 2.34375 V`, `offset_v = 0 V`, `gain_v_per_v = 1`, `max_inl_v = 4.4e-16 V`, `max_dnl_v = 4.2e-16 V` (`spice`)
-- [ ] Supply sensitivity (deferred)
-- [ ] Monte Carlo / resistor mismatch (deferred)
+- [x] Supply sensitivity: ratio-based ladder gives a *pure* VREF gain error — SPICE `gain_error = dVREF/VREF` at ±10% within `1e-9`, offset stays `0`, and the deviated transfer matches the hand `VREF'·code/2^N` to `4.4e-16 V`; temperature/corner have no modelable effect on ideal models (documented, not fabricated); extract-only study (`dac-r2r-v1-extract.json#/supply_sensitivity`), not a profile field
+- [x] Monte Carlo / resistor mismatch: delivered by 0011 (converter variation) as an assumed-`sigma` sensitivity study that matches an independent NumPy solver to `2.2e-15 V` — it fails closed under `physical_claim` and publishes no profile
 - [x] Publish SPICE profile: `device_profiles/dac-r2r-v1.json` (name `dac-r2r-v1`, version `0.1.0`), 11 fields all carrying `evidence_class` (incl. `rth_ohm = 20000 ohm`, `spice`), emitted by `verification/circuit/extract_dac_r2r.py`
 
 ## 0010 — ADC / TIA output path
@@ -138,23 +144,23 @@ R1 is closed; the first DAC slice (below) is eligible.
 
 ---
 
-# R3 — Small crossbar arrays — QUEUED
+# R3 — Small crossbar arrays — COMPLETE
 
-Depends on R1; R2 is required for full signal-path claims but not for early array-only studies.
+Depends on R1 + R2 (both closed). 0012 and 0013 are both delivered with reproducible SPICE evidence and a behavioral-equivalence error report; R3 gate exit is proven (`verification/reports/crossbar-4x4-summary.md`).
 
 ## 0012 — 2×2 differential crossbar
 
-- [ ] Shared input rows, two independent output columns
-- [ ] SPICE MVM versus hand/NumPy reference
-- [ ] Signed-weight cases, zero/balanced cases and boundary envelope
-- [ ] Output-stage loading/headroom checks
+- [x] Shared input rows, two independent output columns: both columns driven by the same x0/x1 rails; column independence asserted in SPICE (`|ΔVout_0| = 0` when only column 1 changes)
+- [x] SPICE MVM versus hand/NumPy reference: `Vout = RF·GSCALE·(W @ (x − VREF))` over 5 deterministic cases × 2 outputs, worst `|SPICE − hand| 1.0e-3 V` (`book/0012-crossbar-2x2/crossbar_2x2.py`, committed extract `crossbar-2x2-0012-extract.json`)
+- [x] Signed-weight cases, zero/balanced cases and boundary envelope: mixed signs, full-scale differential, balanced zero (exact 0 V), one zero per row, boundary at `|Vout| = 2.5 V`
+- [x] Output-stage loading/headroom checks: differential outputs within ±2.5 V; virtual ground within `3.5e-4 V` of VREF; half-stage rail finding — a full-scale weight at `u = ±2.5 V` pushes a G+ half-stage to −2.5 V (below the single 0 V rail), bounding the usable per-input envelope to `|u| ≤ 1.25 V`
 
 ## 0013 — 4×4 differential crossbar
 
-- [ ] Scale the validated 2×2 topology
-- [ ] Compare SPICE output to behavioral model over deterministic vectors/matrices
-- [ ] Quantify max/RMS MVM error
-- [ ] Record current and settling behavior
+- [x] Scale the validated 2×2 topology: four shared input rows, four independent output columns, each an 0007 column repeated four times; 2×2 regression reproduces the committed 0012 extract to `0.0e+00 V` (`book/0013-crossbar-4x4/crossbar_4x4.py`, committed extract `crossbar-4x4-0013-extract.json`)
+- [x] Compare SPICE output to behavioral model over deterministic vectors/matrices: `analog_llm` CrossbarTile on the validated `crossbar-column-v1` profile (16-bit programming/DAC/ADC quantization) vs SPICE vs hand `Vout = Rf·Gscale·(W @ u)` over 5 cases × 4 outputs (mixed-sign, sparse, rank-1, zero matrix → exactly 0 V)
+- [x] Quantify max/RMS MVM error: worst |SPICE − hand| 5.5e-4 V (rms 3.3e-4), worst |tile − hand| 3.8e-5 V, worst |SPICE − tile| 5.2e-4 V — all inside the frozen 2e-3 V budget; tile quantization floor is an order of magnitude below the VCVS finite-gain error, so the tile is a faithful behavioral model
+- [x] Record current and settling behavior: column currents recovered from SPICE half-stage outputs match hand `Σ u_i·G+_ij` to 1.8e-7 A; largest cell current 1.0e-4 A; settling at ASSUMED 1 pF recorded as a caveated data point only (ideal VCVS has no bandwidth model; fails closed under `physical_claim`, bounded settling is 0014)
 
 ## 0014 — Array timing/loading
 
@@ -164,13 +170,13 @@ Depends on R1; R2 is required for full signal-path claims but not for early arra
 
 ### Gate R3 exit
 
-A 4×4 current-mode differential array has reproducible SPICE evidence and a behavioral-equivalence error report.
+A 4×4 current-mode differential array has reproducible SPICE evidence and a behavioral-equivalence error report. **Met**: `crossbar-4x4-0013-extract.json` + `verification/reports/crossbar-4x4-summary.md` (max/RMS MVM error vs hand and vs the behavioral tile, currents, assumed-settling caveat, 2×2 regression), all within the frozen error budget; gate is closed and R4 is now the active gate.
 
 ---
 
-# R4 — Device realism and crossbar-v1 — QUEUED
+# R4 — Device realism and crossbar-v1 — ACTIVE
 
-Depends on R3.
+Depends on R3 (closed).
 
 - [ ] Select explicit programmable-conductance abstraction / compact model
 - [ ] Establish `gmin`, `gmax`, state count/resolution and programming assumptions

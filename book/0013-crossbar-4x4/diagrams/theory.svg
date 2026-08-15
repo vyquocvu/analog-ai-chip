@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 860" width="960" height="860" font-family="Menlo,Consolas,monospace">
+  <rect width="960" height="860" fill="#ffffff"/>
+  <style>
+    .wire{stroke:#333;stroke-width:2;fill:none;}
+    .gp{fill:#eaf2f8;stroke:#1a5276;stroke-width:2;}
+    .gm{fill:#fdecea;stroke:#922b21;stroke-width:2;}
+    .tia{fill:#fdf2e9;stroke:#ca6f1e;stroke-width:2;}
+    .eq{fill:#111;font-size:14px;font-weight:bold;}
+    .lbl{fill:#1a5276;font-size:12px;font-weight:bold;}
+    .cap{fill:#7f8c8d;font-size:12px;}
+    .good{fill:#1e8449;font-size:12px;}
+    .warn{fill:#c0392b;font-size:12px;}
+  </style>
+
+  <text x="480" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#111">4×4 differential crossbar — theory of operation (0013)</text>
+  <text x="480" y="52" text-anchor="middle" class="cap">matrix-vector product in conductance · superposition of 8 half-column TIA stages · behavioral equivalence to the analog_llm tile</text>
+
+  <!-- Section 1: the MVM equation -->
+  <text x="60" y="92" class="lbl">1 · the array computes a matrix-vector product</text>
+  <text x="60" y="118" class="eq">Vout_j = Rf · Σ_i u_i · (G+_ij − G−_ij) = Rf · Gscale · (W @ u)_j</text>
+  <text x="60" y="140" class="cap">u_i = x_i − VREF,  W_ij = (G+_ij − G−_ij)/Gscale ∈ [−1, 1],  Rf·Gscale = 1 V per volt per weight</text>
+  <text x="60" y="160" class="cap">with VREF = 2.5 V, G0 = Gscale = 0.1 mS, Rf = 10 kΩ (the 0007 column constants, unchanged)</text>
+
+  <!-- Section 2: differential cell + balanced zero -->
+  <text x="60" y="200" class="lbl">2 · each cell is a differential conductance pair</text>
+  <rect class="gp" x="60" y="212" width="46" height="22"/><text x="83" y="227" text-anchor="middle" font-size="10" fill="#1a5276">G+_ij</text>
+  <rect class="gm" x="60" y="240" width="46" height="22"/><text x="83" y="255" text-anchor="middle" font-size="10" fill="#922b21">G−_ij</text>
+  <line class="wire" x1="106" y1="223" x2="150" y2="223"/><line class="wire" x1="106" y1="251" x2="150" y2="251"/>
+  <line class="wire" x1="150" y1="223" x2="150" y2="251"/><circle cx="150" cy="237" r="4" fill="#111"/>
+  <line class="wire" x1="150" y1="237" x2="200" y2="237"/>
+  <text x="204" y="241" class="cap">w_ij·Gscale</text>
+  <text x="60" y="292" class="cap">G+_ij = G0 + max(0, w_ij)·Gscale,  G−_ij = G0 + max(0, −w_ij)·Gscale</text>
+  <text x="60" y="310" class="cap">zero weight → both conductances sit at G0 and the cell sinks exactly 0 net current (balanced zero)</text>
+
+  <!-- Section 3: superposition of half-columns -->
+  <text x="60" y="350" class="lbl">3 · every column is an independent 0007 column, solved by superposition</text>
+  <text x="60" y="374" class="cap">a 4×4 array is 8 independent TIA half-columns (4 columns × G+ / G−). Each half-column is a</text>
+  <text x="60" y="392" class="cap">linear network sharing only the input sources and VREF, so each is solved in its own netlist and</text>
+  <text x="60" y="410" class="cap">combined:  Vout_j = Vm_j − Vp_j.  Columns are uncoupled by construction (verified 0.0e+00 V).</text>
+
+  <!-- Section 4: worked example -->
+  <text x="60" y="452" class="lbl">4 · hand-computable example (case 0, W_MIXED · u0)</text>
+  <text x="60" y="478" class="cap">u0 = [0.40, −0.30, 0.25, −0.20]  ·  row 0 of W_MIXED = [0.50, 0.25, −0.25, 0.50]</text>
+  <text x="60" y="500" class="eq">Vout_0 = 0.50·0.40 + 0.25·(−0.30) + (−0.25)·0.25 + 0.50·(−0.20) = −0.0375 V</text>
+  <text x="60" y="522" class="good">SPICE: −0.03725 V   ·   hand: −0.03750 V   ·   |err| = 2.5e-4 V (VCVS finite-gain, as in 0007)</text>
+
+  <!-- Section 5: behavioral equivalence -->
+  <text x="60" y="564" class="lbl">5 · behavioral equivalence: SPICE ↔ hand ↔ analog_llm tile</text>
+  <text x="60" y="588" class="cap">the CrossbarTile (16-bit conductance/converter quantization on the validated crossbar-column-v1 profile)</text>
+  <text x="60" y="606" class="cap">is the architecture simulator's model of this array. Over the 5-case × 4-output suite:</text>
+  <text x="60" y="630" class="cap">|SPICE − hand| worst 5.5e-4 V (rms 3.3e-4)  ·  |tile − hand| worst 3.8e-5 V (rms 2.8e-5)</text>
+  <text x="60" y="648" class="cap">|SPICE − tile| worst 5.2e-4 V (rms 3.1e-4) — tile error is its quantization floor, well under the</text>
+  <text x="60" y="666" class="cap">frozen R3 budget of 2e-3 V; the tile is a faithful behavioral model of the SPICE array.</text>
+
+  <!-- Section 6: currents, headroom, settling -->
+  <text x="60" y="706" class="lbl">6 · currents, headroom, settling — what is claimed vs recorded</text>
+  <text x="60" y="730" class="cap">column currents  Iplus_j = Σ_i u_i·G+_ij (SPICE-recovered via (VREF − Vp_j)/Rf): worst |err| 1.8e-7 A</text>
+  <text x="60" y="748" class="cap">largest cell current 1.0e-4 A (feasibility bound |u|_max·(G0+Gscale))  ·  max |Vout| 0.50 V ≪ 2.5 V headroom</text>
+  <text x="60" y="766" class="warn">virtual ground within 3.0e-4 V of VREF; the 0012 half-stage rail finding carries over (|u| ≤ 1.25 V for |w|=1)</text>
+  <text x="60" y="784" class="warn">settling at assumed CL = 1 pF: recorded data point only (22.7 ns SPICE vs 13.2 ns single-pole bound) — the</text>
+  <text x="60" y="802" class="warn">ideal VCVS has no bandwidth model, so it is NOT a settling claim (bounded settling is the 0014 gate item)</text>
+  <text x="60" y="830" class="cap">evidence classes: SPICE MVM/currents = spice · tile equivalence = derived · settling = assumed (extract only, fails closed)</text>
+</svg>
