@@ -1,0 +1,131 @@
+{
+  "blockers": [
+    {
+      "detail": {
+        "drift_exponent_nu_min": "temporal drift",
+        "iv_non_linearity_beta": "I-V non-linearity",
+        "mvm_error_16x16_1ohm_pct": "IR drop",
+        "p_stuck_hrs": "stuck-at-HRS faults",
+        "p_stuck_lrs": "stuck-at-LRS faults",
+        "sigma_prog_rel": "programming variation",
+        "sigma_read_rel": "read variation"
+      },
+      "kind": "unconsumed_crossbar_nonidealities",
+      "required_action": "Apply each mechanism in the tile/accelerator path from its profile field, with deterministic attribution and boundary tests."
+    },
+    {
+      "detail": "crossbar-v1 has 12 assumed fields and calibration is SYSTEM_SIMULATED on the same samples used for fitting",
+      "kind": "physical_claim_not_supported",
+      "required_action": "Keep physical_claim=False until assumed inputs are replaced or the claim is narrowed to supported evidence; add held-out/corner calibration evidence."
+    }
+  ],
+  "claim_level": "SYSTEM_SIMULATED",
+  "criteria": {
+    "all_required_crossbar_nonidealities_consumed": false,
+    "partial_sum_rules_explicit": true,
+    "physical_claim_supported": false,
+    "profile_driven_calibration": true,
+    "small_array_spice_budget": true,
+    "three_profile_configuration": true
+  },
+  "evidence": {
+    "calibration": {
+      "calibrated_max_abs_error_v": 0.15012364964422886,
+      "calibrated_rms_error_v": 0.07579926571408264,
+      "correction_gain": 0.9795135153093725,
+      "correction_offset_v": 0.0,
+      "profile": "device_profiles/tile-calibration-v1.json",
+      "raw_max_abs_error_v": 0.15012364964422886,
+      "raw_rms_error_v": 0.07983575386745602,
+      "rms_improvement_pct": 5.05599052784644,
+      "same_sample_fit_and_evaluation": true
+    },
+    "partial_sums": {
+      "adc_bits": 4,
+      "examples": {
+        "kc_16": 8,
+        "kc_4": 6,
+        "kc_64": 10
+      },
+      "formula": "B_acc >= B_adc + ceil(log2(K_c))",
+      "kc_16_mean_error_pct": 16.297426613331023
+    },
+    "small_array_spice": {
+      "budget_v": 0.15625,
+      "case_count": 10,
+      "max_abs_error_v": 0.15012364964422886,
+      "output_sample_count": 30,
+      "passed": true,
+      "rms_error_v": 0.07983575386745602
+    }
+  },
+  "formulas": {
+    "accumulator_bits": "B_acc >= B_ADC + ceil(log2(K_c))",
+    "calibration_apply": "y_cal = clip(a_ls,[a_min,a_max])*y_raw",
+    "calibration_gain": "a_ls = sum(y_raw*y_spice)/sum(y_raw^2)",
+    "partial_sum": "y_i = sum_(j=0)^(K_c-1) TileForward(W_ij,x_j)",
+    "tile_spice_acceptance": "E_max <= E_ADC_budget",
+    "tile_spice_error": "E_max = max_(c,j) |V_tile[c,j] - V_spice[c,j]|"
+  },
+  "gate": "R5 \u2014 Profile-driven physical tile",
+  "gate_status": "NOT_MET",
+  "generator": "verification/reports/generate_tile_v1_summary.py",
+  "name": "tile-v1-r5-validation-summary",
+  "profile_coverage": {
+    "assumed_fields": [
+      "c_cell_ff",
+      "c_wire_ff",
+      "drift_exponent_nu_max",
+      "drift_exponent_nu_min",
+      "gmax_s",
+      "gmin_s",
+      "iv_non_linearity_beta",
+      "p_stuck_hrs",
+      "p_stuck_lrs",
+      "r_wire_ohm",
+      "sigma_prog_rel",
+      "sigma_read_rel"
+    ],
+    "configuration_consumed_fields": [
+      "g0_s",
+      "gscale_s_per_w"
+    ],
+    "crossbar_field_count": 35,
+    "required_unconsumed_nonidealities": {
+      "drift_exponent_nu_min": "temporal drift",
+      "iv_non_linearity_beta": "I-V non-linearity",
+      "mvm_error_16x16_1ohm_pct": "IR drop",
+      "p_stuck_hrs": "stuck-at-HRS faults",
+      "p_stuck_lrs": "stuck-at-LRS faults",
+      "sigma_prog_rel": "programming variation",
+      "sigma_read_rel": "read variation"
+    },
+    "unconsumed_field_count": 33
+  },
+  "schema_version": 1,
+  "sources": {
+    "crosscheck": "passed; report values agree with named artifacts within 1e-12 relative",
+    "extracts": [
+      "verification/circuit/results/physical-tile-0021-extract.json",
+      "verification/circuit/results/partial-sums-0022-extract.json",
+      "verification/calibration/results/tile-calibration-v1-extract.json"
+    ],
+    "profiles": [
+      "device_profiles/crossbar-v1.json",
+      "device_profiles/dac-r2r-v1.json",
+      "device_profiles/adc-sar-v1.json",
+      "device_profiles/tile-calibration-v1.json"
+    ]
+  },
+  "tile_configuration": {
+    "adc_bits": 4,
+    "dac_bits": 4,
+    "g_bits": 4,
+    "gmax_s": 0.0001,
+    "gmin_s": 1e-05,
+    "physical_claim": false,
+    "vin_max_v": 2.3437499999999996,
+    "vout_max_v": 2.5
+  },
+  "verdict": "R5 report is frozen, but gate exit is NOT_MET: the current tile is a profile-configured behavioral converter/MVM model, not yet a calibrated abstraction of all proposed crossbar-v1 nonidealities."
+}

@@ -124,4 +124,5 @@ python verification/calibration/diagrams/make_tile_calibration_diagram.py
 ```
 Dữ liệu cam kết: [`verification/circuit/results/physical-tile-0021-extract.json`](../../verification/circuit/results/physical-tile-0021-extract.json).
 Hồ sơ hiệu chuẩn: [`device_profiles/tile-calibration-v1.json`](../../device_profiles/tile-calibration-v1.json).
-Kiểm thử tự động: [`tests/test_physical_tile_contract.py`](../../tests/test_physical_tile_contract.py) và [`tests/test_tile_calibration.py`](../../tests/test_tile_calibration.py).
+Báo cáo R5 đóng băng: [`verification/reports/tile-v1-r5-validation-summary.md`](../../verification/reports/tile-v1-r5-validation-summary.md) (`NOT_MET`: các cơ chế `crossbar-v1` chưa được tiêu thụ vẫn là trở ngại rõ ràng).
+Kiểm thử tự động: [`tests/test_physical_tile_contract.py`](../../tests/test_physical_tile_contract.py), [`tests/test_tile_calibration.py`](../../tests/test_tile_calibration.py), và [`tests/test_tile_v1_report.py`](../../tests/test_tile_v1_report.py).

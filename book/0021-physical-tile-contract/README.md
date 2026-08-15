@@ -124,4 +124,5 @@ python verification/calibration/diagrams/make_tile_calibration_diagram.py
 ```
 Committed extract: [`verification/circuit/results/physical-tile-0021-extract.json`](../../verification/circuit/results/physical-tile-0021-extract.json).
 Calibration profile: [`device_profiles/tile-calibration-v1.json`](../../device_profiles/tile-calibration-v1.json).
-Tested by: [`tests/test_physical_tile_contract.py`](../../tests/test_physical_tile_contract.py) and [`tests/test_tile_calibration.py`](../../tests/test_tile_calibration.py).
+Frozen R5 report: [`verification/reports/tile-v1-r5-validation-summary.md`](../../verification/reports/tile-v1-r5-validation-summary.md) (`NOT_MET`: unconsumed `crossbar-v1` mechanisms remain explicit blockers).
+Tested by: [`tests/test_physical_tile_contract.py`](../../tests/test_physical_tile_contract.py), [`tests/test_tile_calibration.py`](../../tests/test_tile_calibration.py), and [`tests/test_tile_v1_report.py`](../../tests/test_tile_v1_report.py).
