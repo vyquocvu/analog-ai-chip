@@ -1,0 +1,243 @@
+{
+  "evidence_class": "spice",
+  "fields": {
+    "c_cell_ff": {
+      "evidence_class": "assumed",
+      "note": "1T1R cell junction and gate parasitic capacitance",
+      "unit": "fF",
+      "value": 1.0
+    },
+    "c_seg_ff": {
+      "evidence_class": "derived",
+      "note": "total segment capacitance per crosspoint (c_wire + c_cell)",
+      "unit": "fF",
+      "value": 1.5
+    },
+    "c_wire_ff": {
+      "evidence_class": "assumed",
+      "note": "interconnect wire parasitic capacitance per cell pitch",
+      "unit": "fF",
+      "value": 0.5
+    },
+    "drift_exponent_nu_max": {
+      "evidence_class": "assumed",
+      "note": "temporal drift exponent at LRS state",
+      "unit": "1",
+      "value": 0.06
+    },
+    "drift_exponent_nu_min": {
+      "evidence_class": "assumed",
+      "note": "temporal drift exponent at HRS state",
+      "unit": "1",
+      "value": 0.02
+    },
+    "dynamic_range_ratio": {
+      "evidence_class": "derived",
+      "note": "gmax / gmin ratio",
+      "unit": "1",
+      "value": 10.0
+    },
+    "f_max_ghz": {
+      "evidence_class": "spice",
+      "note": "maximum MVM operating frequency bounded by 1% RC settling time on 16x16 tile",
+      "unit": "GHz",
+      "value": 48.78048780487805
+    },
+    "full_scale_weight_std": {
+      "evidence_class": "derived",
+      "note": "effective weight standard deviation at |w|=1 under programming and read noise",
+      "unit": "1",
+      "value": 0.035311663515712674
+    },
+    "g0_s": {
+      "evidence_class": "derived",
+      "note": "balanced-zero HRS conductance for differential pair",
+      "unit": "S",
+      "value": 0.00001
+    },
+    "gmax_s": {
+      "evidence_class": "assumed",
+      "note": "LRS programmed conductance (10 kOhm)",
+      "unit": "S",
+      "value": 0.0001
+    },
+    "gmin_s": {
+      "evidence_class": "assumed",
+      "note": "HRS leakage conductance floor (100 kOhm)",
+      "unit": "S",
+      "value": 0.00001
+    },
+    "gscale_s_per_w": {
+      "evidence_class": "derived",
+      "note": "weight to conductance span (gmax - gmin)",
+      "unit": "S",
+      "value": 0.00009
+    },
+    "iv_non_linearity_beta": {
+      "evidence_class": "assumed",
+      "note": "cubic sub-Ohmic I-V non-linearity coefficient",
+      "unit": "1/V^2",
+      "value": 1.0
+    },
+    "max_drift_loss_1year_pct": {
+      "evidence_class": "derived",
+      "note": "maximum conductance decay on LRS after 1 year retention",
+      "unit": "%",
+      "value": 64.51037856619328
+    },
+    "max_iv_distortion_pct": {
+      "evidence_class": "derived",
+      "note": "peak current deviation from linear Ohm law at v_read_max (0.25 V)",
+      "unit": "%",
+      "value": 6.25
+    },
+    "mvm_error_16x16_1ohm_pct": {
+      "evidence_class": "derived",
+      "note": "relative MVM error due to IR drop on 16x16 tile with 1.0 Ohm wire resistance",
+      "unit": "%",
+      "value": 1.8697587286187805
+    },
+    "mvm_error_1pct_faults_pct": {
+      "evidence_class": "derived",
+      "note": "relative MVM error on 32x32 array at 1.0% total stuck-at defect rate",
+      "unit": "%",
+      "value": 9.209711552094822
+    },
+    "mvm_error_32x32_1ohm_pct": {
+      "evidence_class": "derived",
+      "note": "relative MVM error due to IR drop on 32x32 tile with 1.0 Ohm wire resistance",
+      "unit": "%",
+      "value": 6.772637931593399
+    },
+    "mvm_error_64x64_1ohm_pct": {
+      "evidence_class": "derived",
+      "note": "relative MVM error due to IR drop on 64x64 tile with 1.0 Ohm wire resistance",
+      "unit": "%",
+      "value": 21.840779438055094
+    },
+    "output_headroom_down_v": {
+      "evidence_class": "derived",
+      "note": "VREF - 0 V, assumes 0 V rail",
+      "unit": "V",
+      "value": 2.5
+    },
+    "output_headroom_up_v": {
+      "evidence_class": "derived",
+      "note": "VDD - VREF, assumes VDD=5 V rail",
+      "unit": "V",
+      "value": 2.5
+    },
+    "p_stuck_hrs": {
+      "evidence_class": "assumed",
+      "note": "stuck-at-HRS (open defect) probability",
+      "unit": "1",
+      "value": 0.0255
+    },
+    "p_stuck_lrs": {
+      "evidence_class": "assumed",
+      "note": "stuck-at-LRS (short defect) probability",
+      "unit": "1",
+      "value": 0.0045
+    },
+    "r_wire_ohm": {
+      "evidence_class": "assumed",
+      "note": "interconnect wire resistance per segment",
+      "unit": "ohm",
+      "value": 1.0
+    },
+    "recommended_max_tile_dim": {
+      "evidence_class": "derived",
+      "note": "recommended physical tile dimension limit to keep IR drop error below 10%",
+      "unit": "cells",
+      "value": 32
+    },
+    "rf_nominal_ohm": {
+      "evidence_class": "derived",
+      "note": "transimpedance feedback resistor",
+      "unit": "ohm",
+      "value": 10000.0
+    },
+    "sigma_prog_rel": {
+      "evidence_class": "assumed",
+      "note": "relative standard deviation of programming/write noise",
+      "unit": "1",
+      "value": 0.03
+    },
+    "sigma_read_rel": {
+      "evidence_class": "assumed",
+      "note": "relative standard deviation of read/temporal noise",
+      "unit": "1",
+      "value": 0.01
+    },
+    "sigma_total_rel": {
+      "evidence_class": "derived",
+      "note": "total relative conductance standard deviation",
+      "unit": "1",
+      "value": 0.03162277660168379
+    },
+    "span_s": {
+      "evidence_class": "derived",
+      "note": "conductance dynamic range span (gmax - gmin)",
+      "unit": "S",
+      "value": 0.00009
+    },
+    "t_rise_ps": {
+      "evidence_class": "spice",
+      "note": "10% to 90% rise time on 16x16 RC crossbar ladder",
+      "unit": "ps",
+      "value": 16.5
+    },
+    "t_settle_1pct_ps": {
+      "evidence_class": "spice",
+      "note": "1% settling time on 16x16 RC crossbar ladder",
+      "unit": "ps",
+      "value": 20.5
+    },
+    "v_read_max_v": {
+      "evidence_class": "derived",
+      "note": "maximum non-disturb linear read voltage",
+      "unit": "V",
+      "value": 0.25
+    },
+    "vref_v": {
+      "evidence_class": "derived",
+      "note": "virtual ground reference potential",
+      "unit": "V",
+      "value": 2.5
+    },
+    "zero_weight_noise_floor_std": {
+      "evidence_class": "derived",
+      "note": "effective weight standard deviation at w=0 under noise",
+      "unit": "1",
+      "value": 0.004969039949999532
+    }
+  },
+  "name": "crossbar-v1",
+  "provenance": {
+    "analysis": "transient, op, monte_carlo",
+    "command": "python book/0020-crossbar-v1/crossbar_v1.py",
+    "conditions": {
+      "backend": "ngspice / NumPy nodal solver",
+      "c_seg_ff": 1.5,
+      "gmax_uS": 100.0,
+      "gmin_uS": 10.0,
+      "r_wire_ohm": 1.0,
+      "supply_v": 5.0,
+      "temperature_c": "nominal (no temperature model)",
+      "v_read_max_v": 0.25,
+      "vref_v": 2.5
+    },
+    "limitations": "2D crossbar array models include distributed wire resistance, parasitic capacitance, programming/read variation, temporal drift, stuck defects, and sub-Ohmic I-V non-linearity. Array sizes above 32x32 suffer significant IR drop (>6.7%). High-frequency MVM (>500 MHz) is bottlenecked by peripheral converters (DAC/ADC/TIA) rather than intrinsic crossbar RC settling.",
+    "sources": [
+      "book/0015-conductance-model/conductance_model.py (conductance compact model & discretization)",
+      "book/0016-variation/variation.py (programming & read variation Monte Carlo)",
+      "book/0017-ir-drop/ir_drop.py (interconnect line resistance & IR drop scaling)",
+      "book/0018-parasitics/parasitics.py (parasitic capacitance & transient settling)",
+      "book/0019-drift-faults/drift_faults.py (conductance drift, stuck faults & non-linearity)"
+    ],
+    "tool": "ngspice / NumPy / PySpice"
+  },
+  "schema_version": 1,
+  "status": "VARIATION_SIMULATED",
+  "version": "0.1.0"
+}

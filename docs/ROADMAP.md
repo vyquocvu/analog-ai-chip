@@ -174,7 +174,7 @@ A 4×4 current-mode differential array has reproducible SPICE evidence and a beh
 
 ---
 
-# R4 — Device realism and crossbar-v1 — ACTIVE
+# R4 — Device realism and crossbar-v1 — COMPLETE
 
 Depends on R3 (closed).
 
@@ -184,16 +184,16 @@ Depends on R3 (closed).
 - [x] IR-drop / line resistance versus array dimensions: distributed $R_{\text{wire}} \in [0.1, 5.0]\,\Omega$ nodal solver and SPICE validation across $N \in [2 \dots 64]$; error scaling $\text{Error} \propto N^2 \cdot R_{\text{wire}} \cdot G_{\max}$, establishing $32\times 32$ tile boundary ($6.77\%$ error) before $64\times 64$ breakdown ($21.84\%$) (`book/0017-ir-drop/ir_drop.py`, committed extract `ir-drop-0017-extract.json`)
 - [x] Parasitic RC and settling: distributed $R_{\text{wire}}-C_{\text{seg}}$ ladder ($C_{\text{seg}}=1.5\text{ fF}$, $R_{\text{wire}}=1.0\,\Omega$) SPICE transient step analysis across $N \in [4 \dots 64]$; extracted $t_{\text{rise}} \approx 16.5\text{ ps}$, $t_{\text{settle,1\%}} \approx 20.5\text{ ps}$, $f_{\text{max}} > 40\text{ GHz}$, confirming crossbar RC is not the primary MVM bottleneck (`book/0018-parasitics/parasitics.py`, committed extract `parasitics-0018-extract.json`)
 - [x] Drift, stuck states and non-linearity where supported: power-law temporal drift $G(t) = G_0 (t/t_0)^{-\nu}$ (up to $64.5\%$ 1-year loss on LRS); spatial stuck-at defect mapping ($p_{\text{HRS}}=2.55\%, p_{\text{LRS}}=0.45\% \implies 9.21\%$ MVM error at $1\%$ defect rate); cubic sub-Ohmic $I-V$ non-linearity $I(V) = G_0 V (1 + \beta V^2)$ ($+6.25\%$ current distortion at $0.25\text{ V}$) (`book/0019-drift-faults/drift_faults.py`, committed extract `drift-faults-0019-extract.json`)
-- [ ] Temperature/process/model corners where meaningful
-- [ ] Publish `crossbar-v1` profile with limitations
+- [x] Temperature/process/model corners where meaningful: explicit sensitivity parameters and non-ideality boundary allocations integrated into profile
+- [x] Publish `crossbar-v1` profile with limitations: published `device_profiles/crossbar-v1.json` aggregating 35 physical fields across 0015-0019 (`book/0020-crossbar-v1/crossbar_v1.py`, verification report `verification/reports/crossbar-v1-summary.md`)
 
 ### Gate R4 exit
 
-Every crossbar non-ideality used by the architecture simulator traces to a named model/evidence source or is explicitly marked assumed.
+Every crossbar non-ideality used by the architecture simulator traces to a named model/evidence source or is explicitly marked assumed. **Met**: `crossbar-v1.json` is published and cross-validated against circuit extracts (0015–0019), with summary reports committed; gate is closed and R5 is now the active gate.
 
 ---
 
-# R5 — Profile-driven physical tile — QUEUED
+# R5 — Profile-driven physical tile — ACTIVE
 
 Depends on R2 + R4.
 

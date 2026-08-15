@@ -1,0 +1,105 @@
+{
+  "schema_version": "0.1.0",
+  "name": "crossbar-v1-verification-summary",
+  "profile": "device_profiles/crossbar-v1.json",
+  "status": "VARIATION_SIMULATED",
+  "evidence_class": "spice",
+  "provenance": {
+    "analysis": "transient, op, monte_carlo",
+    "command": "python book/0020-crossbar-v1/crossbar_v1.py",
+    "conditions": {
+      "backend": "ngspice / NumPy nodal solver",
+      "c_seg_ff": 1.5,
+      "gmax_uS": 100.0,
+      "gmin_uS": 10.0,
+      "r_wire_ohm": 1.0,
+      "supply_v": 5.0,
+      "temperature_c": "nominal (no temperature model)",
+      "v_read_max_v": 0.25,
+      "vref_v": 2.5
+    },
+    "limitations": "2D crossbar array models include distributed wire resistance, parasitic capacitance, programming/read variation, temporal drift, stuck defects, and sub-Ohmic I-V non-linearity. Array sizes above 32x32 suffer significant IR drop (>6.7%). High-frequency MVM (>500 MHz) is bottlenecked by peripheral converters (DAC/ADC/TIA) rather than intrinsic crossbar RC settling.",
+    "sources": [
+      "book/0015-conductance-model/conductance_model.py (conductance compact model & discretization)",
+      "book/0016-variation/variation.py (programming & read variation Monte Carlo)",
+      "book/0017-ir-drop/ir_drop.py (interconnect line resistance & IR drop scaling)",
+      "book/0018-parasitics/parasitics.py (parasitic capacitance & transient settling)",
+      "book/0019-drift-faults/drift_faults.py (conductance drift, stuck faults & non-linearity)"
+    ],
+    "tool": "ngspice / NumPy / PySpice"
+  },
+  "evidence_ledger": [
+    {
+      "parameter": "Conductance Dynamic Range (gmax/gmin)",
+      "field": "dynamic_range_ratio",
+      "value": 10.0,
+      "unit": "1",
+      "evidence_class": "derived",
+      "source": "device_profiles/crossbar-v1.json#/fields/dynamic_range_ratio"
+    },
+    {
+      "parameter": "Zero Weight Noise Floor (std)",
+      "field": "zero_weight_noise_floor_std",
+      "value": 0.004969039949999532,
+      "unit": "1",
+      "evidence_class": "derived",
+      "source": "device_profiles/crossbar-v1.json#/fields/zero_weight_noise_floor_std"
+    },
+    {
+      "parameter": "Full Scale Weight Std Dev",
+      "field": "full_scale_weight_std",
+      "value": 0.035311663515712674,
+      "unit": "1",
+      "evidence_class": "derived",
+      "source": "device_profiles/crossbar-v1.json#/fields/full_scale_weight_std"
+    },
+    {
+      "parameter": "MVM Error @ 16x16 (1.0 Ohm)",
+      "field": "mvm_error_16x16_1ohm_pct",
+      "value": 1.8697587286187805,
+      "unit": "%",
+      "evidence_class": "derived",
+      "source": "device_profiles/crossbar-v1.json#/fields/mvm_error_16x16_1ohm_pct"
+    },
+    {
+      "parameter": "MVM Error @ 32x32 (1.0 Ohm)",
+      "field": "mvm_error_32x32_1ohm_pct",
+      "value": 6.772637931593399,
+      "unit": "%",
+      "evidence_class": "derived",
+      "source": "device_profiles/crossbar-v1.json#/fields/mvm_error_32x32_1ohm_pct"
+    },
+    {
+      "parameter": "1% Settling Time (16x16)",
+      "field": "t_settle_1pct_ps",
+      "value": 20.5,
+      "unit": "ps",
+      "evidence_class": "spice",
+      "source": "device_profiles/crossbar-v1.json#/fields/t_settle_1pct_ps"
+    },
+    {
+      "parameter": "Max Retention Drift Loss (1 Year)",
+      "field": "max_drift_loss_1year_pct",
+      "value": 64.51037856619328,
+      "unit": "%",
+      "evidence_class": "derived",
+      "source": "device_profiles/crossbar-v1.json#/fields/max_drift_loss_1year_pct"
+    },
+    {
+      "parameter": "MVM Error @ 1.0% Stuck Faults",
+      "field": "mvm_error_1pct_faults_pct",
+      "value": 9.209711552094822,
+      "unit": "%",
+      "evidence_class": "derived",
+      "source": "device_profiles/crossbar-v1.json#/fields/mvm_error_1pct_faults_pct"
+    },
+    {
+      "parameter": "Peak I-V Non-Linear Distortion",
+      "field": "max_iv_distortion_pct",
+      "value": 6.25,
+      "unit": "%",
+      "evidence_class": "derived",
+      "source": "device_profiles/crossbar-v1.json#/fields/max_iv_distortion_pct"
+    }
+  ]
+}

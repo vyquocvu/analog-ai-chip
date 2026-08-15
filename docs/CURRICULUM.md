@@ -75,13 +75,13 @@ Chapter numbering below is canonical. Existing chapters keep their numbers; futu
 | 0017 | IR drop | line resistance error quantified versus array dimensions | done |
 | 0018 | Parasitics | RC/settling impact extracted from circuit model | done |
 | 0019 | Drift, stuck states and non-linearity | each supported mechanism modeled separately or explicitly excluded | done |
-| 0020 | Crossbar-v1 profile | publish a validated profile with evidence classes, conditions and limitations | next |
+| 0020 | Crossbar-v1 profile | publish a validated profile with evidence classes, conditions and limitations | done |
 
 ## Part VI — Profile-driven accelerator architecture
 
-| # | Chapter | Verification target |
-|---|---|---|
-| 0021 | Physical tile contract | behavioral tile consumes validated DAC/ADC/crossbar profiles |
+| # | Chapter | Verification target | Status |
+|---|---|---|---|
+| 0021 | Physical tile contract | behavioral tile consumes validated DAC/ADC/crossbar profiles | next |
 | 0022 | Partial sums | tiled result matches dense reference within profile-derived error |
 | 0023 | Scheduler / temporal reuse | parallelism and rewrites are explicit and deterministic |
 | 0024 | SRAM / buffers | capacity and traffic are accounted for |

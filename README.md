@@ -30,20 +30,21 @@ physical feasibility report
 
 ## Current status
 
-The repository has closed the first four evidence gates:
+The repository has closed the first five evidence gates:
 
 ```text
 R0 functional + circuit foundation ── COMPLETE
 R1 circuit → profile → simulator   ── COMPLETE  (crossbar-column-v1)
 R2 converter signal path           ── COMPLETE  (dac-r2r-v1, adc-sar-v1)
 R3 small crossbar arrays           ── COMPLETE  (0012 2×2 + 0013 4×4, behavioral-equivalence report)
+R4 device realism + crossbar-v1    ── COMPLETE  (crossbar-v1, 2D mesh, variation, IR drop, RC settling, drift/faults)
 ```
 
-The circuit → profile → simulator chain is closed: `device_profiles/crossbar-column-v1.json` is extracted from SPICE solves of the 0007 current-mode differential column, and `analog_llm` builds its tiles through `profile_adapter` — no hand-copied physical constants. The converter path is closed by the SPICE-verified R-2R DAC (`dac-r2r-v1`) and SAR ADC (`adc-sar-v1`) profiles, consumed through `converter_config_from_profiles`.
+The circuit → profile → simulator chain is closed: `device_profiles/crossbar-column-v1.json` and `device_profiles/crossbar-v1.json` are extracted from SPICE solves and distributed 2D nodal analyses, and `analog_llm` builds its tiles through `profile_adapter` — no hand-copied physical constants. The converter path is closed by the SPICE-verified R-2R DAC (`dac-r2r-v1`) and SAR ADC (`adc-sar-v1`) profiles, consumed through `converter_config_from_profiles`.
 
-`book/0007-crossbar-column/` is the circuit chapter matching the current-mode differential conductance architecture modeled by `analog_llm`: conductance cells generate `I = V·G`, column currents sum, and TIA/differential readout produces the signed result.
+`book/0007-crossbar-column/` and `book/0020-crossbar-v1/` are the circuit chapters matching the current-mode differential conductance architecture modeled by `analog_llm`: conductance cells generate `I = V·G`, column currents sum, and TIA/differential readout produces the signed result.
 
-The **active roadmap gate is R4: device realism and crossbar-v1** — a programmable-conductance compact model with `gmin`/`gmax`/state resolution, variation, IR drop, parasitic settling and a published `crossbar-v1` profile. See [`docs/ROADMAP.md`](docs/ROADMAP.md).
+The **active roadmap gate is R5: profile-driven physical tile** — multi-tile partial sums, spatial scheduling, and SRAM/interconnect traffic accounting on calibrated device profiles. See [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
 ## Engineering hierarchy
 
@@ -111,6 +112,7 @@ See [`docs/SIMULATION_STACK.md`](docs/SIMULATION_STACK.md).
 | 0017 | IR drop and line resistance | done | `book/0017-ir-drop/` |
 | 0018 | Parasitic capacitance and RC settling | done | `book/0018-parasitics/` |
 | 0019 | Drift, stuck states and non-linearity | done | `book/0019-drift-faults/` |
+| 0020 | Crossbar-v1 profile and Gate R4 close | done | `book/0020-crossbar-v1/` |
 
 > **Tiếng Việt:** every chapter has a `README.vi.md` beside the English `README.md`.
 
@@ -119,23 +121,32 @@ See [`docs/SIMULATION_STACK.md`](docs/SIMULATION_STACK.md).
 A decoder-only transformer runs end to end in software. Dense matrix-vector operations are routed through simulated crossbar tiles; layer norm, softmax, GELU, residual/bias operations and embeddings remain digital.
 
 ```text
-tokens ─► embedding
-          └─► [LN ─► QKV ─► attention ─► out ─► LM]
-                    └► [LN ─► MLP up ─► GELU ─► MLP down]
-                                │
-                         dense linears via
-                     DAC → crossbar → ADC
+Prompt tokens
+     ↓
+Token embedding (digital table)
+     ↓
+┌────────────────────────────────────────────────────────┐
+│ Transformer layer × N                                  │
+│   ├── RMSNorm / LayerNorm (digital FP32)               │
+│   ├── QKV projection (analog CrossbarTiles)            │
+│   ├── Scaled dot-product attention + KV cache (digital)│
+│   ├── Output projection (analog CrossbarTiles)         │
+│   ├── Residual addition (digital FP32)                 │
+│   ├── RMSNorm / LayerNorm (digital FP32)               │
+│   ├── MLP / Feed-Forward up+gate (analog CrossbarTiles)│
+│   ├── GELU / SiLU activation (digital FP32)            │
+│   ├── MLP down projection (analog CrossbarTiles)       │
+│   └── Residual addition (digital FP32)                 │
+└────────────────────────────────────────────────────────┘
+     ↓
+Final norm + LM head (analog or digital)
+     ↓
+Greedy / top-p sampler → next token
 ```
 
-Existing transformer/LLM code is a functional architecture foundation. It is **not yet the source of physical truth**. Physical/system claims become eligible only when the simulator consumes validated profiles extracted from circuit/device evidence.
+## Track 3 — Device profiles (`device_profiles/`)
 
-```bash
-python scripts/run_llm_sim.py
-```
-
-## Device profiles and provenance
-
-`device_profiles/` is the bridge between circuit simulation and the architecture simulator.
+Every physical claim made by the simulator must consume a machine-readable profile derived from KiCad/ngspice/Xyce verification, a validated analytical derivation, or an explicitly stated sensitivity-study assumption.
 
 Evidence classes:
 
@@ -144,7 +155,7 @@ Evidence classes:
 - `derived` — calculated from traceable evidence;
 - `assumed` — sensitivity-study input only.
 
-The repository contains the validated SPICE-backed profiles `crossbar-column-v1`, `dac-r2r-v1` and `adc-sar-v1`, all consumed by `analog_llm` through `profile_adapter` (fail-closed: `assumed`/functional-only evidence cannot support a physical claim). The next profile milestone is `crossbar-v1` (device realism, roadmap R4), once small-array evidence exists.
+The repository contains the validated SPICE-backed profiles `crossbar-column-v1`, `crossbar-v1`, `dac-r2r-v1` and `adc-sar-v1`, all consumed by `analog_llm` through `profile_adapter` (fail-closed: `assumed`/functional-only evidence cannot support a physical claim). The next milestone is multi-tile architecture integration on calibrated profiles (roadmap R5).
 
 ## Verification evidence
 
