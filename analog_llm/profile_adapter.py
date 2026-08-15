@@ -102,6 +102,62 @@ def _load_converter_profile(
     return profile
 
 
+CROSSBAR_NONIDEALITY_FIELDS = frozenset(
+    {
+        "sigma_prog_rel",
+        "sigma_read_rel",
+        "p_stuck_hrs",
+        "p_stuck_lrs",
+        "drift_exponent_nu_min",
+        "drift_exponent_nu_max",
+        "iv_non_linearity_beta",
+        "r_wire_ohm",
+        "v_read_max_v",
+    }
+)
+
+
+def nonideality_config_from_profile(
+    profile: dict[str, Any] | str | Path,
+    *,
+    physical_claim: bool = False,
+    drift_time_s: float = 0.0,
+) -> dict[str, float]:
+    """Extract physical crossbar non-ideality parameters from a validated profile.
+
+    Returns a dict with float values for:
+    - ``sigma_prog_rel``
+    - ``sigma_read_rel``
+    - ``p_stuck_hrs``
+    - ``p_stuck_lrs``
+    - ``drift_exponent_nu_min``
+    - ``drift_exponent_nu_max``
+    - ``drift_time_s``
+    - ``iv_non_linearity_beta``
+    - ``v_read_max``
+    - ``r_wire_ohm``
+
+    Any field not present in the profile defaults to ``0.0`` (or ``0.25`` for ``v_read_max``).
+    """
+    if isinstance(profile, (str, Path)):
+        p = load_device_profile(profile, physical_claim=physical_claim)
+    else:
+        validate_device_profile(profile, physical_claim=physical_claim)
+        p = profile
+
+    fields = p.get("fields", {})
+    cfg: dict[str, float] = {}
+    for field_name in sorted(CROSSBAR_NONIDEALITY_FIELDS):
+        if field_name == "v_read_max_v":
+            cfg["v_read_max"] = float(fields[field_name]["value"]) if field_name in fields else 0.25
+        elif field_name in fields:
+            cfg[field_name] = float(fields[field_name]["value"])
+        else:
+            cfg[field_name] = 0.0
+    cfg["drift_time_s"] = float(drift_time_s)
+    return cfg
+
+
 def tile_config_from_profile(
     profile: dict[str, Any] | str | Path,
     *,
@@ -109,6 +165,8 @@ def tile_config_from_profile(
     dac_bits: int,
     adc_bits: int,
     physical_claim: bool = True,
+    include_nonidealities: bool = False,
+    drift_time_s: float = 0.0,
 ) -> dict[str, Any]:
     """Return ``CrossbarTile`` kwargs derived from a validated profile.
 
@@ -141,7 +199,7 @@ def tile_config_from_profile(
             float(fields["output_headroom_up_v"]["value"]),
             float(fields["output_headroom_down_v"]["value"]),
         )
-        return {
+        cfg = {
             "g_bits": int(g_bits),
             "dac_bits": int(dac_bits),
             "adc_bits": int(adc_bits),
@@ -150,6 +208,13 @@ def tile_config_from_profile(
             "vin_max": headroom,
             "vout_max": headroom,
         }
+        if include_nonidealities:
+            cfg.update(
+                nonideality_config_from_profile(
+                    profile, physical_claim=physical_claim, drift_time_s=drift_time_s
+                )
+            )
+        return cfg
 
     # Functional reference layout (dac/crossbar/adc sections, ideal.json).
     return _config_from_sections(profile, g_bits=g_bits, dac_bits=dac_bits, adc_bits=adc_bits)
@@ -194,6 +259,9 @@ def build_tile_factory(
     dac_bits: int,
     adc_bits: int,
     physical_claim: bool = True,
+    include_nonidealities: bool = False,
+    drift_time_s: float = 0.0,
+    **extra_tile_kwargs: Any,
 ) -> Callable[[], CrossbarTile]:
     """Return a deterministic ``() -> CrossbarTile`` factory for the accelerator.
 
@@ -206,7 +274,10 @@ def build_tile_factory(
         dac_bits=dac_bits,
         adc_bits=adc_bits,
         physical_claim=physical_claim,
+        include_nonidealities=include_nonidealities,
+        drift_time_s=drift_time_s,
     )
+    kwargs.update(extra_tile_kwargs)
 
     def factory() -> CrossbarTile:
         return CrossbarTile(rows, cols, **kwargs)
@@ -223,6 +294,9 @@ def build_tile_factory_from_converter_profiles(
     *,
     g_bits: int,
     physical_claim: bool = True,
+    include_nonidealities: bool = False,
+    drift_time_s: float = 0.0,
+    **extra_tile_kwargs: Any,
 ) -> Callable[[], CrossbarTile]:
     """Return a tile factory whose converter parameters come from the profiles.
 
@@ -238,12 +312,30 @@ def build_tile_factory_from_converter_profiles(
         dac_bits=1,  # overridden below; only gmin/gmax/g_bits are kept
         adc_bits=1,
         physical_claim=physical_claim,
+        include_nonidealities=include_nonidealities,
+        drift_time_s=drift_time_s,
     )
     converter = converter_config_from_profiles(
         dac_profile, adc_profile, physical_claim=physical_claim
     )
     kwargs = {"g_bits": base["g_bits"], "gmin": base["gmin"], "gmax": base["gmax"]}
+    if include_nonidealities:
+        for field_name in (
+            "sigma_prog_rel",
+            "sigma_read_rel",
+            "p_stuck_hrs",
+            "p_stuck_lrs",
+            "drift_exponent_nu_min",
+            "drift_exponent_nu_max",
+            "drift_time_s",
+            "iv_non_linearity_beta",
+            "v_read_max",
+            "r_wire_ohm",
+        ):
+            if field_name in base:
+                kwargs[field_name] = base[field_name]
     kwargs.update(converter)
+    kwargs.update(extra_tile_kwargs)
 
     def factory() -> CrossbarTile:
         return CrossbarTile(rows, cols, **kwargs)
