@@ -94,8 +94,8 @@ Chapter numbering below is canonical. Existing chapters keep their numbers; futu
 |---|---|---|---|
 | 0027 | Linear layer | one dense layer maps exactly to the accelerator contract | done |
 | 0028 | MLP | up/down projections preserve reference behavior within error budget | done |
-| 0029 | Q/K/V projections | transformer projections route through the analog path correctly | next |
-| 0030 | Attention boundary | static analog-friendly work and dynamic digital work are separated honestly |
+| 0029 | Q/K/V projections | transformer projections route through the analog path correctly | done |
+| 0030 | Attention boundary | static analog-friendly work and dynamic digital work are separated honestly | next |
 | 0031 | KV cache | dynamic state capacity and traffic are explicitly modeled |
 | 0032 | Transformer block | block-level error is attributable to named mechanisms |
 

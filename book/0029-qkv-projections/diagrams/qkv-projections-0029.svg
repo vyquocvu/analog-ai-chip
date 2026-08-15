@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 14px; font-weight: 700; }
+.box-text { font-size: 12px; fill: #334155; }
+.formula { font: 12px ui-monospace, monospace; fill: #1e293b; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Chapter 0029 — Q/K/V Attention Projections Mapping</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Fused packed QKV and output projections under crossbar-v1 non-idealities</text>
+
+<!-- Architecture Box -->
+<rect x="50" y="85" width="410" height="420" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="70" y="115" class="box-title" fill="#1d4ed8">1. Fused QKV &amp; Multi-Head Slicing</text>
+<text x="70" y="135" class="sub">TinyGPT Attention: d_model=64, 4 heads (d_head=16)</text>
+
+<rect x="70" y="155" width="370" height="95" rx="8" fill="white" stroke="#93c5fd"/>
+<text x="85" y="180" class="box-title" fill="#1e40af">Fused W_QKV Projection (192×64)</text>
+<text x="85" y="202" class="box-text">• 48 physical 16×16 tiles in 12×4 grid</text>
+<text x="85" y="222" class="box-text">• Shared activation broadcast to Query, Key, Value rows</text>
+<text x="85" y="240" class="sub">• Post-ADC calibration gain a* = 0.9795135</text>
+
+<rect x="70" y="265" width="370" height="95" rx="8" fill="#fefce8" stroke="#ca8a04"/>
+<text x="85" y="290" class="box-title" fill="#a16207">Output Projection W_O (64×64)</text>
+<text x="85" y="312" class="box-text">• 16 physical 16×16 tiles in 4×4 grid</text>
+<text x="85" y="332" class="box-text">• Maps concatenated context back to hidden state</text>
+<text x="85" y="350" class="sub">• Total static attention tiles: 48 + 16 = 64 tiles</text>
+
+<rect x="70" y="375" width="370" height="110" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="85" y="400" class="box-title">Multi-Head Slicing Equation</text>
+<text x="85" y="425" class="formula">Q_h = q[h·16 : (h+1)·16], K_h = k[h·16 : (h+1)·16]</text>
+<text x="85" y="450" class="formula">S_h = (Q_h · K_h^T) / sqrt(16)</text>
+<text x="85" y="472" class="sub">Logit Error Sensitivity: 77.77%</text>
+
+<!-- Projection Accuracy Box -->
+<rect x="500" y="85" width="410" height="420" rx="12" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="520" y="115" class="box-title" fill="#7e22ce">2. Projection Accuracy &amp; Cosine Similarity</text>
+<text x="520" y="135" class="sub">Per-head metrics under full crossbar-v1 non-idealities</text>
+
+<!-- Query & Key -->
+<rect x="520" y="155" width="370" height="150" rx="8" fill="white" stroke="#d8b4fe"/>
+<text x="535" y="180" class="box-title" fill="#6b21a8">Query &amp; Key Projection Accuracy</text>
+<text x="535" y="202" class="box-text">• Query L2 Error: 39.07% (SNR: 8.2 dB)</text>
+<text x="535" y="222" class="box-text">• Query Cosine Similarity: 0.9344</text>
+<text x="535" y="242" class="box-text">• Key L2 Error: 37.65% (SNR: 8.5 dB)</text>
+<text x="535" y="262" class="box-text">• Key Cosine Similarity: 0.9405</text>
+<text x="535" y="282" class="sub">Calibration reduces residual projection error by 2.5%</text>
+
+<!-- Value & Out -->
+<rect x="520" y="320" width="370" height="165" rx="8" fill="#f0fdf4" stroke="#86efac"/>
+<text x="535" y="345" class="box-title" fill="#166534">Value &amp; Output Projection Accuracy</text>
+<text x="535" y="370" class="box-text">• Value L2 Error: 46.96% (SNR: 6.6 dB)</text>
+<text x="535" y="390" class="box-text">• Value Cosine Similarity: 0.8973</text>
+<text x="535" y="410" class="box-title" fill="#15803d">• Output L2 Error: 56.13% (SNR: 5.0 dB)</text>
+<text x="535" y="430" class="box-text">• Output Cosine Similarity: 0.8851</text>
+<text x="535" y="455" class="formula">cos_sim = (y_pred · y_ref) / (||y_pred|| · ||y_ref||)</text>
+</svg>

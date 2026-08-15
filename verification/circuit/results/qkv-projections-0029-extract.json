@@ -1,0 +1,93 @@
+{
+  "chapter": "0029-qkv-projections",
+  "evaluations": {
+    "tinygpt_attention_4heads": {
+      "calibration_recovery_pct": 2.4777657113717777,
+      "d_head": 16,
+      "d_model": 64,
+      "k_metrics": {
+        "cosine_similarity": 0.9405229523264326,
+        "mae": 0.2218036544138634,
+        "max_abs_error": 0.7682849329116848,
+        "rel_l2_error_pct": 37.654654994200015,
+        "snr_db": 8.48362654420406
+      },
+      "logit_relative_error_pct": 77.76773745754097,
+      "model_name": "TinyGPT_Attention",
+      "num_heads": 4,
+      "o_metrics": {
+        "cosine_similarity": 0.88511807951915,
+        "mae": 0.37043870785119204,
+        "max_abs_error": 1.1465187045308394,
+        "rel_l2_error_pct": 56.1329181023445,
+        "snr_db": 5.015647602852516
+      },
+      "q_metrics": {
+        "cosine_similarity": 0.9343501023969882,
+        "mae": 0.2657138820155824,
+        "max_abs_error": 0.9601699009767461,
+        "rel_l2_error_pct": 39.067339179353425,
+        "snr_db": 8.163723338890893
+      },
+      "total_physical_tiles": 64,
+      "v_metrics": {
+        "cosine_similarity": 0.8972582272765299,
+        "mae": 0.2663116881068478,
+        "max_abs_error": 0.6373522212292659,
+        "rel_l2_error_pct": 46.95550028900964,
+        "snr_db": 6.56627055773228
+      }
+    },
+    "tinygpt_attention_8heads": {
+      "calibration_recovery_pct": 2.4777657113717777,
+      "d_head": 8,
+      "d_model": 64,
+      "k_metrics": {
+        "cosine_similarity": 0.9405229523264326,
+        "mae": 0.2218036544138634,
+        "max_abs_error": 0.7682849329116848,
+        "rel_l2_error_pct": 37.654654994200015,
+        "snr_db": 8.48362654420406
+      },
+      "logit_relative_error_pct": 70.3250985085023,
+      "model_name": "TinyGPT_8Heads",
+      "num_heads": 8,
+      "o_metrics": {
+        "cosine_similarity": 0.88511807951915,
+        "mae": 0.37043870785119204,
+        "max_abs_error": 1.1465187045308394,
+        "rel_l2_error_pct": 56.1329181023445,
+        "snr_db": 5.015647602852516
+      },
+      "q_metrics": {
+        "cosine_similarity": 0.9343501023969882,
+        "mae": 0.2657138820155824,
+        "max_abs_error": 0.9601699009767461,
+        "rel_l2_error_pct": 39.067339179353425,
+        "snr_db": 8.163723338890893
+      },
+      "total_physical_tiles": 64,
+      "v_metrics": {
+        "cosine_similarity": 0.8972582272765299,
+        "mae": 0.2663116881068478,
+        "max_abs_error": 0.6373522212292659,
+        "rel_l2_error_pct": 46.95550028900964,
+        "snr_db": 6.56627055773228
+      }
+    }
+  },
+  "formulas": {
+    "attention_score": "S_h = (Q_h * K_h^T) / sqrt(d_head)",
+    "fused_qkv": "[q; k; v] = a_star * sum(Tile_qkv(x))",
+    "multi_head_slice": "Q_h = q[h*d_head : (h+1)*d_head]",
+    "out_projection": "o = a_star * sum(Tile_out(context))"
+  },
+  "gate": "R7 \u2014 Transformer and LLM validation",
+  "provenance": {
+    "calibration_profile": "device_profiles/tile-calibration-v1.json",
+    "claim_level": "SYSTEM_SIMULATED",
+    "crossbar_profile": "device_profiles/crossbar-v1.json"
+  },
+  "schema_version": "0.1.0",
+  "title": "Q/K/V Attention Projections Mapping"
+}
