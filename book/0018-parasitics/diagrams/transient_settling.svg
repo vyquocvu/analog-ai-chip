@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" width="960" height="620" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="960" height="620" fill="#ffffff"/>
+  <text x="480" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#0f172a">Distributed RC Crossbar Transient Dynamics (0018)</text>
+  <text x="480" y="50" text-anchor="middle" font-size="12" fill="#64748b">R_wire = 1.0 Ohm, C_seg = 1.5 fF, Step = 0.25 V at t = 0.1 ns</text>
+
+  
+    <text x="480" y="60" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f172a">Panel 1: Step Response Waveforms I_out(t) vs Time across Array Sizes</text>
+    <line x1="90" y1="80" x2="870" y2="80" stroke="#e2e8f0" stroke-dasharray="4"/>
+    <line x1="90" y1="185.0" x2="870" y2="185.0" stroke="#e2e8f0" stroke-dasharray="4"/>
+    <line x1="90" y1="290" x2="870" y2="290" stroke="#334155" stroke-width="1.5"/>
+    <line x1="90" y1="80" x2="90" y2="290" stroke="#334155" stroke-width="1.5"/>
+    <text x="75" y="185.0" text-anchor="middle" transform="rotate(-90 75 185.0)" font-size="11" fill="#64748b">Output Current (uA)</text>
+    
+  
+    <text x="480" y="340" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f172a">Panel 2: 1% Settling Time (ps, Bars) and Max Frequency (GHz, Line) vs N</text>
+    <line x1="90" y1="360" x2="870" y2="360" stroke="#e2e8f0" stroke-dasharray="4"/>
+    <line x1="90" y1="465.0" x2="870" y2="465.0" stroke="#e2e8f0" stroke-dasharray="4"/>
+    <line x1="90" y1="570" x2="870" y2="570" stroke="#334155" stroke-width="1.5"/>
+    <line x1="90" y1="360" x2="90" y2="570" stroke="#334155" stroke-width="1.5"/>
+    <text x="75" y="465.0" text-anchor="middle" transform="rotate(-90 75 465.0)" font-size="11" fill="#64748b">Settling Time t_settle (ps)</text>
+    
+
+  <line x1="780" y1="90" x2="795" y2="90" stroke="#10b981" stroke-width="2"/> <text x="800" y="94" font-size="9" fill="#0f172a">N = 4</text> <line x1="780" y1="106" x2="795" y2="106" stroke="#3b82f6" stroke-width="2"/> <text x="800" y="110" font-size="9" fill="#0f172a">N = 8</text> <line x1="780" y1="122" x2="795" y2="122" stroke="#6366f1" stroke-width="2"/> <text x="800" y="126" font-size="9" fill="#0f172a">N = 16</text> <line x1="780" y1="138" x2="795" y2="138" stroke="#f97316" stroke-width="2"/> <text x="800" y="142" font-size="9" fill="#0f172a">N = 32</text> <line x1="780" y1="154" x2="795" y2="154" stroke="#ef4444" stroke-width="2"/> <text x="800" y="158" font-size="9" fill="#0f172a">N = 64</text>
+  
+<rect x="770" y="370" width="10" height="10" fill="#3b82f6" opacity="0.8"/>
+<text x="785" y="379" font-size="10" fill="#0f172a">1% Settling (ps)</text>
+<line x1="770" y1="395" x2="785" y2="395" stroke="#ea580c" stroke-width="2"/>
+<circle cx="778" cy="395" r="3" fill="#ea580c"/>
+<text x="790" y="398" font-size="10" fill="#ea580c">f_max (GHz)</text>
+
+  <polyline points="90.0,290.0 102.8,290.0 141.8,290.0 170.7,259.9 197.2,115.7 236.2,115.7 275.2,115.7 314.2,115.7 353.2,115.7 392.2,115.7 431.2,115.7 470.3,115.7 509.2,115.7 548.2,115.7 587.2,115.7 626.2,115.7 665.2,115.7 704.2,115.7 743.2,115.7 782.2,115.7 821.2,115.7 860.2,115.7" fill="none" stroke="#10b981" stroke-width="2"/> <polyline points="90.0,290.0 102.8,290.0 141.8,290.0 170.7,260.6 197.2,117.1 236.2,117.1 275.2,117.1 314.2,117.1 353.2,117.1 392.2,117.1 431.2,117.1 470.3,117.1 509.2,117.1 548.2,117.1 587.2,117.1 626.2,117.1 665.2,117.1 704.2,117.1 743.2,117.1 782.2,117.1 821.2,117.1 860.2,117.1" fill="none" stroke="#3b82f6" stroke-width="2"/> <polyline points="90.0,290.0 102.8,290.0 141.8,290.0 170.7,262.0 197.2,119.9 236.2,119.9 275.2,119.9 314.2,119.9 353.2,119.9 392.2,119.9 431.2,119.9 470.3,119.9 509.2,119.9 548.2,119.9 587.2,119.9 626.2,119.9 665.2,119.9 704.2,119.9 743.2,119.9 782.2,119.9 821.2,119.9 860.2,119.9" fill="none" stroke="#6366f1" stroke-width="2"/> <polyline points="90.0,290.0 102.8,290.0 141.8,290.0 170.7,266.9 197.2,129.0 236.2,129.0 275.2,129.0 314.2,129.0 353.2,129.0 392.2,129.0 431.2,129.0 470.3,129.0 509.2,129.0 548.2,129.0 587.2,129.0 626.2,129.0 665.2,129.0 704.2,129.0 743.2,129.0 782.2,129.0 821.2,129.0 860.2,129.0" fill="none" stroke="#f97316" stroke-width="2"/> <polyline points="90.0,290.0 102.8,290.0 141.8,290.0 170.7,277.4 197.2,153.5 236.2,153.5 275.2,153.5 314.2,153.5 353.2,153.5 392.2,153.5 431.2,153.5 470.3,153.5 509.2,153.5 548.2,153.5 587.2,153.5 626.2,153.5 665.2,153.5 704.2,153.5 743.2,153.5 782.2,153.5 821.2,153.5 860.2,153.5" fill="none" stroke="#ef4444" stroke-width="2"/> <text x="90.0" y="308.0" text-anchor="middle" font-size="10" fill="#475569">0.0 ns</text> <text x="246.0" y="308.0" text-anchor="middle" font-size="10" fill="#475569">0.2 ns</text> <text x="402.0" y="308.0" text-anchor="middle" font-size="10" fill="#475569">0.4 ns</text> <text x="558.0" y="308.0" text-anchor="middle" font-size="10" fill="#475569">0.6 ns</text> <text x="714.0" y="308.0" text-anchor="middle" font-size="10" fill="#475569">0.8 ns</text> <text x="870.0" y="308.0" text-anchor="middle" font-size="10" fill="#475569">1.0 ns</text> <rect x="76.0" y="430.0" width="28" height="140.0" fill="#3b82f6" opacity="0.8" rx="2"/> <circle cx="90.0" cy="430.0" r="4" fill="#ea580c"/> <text x="90.0" y="588.0" text-anchor="middle" font-size="10" fill="#475569">N=4</text> <rect x="271.0" y="430.0" width="28" height="140.0" fill="#3b82f6" opacity="0.8" rx="2"/> <circle cx="285.0" cy="430.0" r="4" fill="#ea580c"/> <text x="285.0" y="588.0" text-anchor="middle" font-size="10" fill="#475569">N=8</text> <rect x="466.0" y="426.5" width="28" height="143.5" fill="#3b82f6" opacity="0.8" rx="2"/> <circle cx="480.0" cy="438.5" r="4" fill="#ea580c"/> <text x="480.0" y="588.0" text-anchor="middle" font-size="10" fill="#475569">N=16</text> <rect x="661.0" y="419.5" width="28" height="150.5" fill="#3b82f6" opacity="0.8" rx="2"/> <circle cx="675.0" cy="454.4" r="4" fill="#ea580c"/> <text x="675.0" y="588.0" text-anchor="middle" font-size="10" fill="#475569">N=32</text> <rect x="856.0" y="405.5" width="28" height="164.5" fill="#3b82f6" opacity="0.8" rx="2"/> <circle cx="870.0" cy="482.1" r="4" fill="#ea580c"/> <text x="870.0" y="588.0" text-anchor="middle" font-size="10" fill="#475569">N=64</text> <polyline points="90.0,430.0 285.0,430.0 480.0,438.5 675.0,454.4 870.0,482.1" fill="none" stroke="#ea580c" stroke-width="2"/>
+</svg>

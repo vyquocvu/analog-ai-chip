@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" width="960" height="500" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <style>
+      .title { font-size: 20px; font-weight: bold; fill: #0f172a; }
+      .subtitle { font-size: 13px; fill: #64748b; }
+      .box { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 6; }
+      .box-blue { fill: #eff6ff; stroke: #3b82f6; stroke-width: 1.5; rx: 6; }
+      .box-purple { fill: #faf5ff; stroke: #a855f7; stroke-width: 1.5; rx: 6; }
+      .box-green { fill: #ecfdf5; stroke: #10b981; stroke-width: 1.5; rx: 6; }
+      .wire-r { stroke: #2563eb; stroke-width: 2; fill: none; }
+      .wire-c { stroke: #ea580c; stroke-width: 2; fill: none; }
+      .label-bold { font-size: 13px; font-weight: bold; fill: #0f172a; }
+      .label-sub { font-size: 11px; fill: #64748b; }
+      .math-box { font-family: 'Menlo', 'Consolas', monospace; font-size: 11px; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="500" fill="#ffffff"/>
+
+  <!-- Title Header -->
+  <text x="480" y="32" text-anchor="middle" class="title">Distributed RC Transmission Line &amp; Parasitic Capacitances (0018)</text>
+  <text x="480" y="52" text-anchor="middle" class="subtitle">Wordline/bitline parasitic capacitances (C_seg = C_wire + C_cell) governing transient settling</text>
+
+  <!-- Left: Schematic Container -->
+  <rect x="40" y="75" width="560" height="400" class="box"/>
+  <text x="55" y="100" class="label-bold">Distributed RC Ladder Transmission Line</text>
+
+  <!-- Wordline Input Step -->
+  <text x="55" y="145" class="math-box" font-weight="bold" fill="#2563eb">Step Input V_in(t)</text>
+  <line x1="140" y1="140" x2="170" y2="140" class="wire-r"/>
+
+  <!-- Step Icon -->
+  <path d="M 60 180 L 80 180 L 80 160 L 100 160" fill="none" stroke="#2563eb" stroke-width="2"/>
+  <text x="110" y="175" class="label-sub">20 ps edge</text>
+
+  <!-- Segment 0: R_wire + C_seg -->
+  <rect x="170" y="133" width="30" height="14" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" rx="2"/>
+  <text x="185" y="144" text-anchor="middle" class="math-box" font-size="9" fill="#2563eb">R_w</text>
+  <circle cx="215" cy="140" r="4" fill="#2563eb"/>
+
+  <!-- Row cap C_r -->
+  <line x1="215" y1="140" x2="215" y2="165" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="205" y1="165" x2="225" y2="165" stroke="#334155" stroke-width="2"/>
+  <line x1="205" y1="170" x2="225" y2="170" stroke="#334155" stroke-width="2"/>
+  <line x1="215" y1="170" x2="215" y2="185" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="208" y1="185" x2="222" y2="185" stroke="#334155" stroke-width="1.5"/>
+  <text x="235" y="170" class="math-box" font-size="9" fill="#64748b">C_w</text>
+
+  <!-- Memristive Cell -->
+  <rect x="200" y="210" width="30" height="30" class="box-green"/>
+  <text x="215" y="228" text-anchor="middle" class="math-box" font-weight="bold" fill="#047857">G₀₀</text>
+  <line x1="215" y1="140" x2="215" y2="210" stroke="#334155" stroke-width="1.5"/>
+  <line x1="215" y1="240" x2="215" y2="280" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Column node cap C_c -->
+  <circle cx="215" cy="280" r="4" fill="#ea580c"/>
+  <line x1="215" y1="280" x2="245" y2="280" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="245" y1="272" x2="245" y2="288" stroke="#334155" stroke-width="2"/>
+  <line x1="250" y1="272" x2="250" y2="288" stroke="#334155" stroke-width="2"/>
+  <line x1="250" y1="280" x2="265" y2="280" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="265" y1="275" x2="265" y2="285" stroke="#334155" stroke-width="1.5"/>
+  <text x="275" y="284" class="math-box" font-size="9" fill="#64748b">C_cell</text>
+
+  <!-- Wire between Row Segments -->
+  <line x1="215" y1="140" x2="270" y2="140" class="wire-r"/>
+  <text x="295" y="145" text-anchor="middle" font-size="16" fill="#64748b" font-weight="bold">⋯</text>
+  <line x1="320" y1="140" x2="360" y2="140" class="wire-r"/>
+
+  <!-- Segment M-1 -->
+  <rect x="360" y="133" width="30" height="14" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" rx="2"/>
+  <text x="375" y="144" text-anchor="middle" class="math-box" font-size="9" fill="#2563eb">R_w</text>
+  <circle cx="405" cy="140" r="4" fill="#2563eb"/>
+  <rect x="390" y="210" width="30" height="30" class="box"/>
+  <text x="405" y="228" text-anchor="middle" class="math-box" font-weight="bold">G₀,ₘ</text>
+  <line x1="405" y1="140" x2="405" y2="210" stroke="#334155" stroke-width="1.5"/>
+  <line x1="405" y1="240" x2="405" y2="280" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Column Accumulation Downward -->
+  <line x1="215" y1="280" x2="215" y2="330" class="wire-c"/>
+  <text x="215" y="355" text-anchor="middle" font-size="16" fill="#64748b" font-weight="bold">⋮</text>
+  <line x1="215" y1="375" x2="215" y2="410" class="wire-c"/>
+
+  <!-- Sense Output Stage -->
+  <rect x="200" y="410" width="30" height="30" class="box-purple"/>
+  <text x="215" y="428" text-anchor="middle" class="math-box" font-weight="bold" fill="#7e22ce">TIA</text>
+  <text x="250" y="430" class="math-box" fill="#7e22ce">I_out(t)</text>
+
+  <!-- Right: Dynamics & Formulas Panel -->
+  <rect x="620" y="75" width="300" height="400" class="box"/>
+  <text x="635" y="102" class="label-bold">Parasitic RC Dynamics &amp; Limits</text>
+
+  <rect x="635" y="125" width="270" height="95" class="box-blue"/>
+  <text x="645" y="148" class="label-blue">Segment Capacitance Budget:</text>
+  <text x="645" y="170" class="math-box">• Wire Cap: C_w ≈ 0.5 fF / cell</text>
+  <text x="645" y="188" class="math-box">• Cell Cap: C_cell ≈ 1.0 fF</text>
+  <text x="645" y="206" class="math-box" font-weight="bold">Total C_seg = 1.5 fF / cell pitch</text>
+
+  <rect x="635" y="235" width="270" height="105" class="box-purple"/>
+  <text x="645" y="258" class="label-purple">Bitline Total Capacitance:</text>
+  <text x="645" y="280" class="math-box">• 16-row: C_BL = 24.0 fF</text>
+  <text x="645" y="298" class="math-box">• 32-row: C_BL = 48.0 fF</text>
+  <text x="645" y="316" class="math-box">• 64-row: C_BL = 96.0 fF</text>
+  <text x="645" y="332" class="label-sub">Linear scaling with row count N</text>
+
+  <rect x="635" y="355" width="270" height="105" class="box-green"/>
+  <text x="645" y="378" class="label-bold" fill="#047857">Settling &amp; Clocking Bounds:</text>
+  <text x="645" y="400" class="math-box">• Rise time t_rise: 12 ~ 16 ps</text>
+  <text x="645" y="418" class="math-box">• 1% Settling: 20 ~ 24 ps</text>
+  <text x="645" y="436" class="math-box" font-weight="bold" fill="#047857">• Max Frequency: f_max &gt; 40 GHz</text>
+  <text x="645" y="452" class="label-sub">Crossbar RC does NOT bottleneck MVM</text>
+
+</svg>

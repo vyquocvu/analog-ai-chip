@@ -109,6 +109,7 @@ See [`docs/SIMULATION_STACK.md`](docs/SIMULATION_STACK.md).
 | 0015 | Programmable conductance compact model | done | `book/0015-conductance-model/` |
 | 0016 | Programming and read variation | done | `book/0016-variation/` |
 | 0017 | IR drop and line resistance | done | `book/0017-ir-drop/` |
+| 0018 | Parasitic capacitance and RC settling | done | `book/0018-parasitics/` |
 
 > **Tiếng Việt:** every chapter has a `README.vi.md` beside the English `README.md`.
 
