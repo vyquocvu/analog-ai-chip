@@ -43,8 +43,23 @@ if "NGSPICE_LIBRARY_PATH" not in os.environ:
             os.environ["NGSPICE_LIBRARY_PATH"] = path
             break
 
-from PySpice.Spice.Netlist import Circuit
-from PySpice.Unit import u_kOhm, u_ns, u_pF, u_uA, u_V
+try:  # SPICE engine is optional: the hand model must import engine-free
+    from PySpice.Spice.Netlist import Circuit
+    from PySpice.Unit import u_kOhm, u_ns, u_pF, u_uA, u_V
+
+    _PYSPICE_OK = True
+except ImportError:  # pragma: no cover - engine-less environment
+    _PYSPICE_OK = False
+
+
+def _require_pyspice() -> None:
+    """Raise a clear error when a SPICE solve is requested without PySpice."""
+    if not _PYSPICE_OK:
+        raise ImportError(
+            "PySpice is required for SPICE solves; "
+            "install with `pip install -e '.[sim]'`"
+        )
+
 
 BITS = 4               # prototype ladder width
 VREF = 2.5             # reference voltage (V)
@@ -77,6 +92,7 @@ def _ladder_netlist(
     thus the transient t=0 state) starts at the initial code.
     ``cl_farad`` adds the assumed load capacitance on the output node.
     """
+    _require_pyspice()
     c = Circuit("dac_r2r_0009")
     c.V("vref", "vref", c.gnd, vref @ u_V)
     nodes = [f"n{i}" for i in range(bits)]  # n0 (LSB end) .. n{b-1}
@@ -192,6 +208,53 @@ def settle_time_hand(
     return tau * np.log(dv / band_v)
 
 
+def supply_sensitivity(
+    bits: int = BITS,
+    vref: float = VREF,
+    r_ohm: float = R_OHM,
+    deviations: tuple[float, ...] = (-0.10, -0.05, 0.0, 0.05, 0.10),
+) -> list[dict[str, float]]:
+    """VREF supply sensitivity: does a VREF shift translate into gain error?
+
+    The ladder is ratio-based -- the output depends only on resistor ratios
+    and ``VREF`` -- so the transfer scales linearly with the reference:
+
+        Vout(code, VREF') = VREF' * code / 2^N,   VREF' = VREF * (1 + dev)
+
+    Offset stays exactly 0 (code 0 grounds every leg) and the full-scale and
+    LSB scale with VREF, i.e. a *pure gain error* ``gain_error = dVREF/VREF``.
+    Each row sweeps the full transfer at the deviated VREF in SPICE and checks
+    it against the hand model ``ideal_output`` at that VREF. Temperature and
+    process corner have no effect on the ideal resistor/switch model by
+    construction -- documented, not swept as fake evidence.
+
+    Reported in the extract JSON only: a supply deviation on an ideal model is
+    a design condition, not new device evidence, so it is not a profile field
+    (it stays out of the fail-closed ``physical_claim`` path).
+    """
+    _require_pyspice()
+    nominal = vref / (2**bits)
+    rows = []
+    for dev in deviations:
+        vs = vref * (1.0 + dev)
+        volts = sweep(bits, vs, r_ohm)
+        lsb = (volts[-1] - volts[0]) / (2**bits - 1)
+        max_abs_err = max(
+            abs(v - ideal_output(code, bits, vs)) for code, v in enumerate(volts)
+        )
+        rows.append({
+            "deviation": float(dev),
+            "vref_v": float(vs),
+            "offset_v": float(volts[0]),
+            "full_scale_v": float(volts[-1]),
+            "lsb_v": float(lsb),
+            "gain_error": float((lsb - nominal) / nominal),
+            "gain_error_hand": float(dev),
+            "max_abs_error_v": float(max_abs_err),
+        })
+    return rows
+
+
 def main() -> None:
     print(f"R-2R ladder DAC, {BITS} bits, VREF = {VREF} V, R = {R_OHM/1e3:.0f} kOhm")
     print(f"{'code':>4} {'spice (V)':>10} {'ideal (V)':>10} {'err (V)':>10}")
@@ -222,6 +285,20 @@ def main() -> None:
             f"hand tau*ln(dV/band) = {th*1e9:6.1f} ns"
         )
         assert abs(ts - th) <= 10e-9, "transient settle must match single-pole hand"
+
+    print("\nVREF supply sensitivity (pure gain error on a ratio ladder):")
+    for row in supply_sensitivity():
+        print(f"  dVREF/VREF = {row['gain_error_hand']:+.0%}  "
+              f"gain_err = {row['gain_error']:+.2e}  "
+              f"offset = {row['offset_v']:.1e} V  "
+              f"max_abs_err = {row['max_abs_error_v']:.2e} V")
+        assert abs(row["gain_error"] - row["gain_error_hand"]) <= 1e-9, (
+            f"gain error must equal dVREF/VREF for VREF = {row['vref_v']}"
+        )
+        assert row["offset_v"] == 0.0, "offset must stay zero under VREF deviation"
+        assert row["max_abs_error_v"] <= 1e-9, (
+            "deviated transfer must match the hand model VREF'*code/2^N"
+        )
     print("OK")
 
 

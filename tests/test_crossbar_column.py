@@ -28,6 +28,20 @@ def _load(path):
 mod = _load(_MODULE)
 
 
+def _engine_ok():
+    """True when a real ngspice operating-point solve runs through the module."""
+    if mod is None or not getattr(mod, "_PYSPICE_OK", False):
+        return False
+    try:
+        mod.run_column([mod.VREF, mod.VREF], [0.0, 0.0])  # two trivial op solves
+        return True
+    except Exception:  # noqa: BLE001 - ngspice library missing => skip
+        return False
+
+
+ENGINE_OK = _engine_ok()
+
+
 def test_conductances_realize_weights() -> None:
     # always-on: the differential conductances must satisfy G+ - G- = w*GSCALE
     gp, gm = mod.conductances([0.5, 0.25, -0.5, 0.0])
@@ -41,14 +55,14 @@ def test_ideal_hand_arithmetic() -> None:
     assert abs(mod.ideal_out([3.0, 2.1], [0.5, 0.25]) - expected) < 1e-12
 
 
-@pytest.mark.skipif(mod is None, reason="PySpice/ngspice not available")
+@pytest.mark.skipif(not ENGINE_OK, reason="PySpice/ngspice not available")
 def test_spice_column_matches_hand_calc() -> None:
     assert inspect.isfunction(mod.run_column)
     vout = mod.run_column([3.0, 2.1], [0.5, 0.25])
     assert abs(vout - 0.1500) <= 2e-2
 
 
-@pytest.mark.skipif(mod is None, reason="PySpice/ngspice not available")
+@pytest.mark.skipif(not ENGINE_OK, reason="PySpice/ngspice not available")
 def test_spice_negative_weight() -> None:
     # negative weight: the minus branch carries it, output sign flips
     vout = mod.run_column([3.0, 2.1], [-0.5, 0.25])

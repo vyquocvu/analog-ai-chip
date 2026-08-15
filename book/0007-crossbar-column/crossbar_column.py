@@ -46,8 +46,23 @@ if "NGSPICE_LIBRARY_PATH" not in os.environ:
             os.environ["NGSPICE_LIBRARY_PATH"] = path
             break
 
-from PySpice.Spice.Netlist import Circuit
-from PySpice.Unit import u_kOhm, u_V
+try:  # SPICE engine is optional: the hand model must import engine-free
+    from PySpice.Spice.Netlist import Circuit
+    from PySpice.Unit import u_kOhm, u_V
+
+    _PYSPICE_OK = True
+except ImportError:  # pragma: no cover - engine-less environment
+    _PYSPICE_OK = False
+
+
+def _require_pyspice() -> None:
+    """Raise a clear error when a SPICE solve is requested without PySpice."""
+    if not _PYSPICE_OK:
+        raise ImportError(
+            "PySpice is required for SPICE solves; "
+            "install with `pip install -e '.[sim]'`"
+        )
+
 
 VREF = 2.5          # virtual reference (V)
 G0 = 0.10e-3        # balanced zero conductance (S)
@@ -66,6 +81,7 @@ def conductances(weights, g0=G0, gscale=GSCALE):
 
 def _tia(xs, gs):
     """One transimpedance stage: VREF - RF * sum (x_i - VREF) * G_i."""
+    _require_pyspice()
     c = Circuit("tia_0007")
     c.V("vr", "vref", c.gnd, VREF @ u_V)
     for i, x in enumerate(xs):

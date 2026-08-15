@@ -18,6 +18,34 @@ _DEVICE_PROFILES = _REPO / "device_profiles"
 _PROFILE = _DEVICE_PROFILES / "dac-r2r-v1.json"
 _EXTRACT = _REPO / "verification" / "circuit" / "results" / "dac-r2r-v1-extract.json"
 _EXTRACTOR = _REPO / "verification" / "circuit" / "extract_dac_r2r.py"
+_MODULE = _REPO / "book" / "0009-dac-r2r" / "r2r_dac.py"
+
+
+def _load_module():
+    try:
+        spec = importlib.util.spec_from_file_location("r2r_dac_0009", _MODULE)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod
+    except Exception:  # noqa: BLE001 - missing engine/lib => skip
+        return None
+
+
+mod = _load_module()
+
+
+def _engine_ok():
+    """True when a real ngspice operating-point solve runs through the module."""
+    if mod is None or not getattr(mod, "_PYSPICE_OK", False):
+        return False
+    try:
+        mod.ladder_output(0)  # one trivial op solve
+        return True
+    except Exception:  # noqa: BLE001 - ngspice library missing => skip
+        return False
+
+
+ENGINE_OK = _engine_ok()
 
 REQUIRED_FIELDS = {
     "bits",
@@ -114,7 +142,37 @@ def test_dac_profile_extract_results_are_committed_and_consistent() -> None:
         assert extract[name] == pytest.approx(profile["fields"][name]["value"], rel=1e-9), name
 
 
-@pytest.mark.skipif(extractor is None, reason="PySpice/ngspice not available")
+def test_dac_supply_sensitivity_hand_model() -> None:
+    """Always-on, engine-free: the ratio ladder's transfer is linear in VREF,
+    so a VREF shift is a pure gain error ``gain_error = dVREF/VREF``."""
+    bits, vref = 4, 2.5
+    nominal = vref / (2**bits)
+    for dev in (-0.10, -0.05, 0.0, 0.05, 0.10):
+        lsb = vref * (1.0 + dev) / (2**bits)
+        assert (lsb - nominal) / nominal == pytest.approx(dev, abs=1e-12)
+        assert lsb > 0.0  # negative deviations stay inside the envelope
+
+
+def test_dac_supply_sensitivity_extract_tracks_hand() -> None:
+    """The committed supply study is a pure gain error matching the hand model."""
+    extract = json.loads(_EXTRACT.read_text("utf-8"))
+    rows = extract["supply_sensitivity"]
+    assert len(rows) == 5
+    assert [r["deviation"] for r in rows] == [-0.10, -0.05, 0.0, 0.05, 0.10]
+    bits, vref = int(extract["bits"]), extract["vref_v"]
+    for row in rows:
+        assert row["gain_error"] == pytest.approx(row["gain_error_hand"], abs=1e-9)
+        assert row["offset_v"] == pytest.approx(0.0, abs=1e-15)
+        assert row["full_scale_v"] == pytest.approx(
+            vref * (1.0 + row["deviation"]) * (2**bits - 1) / (2**bits), rel=1e-9
+        )
+        assert row["lsb_v"] == pytest.approx(
+            vref * (1.0 + row["deviation"]) / (2**bits), rel=1e-9
+        )
+        assert row["max_abs_error_v"] <= 1e-9
+
+
+@pytest.mark.skipif(extractor is None or not ENGINE_OK, reason="PySpice/ngspice not available")
 def test_dac_extraction_reproduces_committed_profile() -> None:
     measured = extractor.measure()
     profile = load_device_profile(_PROFILE)
@@ -127,3 +185,29 @@ def test_dac_extraction_reproduces_committed_profile() -> None:
     # settling rows must reproduce within tolerance
     settling = extractor.measure_settling()
     assert settling == pytest.approx(extract["settling"], rel=5e-2, abs=1e-9)
+    # the supply-deviation study must reproduce within tolerance
+    supply = extractor.supply_sensitivity()
+    for row, ref in zip(supply, extract["supply_sensitivity"]):
+        for key in row:
+            assert row[key] == pytest.approx(ref[key], rel=2e-3, abs=1e-9), key
+
+
+@pytest.mark.skipif(not ENGINE_OK, reason="PySpice/ngspice not available")
+def test_spice_supply_sensitivity_tracks_hand() -> None:
+    # a VREF shift is a pure gain error on the ratio-based ladder: measured
+    # gain error must equal dVREF/VREF, offset stays 0, the deviated transfer
+    # reproduces the hand model, and the sweep must be deterministic
+    a = mod.supply_sensitivity()
+    b = mod.supply_sensitivity()
+    assert a == b
+    assert len(a) == 5
+    for row in a:
+        assert row["gain_error"] == pytest.approx(row["gain_error_hand"], abs=1e-9)
+        assert row["offset_v"] == pytest.approx(0.0, abs=1e-15)
+        assert row["max_abs_error_v"] <= 1e-9
+    # and it must match the committed extract
+    committed = json.loads(_EXTRACT.read_text("utf-8"))["supply_sensitivity"]
+    assert len(a) == len(committed)
+    for row, ref in zip(a, committed):
+        for key in row:
+            assert row[key] == pytest.approx(ref[key], rel=1e-6, abs=1e-12), key

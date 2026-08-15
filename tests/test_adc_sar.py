@@ -28,6 +28,20 @@ def _load(path):
 mod = _load(_MODULE)
 
 
+def _engine_ok():
+    """True when a real ngspice operating-point solve runs through the module."""
+    if mod is None or not getattr(mod, "_PYSPICE_OK", False):
+        return False
+    try:
+        mod.comparator_decision(0.0, 0)  # one trivial op solve
+        return True
+    except Exception:  # noqa: BLE001 - ngspice library missing => skip
+        return False
+
+
+ENGINE_OK = _engine_ok()
+
+
 def test_reference_v_hand_model() -> None:
     # always-on: Vref(code) = code * VREF / 2^N
     assert mod.reference_v(0) == 0.0
@@ -84,7 +98,7 @@ def test_vdiff_from_code_hand_example() -> None:
     assert mod.vdiff_from_code(14) == pytest.approx(2 * (14.5 * mod.VREF / 16 - mod.VREF / 2))
 
 
-@pytest.mark.skipif(mod is None, reason="PySpice/ngspice not available")
+@pytest.mark.skipif(not ENGINE_OK, reason="PySpice/ngspice not available")
 def test_spice_comparator_matches_hand() -> None:
     assert inspect.isfunction(mod.comparator_decision)
     for v_in, code in ((1.5, 8), (1.5, 9), (0.5, 3), (0.5, 4), (2.5, 15), (2.5, 16)):
@@ -93,7 +107,7 @@ def test_spice_comparator_matches_hand() -> None:
         assert mod.comparator_decision(v_in, code) == hand, (v_in, code)
 
 
-@pytest.mark.skipif(mod is None, reason="PySpice/ngspice not available")
+@pytest.mark.skipif(not ENGINE_OK, reason="PySpice/ngspice not available")
 def test_spice_sar_transfer_reproduces_hand() -> None:
     rows = mod.transfer_sweep()
     assert len(rows) == 129
@@ -101,7 +115,7 @@ def test_spice_sar_transfer_reproduces_hand() -> None:
         assert row["code_spice"] == pytest.approx(row["code_hand"])
 
 
-@pytest.mark.skipif(mod is None, reason="PySpice/ngspice not available")
+@pytest.mark.skipif(not ENGINE_OK, reason="PySpice/ngspice not available")
 def test_spice_sar_example() -> None:
     # README worked example: Vdiff = +2.0 V -> code 14
     v_in = mod.vin_from_differential(2.0)
@@ -111,7 +125,7 @@ def test_spice_sar_example() -> None:
     assert mod.vdiff_from_code(code) == pytest.approx(2.0, abs=bound)
 
 
-@pytest.mark.skipif(mod is None, reason="PySpice/ngspice not available")
+@pytest.mark.skipif(not ENGINE_OK, reason="PySpice/ngspice not available")
 def test_spice_reference_settling_matches_hand() -> None:
     cl = 1e-12
     band = 0.5 * mod.LSB
@@ -121,7 +135,7 @@ def test_spice_reference_settling_matches_hand() -> None:
         assert ts == pytest.approx(th, abs=10e-9), f"settle 0->{code}"
 
 
-@pytest.mark.skipif(mod is None, reason="PySpice/ngspice not available")
+@pytest.mark.skipif(not ENGINE_OK, reason="PySpice/ngspice not available")
 def test_spice_conversion_time_matches_hand() -> None:
     t_spice, t_hand = mod.conversion_time(1e-12)
     assert t_spice == pytest.approx(t_hand, abs=40e-9)
@@ -137,8 +151,7 @@ def test_conversion_time_hand_is_deterministic_sum() -> None:
         tau * np.log(mod.VREF / (2.0 ** (mod.BITS - i)) / band)
         for i in range(mod.BITS - 1, -1, -1)
     )
-    _, hand = mod.conversion_time(cl)
-    assert hand == pytest.approx(expected)
+    assert mod.conversion_time_hand(cl) == pytest.approx(expected)
 
 
 def test_enob_hand_ideal_quantizer_is_n_bits() -> None:
@@ -174,7 +187,7 @@ def test_enob_study_is_deterministic_and_tracks_hand() -> None:
     assert enobs[0] >= enobs[-1]
 
 
-@pytest.mark.skipif(mod is None, reason="PySpice/ngspice not available")
+@pytest.mark.skipif(not ENGINE_OK, reason="PySpice/ngspice not available")
 def test_spice_supply_sensitivity_tracks_hand() -> None:
     # a VREF shift is a pure gain error on the ratio-based ladder: measured
     # gain error must equal dVREF/VREF, and the sweep must be deterministic

@@ -30,6 +30,20 @@ def _load():
 
 mod = _load()
 
+
+def _engine_ok():
+    """True when a real ngspice operating-point solve runs through the module."""
+    if mod is None or not getattr(mod, "_PYSPICE_OK", False):
+        return False
+    try:
+        mod.mismatched_output(0, np.zeros(mod.resistor_count()))  # one trivial solve
+        return True
+    except Exception:  # noqa: BLE001 - ngspice library missing => skip
+        return False
+
+
+ENGINE_OK = _engine_ok()
+
 R = 1e4
 
 
@@ -108,7 +122,7 @@ def test_mismatch_stats_shape_and_sanity() -> None:
         mod.mismatch_stats(np.zeros((0, 16)))
 
 
-@pytest.mark.skipif(mod is None, reason="PySpice/ngspice not available")
+@pytest.mark.skipif(not ENGINE_OK, reason="PySpice/ngspice not available")
 def test_spice_mismatch_matches_hand_solver() -> None:
     deltas = mod.draw_deltas(8)
     t_spice = mod.transfers_spice(deltas)
@@ -117,14 +131,14 @@ def test_spice_mismatch_matches_hand_solver() -> None:
     assert np.max(np.abs(t_spice - t_hand)) <= 1e-9
 
 
-@pytest.mark.skipif(mod is None, reason="PySpice/ngspice not available")
+@pytest.mark.skipif(not ENGINE_OK, reason="PySpice/ngspice not available")
 def test_spice_zero_mismatch_is_ideal() -> None:
     nominal = mod.transfers_spice(np.zeros((1, mod.resistor_count())))
     ideal = np.array([code * mod.VREF / (2**mod.BITS) for code in range(16)])
     assert np.max(np.abs(nominal[0] - ideal)) <= 1e-9
 
 
-@pytest.mark.skipif(mod is None, reason="PySpice/ngspice not available")
+@pytest.mark.skipif(not ENGINE_OK, reason="PySpice/ngspice not available")
 def test_extract_is_committed_and_reproducible() -> None:
     extract = json.loads(_EXTRACT.read_text("utf-8"))
     assert extract["bits"] == mod.BITS

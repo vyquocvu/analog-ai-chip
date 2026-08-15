@@ -18,6 +18,34 @@ _DEVICE_PROFILES = _REPO / "device_profiles"
 _PROFILE = _DEVICE_PROFILES / "adc-sar-v1.json"
 _EXTRACT = _REPO / "verification" / "circuit" / "results" / "adc-sar-v1-extract.json"
 _EXTRACTOR = _REPO / "verification" / "circuit" / "extract_adc_sar.py"
+_MODULE = _REPO / "book" / "0010-adc-sar" / "sar_adc.py"
+
+
+def _load_module():
+    try:
+        spec = importlib.util.spec_from_file_location("sar_adc_0010", _MODULE)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod
+    except Exception:  # noqa: BLE001 - missing engine/lib => skip
+        return None
+
+
+mod = _load_module()
+
+
+def _engine_ok():
+    """True when a real ngspice operating-point solve runs through the module."""
+    if mod is None or not getattr(mod, "_PYSPICE_OK", False):
+        return False
+    try:
+        mod.comparator_decision(0.0, 0)  # one trivial op solve
+        return True
+    except Exception:  # noqa: BLE001 - ngspice library missing => skip
+        return False
+
+
+ENGINE_OK = _engine_ok()
 
 REQUIRED_FIELDS = {
     "bits",
@@ -122,7 +150,7 @@ def test_adc_profile_extract_results_are_committed_and_consistent() -> None:
         assert extract[name] == pytest.approx(profile["fields"][name]["value"], rel=1e-9), name
 
 
-@pytest.mark.skipif(extractor is None, reason="PySpice/ngspice not available")
+@pytest.mark.skipif(extractor is None or not ENGINE_OK, reason="PySpice/ngspice not available")
 def test_adc_extraction_reproduces_committed_profile() -> None:
     measured = extractor.measure()
     profile = load_device_profile(_PROFILE)

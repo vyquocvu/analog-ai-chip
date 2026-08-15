@@ -58,8 +58,23 @@ if "NGSPICE_LIBRARY_PATH" not in os.environ:
             os.environ["NGSPICE_LIBRARY_PATH"] = path
             break
 
-from PySpice.Spice.Netlist import Circuit
-from PySpice.Unit import u_kOhm, u_V
+try:  # SPICE engine is optional: the hand model must import engine-free
+    from PySpice.Spice.Netlist import Circuit
+    from PySpice.Unit import u_kOhm, u_V
+
+    _PYSPICE_OK = True
+except ImportError:  # pragma: no cover - engine-less environment
+    _PYSPICE_OK = False
+
+
+def _require_pyspice() -> None:
+    """Raise a clear error when a SPICE solve is requested without PySpice."""
+    if not _PYSPICE_OK:
+        raise ImportError(
+            "PySpice is required for SPICE solves; "
+            "install with `pip install -e '.[sim]'`"
+        )
+
 
 BITS = 4                 # prototype ladder width (matches 0009)
 VREF = 2.5               # reference voltage (V)
@@ -104,6 +119,7 @@ def _mismatched_netlist(code: int, deltas, bits: int = BITS,
     if not 0 <= int(code) < 2**bits:
         raise ValueError(f"code {code} out of range for {bits} bits")
 
+    _require_pyspice()
     c = Circuit("dac_r2r_variation_0011")
     c.V("vref", "vref", c.gnd, vref @ u_V)
     nodes = [f"n{i}" for i in range(bits)]

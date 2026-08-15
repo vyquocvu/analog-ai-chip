@@ -1,5 +1,7 @@
 # 0009 — R-2R ladder DAC
 
+> **Bản tiếng Việt:** [`README.vi.md`](README.vi.md)
+
 First design candidate for the converter signal path (R2): a **binary-weighted
 R-2R ladder** DAC. The activation path needs `x (digital) → V (analog)`, and the
 ladder realizes it with only two resistor values, `R` and `2R`.
@@ -60,17 +62,26 @@ numbers the tests verify.
   code-independent (the ladder orientation — termination at the LSB end, output
   at the MSB end — puts `Rth = R + Z` with `Z = 2R ‖ (R + Z)`).
 - **Transient settling**: with an *assumed* load `CL = 1 pF` and a 0.5 LSB band,
-  a full-scale step settles in 68.7 ns (SPICE) vs 68.0 ns from the single-pole
+  a  full-scale step settles in 68.7 ns (SPICE) vs 68.0 ns from the single-pole
   hand model `t = 2R·CL·ln(ΔV/band)`. The `CL` value has no device evidence yet,
   so settling is a sensitivity study only: it lives in the extract JSON and is
   deliberately NOT a profile field (it would fail `physical_claim` validation).
+- **VREF supply sensitivity**: the ladder is ratio-based, so a VREF shift is a
+  *pure gain error* — measured (SPICE) `gain_error` equals `dVREF/VREF` at
+  ±10% to within `1e-9`, offset stays exactly `0`, and the deviated transfer
+  reproduces the hand model `Vout = VREF'·code/2^N` code-for-code. Temperature
+  and process corner have **no** modelable effect on ideal resistors by
+  construction; that is documented as out of scope, not swept as fake
+  evidence. A supply deviation on an ideal model is a design condition, not
+  new device evidence, so the study lives in the extract JSON only and is not
+  a profile field.
 - Always-on data tests + optional engine tests in `tests/test_dac_r2r_profile.py`.
 
 ## What this chapter does NOT do yet
 
-- Resistor mismatch / Monte Carlo — R-2R's whole point is ratio tolerance; the
-  numeric sensitivity is a separate chapter.
-- Supply sensitivity of `VREF` — deferred.
+- Resistor mismatch / Monte Carlo — delivered as chapter 0011 (converter
+  variation): the numeric sensitivity of the ratio ladder under mismatch, as an
+  assumed-`sigma` sensitivity study (fails closed under `physical_claim`).
 - Non-zero switch resistance — real switches add offset and INL; ideal sources
   are the DC model here.
 - Device-backed load capacitance for settling — `CL` is assumed; a measured

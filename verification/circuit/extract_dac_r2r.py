@@ -13,7 +13,10 @@ signal path needs downstream:
   * Thevenin output resistance (two-point DC load line),
   * transient settling vs the single-pole hand reference
     (assumed load capacitance, reported as a sensitivity study, not a profile
-    field -- assumed evidence fails closed under ``physical_claim``).
+    field -- assumed evidence fails closed under ``physical_claim``),
+  * VREF supply deviation (a pure gain error on the ratio ladder: SPICE
+    ``gain_error = dVREF/VREF``; a design condition on an ideal model, so it
+    is reported in the extract JSON only, not a profile field).
 
 Emits:
   * verification/circuit/results/dac-r2r-v1-extract.json  (raw sweep + settling)
@@ -38,6 +41,7 @@ from r2r_dac import (
     output_resistance_ohm,
     settle_time,
     settle_time_hand,
+    supply_sensitivity,
     sweep,
 )
 
@@ -117,8 +121,11 @@ def build_profile(measured: dict[str, float]) -> dict[str, object]:
                 "transient settling study at an ASSUMED load capacitance "
                 "(1 pF, reported in the extract JSON only -- it fails closed "
                 "under physical_claim because CL has no device evidence yet). "
-                "No switch resistance, resistor mismatch, temperature, supply "
-                "sensitivity or Monte Carlo evidence yet."
+                "VREF supply deviation is a pure gain error "
+                "(gain_error = dVREF/VREF on the ratio-based ladder), reported "
+                "in the extract JSON only and not a profile field. No switch "
+                "resistance, resistor mismatch, temperature or Monte Carlo "
+                "evidence yet."
             ),
         },
         "fields": {
@@ -172,7 +179,12 @@ def main() -> None:
 
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
     sweep_only = {k: v for k, v in measured.items() if k != "sweep_v"}
-    extract = {**sweep_only, "sweep_v": measured["sweep_v"], "settling": settling}
+    extract = {
+        **sweep_only,
+        "sweep_v": measured["sweep_v"],
+        "settling": settling,
+        "supply_sensitivity": supply_sensitivity(),
+    }
     result_path = RESULTS_DIR / "dac-r2r-v1-extract.json"
     result_path.write_text(json.dumps(extract, indent=2, sort_keys=True) + "\n", "utf-8")
     PROFILE_PATH.write_text(json.dumps(profile, indent=2, sort_keys=True) + "\n", "utf-8")
@@ -187,6 +199,12 @@ def main() -> None:
         print(f"    {int(row['code_from'])}->{int(row['code_to']):2d}: "
               f"spice {row['settle_time_s']*1e9:6.1f} ns, "
               f"hand {row['hand_tau_s']*1e9:6.1f} ns")
+    print("  supply sensitivity (pure gain error = dVREF/VREF):")
+    for row in supply_sensitivity():
+        print(f"    dVREF/VREF = {row['gain_error_hand']:+.0%}  "
+              f"gain_err = {row['gain_error']:+.2e}  "
+              f"offset = {row['offset_v']:.1e} V  "
+              f"max_abs_err = {row['max_abs_error_v']:.2e} V")
 
 
 if __name__ == "__main__":

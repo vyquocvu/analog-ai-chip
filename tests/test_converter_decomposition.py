@@ -30,6 +30,28 @@ def _load():
 
 mod = _load()
 
+_VARIATION = _REPO / "book" / "0011-converter-variation" / "variation.py"
+
+
+def _engine_ok():
+    """True when a real ngspice op solve runs through variation.py (SPICE MC)."""
+    try:
+        spec = importlib.util.spec_from_file_location("variation_0011_decomp", _VARIATION)
+        vmod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(vmod)
+    except Exception:  # noqa: BLE001 - missing engine/lib => skip
+        return False
+    if not getattr(vmod, "_PYSPICE_OK", False):
+        return False
+    try:
+        vmod.mismatched_output(0, np.zeros(vmod.resistor_count()))  # one trivial solve
+        return True
+    except Exception:  # noqa: BLE001 - ngspice library missing => skip
+        return False
+
+
+ENGINE_OK = _engine_ok()
+
 
 def _ideal_transfers(n_samples=4):
     t = np.tile(np.arange(16, dtype=float) * (mod.VREF / 16.0), (n_samples, 1))
@@ -102,11 +124,11 @@ def test_adc_separation_is_deterministic() -> None:
     assert mod.separate_adc_error(0.01) == mod.separate_adc_error(0.01)
 
 
-@pytest.mark.skipif(mod is None, reason="PySpice/ngspice not available")
+@pytest.mark.skipif(not ENGINE_OK, reason="PySpice/ngspice not available")
 def test_spice_mismatch_decomposition_matches_committed_extract() -> None:
     spec = importlib.util.spec_from_file_location(
         "variation_0011_engine",
-        _REPO / "book" / "0011-converter-variation" / "variation.py",
+        _VARIATION,
     )
     vmod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(vmod)

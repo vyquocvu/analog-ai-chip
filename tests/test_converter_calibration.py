@@ -27,6 +27,28 @@ def _load():
 
 mod = _load()
 
+_VARIATION = _REPO / "book" / "0011-converter-variation" / "variation.py"
+
+
+def _engine_ok():
+    """True when a real ngspice op solve runs through variation.py (SPICE MC)."""
+    try:
+        spec = importlib.util.spec_from_file_location("variation_0011_cal", _VARIATION)
+        vmod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(vmod)
+    except Exception:  # noqa: BLE001 - missing engine/lib => skip
+        return False
+    if not getattr(vmod, "_PYSPICE_OK", False):
+        return False
+    try:
+        vmod.mismatched_output(0, np.zeros(vmod.resistor_count()))  # one trivial solve
+        return True
+    except Exception:  # noqa: BLE001 - ngspice library missing => skip
+        return False
+
+
+ENGINE_OK = _engine_ok()
+
 BITS, VREF = 4, 2.5
 
 
@@ -77,11 +99,11 @@ def test_two_point_on_ideal_is_identity() -> None:
     assert np.allclose(out, _ideal(), atol=1e-12)
 
 
-@pytest.mark.skipif(mod is None, reason="PySpice/ngspice not available")
+@pytest.mark.skipif(not ENGINE_OK, reason="PySpice/ngspice not available")
 def test_calibration_on_spice_mismatch_removes_error() -> None:
     spec = importlib.util.spec_from_file_location(
         "variation_0011_cal",
-        _REPO / "book" / "0011-converter-variation" / "variation.py",
+        _VARIATION,
     )
     vmod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(vmod)

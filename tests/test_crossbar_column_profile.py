@@ -46,6 +46,20 @@ def _load_extractor():
 extractor = _load_extractor()
 
 
+def _engine_ok():
+    """True when a real ngspice operating-point solve runs through the extractor."""
+    if extractor is None:
+        return False
+    try:
+        extractor.run_column([extractor.VREF, extractor.VREF], [0.0, 0.0])
+        return True
+    except Exception:  # noqa: BLE001 - ngspice library missing => skip
+        return False
+
+
+ENGINE_OK = _engine_ok()
+
+
 def test_crossbar_column_profile_exists_and_is_spice_backed() -> None:
     profile = load_device_profile(_PROFILE, physical_claim=True)
     assert profile["name"] == "crossbar-column-v1"
@@ -70,7 +84,7 @@ def test_crossbar_column_profile_fields_carry_evidence_classes() -> None:
         assert field["evidence_class"] in EVIDENCE_CLASSES, name
 
 
-@pytest.mark.skipif(extractor is None, reason="PySpice/ngspice not available")
+@pytest.mark.skipif(extractor is None or not ENGINE_OK, reason="PySpice/ngspice not available")
 def test_extraction_reproduces_committed_profile() -> None:
     measured = extractor.measure()
     profile = load_device_profile(_PROFILE)

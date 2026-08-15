@@ -49,8 +49,23 @@ if "NGSPICE_LIBRARY_PATH" not in os.environ:
             os.environ["NGSPICE_LIBRARY_PATH"] = path
             break
 
-from PySpice.Spice.Netlist import Circuit
-from PySpice.Unit import u_kOhm, u_ns, u_pF, u_V
+try:  # SPICE engine is optional: the hand model must import engine-free
+    from PySpice.Spice.Netlist import Circuit
+    from PySpice.Unit import u_kOhm, u_ns, u_pF, u_V
+
+    _PYSPICE_OK = True
+except ImportError:  # pragma: no cover - engine-less environment
+    _PYSPICE_OK = False
+
+
+def _require_pyspice() -> None:
+    """Raise a clear error when a SPICE solve is requested without PySpice."""
+    if not _PYSPICE_OK:
+        raise ImportError(
+            "PySpice is required for SPICE solves; "
+            "install with `pip install -e '.[sim]'`"
+        )
+
 
 BITS = 4               # prototype ADC width (matches 0009 ladder)
 VREF = 2.5             # reference voltage (V); matches 0005/0007/0009
@@ -102,6 +117,7 @@ def _reference_netlist(code: int, bits: int = BITS, r_ohm: float = R_OHM,
     the transient t=0 state) starts at the initial code. ``cl_farad`` adds the
     assumed comparator-input / interconnect capacitance on the reference node.
     """
+    _require_pyspice()
     c = Circuit("adc_sar_0010")
     c.V("vref", "vref", c.gnd, vref @ u_V)
     nodes = [f"n{i}" for i in range(bits)]
@@ -220,26 +236,38 @@ def reference_settle_time_hand(dv: float, band_v: float, cl_farad: float,
     return tau * np.log(dv / band_v)
 
 
-def conversion_time(cl_farad: float, bits: int = BITS, r_ohm: float = R_OHM,
-                    vref: float = VREF, band_frac: float = 0.5) -> float:
-    """SAR conversion time (s) as ``bits`` sequential reference settlements.
+def conversion_time_hand(cl_farad: float, bits: int = BITS, r_ohm: float = R_OHM,
+                         vref: float = VREF, band_frac: float = 0.5) -> float:
+    """Hand reference conversion time (s): sum of single-pole reference settles.
 
     Each of the ``bits`` bit trials must let the reference settle to within
-    ``band_frac * LSB`` after the largest step that trial can produce. The
-    hand reference uses the single-pole model; the SPICE sum is measured with
-    ``reference_settle_time`` for each bit's worst-case step. ``cl_farad`` is
-    the assumed load on the reference node.
+    ``band_frac * LSB`` after the largest step that trial can produce; the
+    single-pole model gives ``tau * ln(dV/band)`` per trial with
+    ``tau = 2R*CL``. Pure arithmetic -- no SPICE.
+    """
+    band = band_frac * (vref / (2**bits))
+    total = 0.0
+    for i in range(bits - 1, -1, -1):
+        step = vref / (2.0 ** (bits - i))  # largest Vref step for bit i's trial
+        total += reference_settle_time_hand(step, band, cl_farad, r_ohm)
+    return total
+
+
+def conversion_time(cl_farad: float, bits: int = BITS, r_ohm: float = R_OHM,
+                    vref: float = VREF, band_frac: float = 0.5) -> tuple[float, float]:
+    """SAR conversion time (s) as ``bits`` sequential reference settlements.
+
+    The SPICE sum is measured with ``reference_settle_time`` for each bit's
+    worst-case step; the hand reference is ``conversion_time_hand``.
+    ``cl_farad`` is the assumed load on the reference node.
     """
     band = band_frac * (vref / (2**bits))
     t_spice = 0.0
-    t_hand = 0.0
     for i in range(bits - 1, -1, -1):
-        step = vref / (2.0 ** (bits - i))  # largest Vref step for bit i's trial
         code_to = 2**i                     # worst case: reference goes 0 -> 2^i
         t_spice += reference_settle_time(0, code_to, band, cl_farad,
                                          bits, r_ohm, vref)
-        t_hand += reference_settle_time_hand(step, band, cl_farad, r_ohm)
-    return t_spice, t_hand
+    return t_spice, conversion_time_hand(cl_farad, bits, r_ohm, vref, band_frac)
 
 
 def full_scale_sine(n_samples: int = 65536, bits: int = BITS,

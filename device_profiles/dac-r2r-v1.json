@@ -79,7 +79,7 @@
       "supply_v": 2.5,
       "vref_v": 2.5
     },
-    "limitations": "DC operating-point solves with ideal switch sources plus a transient settling study at an ASSUMED load capacitance (1 pF, reported in the extract JSON only -- it fails closed under physical_claim because CL has no device evidence yet). No switch resistance, resistor mismatch, temperature, supply sensitivity or Monte Carlo evidence yet.",
+    "limitations": "DC operating-point solves with ideal switch sources plus a transient settling study at an ASSUMED load capacitance (1 pF, reported in the extract JSON only -- it fails closed under physical_claim because CL has no device evidence yet). VREF supply deviation is a pure gain error (gain_error = dVREF/VREF on the ratio-based ladder), reported in the extract JSON only and not a profile field. No switch resistance, resistor mismatch, temperature or Monte Carlo evidence yet.",
     "sources": [
       "book/0009-dac-r2r/r2r_dac.py (R-2R ladder solves)"
     ],
