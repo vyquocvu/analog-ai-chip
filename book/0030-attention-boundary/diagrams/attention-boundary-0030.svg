@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 14px; font-weight: 700; }
+.box-text { font-size: 12px; fill: #334155; }
+.formula { font: 12px ui-monospace, monospace; fill: #1e293b; }
+.domain-analog { fill: #eff6ff; stroke: #2563eb; }
+.domain-digital { fill: #fefce8; stroke: #ca8a04; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Chapter 0030 — Attention Analog / Digital Boundary</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Rigorous domain separation: Static In-Memory Computing vs Dynamic Digital Attention</text>
+
+<!-- Left: Analog Static Domain -->
+<rect x="50" y="85" width="410" height="420" rx="12" class="domain-analog" stroke-width="2"/>
+<text x="70" y="115" class="box-title" fill="#1d4ed8">1. Static Weights: Analog IMC Domain</text>
+<text x="70" y="135" class="sub">W_Q, W_K, W_V, W_O Projections (64 Physical Tiles)</text>
+
+<rect x="70" y="155" width="370" height="150" rx="8" fill="white" stroke="#93c5fd"/>
+<text x="85" y="180" class="box-title" fill="#1e40af">Why Analog Execution?</text>
+<text x="85" y="202" class="box-text">• Weights are constant across all tokens &amp; requests</text>
+<text x="85" y="222" class="box-text">• Programmed once at model initialization</text>
+<text x="85" y="242" class="box-text">• 50.0 fJ/MAC analog compute energy (derived)</text>
+<text x="85" y="262" class="box-text">• 20.05 ns MVM latency with zero weight DRAM traffic</text>
+<text x="85" y="282" class="box-text">• High spatial parallelism across 16×16 tile arrays</text>
+
+<rect x="70" y="320" width="370" height="165" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="85" y="345" class="box-title">Analog Operations</text>
+<text x="85" y="370" class="formula">Q = a* · W_Q @ x  (16 tiles)</text>
+<text x="85" y="392" class="formula">K = a* · W_K @ x  (16 tiles)</text>
+<text x="85" y="414" class="formula">V = a* · W_V @ x  (16 tiles)</text>
+<text x="85" y="436" class="formula">O = a* · W_O @ Context (16 tiles)</text>
+<text x="85" y="462" class="sub">Total FLOPs: 8 · L · d_model²</text>
+
+<!-- Right: Digital Dynamic Domain -->
+<rect x="500" y="85" width="410" height="420" rx="12" class="domain-digital" stroke-width="2"/>
+<text x="520" y="115" class="box-title" fill="#a16207">2. Dynamic State: Digital SIMD / Host</text>
+<text x="520" y="135" class="sub">Q K^T, Causal Masking, Softmax, A V Context (SRAM + SIMD)</text>
+
+<rect x="520" y="155" width="370" height="150" rx="8" fill="white" stroke="#fde047"/>
+<text x="535" y="180" class="box-title" fill="#854d0e">Why Digital Execution?</text>
+<text x="535" y="202" class="box-text">• Both operands are dynamic activations</text>
+<text x="535" y="222" class="box-text">• Changes every single generated token</text>
+<text x="535" y="242" class="box-text">• Analog rewrite penalty: 8.0 μs &amp; 2.56 nJ per tile</text>
+<text x="535" y="262" class="box-title" fill="#b91c1c">• Dynamic analog is 71.2× worse energy than SIMD!</text>
+<text x="535" y="282" class="box-text">• Softmax requires high dynamic range division &amp; exp</text>
+
+<rect x="520" y="320" width="370" height="165" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="535" y="345" class="box-title">Digital Operations</text>
+<text x="535" y="370" class="formula">S_h = (Q_h · K_h^T) / sqrt(d_head)</text>
+<text x="535" y="392" class="formula">A_h = Softmax(S_h + M_causal)</text>
+<text x="535" y="414" class="formula">Context_h = A_h · V_h</text>
+<text x="535" y="436" class="sub">Boundary Transfer: 3·L·d·Badc/8 + L·d·Bdac/8 B</text>
+<text x="535" y="462" class="formula">Claim Level: SYSTEM_SIMULATED (Honest)</text>
+</svg>

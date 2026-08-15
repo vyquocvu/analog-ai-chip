@@ -1,0 +1,97 @@
+{
+  "boundary_specification": {
+    "analog_domain": [
+      "W_Q projection",
+      "W_K projection",
+      "W_V projection",
+      "W_O projection"
+    ],
+    "boundary_interfaces": [
+      "ADC digitization of Q, K, V -> Digital SRAM buffer",
+      "DAC conversion of Digital Context -> Analog W_O tiles"
+    ],
+    "digital_domain": [
+      "Q K^T score matrix",
+      "Causal mask addition",
+      "Softmax normalization",
+      "A V context accumulation"
+    ]
+  },
+  "chapter": "0030-attention-boundary",
+  "gate": "R7 \u2014 Transformer and LLM validation",
+  "provenance": {
+    "claim_level": "SYSTEM_SIMULATED",
+    "energy_ledger": "Chapter 0026 architecture_ledger.py"
+  },
+  "report": {
+    "d_head": 16,
+    "d_model": 64,
+    "num_heads": 4,
+    "scaling_analysis": [
+      {
+        "analog_proj_energy_nj": 14.7456,
+        "analog_proj_flops": 524288,
+        "analog_proj_latency_us": 0.3208,
+        "boundary_transfer_bytes": 2048,
+        "digital_attn_energy_nj": 10.6496,
+        "digital_attn_flops": 68608,
+        "digital_attn_latency_us": 34.304,
+        "dynamic_analog_penalty_factor": 1.1,
+        "hypothetical_dynamic_analog_energy_nj": 11.8784,
+        "seq_len_l": 16
+      },
+      {
+        "analog_proj_energy_nj": 54.0672,
+        "analog_proj_flops": 2097152,
+        "analog_proj_latency_us": 1.2832,
+        "boundary_transfer_bytes": 8192,
+        "digital_attn_energy_nj": 145.8176,
+        "digital_attn_flops": 1097728,
+        "digital_attn_latency_us": 548.864,
+        "dynamic_analog_penalty_factor": 1.3,
+        "hypothetical_dynamic_analog_energy_nj": 190.0544,
+        "seq_len_l": 64
+      },
+      {
+        "analog_proj_energy_nj": 106.496,
+        "analog_proj_flops": 4194304,
+        "analog_proj_latency_us": 2.5664,
+        "boundary_transfer_bytes": 16384,
+        "digital_attn_energy_nj": 566.8864,
+        "digital_attn_flops": 4390912,
+        "digital_attn_latency_us": 2195.456,
+        "dynamic_analog_penalty_factor": 1.3,
+        "hypothetical_dynamic_analog_energy_nj": 760.2176,
+        "seq_len_l": 128
+      },
+      {
+        "analog_proj_energy_nj": 421.0688,
+        "analog_proj_flops": 16777216,
+        "analog_proj_latency_us": 10.2656,
+        "boundary_transfer_bytes": 65536,
+        "digital_attn_energy_nj": 8873.5744,
+        "digital_attn_flops": 70254592,
+        "digital_attn_latency_us": 35127.296,
+        "dynamic_analog_penalty_factor": 1.4,
+        "hypothetical_dynamic_analog_energy_nj": 12163.4816,
+        "seq_len_l": 512
+      },
+      {
+        "analog_proj_energy_nj": 1679.36,
+        "analog_proj_flops": 67108864,
+        "analog_proj_latency_us": 41.0624,
+        "boundary_transfer_bytes": 262144,
+        "digital_attn_energy_nj": 141190.7584,
+        "digital_attn_flops": 1124073472,
+        "digital_attn_latency_us": 562036.736,
+        "dynamic_analog_penalty_factor": 1.4,
+        "hypothetical_dynamic_analog_energy_nj": 194615.7056,
+        "seq_len_l": 2048
+      }
+    ],
+    "static_crossbar_tiles": 64,
+    "summary_verdict": "Static Q/K/V/Out projections are ideally suited for analog crossbars (50 fJ/MAC with zero weight fetch). Dynamic token-token attention (Q K^T, Softmax, A V) MUST execute digitally because dynamic tile reprogramming imposes a 10x-100x energy penalty and 400x latency overhead."
+  },
+  "schema_version": "0.1.0",
+  "title": "Attention Analog/Digital Boundary Report"
+}
