@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import pytest
-
 from analog_llm.model_manifest import ModelManifest, TensorDescriptor
 
 
@@ -114,25 +113,25 @@ def test_tensor_inventory_requires_exact_shapes_and_explicit_layout() -> None:
 
 
 def test_manifest_fails_closed_on_unsupported_or_inconsistent_semantics() -> None:
-    base = dict(
-        schema_version="1.0",
-        architecture="decoder-only",
-        vocab_size=10,
-        hidden_size=8,
-        num_layers=1,
-        num_attention_heads=4,
-        num_key_value_heads=2,
-        head_dim=2,
-        intermediate_size=16,
-        max_context=32,
-        dtype="float32",
-        tie_embeddings=True,
-        norm_type="rmsnorm",
-        norm_bias=False,
-        position_type="rope",
-        activation="swiglu",
-        linear_bias=False,
-    )
+    base = {
+        "schema_version": "1.0",
+        "architecture": "decoder-only",
+        "vocab_size": 10,
+        "hidden_size": 8,
+        "num_layers": 1,
+        "num_attention_heads": 4,
+        "num_key_value_heads": 2,
+        "head_dim": 2,
+        "intermediate_size": 16,
+        "max_context": 32,
+        "dtype": "float32",
+        "tie_embeddings": True,
+        "norm_type": "rmsnorm",
+        "norm_bias": False,
+        "position_type": "rope",
+        "activation": "swiglu",
+        "linear_bias": False,
+    }
 
     with pytest.raises(ValueError, match="attention heads"):
         ModelManifest(**{**base, "num_attention_heads": 3})
