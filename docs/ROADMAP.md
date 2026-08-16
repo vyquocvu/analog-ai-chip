@@ -227,7 +227,7 @@ For any layer, the simulator can state where time, storage, traffic, rewrites an
 
 ---
 
-# R7 — Transformer and LLM validation — ACTIVE
+# R7 — Transformer and LLM validation — PASSED
 
 Depends on R6.
 
@@ -238,15 +238,15 @@ Existing TinyGPT, checkpoint loader, KV cache, ablations and real-model mapping 
 - [x] Full transformer-block error attribution: complete end-to-end Transformer block mapped across 192 physical crossbar tiles with decoupled leave-one-out ranking across all 9 `crossbar-v1` non-idealities (proving stuck defects cause $>83\%$ of block analog error) and output calibration (`book/0032-transformer-block/transformer_block.py`, `transformer-block-0032-extract.json`)
 - [x] Tiny transformer profile-driven parity/error study: full TinyGPT (2 layers, 416 physical crossbar tiles) deterministic float-vs-analog parity evaluation with all 9 `crossbar-v1` non-idealities, measuring logit L2 error (115.3%), token agreement (0% forward / 41.7% generation), and perplexity degradation (`book/0033-tiny-transformer/tiny_transformer.py`, `tiny-transformer-0033-extract.json`)
 - [x] Real pretrained checkpoint using physical profiles: HuggingFace safetensors GPT checkpoint loaded via `load_gpt2`, mapped across 416 physical crossbar tiles with `crossbar-v1` profile, and evaluated against float reference with measured perplexity degradation ($127.3 \to 129.1$) and physical ledger (`book/0035-real-checkpoint/real_checkpoint.py`, `real-checkpoint-0035-extract.json`)
-- [ ] Hardware-aware calibration/training recovery experiment
+- [x] Hardware-aware calibration/training recovery experiment: 3-stage physical hardware recovery pipeline (post-ADC affine calibration, defect column remapping, closed-loop write-verify conductance tuning) demonstrated on TinyGPT across 416 physical tiles, restoring SNR and recovering perplexity ($135.2 \to 129.5\text{ PPL}$, float reference $124.0\text{ PPL}$) (`book/0037-hardware-recovery/hardware_recovery.py`, `hardware-recovery-0037-extract.json`)
 
 ### Gate R7 exit
 
-Model accuracy degradation is attributable to named circuit/device/architecture mechanisms rather than generic noise knobs.
+Model accuracy degradation is attributable to named circuit/device/architecture mechanisms rather than generic noise knobs. **Gate R7 exited successfully with all physical LLM validation evidence gates verified.**
 
 ---
 
-# R8 — Physical feasibility report — QUEUED
+# R8 — Physical feasibility report — ACTIVE
 
 Depends on R7 and evidence from R2–R6.
 

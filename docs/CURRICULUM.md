@@ -107,17 +107,17 @@ Chapter numbering below is canonical. Existing chapters keep their numbers; futu
 | 0034 | Full autoregressive path | token generation has complete architecture ledger | done |
 | 0035 | Real pretrained checkpoint | model runs using profile-driven accelerator configuration | done |
 | 0036 | Sensitivity and quantization | accuracy/cost trade-offs are reproducible with physical profiles | done |
-| 0037 | Hardware-aware recovery | training/calibration recovery under verified non-idealities is measurable | next |
+| 0037 | Hardware-aware recovery | training/calibration recovery under verified non-idealities is measurable | done |
 
 ## Part IX — Physical feasibility
 
-| # | Chapter | Verification target |
-|---|---|---|
-| 0038 | Latency ledger | timing coefficients are SPICE/derived/measured or explicitly assumed |
-| 0039 | Energy / power ledger | coefficients carry evidence class and provenance |
-| 0040 | Area / process model | area tied to explicit layout/process assumptions |
-| 0041 | Thermal / power density | operating envelope receives sanity checks |
-| 0042 | Integrated feasibility report | separates verified evidence, derived quantities and assumptions |
+| # | Chapter | Verification target | Status |
+|---|---|---|---|
+| 0038 | Latency ledger | timing coefficients are SPICE/derived/measured or explicitly assumed | next |
+| 0039 | Energy / power ledger | coefficients carry evidence class and provenance | |
+| 0040 | Area / process model | area tied to explicit layout/process assumptions | |
+| 0041 | Thermal / power density | operating envelope receives sanity checks | |
+| 0042 | Integrated feasibility report | separates verified evidence, derived quantities and assumptions | |
 
 ## Part X — Correlation with implementation
 

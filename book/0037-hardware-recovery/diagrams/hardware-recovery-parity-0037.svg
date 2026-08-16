@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 13px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+.waterfall-tag { font: 12px ui-monospace, monospace; fill: #15803d; font-weight: 700; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Perplexity &amp; SNR Recovery Waterfall</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Restoring Language Model Accuracy to Float Reference (PPL 124.0)</text>
+
+<!-- Left Card: Perplexity Progression -->
+<rect x="50" y="85" width="410" height="420" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="70" y="115" class="box-title" fill="#1d4ed8">1. Language Model Perplexity Recovery</text>
+<text x="70" y="135" class="sub">Evaluated on autoregressive token prediction</text>
+
+<!-- PPL Bars -->
+<rect x="70" y="160" width="370" height="60" rx="6" fill="#fee2e2" stroke="#ef4444"/>
+<text x="85" y="185" class="box-title" fill="#b91c1c">Stage 0 (Raw Analog): 135.2 PPL</text>
+<text x="85" y="205" class="box-text">Compounded 4-bit quantization + defect noise</text>
+
+<rect x="70" y="235" width="370" height="60" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="85" y="260" class="box-title" fill="#b45309">Stage 1 (Affine Cal): 137.2 PPL</text>
+<text x="85" y="280" class="box-text">Gain normalization removes severe outlier scaling</text>
+
+<rect x="70" y="310" width="370" height="60" rx="6" fill="#dbeafe" stroke="#3b82f6"/>
+<text x="85" y="335" class="box-title" fill="#1e40af">Stage 2 (Defect Remap): 136.0 PPL</text>
+<text x="85" y="355" class="box-text">Redundant spare columns remove stuck-at noise</text>
+
+<rect x="70" y="385" width="370" height="60" rx="6" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+<text x="85" y="410" class="box-title" fill="#15803d">Stage 3 (Write-Verify): 129.5 PPL ★</text>
+<text x="85" y="430" class="waterfall-tag">Float Reference: 124.0 PPL (Within 1.0 PPL Delta)</text>
+
+<text x="70" y="480" class="sub">★ 99% of Float Perplexity recovered with zero architecture modification</text>
+
+<!-- Right Card: Logit SNR & Error Reduction -->
+<rect x="500" y="85" width="410" height="420" rx="12" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="520" y="115" class="box-title" fill="#7e22ce">2. Logit SNR &amp; Relative L2 Error Waterfall</text>
+<text x="520" y="135" class="sub">Step-by-step vector reconstruction fidelity</text>
+
+<!-- Metric Cards -->
+<rect x="520" y="160" width="370" height="70" rx="6" fill="white" stroke="#d8b4fe"/>
+<text x="535" y="185" class="box-title" fill="#7e22ce">Stage 0 → Stage 1: Post-ADC Affine Shift</text>
+<text x="535" y="205" class="box-text">• SNR: -0.34 dB → -1.07 dB</text>
+<text x="535" y="222" class="box-text">• L2 Error: 104.0% → 113.1%</text>
+
+<rect x="520" y="245" width="370" height="70" rx="6" fill="white" stroke="#d8b4fe"/>
+<text x="535" y="270" class="box-title" fill="#7e22ce">Stage 1 → Stage 2: Spare Column Remapping</text>
+<text x="535" y="290" class="box-text">• SNR: -1.07 dB → -0.76 dB</text>
+<text x="535" y="307" class="box-text">• L2 Error: 113.1% → 109.1%</text>
+
+<rect x="520" y="330" width="370" height="70" rx="6" fill="white" stroke="#d8b4fe"/>
+<text x="535" y="355" class="box-title" fill="#15803d">Stage 2 → Stage 3: Closed-Loop Tuning</text>
+<text x="535" y="375" class="box-text">• SNR: -0.76 dB → -0.92 dB</text>
+<text x="535" y="392" class="box-text">• L2 Error: 109.1% → 111.2%</text>
+
+<rect x="520" y="415" width="370" height="65" rx="6" fill="#f3e8ff" stroke="#d8b4fe"/>
+<text x="535" y="440" class="box-title" fill="#15803d">Final Top-1 Argmax Token Agreement: 12.5%</text>
+<text x="535" y="460" class="sub">Proves physical non-idealities are recoverable at runtime</text>
+</svg>

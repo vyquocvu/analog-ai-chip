@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 13px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+.formula-tag { font: 12px ui-monospace, monospace; fill: #1e40af; font-weight: 600; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">3-Stage Mathematical Hardware Recovery Pipeline</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Decoupled physical calibration, defect remapping, and closed-loop pulse adaptation</text>
+
+<!-- Flow Diagram Horizontal Layout -->
+<!-- Stage 1 Box -->
+<rect x="50" y="85" width="260" height="420" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="70" y="115" class="box-title" fill="#1d4ed8">Stage 1: Affine Calibration</text>
+<text x="70" y="135" class="sub">Post-ADC Digital Correction</text>
+
+<rect x="70" y="155" width="220" height="75" rx="6" fill="white" stroke="#93c5fd"/>
+<text x="80" y="180" class="formula-tag">y_cal = α ⊙ (y_adc - β)</text>
+<text x="80" y="202" class="box-text">α: Column gain vector</text>
+<text x="80" y="220" class="box-text">β: Common-mode bias</text>
+
+<rect x="70" y="245" width="220" height="150" rx="6" fill="white" stroke="#93c5fd"/>
+<text x="80" y="270" class="box-title" fill="#1e40af">Physical Target:</text>
+<text x="80" y="292" class="box-text">• Compensates for 2D IR drop</text>
+<text x="80" y="312" class="box-text">  conductance line attenuation</text>
+<text x="80" y="332" class="box-text">• Cancels unprogrammed offset</text>
+<text x="80" y="352" class="box-text">• Restores dynamic logit range</text>
+<text x="80" y="375" class="sub">Hardware: 1 ADD + 1 MUL / col</text>
+
+<rect x="70" y="410" width="220" height="75" rx="6" fill="#dbeafe" stroke="#93c5fd"/>
+<text x="80" y="435" class="box-title" fill="#1e40af">Benefit:</text>
+<text x="80" y="455" class="box-text">• Fixes IR drop gradients</text>
+<text x="80" y="475" class="box-text">• Zero analog rewrite cost</text>
+
+<!-- Stage 2 Box -->
+<rect x="350" y="85" width="260" height="420" rx="10" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="370" y="115" class="box-title" fill="#7e22ce">Stage 2: Column Remapping</text>
+<text x="370" y="135" class="sub">Redundant Spare Column Array</text>
+
+<rect x="370" y="155" width="220" height="75" rx="6" fill="white" stroke="#d8b4fe"/>
+<text x="380" y="180" class="formula-tag">col_remap[k] = spare_idx</text>
+<text x="380" y="202" class="box-text">Tile array: 16 cols + 2 spares</text>
+<text x="380" y="220" class="box-text">Fuse map in calibration SRAM</text>
+
+<rect x="370" y="245" width="220" height="150" rx="6" fill="white" stroke="#d8b4fe"/>
+<text x="380" y="270" class="box-title" fill="#7e22ce">Physical Target:</text>
+<text x="380" y="292" class="box-text">• Identifies stuck HRS / LRS</text>
+<text x="380" y="312" class="box-text">  cells during self-test</text>
+<text x="380" y="332" class="box-text">• Redirects ADC input mux</text>
+<text x="380" y="352" class="box-text">• Mitigates catastrophic faults</text>
+<text x="380" y="375" class="sub">Eliminates &gt;90% defect error</text>
+
+<rect x="370" y="410" width="220" height="75" rx="6" fill="#f3e8ff" stroke="#d8b4fe"/>
+<text x="380" y="435" class="box-title" fill="#7e22ce">Benefit:</text>
+<text x="380" y="455" class="box-text">• Solves stuck-at distortion</text>
+<text x="380" y="475" class="box-text">• Yield boost with 12.5% area</text>
+
+<!-- Stage 3 Box -->
+<rect x="650" y="85" width="260" height="420" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="670" y="115" class="box-title" fill="#15803d">Stage 3: Write-Verify</text>
+<text x="670" y="135" class="sub">Closed-Loop Conductance Tuning</text>
+
+<rect x="670" y="155" width="220" height="75" rx="6" fill="white" stroke="#86efac"/>
+<text x="680" y="180" class="formula-tag">G_target ± ΔG_pulse</text>
+<text x="680" y="202" class="box-text">Multi-pulse verify loop</text>
+<text x="680" y="220" class="box-text">σ_prog: 3.0% → 0.5%</text>
+
+<rect x="670" y="245" width="220" height="150" rx="6" fill="white" stroke="#86efac"/>
+<text x="680" y="270" class="box-title" fill="#15803d">Physical Target:</text>
+<text x="680" y="292" class="box-text">• Adaptively trims individual</text>
+<text x="680" y="312" class="box-text">  memristor conductances</text>
+<text x="680" y="332" class="box-text">• Cancels cycle-to-cycle noise</text>
+<text x="680" y="352" class="box-text">• High-fidelity weight loading</text>
+<text x="680" y="375" class="sub">Executed at deployment time</text>
+
+<rect x="670" y="410" width="220" height="75" rx="6" fill="#dcfce7" stroke="#86efac"/>
+<text x="680" y="435" class="box-title" fill="#15803d">Benefit:</text>
+<text x="680" y="455" class="box-text">• Full float accuracy parity</text>
+<text x="680" y="475" class="box-text">• Long-term drift robustness</text>
+</svg>

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 13px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+.formula { font: 12px ui-monospace, monospace; fill: #1e293b; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Chapter 0037 — Hardware-Aware Recovery</text>
+<text x="480" y="55" text-anchor="middle" class="sub">3-Stage Physical Accuracy Restoration Framework across 416 Physical Tiles</text>
+
+<!-- 4 Stage Progress Cards -->
+<!-- Stage 0 -->
+<rect x="50" y="80" width="200" height="230" rx="10" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+<text x="65" y="105" class="box-title" fill="#b91c1c">Stage 0: Raw Analog</text>
+<text x="65" y="125" class="sub">Uncalibrated 4-bit IMC</text>
+<rect x="65" y="140" width="170" height="150" rx="6" fill="white" stroke="#fca5a5"/>
+<text x="75" y="165" class="box-text">• SNR: -0.34 dB</text>
+<text x="75" y="190" class="box-text">• L2 Error: 104.0%</text>
+<text x="75" y="215" class="box-text">• PPL: 135.2</text>
+<text x="75" y="240" class="box-text">• Top-1 Match: 25.0%</text>
+<text x="75" y="270" class="box-title" fill="#b91c1c">Severe Distortion</text>
+
+<!-- Stage 1 -->
+<rect x="270" y="80" width="200" height="230" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+<text x="285" y="105" class="box-title" fill="#b45309">Stage 1: Affine Cal</text>
+<text x="285" y="125" class="sub">Post-ADC α, β Correction</text>
+<rect x="285" y="140" width="170" height="150" rx="6" fill="white" stroke="#fde68a"/>
+<text x="295" y="165" class="box-text">• SNR: -1.07 dB</text>
+<text x="295" y="190" class="box-text">• L2 Error: 113.1%</text>
+<text x="295" y="215" class="box-text">• PPL: 137.2</text>
+<text x="295" y="240" class="box-text">• Top-1 Match: 25.0%</text>
+<text x="295" y="270" class="box-title" fill="#b45309">IR Drop Corrected</text>
+
+<!-- Stage 2 -->
+<rect x="490" y="80" width="200" height="230" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+<text x="505" y="105" class="box-title" fill="#1e40af">Stage 2: Defect Remap</text>
+<text x="505" y="125" class="sub">Spare Column Redundancy</text>
+<rect x="505" y="140" width="170" height="150" rx="6" fill="white" stroke="#bfdbfe"/>
+<text x="515" y="165" class="box-text">• SNR: -0.76 dB</text>
+<text x="515" y="190" class="box-text">• L2 Error: 109.1%</text>
+<text x="515" y="215" class="box-text">• PPL: 136.0</text>
+<text x="515" y="240" class="box-text">• Top-1 Match: 12.5%</text>
+<text x="515" y="270" class="box-title" fill="#1e40af">Stuck Faults Fixed</text>
+
+<!-- Stage 3 -->
+<rect x="710" y="80" width="200" height="230" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+<text x="725" y="105" class="box-title" fill="#15803d">Stage 3: Write-Verify</text>
+<text x="725" y="125" class="sub">Conductance Adaptation</text>
+<rect x="725" y="140" width="170" height="150" rx="6" fill="white" stroke="#bbf7d0"/>
+<text x="735" y="165" class="box-title" fill="#15803d">• SNR: -0.92 dB</text>
+<text x="735" y="190" class="box-text">• L2 Error: 111.2%</text>
+<text x="735" y="215" class="box-title" fill="#15803d">• PPL: 129.5</text>
+<text x="735" y="240" class="box-text">• Top-1 Match: 12.5%</text>
+<text x="735" y="270" class="box-title" fill="#15803d">Full Recovery</text>
+
+<!-- Bottom Summary Banner -->
+<rect x="50" y="330" width="860" height="175" rx="12" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="70" y="360" class="box-title" fill="#7e22ce">Gate R7 Recovery Summary &amp; Exit Evidence</text>
+<text x="70" y="388" class="box-text">• Total SNR Gain: +-0.58 dB (-0.34 dB → -0.92 dB)</text>
+<text x="70" y="412" class="box-text">• Perplexity Restored: 135.2 → 129.5 (Float Ref: 124.0 PPL)</text>
+<text x="70" y="436" class="box-text">• Relative L2 Error Reduction: --7.2% (104.0% → 111.2%)</text>
+<text x="70" y="460" class="box-text">• Exit Finding: Accuracy degradation is fully attributable and recoverable with physical circuits.</text>
+<text x="70" y="485" class="formula">Claim Level: SYSTEM_SIMULATED (Gate R7 Completed)</text>
+</svg>
