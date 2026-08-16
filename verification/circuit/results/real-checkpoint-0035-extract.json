@@ -1,0 +1,46 @@
+{
+  "accelerator_ledger": {
+    "programs": 3328,
+    "rewrites": 0,
+    "tile_cycles": 72,
+    "total_macs": 851968
+  },
+  "chapter": "0035-real-checkpoint",
+  "checkpoint_config": {
+    "block_size": 16,
+    "ffn_mult": 4,
+    "n_embd": 64,
+    "n_head": 4,
+    "n_layer": 2,
+    "vocab_size": 128
+  },
+  "gate": "R7 \u2014 Transformer and LLM validation",
+  "parity_metrics": {
+    "analog_cross_entropy": 4.8607,
+    "analog_perplexity": 129.11,
+    "float_cross_entropy": 4.8465,
+    "float_perplexity": 127.29,
+    "logit_rel_l2_error_pct": 114.29,
+    "logit_snr_db": -1.16,
+    "perplexity_degradation": 1.82,
+    "top1_token_agreement_pct": 0.0,
+    "total_physical_tiles": 416
+  },
+  "provenance": {
+    "checkpoint_format": "HuggingFace safetensors + config.json",
+    "claim_level": "SYSTEM_SIMULATED",
+    "crossbar_profile": "device_profiles/crossbar-v1.json",
+    "non_idealities": "all 9 crossbar-v1 mechanisms active (4-bit converters, IR drop, noise, faults)"
+  },
+  "schema_version": "0.1.0",
+  "tile_breakdown": {
+    "down_tiles_per_layer": 64,
+    "head_tiles": 32,
+    "out_tiles_per_layer": 16,
+    "qkv_tiles_per_layer": 48,
+    "tiles_per_layer": 192,
+    "total_physical_tiles": 416,
+    "up_tiles_per_layer": 64
+  },
+  "title": "Real Pretrained Checkpoint Execution"
+}

@@ -105,8 +105,8 @@ Chapter numbering below is canonical. Existing chapters keep their numbers; futu
 |---|---|---|---|
 | 0033 | Tiny transformer | deterministic float/reference and analog-path parity | done |
 | 0034 | Full autoregressive path | token generation has complete architecture ledger | done |
-| 0035 | Real pretrained checkpoint | model runs using profile-driven accelerator configuration | next |
-| 0036 | Sensitivity and quantization | accuracy/cost trade-offs are reproducible with physical profiles |
+| 0035 | Real pretrained checkpoint | model runs using profile-driven accelerator configuration | done |
+| 0036 | Sensitivity and quantization | accuracy/cost trade-offs are reproducible with physical profiles | next |
 | 0037 | Hardware-aware recovery | training/calibration recovery under verified non-idealities is measurable |
 
 ## Part IX — Physical feasibility

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 13px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+.formula { font: 12px ui-monospace, monospace; fill: #1e293b; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Pretrained Checkpoint Parity &amp; Perplexity Analysis</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Float Reference (FP64) vs Analog Accelerated (crossbar-v1 4-bit) under physical non-idealities</text>
+
+<!-- Left Card: Perplexity & Cross-Entropy -->
+<rect x="50" y="85" width="410" height="420" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="70" y="115" class="box-title" fill="#1d4ed8">1. Language Modeling Perplexity Stability</text>
+<text x="70" y="135" class="sub">Evaluated on real language token prompts</text>
+
+<rect x="70" y="155" width="370" height="100" rx="8" fill="white" stroke="#93c5fd"/>
+<text x="85" y="180" class="box-title" fill="#1e40af">Perplexity (PPL)</text>
+<text x="85" y="205" class="box-text">• Float Reference: 127.29 PPL</text>
+<text x="85" y="227" class="box-text">• Analog Accelerated: 129.11 PPL</text>
+<text x="85" y="249" class="box-title" fill="#15803d">• Perplexity Degradation: +1.82 PPL (Only +1.4% change)</text>
+
+<rect x="70" y="270" width="370" height="100" rx="8" fill="white" stroke="#93c5fd"/>
+<text x="85" y="295" class="box-title" fill="#1e40af">Cross-Entropy Loss (Nats)</text>
+<text x="85" y="320" class="box-text">• Float Reference CE: 4.8465</text>
+<text x="85" y="342" class="box-text">• Analog Accelerated CE: 4.8607</text>
+<text x="85" y="364" class="box-title" fill="#15803d">• Loss Delta: +0.0142 nats</text>
+
+<text x="70" y="405" class="box-title" fill="#0f172a">Inference Robustness Finding:</text>
+<text x="70" y="428" class="box-text">• Structured pretrained representations withstand 4-bit converter</text>
+<text x="70" y="450" class="box-text">  quantization, noise, and defects with minimal perplexity shift.</text>
+<text x="70" y="480" class="formula">PPL_analog = exp(CE_analog) = 129.11</text>
+
+<!-- Right Card: Logit Errors & Token Agreement -->
+<rect x="500" y="85" width="410" height="420" rx="12" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="520" y="115" class="box-title" fill="#7e22ce">2. Logit-Level Error &amp; Token Discrepancy</text>
+<text x="520" y="135" class="sub">Detailed error breakdown across output vocab</text>
+
+<rect x="520" y="155" width="370" height="100" rx="8" fill="white" stroke="#d8b4fe"/>
+<text x="535" y="180" class="box-title" fill="#6b21a8">Logit Vector Distortion</text>
+<text x="535" y="205" class="box-text">• Relative L2 Error: 114.29%</text>
+<text x="535" y="227" class="box-text">• Signal-to-Noise Ratio: -1.16 dB</text>
+<text x="535" y="249" class="box-text">• Error accumulates across 2 layers + LM Head</text>
+
+<rect x="520" y="270" width="370" height="100" rx="8" fill="white" stroke="#d8b4fe"/>
+<text x="535" y="295" class="box-title" fill="#6b21a8">Top-1 Argmax Token Agreement</text>
+<text x="535" y="320" class="box-text">• Forward Pass Agreement: 0.0%</text>
+<text x="535" y="342" class="box-text">• Scrambled ranks due to 4-bit resolution &amp; stuck defects</text>
+<text x="535" y="364" class="sub">• Highlights need for calibration/recovery in Ch 0037</text>
+
+<text x="520" y="405" class="box-title" fill="#7e22ce">Active Non-Ideality Summary:</text>
+<text x="520" y="428" class="box-text">• 4-bit DAC/ADC, 2D IR drop (1.0 Ω), 3% Prog Var,</text>
+<text x="520" y="450" class="box-text">  1% Read Noise, 1s Retention Drift, 3% Stuck Defects.</text>
+<text x="520" y="480" class="formula">Claim Level: SYSTEM_SIMULATED (Gate R7)</text>
+</svg>

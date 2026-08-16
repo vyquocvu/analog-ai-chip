@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 14px; font-weight: 700; }
+.box-text { font-size: 12px; fill: #334155; }
+.formula { font: 12px ui-monospace, monospace; fill: #1e293b; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Chapter 0035 — Real Pretrained Checkpoint Execution</text>
+<text x="480" y="55" text-anchor="middle" class="sub">HuggingFace safetensors checkpoint mapped across 416 physical crossbar tiles</text>
+
+<!-- Checkpoint Ingestion Box -->
+<rect x="50" y="80" width="410" height="210" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="70" y="105" class="box-title" fill="#1d4ed8">1. HuggingFace Safetensors Ingestion</text>
+<text x="70" y="130" class="box-text">• Format: model.safetensors + config.json (GPT-2 layout)</text>
+<text x="70" y="155" class="box-text">• Transposition: Conv1D [in, out] → Simulator [out, in]</text>
+<text x="70" y="180" class="box-text">• Architecture: 2 Layers, 4 Heads, d_model=64, Vocab=128</text>
+<text x="70" y="205" class="box-title" fill="#15803d">• Physical Footprint: 416 Physical 16×16 Tiles</text>
+<text x="70" y="230" class="sub">Tied LM Head (W_head = W_tok_emb) across 32 tiles</text>
+<text x="70" y="255" class="formula">MACs=851,968  Tile Cycles=72  Programs=3328</text>
+
+<!-- Parity Ledger Box -->
+<rect x="500" y="80" width="410" height="210" rx="12" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="520" y="105" class="box-title" fill="#7e22ce">2. Float Reference vs Analog Parity</text>
+
+<rect x="520" y="120" width="370" height="155" rx="8" fill="white" stroke="#d8b4fe"/>
+<text x="535" y="145" class="box-text">• Logit L2 Error: 114.3% (SNR: -1.2 dB)</text>
+<text x="535" y="170" class="box-text">• Top-1 Argmax Token Agreement: 0.0%</text>
+<text x="535" y="195" class="box-text">• Float PPL: 127.3 → Analog PPL: 129.1</text>
+<text x="535" y="220" class="box-text">• Float CE: 4.846 → Analog CE: 4.861</text>
+<text x="535" y="245" class="box-title" fill="#7e22ce">• 4-bit Converters + 9 Non-Idealities Compounded</text>
+
+<!-- Execution Pipeline Floorplan -->
+<rect x="50" y="310" width="860" height="200" rx="12" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+<text x="70" y="335" class="box-title">3. Profile-Driven Checkpoint Execution Pipeline</text>
+
+<rect x="70" y="355" width="150" height="135" rx="8" fill="#dbeafe" stroke="#3b82f6"/>
+<text x="85" y="375" class="box-title" fill="#1e40af">HF Checkpoint Loader</text>
+<text x="85" y="400" class="box-text">• load_gpt2()</text>
+<text x="85" y="422" class="box-text">• Fail-closed check</text>
+<text x="85" y="444" class="box-text">• Auto-transpose</text>
+<text x="85" y="468" class="sub">• Ingests FP32 tensors</text>
+
+<rect x="240" y="355" width="220" height="135" rx="8" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="255" y="375" class="box-title" fill="#b45309">Tile Profile Adapter</text>
+<text x="255" y="400" class="box-text">• crossbar-v1.json (4-bit)</text>
+<text x="255" y="422" class="box-text">• Conductance: [10, 100] µS</text>
+<text x="255" y="444" class="box-text">• IR Drop, Noise, Faults</text>
+<text x="255" y="468" class="sub">• 416 Tiles configured</text>
+
+<rect x="480" y="355" width="200" height="135" rx="8" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="495" y="375" class="box-title" fill="#b45309">Analog Tile MVM</text>
+<text x="495" y="400" class="box-text">• 851,968 MACs / pass</text>
+<text x="495" y="422" class="box-text">• 72 Tile cycles</text>
+<text x="495" y="444" class="box-text">• Spatial tile residency</text>
+<text x="495" y="468" class="sub">• Zero DRAM stalls</text>
+
+<rect x="700" y="355" width="190" height="135" rx="8" fill="#dcfce7" stroke="#22c55e"/>
+<text x="715" y="375" class="box-title" fill="#15803d">Parity / Loss Ledger</text>
+<text x="715" y="400" class="box-text">• L2 Error: 114.3%</text>
+<text x="715" y="422" class="box-text">• PPL Delta: 1.8</text>
+<text x="715" y="444" class="box-text">• Claim: SYSTEM_SIMULATED</text>
+<text x="715" y="468" class="sub">• Deterministic evidence</text>
+</svg>

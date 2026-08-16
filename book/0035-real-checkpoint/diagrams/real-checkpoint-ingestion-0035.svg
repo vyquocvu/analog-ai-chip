@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 13px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+.tensor-tag { font: 11px ui-monospace, monospace; fill: #1e40af; font-weight: 600; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">HuggingFace Safetensors Checkpoint Ingestion Pipeline</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Tensor mapping, Conv1D transposition, and physical 16×16 tile block slicing</text>
+
+<!-- Ingestion Stage 1: Safetensors File -->
+<rect x="50" y="85" width="260" height="420" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+<text x="70" y="115" class="box-title" fill="#0f172a">1. HuggingFace Safetensors</text>
+<text x="70" y="135" class="sub">model.safetensors + config.json</text>
+
+<rect x="70" y="155" width="220" height="60" rx="6" fill="white" stroke="#cbd5e1"/>
+<text x="80" y="175" class="tensor-tag">transformer.wte.weight</text>
+<text x="80" y="195" class="box-text">Shape: [128, 64] (Vocab × Dim)</text>
+
+<rect x="70" y="225" width="220" height="60" rx="6" fill="white" stroke="#cbd5e1"/>
+<text x="80" y="245" class="tensor-tag">h.0.attn.c_attn.weight</text>
+<text x="80" y="265" class="box-text">Conv1D Shape: [64, 192]</text>
+
+<rect x="70" y="295" width="220" height="60" rx="6" fill="white" stroke="#cbd5e1"/>
+<text x="80" y="315" class="tensor-tag">h.0.mlp.c_fc.weight</text>
+<text x="80" y="335" class="box-text">Conv1D Shape: [64, 256]</text>
+
+<rect x="70" y="365" width="220" height="60" rx="6" fill="white" stroke="#cbd5e1"/>
+<text x="80" y="385" class="tensor-tag">h.0.mlp.c_proj.weight</text>
+<text x="80" y="405" class="box-text">Conv1D Shape: [256, 64]</text>
+
+<rect x="70" y="435" width="220" height="55" rx="6" fill="#f1f5f9" stroke="#cbd5e1"/>
+<text x="80" y="455" class="box-text">• Read via read_safetensors()</text>
+<text x="80" y="475" class="box-text">• Fail-closed shape assertion</text>
+
+<!-- Ingestion Stage 2: Transposition Bridge -->
+<rect x="350" y="85" width="260" height="420" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="370" y="115" class="box-title" fill="#1d4ed8">2. Layout Transposition</text>
+<text x="370" y="135" class="sub">Conv1D [in, out] → Matmul [out, in]</text>
+
+<rect x="370" y="155" width="220" height="60" rx="6" fill="white" stroke="#93c5fd"/>
+<text x="380" y="175" class="tensor-tag">tok_emb / head (tied)</text>
+<text x="380" y="195" class="box-text">No transpose: [128, 64]</text>
+
+<rect x="370" y="225" width="220" height="60" rx="6" fill="white" stroke="#93c5fd"/>
+<text x="380" y="245" class="tensor-tag">0.wqkv = c_attn.T</text>
+<text x="380" y="265" class="box-text">Transposed: [192, 64]</text>
+
+<rect x="370" y="295" width="220" height="60" rx="6" fill="white" stroke="#93c5fd"/>
+<text x="380" y="315" class="tensor-tag">0.wup = c_fc.T</text>
+<text x="380" y="335" class="box-text">Transposed: [256, 64]</text>
+
+<rect x="370" y="365" width="220" height="60" rx="6" fill="white" stroke="#93c5fd"/>
+<text x="380" y="385" class="tensor-tag">0.wdown = c_proj.T</text>
+<text x="380" y="405" class="box-text">Transposed: [64, 256]</text>
+
+<rect x="370" y="435" width="220" height="55" rx="6" fill="#dbeafe" stroke="#93c5fd"/>
+<text x="380" y="455" class="box-text">• Standard h @ W.T matmul</text>
+<text x="380" y="475" class="box-text">• Zero tensor copy overhead</text>
+
+<!-- Ingestion Stage 3: Physical Tile Slicing -->
+<rect x="650" y="85" width="260" height="420" rx="10" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="670" y="115" class="box-title" fill="#7e22ce">3. Crossbar Tile Slicing</text>
+<text x="670" y="135" class="sub">16×16 Physical Tile Partitions</text>
+
+<rect x="670" y="155" width="220" height="60" rx="6" fill="white" stroke="#d8b4fe"/>
+<text x="680" y="175" class="tensor-tag">W_head: 32 Tiles</text>
+<text x="680" y="195" class="box-text">8 Rows × 4 Cols (16×16)</text>
+
+<rect x="670" y="225" width="220" height="60" rx="6" fill="white" stroke="#d8b4fe"/>
+<text x="680" y="245" class="tensor-tag">W_QKV: 48 Tiles/Layer</text>
+<text x="680" y="265" class="box-text">12 Rows × 4 Cols (16×16)</text>
+
+<rect x="670" y="295" width="220" height="60" rx="6" fill="white" stroke="#d8b4fe"/>
+<text x="680" y="315" class="tensor-tag">W_up: 64 Tiles/Layer</text>
+<text x="680" y="335" class="box-text">16 Rows × 4 Cols (16×16)</text>
+
+<rect x="670" y="365" width="220" height="60" rx="6" fill="white" stroke="#d8b4fe"/>
+<text x="680" y="385" class="tensor-tag">W_down: 64 Tiles/Layer</text>
+<text x="680" y="405" class="box-text">4 Rows × 16 Cols (16×16)</text>
+
+<rect x="670" y="435" width="220" height="55" rx="6" fill="#f3e8ff" stroke="#d8b4fe"/>
+<text x="680" y="455" class="box-title" fill="#15803d">Total: 416 Physical Tiles</text>
+<text x="680" y="475" class="sub">Conductance window [10, 100] µS</text>
+</svg>

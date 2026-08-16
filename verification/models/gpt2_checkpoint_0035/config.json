@@ -1,0 +1,8 @@
+{
+  "vocab_size": 128,
+  "n_embd": 64,
+  "n_layer": 2,
+  "n_head": 4,
+  "n_positions": 16,
+  "model_type": "gpt2"
+}

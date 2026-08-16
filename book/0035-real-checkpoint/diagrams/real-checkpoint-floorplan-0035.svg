@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 14px; font-weight: 700; }
+.box-text { font-size: 12px; fill: #334155; }
+.formula { font: 12px ui-monospace, monospace; fill: #1e293b; }
+.tile-box { font: 11px ui-monospace, monospace; fill: #1e293b; font-weight: 600; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Pretrained Checkpoint Hardware Floorplan &amp; Tile Residency</text>
+<text x="480" y="55" text-anchor="middle" class="sub">416 Physical 16×16 Crossbar Tiles mapped to HuggingFace GPT Checkpoint</text>
+
+<!-- Layer 0 Cluster -->
+<rect x="50" y="80" width="410" height="260" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="70" y="105" class="box-title" fill="#1d4ed8">Layer 0 Cluster (192 Tiles @ 16×16)</text>
+
+<rect x="70" y="120" width="170" height="90" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="155" y="145" text-anchor="middle" class="box-title" fill="#b45309">0.wqkv (192×64)</text>
+<text x="155" y="170" text-anchor="middle" class="tile-box">48 Tiles (12×4)</text>
+<text x="155" y="195" text-anchor="middle" class="sub">12,288 MACs</text>
+
+<rect x="260" y="120" width="180" height="90" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="350" y="145" text-anchor="middle" class="box-title" fill="#b45309">0.wo (64×64)</text>
+<text x="350" y="170" text-anchor="middle" class="tile-box">16 Tiles (4×4)</text>
+<text x="350" y="195" text-anchor="middle" class="sub">4,096 MACs</text>
+
+<rect x="70" y="225" width="170" height="95" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="155" y="250" text-anchor="middle" class="box-title" fill="#b45309">0.wup (256×64)</text>
+<text x="155" y="275" text-anchor="middle" class="tile-box">64 Tiles (16×4)</text>
+<text x="155" y="300" text-anchor="middle" class="sub">16,384 MACs</text>
+
+<rect x="260" y="225" width="180" height="95" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="350" y="250" text-anchor="middle" class="box-title" fill="#b45309">0.wdown (64×256)</text>
+<text x="350" y="275" text-anchor="middle" class="tile-box">64 Tiles (4×16)</text>
+<text x="350" y="300" text-anchor="middle" class="sub">16,384 MACs</text>
+
+<!-- Layer 1 Cluster -->
+<rect x="500" y="80" width="410" height="260" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="520" y="105" class="box-title" fill="#1d4ed8">Layer 1 Cluster (192 Tiles @ 16×16)</text>
+
+<rect x="520" y="120" width="170" height="90" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="605" y="145" text-anchor="middle" class="box-title" fill="#b45309">1.wqkv (192×64)</text>
+<text x="605" y="170" text-anchor="middle" class="tile-box">48 Tiles (12×4)</text>
+<text x="605" y="195" text-anchor="middle" class="sub">12,288 MACs</text>
+
+<rect x="710" y="120" width="180" height="90" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="800" y="145" text-anchor="middle" class="box-title" fill="#b45309">1.wo (64×64)</text>
+<text x="800" y="170" text-anchor="middle" class="tile-box">16 Tiles (4×4)</text>
+<text x="800" y="195" text-anchor="middle" class="sub">4,096 MACs</text>
+
+<rect x="520" y="225" width="170" height="95" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="605" y="250" text-anchor="middle" class="box-title" fill="#b45309">1.wup (256×64)</text>
+<text x="605" y="275" text-anchor="middle" class="tile-box">64 Tiles (16×4)</text>
+<text x="605" y="300" text-anchor="middle" class="sub">16,384 MACs</text>
+
+<rect x="710" y="225" width="180" height="95" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="800" y="250" text-anchor="middle" class="box-title" fill="#b45309">1.wdown (64×256)</text>
+<text x="800" y="275" text-anchor="middle" class="tile-box">64 Tiles (4×16)</text>
+<text x="800" y="300" text-anchor="middle" class="sub">16,384 MACs</text>
+
+<!-- LM Head & Global Bus Subsystems -->
+<rect x="50" y="360" width="860" height="150" rx="12" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+
+<!-- Tied LM Head Cluster -->
+<rect x="70" y="380" width="260" height="110" rx="8" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="200" y="405" text-anchor="middle" class="box-title" fill="#b45309">Tied LM Head (128×64)</text>
+<text x="200" y="430" text-anchor="middle" class="tile-box">32 Tiles (8×4 Grid)</text>
+<text x="200" y="450" text-anchor="middle" class="sub">Tied to transformer.wte.weight</text>
+<text x="200" y="470" text-anchor="middle" class="sub">8,192 MACs / pass</text>
+
+<!-- Central SRAM Pool -->
+<rect x="350" y="380" width="260" height="110" rx="8" fill="white" stroke="#d8b4fe"/>
+<text x="480" y="405" text-anchor="middle" class="box-title" fill="#7e22ce">On-Chip SRAM Pool (32 KB)</text>
+<text x="480" y="430" text-anchor="middle" class="box-text">KV Cache + Activation Buffers</text>
+<text x="480" y="450" text-anchor="middle" class="box-text">Energy: 1.0 pJ / Byte</text>
+<text x="480" y="470" text-anchor="middle" class="sub">Zero DRAM Weight Traffic</text>
+
+<!-- Digital SIMD Vector Units -->
+<rect x="630" y="380" width="260" height="110" rx="8" fill="#dbeafe" stroke="#3b82f6"/>
+<text x="760" y="405" text-anchor="middle" class="box-title" fill="#1e40af">Digital SIMD Units</text>
+<text x="760" y="430" text-anchor="middle" class="box-text">LayerNorm 1, 2, Final (FP32/INT8)</text>
+<text x="760" y="450" text-anchor="middle" class="box-text">Softmax Attention &amp; GELU</text>
+<text x="760" y="470" text-anchor="middle" class="sub">Energy: 200.0 fJ / MAC</text>
+</svg>
