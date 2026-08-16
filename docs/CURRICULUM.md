@@ -96,8 +96,8 @@ Chapter numbering below is canonical. Existing chapters keep their numbers; futu
 | 0028 | MLP | up/down projections preserve reference behavior within error budget | done |
 | 0029 | Q/K/V projections | transformer projections route through the analog path correctly | done |
 | 0030 | Attention boundary | static analog-friendly work and dynamic digital work are separated honestly | done |
-| 0031 | KV cache | dynamic state capacity and traffic are explicitly modeled | next |
-| 0032 | Transformer block | block-level error is attributable to named mechanisms |
+| 0031 | KV cache | dynamic state capacity and traffic are explicitly modeled | done |
+| 0032 | Transformer block | block-level error is attributable to named mechanisms | next |
 
 ## Part VIII — LLM inference and robustness
 

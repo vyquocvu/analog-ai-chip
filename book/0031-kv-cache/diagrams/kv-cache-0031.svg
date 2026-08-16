@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 14px; font-weight: 700; }
+.box-text { font-size: 12px; fill: #334155; }
+.formula { font: 12px ui-monospace, monospace; fill: #1e293b; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Chapter 0031 — Key-Value (KV) Cache Memory &amp; Traffic</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Dynamic token state capacity, autoregressive traffic scaling, and paging efficiency</text>
+
+<!-- Capacity & Precision Box -->
+<rect x="50" y="85" width="410" height="420" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="70" y="115" class="box-title" fill="#1d4ed8">1. KV Cache Footprint &amp; Precision Scaling</text>
+<text x="70" y="135" class="sub">TinyGPT: 4 layers, d_model=64, Context L=128 tokens</text>
+
+<rect x="70" y="155" width="370" height="150" rx="8" fill="white" stroke="#93c5fd"/>
+<text x="85" y="180" class="box-title" fill="#1e40af">Footprint Across Bit-Widths (128 Tokens)</text>
+<text x="85" y="202" class="box-text">• 4-bit Quantized: 32.0 KB (32768 bytes) [Baseline]</text>
+<text x="85" y="222" class="box-text">• 8-bit Quantized: 64.0 KB (65536 bytes) [2.0× footprint]</text>
+<text x="85" y="242" class="box-text">• 16-bit FP16: 128.0 KB (131072 bytes) [4.0× footprint]</text>
+<text x="85" y="262" class="box-text">• 32-bit FP32: 256.0 KB (262144 bytes) [8.0× footprint]</text>
+<text x="85" y="282" class="sub">S_KV = 2 · n_layers · L · d_model · (B_act / 8)</text>
+
+<rect x="70" y="320" width="370" height="165" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="85" y="345" class="box-title">Paging Efficiency (Prompt=32, Gen=96)</text>
+<text x="85" y="370" class="box-text">• Contiguous Pre-alloc: 32.0 KB (Frag: 0.0%)</text>
+<text x="85" y="392" class="box-text">• Paged Alloc (Block=16): 32.0 KB (Frag: 0.0%)</text>
+<text x="85" y="415" class="box-title" fill="#15803d">• Paged KV eliminates external memory fragmentation</text>
+<text x="85" y="440" class="formula">B_per_step = 4 layers · 2 · 64 · 0.5 B = 256 B/tok</text>
+
+<!-- Traffic & Energy Box -->
+<rect x="500" y="85" width="410" height="420" rx="12" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="520" y="115" class="box-title" fill="#7e22ce">2. Autoregressive Traffic &amp; Memory Tiers</text>
+<text x="520" y="135" class="sub">Quadratic cumulative read bandwidth demands O(L²)</text>
+
+<!-- Traffic Breakdown -->
+<rect x="520" y="155" width="370" height="150" rx="8" fill="white" stroke="#d8b4fe"/>
+<text x="535" y="180" class="box-title" fill="#6b21a8">Generation Traffic (Prompt=32, Gen=96)</text>
+<text x="535" y="202" class="box-text">• Total Write Traffic: 32.0 KB (256 B / token)</text>
+<text x="535" y="222" class="box-text">• Total Read Traffic: 1908.0 KB (quadratic read)</text>
+<text x="535" y="242" class="box-title" fill="#1e40af">• Cumulative KV Traffic: 1940.0 KB (1986560 bytes)</text>
+<text x="535" y="262" class="sub">Read traffic dominates write traffic by 59.6×</text>
+
+<!-- Memory Tiers Energy -->
+<rect x="520" y="320" width="370" height="165" rx="8" fill="#f0fdf4" stroke="#86efac"/>
+<text x="535" y="345" class="box-title" fill="#166534">Memory Hierarchy Energy Ledger</text>
+<text x="535" y="370" class="box-text">• Local On-Chip SRAM (1.0 pJ/B): 1986.6 nJ</text>
+<text x="535" y="392" class="box-text">• Off-Chip DRAM / HBM (20.0 pJ/B): 39731.2 nJ</text>
+<text x="535" y="415" class="box-title" fill="#15803d">• On-Chip SRAM saves 20.0× memory access energy</text>
+<text x="535" y="440" class="formula">E_SRAM = 1986.6 nJ vs E_DRAM = 39731.2 nJ</text>
+</svg>

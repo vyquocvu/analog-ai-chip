@@ -1,0 +1,70 @@
+{
+  "chapter": "0031-kv-cache",
+  "evaluations": {
+    "full_context_128": {
+      "contiguous_allocated_bytes": 32768,
+      "contiguous_fragmentation_pct": 0.0,
+      "dram_total_energy_nj": 39731.2,
+      "gen_len": 96,
+      "paged_allocated_bytes": 32768,
+      "paged_fragmentation_pct": 0.0,
+      "peak_kv_cache_bytes": 32768,
+      "prompt_len": 32,
+      "sram_total_energy_nj": 1986.56,
+      "total_kv_traffic_bytes": 1986560,
+      "total_read_bytes": 1953792,
+      "total_seq_len": 128,
+      "total_write_bytes": 32768
+    },
+    "medium_sequence_64": {
+      "contiguous_allocated_bytes": 32768,
+      "contiguous_fragmentation_pct": 50.0,
+      "dram_total_energy_nj": 8110.08,
+      "gen_len": 32,
+      "paged_allocated_bytes": 16384,
+      "paged_fragmentation_pct": 0.0,
+      "peak_kv_cache_bytes": 16384,
+      "prompt_len": 32,
+      "sram_total_energy_nj": 405.504,
+      "total_kv_traffic_bytes": 405504,
+      "total_read_bytes": 389120,
+      "total_seq_len": 64,
+      "total_write_bytes": 16384
+    },
+    "short_sequence_32": {
+      "contiguous_allocated_bytes": 32768,
+      "contiguous_fragmentation_pct": 75.0,
+      "dram_total_energy_nj": 2088.96,
+      "gen_len": 16,
+      "paged_allocated_bytes": 8192,
+      "paged_fragmentation_pct": 0.0,
+      "peak_kv_cache_bytes": 8192,
+      "prompt_len": 16,
+      "sram_total_energy_nj": 104.448,
+      "total_kv_traffic_bytes": 104448,
+      "total_read_bytes": 96256,
+      "total_seq_len": 32,
+      "total_write_bytes": 8192
+    }
+  },
+  "formulas": {
+    "cumulative_read": "T_read_total = T_write * sum(t=prompt_len)^(L-1) t",
+    "kv_capacity": "S_KV = 2 * n_layers * L * d_model * (B_act / 8) bytes",
+    "per_step_read": "T_read(t) = 2 * n_layers * t * d_model * (B_act / 8) bytes/token",
+    "per_step_write": "T_write = 2 * n_layers * d_model * (B_act / 8) bytes/token"
+  },
+  "gate": "R7 \u2014 Transformer and LLM validation",
+  "precision_comparison_128_ctx": {
+    "16bit_fp16_bytes": 131072,
+    "32bit_fp32_bytes": 262144,
+    "4bit_bytes": 32768,
+    "8bit_bytes": 65536
+  },
+  "provenance": {
+    "architecture_ledger": "Chapter 0026 architecture_ledger.py",
+    "claim_level": "SYSTEM_SIMULATED",
+    "sram_buffers_model": "Chapter 0024 sram_buffers.py"
+  },
+  "schema_version": "0.1.0",
+  "title": "KV Cache Capacity and Traffic Model"
+}
