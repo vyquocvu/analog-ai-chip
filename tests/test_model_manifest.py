@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import pytest
+
 from analog_llm.model_manifest import ModelManifest, TensorDescriptor
 
 
@@ -38,7 +39,7 @@ def test_tiny_manifest_has_hand_computable_shapes_parameters_macs_and_kv() -> No
     assert specs["layers.0.attn.k.weight"].shape == (4, 4)
     assert specs["layers.0.mlp.up.weight"].shape == (8, 4)
     assert specs["layers.0.mlp.down.weight"].shape == (4, 8)
-    assert "lm_head.weight" not in specs  # tied to token_embedding.weight
+    assert "lm_head.weight" not in specs
 
     # Hand count:
     # embeddings 10*4 + 8*4 = 72
@@ -78,7 +79,7 @@ def test_llama_style_semantics_are_not_coerced_to_gpt2() -> None:
 
     specs = manifest.expected_tensors()
     assert "position_embedding.weight" not in specs
-    assert specs["layers.0.attn.k.weight"].shape == (4, 8)  # GQA: 2 KV heads * dim 2
+    assert specs["layers.0.attn.k.weight"].shape == (4, 8)
     assert specs["layers.0.attn.v.weight"].shape == (4, 8)
     assert specs["layers.0.mlp.gate.weight"].shape == (12, 8)
     assert specs["layers.0.mlp.up.weight"].shape == (12, 8)
