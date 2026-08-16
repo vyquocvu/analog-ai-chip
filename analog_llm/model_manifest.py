@@ -21,7 +21,12 @@ _SUPPORTED_LAYOUTS = {"out_in", "rows_cols", "vector"}
 
 @dataclass(frozen=True)
 class TensorDescriptor:
-    """Expected tensor shape plus an explicit, non-ambiguous layout contract."""
+    """Tensor shape plus an explicit checkpoint layout declaration.
+
+    The descriptor permits an arbitrary layout string so that inventory
+    validation can reject ambiguous/unsupported checkpoint metadata at the
+    contract boundary rather than during descriptor construction.
+    """
 
     shape: tuple[int, ...]
     layout: str
@@ -29,11 +34,6 @@ class TensorDescriptor:
     def __post_init__(self) -> None:
         if not self.shape or any(dim <= 0 for dim in self.shape):
             raise ValueError(f"tensor shape must contain positive dimensions, got {self.shape}")
-        if self.layout not in _SUPPORTED_LAYOUTS:
-            raise ValueError(
-                f"unsupported tensor layout {self.layout!r}; expected one of "
-                f"{sorted(_SUPPORTED_LAYOUTS)}"
-            )
 
     @property
     def elements(self) -> int:
@@ -87,15 +87,15 @@ class ModelManifest:
         if invalid:
             raise ValueError(f"manifest dimensions must be positive: {', '.join(invalid)}")
 
-        if self.hidden_size != self.num_attention_heads * self.head_dim:
-            raise ValueError(
-                "head_dim is inconsistent with hidden_size and num_attention_heads: "
-                f"{self.hidden_size} != {self.num_attention_heads} * {self.head_dim}"
-            )
         if self.num_attention_heads % self.num_key_value_heads != 0:
             raise ValueError(
                 "num_key_value_heads must divide the number of attention heads "
                 f"({self.num_attention_heads} % {self.num_key_value_heads} != 0)"
+            )
+        if self.hidden_size != self.num_attention_heads * self.head_dim:
+            raise ValueError(
+                "head_dim is inconsistent with hidden_size and num_attention_heads: "
+                f"{self.hidden_size} != {self.num_attention_heads} * {self.head_dim}"
             )
         if self.dtype not in _SUPPORTED_DTYPES:
             raise ValueError(f"unsupported dtype {self.dtype!r}")
@@ -152,7 +152,7 @@ class ModelManifest:
                 if self.linear_bias:
                     specs[f"{prefix}.mlp.up.bias"] = TensorDescriptor((m,), "vector")
                     specs[f"{prefix}.mlp.down.bias"] = TensorDescriptor((h,), "vector")
-            else:  # swiglu
+            else:
                 specs[f"{prefix}.mlp.gate.weight"] = TensorDescriptor((m, h), "out_in")
                 specs[f"{prefix}.mlp.up.weight"] = TensorDescriptor((m, h), "out_in")
                 specs[f"{prefix}.mlp.down.weight"] = TensorDescriptor((h, m), "out_in")
@@ -197,9 +197,7 @@ class ModelManifest:
         if tokens <= 0:
             raise ValueError("tokens must be positive")
         if tokens > self.max_context:
-            raise ValueError(
-                f"tokens {tokens} exceed max_context {self.max_context}"
-            )
+            raise ValueError(f"tokens {tokens} exceed max_context {self.max_context}")
         return tokens * self.num_layers * self.kv_bytes_per_token_per_layer()
 
     def validate_tensor_inventory(
@@ -217,7 +215,9 @@ class ModelManifest:
         for name, spec in expected.items():
             actual = inventory[name]
             if actual.layout not in _SUPPORTED_LAYOUTS:
-                raise ValueError(f"tensor {name} has ambiguous/unsupported layout {actual.layout!r}")
+                raise ValueError(
+                    f"tensor {name} has ambiguous/unsupported layout {actual.layout!r}"
+                )
             if actual.layout != spec.layout:
                 raise ValueError(
                     f"tensor {name} layout {actual.layout!r} != expected {spec.layout!r}"
