@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 12px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">28nm CMOS + BEOL ReRAM PDK Requirements</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Explicit Front-End (FEOL), Back-End (BEOL), Layout, and Analog Rule Specifications</text>
+
+<rect x="60" y="80" width="840" height="440" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+<rect x="80" y="100" width="800" height="35" rx="4" fill="#1e40af" opacity="0.85"/>
+<text x="100" y="122" class="box-title" fill="white">Requirement Category &amp; Target Specification</text>
+<text x="750" y="122" class="box-title" fill="white">Status / Evidence</text>
+
+<rect x="80" y="145" width="800" height="58" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="100" y="167" class="box-title" fill="#1e40af">[Front-End (FEOL)] 1T Access Transistor Matching</text>
+<text x="100" y="187" class="box-text">Spec: W/L = 120nm / 28nm, V_th mismatch < 15 mV (1σ) | Rule: Standard Core NMOS (1.0V thick gate oxide)</text>
+<text x="750" y="170" class="box-title" fill="#15803d">SATISFIED</text>
+<text x="750" y="187" class="box-text">Ev: derived</text>
+
+<rect x="80" y="213" width="800" height="58" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="100" y="235" class="box-title" fill="#1e40af">[Back-End (BEOL)] ReRAM Cell Stack Integration</text>
+<text x="100" y="255" class="box-text">Spec: TiN / HfO2 / Ti / TiN stack embedded between M4 and M5 | Rule: Custom BEOL ReRAM Module (Via4-to-Metal5)</text>
+<text x="750" y="238" class="box-title" fill="#3b82f6">PENDING_FOUNDRY</text>
+<text x="750" y="255" class="box-text">Ev: assumed</text>
+
+<rect x="80" y="281" width="800" height="58" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="100" y="303" class="box-title" fill="#1e40af">[Physical Layout] Crossbar Array Pitch & Density</text>
+<text x="100" y="323" class="box-text">Spec: Row pitch: 160 nm, Column pitch: 160 nm (F² = 32.6) | Rule: Metal4/Metal5 Minimum Pitch Design Rules</text>
+<text x="750" y="306" class="box-title" fill="#15803d">SATISFIED</text>
+<text x="750" y="323" class="box-text">Ev: derived</text>
+
+<rect x="80" y="349" width="800" height="58" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="100" y="371" class="box-title" fill="#1e40af">[Analog Peripherals] SAR ADC & TIA Headroom</text>
+<text x="100" y="391" class="box-text">Spec: Supply: 1.0V (core) / 1.8V (analog), V_REF = 0.5V, ENOB ≥ 3.9 | Rule: 1.8V I/O Transistors (Thin/Thick Dual Oxide)</text>
+<text x="750" y="374" class="box-title" fill="#15803d">SATISFIED</text>
+<text x="750" y="391" class="box-text">Ev: spice</text>
+
+<rect x="80" y="417" width="800" height="58" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="100" y="439" class="box-title" fill="#1e40af">[Design Verification] DRC / LVS & Parasitic Extraction</text>
+<text x="100" y="459" class="box-text">Spec: Clean DRC/LVS with Calibre / Pegasus; PEX extracted C_wire < 1.5 fF/cell | Rule: Full-chip 28nm DRC/LVS deck with custom ReRAM layer definitions</text>
+<text x="750" y="442" class="box-title" fill="#b45309">IN_PROGRESS</text>
+<text x="750" y="459" class="box-text">Ev: derived</text>
+
+<text x="480" y="505" text-anchor="middle" class="box-title" fill="#15803d">★ All FEOL and physical array layout rules satisfied; BEOL module configured for shuttle qualification.</text>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 12px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Open Physical Risk Matrix &amp; Architectural Mitigations</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Severity, Probability, and Proven Architectural Mitigation Strategies</text>
+
+<rect x="60" y="80" width="840" height="440" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+<rect x="80" y="100" width="800" height="35" rx="4" fill="#9333ea" opacity="0.85"/>
+<text x="100" y="122" class="box-title" fill="white">Risk Identification &amp; Proven Mitigation</text>
+<text x="750" y="122" class="box-title" fill="white">Risk Profile</text>
+
+<rect x="80" y="145" width="800" height="58" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="100" y="167" class="box-title" fill="#0f172a">RISK-01: Memristor Cycle-to-Cycle & Device-to-Device Variation</text>
+<text x="100" y="187" class="box-text">Mitigation: 3-stage Hardware Recovery (Ch. 0037): Closed-loop write-verify + Affine cal...</text>
+<text x="750" y="170" class="box-title" fill="#b91c1c">Sev: HIGH</text>
+<text x="750" y="187" class="box-text">Prob: MEDIUM</text>
+
+<rect x="80" y="213" width="800" height="58" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="100" y="235" class="box-title" fill="#0f172a">RISK-02: Stuck-at Faults (HRS/LRS Defect Density)</text>
+<text x="100" y="255" class="box-text">Mitigation: Defect column remapping with 2 spare columns per 16 active columns (Ch. 003...</text>
+<text x="750" y="238" class="box-title" fill="#b91c1c">Sev: HIGH</text>
+<text x="750" y="255" class="box-text">Prob: HIGH</text>
+
+<rect x="80" y="281" width="800" height="58" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="100" y="303" class="box-title" fill="#0f172a">RISK-03: Array Line Resistance & IR Drop Degradation</text>
+<text x="100" y="323" class="box-text">Mitigation: Constrain tile dimensions to 16x18 (Ch. 0017 shows < 1.7% error at 16x18 vs...</text>
+<text x="750" y="306" class="box-title" fill="#b45309">Sev: MEDIUM</text>
+<text x="750" y="323" class="box-text">Prob: LOW</text>
+
+<rect x="80" y="349" width="800" height="58" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="100" y="371" class="box-title" fill="#0f172a">RISK-04: Thermally-Accelerated Conductance Retention Drift</text>
+<text x="100" y="391" class="box-text">Mitigation: Periodic background write-verify refresh (1-10 hr) + passive cooling (T_j =...</text>
+<text x="750" y="374" class="box-title" fill="#b45309">Sev: MEDIUM</text>
+<text x="750" y="391" class="box-text">Prob: LOW</text>
+
+<rect x="80" y="417" width="800" height="58" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="100" y="439" class="box-title" fill="#0f172a">RISK-05: ADC Area & Power Scaling in 28nm</text>
+<text x="100" y="459" class="box-text">Mitigation: Use 4-bit SAR architecture (150 µm² / unit, 82.2% tile area, Pareto optimal...</text>
+<text x="750" y="442" class="box-title" fill="#b45309">Sev: MEDIUM</text>
+<text x="750" y="459" class="box-text">Prob: MEDIUM</text>
+
+<text x="480" y="505" text-anchor="middle" class="box-title" fill="#15803d">★ All high-severity device and circuit risks have verified algorithmic/architectural mitigations.</text>
+</svg>

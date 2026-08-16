@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 12px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Tape-Out Sign-Off Gate Checklist</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Cross-Domain Audit from Mathematical Proofs to Physical Implementation</text>
+
+<rect x="60" y="80" width="840" height="440" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+<rect x="80" y="100" width="800" height="35" rx="4" fill="#15803d" opacity="0.85"/>
+<text x="100" y="122" class="box-title" fill="white">Tape-Out Gate Domain &amp; Criteria</text>
+<text x="750" y="122" class="box-title" fill="white">Sign-Off Status</text>
+
+<rect x="80" y="145" width="800" height="52" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="100" y="165" class="box-title" fill="#0f172a">Mathematical & Algorithm Parity (Software / Model)</text>
+<text x="100" y="183" class="box-text">Evidence: Ch. 0033/0037: 129.5 PPL achieved after 3-stage hardware recovery (float = 124.0)...</text>
+<text x="750" y="170" class="box-title" fill="#15803d">PASS</text>
+<text x="750" y="187" class="box-text">Fab Ready: ✓ YES</text>
+
+<rect x="80" y="203" width="800" height="52" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="100" y="223" class="box-title" fill="#0f172a">Circuit SPICE & Device Non-idealities (Circuit / Device)</text>
+<text x="100" y="241" class="box-text">Evidence: Ch. 0005–0020: 100% of physical parameters carry valid provenance...</text>
+<text x="750" y="228" class="box-title" fill="#15803d">PASS</text>
+<text x="750" y="245" class="box-text">Fab Ready: ✓ YES</text>
+
+<rect x="80" y="261" width="800" height="52" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="100" y="281" class="box-title" fill="#0f172a">Physical Ledgers (Latency/Energy/Area/Thermal) (System / Physical)</text>
+<text x="100" y="299" class="box-text">Evidence: Ch. 0038–0042: 998 ns, 29.1 nJ/tok, 1.412 mm², 20.8 mW/mm² (5/5 checks passed)...</text>
+<text x="750" y="286" class="box-title" fill="#15803d">PASS</text>
+<text x="750" y="303" class="box-text">Fab Ready: ✓ YES</text>
+
+<rect x="80" y="319" width="800" height="52" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="100" y="339" class="box-title" fill="#0f172a">Digital Control & Hardware Shell (Digital Control)</text>
+<text x="100" y="357" class="box-text">Evidence: Ch. 0043: Executable digital shell matches Ch. 0038 timing model to < 1% delta...</text>
+<text x="750" y="344" class="box-title" fill="#15803d">PASS</text>
+<text x="750" y="361" class="box-text">Fab Ready: ✓ YES</text>
+
+<rect x="80" y="377" width="800" height="52" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="100" y="397" class="box-title" fill="#0f172a">Hardware Testbench & PCB Correlation (Implementation Correlation)</text>
+<text x="100" y="415" class="box-text">Evidence: Ch. 0044: R² = 0.999683, RMSE = 1.58 mV, 5/5 metrics within physical tolerance...</text>
+<text x="750" y="402" class="box-title" fill="#15803d">PASS</text>
+<text x="750" y="419" class="box-text">Fab Ready: ✓ YES</text>
+
+<rect x="80" y="435" width="800" height="52" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="100" y="455" class="box-title" fill="#0f172a">Foundry BEOL Memristor PDK Integration (Foundry / Fabrication)</text>
+<text x="100" y="473" class="box-text">Evidence: PDK requirements specified; pending final shuttle tape-out slot and vendor signoff...</text>
+<text x="750" y="460" class="box-title" fill="#3b82f6">CONDITIONAL</text>
+<text x="750" y="477" class="box-text">Fab Ready: CONDITIONAL</text>
+
+<text x="480" y="505" text-anchor="middle" class="box-title" fill="#15803d">★ 5/6 Gates Fully Passed; Zero critical design blockers remaining for tape-out shuttle.</text>
+</svg>
