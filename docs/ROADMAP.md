@@ -250,7 +250,7 @@ Model accuracy degradation is attributable to named circuit/device/architecture 
 
 Depends on R7 and evidence from R2–R6.
 
-- [ ] Latency model with evidence-tagged timing coefficients
+- [x] Latency model with evidence-tagged timing coefficients: 100% of timing coefficients tagged with SPICE, derived, or assumed provenance; full token decode waterfall ledger ($998.0\text{ ns}$ / $1,002,004\text{ tok/s}$) and context scaling (`book/0038-latency-ledger/latency_ledger.py`, `latency-ledger-0038-extract.json`)
 - [ ] Energy/power model with evidence-tagged coefficients
 - [ ] Area model with explicit topology/process/layout assumptions
 - [ ] Thermal/power-density sanity checks

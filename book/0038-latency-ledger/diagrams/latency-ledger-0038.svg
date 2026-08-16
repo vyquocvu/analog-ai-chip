@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 13px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+.formula { font: 12px ui-monospace, monospace; fill: #1e293b; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Chapter 0038 — Physical Latency Ledger</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Evidence-Tagged Timing Model &amp; End-to-End Autoregressive Token Latency (Gate R8)</text>
+
+<!-- Left Card: Timing Coefficients & Provenance -->
+<rect x="50" y="80" width="410" height="230" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="70" y="105" class="box-title" fill="#1d4ed8">1. Physical Timing Coefficients &amp; Provenance</text>
+
+<rect x="70" y="120" width="370" height="175" rx="6" fill="white" stroke="#93c5fd"/>
+<text x="85" y="145" class="box-text">• t_dac = 10.0 ns (SPICE: 4-bit PWM / voltage driver)</text>
+<text x="85" y="167" class="box-text">• t_settle = 15.0 ns (SPICE: 2D RC mesh, R=1.0 Ω, C=50 fF)</text>
+<text x="85" y="189" class="box-text">• t_adc = 75.0 ns (SPICE: 4-bit SAR ADC @ 18.75 ns/bit)</text>
+<text x="85" y="211" class="box-title" fill="#15803d">• t_tile = 100.0 ns (DERIVED: 10 MHz Analog IMC Clock)</text>
+<text x="85" y="233" class="box-text">• t_sram = 2.0 ns (DERIVED: 28nm SRAM 32 KB cache)</text>
+<text x="85" y="255" class="box-text">• t_simd = 5.0 ns (DERIVED: Digital Vector ALU @ 200 MHz)</text>
+<text x="85" y="277" class="box-text">• t_noc = 3.0 ns (ASSUMED: 2D mesh router hop)</text>
+
+<!-- Right Card: Latency & Throughput Summary -->
+<rect x="500" y="80" width="410" height="230" rx="10" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="520" y="105" class="box-title" fill="#7e22ce">2. Token Decode Latency &amp; Peak Throughput</text>
+
+<rect x="520" y="120" width="370" height="175" rx="6" fill="white" stroke="#d8b4fe"/>
+<text x="535" y="150" class="box-title" fill="#1e293b">Single-Token Decode Latency:</text>
+<text x="535" y="180" class="title" fill="#15803d">998.0 ns (0.998 µs)</text>
+<text x="535" y="210" class="box-title" fill="#1e293b">Peak Decode Throughput:</text>
+<text x="535" y="240" class="title" fill="#2563eb">1,002,004 tokens/sec</text>
+<text x="535" y="275" class="formula">Analog MVM: 90.2% | Digital: 9.8%</text>
+
+<!-- Bottom Architecture Ledger Card -->
+<rect x="50" y="330" width="860" height="175" rx="12" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+<text x="70" y="360" class="box-title">3. Physical Timing Breakdown Across 9 Sequential Tile Stages</text>
+
+<rect x="70" y="380" width="260" height="105" rx="8" fill="#dbeafe" stroke="#3b82f6"/>
+<text x="85" y="405" class="box-title" fill="#1e40af">Analog IMC Compute</text>
+<text x="85" y="430" class="box-text">• 9 Tile Stages × 100 ns = 900.0 ns</text>
+<text x="85" y="452" class="box-text">• 90.7% of total token execution</text>
+<text x="85" y="472" class="sub">• Stationary weight mapping</text>
+
+<rect x="350" y="380" width="260" height="105" rx="8" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="365" y="405" class="box-title" fill="#b45309">Digital Vector SIMD</text>
+<text x="365" y="430" class="box-text">• 16 SIMD Ops × 5 ns = 80.0 ns</text>
+<text x="365" y="452" class="box-text">• 8.1% of total token execution</text>
+<text x="365" y="472" class="sub">• LayerNorm, Softmax, GELU</text>
+
+<rect x="630" y="380" width="260" height="105" rx="8" fill="#dcfce7" stroke="#22c55e"/>
+<text x="645" y="405" class="box-title" fill="#15803d">SRAM &amp; NoC Overhead</text>
+<text x="645" y="430" class="box-text">• SRAM (2 ns) + 2 NoC (6 ns) = 8.0 ns</text>
+<text x="645" y="452" class="box-text">• 0.8% of total token execution</text>
+<text x="645" y="472" class="sub">• Zero DRAM memory stalls</text>
+</svg>

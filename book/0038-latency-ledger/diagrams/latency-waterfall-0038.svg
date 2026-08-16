@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 12px; font-weight: 700; }
+.time-label { font: 10px ui-monospace, monospace; fill: #64748b; }
+.bar-text { font: 10px ui-monospace, monospace; fill: white; font-weight: 600; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Single-Token Autoregressive Decode Gantt Waterfall</text>
+<text x="480" y="55" text-anchor="middle" class="sub">992.0 ns Execution Schedule across 2 Transformer Layers + LM Head</text>
+
+<!-- Time Axis Header -->
+<line x1="220" y1="80" x2="900" y2="80" stroke="#cbd5e1" stroke-width="1"/>
+<text x="220" y="75" text-anchor="middle" class="time-label">0 ns</text>
+<text x="390" y="75" text-anchor="middle" class="time-label">250 ns</text>
+<text x="560" y="75" text-anchor="middle" class="time-label">500 ns</text>
+<text x="730" y="75" text-anchor="middle" class="time-label">750 ns</text>
+<text x="900" y="75" text-anchor="middle" class="time-label">992 ns</text>
+
+<!-- Gantt Rows -->
+<!-- Row 1: Token Emb -->
+<text x="200" y="110" text-anchor="end" class="box-title">Tok Emb</text>
+<rect x="220" y="98" width="6" height="16" rx="2" fill="#64748b"/>
+
+<!-- Row 2: L0 QKV -->
+<text x="200" y="145" text-anchor="end" class="box-title">L0 W_QKV</text>
+<rect x="226" y="133" width="70" height="16" rx="2" fill="#2563eb"/>
+<text x="261" y="145" text-anchor="middle" class="bar-text">100 ns</text>
+
+<!-- Row 3: L0 Attn -->
+<text x="200" y="180" text-anchor="end" class="box-title">L0 Softmax</text>
+<rect x="296" y="168" width="16" height="16" rx="2" fill="#f59e0b"/>
+
+<!-- Row 4: L0 Out -->
+<text x="200" y="215" text-anchor="end" class="box-title">L0 W_O</text>
+<rect x="312" y="203" width="70" height="16" rx="2" fill="#2563eb"/>
+<text x="347" y="215" text-anchor="middle" class="bar-text">100 ns</text>
+
+<!-- Row 5: L0 MLP Up -->
+<text x="200" y="250" text-anchor="end" class="box-title">L0 W_up</text>
+<rect x="390" y="238" width="70" height="16" rx="2" fill="#2563eb"/>
+<text x="425" y="250" text-anchor="middle" class="bar-text">100 ns</text>
+
+<!-- Row 6: L0 MLP Down -->
+<text x="200" y="285" text-anchor="end" class="box-title">L0 W_down</text>
+<rect x="466" y="273" width="70" height="16" rx="2" fill="#2563eb"/>
+<text x="501" y="285" text-anchor="middle" class="bar-text">100 ns</text>
+
+<!-- Row 7: L1 QKV -->
+<text x="200" y="320" text-anchor="end" class="box-title">L1 W_QKV</text>
+<rect x="544" y="308" width="70" height="16" rx="2" fill="#2563eb"/>
+<text x="579" y="320" text-anchor="middle" class="bar-text">100 ns</text>
+
+<!-- Row 8: L1 Out -->
+<text x="200" y="355" text-anchor="end" class="box-title">L1 W_O</text>
+<rect x="630" y="343" width="70" height="16" rx="2" fill="#2563eb"/>
+<text x="665" y="355" text-anchor="middle" class="bar-text">100 ns</text>
+
+<!-- Row 9: L1 MLP Up -->
+<text x="200" y="390" text-anchor="end" class="box-title">L1 W_up</text>
+<rect x="708" y="378" width="70" height="16" rx="2" fill="#2563eb"/>
+<text x="743" y="390" text-anchor="middle" class="bar-text">100 ns</text>
+
+<!-- Row 10: L1 MLP Down -->
+<text x="200" y="425" text-anchor="end" class="box-title">L1 W_down</text>
+<rect x="784" y="413" width="70" height="16" rx="2" fill="#2563eb"/>
+<text x="819" y="425" text-anchor="middle" class="bar-text">100 ns</text>
+
+<!-- Row 11: W_head -->
+<text x="200" y="460" text-anchor="end" class="box-title">W_head</text>
+<rect x="860" y="448" width="70" height="16" rx="2" fill="#15803d"/>
+<text x="895" y="460" text-anchor="middle" class="bar-text">100 ns</text>
+
+<!-- Legend -->
+<rect x="220" y="490" width="14" height="14" rx="2" fill="#2563eb"/>
+<text x="240" y="502" class="box-title">Analog IMC (100 ns)</text>
+<rect x="420" y="490" width="14" height="14" rx="2" fill="#f59e0b"/>
+<text x="440" y="502" class="box-title">Digital SIMD (5-15 ns)</text>
+<rect x="620" y="490" width="14" height="14" rx="2" fill="#64748b"/>
+<text x="640" y="502" class="box-title">SRAM / NoC (2-3 ns)</text>
+<rect x="790" y="490" width="14" height="14" rx="2" fill="#15803d"/>
+<text x="810" y="502" class="box-title">LM Head (100 ns)</text>
+</svg>

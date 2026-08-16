@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 13px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+.scaling-tag { font: 12px ui-monospace, monospace; fill: #15803d; font-weight: 700; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Context Length &amp; Batch Throughput Scaling</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Autoregressive Decode Step Latency across Context Lengths (T = 1 to 1024 Tokens)</text>
+
+<!-- Scaling Table / Chart Area -->
+<rect x="60" y="85" width="840" height="420" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+
+<rect x="80" y="110" width="800" height="50" rx="6" fill="#eff6ff" stroke="#93c5fd"/>
+<text x="140" y="140" text-anchor="middle" class="box-title" fill="#1e40af">Context Length (T)</text>
+<text x="340" y="140" text-anchor="middle" class="box-title" fill="#1e40af">Step Latency (ns)</text>
+<text x="540" y="140" text-anchor="middle" class="box-title" fill="#1e40af">Throughput (tok/s)</text>
+<text x="740" y="140" text-anchor="middle" class="box-title" fill="#1e40af">SIMD Attn Bottleneck</text>
+
+<!-- Data Rows -->
+<text x="140" y="190" text-anchor="middle" class="box-text">T = 1 token</text>
+<text x="340" y="190" text-anchor="middle" class="box-text">963.9 ns</text>
+<text x="540" y="190" text-anchor="middle" class="scaling-tag">1,037,458 tok/s</text>
+<text x="740" y="190" text-anchor="middle" class="box-text">Negligible (1.9 ns)</text>
+
+<text x="140" y="235" text-anchor="middle" class="box-text">T = 16 tokens</text>
+<text x="340" y="235" text-anchor="middle" class="box-text">992.0 ns</text>
+<text x="540" y="235" text-anchor="middle" class="scaling-tag">1,008,064 tok/s</text>
+<text x="740" y="235" text-anchor="middle" class="box-text">Mild (30.0 ns)</text>
+
+<text x="140" y="280" text-anchor="middle" class="box-text">T = 64 tokens</text>
+<text x="340" y="280" text-anchor="middle" class="box-text">1,082.0 ns</text>
+<text x="540" y="280" text-anchor="middle" class="scaling-tag">924,214 tok/s</text>
+<text x="740" y="280" text-anchor="middle" class="box-text">Moderate (120.0 ns)</text>
+
+<text x="140" y="325" text-anchor="middle" class="box-text">T = 128 tokens</text>
+<text x="340" y="325" text-anchor="middle" class="box-text">1,202.0 ns</text>
+<text x="540" y="325" text-anchor="middle" class="scaling-tag">831,946 tok/s</text>
+<text x="740" y="325" text-anchor="middle" class="box-text">Linear (240.0 ns)</text>
+
+<text x="140" y="370" text-anchor="middle" class="box-text">T = 256 tokens</text>
+<text x="340" y="370" text-anchor="middle" class="box-text">1,442.0 ns</text>
+<text x="540" y="370" text-anchor="middle" class="scaling-tag">693,481 tok/s</text>
+<text x="740" y="370" text-anchor="middle" class="box-text">33.3% of step time</text>
+
+<text x="140" y="415" text-anchor="middle" class="box-text">T = 512 tokens</text>
+<text x="340" y="415" text-anchor="middle" class="box-text">1,922.0 ns</text>
+<text x="540" y="415" text-anchor="middle" class="scaling-tag">520,291 tok/s</text>
+<text x="740" y="415" text-anchor="middle" class="box-text">50.0% of step time</text>
+
+<text x="140" y="460" text-anchor="middle" class="box-text">T = 1024 tokens</text>
+<text x="340" y="460" text-anchor="middle" class="box-text">2,882.0 ns</text>
+<text x="540" y="460" text-anchor="middle" class="scaling-tag">346,981 tok/s</text>
+<text x="740" y="460" text-anchor="middle" class="box-text">66.6% (SIMD dominant)</text>
+</svg>

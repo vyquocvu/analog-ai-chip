@@ -1,0 +1,379 @@
+{
+  "chapter": "0038-latency-ledger",
+  "context_length_scaling": [
+    {
+      "context_length": 1,
+      "latency_ns": 969.9,
+      "throughput_tokens_per_sec": 1031061
+    },
+    {
+      "context_length": 16,
+      "latency_ns": 998.0,
+      "throughput_tokens_per_sec": 1002004
+    },
+    {
+      "context_length": 64,
+      "latency_ns": 1088.0,
+      "throughput_tokens_per_sec": 919118
+    },
+    {
+      "context_length": 128,
+      "latency_ns": 1208.0,
+      "throughput_tokens_per_sec": 827815
+    },
+    {
+      "context_length": 256,
+      "latency_ns": 1448.0,
+      "throughput_tokens_per_sec": 690608
+    },
+    {
+      "context_length": 512,
+      "latency_ns": 1928.0,
+      "throughput_tokens_per_sec": 518672
+    },
+    {
+      "context_length": 1024,
+      "latency_ns": 2888.0,
+      "throughput_tokens_per_sec": 346260
+    }
+  ],
+  "gate": "R8 \u2014 Physical feasibility report",
+  "provenance": {
+    "claim_level": "SYSTEM_DERIVED_WITH_SPICE_EVIDENCE",
+    "timing_sources": "SPICE 2D RC mesh, 4-bit SAR ADC, 28nm SRAM & SIMD ALU"
+  },
+  "schema_version": "0.1.0",
+  "subsystem_breakdown": [
+    {
+      "description": "9 sequential tile stages holding stationary model weights",
+      "fraction_pct": 90.2,
+      "latency_ns": 900.0,
+      "primary_evidence": "spice / derived (100 ns / tile MVM)",
+      "subsystem": "Analog IMC Crossbars"
+    },
+    {
+      "description": "LayerNorm, Softmax attention, GELU, and residual additions",
+      "fraction_pct": 9.0,
+      "latency_ns": 90.0,
+      "primary_evidence": "derived (5 ns / vector op)",
+      "subsystem": "Digital SIMD ALU"
+    },
+    {
+      "description": "Inter-cluster packet transport across on-chip 2D mesh",
+      "fraction_pct": 0.6,
+      "latency_ns": 6.0,
+      "primary_evidence": "assumed (3 ns / router hop)",
+      "subsystem": "NoC Interconnect"
+    },
+    {
+      "description": "Token embedding lookup and activation buffer transfers",
+      "fraction_pct": 0.2,
+      "latency_ns": 2.0,
+      "primary_evidence": "derived (2 ns / access)",
+      "subsystem": "On-Chip SRAM Pool"
+    }
+  ],
+  "summary": {
+    "analog_imc_time_pct": 90.2,
+    "digital_overhead_pct": 9.8,
+    "evidence_provenance_audit": "100% of coefficients tagged with measured, spice, derived, or assumed",
+    "peak_token_throughput_tok_s": 1002004,
+    "single_token_decode_latency_ns": 998.0,
+    "single_token_decode_latency_us": 0.998
+  },
+  "timing_coefficients": [
+    {
+      "description": "4-bit input DAC voltage conversion and wordline driver setup",
+      "evidence_class": "spice",
+      "name": "dac_setup_time",
+      "provenance": "SPICE transient simulation of 4-bit DAC PWM/R-2R buffer",
+      "symbol": "t_dac",
+      "value_ns": 10.0
+    },
+    {
+      "description": "Bitline current accumulation and RC line transient settling",
+      "evidence_class": "spice",
+      "name": "crossbar_line_settling",
+      "provenance": "SPICE 2D RC mesh simulation (R_wire=1.0 \u03a9, C_line=50 fF)",
+      "symbol": "t_settle",
+      "value_ns": 15.0
+    },
+    {
+      "description": "Current-mode TIA integration and 4-bit SAR conversion",
+      "evidence_class": "spice",
+      "name": "adc_conversion_time",
+      "provenance": "SPICE 4-bit SAR ADC simulation (4 cycles @ 18.75 ns)",
+      "symbol": "t_adc",
+      "value_ns": 75.0
+    },
+    {
+      "description": "Full physical crossbar MVM cycle (10 MHz analog clock)",
+      "evidence_class": "derived",
+      "name": "tile_cycle_time",
+      "provenance": "t_dac (10 ns) + t_settle (15 ns) + t_adc (75 ns)",
+      "symbol": "t_tile",
+      "value_ns": 100.0
+    },
+    {
+      "description": "On-chip 32 KB activation and KV cache read/write latency",
+      "evidence_class": "derived",
+      "name": "sram_access_time",
+      "provenance": "28nm high-density SRAM standard cell read/write access",
+      "symbol": "t_sram",
+      "value_ns": 2.0
+    },
+    {
+      "description": "Digital LayerNorm, Softmax, GELU, and affine calibration",
+      "evidence_class": "derived",
+      "name": "simd_vector_op",
+      "provenance": "Pipelined 32-bit digital vector ALU @ 200 MHz",
+      "symbol": "t_simd",
+      "value_ns": 5.0
+    },
+    {
+      "description": "Inter-tile packet routing between IMC clusters",
+      "evidence_class": "assumed",
+      "name": "noc_hop_latency",
+      "provenance": "2D mesh NoC router traversal (assumed 28nm standard)",
+      "symbol": "t_noc",
+      "value_ns": 3.0
+    }
+  ],
+  "title": "Physical Latency Ledger",
+  "token_decode_schedule": [
+    {
+      "duration_ns": 2.0,
+      "end_time_ns": 2.0,
+      "evidence_class": "derived",
+      "operation_type": "sram",
+      "stage_index": 1,
+      "stage_name": "Token Embedding Lookup",
+      "start_time_ns": 0.0
+    },
+    {
+      "duration_ns": 5.0,
+      "end_time_ns": 7.0,
+      "evidence_class": "derived",
+      "operation_type": "digital_simd",
+      "stage_index": 2,
+      "stage_name": "L0 LayerNorm 1",
+      "start_time_ns": 2.0
+    },
+    {
+      "duration_ns": 100.0,
+      "end_time_ns": 107.0,
+      "evidence_class": "derived",
+      "operation_type": "analog_imc",
+      "stage_index": 3,
+      "stage_name": "L0 W_QKV Crossbar MVM",
+      "start_time_ns": 7.0
+    },
+    {
+      "duration_ns": 3.0,
+      "end_time_ns": 110.0,
+      "evidence_class": "assumed",
+      "operation_type": "noc",
+      "stage_index": 4,
+      "stage_name": "L0 NoC Router to SRAM",
+      "start_time_ns": 107.0
+    },
+    {
+      "duration_ns": 15.0,
+      "end_time_ns": 125.0,
+      "evidence_class": "derived",
+      "operation_type": "digital_simd",
+      "stage_index": 5,
+      "stage_name": "L0 Softmax Attention (Q\u00b7K^T / A\u00b7V)",
+      "start_time_ns": 110.0
+    },
+    {
+      "duration_ns": 100.0,
+      "end_time_ns": 225.0,
+      "evidence_class": "derived",
+      "operation_type": "analog_imc",
+      "stage_index": 6,
+      "stage_name": "L0 W_O Crossbar MVM",
+      "start_time_ns": 125.0
+    },
+    {
+      "duration_ns": 5.0,
+      "end_time_ns": 230.0,
+      "evidence_class": "derived",
+      "operation_type": "digital_simd",
+      "stage_index": 7,
+      "stage_name": "L0 Residual Add 1",
+      "start_time_ns": 225.0
+    },
+    {
+      "duration_ns": 5.0,
+      "end_time_ns": 235.0,
+      "evidence_class": "derived",
+      "operation_type": "digital_simd",
+      "stage_index": 8,
+      "stage_name": "L0 LayerNorm 2",
+      "start_time_ns": 230.0
+    },
+    {
+      "duration_ns": 100.0,
+      "end_time_ns": 335.0,
+      "evidence_class": "derived",
+      "operation_type": "analog_imc",
+      "stage_index": 9,
+      "stage_name": "L0 W_up Crossbar MVM",
+      "start_time_ns": 235.0
+    },
+    {
+      "duration_ns": 5.0,
+      "end_time_ns": 340.0,
+      "evidence_class": "derived",
+      "operation_type": "digital_simd",
+      "stage_index": 10,
+      "stage_name": "L0 GELU Activation",
+      "start_time_ns": 335.0
+    },
+    {
+      "duration_ns": 100.0,
+      "end_time_ns": 440.0,
+      "evidence_class": "derived",
+      "operation_type": "analog_imc",
+      "stage_index": 11,
+      "stage_name": "L0 W_down Crossbar MVM",
+      "start_time_ns": 340.0
+    },
+    {
+      "duration_ns": 5.0,
+      "end_time_ns": 445.0,
+      "evidence_class": "derived",
+      "operation_type": "digital_simd",
+      "stage_index": 12,
+      "stage_name": "L0 Residual Add 2",
+      "start_time_ns": 440.0
+    },
+    {
+      "duration_ns": 5.0,
+      "end_time_ns": 450.0,
+      "evidence_class": "derived",
+      "operation_type": "digital_simd",
+      "stage_index": 13,
+      "stage_name": "L1 LayerNorm 1",
+      "start_time_ns": 445.0
+    },
+    {
+      "duration_ns": 100.0,
+      "end_time_ns": 550.0,
+      "evidence_class": "derived",
+      "operation_type": "analog_imc",
+      "stage_index": 14,
+      "stage_name": "L1 W_QKV Crossbar MVM",
+      "start_time_ns": 450.0
+    },
+    {
+      "duration_ns": 3.0,
+      "end_time_ns": 553.0,
+      "evidence_class": "assumed",
+      "operation_type": "noc",
+      "stage_index": 15,
+      "stage_name": "L1 NoC Router to SRAM",
+      "start_time_ns": 550.0
+    },
+    {
+      "duration_ns": 15.0,
+      "end_time_ns": 568.0,
+      "evidence_class": "derived",
+      "operation_type": "digital_simd",
+      "stage_index": 16,
+      "stage_name": "L1 Softmax Attention (Q\u00b7K^T / A\u00b7V)",
+      "start_time_ns": 553.0
+    },
+    {
+      "duration_ns": 100.0,
+      "end_time_ns": 668.0,
+      "evidence_class": "derived",
+      "operation_type": "analog_imc",
+      "stage_index": 17,
+      "stage_name": "L1 W_O Crossbar MVM",
+      "start_time_ns": 568.0
+    },
+    {
+      "duration_ns": 5.0,
+      "end_time_ns": 673.0,
+      "evidence_class": "derived",
+      "operation_type": "digital_simd",
+      "stage_index": 18,
+      "stage_name": "L1 Residual Add 1",
+      "start_time_ns": 668.0
+    },
+    {
+      "duration_ns": 5.0,
+      "end_time_ns": 678.0,
+      "evidence_class": "derived",
+      "operation_type": "digital_simd",
+      "stage_index": 19,
+      "stage_name": "L1 LayerNorm 2",
+      "start_time_ns": 673.0
+    },
+    {
+      "duration_ns": 100.0,
+      "end_time_ns": 778.0,
+      "evidence_class": "derived",
+      "operation_type": "analog_imc",
+      "stage_index": 20,
+      "stage_name": "L1 W_up Crossbar MVM",
+      "start_time_ns": 678.0
+    },
+    {
+      "duration_ns": 5.0,
+      "end_time_ns": 783.0,
+      "evidence_class": "derived",
+      "operation_type": "digital_simd",
+      "stage_index": 21,
+      "stage_name": "L1 GELU Activation",
+      "start_time_ns": 778.0
+    },
+    {
+      "duration_ns": 100.0,
+      "end_time_ns": 883.0,
+      "evidence_class": "derived",
+      "operation_type": "analog_imc",
+      "stage_index": 22,
+      "stage_name": "L1 W_down Crossbar MVM",
+      "start_time_ns": 783.0
+    },
+    {
+      "duration_ns": 5.0,
+      "end_time_ns": 888.0,
+      "evidence_class": "derived",
+      "operation_type": "digital_simd",
+      "stage_index": 23,
+      "stage_name": "L1 Residual Add 2",
+      "start_time_ns": 883.0
+    },
+    {
+      "duration_ns": 5.0,
+      "end_time_ns": 893.0,
+      "evidence_class": "derived",
+      "operation_type": "digital_simd",
+      "stage_index": 24,
+      "stage_name": "Final LayerNorm",
+      "start_time_ns": 888.0
+    },
+    {
+      "duration_ns": 100.0,
+      "end_time_ns": 993.0,
+      "evidence_class": "derived",
+      "operation_type": "analog_imc",
+      "stage_index": 25,
+      "stage_name": "W_head Crossbar MVM",
+      "start_time_ns": 893.0
+    },
+    {
+      "duration_ns": 5.0,
+      "end_time_ns": 998.0,
+      "evidence_class": "derived",
+      "operation_type": "digital_simd",
+      "stage_index": 26,
+      "stage_name": "Argmax / Sampling",
+      "start_time_ns": 993.0
+    }
+  ]
+}

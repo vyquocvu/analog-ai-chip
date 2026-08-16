@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 13px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+.pct-label { font: 14px ui-monospace, monospace; font-weight: 700; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Subsystem Latency &amp; Execution Distribution</text>
+<text x="480" y="55" text-anchor="middle" class="sub">992.0 ns Token Decode Execution Partitioning across Architecture Layers</text>
+
+<!-- 4 Subsystem Cards -->
+<!-- Subsystem 1: Analog IMC -->
+<rect x="50" y="85" width="410" height="195" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="70" y="115" class="box-title" fill="#1d4ed8">1. Analog IMC Compute (900.0 ns / 90.7%)</text>
+<text x="70" y="140" class="box-text">• Primary Evidence: SPICE + Derived (t_tile = 100 ns)</text>
+<text x="70" y="162" class="box-text">• 9 Sequential Crossbar Passes: W_QKV, W_O, W_up, W_down, W_head</text>
+<text x="70" y="184" class="box-text">• Full spatial weight residency across 416 physical tiles</text>
+<text x="70" y="206" class="box-text">• Zero DRAM stalls: Weights remain permanently in memristor cells</text>
+<text x="70" y="240" class="pct-label" fill="#1d4ed8">Latency: 900.0 ns (90.7% of Total Token Time)</text>
+
+<!-- Subsystem 2: Digital SIMD Vector ALU -->
+<rect x="500" y="85" width="410" height="195" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+<text x="520" y="115" class="box-title" fill="#b45309">2. Digital SIMD Vector Units (80.0 ns / 8.1%)</text>
+<text x="520" y="140" class="box-text">• Primary Evidence: Derived (5 ns / pipelined vector op @ 200 MHz)</text>
+<text x="520" y="162" class="box-text">• LayerNorm 1, 2, Final LayerNorm (FP32/INT8 arithmetic)</text>
+<text x="520" y="184" class="box-text">• Attention Softmax &amp; Dynamic Q·K^T dot product matrix</text>
+<text x="520" y="206" class="box-text">• Digital GELU element-wise activation + Residual Additions</text>
+<text x="520" y="240" class="pct-label" fill="#b45309">Latency: 80.0 ns (8.1% of Total Token Time)</text>
+
+<!-- Subsystem 3: On-Chip SRAM Pool -->
+<rect x="50" y="300" width="410" height="195" rx="10" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="70" y="330" class="box-title" fill="#7e22ce">3. On-Chip SRAM Pool (2.0 ns / 0.2%)</text>
+<text x="70" y="355" class="box-text">• Primary Evidence: Derived (28nm standard cell SRAM model)</text>
+<text x="70" y="377" class="box-text">• Token Embedding lookup (128 vocab × 64 dim)</text>
+<text x="70" y="399" class="box-text">• KV Cache buffer read/write access (32 KB capacity)</text>
+<text x="70" y="421" class="box-text">• Inter-stage intermediate activation buffering</text>
+<text x="70" y="455" class="pct-label" fill="#7e22ce">Latency: 2.0 ns (0.2% of Total Token Time)</text>
+
+<!-- Subsystem 4: NoC Interconnect -->
+<rect x="500" y="300" width="410" height="195" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+<text x="520" y="330" class="box-title" fill="#15803d">4. NoC Mesh Interconnect (6.0 ns / 0.6%)</text>
+<text x="520" y="355" class="box-text">• Primary Evidence: Assumed (3.0 ns / router hop)</text>
+<text x="520" y="377" class="box-text">• 2 Inter-Cluster hops: Attention cluster to SRAM buffer</text>
+<text x="520" y="399" class="box-text">• 128-bit flit width, single-cycle router arbitration</text>
+<text x="520" y="421" class="box-text">• Fully decoupled from analog tile execution</text>
+<text x="520" y="455" class="pct-label" fill="#15803d">Latency: 6.0 ns (0.6% of Total Token Time)</text>
+</svg>
