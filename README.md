@@ -30,7 +30,9 @@ physical feasibility report
 
 ## Current status
 
-The repository has closed all 10 evidence gates (**R0 through R9**) across all 45 canonical chapters:
+The v0.1 proof chain has closed all 10 original evidence gates (**R0 through
+R9**) across chapters 0000–0045. The post-v0.1 large-model expansion is now
+active, extending the canonical curriculum through chapter 0058:
 
 ```text
 R0 functional + circuit foundation ── COMPLETE
@@ -43,9 +45,18 @@ R6 accelerator architecture        ── COMPLETE  (scheduler, SRAM buffers, 2D
 R7 Transformer & LLM validation    ── PASSED    (TinyGPT/GPT-2 inference, 3-stage hardware recovery, 129.5 PPL)
 R8 physical feasibility report     ── PASSED    (latency 998 ns, energy 29.1 nJ/tok, area 1.412 mm², thermal 30.9°C)
 R9 implementation correlation      ── PASSED    (FPGA digital shell, PCB correlation R²=0.9997, tape-out sign-off)
+R10 scalable model contract        ── ACTIVE    (manifest, decoder primitives, sharded checkpoints)
+R11 memory-bounded simulator       ── PLANNED   (block streaming, sampled/surrogate modes)
+R12 large-model architecture       ── PLANNED   (residency, multi-die, prefill/decode, KV hierarchy)
+R13 large-model validation         ── PLANNED   (T0–T3 accuracy and recovery)
+R14 multi-tier feasibility         ── PLANNED   (parametric ledger and go/no-go decision)
 ```
 
-The entire proof chain from Ohm's and Kirchhoff's laws to full-chip LLM inference and physical tape-out readiness is verified with 445 automated tests and 100% evidence provenance. See [`docs/ROADMAP.md`](docs/ROADMAP.md) and [`docs/CURRICULUM.md`](docs/CURRICULUM.md).
+The original proof chain from Ohm's and Kirchhoff's laws to small-model LLM
+inference and physical tape-out readiness remains complete. Large-model support
+is planned as new evidence rather than inferred from that result. See
+[`docs/ROADMAP.md`](docs/ROADMAP.md) and
+[`docs/CURRICULUM.md`](docs/CURRICULUM.md).
 
 ## Engineering hierarchy
 
@@ -159,7 +170,7 @@ Evidence classes:
 - `derived` — calculated from traceable evidence;
 - `assumed` — sensitivity-study input only.
 
-The repository contains the validated SPICE-backed profiles `crossbar-column-v1`, `crossbar-v1`, `dac-r2r-v1` and `adc-sar-v1`, all consumed by `analog_llm` through `profile_adapter` (fail-closed: `assumed`/functional-only evidence cannot support a physical claim). The next milestone is multi-tile architecture integration on calibrated profiles (roadmap R5).
+The repository contains the validated SPICE-backed profiles `crossbar-column-v1`, `crossbar-v1`, `dac-r2r-v1` and `adc-sar-v1`, all consumed by `analog_llm` through `profile_adapter` (fail-closed: `assumed`/functional-only evidence cannot support a physical claim). The active milestone is the architecture-neutral model contract and checkpoint-ingestion path for larger models (roadmap R10).
 
 ## Verification evidence
 

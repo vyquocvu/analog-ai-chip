@@ -127,6 +127,39 @@ Chapter numbering below is canonical. Existing chapters keep their numbers; futu
 | 0044 | PCB / board correlation | measured converter/crossbar behavior can replace SPICE evidence where available | done |
 | 0045 | IC / tape-out readiness | open risks, required models, PDK/layout assumptions and missing evidence are explicit | done |
 
+## Part XI — Scalable model semantics and ingestion
+
+| # | Chapter | Verification target | Status |
+|---|---|---|---|
+| 0046 | Architecture-neutral model manifest | decoder shape, tensor, parameter, MAC and KV contracts are explicit and hand-checkable | planned |
+| 0047 | Generalized decoder primitives | RMSNorm/RoPE/SwiGLU and MHA/GQA/MQA match independent references | planned |
+| 0048 | Sharded checkpoint ingestion | GPT-2-style and Llama-style safetensors load with strict provenance and validation | planned |
+
+## Part XII — Memory-bounded model execution
+
+| # | Chapter | Verification target | Status |
+|---|---|---|---|
+| 0049 | Block-streamed linear execution | model execution avoids a second whole-checkpoint copy and matches the scalar reference | planned |
+| 0050 | Scalable physical-error evaluation | exact, sampled and surrogate modes are calibrated and visibly separated | planned |
+| 0051 | Resumable large-model runs | deterministic per-layer artifacts support bounded T0–T3 execution | planned |
+
+## Part XIII — Large-model architecture and validation
+
+| # | Chapter | Verification target | Status |
+|---|---|---|---|
+| 0052 | Weight residency and multi-die scheduling | resident/streamed weights, rewrites and inter-die costs are explicit | planned |
+| 0053 | Prefill, decode and KV hierarchy | GQA/MQA cache capacity, traffic and digital-attention cost are modeled | planned |
+| 0054 | Large-checkpoint accuracy | fixed baselines quantify profile-driven degradation by model tier | planned |
+| 0055 | Scalable hardware recovery | calibration/remapping/mixed precision include storage and execution cost | planned |
+
+## Part XIV — Large-model physical feasibility
+
+| # | Chapter | Verification target | Status |
+|---|---|---|---|
+| 0056 | Parametric model-to-system ledger | T0–T3 latency, energy, memory, area and thermal metrics derive from manifests and schedules | planned |
+| 0057 | Bottleneck and Pareto analysis | first limiting resources and conditional break-even points are reproducible | planned |
+| 0058 | Multi-tier design decision | each tier receives an evidence-backed feasible/conditional/infeasible classification | planned |
+
 ## Chapter completion rules
 
 A chapter is not complete because prose or a plot exists.

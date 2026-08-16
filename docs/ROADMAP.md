@@ -277,6 +277,235 @@ not silicon verification. Gate R8 exited successfully — all physical feasibili
 
 ---
 
+# R10 — Scalable model contract and checkpoint ingestion — ACTIVE
+
+Depends on R7 (closed). R10 extends the functional/model contract; it does not
+change or strengthen any circuit/device claim from R0–R9.
+
+The reference workload ladder is frozen as a set of **design points**, not as
+hardware capability claims:
+
+| Tier | Parameter range | Context design point | Required validation depth |
+|---|---:|---:|---|
+| T0 | up to 150M | 2K tokens | full float + analog-path end-to-end run |
+| T1 | 1–1.5B | 4K tokens | full checkpoint ingestion and bounded decode run |
+| T2 | about 3B | 8K tokens | full checkpoint ingestion and bounded decode run |
+| T3 | 7–8B | 8K tokens | full checkpoint ingestion; streamed decode and sampled physical-error study |
+
+Specific public checkpoints may be substituted when licensing or access
+prevents committing a named model. Every result must record the exact model ID,
+revision, config hash, weight-file hashes, dtype and tokenizer revision. Tests
+must use tiny local fixtures; network access is never required by the default
+test suite.
+
+## WP10.1 — Architecture-neutral model manifest (first eligible package)
+
+- [ ] Define a versioned `ModelManifest` for decoder-only models: vocabulary,
+  hidden size, layer/head counts, head dimension, intermediate size, context,
+  tensor dtype, tied/untied embeddings and parameter count.
+- [ ] Represent LayerNorm versus RMSNorm, learned positions versus RoPE,
+  GELU versus gated SiLU/SwiGLU, bias/no-bias linears, and MHA/GQA/MQA without
+  silently coercing one architecture into GPT-2 semantics.
+- [ ] Encode a tiny hand-computable manifest and assert tensor shapes, parameter
+  count, per-layer MACs and KV bytes.
+- [ ] Fail closed on unsupported attention/position/activation types, inconsistent
+  head dimensions, missing tensors and ambiguous transpose/layout rules.
+
+## WP10.2 — Generalized decoder functional reference
+
+- [ ] Split the current `TinyGPT`-specific execution into reusable decoder,
+  attention, norm, position and MLP primitives while preserving GPT-2 parity.
+- [ ] Add RoPE, RMSNorm, SwiGLU and grouped-query attention; keep the analog/digital
+  boundary explicit (static projection weights analog-eligible, token-token
+  attention and normalization digital).
+- [ ] Prove each new primitive with a tiny hand calculation plus an independent
+  reference implementation and at least one invalid/boundary test.
+- [ ] Preserve KV-cache versus full-context parity for MHA, GQA and MQA.
+
+## WP10.3 — Sharded HuggingFace checkpoint ingestion
+
+- [ ] Generalize the GPT-2-only loader to consume indexed/sharded safetensors and
+  architecture adapters without materializing a second full copy of the model.
+- [ ] Support at least one GPT-2-style and one Llama-style local fixture with strict
+  tensor-name, shape, dtype, transpose and weight-tying validation.
+- [ ] Record checkpoint/tokenizer provenance and reject mutable or unhashed inputs
+  in reproducible verification runs.
+- [ ] Emit a deterministic model inventory: tensors, parameters, bytes, analog-
+  eligible weights, digital-only state and per-layer matrix shapes.
+
+### Gate R10 exit
+
+One manifest-driven path must load GPT-2-style and Llama-style sharded fixtures,
+reproduce independent float logits/KV-cache outputs, and emit a deterministic
+inventory for all T0–T3 design points. Passing R10 proves model semantics and
+checkpoint mapping only; it does not prove that a large checkpoint fits or runs
+efficiently on the proposed accelerator.
+
+---
+
+# R11 — Memory-bounded large-model simulator — PLANNED
+
+Depends on R10 + R5.
+
+## WP11.1 — Block-streamed linear execution
+
+- [ ] Replace whole-matrix `float64` conversion/copying with dtype-preserving,
+  memory-mapped block iteration compatible with the physical tile partition.
+- [ ] Add batched token/prefill execution and vectorized tile-block evaluation;
+  retain a deterministic scalar reference for equivalence tests.
+- [ ] Bound peak host memory as a function of checkpoint dtype, active layer,
+  tile block and KV cache; measure process RSS separately from analytical bytes.
+
+## WP11.2 — Scalable non-ideality evaluation
+
+- [ ] Define `exact`, `layer-sampled` and `statistical-surrogate` evaluation modes;
+  never label a sampled/surrogate run as full physical simulation.
+- [ ] Calibrate any surrogate against exact profile-driven tile execution over a
+  deterministic stratified matrix suite (layer type, depth, shape and weight range).
+- [ ] Report confidence/error bounds and fail closed outside the calibrated domain.
+
+## WP11.3 — Reproducible execution envelope
+
+- [ ] Add resumable per-layer artifacts so a multi-hour evaluation can restart
+  without changing seeds or double-counting ledger entries.
+- [ ] Define engine-gated T1–T3 tests and small always-on fixtures; committed
+  summaries must be reproducible without committing third-party model weights.
+- [ ] Establish host-memory and runtime budgets for each tier before claiming it
+  is executable by the simulator.
+
+### Gate R11 exit
+
+The simulator completes the frozen bounded workload for T0 and T1 without a
+full-model `float64` copy, and produces deterministic streamed inventories/traces
+for T2 and T3. Exact and approximate physical-error modes are visibly separated
+and cross-calibrated.
+
+---
+
+# R12 — Large-model accelerator capacity and data movement — PLANNED
+
+Depends on R11 + R6.
+
+## WP12.1 — Weight residency and topology exploration
+
+- [ ] Compute exact tile pairs, usable-cell utilization, programming bytes and
+  resident area for every projection in T0–T3, including embeddings/LM head.
+- [ ] Compare fully resident, layer-resident and streamed-weight schedules under
+  explicit SRAM/HBM/host-link capacities and bandwidths.
+- [ ] Extend scheduling to multiple dies/chiplets with explicit inter-die traffic,
+  synchronization, pipeline bubbles and failure/spare capacity.
+
+## WP12.2 — Prefill/decode and KV-cache hierarchy
+
+- [ ] Separate prefill throughput from single-token decode latency; do not reuse
+  the TinyGPT per-token ledger for batched prefill.
+- [ ] Model GQA/MQA KV capacity, paged allocation, precision, context length and
+  SRAM/HBM placement for all four tiers.
+- [ ] Account for digital attention MACs, softmax, KV reads/writes and long-context
+  bandwidth; report when the digital path becomes the bottleneck.
+
+## WP12.3 — End-to-end traffic and utilization ledger
+
+- [ ] Emit per-layer/per-token bytes across tile SRAM, shared SRAM, NoC,
+  inter-die links and off-chip memory with provenance-tagged energy coefficients.
+- [ ] Report tile/ADC/NoC/memory utilization and distinguish useful MACs from
+  padding, differential-cell overhead and re-execution.
+- [ ] Add hand-computable two-layer/two-die scheduling assertions plus invalid
+  capacity/bandwidth boundary tests.
+
+### Gate R12 exit
+
+For every T0–T3 design point, the architecture simulator can state whether
+weights are resident or streamed and can account for capacity, rewrites,
+latency, traffic and utilization across prefill and decode. Any infeasible tier
+must be reported as infeasible rather than repaired with unbounded bandwidth or
+memory assumptions.
+
+---
+
+# R13 — Large-model accuracy and hardware-recovery validation — PLANNED
+
+Depends on R11 + R12.
+
+## WP13.1 — Digital baseline and evaluation corpus
+
+- [ ] Freeze tokenizer, prompts/corpus slices, sequence lengths, decoding settings,
+  seeds and digital reference outputs for each accessible checkpoint.
+- [ ] Report float/quantized baseline perplexity and token/logit metrics before
+  injecting analog non-idealities.
+- [ ] Keep copyrighted/licensed model weights and datasets out of the repository;
+  commit hashes, manifests, scripts and aggregate results only.
+
+## WP13.2 — Profile-driven error at scale
+
+- [ ] Run exact profile-driven end-to-end evaluation for T0 and the bounded T1
+  workload; use calibrated stratified studies for T2/T3 until exact execution is
+  demonstrated.
+- [ ] Attribute degradation by layer family and by each named `crossbar-v1`
+  mechanism, including depth-wise error accumulation and clipping incidence.
+- [ ] Compare 4/6/8-bit converter and weight-state design points without promoting
+  assumed higher-resolution hardware to verified evidence.
+
+## WP13.3 — Scalable recovery
+
+- [ ] Extend output calibration, defect remapping and write-verify tuning to shared
+  calibration groups with explicit metadata/storage/programming cost.
+- [ ] Evaluate layer sensitivity, selective digital fallback and mixed precision;
+  include their latency/energy/area penalties in the architecture ledger.
+- [ ] Freeze accuracy acceptance thresholds per tier before running the final
+  recovery experiment.
+
+### Gate R13 exit
+
+At least one real T0 and one real T1 checkpoint complete the bounded evaluation
+with degradation attributable to named mechanisms and recovery costs included.
+T2/T3 results must explicitly say `FULL`, `SAMPLED` or `SURROGATE`; sampled
+evidence cannot satisfy a full-model accuracy claim.
+
+---
+
+# R14 — Multi-tier physical feasibility and design decision — PLANNED
+
+Depends on R13 + R8 + R9.
+
+## WP14.1 — Parametric physical ledger
+
+- [ ] Replace TinyGPT-fixed latency, energy, area and thermal constants with a
+  manifest- and schedule-driven ledger for T0–T3 prefill and decode.
+- [ ] Propagate evidence class and sensitivity ranges through every memory,
+  converter, NoC, inter-die and digital-attention coefficient.
+- [ ] Report throughput at stated batch/context, time-to-first-token, tokens/s,
+  joules/token, die count/area, power density and thermal envelope.
+
+## WP14.2 — Bottleneck and break-even analysis
+
+- [ ] Identify the first limiting resource for each tier: crossbar capacity,
+  programming, ADC bandwidth/area, SRAM/HBM, NoC/inter-die link, digital attention,
+  power or thermal envelope.
+- [ ] Sweep tile size/count, converter sharing, model precision, context, batch and
+  residency strategy with deterministic Pareto reports.
+- [ ] Compare against digital baselines only when measurement methodology and
+  workload are comparable; otherwise label the comparison assumed/sensitivity-only.
+
+## WP14.3 — Go/no-go architecture report
+
+- [ ] Publish one integrated report that classifies each tier as `FEASIBLE`,
+  `CONDITIONAL` or `INFEASIBLE` under frozen constraints and lists the evidence
+  required to change that decision.
+- [ ] Select one implementation target for the next PCB/FPGA/IC correlation loop;
+  do not claim all tiers are equally realizable.
+- [ ] Preserve the strongest honest status: simulation-backed physical feasibility
+  unless the corresponding large-model implementation is hardware measured.
+
+### Gate R14 exit
+
+The repository has an auditable, reproducible design decision for all four
+model tiers and a single justified implementation target. A passed gate does
+not require every tier to be feasible; it requires that feasibility or
+infeasibility follows from bounded resources and evidence-tagged assumptions.
+
+---
+
 ## Work-selection rule
 
 When choosing the next task:
