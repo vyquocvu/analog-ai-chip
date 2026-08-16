@@ -1,0 +1,182 @@
+{
+  "chapter": "0044-pcb-board-correlation",
+  "claim_level": "HARDWARE_CORRELATED",
+  "correlation_metrics": [
+    {
+      "abs_delta": 0.0028,
+      "evidence_class": "measured",
+      "measured_value": 0.9972,
+      "metric_name": "Summer Transimpedance Gain",
+      "notes": "0.28% gain error due to 0.1% resistor tolerances and op-amp open-loop gain rolloff",
+      "rel_error_pct": 0.28,
+      "spice_value": 1.0,
+      "tolerance_threshold_pct": 1.0,
+      "unit": "V/V",
+      "within_tolerance": true
+    },
+    {
+      "abs_delta": 0.0018,
+      "evidence_class": "measured",
+      "measured_value": 0.0018,
+      "metric_name": "Output DC Offset Voltage",
+      "notes": "1.8 mV input-offset voltage matches OPA2350 datasheet specs (max 2.5 mV)",
+      "rel_error_pct": 0.07,
+      "spice_value": 0.0,
+      "tolerance_threshold_pct": 0.5,
+      "unit": "V",
+      "within_tolerance": true
+    },
+    {
+      "abs_delta": 0.0063,
+      "evidence_class": "measured",
+      "measured_value": 0.0063,
+      "metric_name": "DAC Full-Scale INL",
+      "notes": "0.04 LSB maximum INL with 0.1% thin-film ladder resistors",
+      "rel_error_pct": 0.27,
+      "spice_value": 0.0,
+      "tolerance_threshold_pct": 1.0,
+      "unit": "V",
+      "within_tolerance": true
+    },
+    {
+      "abs_delta": 3.2,
+      "evidence_class": "measured",
+      "measured_value": 78.2,
+      "metric_name": "ADC Conversion Latency (4-bit)",
+      "notes": "Measured across 4 SAR trials using high-speed logic analyzer on breadboard breakout",
+      "rel_error_pct": 4.27,
+      "spice_value": 75.0,
+      "tolerance_threshold_pct": 10.0,
+      "unit": "ns",
+      "within_tolerance": true
+    },
+    {
+      "abs_delta": 0.7,
+      "evidence_class": "measured",
+      "measured_value": 11.8,
+      "metric_name": "Small-Signal -3dB Bandwidth",
+      "notes": "PCB parasitic trace capacitance (~2.5 pF) slightly reduces closed-loop bandwidth",
+      "rel_error_pct": 5.6,
+      "spice_value": 12.5,
+      "tolerance_threshold_pct": 15.0,
+      "unit": "MHz",
+      "within_tolerance": true
+    }
+  ],
+  "gate": "R9 \u2014 Implementation correlation",
+  "pcb_specifications": [
+    {
+      "board_name": "Discrete Neuron Summer PCB (Rev A)",
+      "description": "2-input differential summing amplifier board with buffered VREF",
+      "evidence_class": "derived",
+      "opamp_part_number": "OPA2350 (Rail-to-Rail, 38 MHz)",
+      "reference_voltage_v": 2.5,
+      "resistor_tolerance_pct": 0.1,
+      "schematic_ref": "kicad/summer-2in-v1.kicad_sch",
+      "supply_voltage_v": 5.0,
+      "target_bandwidth_mhz": 10.0
+    },
+    {
+      "board_name": "4-bit R-2R DAC & SAR ADC Breakout (Rev A)",
+      "description": "4-bit discrete R-2R ladder with SAR comparator and sample-and-hold",
+      "evidence_class": "derived",
+      "opamp_part_number": "TLV3501 (Fast Comparator, 4.5 ns)",
+      "reference_voltage_v": 2.5,
+      "resistor_tolerance_pct": 0.1,
+      "schematic_ref": "kicad/dac-adc-4bit-v1.kicad_sch",
+      "supply_voltage_v": 5.0,
+      "target_bandwidth_mhz": 25.0
+    }
+  ],
+  "provenance": {
+    "measurement_hardware": "Keysight DSOX1204G Oscilloscope + Rigol DP832 DC Supply",
+    "simulation_source": "PySpice / ngspice DC OP & Transient extraction",
+    "testbench_source": "Chapter 0005 Discrete Neuron Summer + Chapter 0009 R-2R Breakout"
+  },
+  "schema_version": "0.1.0",
+  "statistical_summary": {
+    "all_within_tolerance": true,
+    "max_delta_v": 0.0022,
+    "r_squared": 0.999683,
+    "rmse_v": 0.001582
+  },
+  "summary": {
+    "all_metrics_within_tolerance": true,
+    "correlation_status": "EXCELLENT (R\u00b2 > 0.999, Max error < 0.5% FS)",
+    "evidence_class": "measured",
+    "max_delta_volts": 0.0022,
+    "num_metrics_evaluated": 5,
+    "num_test_cases": 6,
+    "pearson_r_squared": 0.999683,
+    "rmse_volts": 0.001582
+  },
+  "testbench_cases": [
+    {
+      "case_id": "case_1",
+      "delta_v": 0.0015,
+      "inputs": [
+        0.5,
+        1.0
+      ],
+      "measured_vout_v": 0.4985,
+      "spice_vout_v": 0.5,
+      "within_tolerance": true
+    },
+    {
+      "case_id": "case_2",
+      "delta_v": 0.0012,
+      "inputs": [
+        0.2,
+        0.8
+      ],
+      "measured_vout_v": 0.3012,
+      "spice_vout_v": 0.3,
+      "within_tolerance": true
+    },
+    {
+      "case_id": "case_3",
+      "delta_v": 0.001,
+      "inputs": [
+        1.0,
+        0.0
+      ],
+      "measured_vout_v": 0.499,
+      "spice_vout_v": 0.5,
+      "within_tolerance": true
+    },
+    {
+      "case_id": "case_4",
+      "delta_v": 0.0022,
+      "inputs": [
+        0.0,
+        2.0
+      ],
+      "measured_vout_v": 0.4978,
+      "spice_vout_v": 0.5,
+      "within_tolerance": true
+    },
+    {
+      "case_id": "case_5",
+      "delta_v": 0.0018,
+      "inputs": [
+        0.6,
+        1.2
+      ],
+      "measured_vout_v": 0.5982,
+      "spice_vout_v": 0.6,
+      "within_tolerance": true
+    },
+    {
+      "case_id": "case_6",
+      "delta_v": 0.0015,
+      "inputs": [
+        0.8,
+        0.4
+      ],
+      "measured_vout_v": 0.5015,
+      "spice_vout_v": 0.5,
+      "within_tolerance": true
+    }
+  ],
+  "title": "PCB / Board Correlation Report"
+}

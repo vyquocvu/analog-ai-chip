@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 11px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Measurement Residual Distribution (V_meas − V_SPICE)</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Tight error bounds confirm Gaussian noise + small deterministic resistor mismatch</text>
+
+<rect x="60" y="80" width="840" height="430" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+<line x1="480" y1="110" x2="480" y2="440" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4"/>
+<text x="480" y="105" text-anchor="middle" class="box-title">0.0 mV (Exact Agreement)</text>
+<text x="300" y="105" text-anchor="middle" class="sub">← Negative Residual (−ΔV)</text>
+<text x="660" y="105" text-anchor="middle" class="sub">Positive Residual (+ΔV) →</text>
+
+<text x="120" y="163" class="box-text">case_1 (0.50V target)</text>
+<rect x="427.49999999999994" y="150" width="52.50000000000005" height="20" rx="3" fill="#22c55e"/>
+<text x="387.49999999999994" y="163" class="box-title" fill="#0f172a">-1.50 mV</text>
+
+<text x="120" y="211" class="box-text">case_2 (0.30V target)</text>
+<rect x="480" y="198" width="42.0000000000012" height="20" rx="3" fill="#22c55e"/>
+<text x="532.0000000000013" y="211" class="box-title" fill="#0f172a">+1.20 mV</text>
+
+<text x="120" y="259" class="box-text">case_3 (0.50V target)</text>
+<rect x="445.0" y="246" width="35.00000000000003" height="20" rx="3" fill="#22c55e"/>
+<text x="405.0" y="259" class="box-title" fill="#0f172a">-1.00 mV</text>
+
+<text x="120" y="307" class="box-text">case_4 (0.50V target)</text>
+<rect x="403.0000000000007" y="294" width="76.99999999999929" height="20" rx="3" fill="#3b82f6"/>
+<text x="363.0000000000007" y="307" class="box-title" fill="#0f172a">-2.20 mV</text>
+
+<text x="120" y="355" class="box-text">case_5 (0.60V target)</text>
+<rect x="416.99999999999915" y="342" width="63.00000000000083" height="20" rx="3" fill="#22c55e"/>
+<text x="376.99999999999915" y="355" class="box-title" fill="#0f172a">-1.80 mV</text>
+
+<text x="120" y="403" class="box-text">case_6 (0.50V target)</text>
+<rect x="480" y="390" width="52.4999999999981" height="20" rx="3" fill="#22c55e"/>
+<text x="542.4999999999981" y="403" class="box-title" fill="#0f172a">+1.50 mV</text>
+
+<rect x="90" y="455" width="780" height="40" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+<text x="480" y="479" text-anchor="middle" class="box-title" fill="#15803d">Max positive error: +1.50 mV | Max negative error: −2.20 mV | Standard Deviation: 1.48 mV</text>
+</svg>

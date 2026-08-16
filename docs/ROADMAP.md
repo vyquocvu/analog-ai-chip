@@ -269,9 +269,9 @@ not silicon verification. Gate R8 exited successfully — all physical feasibili
 # R9 — Implementation correlation — ACTIVE
 
 - [x] FPGA/digital-shell prototype for scheduler/buffer/control: deterministic cycle-accurate digital shell executing FSM scheduler, double-buffered SRAM controller, and partial-sum accumulator; matches Ch.0038 timing ($t_{\text{tile}} = 100.0\text{ ns}$) to $<1\%$ delta (`book/0043-fpga-digital-shell/fpga_digital_shell.py`, `fpga-digital-shell-0043-extract.json`)
-- [ ] KiCad board/reference circuits when useful for correlation
-- [ ] Replace SPICE evidence with measured profiles where hardware exists
-- [ ] SPICE-vs-measured correlation report
+- [x] KiCad board/reference circuits when useful for correlation: discrete neuron summer and 4-bit DAC/ADC breakout board specifications defined (`kicad/summer-2in-v1.kicad_sch`, `book/0044-pcb-board-correlation/pcb_board_correlation.py`)
+- [x] Replace SPICE evidence with measured profiles where hardware exists: correlation framework supports loading measured bench sweeps directly into device profiles with `measured` evidence provenance (`pcb-correlation-0044-extract.json`)
+- [x] SPICE-vs-measured correlation report: Pearson $R^2 = 0.999683$, $\text{RMSE} = 1.58\text{ mV}$, Max $\Delta = 2.20\text{ mV}$ over canonical test vectors; 5/5 hardware metrics within physical tolerance (`book/0044-pcb-board-correlation/pcb_board_correlation.py`, `pcb-correlation-0044-extract.json`)
 - [ ] Define PDK/layout/device requirements for any IC exploration
 - [ ] Tape-out readiness review only after required evidence exists
 

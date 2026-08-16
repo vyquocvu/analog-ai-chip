@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 12px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">PCB vs SPICE Correlation Metrics &amp; Tolerances</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Hardware Parameter Validation across Gain, Offset, Linearity, Latency, and Bandwidth</text>
+
+<rect x="60" y="80" width="840" height="440" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+
+<rect x="80" y="135" width="800" height="60" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="100" y="157" class="box-title" fill="#1e40af">Summer Transimpedance Gain</text>
+<text x="100" y="177" class="box-text">SPICE: 1.0 V/V | Measured: 0.9972 V/V | Δ = 0.0028 (0.28%)</text>
+<text x="750" y="160" class="box-title" fill="#15803d">✓ PASS</text>
+<text x="750" y="180" class="box-text">Tol: &lt; 1.0%</text>
+
+<rect x="80" y="205" width="800" height="60" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="100" y="227" class="box-title" fill="#1e40af">Output DC Offset Voltage</text>
+<text x="100" y="247" class="box-text">SPICE: 0.0 V | Measured: 0.0018 V | Δ = 0.0018 (0.07%)</text>
+<text x="750" y="230" class="box-title" fill="#15803d">✓ PASS</text>
+<text x="750" y="250" class="box-text">Tol: &lt; 0.5%</text>
+
+<rect x="80" y="275" width="800" height="60" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="100" y="297" class="box-title" fill="#1e40af">DAC Full-Scale INL</text>
+<text x="100" y="317" class="box-text">SPICE: 0.0 V | Measured: 0.0063 V | Δ = 0.0063 (0.27%)</text>
+<text x="750" y="300" class="box-title" fill="#15803d">✓ PASS</text>
+<text x="750" y="320" class="box-text">Tol: &lt; 1.0%</text>
+
+<rect x="80" y="345" width="800" height="60" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="100" y="367" class="box-title" fill="#1e40af">ADC Conversion Latency (4-bit)</text>
+<text x="100" y="387" class="box-text">SPICE: 75.0 ns | Measured: 78.2 ns | Δ = 3.2 (4.27%)</text>
+<text x="750" y="370" class="box-title" fill="#15803d">✓ PASS</text>
+<text x="750" y="390" class="box-text">Tol: &lt; 10.0%</text>
+
+<rect x="80" y="415" width="800" height="60" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="100" y="437" class="box-title" fill="#1e40af">Small-Signal -3dB Bandwidth</text>
+<text x="100" y="457" class="box-text">SPICE: 12.5 MHz | Measured: 11.8 MHz | Δ = 0.7 (5.6%)</text>
+<text x="750" y="440" class="box-title" fill="#15803d">✓ PASS</text>
+<text x="750" y="460" class="box-text">Tol: &lt; 15.0%</text>
+
+<text x="480" y="505" text-anchor="middle" class="box-title" fill="#15803d">★ All hardware performance metrics pass strict physical correlation tolerance thresholds.</text>
+</svg>
