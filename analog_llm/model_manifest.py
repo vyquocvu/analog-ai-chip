@@ -8,9 +8,10 @@ execution/checkpoint ingestion is added in later work packages.
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 from dataclasses import asdict, dataclass
 from math import prod
-from typing import Any, Mapping
+from typing import Any
 
 _SUPPORTED_DTYPES = {"float16": 2, "bfloat16": 2, "float32": 4}
 _SUPPORTED_NORMS = {"layernorm", "rmsnorm"}
