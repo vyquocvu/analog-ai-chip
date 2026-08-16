@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 13px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+.big { font-size: 22px; font-weight: 800; }
+.formula { font: 12px ui-monospace, monospace; fill: #1e293b; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Chapter 0042 — Integrated Physical Feasibility Report</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Gate R8 Final Verdict — Evidence-Separated Physical Ledger: Latency · Energy · Area · Thermal</text>
+
+<!-- Gate R8 Verdict Banner -->
+<rect x="50" y="75" width="860" height="70" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="2.5"/>
+<text x="480" y="108" text-anchor="middle" class="big" fill="#15803d">★ Gate R8 PASSED</text>
+<text x="480" y="132" text-anchor="middle" class="box-text">7/7 milestones satisfied — SYSTEM-LEVEL DERIVED — All physical metrics derived from tagged coefficients.</text>
+
+<!-- Four-domain metric cards -->
+<rect x="50" y="165" width="200" height="120" rx="10" fill="#dbeafe" stroke="#3b82f6"/>
+<text x="150" y="192" text-anchor="middle" class="box-title" fill="#1e40af">LATENCY</text>
+<text x="150" y="220" text-anchor="middle" class="big" fill="#1e40af">998 ns</text>
+<text x="150" y="243" text-anchor="middle" class="box-text">Single token decode</text>
+<text x="150" y="263" text-anchor="middle" class="box-text">1.002M tok/s throughput</text>
+<text x="150" y="280" text-anchor="middle" class="sub">derived (Ch.0038)</text>
+
+<rect x="270" y="165" width="200" height="120" rx="10" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="370" y="192" text-anchor="middle" class="box-title" fill="#b45309">ENERGY</text>
+<text x="370" y="220" text-anchor="middle" class="big" fill="#b45309">29.1 nJ</text>
+<text x="370" y="243" text-anchor="middle" class="box-text">Per token decode</text>
+<text x="370" y="263" text-anchor="middle" class="box-text">8.6× vs digital baseline</text>
+<text x="370" y="280" text-anchor="middle" class="sub">derived (Ch.0039)</text>
+
+<rect x="490" y="165" width="200" height="120" rx="10" fill="#faf5ff" stroke="#9333ea"/>
+<text x="590" y="192" text-anchor="middle" class="box-title" fill="#7e22ce">AREA</text>
+<text x="590" y="220" text-anchor="middle" class="big" fill="#7e22ce">1.412 mm²</text>
+<text x="590" y="243" text-anchor="middle" class="box-text">Total chip die (28nm)</text>
+<text x="590" y="263" text-anchor="middle" class="box-text">75.6 GOPS/mm²</text>
+<text x="590" y="280" text-anchor="middle" class="sub">derived (Ch.0040)</text>
+
+<rect x="710" y="165" width="200" height="120" rx="10" fill="#dcfce7" stroke="#22c55e"/>
+<text x="810" y="192" text-anchor="middle" class="box-title" fill="#15803d">THERMAL</text>
+<text x="810" y="220" text-anchor="middle" class="big" fill="#15803d">30.9°C</text>
+<text x="810" y="243" text-anchor="middle" class="box-text">Junction temp (nom.)</text>
+<text x="810" y="263" text-anchor="middle" class="box-text">20.8 mW/mm² density</text>
+<text x="810" y="280" text-anchor="middle" class="sub">derived (Ch.0041)</text>
+
+<!-- Evidence legend -->
+<rect x="50" y="310" width="860" height="200" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="70" y="340" class="box-title">Evidence Taxonomy Applied to All Claims</text>
+<rect x="70" y="357" width="195" height="133" rx="6" fill="#dcfce7" stroke="#22c55e"/>
+<text x="168" y="380" text-anchor="middle" class="box-title" fill="#15803d">measured</text>
+<text x="168" y="402" text-anchor="middle" class="box-text">Physical measurement</text>
+<text x="168" y="422" text-anchor="middle" class="box-text">on fabricated hardware</text>
+<text x="168" y="452" text-anchor="middle" class="box-title" fill="#b91c1c">None yet</text>
+<text x="168" y="472" text-anchor="middle" class="sub">Requires tape-out</text>
+
+<rect x="280" y="357" width="195" height="133" rx="6" fill="#dbeafe" stroke="#3b82f6"/>
+<text x="378" y="380" text-anchor="middle" class="box-title" fill="#1d4ed8">spice</text>
+<text x="378" y="402" text-anchor="middle" class="box-text">SPICE / compact model</text>
+<text x="378" y="422" text-anchor="middle" class="box-text">circuit simulation</text>
+<text x="378" y="452" text-anchor="middle" class="box-title" fill="#1d4ed8">crossbar-v1 device</text>
+<text x="378" y="472" text-anchor="middle" class="sub">DAC/ADC timing</text>
+
+<rect x="490" y="357" width="195" height="133" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="588" y="380" text-anchor="middle" class="box-title" fill="#b45309">derived</text>
+<text x="588" y="402" text-anchor="middle" class="box-text">Mathematically derived</text>
+<text x="588" y="422" text-anchor="middle" class="box-text">from spice/measured inputs</text>
+<text x="588" y="452" text-anchor="middle" class="box-title" fill="#b45309">Most system metrics</text>
+<text x="588" y="472" text-anchor="middle" class="sub">Latency/energy/area/T_j</text>
+
+<rect x="700" y="357" width="195" height="133" rx="6" fill="#fee2e2" stroke="#f87171"/>
+<text x="798" y="380" text-anchor="middle" class="box-title" fill="#b91c1c">assumed</text>
+<text x="798" y="402" text-anchor="middle" class="box-text">Engineering assumption</text>
+<text x="798" y="422" text-anchor="middle" class="box-text">must be measured on device</text>
+<text x="798" y="452" text-anchor="middle" class="box-title" fill="#b91c1c">ADC area/energy, θ_ja</text>
+<text x="798" y="472" text-anchor="middle" class="sub">E_a, digital baseline</text>
+</svg>

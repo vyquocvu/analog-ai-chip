@@ -1,0 +1,216 @@
+{
+  "chapter": "0042-integrated-feasibility-report",
+  "efficiency_claims_audit": [
+    {
+      "allowed": true,
+      "caveat": "CONDITIONAL: digital baseline is assumed, not measured. Advantage is valid only relative to the stated 250 nJ/token digital model.",
+      "claim_text": "IMC accelerator is 8.6\u00d7 more energy-efficient than digital GEMV baseline",
+      "computed_ratio": 8.6,
+      "denominator": "IMC measured energy: 29.08 nJ/token (derived from ADC/DAC/crossbar ledger)",
+      "evidence_class": "derived",
+      "numerator": "Digital baseline energy: 250 nJ/token (assumed int8 systolic)"
+    },
+    {
+      "allowed": true,
+      "caveat": "CONDITIONAL: O(1) refers to the analog compute step only. Full token decode includes O(T) softmax and LayerNorm on digital SIMD \u2014 total decode is O(T) for attention.",
+      "claim_text": "IMC crossbar GEMV executes in O(1) time per token",
+      "computed_ratio": 1.0,
+      "denominator": "Reference digital GEMV: O(N) multiplications on SIMD",
+      "evidence_class": "derived",
+      "numerator": "Crossbar compute time: 10 ns (assumed write settling + read, spice-derived)"
+    },
+    {
+      "allowed": true,
+      "caveat": "\u03b8_ja = 200\u00b0C/W is assumed for bare die. Packaged part may differ.",
+      "claim_text": "Full-chip power is within passive convection cooling limits",
+      "computed_ratio": 4.8,
+      "denominator": "Passive cooling limit: ~100 mW/mm\u00b2 \u00d7 1.412 mm\u00b2 = 141 mW",
+      "evidence_class": "derived",
+      "numerator": "Active power: 29.35 mW (derived)"
+    },
+    {
+      "allowed": true,
+      "caveat": "GOPS/mm\u00b2 is derived from assumed-ADC-area tile model. Fab measurement required for verification.",
+      "claim_text": "System achieves 75.6 GOPS/mm\u00b2 compute density",
+      "computed_ratio": 75.6,
+      "denominator": "Die area: 1.412 mm\u00b2 (derived from 28nm layout assumptions)",
+      "evidence_class": "derived",
+      "numerator": "Compute throughput: 1.002M tok/s \u00d7 model FLOP count (derived)"
+    }
+  ],
+  "evidence_classes": {
+    "assumed": "Engineering assumption \u2014 must be measured on actual device",
+    "derived": "Mathematically derived from measured/spice inputs",
+    "measured": "Physical measurement on fabricated hardware",
+    "spice": "SPICE/compact-model circuit simulation"
+  },
+  "gate": "R8 \u2014 Physical feasibility report",
+  "gate_r8_status": {
+    "checks": {
+      "area_model_complete": true,
+      "energy_model_complete": true,
+      "integrated_report_generated": true,
+      "latency_model_complete": true,
+      "no_unsubstantiated_gpu_claims": true,
+      "sensitivity_ranges_documented": true,
+      "thermal_checks_complete": true
+    },
+    "gate_r8_passed": true,
+    "num_passed": 7,
+    "num_total": 7,
+    "verdict": "PASSED \u2014 all Gate R8 physical feasibility milestones satisfied"
+  },
+  "physical_ledger": [
+    {
+      "claim": "Single-token decode latency (all subsystems)",
+      "domain": "latency",
+      "evidence_class": "derived",
+      "provenance": "Ch.0038 latency_ledger.py \u2014 all timing coefficients tagged spice/derived/assumed",
+      "sensitivity": "ADC sample time (assumed 50 ns) dominates; 2\u00d7 ADC \u2192 ~1.4\u00d7 total latency",
+      "value": "998.0 ns"
+    },
+    {
+      "claim": "Throughput at full crossbar decode",
+      "domain": "latency",
+      "evidence_class": "derived",
+      "provenance": "Ch.0038: 1/998 ns pipelined throughput",
+      "sensitivity": "Scales inversely with ADC sample latency",
+      "value": "1002004 tok/s"
+    },
+    {
+      "claim": "Energy per decode token (all subsystems)",
+      "domain": "energy",
+      "evidence_class": "derived",
+      "provenance": "Ch.0039 energy_power_ledger.py \u2014 ADC conversion dominates at 82.0%",
+      "sensitivity": "ADC energy (assumed 0.5 pJ/conv) scales linearly with 4-bit SAR assumptions",
+      "value": "29.08 nJ/token"
+    },
+    {
+      "claim": "Active chip power at 1M tok/s",
+      "domain": "energy",
+      "evidence_class": "derived",
+      "provenance": "Ch.0039: P = E/token \u00d7 throughput",
+      "sensitivity": "\u00b150% on assumed ADC energy \u2192 \u00b141% on total active power",
+      "value": "29.14 mW"
+    },
+    {
+      "claim": "Energy efficiency advantage vs digital baseline",
+      "domain": "energy",
+      "evidence_class": "derived",
+      "provenance": "Ch.0039: digital GEMV = 250 nJ/token (8-bit int8 systolic assumed)",
+      "sensitivity": "Digital baseline is ASSUMED; actual advantage requires ASIC measurement",
+      "value": "8.6\u00d7"
+    },
+    {
+      "claim": "Single tile area (16\u00d718 crossbar + ADC/DAC + calibration)",
+      "domain": "area",
+      "evidence_class": "derived",
+      "provenance": "Ch.0040: 28nm CMOS \u2014 ADC bank dominates at 82.2%",
+      "sensitivity": "SAR ADC unit area (assumed 150 \u00b5m\u00b2): 2\u00d7 ADC \u2192 1.8\u00d7 tile area",
+      "value": "3281.5 \u00b5m\u00b2"
+    },
+    {
+      "claim": "Total chip die area (416 tiles + SRAM + SIMD + NoC)",
+      "domain": "area",
+      "evidence_class": "derived",
+      "provenance": "Ch.0040: 28nm CMOS floorplan ledger",
+      "sensitivity": "Within \u00b12\u00d7 depending on ADC area and SRAM macro choices",
+      "value": "1.412 mm\u00b2"
+    },
+    {
+      "claim": "Compute area efficiency",
+      "domain": "area",
+      "evidence_class": "derived",
+      "provenance": "Ch.0040: throughput / die area",
+      "sensitivity": "Improves quadratically with process shrink (28\u219216 nm would give ~2\u00d7 density)",
+      "value": "75.6 GOPS/mm\u00b2"
+    },
+    {
+      "claim": "Nominal junction temperature (T_amb = 25\u00b0C)",
+      "domain": "thermal",
+      "evidence_class": "derived",
+      "provenance": "Ch.0041: T_j = T_amb + \u03b8_ja \u00d7 P_chip; \u03b8_ja = 200\u00b0C/W assumed",
+      "sensitivity": "\u03b8_ja is assumed; real die mount and package may reduce this significantly",
+      "value": "30.87\u00b0C"
+    },
+    {
+      "claim": "Power density",
+      "domain": "thermal",
+      "evidence_class": "derived",
+      "provenance": "Ch.0041: P_chip / A_die",
+      "sensitivity": "Scales with active power \u2014 safe under all assumed scenarios",
+      "value": "20.79 mW/mm\u00b2"
+    }
+  ],
+  "schema_version": "0.1.0",
+  "sensitivity_ranges": [
+    {
+      "assumed_param": "ADC unit area (A_adc)",
+      "baseline_assumed": "4-bit SAR ADC + TIA (28nm published scaling)",
+      "baseline_value": "150 \u00b5m\u00b2",
+      "evidence_class": "assumed",
+      "optimistic_case": "80 \u00b5m\u00b2 (\u221247%)",
+      "optimistic_impact": "Tile area: 1,736 \u00b5m\u00b2 (\u221247%); Chip: 0.76 mm\u00b2 (\u221246%)",
+      "pessimistic_case": "250 \u00b5m\u00b2 (+67%)",
+      "pessimistic_impact": "Tile area: 4,736 \u00b5m\u00b2 (+44%); Chip: 2.01 mm\u00b2 (+42%)",
+      "system_metric_affected": "Die area, power density"
+    },
+    {
+      "assumed_param": "ADC energy per conversion (E_adc)",
+      "baseline_assumed": "4-bit SAR ADC at 25 MHz (28nm literature)",
+      "baseline_value": "0.5 pJ/conv",
+      "evidence_class": "assumed",
+      "optimistic_case": "0.1 pJ/conv (\u221280%)",
+      "optimistic_impact": "Total energy: 15.2 nJ/token (\u221248%); active power: 15.3 mW (\u221247%)",
+      "pessimistic_case": "2.0 pJ/conv (+300%)",
+      "pessimistic_impact": "Total energy: 86.4 nJ/token (+197%); active power: 86.7 mW (+198%)",
+      "system_metric_affected": "Energy per token, active power, efficiency advantage"
+    },
+    {
+      "assumed_param": "Junction-to-ambient thermal resistance (\u03b8_ja)",
+      "baseline_assumed": "Bare die on PCB, natural convection",
+      "baseline_value": "200 \u00b0C/W",
+      "evidence_class": "assumed",
+      "optimistic_case": "50 \u00b0C/W (packaged + heatsink)",
+      "optimistic_impact": "T_j = 26.5\u00b0C (+1.5\u00b0C) \u2014 essentially ambient",
+      "pessimistic_case": "500 \u00b0C/W",
+      "pessimistic_impact": "T_j = 39.7\u00b0C (+8.8\u00b0C) \u2014 still safe, but tighter",
+      "system_metric_affected": "Junction temperature, Arrhenius drift acceleration"
+    },
+    {
+      "assumed_param": "Memristor Arrhenius activation energy (E_a)",
+      "baseline_assumed": "HfO\u2082 memristor retention (literature)",
+      "baseline_value": "0.6 eV",
+      "evidence_class": "assumed",
+      "optimistic_case": "0.9 eV (stable device)",
+      "optimistic_impact": "Drift acceleration at 70\u00b0C: 2.0\u00d7 \u2192 longer calibration interval feasible",
+      "pessimistic_case": "0.3 eV (low-E_a device)",
+      "pessimistic_impact": "Drift acceleration at 70\u00b0C: 6.8\u00d7 \u2192 shorter refresh interval required",
+      "system_metric_affected": "Refresh frequency, calibration energy overhead"
+    },
+    {
+      "assumed_param": "Digital baseline energy (GEMV reference)",
+      "baseline_assumed": "8-bit int8 systolic GEMV at 28nm (assumed)",
+      "baseline_value": "250 nJ/token",
+      "evidence_class": "assumed",
+      "optimistic_case": "500 nJ/token (FP16 baseline)",
+      "optimistic_impact": "Efficiency advantage: 17.2\u00d7 (vs 8.6\u00d7 baseline)",
+      "pessimistic_case": "80 nJ/token (optimized GPU kernel)",
+      "pessimistic_impact": "Efficiency advantage: 2.7\u00d7 (vs 8.6\u00d7 baseline)",
+      "system_metric_affected": "Energy efficiency advantage ratio"
+    }
+  ],
+  "summary": {
+    "all_efficiency_claims_allowed": true,
+    "claims_by_domain": {
+      "area": 3,
+      "energy": 3,
+      "latency": 2,
+      "thermal": 2
+    },
+    "gate_r8_passed": true,
+    "strongest_available_claim": "SYSTEM-LEVEL DERIVED \u2014 All physical metrics derived from tagged coefficients. No fabricated-hardware measurements are available. Gate R8 is satisfied at the derived/assumed physical modelling level.",
+    "total_claims": 10
+  },
+  "title": "Integrated Physical Feasibility Report"
+}

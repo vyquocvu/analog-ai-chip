@@ -117,7 +117,7 @@ Chapter numbering below is canonical. Existing chapters keep their numbers; futu
 | 0039 | Energy / power ledger | coefficients carry evidence class and provenance | done |
 | 0040 | Area / process model | area tied to explicit layout/process assumptions | done |
 | 0041 | Thermal / power density | operating envelope receives sanity checks | done |
-| 0042 | Integrated feasibility report | separates verified evidence, derived quantities and assumptions | next |
+| 0042 | Integrated feasibility report | separates verified evidence, derived quantities and assumptions | done |
 
 ## Part X — Correlation with implementation
 
