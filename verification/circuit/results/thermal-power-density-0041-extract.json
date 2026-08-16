@@ -1,0 +1,185 @@
+{
+  "chapter": "0041-thermal-power-density",
+  "gate": "R8 \u2014 Physical feasibility report",
+  "provenance": {
+    "claim_level": "SYSTEM_DERIVED_WITH_PHYSICAL_ASSUMPTIONS",
+    "thermal_sources": "Chapters 0038\u20130040 physical ledgers + JEDEC JESD51 thermal model"
+  },
+  "sanity_checks": [
+    {
+      "check_name": "Junction Temperature Rise",
+      "computed_value": 30.87,
+      "evidence_class": "derived",
+      "finding": "T_j = 25.0\u00b0C + 5.87\u00b0C rise = 30.87\u00b0C \u2014 SAFE",
+      "passed": true,
+      "threshold": 125.0,
+      "threshold_description": "Max 28nm CMOS junction temperature (T_j,max = 125 \u00b0C)",
+      "unit": "\u00b0C"
+    },
+    {
+      "check_name": "Power Density",
+      "computed_value": 20.7861,
+      "evidence_class": "derived",
+      "finding": "P/A = 29.35 mW / 1.412 mm\u00b2 = 20.79 mW/mm\u00b2 \u2014 WELL BELOW passive cooling limit",
+      "passed": true,
+      "threshold": 100.0,
+      "threshold_description": "Typical safe power density for passive cooling (<100 mW/mm\u00b2)",
+      "unit": "mW/mm\u00b2"
+    },
+    {
+      "check_name": "Radiative Power Dissipation",
+      "computed_value": 0.0513,
+      "evidence_class": "derived",
+      "finding": "Stefan-Boltzmann radiation from 1.412 mm\u00b2 die at 30.9\u00b0C = 51.31 \u00b5W \u2014 negligible vs 29.35 mW chip power",
+      "passed": true,
+      "threshold": 29.35,
+      "threshold_description": "Radiative dissipation must be less than chip power",
+      "unit": "mW"
+    },
+    {
+      "check_name": "Thermal Safety Margin to T_j,max",
+      "computed_value": 94.13,
+      "evidence_class": "derived",
+      "finding": "Margin = 125.0\u00b0C - 30.87\u00b0C = 94.13\u00b0C headroom \u2014 ADEQUATE",
+      "passed": true,
+      "threshold": 20.0,
+      "threshold_description": "Minimum recommended thermal margin (>20 \u00b0C headroom)",
+      "unit": "\u00b0C"
+    },
+    {
+      "check_name": "Hot-Case Junction Temp (T_amb = 70\u00b0C)",
+      "computed_value": 75.87,
+      "evidence_class": "assumed",
+      "finding": "Hot-case T_j = 70\u00b0C + 5.87\u00b0C = 75.87\u00b0C \u2014 SAFE",
+      "passed": true,
+      "threshold": 125.0,
+      "threshold_description": "Max junction temperature at 70\u00b0C ambient (industrial spec)",
+      "unit": "\u00b0C"
+    }
+  ],
+  "schema_version": "0.1.0",
+  "summary": {
+    "all_sanity_checks_passed": true,
+    "evidence_provenance_audit": "100% of thermal parameters tagged with derived or assumed provenance",
+    "hot_case_max_ambient_c": 70.0,
+    "nominal_junction_temp_c": 30.87,
+    "num_checks_passed": 5,
+    "num_checks_total": 5,
+    "power_density_mw_per_mm2": 20.786,
+    "thermal_assessment": "SAFE \u2014 full operating range within 28nm CMOS thermal envelope",
+    "thermal_rise_c": 5.87
+  },
+  "temperature_scenarios": [
+    {
+      "ambient_c": 0.0,
+      "evidence_class": "assumed",
+      "junction_c": 5.87,
+      "memristor_drift_accel_x": 0.2,
+      "operating_safe": true,
+      "power_derate_pct": 0.0,
+      "scenario": "Cold Storage (0\u00b0C)"
+    },
+    {
+      "ambient_c": 25.0,
+      "evidence_class": "derived",
+      "junction_c": 30.87,
+      "memristor_drift_accel_x": 1.57,
+      "operating_safe": true,
+      "power_derate_pct": 0.0,
+      "scenario": "Standard Operation (25\u00b0C)"
+    },
+    {
+      "ambient_c": 55.0,
+      "evidence_class": "assumed",
+      "junction_c": 60.87,
+      "memristor_drift_accel_x": 12.28,
+      "operating_safe": true,
+      "power_derate_pct": 0.0,
+      "scenario": "Industrial Grade (55\u00b0C)"
+    },
+    {
+      "ambient_c": 70.0,
+      "evidence_class": "assumed",
+      "junction_c": 75.87,
+      "memristor_drift_accel_x": 30.08,
+      "operating_safe": true,
+      "power_derate_pct": 0.0,
+      "scenario": "Hot Case / Automotive (70\u00b0C)"
+    },
+    {
+      "ambient_c": 85.0,
+      "evidence_class": "assumed",
+      "junction_c": 90.87,
+      "memristor_drift_accel_x": 68.44,
+      "operating_safe": true,
+      "power_derate_pct": 0.0,
+      "scenario": "Extended Industrial (85\u00b0C)"
+    }
+  ],
+  "thermal_parameters": [
+    {
+      "description": "Total peak chip power dissipation at full decode throughput",
+      "evidence_class": "derived",
+      "name": "chip_power_dissipation",
+      "provenance": "Chapters 0038+0039: 29.14 mW active + 0.21 mW leakage @ 1.002M tok/s",
+      "symbol": "P_chip",
+      "unit": "mW",
+      "value": 29.35
+    },
+    {
+      "description": "Total chip die area in 28nm CMOS",
+      "evidence_class": "derived",
+      "name": "die_area",
+      "provenance": "Chapter 0040: 28nm CMOS floorplan with 416 tiles + SRAM + SIMD",
+      "symbol": "A_die",
+      "unit": "mm\u00b2",
+      "value": 1.412
+    },
+    {
+      "description": "Junction-to-ambient thermal resistance (no heatsink, natural convection)",
+      "evidence_class": "assumed",
+      "name": "thermal_resistance_junction_ambient",
+      "provenance": "Bare die on PCB natural convection (~200 \u00b0C/W for <2 mm\u00b2 die)",
+      "symbol": "\u03b8_ja",
+      "unit": "\u00b0C/W",
+      "value": 200.0
+    },
+    {
+      "description": "Nominal ambient operating temperature",
+      "evidence_class": "assumed",
+      "name": "ambient_temperature_nominal",
+      "provenance": "Standard room-temperature operation assumption (JEDEC JESD51)",
+      "symbol": "T_amb",
+      "unit": "\u00b0C",
+      "value": 25.0
+    },
+    {
+      "description": "Maximum allowed junction temperature before reliability degradation",
+      "evidence_class": "assumed",
+      "name": "max_junction_temperature",
+      "provenance": "28nm CMOS process maximum junction temperature (TSMC 28nm design rules)",
+      "symbol": "T_j_max",
+      "unit": "\u00b0C",
+      "value": 125.0
+    },
+    {
+      "description": "Memristor conductance drift time exponent (G \u221d t^\u03bd)",
+      "evidence_class": "derived",
+      "name": "memristor_thermal_coefficient",
+      "provenance": "Chapter 0036 device_profiles/crossbar-v1.json: retention drift exponent",
+      "symbol": "\u03bd_drift",
+      "unit": "dimensionless",
+      "value": 0.08
+    },
+    {
+      "description": "Arrhenius activation energy for thermally-accelerated conductance drift",
+      "evidence_class": "assumed",
+      "name": "memristor_arrhenius_activation",
+      "provenance": "Published HfO\u2082 memristor retention activation energy (assumed, literature)",
+      "symbol": "E_a",
+      "unit": "eV",
+      "value": 0.6
+    }
+  ],
+  "title": "Thermal and Power Density Sanity Checks"
+}

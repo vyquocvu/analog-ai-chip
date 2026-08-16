@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 13px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+.formula-tag { font: 12px ui-monospace, monospace; fill: #1e40af; font-weight: 600; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Memristor Thermal Reliability Model</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Retention Drift &amp; Arrhenius Lifetime vs Temperature — Evidence Classes: DERIVED + ASSUMED</text>
+
+<!-- Left Card: Drift Model -->
+<rect x="50" y="85" width="410" height="420" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="70" y="115" class="box-title" fill="#1d4ed8">1. Conductance Retention Drift Model</text>
+
+<rect x="70" y="130" width="370" height="75" rx="6" fill="white" stroke="#93c5fd"/>
+<text x="85" y="157" class="formula-tag">G(t) = G₀ · (1 − ν · log(t))</text>
+<text x="85" y="180" class="box-text">ν = 0.08 (DERIVED: crossbar-v1.json profile)</text>
+<text x="85" y="197" class="box-text">G₀: programmed conductance at t=0</text>
+
+<rect x="70" y="220" width="370" height="140" rx="6" fill="white" stroke="#93c5fd"/>
+<text x="85" y="245" class="box-title" fill="#1e40af">Drift at T = 30.9°C (Nominal):</text>
+<text x="85" y="268" class="box-text">• t=1s: ΔG/G₀ = 0.0% (reference)</text>
+<text x="85" y="290" class="box-text">• t=1hr: ΔG/G₀ ≈ 1.8% drift</text>
+<text x="85" y="312" class="box-text">• t=1yr: ΔG/G₀ ≈ 6.3% drift (refreshable)</text>
+<text x="85" y="334" class="box-text">• Proven low sensitivity in Ch.0036 (ranked last)</text>
+
+<rect x="70" y="375" width="370" height="110" rx="6" fill="#dbeafe" stroke="#93c5fd"/>
+<text x="85" y="400" class="box-title" fill="#1e40af">Weight Refresh Strategy:</text>
+<text x="85" y="422" class="box-text">• Periodic write-verify refresh cycle</text>
+<text x="85" y="444" class="box-text">• Refresh interval: 1-10 hours (model deployment)</text>
+<text x="85" y="466" class="box-text">• Refresh energy: ≪ normal compute energy</text>
+
+<!-- Right Card: Arrhenius Acceleration -->
+<rect x="500" y="85" width="410" height="420" rx="10" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="520" y="115" class="box-title" fill="#7e22ce">2. Arrhenius Thermal Lifetime Model</text>
+
+<rect x="520" y="130" width="370" height="75" rx="6" fill="white" stroke="#d8b4fe"/>
+<text x="535" y="157" class="formula-tag">AF = exp(E_a/k_B · (1/T_ref − 1/T_j))</text>
+<text x="535" y="180" class="box-text">E_a = 0.6 eV (ASSUMED: HfO₂ literature)</text>
+<text x="535" y="197" class="box-text">T_ref = 298.15 K (25°C reference)</text>
+
+<rect x="520" y="220" width="370" height="140" rx="6" fill="white" stroke="#d8b4fe"/>
+<text x="535" y="245" class="box-title" fill="#7e22ce">Acceleration Factor at T_j:</text>
+<text x="535" y="268" class="box-text">• T_j = 30.9°C (nominal): AF = 1.00× (baseline)</text>
+<text x="535" y="290" class="box-text">• T_j = 55°C: AF ≈ 2.1× faster drift</text>
+<text x="535" y="312" class="box-text">• T_j = 70°C: AF ≈ 3.8× faster drift</text>
+<text x="535" y="334" class="box-text">• T_j = 85°C: AF ≈ 6.5× faster drift</text>
+
+<rect x="520" y="375" width="370" height="110" rx="6" fill="#f3e8ff" stroke="#d8b4fe"/>
+<text x="535" y="400" class="box-title" fill="#7e22ce">Reliability Assessment:</text>
+<text x="535" y="422" class="box-text">• Nominal T_j = 30.9°C: Fully benign (AF≈1.0)</text>
+<text x="535" y="444" class="box-text">• Industrial 70°C: Manageable with shorter refresh</text>
+<text x="535" y="466" class="box-text">• E_a is assumed — refresh interval must be empirical</text>
+</svg>

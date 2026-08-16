@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 12px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Thermal Sanity Check Results (5/5 Passed)</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Evidence-Tagged Thermal Safety Boundary Verification for 28nm CMOS Operating Envelope</text>
+<rect x="60" y="80" width="840" height="420" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+<rect x="90" y="108" width="780" height="66" rx="6" fill="#dcfce7" stroke="#22c55e"/>
+<text x="105" y="133" class="box-title" fill="#15803d">Junction Temperature Rise: 30.87 °C (Threshold: 125.0 °C)</text>
+<text x="105" y="155" class="box-text">T_j = 25.0°C + 5.87°C rise = 30.87°C — SAFE</text>
+<text x="835" y="148" text-anchor="end" class="box-title" fill="#15803d">✓ PASSED</text>
+
+<rect x="90" y="184" width="780" height="66" rx="6" fill="#dbeafe" stroke="#3b82f6"/>
+<text x="105" y="209" class="box-title" fill="#1e40af">Power Density: 20.7861 mW/mm² (Threshold: 100.0 mW/mm²)</text>
+<text x="105" y="231" class="box-text">P/A = 29.35 mW / 1.412 mm² = 20.79 mW/mm² — WELL BELOW passive cooling limit</text>
+<text x="835" y="224" text-anchor="end" class="box-title" fill="#15803d">✓ PASSED</text>
+
+<rect x="90" y="260" width="780" height="66" rx="6" fill="#dcfce7" stroke="#22c55e"/>
+<text x="105" y="285" class="box-title" fill="#15803d">Radiative Power Dissipation: 0.0513 mW (Threshold: 29.35 mW)</text>
+<text x="105" y="307" class="box-text">Stefan-Boltzmann radiation from 1.412 mm² die at 30.9°C = 51.31 µW — negligible vs 29.35 mW chip power</text>
+<text x="835" y="300" text-anchor="end" class="box-title" fill="#15803d">✓ PASSED</text>
+
+<rect x="90" y="336" width="780" height="66" rx="6" fill="#dcfce7" stroke="#22c55e"/>
+<text x="105" y="361" class="box-title" fill="#15803d">Thermal Safety Margin to T_j,max: 94.13 °C (Threshold: 20.0 °C)</text>
+<text x="105" y="383" class="box-text">Margin = 125.0°C - 30.87°C = 94.13°C headroom — ADEQUATE</text>
+<text x="835" y="376" text-anchor="end" class="box-title" fill="#15803d">✓ PASSED</text>
+
+<rect x="90" y="412" width="780" height="66" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="105" y="437" class="box-title" fill="#b45309">Hot-Case Junction Temp (T_amb = 70°C): 75.87 °C (Threshold: 125.0 °C)</text>
+<text x="105" y="459" class="box-text">Hot-case T_j = 70°C + 5.87°C = 75.87°C — SAFE</text>
+<text x="835" y="452" text-anchor="end" class="box-title" fill="#15803d">✓ PASSED</text>
+
+</svg>

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 12px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Temperature Operating Scenarios</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Junction Temperature, Memristor Drift Acceleration, and Safety Envelope across 5 Thermal Scenarios</text>
+
+<rect x="60" y="80" width="840" height="420" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+<rect x="90" y="105" width="780" height="45" rx="4" fill="#1e40af" opacity="0.85"/>
+<text x="140" y="132" text-anchor="middle" class="box-title" fill="white">Scenario</text>
+<text x="350" y="132" text-anchor="middle" class="box-title" fill="white">T_amb</text>
+<text x="490" y="132" text-anchor="middle" class="box-title" fill="white">T_j (Computed)</text>
+<text x="630" y="132" text-anchor="middle" class="box-title" fill="white">Drift Accel. (Arrhenius)</text>
+<text x="810" y="132" text-anchor="middle" class="box-title" fill="white">Status</text>
+
+<rect x="90" y="160" width="780" height="45" rx="4" fill="#f1f5f9" stroke="#e2e8f0"/>
+<text x="140" y="187" text-anchor="middle" class="box-text">Cold Storage (0°C)</text>
+<text x="350" y="187" text-anchor="middle" class="box-text">0°C</text>
+<text x="490" y="187" text-anchor="middle" class="box-text">5.9°C</text>
+<text x="630" y="187" text-anchor="middle" class="box-text">0.20×</text>
+<text x="810" y="187" text-anchor="middle" class="box-title" fill="#15803d">✓ SAFE</text>
+
+<rect x="90" y="215" width="780" height="45" rx="4" fill="#dbeafe" stroke="#e2e8f0"/>
+<text x="140" y="242" text-anchor="middle" class="box-text">Standard Operation (25°C)</text>
+<text x="350" y="242" text-anchor="middle" class="box-text">25°C</text>
+<text x="490" y="242" text-anchor="middle" class="box-text">30.9°C</text>
+<text x="630" y="242" text-anchor="middle" class="box-text">1.57×</text>
+<text x="810" y="242" text-anchor="middle" class="box-title" fill="#15803d">✓ SAFE</text>
+
+<rect x="90" y="270" width="780" height="45" rx="4" fill="#fef3c7" stroke="#e2e8f0"/>
+<text x="140" y="297" text-anchor="middle" class="box-text">Industrial Grade (55°C)</text>
+<text x="350" y="297" text-anchor="middle" class="box-text">55°C</text>
+<text x="490" y="297" text-anchor="middle" class="box-text">60.9°C</text>
+<text x="630" y="297" text-anchor="middle" class="box-text">12.28×</text>
+<text x="810" y="297" text-anchor="middle" class="box-title" fill="#15803d">✓ SAFE</text>
+
+<rect x="90" y="325" width="780" height="45" rx="4" fill="#fef9c3" stroke="#e2e8f0"/>
+<text x="140" y="352" text-anchor="middle" class="box-text">Hot Case / Automotive (70°C)</text>
+<text x="350" y="352" text-anchor="middle" class="box-text">70°C</text>
+<text x="490" y="352" text-anchor="middle" class="box-text">75.9°C</text>
+<text x="630" y="352" text-anchor="middle" class="box-text">30.08×</text>
+<text x="810" y="352" text-anchor="middle" class="box-title" fill="#15803d">✓ SAFE</text>
+
+<rect x="90" y="380" width="780" height="45" rx="4" fill="#fee2e2" stroke="#e2e8f0"/>
+<text x="140" y="407" text-anchor="middle" class="box-text">Extended Industrial (85°C)</text>
+<text x="350" y="407" text-anchor="middle" class="box-text">85°C</text>
+<text x="490" y="407" text-anchor="middle" class="box-text">90.9°C</text>
+<text x="630" y="407" text-anchor="middle" class="box-text">68.44×</text>
+<text x="810" y="407" text-anchor="middle" class="box-title" fill="#15803d">✓ SAFE</text>
+
+<text x="90" y="450" class="box-title" fill="#b45309">★ Drift acceleration uses Arrhenius model: AF = exp(E_a / k_B × (1/T_ref − 1/T_j)), E_a = 0.6 eV (assumed HfO₂)</text>
+</svg>
