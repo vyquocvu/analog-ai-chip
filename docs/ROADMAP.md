@@ -235,7 +235,7 @@ Existing TinyGPT, checkpoint loader, KV cache, ablations and real-model mapping 
 
 - [x] Re-run linear/MLP/QKV mappings with R5/R6 physical profiles: dense linear layer (0027), two-stage Transformer MLP block with digital GELU/SiLU (0028), and packed multi-head QKV + Out attention projections (0029) mapped through physical crossbar tiles with all 9 `crossbar-v1` non-idealities, multi-head slicing, spatial reduction, and post-ADC output calibration (`linear-layer-0027-extract.json`, `mlp-0028-extract.json`, `qkv-projections-0029-extract.json`)
 - [x] Explicit analog/digital boundary report for attention: rigorous breakdown establishing static weights (Q, K, V, Out) on analog IMC crossbars (50 fJ/MAC) vs dynamic token-token attention (Q K^T, Softmax, A V) on digital SIMD/SRAM, proving dynamic tile reprogramming penalty across context lengths (`book/0030-attention-boundary/attention_boundary.py`, `attention-boundary-0030-extract.json`)
-- [ ] Full transformer-block error attribution
+- [x] Full transformer-block error attribution: complete end-to-end Transformer block mapped across 192 physical crossbar tiles with decoupled leave-one-out ranking across all 9 `crossbar-v1` non-idealities (proving stuck defects cause $>83\%$ of block analog error) and output calibration (`book/0032-transformer-block/transformer_block.py`, `transformer-block-0032-extract.json`)
 - [ ] Tiny transformer profile-driven parity/error study
 - [ ] Real pretrained checkpoint using physical profiles
 - [ ] Hardware-aware calibration/training recovery experiment

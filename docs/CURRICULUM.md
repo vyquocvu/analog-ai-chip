@@ -97,13 +97,13 @@ Chapter numbering below is canonical. Existing chapters keep their numbers; futu
 | 0029 | Q/K/V projections | transformer projections route through the analog path correctly | done |
 | 0030 | Attention boundary | static analog-friendly work and dynamic digital work are separated honestly | done |
 | 0031 | KV cache | dynamic state capacity and traffic are explicitly modeled | done |
-| 0032 | Transformer block | block-level error is attributable to named mechanisms | next |
+| 0032 | Transformer block | block-level error is attributable to named mechanisms | done |
 
 ## Part VIII — LLM inference and robustness
 
-| # | Chapter | Verification target |
-|---|---|---|
-| 0033 | Tiny transformer | deterministic float/reference and analog-path parity |
+| # | Chapter | Verification target | Status |
+|---|---|---|---|
+| 0033 | Tiny transformer | deterministic float/reference and analog-path parity | next |
 | 0034 | Full autoregressive path | token generation has complete architecture ledger |
 | 0035 | Real pretrained checkpoint | model runs using profile-driven accelerator configuration |
 | 0036 | Sensitivity and quantization | accuracy/cost trade-offs are reproducible with physical profiles |

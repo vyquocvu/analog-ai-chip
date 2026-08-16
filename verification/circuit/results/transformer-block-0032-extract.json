@@ -1,0 +1,99 @@
+{
+  "block_hardware_breakdown": {
+    "attention_out_tiles": 16,
+    "attention_qkv_tiles": 48,
+    "mlp_down_tiles": 64,
+    "mlp_up_tiles": 64,
+    "total_physical_tiles_per_block": 192
+  },
+  "chapter": "0032-transformer-block",
+  "gate": "R7 \u2014 Transformer and LLM validation",
+  "provenance": {
+    "calibration_profile": "device_profiles/tile-calibration-v1.json",
+    "claim_level": "SYSTEM_SIMULATED",
+    "crossbar_profile": "device_profiles/crossbar-v1.json"
+  },
+  "report": {
+    "attributions": [
+      {
+        "delta_error_pct": 0.0,
+        "l2_error_without_pct": 85.88,
+        "mechanism_name": "2D IR Drop (1.0 \u03a9)",
+        "relative_importance_pct": 0.0
+      },
+      {
+        "delta_error_pct": 1.25,
+        "l2_error_without_pct": 83.4,
+        "mechanism_name": "Programming Variation (3%)",
+        "relative_importance_pct": 1.6
+      },
+      {
+        "delta_error_pct": 5.25,
+        "l2_error_without_pct": 79.41,
+        "mechanism_name": "Read Noise (1%)",
+        "relative_importance_pct": 6.8
+      },
+      {
+        "delta_error_pct": 0.0,
+        "l2_error_without_pct": 84.66,
+        "mechanism_name": "Retention Drift (1s)",
+        "relative_importance_pct": 0.0
+      },
+      {
+        "delta_error_pct": 30.07,
+        "l2_error_without_pct": 54.59,
+        "mechanism_name": "HRS Stuck Defects",
+        "relative_importance_pct": 38.8
+      },
+      {
+        "delta_error_pct": 34.78,
+        "l2_error_without_pct": 49.87,
+        "mechanism_name": "LRS Stuck Defects",
+        "relative_importance_pct": 44.9
+      },
+      {
+        "delta_error_pct": 6.11,
+        "l2_error_without_pct": 78.55,
+        "mechanism_name": "Cubic I-V Non-Linearity",
+        "relative_importance_pct": 7.9
+      }
+    ],
+    "calibrated_nonideal_metrics": {
+      "rel_l2_error_pct": 84.65788535110016,
+      "snr_db": 1.4466516772728355
+    },
+    "calibration_recovery_pct": 0.0,
+    "d_ffn": 256,
+    "d_model": 64,
+    "ideal_quantized_metrics": {
+      "rel_l2_error_pct": 43.3047031093493,
+      "snr_db": 7.2692986902447485
+    },
+    "num_heads": 4,
+    "raw_nonideal_metrics": {
+      "rel_l2_error_pct": 82.15755808104149,
+      "snr_db": 1.7070495497757525
+    },
+    "stage_breakdown": {
+      "attn_out": {
+        "rel_l2_error_pct": 68.39527516847659,
+        "snr_db": 3.2994779770401266
+      },
+      "block_out": {
+        "rel_l2_error_pct": 84.65788535110016,
+        "snr_db": 1.4466516772728355
+      },
+      "mlp_out": {
+        "rel_l2_error_pct": 76.65426587677854,
+        "snr_db": 2.3092734254044522
+      },
+      "res1": {
+        "rel_l2_error_pct": 65.27925757904715,
+        "snr_db": 3.704495869139224
+      }
+    },
+    "total_physical_tiles": 192
+  },
+  "schema_version": "0.1.0",
+  "title": "Transformer Block Error Attribution"
+}

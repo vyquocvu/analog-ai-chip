@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 14px; font-weight: 700; }
+.box-text { font-size: 12px; fill: #334155; }
+.formula { font: 12px ui-monospace, monospace; fill: #1e293b; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Chapter 0032 — Transformer Block Error Attribution</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Full-layer simulation across 192 physical crossbar tiles with leave-one-out attribution</text>
+
+<!-- Block Architecture Box -->
+<rect x="50" y="85" width="410" height="420" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="70" y="115" class="box-title" fill="#1d4ed8">1. Transformer Block Hardware Pipeline</text>
+<text x="70" y="135" class="sub">192 Physical 16×16 Crossbar Tiles per Block</text>
+
+<rect x="70" y="155" width="370" height="80" rx="8" fill="white" stroke="#93c5fd"/>
+<text x="85" y="180" class="box-title" fill="#1e40af">Attention Sub-Layer (64 Tiles)</text>
+<text x="85" y="202" class="box-text">• Fused W_QKV: 48 tiles (192×64) | Out W_O: 16 tiles (64×64)</text>
+<text x="85" y="222" class="sub">• Stage Error: L2=68.4% (SNR=3.3 dB)</text>
+
+<rect x="70" y="245" width="370" height="80" rx="8" fill="white" stroke="#93c5fd"/>
+<text x="85" y="270" class="box-title" fill="#1e40af">MLP Sub-Layer (128 Tiles)</text>
+<text x="85" y="292" class="box-text">• Up W_up: 64 tiles (256×64) | Down W_down: 64 tiles (64×256)</text>
+<text x="85" y="312" class="sub">• Stage Error: L2=76.7% (SNR=2.3 dB)</text>
+
+<rect x="70" y="335" width="370" height="150" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="85" y="360" class="box-title">End-to-End Block Metrics</text>
+<text x="85" y="385" class="box-text">• Ideal Quantized: L2=43.30% (SNR: 7.3 dB)</text>
+<text x="85" y="405" class="box-text">• Raw Non-Ideal: L2=82.16% (SNR: 1.7 dB)</text>
+<text x="85" y="425" class="box-title" fill="#15803d">• Calibrated Non-Ideal: L2=84.66% (SNR: 1.4 dB)</text>
+<text x="85" y="450" class="sub">Dual residuals &amp; calibration reduce error by 0.0%</text>
+
+<!-- Attribution Ranking Box -->
+<rect x="500" y="85" width="410" height="420" rx="12" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="520" y="115" class="box-title" fill="#7e22ce">2. Leave-One-Out Error Attribution Ranking</text>
+<text x="520" y="135" class="sub">Marginal error impact of named physical mechanisms</text>
+
+<rect x="520" y="155" width="370" height="330" rx="8" fill="white" stroke="#d8b4fe"/>
+<text x="535" y="180" class="box-title" fill="#6b21a8">Mechanism Ranking (Importance %)</text>
+<text x="535" y="210" class="box-text">1. 2D IR Drop (Wire R=1.0 Ω): 0.0% (ΔL2: 0.0%)</text>
+<text x="535" y="240" class="box-text">2. Programming Variation (3%): 1.6% (ΔL2: 1.2%)</text>
+<text x="535" y="270" class="box-text">3. Read Noise (1%): 6.8% (ΔL2: 5.2%)</text>
+<text x="535" y="300" class="box-text">4. Retention Drift (1s): 0.0% (ΔL2: 0.0%)</text>
+<text x="535" y="330" class="box-text">5. Stuck Defects (HRS/LRS): 38.8% (ΔL2: 30.1%)</text>
+<text x="535" y="360" class="box-text">6. Cubic I-V Non-Linearity: 7.9% (ΔL2: 6.1%)</text>
+<text x="535" y="410" class="formula">Leave-One-Out unconfounded random streams</text>
+<text x="535" y="440" class="sub">Claim Level: SYSTEM_SIMULATED (Gate R7 evidence)</text>
+</svg>
