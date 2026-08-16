@@ -252,7 +252,7 @@ Depends on R7 and evidence from R2–R6.
 
 - [x] Latency model with evidence-tagged timing coefficients: 100% of timing coefficients tagged with SPICE, derived, or assumed provenance; full token decode waterfall ledger ($998.0\text{ ns}$ / $1,002,004\text{ tok/s}$) and context scaling (`book/0038-latency-ledger/latency_ledger.py`, `latency-ledger-0038-extract.json`)
 - [x] Energy/power model with evidence-tagged coefficients: 100% of energy/power coefficients tagged with SPICE, derived, or assumed provenance; dynamic token step ledger ($29.08\text{ nJ/token}$, $29.14\text{ mW}$ active power, $8.6\times$ advantage vs digital baseline) (`book/0039-energy-power-ledger/energy_power_ledger.py`, `energy-power-ledger-0039-extract.json`)
-- [ ] Area model with explicit topology/process/layout assumptions
+- [x] Area model with explicit topology/process/layout assumptions: 28nm CMOS floorplan ledger; tile = 3,281.5 µm² (ADC bank 82.2%), chip = 1.412 mm²; 75.6 GOPS/mm²; 119,808 packed synapses; all coefficients tagged `derived` or `assumed` (`book/0040-area-process-model/area_process_model.py`, `area-process-model-0040-extract.json`)
 - [ ] Thermal/power-density sanity checks
 - [ ] Sensitivity ranges for all still-assumed parameters
 - [ ] No GPU/ASIC superiority claim without comparable measured evidence

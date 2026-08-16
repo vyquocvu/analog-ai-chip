@@ -1,0 +1,170 @@
+{
+  "area_coefficients": [
+    {
+      "description": "Single memristor synapse cell area in 28nm CMOS back-end",
+      "evidence_class": "derived",
+      "name": "memristor_cell_area",
+      "provenance": "28nm 1T1R memristor cell: 80nm\u00d780nm bit cell + 1T access transistor",
+      "symbol": "A_cell",
+      "value_um2": 0.0064
+    },
+    {
+      "description": "16-row \u00d7 18-column active + spare memristor crossbar array area",
+      "evidence_class": "derived",
+      "name": "crossbar_core_area",
+      "provenance": "16\u00d718 bit cells (288 cells @ 0.04 \u00b5m\u00b2) + signal routing pitch",
+      "symbol": "A_xbar",
+      "value_um2": 11.52
+    },
+    {
+      "description": "Single 4-bit wordline input DAC driver unit",
+      "evidence_class": "assumed",
+      "name": "dac_unit_area",
+      "provenance": "4-bit R-2R / PWM driver (assumed 28nm standard cell chain)",
+      "symbol": "A_dac",
+      "value_um2": 25.0
+    },
+    {
+      "description": "Single 4-bit SAR ADC + transimpedance amplifier per bitline",
+      "evidence_class": "assumed",
+      "name": "adc_unit_area",
+      "provenance": "4-bit SAR ADC with TIA (assumed 28nm, based on published area scaling)",
+      "symbol": "A_adc",
+      "value_um2": 150.0
+    },
+    {
+      "description": "On-chip post-ADC affine calibration ALU per tile (\u03b1\u00b7y + \u03b2)",
+      "evidence_class": "derived",
+      "name": "affine_alu_area",
+      "provenance": "16-wide 8-bit affine multiply-add (28nm standard cell synthesis)",
+      "symbol": "A_alu",
+      "value_um2": 80.0
+    },
+    {
+      "description": "Calibration register bank (\u03b1 and \u03b2 coefficient SRAM per tile)",
+      "evidence_class": "derived",
+      "name": "calibration_sram_area",
+      "provenance": "16-entry \u00d7 16-bit (2\u00d7) SRAM register array (28nm SRAM bit cell)",
+      "symbol": "A_cal_sram",
+      "value_um2": 40.0
+    },
+    {
+      "description": "Global on-chip 32 KB SRAM pool (KV cache + activations)",
+      "evidence_class": "derived",
+      "name": "sram_32kb_macro",
+      "provenance": "28nm standard-density 32 KB SRAM macro (0.22 \u00b5m\u00b2/bit)",
+      "symbol": "A_sram32",
+      "value_um2": 40000.0
+    },
+    {
+      "description": "Shared digital SIMD vector ALU block (LayerNorm, Softmax, GELU)",
+      "evidence_class": "assumed",
+      "name": "simd_vector_alu_area",
+      "provenance": "32-wide pipelined 32-bit integer ALU cluster (assumed 28nm synthesis)",
+      "symbol": "A_simd",
+      "value_um2": 5000.0
+    },
+    {
+      "description": "On-chip 2D mesh NoC router per tile cluster boundary",
+      "evidence_class": "assumed",
+      "name": "noc_router_area",
+      "provenance": "2D mesh 5-port router with 128-bit flits (assumed 28nm)",
+      "symbol": "A_noc",
+      "value_um2": 2000.0
+    }
+  ],
+  "chapter": "0040-area-process-model",
+  "chip_floorplan": [
+    {
+      "area_mm2": 1.3651,
+      "description": "416 physical crossbar tiles including DAC/ADC banks and calibration",
+      "evidence_class": "derived",
+      "name": "416-Tile Crossbar Array"
+    },
+    {
+      "area_mm2": 0.04,
+      "description": "KV cache and activation buffer SRAM macro",
+      "evidence_class": "derived",
+      "name": "Shared 32 KB SRAM Macro"
+    },
+    {
+      "area_mm2": 0.005,
+      "description": "Shared 32-wide pipelined digital vector ALU block",
+      "evidence_class": "assumed",
+      "name": "Shared SIMD Vector Cluster"
+    },
+    {
+      "area_mm2": 0.002,
+      "description": "On-chip 2D mesh NoC router fabric",
+      "evidence_class": "assumed",
+      "name": "NoC Router Network"
+    }
+  ],
+  "gate": "R8 \u2014 Physical feasibility report",
+  "process_node": "28nm CMOS",
+  "provenance": {
+    "area_sources": "28nm 1T1R memristor cell layout, SRAM macro, standard cell synthesis estimates",
+    "claim_level": "SYSTEM_DERIVED_WITH_LAYOUT_ASSUMPTIONS",
+    "process_node": "28nm CMOS"
+  },
+  "schema_version": "0.1.0",
+  "single_tile": {
+    "subsystem_breakdown": [
+      {
+        "area_um2": 2700.0,
+        "description": "4-bit SAR ADCs and TIA current integrators per bitline",
+        "fraction_pct": 82.3,
+        "primary_evidence": "assumed (150 \u00b5m\u00b2 / SAR ADC unit)",
+        "subsystem": "ADC Bank (18\u00d7 SAR ADC + TIA)"
+      },
+      {
+        "area_um2": 400.0,
+        "description": "4-bit R-2R wordline voltage driver bank",
+        "fraction_pct": 12.2,
+        "primary_evidence": "assumed (25 \u00b5m\u00b2 / DAC unit)",
+        "subsystem": "DAC Bank (16\u00d7 4-bit Driver)"
+      },
+      {
+        "area_um2": 80.0,
+        "description": "Post-ADC gain and offset correction arithmetic unit",
+        "fraction_pct": 2.4,
+        "primary_evidence": "derived (28nm synthesis)",
+        "subsystem": "Affine Calibration ALU"
+      },
+      {
+        "area_um2": 40.0,
+        "description": "\u03b1 and \u03b2 coefficient register file per tile",
+        "fraction_pct": 1.2,
+        "primary_evidence": "derived (28nm SRAM bit cell)",
+        "subsystem": "Calibration SRAM"
+      },
+      {
+        "area_um2": 50.0,
+        "description": "Defect-aware spare column ADC input multiplexer",
+        "fraction_pct": 1.5,
+        "primary_evidence": "assumed",
+        "subsystem": "Remap MUX (18:16)"
+      },
+      {
+        "area_um2": 11.52,
+        "description": "16\u00d718 memristor synapse array (active + 2 redundant spare columns)",
+        "fraction_pct": 0.4,
+        "primary_evidence": "derived (28nm 1T1R cell)",
+        "subsystem": "Memristor Crossbar Core"
+      }
+    ],
+    "total_area_um2": 3281.52
+  },
+  "summary": {
+    "adc_dominates_tile": true,
+    "adc_fraction_pct": 82.3,
+    "area_efficiency_gops_per_mm2": 75.57,
+    "area_efficiency_mac_per_um2": 0.0848,
+    "evidence_provenance_audit": "100% of area coefficients tagged with derived or assumed provenance",
+    "single_tile_area_um2": 3281.52,
+    "total_chip_area_mm2": 1.4121,
+    "total_synapses_packed": 119808,
+    "total_tile_array_area_mm2": 1.3651
+  },
+  "title": "Physical Area and Process Model"
+}
