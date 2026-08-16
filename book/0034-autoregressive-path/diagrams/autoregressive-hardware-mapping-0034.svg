@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 14px; font-weight: 700; }
+.box-text { font-size: 12px; fill: #334155; }
+.formula { font: 12px ui-monospace, monospace; fill: #1e293b; }
+.tile-box { font: 11px ui-monospace, monospace; fill: #1e293b; font-weight: 600; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">TinyGPT Accelerator Floorplan &amp; 416 Physical Tile Residency</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Complete spatial mapping of 2 Transformer layers + LM Head onto 16×16 crossbar tiles</text>
+
+<!-- Layer 0 Block -->
+<rect x="50" y="80" width="410" height="260" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="70" y="105" class="box-title" fill="#1d4ed8">Layer 0 Tile Cluster (192 Physical 16×16 Tiles)</text>
+
+<!-- L0 W_QKV -->
+<rect x="70" y="120" width="170" height="90" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="155" y="145" text-anchor="middle" class="box-title" fill="#b45309">W_QKV (192×64)</text>
+<text x="155" y="170" text-anchor="middle" class="tile-box">48 Tiles (12×4 Grid)</text>
+<text x="155" y="195" text-anchor="middle" class="sub">12,288 MACs / step</text>
+
+<!-- L0 W_O -->
+<rect x="260" y="120" width="180" height="90" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="350" y="145" text-anchor="middle" class="box-title" fill="#b45309">W_O (64×64)</text>
+<text x="350" y="170" text-anchor="middle" class="tile-box">16 Tiles (4×4 Grid)</text>
+<text x="350" y="195" text-anchor="middle" class="sub">4,096 MACs / step</text>
+
+<!-- L0 W_up -->
+<rect x="70" y="225" width="170" height="95" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="155" y="250" text-anchor="middle" class="box-title" fill="#b45309">W_up (256×64)</text>
+<text x="155" y="275" text-anchor="middle" class="tile-box">64 Tiles (16×4 Grid)</text>
+<text x="155" y="300" text-anchor="middle" class="sub">16,384 MACs / step</text>
+
+<!-- L0 W_down -->
+<rect x="260" y="225" width="180" height="95" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="350" y="250" text-anchor="middle" class="box-title" fill="#b45309">W_down (64×256)</text>
+<text x="350" y="275" text-anchor="middle" class="tile-box">64 Tiles (4×16 Grid)</text>
+<text x="350" y="300" text-anchor="middle" class="sub">16,384 MACs / step</text>
+
+<!-- Layer 1 Block -->
+<rect x="500" y="80" width="410" height="260" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="520" y="105" class="box-title" fill="#1d4ed8">Layer 1 Tile Cluster (192 Physical 16×16 Tiles)</text>
+
+<!-- L1 W_QKV -->
+<rect x="520" y="120" width="170" height="90" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="605" y="145" text-anchor="middle" class="box-title" fill="#b45309">W_QKV (192×64)</text>
+<text x="605" y="170" text-anchor="middle" class="tile-box">48 Tiles (12×4 Grid)</text>
+<text x="605" y="195" text-anchor="middle" class="sub">12,288 MACs / step</text>
+
+<!-- L1 W_O -->
+<rect x="710" y="120" width="180" height="90" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="800" y="145" text-anchor="middle" class="box-title" fill="#b45309">W_O (64×64)</text>
+<text x="800" y="170" text-anchor="middle" class="tile-box">16 Tiles (4×4 Grid)</text>
+<text x="800" y="195" text-anchor="middle" class="sub">4,096 MACs / step</text>
+
+<!-- L1 W_up -->
+<rect x="520" y="225" width="170" height="95" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="605" y="250" text-anchor="middle" class="box-title" fill="#b45309">W_up (256×64)</text>
+<text x="605" y="275" text-anchor="middle" class="tile-box">64 Tiles (16×4 Grid)</text>
+<text x="605" y="300" text-anchor="middle" class="sub">16,384 MACs / step</text>
+
+<!-- L1 W_down -->
+<rect x="710" y="225" width="180" height="95" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="800" y="250" text-anchor="middle" class="box-title" fill="#b45309">W_down (64×256)</text>
+<text x="800" y="275" text-anchor="middle" class="tile-box">64 Tiles (4×16 Grid)</text>
+<text x="800" y="300" text-anchor="middle" class="sub">16,384 MACs / step</text>
+
+<!-- Central SRAM & LM Head Subsystem -->
+<rect x="50" y="360" width="860" height="150" rx="12" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+
+<!-- Central On-Chip SRAM -->
+<rect x="70" y="380" width="370" height="110" rx="8" fill="white" stroke="#d8b4fe"/>
+<text x="90" y="405" class="box-title" fill="#7e22ce">On-Chip SRAM Pool (32 KB Capacity)</text>
+<text x="90" y="430" class="box-text">• KV Cache Storage: 3.0 KB (for L=12 context)</text>
+<text x="90" y="450" class="box-text">• Activation &amp; Logit Buffer: 1.5 KB</text>
+<text x="90" y="470" class="sub">• Energy: 1.0 pJ / Byte | Zero Off-Chip DRAM Traffic</text>
+
+<!-- LM Head Cluster -->
+<rect x="460" y="380" width="220" height="110" rx="8" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="570" y="405" text-anchor="middle" class="box-title" fill="#b45309">LM Head W_head</text>
+<text x="570" y="430" text-anchor="middle" class="tile-box">32 Tiles (8×4 Grid)</text>
+<text x="570" y="450" text-anchor="middle" class="sub">128×64 Vocabulary Matmul</text>
+<text x="570" y="470" text-anchor="middle" class="sub">8,192 MACs / step</text>
+
+<!-- Digital SIMD Vector Engines -->
+<rect x="700" y="380" width="190" height="110" rx="8" fill="#dbeafe" stroke="#3b82f6"/>
+<text x="795" y="405" text-anchor="middle" class="box-title" fill="#1e40af">Digital SIMD Units</text>
+<text x="795" y="430" text-anchor="middle" class="box-text">• LayerNorm 1, 2, Final</text>
+<text x="795" y="450" text-anchor="middle" class="box-text">• Softmax &amp; Scaled Attn</text>
+<text x="795" y="470" text-anchor="middle" class="box-text">• GELU Non-Linearity</text>
+</svg>

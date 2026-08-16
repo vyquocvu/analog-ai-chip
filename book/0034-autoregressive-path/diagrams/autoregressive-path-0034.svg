@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 14px; font-weight: 700; }
+.box-text { font-size: 12px; fill: #334155; }
+.formula { font: 12px ui-monospace, monospace; fill: #1e293b; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Chapter 0034 — Full Autoregressive Path Architecture Ledger</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Token-by-token trace of 12 tokens on TinyGPT (416 Physical Crossbar Tiles)</text>
+
+<!-- Generation Summary Box -->
+<rect x="50" y="80" width="410" height="210" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="70" y="105" class="box-title" fill="#1d4ed8">1. End-to-End Generation Summary (12 Tokens)</text>
+<text x="70" y="130" class="box-text">• Total Compute: 1,297,920 MACs (Analog: 1,277,952 | Digital: 19,968)</text>
+<text x="70" y="155" class="box-text">• Total SRAM Traffic: 14,976 Bytes</text>
+<text x="70" y="180" class="box-text">• Total Generation Energy: 82.87 nJ</text>
+<text x="70" y="205" class="box-title" fill="#15803d">• Total Generation Latency: 11.68 µs (1,027,749 tokens/sec)</text>
+<text x="70" y="230" class="sub">Per-token step: 106,496 analog MACs (5.33 nJ) + 900 ns MVM latency</text>
+<text x="70" y="255" class="formula">E_token = 5.33 nJ + 0.05(t+1) nJ + SRAM(1 pJ/B)</text>
+
+<!-- KV Cache Comparison Box -->
+<rect x="500" y="80" width="410" height="210" rx="12" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="520" y="105" class="box-title" fill="#7e22ce">2. KV Cache vs Full Recompute Savings</text>
+<text x="520" y="130" class="box-text">• KV Cache Total MACs: 1,297,920 vs No-Cache: 8,326,656</text>
+<text x="520" y="155" class="box-title" fill="#7e22ce">• Compute Reduction: 6.4× fewer analog operations</text>
+<text x="520" y="180" class="box-text">• KV Cache Energy: 82.9 nJ vs No-Cache: 419.3 nJ (5.1× savings)</text>
+<text x="520" y="205" class="box-title" fill="#15803d">• Generation Speedup: 6.1× faster decode latency</text>
+<text x="520" y="230" class="sub">Peak KV Cache SRAM Footprint: 3,072 Bytes (Fits in L1 SRAM)</text>
+<text x="520" y="255" class="formula">O(L) decode scaling vs O(L²) recomputation</text>
+
+<!-- Step-by-Step Trace Breakdown -->
+<rect x="50" y="310" width="860" height="200" rx="12" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+<text x="70" y="335" class="box-title">3. Token Step Progression (Prefill 0..3 → Decode 4..11)</text>
+
+<rect x="70" y="355" width="185" height="135" rx="8" fill="#dbeafe" stroke="#3b82f6"/>
+<text x="85" y="375" class="box-title" fill="#1e40af">Prefill Phase (Prompt)</text>
+<text x="85" y="398" class="box-text">• Steps: t=0..3 (4 tokens)</text>
+<text x="85" y="420" class="box-text">• MACs/step: 106,752 .. 107,520</text>
+<text x="85" y="442" class="box-text">• Energy: 5.34 .. 5.38 nJ/tok</text>
+<text x="85" y="465" class="sub">• Populates KV cache in SRAM</text>
+
+<rect x="275" y="355" width="280" height="135" rx="8" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="290" y="375" class="box-title" fill="#b45309">Decode Phase (Autoregressive)</text>
+<text x="290" y="398" class="box-text">• Steps: t=4..11 (8 new tokens)</text>
+<text x="290" y="420" class="box-text">• MACs/step: 107,776 .. 109,568 (O(t) attention)</text>
+<text x="290" y="442" class="box-text">• Energy: 5.39 .. 5.50 nJ/tok</text>
+<text x="290" y="465" class="sub">• Constant ~970 ns latency per token step</text>
+
+<rect x="575" y="355" width="315" height="135" rx="8" fill="#dcfce7" stroke="#22c55e"/>
+<text x="590" y="375" class="box-title" fill="#15803d">Hardware Ledger Constants</text>
+<text x="590" y="398" class="box-text">• Analog IMC: 50.0 fJ/MAC (416 Tiles stationary)</text>
+<text x="590" y="420" class="box-text">• Digital SIMD: 200.0 fJ/MAC (Attention &amp; LN)</text>
+<text x="590" y="442" class="box-text">• On-Chip SRAM: 1.0 pJ/Byte | DRAM: 0 Bytes</text>
+<text x="590" y="465" class="sub">Claim Level: SYSTEM_SIMULATED (Gate R7 evidence)</text>
+</svg>

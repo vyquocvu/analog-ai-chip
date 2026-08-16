@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 14px; font-weight: 700; }
+.box-text { font-size: 12px; fill: #334155; }
+.formula { font: 12px ui-monospace, monospace; fill: #1e293b; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">KV Cache vs Full Recompute Scaling Analysis</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Computation, Memory Traffic, and Energy Scaling across Generation Steps (L=1..128)</text>
+
+<!-- Left Card: KV Cache Linear O(L) Scaling -->
+<rect x="50" y="80" width="410" height="420" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="70" y="110" class="box-title" fill="#1d4ed8">1. KV Cache Enabled (Hardware Baseline)</text>
+<text x="70" y="130" class="sub">O(L) Linear Computation &amp; Energy Scaling</text>
+
+<rect x="70" y="150" width="370" height="100" rx="8" fill="white" stroke="#93c5fd"/>
+<text x="85" y="175" class="box-title" fill="#1e40af">Per-Step Execution Ledger</text>
+<text x="85" y="200" class="box-text">• Analog Compute: Flat 106,496 MACs/step (O(1))</text>
+<text x="85" y="222" class="box-text">• Energy: Flat ~6.5 nJ / token step</text>
+<text x="85" y="244" class="box-text">• Latency: Constant ~970 ns / token step</text>
+
+<rect x="70" y="265" width="370" height="100" rx="8" fill="white" stroke="#93c5fd"/>
+<text x="85" y="290" class="box-title" fill="#1e40af">SRAM Traffic &amp; Footprint</text>
+<text x="85" y="315" class="box-text">• KV Read Traffic: 128·t bytes/step (O(t))</text>
+<text x="85" y="337" class="box-text">• Peak KV Footprint: 32.0 KB @ L=128 tokens</text>
+<text x="85" y="359" class="box-text">• Weight DRAM Reads: 0 Bytes (Stationary Tiles)</text>
+
+<text x="70" y="405" class="box-title" fill="#15803d">• Total Cumulative Energy (L=128): 832.0 nJ</text>
+<text x="70" y="430" class="box-title" fill="#15803d">• Total Cumulative Latency (L=128): 124.2 µs</text>
+<text x="70" y="460" class="formula">E_total(L) = O(L) · 6.5 nJ</text>
+
+<!-- Right Card: No Cache Quadratic O(L^2) Scaling -->
+<rect x="500" y="80" width="410" height="420" rx="12" fill="#fff1f2" stroke="#e11d48" stroke-width="2"/>
+<text x="520" y="110" class="box-title" fill="#be123c">2. KV Cache Disabled (Full Recompute)</text>
+<text x="520" y="130" class="sub">O(L²) Quadratic Computation &amp; Energy Explosion</text>
+
+<rect x="520" y="150" width="370" height="100" rx="8" fill="white" stroke="#fda4af"/>
+<text x="535" y="175" class="box-title" fill="#9f1239">Per-Step Recomputation Penalty</text>
+<text x="535" y="200" class="box-text">• Analog Compute: 106,496 · t MACs/step (O(t))</text>
+<text x="535" y="222" class="box-text">• Energy: 6.5 · t nJ / token step (Linear growth)</text>
+<text x="535" y="244" class="box-text">• Latency: 970 · t ns / token step (Linear slowdown)</text>
+
+<rect x="520" y="265" width="370" height="100" rx="8" fill="white" stroke="#fda4af"/>
+<text x="535" y="290" class="box-title" fill="#9f1239">Penalties at L=128 Context</text>
+<text x="535" y="315" class="box-text">• Cumulative MACs: 872.5 Million MACs</text>
+<text x="535" y="337" class="box-text">• Cumulative Energy: 53,248.0 nJ (64.0× worse)</text>
+<text x="535" y="359" class="box-text">• Cumulative Latency: 7.95 ms (64.0× slower)</text>
+
+<text x="520" y="405" class="box-title" fill="#be123c">• Energy Waste Ratio: 64.0× more energy</text>
+<text x="520" y="430" class="box-title" fill="#be123c">• Throughput Penalty: 64.0× slower decode</text>
+<text x="520" y="460" class="formula">E_total(L) = O(L²) · 0.5 · 6.5 nJ</text>
+</svg>

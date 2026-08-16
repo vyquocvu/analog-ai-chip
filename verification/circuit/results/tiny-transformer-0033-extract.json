@@ -1,0 +1,85 @@
+{
+  "accelerator_ledger": {
+    "programs": 3328,
+    "rewrites": 0,
+    "tile_cycles": 72,
+    "total_macs": 851968
+  },
+  "chapter": "0033-tiny-transformer",
+  "config": {
+    "block_size": 16,
+    "d_ffn": 256,
+    "ffn_mult": 4,
+    "n_embd": 64,
+    "n_head": 4,
+    "n_layer": 2,
+    "vocab_size": 128
+  },
+  "gate": "R7 \u2014 Transformer and LLM validation",
+  "generation_comparison": {
+    "analog_sequence": [
+      115,
+      10,
+      17,
+      86,
+      78,
+      5,
+      11,
+      11,
+      37,
+      127,
+      13,
+      65
+    ],
+    "float_sequence": [
+      115,
+      10,
+      17,
+      86,
+      112,
+      93,
+      82,
+      21,
+      37,
+      112,
+      112,
+      82
+    ],
+    "prompt_tokens": [
+      115,
+      10,
+      17,
+      86
+    ]
+  },
+  "parity_metrics": {
+    "analog_cross_entropy": 4.7801,
+    "analog_perplexity": 119.12,
+    "float_cross_entropy": 4.8497,
+    "float_perplexity": 127.7,
+    "generation_token_agreement_pct": 41.7,
+    "logit_rel_l2_error_pct": 115.26,
+    "logit_snr_db": -1.23,
+    "perplexity_degradation": -8.58,
+    "top1_token_agreement_pct": 0.0
+  },
+  "provenance": {
+    "claim_level": "SYSTEM_SIMULATED",
+    "converter_bits": "4-bit DAC / 4-bit ADC / 4-bit conductance",
+    "crossbar_profile": "device_profiles/crossbar-v1.json",
+    "non_idealities": "all 9 crossbar-v1 mechanisms active"
+  },
+  "schema_version": "0.1.0",
+  "tile_breakdown": {
+    "down_tiles_per_layer": 64,
+    "head_tiles": 32,
+    "n_layers": 2,
+    "out_tiles_per_layer": 16,
+    "qkv_tiles_per_layer": 48,
+    "tiles_per_layer": 192,
+    "total_layer_tiles": 384,
+    "total_physical_tiles": 416,
+    "up_tiles_per_layer": 64
+  },
+  "title": "Tiny Transformer End-to-End Parity Study"
+}

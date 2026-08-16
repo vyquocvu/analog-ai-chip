@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 13px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+.time-tag { font: 10px ui-monospace, monospace; fill: #64748b; font-weight: 600; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">TinyGPT Token Execution Latency Waterfall (~970 ns / Step)</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Sequential stage pipeline for 1 token autoregressive decode step across 2 layers</text>
+
+<!-- Time Axis Header -->
+<line x1="80" y1="80" x2="880" y2="80" stroke="#cbd5e1" stroke-width="2"/>
+<text x="80" y="73" class="time-tag">0 ns</text>
+<text x="240" y="73" class="time-tag">200 ns</text>
+<text x="440" y="73" class="time-tag">450 ns (End Layer 0)</text>
+<text x="640" y="73" class="time-tag">700 ns</text>
+<text x="840" y="73" class="time-tag">900 ns (End Layer 1)</text>
+<text x="880" y="73" class="time-tag">970 ns</text>
+
+<!-- Stage 0: Embeddings & LN1 -->
+<rect x="80" y="95" width="40" height="35" rx="4" fill="#dbeafe" stroke="#3b82f6"/>
+<text x="100" y="117" text-anchor="middle" class="box-text">Emb+LN1</text>
+<text x="100" y="145" text-anchor="middle" class="time-tag">20 ns (Dig)</text>
+
+<!-- Layer 0 Stages -->
+<!-- Stage 1: Layer 0 W_QKV -->
+<rect x="125" y="95" width="80" height="35" rx="4" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+<text x="165" y="117" text-anchor="middle" class="box-title" fill="#b45309">L0 W_QKV</text>
+<text x="165" y="145" text-anchor="middle" class="time-tag">100 ns (48 Tiles)</text>
+
+<!-- Stage 2: Layer 0 Attention Softmax + Context -->
+<rect x="210" y="95" width="45" height="35" rx="4" fill="#dbeafe" stroke="#3b82f6"/>
+<text x="232" y="117" text-anchor="middle" class="box-text">Attn+KV</text>
+<text x="232" y="145" text-anchor="middle" class="time-tag">24 ns (Dig)</text>
+
+<!-- Stage 3: Layer 0 W_O -->
+<rect x="260" y="95" width="80" height="35" rx="4" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+<text x="300" y="117" text-anchor="middle" class="box-title" fill="#b45309">L0 W_O</text>
+<text x="300" y="145" text-anchor="middle" class="time-tag">100 ns (16 Tiles)</text>
+
+<!-- Stage 4: Layer 0 LN2 & Res1 -->
+<rect x="345" y="95" width="35" height="35" rx="4" fill="#dbeafe" stroke="#3b82f6"/>
+<text x="362" y="117" text-anchor="middle" class="box-text">LN2</text>
+<text x="362" y="145" text-anchor="middle" class="time-tag">16 ns</text>
+
+<!-- Stage 5: Layer 0 W_up -->
+<rect x="385" y="95" width="80" height="35" rx="4" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+<text x="425" y="117" text-anchor="middle" class="box-title" fill="#b45309">L0 W_up</text>
+<text x="425" y="145" text-anchor="middle" class="time-tag">100 ns (64 Tiles)</text>
+
+<!-- Stage 6: Layer 0 GELU -->
+<rect x="470" y="95" width="35" height="35" rx="4" fill="#dbeafe" stroke="#3b82f6"/>
+<text x="487" y="117" text-anchor="middle" class="box-text">GELU</text>
+<text x="487" y="145" text-anchor="middle" class="time-tag">16 ns</text>
+
+<!-- Stage 7: Layer 0 W_down -->
+<rect x="510" y="95" width="80" height="35" rx="4" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+<text x="550" y="117" text-anchor="middle" class="box-title" fill="#b45309">L0 W_dn</text>
+<text x="550" y="145" text-anchor="middle" class="time-tag">100 ns (64 Tiles)</text>
+
+<!-- Layer 1 Repeating Stages -->
+<rect x="595" y="95" width="180" height="35" rx="4" fill="#fef9c3" stroke="#eab308"/>
+<text x="685" y="117" text-anchor="middle" class="box-title" fill="#854d0e">Layer 1 Pipeline (QKV → Attn → Out → Up → Down)</text>
+<text x="685" y="145" text-anchor="middle" class="time-tag">440 ns (192 Tiles)</text>
+
+<!-- LM Head Stage -->
+<rect x="780" y="95" width="60" height="35" rx="4" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+<text x="810" y="117" text-anchor="middle" class="box-title" fill="#b45309">LM Head</text>
+<text x="810" y="145" text-anchor="middle" class="time-tag">100 ns</text>
+
+<!-- Logit Selection -->
+<rect x="845" y="95" width="35" height="35" rx="4" fill="#dcfce7" stroke="#22c55e"/>
+<text x="862" y="117" text-anchor="middle" class="box-text">Argmax</text>
+<text x="862" y="145" text-anchor="middle" class="time-tag">14 ns</text>
+
+<!-- Breakdown Cards Below -->
+<rect x="50" y="180" width="410" height="320" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="70" y="210" class="box-title" fill="#0f172a">1. Analog Tile MVM Domination (92.8% of Time)</text>
+<text x="70" y="235" class="box-text">• 9 Sequential Tile Stages @ 100 ns = 900.0 ns</text>
+<text x="70" y="258" class="box-text">• All 416 physical crossbar tiles hold weights stationary</text>
+<text x="70" y="281" class="box-text">• No tile reprogramming or serial weight loading latency</text>
+<text x="70" y="304" class="box-text">• Ultra-low DAC/ADC conversion time folded inside tile cycle</text>
+<text x="70" y="335" class="box-title" fill="#15803d">• Single-token step latency = 970 ns (~1.03M tokens/s)</text>
+<text x="70" y="365" class="sub">Prefill tokens process through same 900 ns pipeline per token</text>
+
+<rect x="500" y="180" width="410" height="320" rx="10" fill="#faf5ff" stroke="#d8b4fe"/>
+<text x="520" y="210" class="box-title" fill="#7e22ce">2. Digital SIMD &amp; Memory Latency (7.2% of Time)</text>
+<text x="520" y="235" class="box-text">• Embeddings + LayerNorm 1, 2, Final: 40 ns</text>
+<text x="520" y="258" class="box-text">• Multi-Head Softmax Attention &amp; Context: 24 ns (at t=12)</text>
+<text x="520" y="281" class="box-text">• GELU Non-Linearity Activation: 16 ns</text>
+<text x="520" y="304" class="box-text">• SRAM KV Cache Read/Write Bus Transfer: 14 ns</text>
+<text x="520" y="335" class="box-title" fill="#7e22ce">• Total Digital Overhead = 70 ns / token step</text>
+<text x="520" y="365" class="sub">Zero off-chip DRAM memory stall cycles</text>
+</svg>

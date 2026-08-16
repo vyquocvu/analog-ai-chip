@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 14px; font-weight: 700; }
+.box-text { font-size: 12px; fill: #334155; }
+.formula { font: 12px ui-monospace, monospace; fill: #1e293b; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Chapter 0033 — Tiny Transformer End-to-End Parity Study</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Full TinyGPT (2 layers) on 416 physical crossbar tiles — Float Reference vs Analog Accelerated</text>
+
+<!-- Hardware Footprint Box -->
+<rect x="50" y="80" width="410" height="200" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="70" y="105" class="box-title" fill="#1d4ed8">1. Physical Hardware Footprint (416 Tiles)</text>
+<text x="70" y="130" class="box-text">Per Layer: W_QKV (48) + W_O (16) + W_up (64) + W_down (64) = 192 tiles</text>
+<text x="70" y="155" class="box-text">× 2 layers = 384 tiles</text>
+<text x="70" y="180" class="box-text">+ Language Model Head W_head: 32 tiles (128×64)</text>
+<text x="70" y="205" class="box-title" fill="#15803d">Total: 416 physical 16×16 crossbar tiles</text>
+<text x="70" y="230" class="sub">4-bit DAC / 4-bit ADC / 4-bit conductance, all 9 non-idealities active</text>
+<text x="70" y="255" class="formula">MACs=851,968  Tile Cycles=72  Programs=3328</text>
+
+<!-- Parity Metrics Box -->
+<rect x="500" y="80" width="410" height="200" rx="12" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="520" y="105" class="box-title" fill="#7e22ce">2. Float vs Analog Parity Metrics</text>
+
+<rect x="520" y="120" width="370" height="145" rx="8" fill="white" stroke="#d8b4fe"/>
+<text x="535" y="143" class="box-text">• Logit L2 Error: 115.3% (SNR: -1.2 dB)</text>
+<text x="535" y="168" class="box-text">• Top-1 Token Agreement: 0.0%</text>
+<text x="535" y="193" class="box-text">• Float PPL: 127.7 → Analog PPL: 119.1 (Δ=-8.6)</text>
+<text x="535" y="218" class="box-text">• Float CE: 4.850 → Analog CE: 4.780</text>
+<text x="535" y="243" class="box-title" fill="#15803d">• Generation Token Agreement: 41.7%</text>
+
+<!-- TinyGPT Pipeline Diagram -->
+<rect x="50" y="310" width="860" height="200" rx="12" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+<text x="70" y="340" class="box-title">3. TinyGPT Hybrid Analog/Digital Execution Pipeline</text>
+
+<rect x="70" y="360" width="120" height="50" rx="6" fill="#dbeafe" stroke="#3b82f6"/>
+<text x="130" y="390" text-anchor="middle" class="formula">Embeddings</text>
+<text x="130" y="405" text-anchor="middle" class="sub">Digital</text>
+
+<rect x="210" y="360" width="120" height="50" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="270" y="390" text-anchor="middle" class="formula">Layer 0</text>
+<text x="270" y="405" text-anchor="middle" class="sub">192 Analog Tiles</text>
+
+<rect x="350" y="360" width="120" height="50" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="410" y="390" text-anchor="middle" class="formula">Layer 1</text>
+<text x="410" y="405" text-anchor="middle" class="sub">192 Analog Tiles</text>
+
+<rect x="490" y="360" width="120" height="50" rx="6" fill="#dbeafe" stroke="#3b82f6"/>
+<text x="550" y="390" text-anchor="middle" class="formula">Final LN</text>
+<text x="550" y="405" text-anchor="middle" class="sub">Digital</text>
+
+<rect x="630" y="360" width="120" height="50" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="690" y="390" text-anchor="middle" class="formula">LM Head</text>
+<text x="690" y="405" text-anchor="middle" class="sub">32 Analog Tiles</text>
+
+<rect x="770" y="360" width="120" height="50" rx="6" fill="#dcfce7" stroke="#22c55e"/>
+<text x="830" y="390" text-anchor="middle" class="formula">Logits</text>
+<text x="830" y="405" text-anchor="middle" class="sub">[8, 128]</text>
+
+<text x="70" y="450" class="box-text">Analog Path: Dense matmuls (QKV, Out, Up, Down, Head) on 416 physical crossbar tiles</text>
+<text x="70" y="470" class="box-text">Digital Path: Embeddings, LayerNorm, Softmax, GELU, Residual Adds, Bias Adds</text>
+<text x="70" y="490" class="sub">Claim Level: SYSTEM_SIMULATED (Gate R7 evidence) — crossbar-v1 profile with all 9 non-idealities</text>
+</svg>
