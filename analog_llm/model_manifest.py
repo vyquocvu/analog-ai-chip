@@ -116,6 +116,15 @@ class ModelManifest:
     def dtype_bytes(self) -> int:
         return _SUPPORTED_DTYPES[self.dtype]
 
+    @property
+    def attention_type(self) -> str:
+        """Return explicit attention grouping semantics: MHA, GQA, or MQA."""
+        if self.num_key_value_heads == self.num_attention_heads:
+            return "mha"
+        if self.num_key_value_heads == 1:
+            return "mqa"
+        return "gqa"
+
     def expected_tensors(self) -> dict[str, TensorDescriptor]:
         """Return the exact neutral tensor inventory implied by this manifest."""
         h = self.hidden_size
