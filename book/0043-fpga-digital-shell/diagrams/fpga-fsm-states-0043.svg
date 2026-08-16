@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 11px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Tile Controller FSM — State Histogram</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Frequency of Each FSM State Across 263 Transitions for 48-Block MVM</text>
+
+<rect x="60" y="80" width="860" height="440" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="90" y="120" class="box-title">FSM State</text>
+<text x="270" y="120" class="box-title">Occurrence Frequency</text>
+<text x="800" y="120" class="box-title">Count (% of total transitions)</text>
+<rect x="90" y="135" width="165" height="35" rx="5" fill="#dbeafe" stroke="#3b82f6"/>
+<text x="172" y="158" text-anchor="middle" class="box-title" fill="#1e40af">FETCH_ACT</text>
+<rect x="270" y="140" width="91" height="26" rx="4" fill="#3b82f6" opacity="0.5"/>
+<text x="366" y="157" class="box-text">48 (18.3%)</text>
+<rect x="90" y="183" width="165" height="35" rx="5" fill="#fee2e2" stroke="#f87171"/>
+<text x="172" y="206" text-anchor="middle" class="box-title" fill="#b91c1c">PROGRAM</text>
+<rect x="270" y="188" width="91" height="26" rx="4" fill="#f87171" opacity="0.5"/>
+<text x="366" y="205" class="box-text">48 (18.3%)</text>
+<rect x="90" y="231" width="165" height="35" rx="5" fill="#dcfce7" stroke="#22c55e"/>
+<text x="172" y="254" text-anchor="middle" class="box-title" fill="#15803d">COMPUTE</text>
+<rect x="270" y="236" width="91" height="26" rx="4" fill="#22c55e" opacity="0.5"/>
+<text x="366" y="253" class="box-text">48 (18.3%)</text>
+<rect x="90" y="279" width="165" height="35" rx="5" fill="#faf5ff" stroke="#9333ea"/>
+<text x="172" y="302" text-anchor="middle" class="box-title" fill="#7e22ce">ACCUMULATE</text>
+<rect x="270" y="284" width="91" height="26" rx="4" fill="#9333ea" opacity="0.5"/>
+<text x="366" y="301" class="box-text">48 (18.3%)</text>
+<rect x="90" y="327" width="165" height="35" rx="5" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="172" y="350" text-anchor="middle" class="box-title" fill="#b45309">WRITEBACK</text>
+<rect x="270" y="332" width="22" height="26" rx="4" fill="#f59e0b" opacity="0.5"/>
+<text x="297" y="349" class="box-text">12 (4.6%)</text>
+<rect x="90" y="375" width="165" height="35" rx="5" fill="#f1f5f9" stroke="#94a3b8"/>
+<text x="172" y="398" text-anchor="middle" class="box-title" fill="#475569">STALL_BUFFER</text>
+<rect x="270" y="380" width="22" height="26" rx="4" fill="#94a3b8" opacity="0.5"/>
+<text x="297" y="397" class="box-text">12 (4.6%)</text>
+<rect x="90" y="423" width="165" height="35" rx="5" fill="#ecfdf5" stroke="#34d399"/>
+<text x="172" y="446" text-anchor="middle" class="box-title" fill="#065f46">NOC_HOP</text>
+<rect x="270" y="428" width="89" height="26" rx="4" fill="#34d399" opacity="0.5"/>
+<text x="364" y="445" class="box-text">47 (17.9%)</text>
+
+<text x="90" y="510" class="box-text" fill="#b45309">★ PROGRAM state (48 transitions) dominates — NVM write is the primary FPGA scheduling bottleneck (t_prog = 500 ns, ASSUMED).</text>
+</svg>

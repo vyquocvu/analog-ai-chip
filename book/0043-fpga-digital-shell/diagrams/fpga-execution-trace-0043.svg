@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 12px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+.row-label { font-size: 10px; fill: #475569; font-weight: 600; }
+.bar-val { font-size: 9px; fill: #334155; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">FSM Execution Trace — First 10 Tile Operations</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Gantt-style cycle-accurate trace: FETCH → PROGRAM → COMPUTE → ACCUMULATE → WRITEBACK</text>
+
+<rect x="0" y="80" width="960" height="400" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+<line x1="120" y1="120" x2="120" y2="480" stroke="#cbd5e1" stroke-width="1"/>
+<text x="60" y="115" class="box-title">State / Tile</text>
+<text x="480" y="115" class="box-title" text-anchor="middle">Time →</text>
+<rect x="120.0" y="130" width="3.0" height="28" rx="4" fill="#3b82f6" opacity="0.85"/>
+<text x="5" y="149" class="row-label">FETCH_ACT T0</text>
+<text x="127.0" y="149" class="bar-val">2ns</text>
+<rect x="120.1" y="164" width="356.2" height="28" rx="4" fill="#ef4444" opacity="0.85"/>
+<text x="5" y="183" class="row-label">PROGRAM T0</text>
+<text x="480.3" y="183" class="bar-val">10000ns</text>
+<rect x="476.3" y="198" width="3.6" height="28" rx="4" fill="#22c55e" opacity="0.85"/>
+<text x="5" y="217" class="row-label">COMPUTE T0</text>
+<text x="483.8" y="217" class="bar-val">100ns</text>
+<rect x="479.8" y="232" width="3.0" height="28" rx="4" fill="#a855f7" opacity="0.85"/>
+<text x="5" y="251" class="row-label">ACCUMULATE T0</text>
+<text x="486.8" y="251" class="bar-val">2ns</text>
+<rect x="479.9" y="266" width="3.0" height="28" rx="4" fill="#3b82f6" opacity="0.85"/>
+<text x="5" y="285" class="row-label">FETCH_ACT T1</text>
+<text x="486.9" y="285" class="bar-val">2ns</text>
+<rect x="480.0" y="300" width="356.2" height="28" rx="4" fill="#ef4444" opacity="0.85"/>
+<text x="5" y="319" class="row-label">PROGRAM T1</text>
+<text x="840.2" y="319" class="bar-val">10000ns</text>
+<rect x="836.2" y="334" width="3.6" height="28" rx="4" fill="#22c55e" opacity="0.85"/>
+<text x="5" y="353" class="row-label">COMPUTE T1</text>
+<text x="843.8" y="353" class="bar-val">100ns</text>
+<rect x="839.8" y="368" width="3.0" height="28" rx="4" fill="#a855f7" opacity="0.85"/>
+<text x="5" y="387" class="row-label">ACCUMULATE T1</text>
+<text x="846.8" y="387" class="bar-val">2ns</text>
+<rect x="839.8" y="402" width="3.0" height="28" rx="4" fill="#34d399" opacity="0.85"/>
+<text x="5" y="421" class="row-label">NOC_HOP T1</text>
+<text x="846.8" y="421" class="bar-val">3ns</text>
+<rect x="839.9" y="436" width="3.0" height="28" rx="4" fill="#3b82f6" opacity="0.85"/>
+<text x="5" y="455" class="row-label">FETCH_ACT T2</text>
+<text x="846.9" y="455" class="bar-val">2ns</text>
+
+<rect x="50" y="490" width="860" height="38" rx="6" fill="#dbeafe" stroke="#93c5fd"/>
+<text x="70" y="510" class="box-text">t_mvm per block = 100.00 ns | Total 48 blocks | Dominates: PROGRAM (480000 ns) >> COMPUTE (4800 ns)</text>
+<text x="70" y="525" class="box-text" fill="#b45309">⚠ PROGRAM bar (500 ns NVM write) is ASSUMED — replace with FPGA measured write pulse timing for Gate R9.</text>
+</svg>

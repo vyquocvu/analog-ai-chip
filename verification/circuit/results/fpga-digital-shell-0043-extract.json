@@ -1,0 +1,250 @@
+{
+  "architecture": {
+    "n_blocks_total": 48,
+    "n_col_blocks": 4,
+    "n_row_blocks": 12,
+    "reference_matrix_shape": [
+      192,
+      64
+    ],
+    "tile_cols": 18,
+    "tile_count": 416,
+    "tile_rows": 16
+  },
+  "buffer_model": {
+    "acc_buffer_bits": 208,
+    "acc_word_bits": 13,
+    "act_buffer_bits": 144,
+    "act_buffer_bytes": 18,
+    "adc_bits": 4,
+    "dac_bits": 4,
+    "evidence_class": "derived",
+    "n_tiles": 416,
+    "provenance": "Ch.0024 sram_buffers.py buffer sizing formulas (double-buffer, accumulator, weight-shadow)",
+    "tile_cols": 18,
+    "tile_rows": 16,
+    "weight_shadow_bytes": 288
+  },
+  "ch0038_crosscheck": {
+    "ch0038_single_token_latency_ns": 998.0,
+    "consistent": true,
+    "delta_pct": 0.0,
+    "digital_shell_compute_per_block_ns": 100.0,
+    "digital_shell_t_tile_ns": 100.0,
+    "note": "Ch.0038 modelled 998 ns full decode (all layers). Digital shell t_tile = 100 ns/block (t_dac=10.0+t_settle=15.0+t_adc=75.0 ns) is consistent with the Ch.0038 tile timing model (delta = 0.0000%)."
+  },
+  "chapter": "0043-fpga-digital-shell",
+  "claim_level": "FUNCTIONAL_DIGITAL_SHELL",
+  "control_ledger": {
+    "compute_fraction_pct": 0.99,
+    "n_blocks": 48,
+    "n_programs": 48,
+    "n_rewrites": 0,
+    "peak_acc_buffer_bits": 208,
+    "peak_act_buffer_bytes": 36,
+    "program_fraction_pct": 98.93,
+    "stall_fraction_pct": 0.0,
+    "total_compute_ns": 4800,
+    "total_execution_ns": 485181,
+    "total_noc_ns": 141,
+    "total_program_ns": 480000,
+    "total_stall_ns": 24,
+    "total_writeback_ns": 24
+  },
+  "fsm_trace": {
+    "first_10_transitions": [
+      {
+        "block_id": 0,
+        "cycle": 0,
+        "duration_ns": 2.0,
+        "note": "Load activation slice col-block 0 from SRAM",
+        "state": "FETCH_ACT",
+        "tile_id": 0
+      },
+      {
+        "block_id": 0,
+        "cycle": 2.0,
+        "duration_ns": 10000.0,
+        "note": "Initial program tile 0 weight block 0",
+        "state": "PROGRAM",
+        "tile_id": 0
+      },
+      {
+        "block_id": 0,
+        "cycle": 10002.0,
+        "duration_ns": 100.0,
+        "note": "t_dac(10.0ns)+t_settle(15.0ns)+t_adc(75.0ns)=t_tile(100ns)",
+        "state": "COMPUTE",
+        "tile_id": 0
+      },
+      {
+        "block_id": 0,
+        "cycle": 10102.0,
+        "duration_ns": 2.0,
+        "note": "Adder tree: 2 levels \u00d7 0.5 ns",
+        "state": "ACCUMULATE",
+        "tile_id": 0
+      },
+      {
+        "block_id": 1,
+        "cycle": 10104.0,
+        "duration_ns": 2.0,
+        "note": "Load activation slice col-block 1 from SRAM",
+        "state": "FETCH_ACT",
+        "tile_id": 1
+      },
+      {
+        "block_id": 1,
+        "cycle": 10106.0,
+        "duration_ns": 10000.0,
+        "note": "Initial program tile 1 weight block 1",
+        "state": "PROGRAM",
+        "tile_id": 1
+      },
+      {
+        "block_id": 1,
+        "cycle": 20106.0,
+        "duration_ns": 100.0,
+        "note": "t_dac(10.0ns)+t_settle(15.0ns)+t_adc(75.0ns)=t_tile(100ns)",
+        "state": "COMPUTE",
+        "tile_id": 1
+      },
+      {
+        "block_id": 1,
+        "cycle": 20206.0,
+        "duration_ns": 2.0,
+        "note": "Adder tree: 2 levels \u00d7 0.5 ns",
+        "state": "ACCUMULATE",
+        "tile_id": 1
+      },
+      {
+        "block_id": 1,
+        "cycle": 20208.0,
+        "duration_ns": 3.0,
+        "note": "Route partial sum across 1 NoC hop to accumulator",
+        "state": "NOC_HOP",
+        "tile_id": 1
+      },
+      {
+        "block_id": 2,
+        "cycle": 20211.0,
+        "duration_ns": 2.0,
+        "note": "Load activation slice col-block 2 from SRAM",
+        "state": "FETCH_ACT",
+        "tile_id": 2
+      }
+    ],
+    "state_histogram": {
+      "ACCUMULATE": 48,
+      "COMPUTE": 48,
+      "FETCH_ACT": 48,
+      "NOC_HOP": 47,
+      "PROGRAM": 48,
+      "STALL_BUFFER": 12,
+      "WRITEBACK": 12
+    },
+    "total_transitions": 263
+  },
+  "gate": "R9 \u2014 Implementation correlation",
+  "partial_sum_accumulator": {
+    "adc_bits": 4,
+    "adder_levels": 2,
+    "bit_growth_formula": "B_acc = B_ADC + \u2308log\u2082(K_c)\u2309 = 4 + 2 = 6 bits",
+    "evidence_class": "derived",
+    "max_accumulated_value": 60.0,
+    "max_value_at_adc": 15.0,
+    "n_column_groups": 4,
+    "overflow_safe": true,
+    "total_acc_bits": 6
+  },
+  "provenance": {
+    "architecture_sources": "Chs.0023\u20130026 scheduler/buffer/NoC ledgers + Ch.0038 timing model",
+    "timing_sources": "Chs.0009\u20130025 SPICE extracts and derived ledgers"
+  },
+  "schema_version": "0.1.0",
+  "summary": {
+    "all_timing_tagged": true,
+    "ch0038_consistent": true,
+    "claim_level": "FUNCTIONAL_DIGITAL_SHELL",
+    "finding": "Digital shell executes 48 MVM blocks in 485181 ns for a 192\u00d764 matrix. Programming dominates (99%) \u2014 consistent with Ch.0038/0039 ledgers. Compute kernel t_mvm = 100.00 ns/block matches Ch.0038 timing to <1% delta. All 9 timing parameters tagged (spice/derived/assumed). Status: FUNCTIONAL_DIGITAL_SHELL \u2014 must be validated against real FPGA measurement for Gate R9 exit.",
+    "fsm_states": 7,
+    "n_transitions": 263,
+    "partial_sum_overflow_safe": true,
+    "timing_params": 9
+  },
+  "timing_parameters": [
+    {
+      "description": "4-bit input DAC voltage conversion and wordline driver setup",
+      "evidence_class": "spice",
+      "name": "dac_setup_time",
+      "provenance": "Ch.0038 latency-ledger-0038-extract.json: SPICE transient simulation of 4-bit DAC PWM/R-2R buffer",
+      "symbol": "t_dac",
+      "value_ns": 10.0
+    },
+    {
+      "description": "Bitline current accumulation and RC line transient settling",
+      "evidence_class": "spice",
+      "name": "crossbar_line_settling",
+      "provenance": "Ch.0038: SPICE 2D RC mesh simulation (R_wire=1.0 \u03a9, C_line=50 fF, 16 rows)",
+      "symbol": "t_settle",
+      "value_ns": 15.0
+    },
+    {
+      "description": "4-bit SAR ADC conversion time (successive-approximation)",
+      "evidence_class": "spice",
+      "name": "adc_conversion",
+      "provenance": "Ch.0038: SPICE SAR ADC 4-bit conversion time (4 cycles \u00d7 18.75 ns/bit-trial)",
+      "symbol": "t_adc",
+      "value_ns": 75.0
+    },
+    {
+      "description": "Total tile MVM cycle time = DAC setup + settling + ADC conversion",
+      "evidence_class": "derived",
+      "name": "tile_mvm_cycle",
+      "provenance": "Ch.0038: t_tile = t_dac + t_settle + t_adc = 10 + 15 + 75 = 100 ns (derived)",
+      "symbol": "t_tile",
+      "value_ns": 100.0
+    },
+    {
+      "description": "SRAM activation buffer read latency per row (double-buffer)",
+      "evidence_class": "derived",
+      "name": "sram_read_latency",
+      "provenance": "Ch.0038: 28nm SRAM read latency derived from SRAM macro parameters",
+      "symbol": "t_sram",
+      "value_ns": 2.0
+    },
+    {
+      "description": "Digital SIMD overhead per token (LayerNorm + GELU + Softmax)",
+      "evidence_class": "derived",
+      "name": "simd_digital_ops",
+      "provenance": "Ch.0038: LayerNorm/GELU/Softmax SIMD pipeline latency (derived, 32-wide vector)",
+      "symbol": "t_simd",
+      "value_ns": 5.0
+    },
+    {
+      "description": "NoC router single-hop latency (tile boundary crossing)",
+      "evidence_class": "assumed",
+      "name": "noc_hop_latency",
+      "provenance": "Ch.0038: 2D mesh NoC hop = 3 ns (assumed, 28nm router, 128-bit flit width)",
+      "symbol": "t_noc",
+      "value_ns": 3.0
+    },
+    {
+      "description": "Memristor cell programming pulse time (row-parallel per tile): 10 \u00b5s",
+      "evidence_class": "assumed",
+      "name": "tile_program_latency",
+      "provenance": "Ch.0038/0023: NVM cell write pulse = 10 \u00b5s (assumed, dominates temporal reuse overhead)",
+      "symbol": "t_prog",
+      "value_ns": 10000.0
+    },
+    {
+      "description": "Digital partial-sum binary adder tree reduction latency",
+      "evidence_class": "assumed",
+      "name": "adder_tree_latency",
+      "provenance": "Derived from t_sram (SRAM writeback pipeline), assumed 1 level = 0.5 ns per bit at 28nm",
+      "symbol": "t_add",
+      "value_ns": 2.0
+    }
+  ],
+  "title": "FPGA / Digital Shell \u2014 Scheduler, Buffer, and Control FSM"
+}

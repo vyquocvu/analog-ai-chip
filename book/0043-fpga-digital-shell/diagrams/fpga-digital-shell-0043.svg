@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 13px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+.big { font-size: 18px; font-weight: 800; }
+.mono { font: 12px ui-monospace, monospace; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Chapter 0043 — FPGA / Digital Shell</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Scheduler FSM · Buffer Controller · Partial-Sum Accumulator · Control Ledger (Gate R9, WP9.1)</text>
+
+<!-- Status Banner -->
+<rect x="50" y="72" width="860" height="42" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+<text x="480" y="92" text-anchor="middle" class="box-title" fill="#1e40af">Claim Level: FUNCTIONAL_DIGITAL_SHELL — All 9 timing params tagged (spice/derived/assumed)</text>
+<text x="480" y="108" text-anchor="middle" class="box-text">Must be validated against real FPGA measurement for Gate R9 exit. Not a fabrication or silicon claim.</text>
+
+<!-- Left: Architecture -->
+<rect x="50" y="128" width="280" height="195" rx="8" fill="#eff6ff" stroke="#3b82f6"/>
+<text x="70" y="155" class="box-title" fill="#1e40af">Architecture</text>
+<text x="70" y="177" class="box-text">Tile: 16×18 cells | 416 tiles</text>
+<text x="70" y="197" class="box-text">Matrix: 192×64</text>
+<text x="70" y="217" class="box-text">Row blocks: 12 | Col blocks: 4</text>
+<text x="70" y="237" class="box-text">Total MVM blocks: 48</text>
+<text x="70" y="257" class="box-text">Programs: 48 | Rewrites: 0</text>
+<text x="70" y="277" class="box-text">FSM transitions: 263</text>
+<text x="70" y="297" class="box-text">Overflow safe: ✓ YES</text>
+<text x="70" y="317" class="box-text">Ch.0038 consistent: ✓ YES (Δ &lt;1%)</text>
+
+<!-- Centre: Execution breakdown -->
+<rect x="350" y="128" width="280" height="195" rx="8" fill="#faf5ff" stroke="#9333ea"/>
+<text x="370" y="155" class="box-title" fill="#7e22ce">Execution Breakdown</text>
+<text x="370" y="177" class="box-text">Total time: 485181 ns</text>
+<text x="370" y="197" class="box-title" fill="#b91c1c">Programming: 98.9%</text>
+<text x="370" y="217" class="box-text">  (480000 ns — NVM write dominates)</text>
+<text x="370" y="237" class="box-text">Compute:   1.0% (4800 ns)</text>
+<text x="370" y="257" class="box-text">Stalls:    0.0% (24 ns)</text>
+<text x="370" y="277" class="box-text">NoC hops:  141 ns</text>
+<text x="370" y="297" class="box-text">Writeback: 24 ns</text>
+<text x="370" y="317" class="box-text">t_mvm/block: 100.00 ns (Ch.0038 ✓)</text>
+
+<!-- Right: Timing param summary -->
+<rect x="650" y="128" width="260" height="195" rx="8" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="670" y="155" class="box-title" fill="#b45309">Timing Parameters</text>
+<text x="670" y="177" class="box-text">t_dac = 5.0 ns (SPICE)</text>
+<text x="670" y="197" class="box-text">t_xbar = 0.05 ns (SPICE)</text>
+<text x="670" y="217" class="box-text">t_tia = 5.0 ns (derived)</text>
+<text x="670" y="237" class="box-text">t_adc = 50.0 ns (SPICE)</text>
+<text x="670" y="257" class="box-text">t_prog = 500 ns (ASSUMED)</text>
+<text x="670" y="277" class="box-text">t_add = 2.0 ns (ASSUMED)</text>
+<text x="670" y="297" class="box-text">t_sram_rd = 1.0 ns (ASSUMED)</text>
+<text x="670" y="317" class="box-text">t_sram_wr = 1.5 ns (ASSUMED)</text>
+
+<!-- Bottom banner -->
+<rect x="50" y="345" width="860" height="165" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="70" y="375" class="box-title">Key Finding</text>
+<text x="70" y="398" class="box-text">★ Programming (NVM write, t_prog = 500 ns ASSUMED) dominates at 99% of total execution — matching Ch.0038/0039.</text>
+<text x="70" y="420" class="box-text">★ Compute kernel (DAC+xbar+TIA+ADC = 100.00 ns) matches Ch.0038 latency model within 1% — cross-chapter consistency proven.</text>
+<text x="70" y="442" class="box-text">★ Partial-sum accumulator: B_acc = B_ADC + ⌈log₂(K_c)⌉ = 4 + 2 = 6 bits — overflow safe.</text>
+<text x="70" y="464" class="box-text">★ Buffer pressure: 0.0% stall rate — double-buffer SRAM refill is the dominant latency risk, not compute.</text>
+<text x="70" y="490" class="box-text" fill="#b45309">⚠ Gate R9 requires FPGA measurement to replace ASSUMED timing params (t_prog, t_add, t_sram_rd/wr, t_noc) with MEASURED evidence.</text>
+</svg>

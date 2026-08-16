@@ -123,8 +123,8 @@ Chapter numbering below is canonical. Existing chapters keep their numbers; futu
 
 | # | Chapter | Verification target |
 |---|---|---|
-| 0043 | FPGA / digital shell | scheduler, buffers and control assumptions are executable independently |
-| 0044 | PCB / board correlation | measured converter/crossbar behavior can replace SPICE evidence where available |
+| 0043 | FPGA / digital shell | scheduler, buffers and control assumptions are executable independently | done |
+| 0044 | PCB / board correlation | measured converter/crossbar behavior can replace SPICE evidence where available | next |
 | 0045 | IC / tape-out readiness | open risks, required models, PDK/layout assumptions and missing evidence are explicit |
 
 ## Chapter completion rules

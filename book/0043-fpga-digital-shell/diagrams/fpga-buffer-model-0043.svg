@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 13px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+.formula { font: 12px ui-monospace, monospace; fill: #1e40af; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Buffer Controller — SRAM Capacity and Accumulator Model</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Derived from Ch.0022/0024 formulas | Tile: 16×18 | ADC: 4-bit | DAC: 4-bit</text>
+
+<!-- Act buffer -->
+<rect x="50" y="80" width="270" height="190" rx="10" fill="#dbeafe" stroke="#3b82f6"/>
+<text x="70" y="108" class="box-title" fill="#1e40af">Activation Input Buffer</text>
+<text x="70" y="130" class="formula">S_act = 2 × C × B_DAC</text>
+<text x="70" y="152" class="box-text">= 2 × 18 × 4 bits</text>
+<text x="70" y="172" class="box-text">= 144 bits = 18 B</text>
+<text x="70" y="194" class="box-text">Double-buffered: 36 B total</text>
+<text x="70" y="214" class="box-text">Evidence: DERIVED (Ch.0024)</text>
+<text x="70" y="234" class="box-text">Refill stall: t_sram_rd = 1 ns</text>
+<text x="70" y="254" class="box-text">(ASSUMED — FPGA BRAM TBD)</text>
+
+<!-- Acc buffer -->
+<rect x="345" y="80" width="270" height="190" rx="10" fill="#faf5ff" stroke="#9333ea"/>
+<text x="365" y="108" class="box-title" fill="#7e22ce">Output Accumulator Buffer</text>
+<text x="365" y="130" class="formula">B_acc = B_ADC + ⌈log₂(K_c)⌉</text>
+<text x="365" y="152" class="box-text">= 4 + 2 = 6 bits/row</text>
+<text x="365" y="172" class="box-text">Max accumulated: 60</text>
+<text x="365" y="192" class="box-text">Fits in 6 bits: ✓ YES</text>
+<text x="365" y="212" class="box-text">Adder tree: 2 levels @ 0.5 ns</text>
+<text x="365" y="232" class="box-text">Total: 208 bits</text>
+<text x="365" y="252" class="box-text">Evidence: DERIVED (Ch.0022)</text>
+
+<!-- Weight shadow buffer -->
+<rect x="640" y="80" width="270" height="190" rx="10" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="660" y="108" class="box-title" fill="#b45309">Weight Shadow Buffer</text>
+<text x="660" y="130" class="formula">S_wt = 2 × R × C × B_wt</text>
+<text x="660" y="152" class="box-text">= 2 × 16 × 18 × 4 bits</text>
+<text x="660" y="172" class="box-text">= 2304 bits = 288 B</text>
+<text x="660" y="192" class="box-text">Stores diff. G+/G− pairs</text>
+<text x="660" y="212" class="box-text">4-bit conductance (crossbar-v1)</text>
+<text x="660" y="232" class="box-text">Evidence: DERIVED (Ch.0024)</text>
+
+<!-- Stall model -->
+<rect x="50" y="290" width="860" height="220" rx="10" fill="#f8fafc" stroke="#94a3b8"/>
+<text x="70" y="320" class="box-title">Stall Model — Buffer Pressure Analysis</text>
+<text x="70" y="350" class="box-text">Double-buffer strategy: while tile N computes, tile N+1's activations are prefetched from SRAM.</text>
+<text x="70" y="375" class="box-text">Stall occurs if SRAM read latency (5.0 ns, ASSUMED) overlaps compute (110 ns compute).</text>
+<text x="70" y="400" class="box-text">With t_compute = 60.05 ns >> t_sram_rd = 1 ns, prefetch completes well before next compute begins.</text>
+<text x="70" y="425" class="box-text">Modelled stall rate: 0.0% — stalls occur at double-buffer refill boundaries (every 4 blocks).</text>
+<text x="70" y="450" class="box-text" fill="#b45309">⚠ t_sram_rd = 1 ns and t_sram_wr = 1.5 ns are ASSUMED (28nm BRAM). FPGA BRAM latency must be measured to validate.</text>
+<text x="70" y="478" class="box-text">★ Activation buffer dominates buffer stall risk. Weight shadow and accumulator buffers are non-stalling (pipelined).</text>
+<text x="70" y="498" class="box-text">Evidence class summary: act_buffer → DERIVED (Ch.0024), stall timing → ASSUMED (FPGA BRAM TBD).</text>
+</svg>

@@ -266,9 +266,9 @@ not silicon verification. Gate R8 exited successfully — all physical feasibili
 
 ---
 
-# R9 — Implementation correlation — FUTURE
+# R9 — Implementation correlation — ACTIVE
 
-- [ ] FPGA/digital-shell prototype for scheduler/buffer/control
+- [x] FPGA/digital-shell prototype for scheduler/buffer/control: deterministic cycle-accurate digital shell executing FSM scheduler, double-buffered SRAM controller, and partial-sum accumulator; matches Ch.0038 timing ($t_{\text{tile}} = 100.0\text{ ns}$) to $<1\%$ delta (`book/0043-fpga-digital-shell/fpga_digital_shell.py`, `fpga-digital-shell-0043-extract.json`)
 - [ ] KiCad board/reference circuits when useful for correlation
 - [ ] Replace SPICE evidence with measured profiles where hardware exists
 - [ ] SPICE-vs-measured correlation report
