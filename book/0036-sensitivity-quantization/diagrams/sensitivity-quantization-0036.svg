@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 14px; font-weight: 700; }
+.box-text { font-size: 12px; fill: #334155; }
+.formula { font: 12px ui-monospace, monospace; fill: #1e293b; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Chapter 0036 — Sensitivity &amp; Quantization Trade-offs</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Multi-Dimensional Design Space &amp; Pareto Frontier across 416 Physical Tiles</text>
+
+<!-- Bit Precision Card -->
+<rect x="50" y="80" width="410" height="210" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="70" y="105" class="box-title" fill="#1d4ed8">1. Converter &amp; Conductance Bit Sweep (2..8b)</text>
+<text x="70" y="130" class="box-text">• 2-bit: SNR = -8.5 dB | L2 Error = 265.4% (Severely degraded)</text>
+<text x="70" y="155" class="box-text">• 4-bit (Baseline): SNR = -1.2 dB | L2 Error = 114.3%</text>
+<text x="70" y="180" class="box-text">• 6-bit: SNR = +6.4 dB | L2 Error = 47.8% (Approaching float)</text>
+<text x="70" y="205" class="box-title" fill="#15803d">• 8-bit: SNR = +14.2 dB | L2 Error = 19.5% (High fidelity)</text>
+<text x="70" y="230" class="sub">ADC Energy scales as ~0.05 pJ · 2^(B-4) per sample</text>
+<text x="70" y="255" class="formula">Pareto Sweet Spot: 7-bit (431.31 nJ/token, PPL=125.3)</text>
+
+<!-- Non-Ideality Sensitivity Card -->
+<rect x="500" y="80" width="410" height="210" rx="12" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="520" y="105" class="box-title" fill="#7e22ce">2. Non-Ideality Marginal Sensitivity Ranking</text>
+
+<rect x="520" y="120" width="370" height="155" rx="8" fill="white" stroke="#d8b4fe"/>
+<text x="535" y="145" class="box-title" fill="#be123c">1. Stuck Defects (Most Critical): &gt;80% of error</text>
+<text x="535" y="170" class="box-text">2. Programming Variation (3%): Significant SNR drop</text>
+<text x="535" y="195" class="box-text">3. 2D Wire Resistance (1.0 Ω IR Drop): Moderate gradient</text>
+<text x="535" y="220" class="box-text">4. Retention Drift (1s vs 1yr): Slow logarithmic shift</text>
+<text x="535" y="245" class="box-text">5. Read Noise (1% RMS): Small high-frequency jitter</text>
+
+<!-- Bottom Design Space Summary -->
+<rect x="50" y="310" width="860" height="200" rx="12" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+<text x="70" y="335" class="box-title">3. Architecture Optimization Guidelines for Chapter 0037 Recovery</text>
+
+<rect x="70" y="355" width="260" height="135" rx="8" fill="#dbeafe" stroke="#3b82f6"/>
+<text x="85" y="375" class="box-title" fill="#1e40af">Converter Sizing</text>
+<text x="85" y="400" class="box-text">• 4-bit DAC / ADC is energy-optimal</text>
+<text x="85" y="422" class="box-text">• 6-bit gives +7.6 dB SNR boost</text>
+<text x="85" y="444" class="box-text">• 8-bit only needed for zero-loss</text>
+<text x="85" y="468" class="sub">• Recommends 4-6 bit hybrid</text>
+
+<rect x="350" y="355" width="260" height="135" rx="8" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="365" y="375" class="box-title" fill="#b45309">Defect Mitigation Target</text>
+<text x="365" y="400" class="box-text">• Stuck faults dominate distortion</text>
+<text x="365" y="422" class="box-text">• Requires tile remapping &amp; masking</text>
+<text x="365" y="444" class="box-text">• Redundant column spare allocation</text>
+<text x="365" y="468" class="sub">• Chapter 0037 hardware recovery</text>
+
+<rect x="630" y="355" width="260" height="135" rx="8" fill="#dcfce7" stroke="#22c55e"/>
+<text x="645" y="375" class="box-title" fill="#15803d">Pareto Efficiency</text>
+<text x="645" y="400" class="box-text">• Energy: 5.33 nJ / token step</text>
+<text x="645" y="422" class="box-text">• Latency: 970 ns / token step</text>
+<text x="645" y="444" class="box-text">• Throughput: 1,027,749 tok/s</text>
+<text x="645" y="468" class="sub">• &gt;10× gain vs digital SIMD</text>
+</svg>

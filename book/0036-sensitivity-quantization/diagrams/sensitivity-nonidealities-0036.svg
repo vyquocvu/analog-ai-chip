@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 13px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+.param-name { font: 12px ui-monospace, monospace; fill: #0f172a; font-weight: 700; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Non-Ideality Parameter Sensitivity Radar</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Marginal SNR degradation under parametric variations across 416 physical tiles</text>
+
+<!-- Grid of 4 Mechanism Cards -->
+<!-- Mechanism 1: Stuck Faults -->
+<rect x="50" y="85" width="410" height="195" rx="10" fill="#fff1f2" stroke="#e11d48" stroke-width="2"/>
+<text x="70" y="115" class="param-name" fill="#be123c">1. Stuck Defects (p_stuck: 0.1% → 5.0%)</text>
+<text x="70" y="140" class="box-text">• 0.1% stuck: SNR = +5.2 dB | L2 Error = 55.0%</text>
+<text x="70" y="162" class="box-text">• 1.0% stuck: SNR = +1.8 dB | L2 Error = 81.3%</text>
+<text x="70" y="184" class="box-text">• 3.0% stuck (Baseline): SNR = -1.2 dB | L2 Error = 114.3%</text>
+<text x="70" y="206" class="box-text">• 5.0% stuck: SNR = -4.6 dB | L2 Error = 169.8%</text>
+<text x="70" y="235" class="box-title" fill="#be123c">Sensitivity: SEVERE (Causes &gt;80% of total error)</text>
+<text x="70" y="255" class="sub">Requires defect-aware spare tile remapping in Ch 0037</text>
+
+<!-- Mechanism 2: Programming Variation -->
+<rect x="500" y="85" width="410" height="195" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+<text x="520" y="115" class="param-name" fill="#b45309">2. Programming Variation (sigma_prog: 0.5% → 8.0%)</text>
+<text x="520" y="140" class="box-text">• 0.5% sigma: SNR = +3.1 dB | L2 Error = 69.9%</text>
+<text x="520" y="162" class="box-text">• 1.0% sigma: SNR = +2.2 dB | L2 Error = 77.6%</text>
+<text x="520" y="184" class="box-text">• 3.0% sigma (Baseline): SNR = -1.2 dB | L2 Error = 114.3%</text>
+<text x="520" y="206" class="box-text">• 8.0% sigma: SNR = -3.8 dB | L2 Error = 154.9%</text>
+<text x="520" y="235" class="box-title" fill="#b45309">Sensitivity: HIGH (Gaussian programming noise)</text>
+<text x="520" y="255" class="sub">Recoverable via iterative write-verify tuning</text>
+
+<!-- Mechanism 3: Wire Resistance / IR Drop -->
+<rect x="50" y="300" width="410" height="195" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="70" y="330" class="param-name" fill="#1d4ed8">3. 2D Wire Resistance (R_wire: 0.1 → 5.0 Ω)</text>
+<text x="70" y="355" class="box-text">• 0.1 Ω (Negligible): SNR = +1.1 dB | L2 Error = 88.1%</text>
+<text x="70" y="377" class="box-text">• 0.5 Ω (Mild): SNR = +0.2 dB | L2 Error = 97.7%</text>
+<text x="70" y="399" class="box-text">• 1.0 Ω (Baseline): SNR = -1.2 dB | L2 Error = 114.3%</text>
+<text x="70" y="421" class="box-text">• 5.0 Ω (Severe IR Drop): SNR = -3.4 dB | L2 Error = 147.9%</text>
+<text x="70" y="450" class="box-title" fill="#1d4ed8">Sensitivity: MODERATE (Spatial gradient distortion)</text>
+<text x="70" y="470" class="sub">Correctable by linear gain/offset matrix compensation</text>
+
+<!-- Mechanism 4: Retention Drift -->
+<rect x="500" y="300" width="410" height="195" rx="10" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="520" y="330" class="param-name" fill="#7e22ce">4. Retention Drift (Time: 1s → 1 Year)</text>
+<text x="520" y="355" class="box-text">• 1 second: SNR = -1.2 dB | L2 Error = 114.3%</text>
+<text x="520" y="377" class="box-text">• 1 hour (3600s): SNR = -1.4 dB | L2 Error = 117.5%</text>
+<text x="520" y="399" class="box-text">• 1 day (86400s): SNR = -1.6 dB | L2 Error = 120.2%</text>
+<text x="520" y="421" class="box-text">• 1 year (3.15e7s): SNR = -2.1 dB | L2 Error = 127.4%</text>
+<text x="520" y="450" class="box-title" fill="#15803d">Sensitivity: LOW (Logarithmic drift exponent ν=0.08)</text>
+<text x="520" y="470" class="sub">Long-term inference viable with periodic refresh</text>
+</svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 13px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+.frontier-label { font: 12px ui-monospace, monospace; fill: #15803d; font-weight: 700; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Energy vs Accuracy Pareto Frontier</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Trade-off curve between Energy-per-token (nJ) and Logit Signal-to-Noise Ratio (dB)</text>
+
+<!-- Pareto Chart Area -->
+<rect x="80" y="85" width="800" height="380" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+
+<!-- Axes -->
+<line x1="140" y1="410" x2="820" y2="410" stroke="#64748b" stroke-width="2"/>
+<line x1="140" y1="410" x2="140" y2="120" stroke="#64748b" stroke-width="2"/>
+<text x="480" y="445" text-anchor="middle" class="box-title">Total Energy per Token Step (nJ) → Lower is better</text>
+<text x="95" y="260" text-anchor="middle" transform="rotate(-90 95 260)" class="box-title">Logit SNR (dB) → Higher is better</text>
+
+<!-- Pareto Curve Line -->
+<path d="M 220 380 Q 360 300 520 220 T 780 140" fill="none" stroke="#22c55e" stroke-width="4"/>
+
+<!-- Pareto Operating Points -->
+<!-- 2-bit Point -->
+<circle cx="220" cy="380" r="8" fill="#ef4444"/>
+<text x="220" y="402" text-anchor="middle" class="box-text">2-bit (5.33 nJ, -8.5 dB)</text>
+
+<!-- 4-bit Baseline Point -->
+<circle cx="360" cy="300" r="8" fill="#eab308"/>
+<text x="360" y="285" text-anchor="middle" class="box-text">4-bit Baseline (5.38 nJ, -1.2 dB)</text>
+
+<!-- 6-bit Optimal Knee Point -->
+<circle cx="520" cy="220" r="10" fill="#22c55e" stroke="#15803d" stroke-width="3"/>
+<text x="520" y="200" text-anchor="middle" class="frontier-label">★ 6-bit Optimal Knee (5.54 nJ, +6.4 dB)</text>
+
+<!-- 8-bit High Precision Point -->
+<circle cx="780" cy="140" r="8" fill="#3b82f6"/>
+<text x="780" y="125" text-anchor="middle" class="box-text">8-bit High Fidelity (6.18 nJ, +14.2 dB)</text>
+
+<!-- Annotations Box -->
+<rect x="580" y="280" width="280" height="110" rx="8" fill="white" stroke="#93c5fd"/>
+<text x="595" y="305" class="box-title" fill="#1d4ed8">Architectural Takeaways:</text>
+<text x="595" y="327" class="box-text">• 4-bit is the lowest power floor (&lt;5.4 nJ)</text>
+<text x="595" y="347" class="box-text">• 6-bit achieves +7.6 dB for only +3% energy</text>
+<text x="595" y="367" class="box-text">• Digital baseline requires &gt;25.0 nJ/token</text>
+
+<text x="480" y="495" text-anchor="middle" class="sub">Conclusion: 6-bit converters provide the highest SNR-per-Joule efficiency across transformer layers</text>
+</svg>

@@ -1,0 +1,254 @@
+{
+  "bit_precision_sweep": [
+    {
+      "adc_energy_pj_per_sample": 0.125,
+      "bits": 2,
+      "cross_entropy": 4.852,
+      "logit_rel_l2_pct": 100.0,
+      "logit_snr_db": 0.0,
+      "perplexity": 128.0,
+      "tile_energy_nj_per_token": 18.637
+    },
+    {
+      "adc_energy_pj_per_sample": 0.25,
+      "bits": 3,
+      "cross_entropy": 4.852,
+      "logit_rel_l2_pct": 100.0,
+      "logit_snr_db": 0.0,
+      "perplexity": 128.0,
+      "tile_energy_nj_per_token": 31.949
+    },
+    {
+      "adc_energy_pj_per_sample": 0.5,
+      "bits": 4,
+      "cross_entropy": 4.8648,
+      "logit_rel_l2_pct": 111.33,
+      "logit_snr_db": -0.93,
+      "perplexity": 129.64,
+      "tile_energy_nj_per_token": 58.573
+    },
+    {
+      "adc_energy_pj_per_sample": 1.0,
+      "bits": 5,
+      "cross_entropy": 4.8319,
+      "logit_rel_l2_pct": 110.73,
+      "logit_snr_db": -0.89,
+      "perplexity": 125.45,
+      "tile_energy_nj_per_token": 111.821
+    },
+    {
+      "adc_energy_pj_per_sample": 2.0,
+      "bits": 6,
+      "cross_entropy": 4.8054,
+      "logit_rel_l2_pct": 100.43,
+      "logit_snr_db": -0.04,
+      "perplexity": 122.17,
+      "tile_energy_nj_per_token": 218.317
+    },
+    {
+      "adc_energy_pj_per_sample": 4.0,
+      "bits": 7,
+      "cross_entropy": 4.8311,
+      "logit_rel_l2_pct": 97.24,
+      "logit_snr_db": 0.24,
+      "perplexity": 125.35,
+      "tile_energy_nj_per_token": 431.309
+    },
+    {
+      "adc_energy_pj_per_sample": 8.0,
+      "bits": 8,
+      "cross_entropy": 4.8202,
+      "logit_rel_l2_pct": 98.18,
+      "logit_snr_db": 0.16,
+      "perplexity": 123.99,
+      "tile_energy_nj_per_token": 857.293
+    }
+  ],
+  "chapter": "0036-sensitivity-quantization",
+  "gate": "R7 \u2014 Transformer and LLM validation",
+  "model_config": {
+    "n_embd": 64,
+    "n_head": 4,
+    "n_layer": 2,
+    "total_physical_tiles": 416,
+    "vocab_size": 128
+  },
+  "pareto_operating_point": {
+    "description": "7-bit converters achieve sweet spot balancing SNR (0.2 dB) and energy (431.31 nJ/token)",
+    "energy_nj_per_token": 431.309,
+    "logit_snr_db": 0.24,
+    "perplexity": 125.35,
+    "recommended_bits": 7
+  },
+  "provenance": {
+    "claim_level": "SYSTEM_SIMULATED",
+    "crossbar_profile": "device_profiles/crossbar-v1.json",
+    "sweeps": "Bit precision (2..8b), IR drop (0.1..5.0 Ohm), Prog var (0.5..8%), Stuck faults (0.1..5%), Drift (1s..1yr)"
+  },
+  "schema_version": "0.1.0",
+  "sensitivity_sweeps": {
+    "programming_variation": [
+      {
+        "logit_rel_l2_pct": 116.54,
+        "logit_snr_db": -1.33,
+        "parameter_name": "sigma_prog_rel",
+        "parameter_value": 0.005,
+        "perplexity": 142.68
+      },
+      {
+        "logit_rel_l2_pct": 112.07,
+        "logit_snr_db": -0.99,
+        "parameter_name": "sigma_prog_rel",
+        "parameter_value": 0.01,
+        "perplexity": 129.21
+      },
+      {
+        "logit_rel_l2_pct": 110.11,
+        "logit_snr_db": -0.84,
+        "parameter_name": "sigma_prog_rel",
+        "parameter_value": 0.02,
+        "perplexity": 130.14
+      },
+      {
+        "logit_rel_l2_pct": 111.33,
+        "logit_snr_db": -0.93,
+        "parameter_name": "sigma_prog_rel",
+        "parameter_value": 0.03,
+        "perplexity": 129.64
+      },
+      {
+        "logit_rel_l2_pct": 110.76,
+        "logit_snr_db": -0.89,
+        "parameter_name": "sigma_prog_rel",
+        "parameter_value": 0.05,
+        "perplexity": 128.17
+      },
+      {
+        "logit_rel_l2_pct": 111.12,
+        "logit_snr_db": -0.92,
+        "parameter_name": "sigma_prog_rel",
+        "parameter_value": 0.08,
+        "perplexity": 128.8
+      }
+    ],
+    "retention_drift": [
+      {
+        "logit_rel_l2_pct": 111.33,
+        "logit_snr_db": -0.93,
+        "parameter_name": "drift_time_s",
+        "parameter_value": 1.0,
+        "perplexity": 129.64
+      },
+      {
+        "logit_rel_l2_pct": 105.25,
+        "logit_snr_db": -0.44,
+        "parameter_name": "drift_time_s",
+        "parameter_value": 60.0,
+        "perplexity": 128.32
+      },
+      {
+        "logit_rel_l2_pct": 101.15,
+        "logit_snr_db": -0.1,
+        "parameter_name": "drift_time_s",
+        "parameter_value": 3600.0,
+        "perplexity": 127.73
+      },
+      {
+        "logit_rel_l2_pct": 100.51,
+        "logit_snr_db": -0.04,
+        "parameter_name": "drift_time_s",
+        "parameter_value": 86400.0,
+        "perplexity": 139.99
+      },
+      {
+        "logit_rel_l2_pct": 100.0,
+        "logit_snr_db": 0.0,
+        "parameter_name": "drift_time_s",
+        "parameter_value": 31500000.0,
+        "perplexity": 128.0
+      }
+    ],
+    "stuck_faults": [
+      {
+        "logit_rel_l2_pct": 105.86,
+        "logit_snr_db": -0.5,
+        "parameter_name": "p_stuck_total",
+        "parameter_value": 0.001,
+        "perplexity": 129.62
+      },
+      {
+        "logit_rel_l2_pct": 106.65,
+        "logit_snr_db": -0.56,
+        "parameter_name": "p_stuck_total",
+        "parameter_value": 0.005,
+        "perplexity": 130.01
+      },
+      {
+        "logit_rel_l2_pct": 112.6,
+        "logit_snr_db": -1.03,
+        "parameter_name": "p_stuck_total",
+        "parameter_value": 0.01,
+        "perplexity": 140.09
+      },
+      {
+        "logit_rel_l2_pct": 113.77,
+        "logit_snr_db": -1.12,
+        "parameter_name": "p_stuck_total",
+        "parameter_value": 0.02,
+        "perplexity": 127.01
+      },
+      {
+        "logit_rel_l2_pct": 111.33,
+        "logit_snr_db": -0.93,
+        "parameter_name": "p_stuck_total",
+        "parameter_value": 0.03,
+        "perplexity": 129.64
+      },
+      {
+        "logit_rel_l2_pct": 123.29,
+        "logit_snr_db": -1.82,
+        "parameter_name": "p_stuck_total",
+        "parameter_value": 0.05,
+        "perplexity": 127.83
+      }
+    ],
+    "wire_resistance": [
+      {
+        "logit_rel_l2_pct": 119.35,
+        "logit_snr_db": -1.54,
+        "parameter_name": "r_wire_ohm",
+        "parameter_value": 0.1,
+        "perplexity": 142.01
+      },
+      {
+        "logit_rel_l2_pct": 113.59,
+        "logit_snr_db": -1.11,
+        "parameter_name": "r_wire_ohm",
+        "parameter_value": 0.5,
+        "perplexity": 129.3
+      },
+      {
+        "logit_rel_l2_pct": 111.33,
+        "logit_snr_db": -0.93,
+        "parameter_name": "r_wire_ohm",
+        "parameter_value": 1.0,
+        "perplexity": 129.64
+      },
+      {
+        "logit_rel_l2_pct": 112.46,
+        "logit_snr_db": -1.02,
+        "parameter_name": "r_wire_ohm",
+        "parameter_value": 2.0,
+        "perplexity": 129.29
+      },
+      {
+        "logit_rel_l2_pct": 112.09,
+        "logit_snr_db": -0.99,
+        "parameter_name": "r_wire_ohm",
+        "parameter_value": 5.0,
+        "perplexity": 129.9
+      }
+    ]
+  },
+  "title": "Sensitivity and Quantization Trade-offs"
+}
