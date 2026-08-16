@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 13px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+.comp-tag { font: 14px ui-monospace, monospace; fill: #15803d; font-weight: 700; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Energy Efficiency Benchmark: Analog IMC vs Digital SIMD Baseline</text>
+<text x="480" y="55" text-anchor="middle" class="sub">28nm Process Comparison across Compute Energy (fJ/MAC) and Token Step Energy (nJ/Token)</text>
+
+<!-- Side-by-Side Comparison Area -->
+<rect x="60" y="85" width="840" height="420" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+
+<!-- Left: Digital SIMD Baseline -->
+<rect x="90" y="115" width="360" height="360" rx="8" fill="#fee2e2" stroke="#ef4444"/>
+<text x="270" y="145" text-anchor="middle" class="box-title" fill="#b91c1c">28nm Digital SIMD / GPU Baseline</text>
+
+<rect x="110" y="165" width="320" height="85" rx="6" fill="white" stroke="#fca5a5"/>
+<text x="125" y="190" class="box-title" fill="#b91c1c">MAC Compute Energy:</text>
+<text x="125" y="215" class="title" fill="#b91c1c">200.0 fJ / MAC</text>
+<text x="125" y="235" class="sub">32-bit / INT8 digital multiply-accumulate</text>
+
+<rect x="110" y="260" width="320" height="85" rx="6" fill="white" stroke="#fca5a5"/>
+<text x="125" y="285" class="box-title" fill="#b91c1c">Token Step Energy:</text>
+<text x="125" y="310" class="title" fill="#b91c1c">250.0 nJ / token</text>
+<text x="125" y="330" class="sub">Dominated by register file &amp; DRAM weight fetch</text>
+
+<rect x="110" y="355" width="320" height="100" rx="6" fill="white" stroke="#fca5a5"/>
+<text x="125" y="380" class="box-title" fill="#b91c1c">Key Bottlenecks:</text>
+<text x="125" y="402" class="box-text">• von Neumann memory wall</text>
+<text x="125" y="422" class="box-text">• High dynamic toggle rate on digital buses</text>
+<text x="125" y="442" class="box-text">• 250.5 mW power dissipation @ 1M tok/s</text>
+
+<!-- Right: Analog IMC Chip -->
+<rect x="510" y="115" width="360" height="360" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+<text x="690" y="145" text-anchor="middle" class="box-title" fill="#15803d">28nm Analog IMC Architecture ★</text>
+
+<rect x="530" y="165" width="320" height="85" rx="6" fill="white" stroke="#86efac"/>
+<text x="545" y="190" class="box-title" fill="#15803d">IMC Compute Energy:</text>
+<text x="545" y="215" class="title" fill="#15803d">50.0 fJ / MAC (4.0× Advantage)</text>
+<text x="545" y="235" class="sub">In-situ Ohm's / Kirchhoff's current summation</text>
+
+<rect x="530" y="260" width="320" height="85" rx="6" fill="white" stroke="#86efac"/>
+<text x="545" y="285" class="box-title" fill="#15803d">Token Step Energy:</text>
+<text x="545" y="310" class="title" fill="#15803d">28.83 nJ / token (8.7× Advantage)</text>
+<text x="545" y="330" class="sub">Full spatial residency; zero DRAM weight access</text>
+
+<rect x="530" y="355" width="320" height="100" rx="6" fill="white" stroke="#86efac"/>
+<text x="545" y="380" class="box-title" fill="#15803d">Architecture Advantages:</text>
+<text x="545" y="402" class="box-text">• Stationary non-volatile memristor storage</text>
+<text x="545" y="422" class="box-text">• Analog compute inside memory crossbar</text>
+<text x="545" y="442" class="comp-tag">8.7× Higher Energy Efficiency</text>
+</svg>

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 13px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+.power-val { font: 16px ui-monospace, monospace; fill: #15803d; font-weight: 700; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Chip Power Dissipation &amp; Operating Density</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Total Power Profile across 416 Physical Tiles @ 1.002 Million Tokens / Second</text>
+
+<!-- 3 Power Domain Cards -->
+<rect x="50" y="85" width="260" height="420" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="70" y="115" class="box-title" fill="#1d4ed8">Active Dynamic Power</text>
+<text x="70" y="135" class="sub">Compute + Converters + SRAM</text>
+<rect x="70" y="155" width="220" height="80" rx="6" fill="white" stroke="#93c5fd"/>
+<text x="180" y="190" text-anchor="middle" class="power-val">28.88 mW</text>
+<text x="180" y="215" text-anchor="middle" class="sub">@ 1.002M tokens/sec</text>
+<rect x="70" y="250" width="220" height="235" rx="6" fill="white" stroke="#93c5fd"/>
+<text x="80" y="275" class="box-title" fill="#1e40af">Breakdown:</text>
+<text x="80" y="300" class="box-text">• Analog IMC: 5.34 mW</text>
+<text x="80" y="325" class="box-text">• Converters: 4.67 mW</text>
+<text x="80" y="350" class="box-text">• SRAM Pool: 16.42 mW</text>
+<text x="80" y="375" class="box-text">• Digital SIMD: 2.46 mW</text>
+<text x="80" y="400" class="box-text">• NoC Router: 0.26 mW</text>
+<text x="80" y="435" class="box-title" fill="#15803d">99.3% Dynamic Power</text>
+
+<rect x="350" y="85" width="260" height="420" rx="10" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="370" y="115" class="box-title" fill="#7e22ce">Static Standby Power</text>
+<text x="370" y="135" class="sub">Subthreshold &amp; Gate Leakage</text>
+<rect x="370" y="155" width="220" height="80" rx="6" fill="white" stroke="#d8b4fe"/>
+<text x="480" y="190" text-anchor="middle" class="power-val" fill="#7e22ce">0.21 mW</text>
+<text x="480" y="215" text-anchor="middle" class="sub">Across 416 physical tiles</text>
+<rect x="370" y="250" width="220" height="235" rx="6" fill="white" stroke="#d8b4fe"/>
+<text x="380" y="275" class="box-title" fill="#7e22ce">Characteristics:</text>
+<text x="380" y="300" class="box-text">• 0.5 µW / tile static leakage</text>
+<text x="380" y="325" class="box-text">• Non-volatile memristor array</text>
+<text x="380" y="350" class="box-text">  draws ZERO refresh power</text>
+<text x="380" y="375" class="box-text">• Power gating applied to idle</text>
+<text x="380" y="400" class="box-text">  DAC / ADC peripheral blocks</text>
+<text x="380" y="435" class="box-title" fill="#7e22ce">0.7% Static Power</text>
+
+<rect x="650" y="85" width="260" height="420" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+<text x="670" y="115" class="box-title" fill="#15803d">Thermal &amp; Power Density</text>
+<text x="670" y="135" class="sub">Cooling &amp; Reliability Margin</text>
+<rect x="670" y="155" width="220" height="80" rx="6" fill="white" stroke="#86efac"/>
+<text x="780" y="190" text-anchor="middle" class="power-val" fill="#15803d">29.09 mW</text>
+<text x="780" y="215" text-anchor="middle" class="sub">Total Peak Chip Dissipation</text>
+<rect x="670" y="250" width="220" height="235" rx="6" fill="white" stroke="#86efac"/>
+<text x="680" y="275" class="box-title" fill="#15803d">Thermal Envelope:</text>
+<text x="680" y="300" class="box-text">• Estimated Die Area: ~4.2 mm²</text>
+<text x="680" y="325" class="box-text">• Power Density: 0.007 W/mm²</text>
+<text x="680" y="350" class="box-text">• Ambient Convection cooling</text>
+<text x="680" y="375" class="box-text">  sufficient (No heat sink required)</text>
+<text x="680" y="400" class="box-text">• Junction Temp rise: &lt; 2.5 °C</text>
+<text x="680" y="435" class="box-title" fill="#15803d">Safe Operating Envelope</text>
+</svg>

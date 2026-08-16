@@ -114,8 +114,8 @@ Chapter numbering below is canonical. Existing chapters keep their numbers; futu
 | # | Chapter | Verification target | Status |
 |---|---|---|---|
 | 0038 | Latency ledger | timing coefficients are SPICE/derived/measured or explicitly assumed | done |
-| 0039 | Energy / power ledger | coefficients carry evidence class and provenance | next |
-| 0040 | Area / process model | area tied to explicit layout/process assumptions | |
+| 0039 | Energy / power ledger | coefficients carry evidence class and provenance | done |
+| 0040 | Area / process model | area tied to explicit layout/process assumptions | next |
 | 0041 | Thermal / power density | operating envelope receives sanity checks | |
 | 0042 | Integrated feasibility report | separates verified evidence, derived quantities and assumptions | |
 

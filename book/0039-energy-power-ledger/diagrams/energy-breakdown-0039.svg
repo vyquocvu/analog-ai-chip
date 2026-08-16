@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 13px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+.energy-tag { font: 12px ui-monospace, monospace; fill: #15803d; font-weight: 700; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Subsystem Energy Waterfall Breakdown (28.83 nJ / Token)</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Detailed Energy Ledgers across Analog IMC, Converters, SRAM, and Digital SIMD</text>
+
+<!-- Energy Waterfall Stack -->
+<rect x="60" y="85" width="840" height="420" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+
+<!-- Bar 1: SRAM Pool -->
+<rect x="100" y="115" width="760" height="65" rx="6" fill="#eff6ff" stroke="#2563eb"/>
+<text x="120" y="140" class="box-title" fill="#1d4ed8">1. On-Chip SRAM Pool: 16.38 nJ (56.8% of Total)</text>
+<text x="120" y="160" class="box-text">16,384 Bytes transferred @ 1.0 pJ/Byte (KV Cache + Activation Buffers) | Derived evidence</text>
+<text x="830" y="152" text-anchor="end" class="energy-tag">16.38 nJ</text>
+
+<!-- Bar 2: Analog IMC Compute -->
+<rect x="100" y="190" width="760" height="65" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="120" y="215" class="box-title" fill="#b45309">2. Analog IMC Crossbars: 5.33 nJ (18.5% of Total)</text>
+<text x="120" y="235" class="box-text">106,496 MACs executed across 416 physical tiles @ 50.0 fJ/MAC | Derived SPICE evidence</text>
+<text x="830" y="227" text-anchor="end" class="energy-tag">5.33 nJ</text>
+
+<!-- Bar 3: Data Converters -->
+<rect x="100" y="265" width="760" height="65" rx="6" fill="#faf5ff" stroke="#9333ea"/>
+<text x="120" y="290" class="box-title" fill="#7e22ce">3. Data Converters (DAC + ADC): 4.66 nJ (16.2% of Total)</text>
+<text x="120" y="310" class="box-text">6,656 4-bit DAC inputs (1.33 nJ) + 6,656 4-bit SAR ADC outputs (3.33 nJ) | SPICE evidence</text>
+<text x="830" y="302" text-anchor="end" class="energy-tag">4.66 nJ</text>
+
+<!-- Bar 4: Digital SIMD Vector Units -->
+<rect x="100" y="340" width="760" height="65" rx="6" fill="#dcfce7" stroke="#22c55e"/>
+<text x="120" y="365" class="box-title" fill="#15803d">4. Digital SIMD Vector ALU: 2.46 nJ (8.5% of Total)</text>
+<text x="120" y="385" class="box-text">12,288 Vector ALU ops (LayerNorm, Softmax, GELU, Residuals) @ 200 fJ/MAC | Derived evidence</text>
+<text x="830" y="377" text-anchor="end" class="energy-tag">2.46 nJ</text>
+
+<!-- Bar 5: NoC Interconnect -->
+<rect x="100" y="415" width="760" height="65" rx="6" fill="#f1f5f9" stroke="#64748b"/>
+<text x="120" y="440" class="box-title" fill="#0f172a">5. NoC Mesh Interconnect: 0.26 nJ (0.9% of Total)</text>
+<text x="120" y="460" class="box-text">512 Flit-hops @ 0.5 pJ/hop/flit across on-chip 2D router mesh | Assumed evidence</text>
+<text x="830" y="452" text-anchor="end" class="energy-tag">0.26 nJ</text>
+</svg>

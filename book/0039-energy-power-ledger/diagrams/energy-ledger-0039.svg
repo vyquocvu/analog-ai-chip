@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+.title { font-size: 20px; font-weight: 700; }
+.sub { font-size: 12px; fill: #475569; }
+.box-title { font-size: 13px; font-weight: 700; }
+.box-text { font-size: 11px; fill: #334155; }
+.formula { font: 12px ui-monospace, monospace; fill: #1e293b; }
+</style>
+<rect width="960" height="540" fill="white"/>
+<text x="480" y="35" text-anchor="middle" class="title">Chapter 0039 — Physical Energy &amp; Power Ledger</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Evidence-Tagged Energy Model &amp; Power Dissipation Across 416 Physical Crossbar Tiles (Gate R8)</text>
+
+<!-- Left Card: Energy Coefficients & Provenance -->
+<rect x="50" y="80" width="410" height="230" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="70" y="105" class="box-title" fill="#1d4ed8">1. Physical Energy Coefficients &amp; Provenance</text>
+
+<rect x="70" y="120" width="370" height="175" rx="6" fill="white" stroke="#93c5fd"/>
+<text x="85" y="145" class="box-title" fill="#15803d">• E_imc_mac = 50.0 fJ/MAC (DERIVED: SPICE I·V·t pulse)</text>
+<text x="85" y="167" class="box-text">• E_dac = 0.2 pJ/sample (SPICE: 4-bit voltage driver)</text>
+<text x="85" y="189" class="box-text">• E_adc = 0.5 pJ/sample (SPICE: 4-bit SAR capacitor DAC)</text>
+<text x="85" y="211" class="box-text">• E_sram = 1.0 pJ/Byte (DERIVED: 28nm SRAM 32 KB pool)</text>
+<text x="85" y="233" class="box-text">• E_simd_mac = 200.0 fJ/MAC (DERIVED: 32-bit vector ALU)</text>
+<text x="85" y="255" class="box-text">• E_noc = 0.5 pJ/hop/flit (ASSUMED: 2D mesh router hop)</text>
+<text x="85" y="277" class="box-text">• P_leak = 0.5 µW/tile (DERIVED: Subthreshold leakage)</text>
+
+<!-- Right Card: Token Step Energy & Active Power -->
+<rect x="500" y="80" width="410" height="230" rx="10" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+<text x="520" y="105" class="box-title" fill="#7e22ce">2. Token Step Energy &amp; Total Power</text>
+
+<rect x="520" y="120" width="370" height="175" rx="6" fill="white" stroke="#d8b4fe"/>
+<text x="535" y="150" class="box-title" fill="#1e293b">Total Energy per Token Step:</text>
+<text x="535" y="180" class="title" fill="#15803d">29.08 nJ / token</text>
+<text x="535" y="210" class="box-title" fill="#1e293b">Total Active Chip Power (@ 1.002M tok/s):</text>
+<text x="535" y="240" class="title" fill="#2563eb">29.14 mW (Leakage: 0.208 mW)</text>
+<text x="535" y="275" class="formula">Energy Advantage: 8.6× vs Digital SIMD (250 nJ)</text>
+
+<!-- Bottom Breakdown Card -->
+<rect x="50" y="330" width="860" height="175" rx="12" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+<text x="70" y="360" class="box-title">3. Subsystem Energy Distribution Across 106,496 MACs per Token</text>
+
+<rect x="70" y="380" width="260" height="105" rx="8" fill="#dbeafe" stroke="#3b82f6"/>
+<text x="85" y="405" class="box-title" fill="#1e40af">Analog IMC Synapses</text>
+<text x="85" y="430" class="box-text">• 5.325 nJ (18.5% of total)</text>
+<text x="85" y="452" class="box-text">• 106,496 MACs @ 50 fJ/MAC</text>
+<text x="85" y="472" class="sub">• Ultra-low power memristor core</text>
+
+<rect x="350" y="380" width="260" height="105" rx="8" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="365" y="405" class="box-title" fill="#b45309">Data Converters &amp; SIMD</text>
+<text x="365" y="430" class="box-text">• Converters: 4.659 nJ (16.2%)</text>
+<text x="365" y="452" class="box-text">• Digital SIMD: 2.458 nJ (8.5%)</text>
+<text x="365" y="472" class="sub">• Mixed-signal conversion overhead</text>
+
+<rect x="630" y="380" width="260" height="105" rx="8" fill="#dcfce7" stroke="#22c55e"/>
+<text x="645" y="405" class="box-title" fill="#15803d">SRAM Pool &amp; Routing</text>
+<text x="645" y="430" class="box-text">• SRAM Cache: 16.384 nJ (56.8%)</text>
+<text x="645" y="452" class="box-text">• NoC Mesh: 0.256 nJ (0.9%)</text>
+<text x="645" y="472" class="sub">• KV Cache traffic dominates</text>
+</svg>

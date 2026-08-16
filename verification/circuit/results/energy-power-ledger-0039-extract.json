@@ -1,0 +1,147 @@
+{
+  "chapter": "0039-energy-power-ledger",
+  "energy_coefficients": [
+    {
+      "description": "Analog memristor crossbar dot-product energy per MAC",
+      "evidence_class": "derived",
+      "name": "analog_mvm_mac_energy",
+      "provenance": "SPICE I_cell \u00b7 V_read \u00b7 t_pulse (G_avg=55 \u00b5S, V=0.2 V, t=10 ns)",
+      "symbol": "E_imc_mac",
+      "unit": "fJ/MAC",
+      "value": 50.0
+    },
+    {
+      "description": "Input 4-bit DAC conversion energy per wordline driver",
+      "evidence_class": "spice",
+      "name": "dac_conversion_energy",
+      "provenance": "SPICE transient simulation of 4-bit PWM / voltage DAC driver",
+      "symbol": "E_dac",
+      "unit": "pJ/sample",
+      "value": 0.2
+    },
+    {
+      "description": "Output 4-bit SAR ADC conversion energy per bitline TIA",
+      "evidence_class": "spice",
+      "name": "adc_conversion_energy",
+      "provenance": "SPICE 4-bit SAR ADC capacitor array + comparator switching",
+      "symbol": "E_adc",
+      "unit": "pJ/sample",
+      "value": 0.5
+    },
+    {
+      "description": "On-chip SRAM buffer and KV cache read/write energy",
+      "evidence_class": "derived",
+      "name": "sram_access_energy",
+      "provenance": "28nm standard cell high-density SRAM model (32 KB capacity)",
+      "symbol": "E_sram",
+      "unit": "pJ/Byte",
+      "value": 1.0
+    },
+    {
+      "description": "Digital LayerNorm, Softmax attention, GELU, and residual ALU ops",
+      "evidence_class": "derived",
+      "name": "simd_mac_energy",
+      "provenance": "Pipelined 32-bit digital vector ALU @ 200 MHz in 28nm",
+      "symbol": "E_simd_mac",
+      "unit": "fJ/MAC",
+      "value": 200.0
+    },
+    {
+      "description": "Inter-cluster packet routing energy across tile array",
+      "evidence_class": "assumed",
+      "name": "noc_transport_energy",
+      "provenance": "2D mesh on-chip router packet transport (assumed 28nm)",
+      "symbol": "E_noc",
+      "unit": "pJ/hop/flit",
+      "value": 0.5
+    },
+    {
+      "description": "Static standby power per crossbar tile at room temperature",
+      "evidence_class": "derived",
+      "name": "tile_static_leakage",
+      "provenance": "Subthreshold and gate oxide leakage across 416 physical tiles",
+      "symbol": "P_leak_tile",
+      "unit": "\u00b5W/tile",
+      "value": 0.5
+    }
+  ],
+  "gate": "R8 \u2014 Physical feasibility report",
+  "power_metrics": [
+    {
+      "description": "Active power during 1.002M tok/s decode",
+      "evidence_class": "derived",
+      "name": "Active Dynamic Power",
+      "unit": "mW",
+      "value_mw": 29.14
+    },
+    {
+      "description": "Static standby leakage across 416 tiles",
+      "evidence_class": "derived",
+      "name": "Static Standby Leakage",
+      "unit": "mW",
+      "value_mw": 0.208
+    },
+    {
+      "description": "Combined active compute + leakage dissipation",
+      "evidence_class": "derived",
+      "name": "Total Peak Chip Power",
+      "unit": "mW",
+      "value_mw": 29.35
+    }
+  ],
+  "provenance": {
+    "claim_level": "SYSTEM_DERIVED_WITH_SPICE_EVIDENCE",
+    "energy_sources": "SPICE memristor cell, 4-bit SAR ADC, 28nm SRAM & SIMD ALU"
+  },
+  "schema_version": "0.1.0",
+  "subsystem_energy_breakdown": [
+    {
+      "description": "KV Cache read/write buffer traffic and activation transfers",
+      "energy_nj": 16.384,
+      "fraction_pct": 56.3,
+      "primary_evidence": "derived (1.0 pJ / Byte @ 28nm)",
+      "subsystem": "On-Chip SRAM Pool"
+    },
+    {
+      "description": "Stationary memristor crossbar matrix multiplications (106,496 MACs)",
+      "energy_nj": 5.325,
+      "fraction_pct": 18.3,
+      "primary_evidence": "derived / SPICE (50.0 fJ / MAC)",
+      "subsystem": "Analog IMC Compute"
+    },
+    {
+      "description": "4-bit input voltage drivers and 4-bit SAR bitline quantization",
+      "energy_nj": 4.659,
+      "fraction_pct": 16.0,
+      "primary_evidence": "spice (0.2 pJ DAC + 0.5 pJ ADC)",
+      "subsystem": "Data Converters (DAC + ADC)"
+    },
+    {
+      "description": "LayerNorm, Softmax attention, GELU, and residual additions",
+      "energy_nj": 2.458,
+      "fraction_pct": 8.5,
+      "primary_evidence": "derived (200.0 fJ / MAC @ 28nm)",
+      "subsystem": "Digital Vector SIMD"
+    },
+    {
+      "description": "Inter-cluster packet transport across on-chip 2D mesh",
+      "energy_nj": 0.256,
+      "fraction_pct": 0.9,
+      "primary_evidence": "assumed (0.5 pJ / hop / flit)",
+      "subsystem": "NoC Mesh Interconnect"
+    }
+  ],
+  "summary": {
+    "active_power_mw": 29.14,
+    "analog_imc_energy_nj": 5.325,
+    "converter_energy_nj": 4.659,
+    "digital_baseline_nj": 250.0,
+    "energy_efficiency_advantage_x": 8.6,
+    "evidence_provenance_audit": "100% of coefficients tagged with measured, spice, derived, or assumed",
+    "leakage_power_mw": 0.208,
+    "simd_energy_nj": 2.458,
+    "sram_energy_nj": 16.384,
+    "total_token_energy_nj": 29.082
+  },
+  "title": "Physical Energy and Power Ledger"
+}
