@@ -241,7 +241,7 @@ def generate_pcb_correlation_extract() -> dict[str, Any]:
             "rmse_volts": stats["rmse_v"],
             "max_delta_volts": stats["max_delta_v"],
             "pearson_r_squared": stats["r_squared"],
-            "correlation_status": "EXCELLENT (R² > 0.999, Max error < 0.5% FS)",
+            "correlation_status": "EXCELLENT (R² &gt; 0.999, Max error &lt; 0.5% FS)",
             "evidence_class": "measured",
         },
     }

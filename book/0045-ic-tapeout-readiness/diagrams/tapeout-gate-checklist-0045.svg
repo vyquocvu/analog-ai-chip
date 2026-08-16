@@ -16,13 +16,13 @@ text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; f
 <text x="750" y="122" class="box-title" fill="white">Sign-Off Status</text>
 
 <rect x="80" y="145" width="800" height="52" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
-<text x="100" y="165" class="box-title" fill="#0f172a">Mathematical & Algorithm Parity (Software / Model)</text>
+<text x="100" y="165" class="box-title" fill="#0f172a">Mathematical and Algorithm Parity (Software / Model)</text>
 <text x="100" y="183" class="box-text">Evidence: Ch. 0033/0037: 129.5 PPL achieved after 3-stage hardware recovery (float = 124.0)...</text>
 <text x="750" y="170" class="box-title" fill="#15803d">PASS</text>
 <text x="750" y="187" class="box-text">Fab Ready: ✓ YES</text>
 
 <rect x="80" y="203" width="800" height="52" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
-<text x="100" y="223" class="box-title" fill="#0f172a">Circuit SPICE & Device Non-idealities (Circuit / Device)</text>
+<text x="100" y="223" class="box-title" fill="#0f172a">Circuit SPICE and Device Non-idealities (Circuit / Device)</text>
 <text x="100" y="241" class="box-text">Evidence: Ch. 0005–0020: 100% of physical parameters carry valid provenance...</text>
 <text x="750" y="228" class="box-title" fill="#15803d">PASS</text>
 <text x="750" y="245" class="box-text">Fab Ready: ✓ YES</text>
@@ -34,13 +34,13 @@ text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; f
 <text x="750" y="303" class="box-text">Fab Ready: ✓ YES</text>
 
 <rect x="80" y="319" width="800" height="52" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
-<text x="100" y="339" class="box-title" fill="#0f172a">Digital Control & Hardware Shell (Digital Control)</text>
-<text x="100" y="357" class="box-text">Evidence: Ch. 0043: Executable digital shell matches Ch. 0038 timing model to < 1% delta...</text>
+<text x="100" y="339" class="box-title" fill="#0f172a">Digital Control and Hardware Shell (Digital Control)</text>
+<text x="100" y="357" class="box-text">Evidence: Ch. 0043: Executable digital shell matches Ch. 0038 timing model to &lt; 1% delta...</text>
 <text x="750" y="344" class="box-title" fill="#15803d">PASS</text>
 <text x="750" y="361" class="box-text">Fab Ready: ✓ YES</text>
 
 <rect x="80" y="377" width="800" height="52" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
-<text x="100" y="397" class="box-title" fill="#0f172a">Hardware Testbench & PCB Correlation (Implementation Correlation)</text>
+<text x="100" y="397" class="box-title" fill="#0f172a">Hardware Testbench and PCB Correlation (Implementation Correlation)</text>
 <text x="100" y="415" class="box-text">Evidence: Ch. 0044: R² = 0.999683, RMSE = 1.58 mV, 5/5 metrics within physical tolerance...</text>
 <text x="750" y="402" class="box-title" fill="#15803d">PASS</text>
 <text x="750" y="419" class="box-text">Fab Ready: ✓ YES</text>

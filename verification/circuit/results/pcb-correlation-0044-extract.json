@@ -102,7 +102,7 @@
   },
   "summary": {
     "all_metrics_within_tolerance": true,
-    "correlation_status": "EXCELLENT (R\u00b2 > 0.999, Max error < 0.5% FS)",
+    "correlation_status": "EXCELLENT (R\u00b2 &gt; 0.999, Max error &lt; 0.5% FS)",
     "evidence_class": "measured",
     "max_delta_volts": 0.0022,
     "num_metrics_evaluated": 5,
