@@ -26,6 +26,7 @@ from .crossbar import (
     solve_crossbar_nodal,
 )
 from .device_profile import load_device_profile, validate_device_profile
+from .model_manifest import ModelManifest, TensorDescriptor
 from .profile_adapter import (
     CROSSBAR_NONIDEALITY_FIELDS,
     build_tile_factory,
@@ -44,7 +45,9 @@ __all__ = [
     "ErrorAttributionResult",
     "MechanismMetrics",
     "Metrics",
+    "ModelManifest",
     "OutputCalibration",
+    "TensorDescriptor",
     "TinyGPT",
     "TinyGPTConfig",
     "adc",
