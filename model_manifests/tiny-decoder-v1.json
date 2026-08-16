@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "architecture": "decoder-only",
+  "vocab_size": 10,
+  "hidden_size": 4,
+  "num_layers": 2,
+  "num_attention_heads": 2,
+  "num_key_value_heads": 2,
+  "head_dim": 2,
+  "intermediate_size": 8,
+  "max_context": 8,
+  "dtype": "float32",
+  "tie_embeddings": true,
+  "norm_type": "layernorm",
+  "norm_bias": true,
+  "position_type": "learned",
+  "activation": "gelu",
+  "linear_bias": true
+}
