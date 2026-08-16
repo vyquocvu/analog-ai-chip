@@ -2,9 +2,14 @@
 
 from __future__ import annotations
 
+import json
+from pathlib import Path
+
 import pytest
 
 from analog_llm.model_manifest import ModelManifest, TensorDescriptor
+
+ROOT = Path(__file__).resolve().parent.parent
 
 
 def _tiny_gpt2_style() -> ModelManifest:
@@ -33,6 +38,7 @@ def test_tiny_manifest_has_hand_computable_shapes_parameters_macs_and_kv() -> No
     manifest = _tiny_gpt2_style()
 
     specs = manifest.expected_tensors()
+    assert manifest.attention_type == "mha"
     assert specs["token_embedding.weight"].shape == (10, 4)
     assert specs["position_embedding.weight"].shape == (8, 4)
     assert specs["layers.0.attn.q.weight"].shape == (4, 4)
@@ -78,6 +84,7 @@ def test_llama_style_semantics_are_not_coerced_to_gpt2() -> None:
     )
 
     specs = manifest.expected_tensors()
+    assert manifest.attention_type == "gqa"
     assert "position_embedding.weight" not in specs
     assert specs["layers.0.attn.k.weight"].shape == (4, 8)
     assert specs["layers.0.attn.v.weight"].shape == (4, 8)
@@ -86,6 +93,21 @@ def test_llama_style_semantics_are_not_coerced_to_gpt2() -> None:
     assert specs["lm_head.weight"].shape == (32, 8)
     assert not any(name.endswith(".bias") for name in specs)
     assert manifest.kv_bytes_per_token_per_layer() == 2 * 2 * 2 * 2
+
+
+def test_mqa_is_explicit_and_reduces_kv_width() -> None:
+    data = _tiny_gpt2_style().to_dict()
+    data.update(
+        hidden_size=8,
+        num_attention_heads=4,
+        num_key_value_heads=1,
+        head_dim=2,
+        intermediate_size=16,
+    )
+    manifest = ModelManifest.from_dict(data)
+    assert manifest.attention_type == "mqa"
+    assert manifest.kv_hidden_size == 2
+    assert manifest.expected_tensors()["layers.0.attn.k.weight"].shape == (2, 8)
 
 
 def test_tensor_inventory_requires_exact_shapes_and_explicit_layout() -> None:
@@ -150,8 +172,12 @@ def test_manifest_fails_closed_on_unsupported_or_inconsistent_semantics() -> Non
         ModelManifest(**{**base, "dtype": "float128"})
 
 
-def test_manifest_round_trip_is_versioned_and_deterministic() -> None:
+def test_manifest_round_trip_and_committed_fixture_are_deterministic() -> None:
     manifest = _tiny_gpt2_style()
     encoded = manifest.to_dict()
     assert encoded["schema_version"] == "1.0"
     assert ModelManifest.from_dict(encoded) == manifest
+
+    fixture = ROOT / "model_manifests" / "tiny-decoder-v1.json"
+    data = json.loads(fixture.read_text())
+    assert ModelManifest.from_dict(data) == manifest
