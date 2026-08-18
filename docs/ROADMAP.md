@@ -20,9 +20,29 @@ Transformer / LLM
 physical feasibility
 ```
 
-A higher gate may contain exploratory code, but it is not considered physically verified until all lower gates it depends on are closed.
+A higher gate may contain exploratory code, but it is not considered physically verified until all lower gates it depends on are closed. Evidence classes remain: `measured`, `spice`, `derived`, `assumed`.
 
-Evidence classes remain: `measured`, `spice`, `derived`, `assumed`. `assumed` is allowed for sensitivity studies but cannot support a verified physical claim.
+---
+
+## Canonical Curriculum & Evidence Gate Mapping
+
+| Gate | Focus | Book Chapters | Status |
+|---|---|---|---|
+| **R0** | Functional & circuit foundations | `book/0000`–`0004` (Math), `book/0005`–`0007` (Circuit) | **COMPLETE** |
+| **R1** | Circuit $\rightarrow$ profile $\rightarrow$ simulator proof chain | `book/0008` (Profile bridge) | **COMPLETE** |
+| **R2** | Converter signal path (DAC/ADC/TIA) | `book/0009`–`0011` | **COMPLETE** |
+| **R3** | Small crossbar arrays (2×2, 4×4) | `book/0012`–`0014` | **COMPLETE** |
+| **R4** | Device realism (variation, IR drop, parasitics, drift) | `book/0015`–`0020` | **COMPLETE** |
+| **R5** | Profile-driven physical tile & partial sums | `book/0021`–`0022` | **COMPLETE** |
+| **R6** | Multi-tile accelerator, scheduler & NoC | `book/0023`–`0026` | **COMPLETE** |
+| **R7** | Transformer mapping & small LLM validation | `book/0027`–`0037` | **PASSED** |
+| **R8** | Physical feasibility report (latency/energy/area) | `book/0038`–`0042` | **PASSED** |
+| **R9** | Implementation correlation (FPGA/PCB/Tape-out) | `book/0043`–`0045` | **PASSED** |
+| **R10** | Scalable model semantics & sharded checkpoints | `book/0046`–`0048` | **ACTIVE** |
+| **R11** | Memory-bounded model execution | `book/0049`–`0051` | **PLANNED** |
+| **R12** | Large-model architecture & residency | `book/0052`–`0053` | **PLANNED** |
+| **R13** | Large-model validation & hardware recovery | `book/0054`–`0055` | **PLANNED** |
+| **R14** | Multi-tier physical feasibility & design decision | `book/0056`–`0058` | **PLANNED** |
 
 ---
 
