@@ -83,9 +83,9 @@ def test_transformer_workload_layer_counts() -> None:
     layers = sched.create_transformer_layer_workload(d_model=128, d_ffn=512)
 
     assert len(layers) == 4
-    total_blocks = sum(l.num_blocks(16, 16) for l in layers)
+    total_blocks = sum(layer.num_blocks(16, 16) for layer in layers)
     assert total_blocks == 768
-    assert sum(l.macs() for l in layers) == 196608
+    assert sum(layer.macs() for layer in layers) == 196608
 
 
 def test_temporal_multiplexing_schedule() -> None:

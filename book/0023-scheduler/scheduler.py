@@ -114,8 +114,8 @@ class AcceleratorScheduler:
         strategy: SchedulingStrategy = SchedulingStrategy.TEMPORAL_MULTIPLEXED,
     ) -> ScheduleReport:
         """Schedule layers and compute deterministic execution metrics."""
-        total_macs = sum(l.macs() for l in layers)
-        layer_blocks = [l.num_blocks(self.tile_rows, self.tile_cols) for l in layers]
+        total_macs = sum(layer.macs() for layer in layers)
+        layer_blocks = [layer.num_blocks(self.tile_rows, self.tile_cols) for layer in layers]
         total_blocks = sum(layer_blocks)
 
         if strategy == SchedulingStrategy.WEIGHT_STATIONARY:
@@ -222,13 +222,13 @@ def run_scheduler_extract() -> dict[str, Any]:
 
     # 2. Layer breakdown for d_model=128, d_ffn=512 (16x16 tiles)
     layer_breakdown = []
-    for l in workload:
-        b = l.num_blocks(16, 16)
-        m = l.macs()
+    for layer in workload:
+        b = layer.num_blocks(16, 16)
+        m = layer.macs()
         layer_breakdown.append(
             {
-                "name": l.name,
-                "shape": f"{l.m_out}x{l.m_in}",
+                "name": layer.name,
+                "shape": f"{layer.m_out}x{layer.m_in}",
                 "blocks_16x16": b,
                 "macs": m,
             }
@@ -242,8 +242,8 @@ def run_scheduler_extract() -> dict[str, Any]:
             "d_model": 128,
             "d_ffn": 512,
             "layers": layer_breakdown,
-            "total_blocks_16x16": sum(l["blocks_16x16"] for l in layer_breakdown),
-            "total_macs": sum(l["macs"] for l in layer_breakdown),
+            "total_blocks_16x16": sum(layer["blocks_16x16"] for layer in layer_breakdown),
+            "total_macs": sum(layer["macs"] for layer in layer_breakdown),
         },
         "timing_assumptions": {
             "t_mvm_ns": {
@@ -267,8 +267,8 @@ def run_scheduler_extract() -> dict[str, Any]:
         },
         "capacity_sweeps": capacity_sweeps,
         "summary": {
-            "total_workload_blocks": sum(l["blocks_16x16"] for l in layer_breakdown),
-            "min_tiles_for_weight_stationary": sum(l["blocks_16x16"] for l in layer_breakdown),
+            "total_workload_blocks": sum(layer["blocks_16x16"] for layer in layer_breakdown),
+            "min_tiles_for_weight_stationary": sum(layer["blocks_16x16"] for layer in layer_breakdown),
             "temporal_16tiles_cycles": capacity_sweeps[0]["temporal_cycles"],
             "temporal_16tiles_rewrites": capacity_sweeps[0]["temporal_rewrites"],
             "speedup_100tok_stationary_vs_temporal": capacity_sweeps[-1][

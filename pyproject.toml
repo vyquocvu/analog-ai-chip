@@ -27,3 +27,11 @@ addopts = "-q"
 [tool.ruff]
 line-length = 100
 target-version = "py39"
+
+# Chapter and extraction programs deliberately add the repository or a chapter
+# directory to sys.path before importing the implementation they demonstrate.
+# Keep that executable bootstrap visible while enforcing all other Ruff rules.
+[tool.ruff.lint.per-file-ignores]
+"book/**/*.py" = ["E402"]
+"scripts/dashboard.py" = ["E402"]
+"verification/**/*.py" = ["E402"]

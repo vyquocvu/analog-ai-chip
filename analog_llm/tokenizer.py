@@ -41,7 +41,7 @@ class GPT2Tokenizer:
         with open(vocab_path) as fh:
             self.vocab: dict[str, int] = json.load(fh)
         with open(merges_path) as fh:
-            lines = [l.split() for l in fh if l.strip() and not l.strip().startswith("#")]
+            lines = [line.split() for line in fh if line.strip() and not line.strip().startswith("#")]
         self.merges = [tuple(pair) for pair in lines]
         self.merge_rank = {pair: i for i, pair in enumerate(self.merges)}
         self.b2u = _bytes_to_unicode()

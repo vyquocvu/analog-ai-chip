@@ -91,8 +91,8 @@ def main():
 
     print(f"Sweep x1 in [{XMIN}, {XMAX}] V, x2 = {X2} V (virtual ref {VREF} V)")
     print("  x1      Vout(lin)  Vout(chip)")
-    for x, l, c in zip(xs[::5], outs_lin[::5], outs_chip[::5]):
-        print(f"  {x:7.2f}  {l:8.3f}  {c:9.3f}")
+    for x, linear, clipped in zip(xs[::5], outs_lin[::5], outs_chip[::5]):
+        print(f"  {x:7.2f}  {linear:8.3f}  {clipped:9.3f}")
 
     # assertions
     slope = np.polyfit(xs[linear_mask], outs_chip[linear_mask], 1)[0]
