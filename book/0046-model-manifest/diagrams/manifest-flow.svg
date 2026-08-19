@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="260" viewBox="0 0 900 260" role="img" aria-labelledby="title desc">
+  <title id="title">Architecture-neutral manifest validation flow</title>
+  <desc id="desc">Architecture choices enter a fail-closed manifest, producing tensor and analytical inventories before later checkpoint mapping.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker>
+    <style>.box{fill:#f8fafc;stroke:#334155;stroke-width:2}.gate{fill:#ecfeff;stroke:#0891b2;stroke-width:3}.t{font:16px sans-serif;fill:#0f172a}.h{font:bold 18px sans-serif;fill:#0f172a}.a{stroke:#334155;stroke-width:2;marker-end:url(#arrow)}</style>
+  </defs>
+  <rect class="box" x="20" y="40" rx="12" width="210" height="170"/>
+  <text class="h" x="45" y="72">Explicit architecture</text>
+  <text class="t" x="45" y="105">Norm + position</text><text class="t" x="45" y="133">GELU / SwiGLU</text>
+  <text class="t" x="45" y="161">MHA / GQA / MQA</text><text class="t" x="45" y="189">dtype + tying + bias</text>
+  <line class="a" x1="230" y1="125" x2="315" y2="125"/>
+  <rect class="gate" x="320" y="65" rx="12" width="250" height="120"/>
+  <text class="h" x="350" y="100">ModelManifest v1</text>
+  <text class="t" x="350" y="130">validate relationships</text><text class="t" x="350" y="158">fail closed on ambiguity</text>
+  <line class="a" x1="570" y1="125" x2="655" y2="125"/>
+  <rect class="box" x="660" y="40" rx="12" width="220" height="170"/>
+  <text class="h" x="685" y="72">Deterministic outputs</text>
+  <text class="t" x="685" y="105">exact tensor shapes</text><text class="t" x="685" y="133">parameter count</text>
+  <text class="t" x="685" y="161">projection MACs</text><text class="t" x="685" y="189">KV bytes</text>
+  <text class="t" x="300" y="238">FUNCTIONAL / ANALYTICAL CONTRACT — no physical hardware claim</text>
+</svg>

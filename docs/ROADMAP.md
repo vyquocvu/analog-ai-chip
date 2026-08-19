@@ -320,15 +320,15 @@ test suite.
 
 ## WP10.1 — Architecture-neutral model manifest (first eligible package)
 
-- [ ] Define a versioned `ModelManifest` for decoder-only models: vocabulary,
+- [x] Define a versioned `ModelManifest` for decoder-only models: vocabulary,
   hidden size, layer/head counts, head dimension, intermediate size, context,
   tensor dtype, tied/untied embeddings and parameter count.
-- [ ] Represent LayerNorm versus RMSNorm, learned positions versus RoPE,
+- [x] Represent LayerNorm versus RMSNorm, learned positions versus RoPE,
   GELU versus gated SiLU/SwiGLU, bias/no-bias linears, and MHA/GQA/MQA without
   silently coercing one architecture into GPT-2 semantics.
-- [ ] Encode a tiny hand-computable manifest and assert tensor shapes, parameter
+- [x] Encode a tiny hand-computable manifest and assert tensor shapes, parameter
   count, per-layer MACs and KV bytes.
-- [ ] Fail closed on unsupported attention/position/activation types, inconsistent
+- [x] Fail closed on unsupported attention/position/activation types, inconsistent
   head dimensions, missing tensors and ambiguous transpose/layout rules.
 
 ## WP10.2 — Generalized decoder functional reference

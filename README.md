@@ -128,6 +128,7 @@ See [`docs/SIMULATION_STACK.md`](docs/SIMULATION_STACK.md).
 | 0021 | Physical tile contract | done | `book/0021-physical-tile-contract/` |
 | 0022 | Partial sums | done | `book/0022-partial-sums/` |
 | 0023 | Scheduler and temporal reuse | done | `book/0023-scheduler/` |
+| 0046 | Architecture-neutral model manifest | done | `book/0046-model-manifest/` |
 
 > **Tiếng Việt:** every chapter has a `README.vi.md` beside the English `README.md`.
 
