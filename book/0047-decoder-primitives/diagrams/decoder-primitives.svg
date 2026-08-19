@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="350" viewBox="0 0 960 350" role="img" aria-labelledby="title desc">
+  <title id="title">Hybrid decoder primitive boundary</title>
+  <desc id="desc">Static linear projections are analog eligible while normalization, rotary position, activation, and token attention remain digital functional operations.</desc>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0 0L0 6L9 3z" fill="#334155"/></marker><style>.d{fill:#eff6ff;stroke:#2563eb;stroke-width:2}.p{fill:#fff7ed;stroke:#ea580c;stroke-width:2}.x{stroke:#334155;stroke-width:2;marker-end:url(#a)}.h{font:bold 18px sans-serif;fill:#0f172a}.t{font:15px sans-serif;fill:#0f172a}.n{font:bold 14px sans-serif;fill:#475569}</style></defs>
+  <text class="n" x="40" y="30">DIGITAL FUNCTIONAL REFERENCE</text>
+  <rect class="d" x="40" y="50" width="170" height="70" rx="10"/><text class="h" x="70" y="82">Norm + RoPE</text><text class="t" x="62" y="105">LN/RMS · learned/rotary</text>
+  <line class="x" x1="210" y1="85" x2="270" y2="85"/>
+  <rect class="p" x="275" y="50" width="180" height="70" rx="10"/><text class="h" x="303" y="82">Q/K/V matrices</text><text class="t" x="300" y="105">static · analog-eligible</text>
+  <line class="x" x1="455" y1="85" x2="515" y2="85"/>
+  <rect class="d" x="520" y="50" width="190" height="70" rx="10"/><text class="h" x="542" y="82">MHA/GQA/MQA</text><text class="t" x="547" y="105">causal + KV cache</text>
+  <line class="x" x1="710" y1="85" x2="770" y2="85"/>
+  <rect class="p" x="775" y="50" width="150" height="70" rx="10"/><text class="h" x="805" y="82">O matrix</text><text class="t" x="793" y="105">analog-eligible</text>
+  <line class="x" x1="850" y1="120" x2="850" y2="175"/>
+  <rect class="d" x="635" y="180" width="290" height="70" rx="10"/><text class="h" x="682" y="212">GELU / SiLU / SwiGLU</text><text class="t" x="682" y="235">digital activation and gating</text>
+  <line class="x" x1="635" y1="215" x2="575" y2="215"/>
+  <rect class="p" x="335" y="180" width="235" height="70" rx="10"/><text class="h" x="372" y="212">MLP matrices</text><text class="t" x="363" y="235">up/gate/down · analog-eligible</text>
+  <line class="x" x1="335" y1="215" x2="275" y2="215"/>
+  <rect class="d" x="40" y="180" width="230" height="70" rx="10"/><text class="h" x="82" y="212">Residual + Norm</text><text class="t" x="69" y="235">digital decoder sequencing</text>
+  <text class="n" x="275" y="310">FUNCTIONAL ONLY — no new circuit, latency, energy, or area claim</text>
+</svg>
