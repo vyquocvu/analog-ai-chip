@@ -60,7 +60,7 @@ class TinyGPT:
 
     # -- weight initialization (deterministic) -------------------------------
     def _init_weights(self) -> None:
-        cfg = self. cfg
+        cfg = self.cfg
         rng = np.random.default_rng(cfg.seed)
         std = 0.02
         w = self.weights
@@ -89,7 +89,9 @@ class TinyGPT:
 
     # -- ops -----------------------------------------------------------------
     @staticmethod
-    def _layernorm(x: NDArray[np.float64], g: NDArray[np.float64], b: NDArray[np.float64]) -> NDArray[np.float64]:
+    def _layernorm(
+        x: NDArray[np.float64], g: NDArray[np.float64], b: NDArray[np.float64]
+    ) -> NDArray[np.float64]:
         return layer_norm(x, g, b)
 
     @staticmethod
@@ -105,7 +107,9 @@ class TinyGPT:
     def _float_lin(self, name: str, h: NDArray[np.float64]) -> NDArray[np.float64]:
         return h @ self.weights[name].T + self.weights[name + "b"]
 
-    def _analog_lin(self, acc: Accelerator, name: str, h: NDArray[np.float64]) -> NDArray[np.float64]:
+    def _analog_lin(
+        self, acc: Accelerator, name: str, h: NDArray[np.float64]
+    ) -> NDArray[np.float64]:
         w = self.weights[name]
         bias = self.weights[name + "b"]
         out = np.zeros((h.shape[0], w.shape[0]), dtype=np.float64)
@@ -126,8 +130,8 @@ class TinyGPT:
             raise ValueError(f"sequence length must be in [1, {cfg.block_size}]")
         B = tokens.size
 
-        tok = w["tok_emb"][tokens]                      # [B, C]
-        pos = w["pos_emb"][:B]                          # [B, C]
+        tok = w["tok_emb"][tokens]  # [B, C]
+        pos = w["pos_emb"][:B]  # [B, C]
         x = tok + pos
 
         for i in range(cfg.n_layer):
@@ -136,7 +140,7 @@ class TinyGPT:
             h = self._layernorm(x, w[p + "ln1"], w[p + "ln1b"])
             qkv = lin(p + "wqkv", h)  # [B, 3C]
             C = cfg.n_embd
-            q, k, v = qkv[:, :C], qkv[:, C:2 * C], qkv[:, 2 * C:]
+            q, k, v = qkv[:, :C], qkv[:, C : 2 * C], qkv[:, 2 * C :]
             nh, hd = cfg.n_head, C // cfg.n_head
             q = q.reshape(B, nh, hd)
             k = k.reshape(B, nh, hd)
@@ -158,14 +162,18 @@ class TinyGPT:
 
     # -- generation ----------------------------------------------------------
     def generate(
-        self, prompt: NDArray[np.int64], max_new: int = 8, greedy: bool = True,
-        accelerator: Accelerator | None = None, rng: np.random.Generator | None = None,
+        self,
+        prompt: NDArray[np.int64],
+        max_new: int = 8,
+        greedy: bool = True,
+        accelerator: Accelerator | None = None,
+        rng: np.random.Generator | None = None,
     ) -> NDArray[np.int64]:
         """Autoregressive generation without a KV cache (simple, honest reference)."""
         prompt = np.asarray(prompt, dtype=np.int64).reshape(-1)
         out = list(prompt.tolist())
         for _ in range(max_new):
-            ctx = np.asarray(out[-self.cfg.block_size:], dtype=np.int64)
+            ctx = np.asarray(out[-self.cfg.block_size :], dtype=np.int64)
             logits = self.forward_logits(ctx, accelerator=accelerator)
             logit = logits[-1]
             if greedy:
@@ -183,7 +191,9 @@ class TinyGPT:
     def _init_kv_cache(self) -> dict[str, list]:
         return {"k": [None] * self.cfg.n_layer, "v": [None] * self.cfg.n_layer}
 
-    def _step(self, token: int, pos: int, cache, accelerator: Accelerator | None) -> NDArray[np.float64]:
+    def _step(
+        self, token: int, pos: int, cache, accelerator: Accelerator | None
+    ) -> NDArray[np.float64]:
         """One position's forward using the running K/V cache; returns logits."""
         cfg = self.cfg
         if pos >= cfg.block_size:
@@ -196,7 +206,7 @@ class TinyGPT:
             h = self._layernorm(x[None, :], w[p + "ln1"], w[p + "ln1b"])[0]
             qkv = lin(p + "wqkv", h[None, :])[0]  # [3C]
             C = cfg.n_embd
-            q, k, v = qkv[:C], qkv[C:2 * C], qkv[2 * C:]
+            q, k, v = qkv[:C], qkv[C : 2 * C], qkv[2 * C :]
             nh, hd = cfg.n_head, C // cfg.n_head
             q = q.reshape(nh, hd)
             k = k.reshape(nh, hd)
@@ -218,8 +228,12 @@ class TinyGPT:
         return lin("head", x[None, :])[0]
 
     def generate_kvcache(
-        self, prompt: NDArray[np.int64], max_new: int = 8, greedy: bool = True,
-        accelerator: Accelerator | None = None, rng: np.random.Generator | None = None,
+        self,
+        prompt: NDArray[np.int64],
+        max_new: int = 8,
+        greedy: bool = True,
+        accelerator: Accelerator | None = None,
+        rng: np.random.Generator | None = None,
     ) -> NDArray[np.int64]:
         """Autoregressive generation with a KV cache (no per-step full-ctx recompute).
 

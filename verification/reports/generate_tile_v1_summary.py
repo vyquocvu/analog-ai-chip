@@ -12,10 +12,10 @@ import numpy as np
 _REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(_REPO))
 
-from analog_llm.attribution import evaluate_attribution_suite
-from analog_llm.calibration import output_calibration_from_profile
-from analog_llm.device_profile import load_device_profile
-from analog_llm.profile_adapter import build_tile_factory_from_converter_profiles
+from analog_llm.attribution import evaluate_attribution_suite  # noqa: E402
+from analog_llm.calibration import output_calibration_from_profile  # noqa: E402
+from analog_llm.device_profile import load_device_profile  # noqa: E402
+from analog_llm.profile_adapter import build_tile_factory_from_converter_profiles  # noqa: E402
 
 OUT_DIR = _REPO / "verification" / "reports"
 CROSSBAR_PROFILE = _REPO / "device_profiles" / "crossbar-v1.json"

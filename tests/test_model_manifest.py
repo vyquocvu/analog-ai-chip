@@ -59,9 +59,7 @@ def test_tensor_inventory_validation_accepts_exact_shapes_and_rejects_missing() 
         ({"tensor_layout": "in_out"}, "out_in"),
     ],
 )
-def test_manifest_fails_closed_on_inconsistent_or_ambiguous_semantics(
-    overrides, message
-) -> None:
+def test_manifest_fails_closed_on_inconsistent_or_ambiguous_semantics(overrides, message) -> None:
     with pytest.raises(ValueError, match=message):
         _tiny_manifest(**overrides)
 

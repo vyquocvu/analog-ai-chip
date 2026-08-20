@@ -33,7 +33,7 @@ import numpy as np
 
 _REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(_REPO / "book" / "0011-converter-variation"))
-from variation import (
+from variation import (  # noqa: E402
     BITS,
     N_SAMPLES_DEFAULT,
     R_OHM,

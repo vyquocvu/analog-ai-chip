@@ -32,7 +32,7 @@ import numpy as np
 
 _REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(_REPO / "book" / "0012-crossbar-2x2"))
-from crossbar_2x2 import (
+from crossbar_2x2 import (  # noqa: E402
     CASES,
     G0,
     GSCALE,

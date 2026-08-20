@@ -31,8 +31,8 @@ from typing import Any
 _REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(_REPO))
 
-from analog_llm.device_profile import load_device_profile
-from analog_llm.profile_adapter import tile_config_from_profile
+from analog_llm.device_profile import load_device_profile  # noqa: E402
+from analog_llm.profile_adapter import tile_config_from_profile  # noqa: E402
 
 OUT_DIR = _REPO / "verification" / "reports"
 PROFILE_PATH = _REPO / "device_profiles" / "crossbar-column-v1.json"

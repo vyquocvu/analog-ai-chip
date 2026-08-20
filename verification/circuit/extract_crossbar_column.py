@@ -30,7 +30,7 @@ if "NGSPICE_LIBRARY_PATH" not in os.environ:
 
 _REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(_REPO / "book" / "0007-crossbar-column"))
-from crossbar_column import (
+from crossbar_column import (  # noqa: E402
     G0,
     GSCALE,
     RF,

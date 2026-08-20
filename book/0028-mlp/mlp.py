@@ -33,9 +33,9 @@ import numpy as np
 _REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(_REPO))
 
-from analog_llm.device_profile import load_device_profile
-from analog_llm.profile_adapter import nonideality_config_from_profile
-from analog_llm.tile import CrossbarTile
+from analog_llm.device_profile import load_device_profile  # noqa: E402
+from analog_llm.profile_adapter import nonideality_config_from_profile  # noqa: E402
+from analog_llm.tile import CrossbarTile  # noqa: E402
 
 CALIBRATION_GAIN = 0.9795135153
 

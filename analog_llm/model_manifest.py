@@ -88,9 +88,7 @@ class ModelManifest:
             "mqa": 1,
         }.get(self.attention_type)
         if expected_kv is not None and self.num_key_value_heads != expected_kv:
-            raise ValueError(
-                f"{self.attention_type} requires num_key_value_heads={expected_kv}"
-            )
+            raise ValueError(f"{self.attention_type} requires num_key_value_heads={expected_kv}")
         if self.attention_type == "gqa" and not (
             1 < self.num_key_value_heads < self.num_attention_heads
         ):
@@ -171,8 +169,10 @@ class ModelManifest:
     def kv_cache_bytes(self, tokens: int | None = None) -> int:
         """Bytes for K and V across all layers at ``tokens`` cached positions."""
         positions = self.context_length if tokens is None else tokens
-        if isinstance(positions, bool) or not isinstance(positions, int) or not (
-            0 <= positions <= self.context_length
+        if (
+            isinstance(positions, bool)
+            or not isinstance(positions, int)
+            or not (0 <= positions <= self.context_length)
         ):
             raise ValueError(f"tokens must be an integer in [0, {self.context_length}]")
         return (

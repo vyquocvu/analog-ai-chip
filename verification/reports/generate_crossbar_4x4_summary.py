@@ -26,7 +26,7 @@ from pathlib import Path
 _REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(_REPO))
 
-from analog_llm.profile_adapter import build_tile_factory
+from analog_llm.profile_adapter import build_tile_factory  # noqa: E402
 
 OUT_DIR = _REPO / "verification" / "reports"
 EXTRACT_PATH = _REPO / "verification" / "circuit" / "results" / "crossbar-4x4-0013-extract.json"

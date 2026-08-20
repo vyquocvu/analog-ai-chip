@@ -31,8 +31,7 @@ def _scalar_attention_reference(query, key, value):
             probabilities /= probabilities.sum()
             for d in range(dimension):
                 output[token, head, d] = sum(
-                    probabilities[source] * value[source, kv_head, d]
-                    for source in range(token + 1)
+                    probabilities[source] * value[source, kv_head, d] for source in range(token + 1)
                 )
     return output
 
@@ -63,9 +62,7 @@ def test_rope_rotates_one_pair_by_position_angle() -> None:
 
 
 @pytest.mark.parametrize("query_heads,kv_heads", [(4, 4), (4, 2), (4, 1)])
-def test_mha_gqa_mqa_full_context_matches_cache_and_scalar_reference(
-    query_heads, kv_heads
-) -> None:
+def test_mha_gqa_mqa_full_context_matches_cache_and_scalar_reference(query_heads, kv_heads) -> None:
     rng = np.random.default_rng(17 + kv_heads)
     query = rng.normal(size=(3, query_heads, 2))
     key = rng.normal(size=(3, kv_heads, 2))

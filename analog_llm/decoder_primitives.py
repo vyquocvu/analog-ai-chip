@@ -128,13 +128,13 @@ def cached_attention_step(query: FloatArray, key: FloatArray, value: FloatArray)
     if key.ndim != 3 or value.shape != key.shape or key.shape[0] == 0:
         raise ValueError("cached attention requires non-empty matching K/V [T,KVH,D]")
     if query.shape[1] != key.shape[2] or key.shape[1] == 0 or query.shape[0] % key.shape[1]:
-        raise ValueError("cached query heads must group evenly over K/V heads with matching dimensions")
+        raise ValueError(
+            "cached query heads must group evenly over K/V heads with matching dimensions"
+        )
     groups = query.shape[0] // key.shape[1]
     key_for_query = np.repeat(key, groups, axis=1)
     value_for_query = np.repeat(value, groups, axis=1)
-    scores = np.einsum("hd,thd->ht", query, key_for_query) / math.sqrt(
-        query.shape[-1]
-    )
+    scores = np.einsum("hd,thd->ht", query, key_for_query) / math.sqrt(query.shape[-1])
     return np.einsum("ht,thd->hd", _softmax(scores), value_for_query)
 
 
