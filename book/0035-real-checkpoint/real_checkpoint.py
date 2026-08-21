@@ -35,13 +35,13 @@ from safetensors.numpy import save_file
 _REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(_REPO))
 
-from analog_llm import (  # noqa: E402
+from analog_llm import (
     Accelerator,
     Metrics,
     TinyGPT,
     build_tile_factory,
 )
-from analog_llm.gpt_loader import load_gpt2  # noqa: E402
+from analog_llm.gpt_loader import load_gpt2
 
 _PROFILE = _REPO / "device_profiles" / "crossbar-v1.json"
 _TILE_ROWS = 16

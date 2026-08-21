@@ -6,10 +6,9 @@ counts are analytical software inventory values, not physical-hardware claims.
 
 from __future__ import annotations
 
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from math import prod
-from typing import Mapping, Sequence
-
 
 _DTYPE_BYTES = {"float16": 2, "bfloat16": 2, "float32": 4, "float64": 8}
 _NORMS = {"layernorm", "rmsnorm"}

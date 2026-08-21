@@ -25,7 +25,6 @@ from .crossbar import (
     scale_weights,
     solve_crossbar_nodal,
 )
-from .device_profile import load_device_profile, validate_device_profile
 from .decoder_primitives import (
     apply_rope,
     cached_attention_step,
@@ -36,6 +35,7 @@ from .decoder_primitives import (
     silu,
     swiglu,
 )
+from .device_profile import load_device_profile, validate_device_profile
 from .model_manifest import ModelManifest, TensorSpec
 from .profile_adapter import (
     CROSSBAR_NONIDEALITY_FIELDS,
@@ -57,15 +57,15 @@ __all__ = [
     "Metrics",
     "ModelManifest",
     "OutputCalibration",
+    "TensorSpec",
     "TinyGPT",
     "TinyGPTConfig",
-    "TensorSpec",
     "adc",
-    "apply_rope",
     "apply_conductance_drift",
     "apply_iv_nonlinearity",
     "apply_programming_variation",
     "apply_read_noise",
+    "apply_rope",
     "apply_stuck_faults",
     "attribute_from_profiles",
     "attribute_tile_error",
@@ -85,8 +85,8 @@ __all__ = [
     "output_calibration_from_profile",
     "rms_norm",
     "scale_weights",
-    "solve_crossbar_nodal",
     "silu",
+    "solve_crossbar_nodal",
     "swiglu",
     "symmetric_converter",
     "tile_config_from_profile",

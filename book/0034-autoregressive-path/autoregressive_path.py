@@ -40,7 +40,7 @@ import numpy as np
 _REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(_REPO))
 
-from analog_llm import TinyGPT, TinyGPTConfig  # noqa: E402
+from analog_llm import TinyGPT, TinyGPTConfig
 
 # Physical and Architecture Energy Constants
 ANALOG_ENERGY_PJ_PER_MAC = 0.050    # 50.0 fJ/MAC (derived from crossbar tile ledger)

@@ -31,7 +31,7 @@ from pathlib import Path
 
 _REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(_REPO / "book" / "0010-adc-sar"))
-from sar_adc import (  # noqa: E402
+from sar_adc import (
     BITS,
     LSB,
     R_OHM,

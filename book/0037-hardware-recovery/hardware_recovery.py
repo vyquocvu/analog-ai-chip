@@ -22,7 +22,7 @@ import numpy as np
 _REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(_REPO))
 
-from analog_llm import (  # noqa: E402
+from analog_llm import (
     Accelerator,
     TinyGPT,
     TinyGPTConfig,

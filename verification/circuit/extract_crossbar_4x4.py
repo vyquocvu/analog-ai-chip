@@ -34,7 +34,7 @@ _REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(_REPO))
 sys.path.insert(0, str(_REPO / "book" / "0013-crossbar-4x4"))
 
-from crossbar_4x4 import (  # noqa: E402
+from crossbar_4x4 import (
     CASES,
     G0,
     GSCALE,
@@ -51,7 +51,7 @@ from crossbar_4x4 import (  # noqa: E402
     settle_time_hand,
 )
 
-from analog_llm import build_tile_factory  # noqa: E402
+from analog_llm import build_tile_factory
 
 RESULTS_DIR = _REPO / "verification" / "circuit" / "results"
 RESULT_PATH = RESULTS_DIR / "crossbar-4x4-0013-extract.json"

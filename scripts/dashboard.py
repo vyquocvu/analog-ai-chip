@@ -22,7 +22,7 @@ _REPO = Path(__file__).resolve().parents[1]
 _RESULTS = _REPO / "verification" / "circuit" / "results"
 sys.path.insert(0, str(_REPO))
 
-from analog_llm.transformer import TinyGPT, TinyGPTConfig  # noqa: E402
+from analog_llm.transformer import TinyGPT, TinyGPTConfig
 
 
 def load_extract(name: str) -> dict[str, Any]:

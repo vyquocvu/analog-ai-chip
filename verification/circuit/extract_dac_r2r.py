@@ -33,7 +33,7 @@ from pathlib import Path
 
 _REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(_REPO / "book" / "0009-dac-r2r"))
-from r2r_dac import (  # noqa: E402
+from r2r_dac import (
     BITS,
     R_OHM,
     VREF,
