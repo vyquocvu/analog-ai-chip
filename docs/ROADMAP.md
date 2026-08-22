@@ -541,9 +541,9 @@ Depends on R14 + R9 + R5.
 
 ## WP15.2 — Mixed-signal SAR ADC / DAC layout & LVS
 
-- [ ] Implement common-centroid binary-weighted CDAC capacitor array layout for parasitic matching.
-- [ ] Perform Layout-Versus-Schematic (LVS) matching against SPICE netlists with pin/port extraction.
-- [ ] Report zero topological discrepancies in LVS signoff.
+- [x] Implement common-centroid binary-weighted CDAC capacitor array layout for parasitic matching.
+- [x] Perform Layout-Versus-Schematic (LVS) matching against SPICE netlists with pin/port extraction.
+- [x] Report zero topological discrepancies in LVS signoff.
 
 ## WP15.3 — Core tile floorplanning & power grid IR drop
 

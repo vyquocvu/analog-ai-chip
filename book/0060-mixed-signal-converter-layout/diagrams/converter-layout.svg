@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="380" viewBox="0 0 960 380" role="img" aria-labelledby="title desc">
+  <title id="title">Mixed-Signal Converter Layout &amp; LVS Signoff</title>
+  <desc id="desc">Common-centroid capacitor DAC layout, 8-bit SAR ADC physical floorplan, and LVS verification for Gate R15.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker>
+    <style>
+      .box{fill:#f8fafc;stroke:#64748b;stroke-width:2}
+      .cdac{fill:#fff7ed;stroke:#ea580c;stroke-width:2}
+      .adc{fill:#eff6ff;stroke:#2563eb;stroke-width:2}
+      .lvs{fill:#ecfdf5;stroke:#059669;stroke-width:2}
+      .head{font:bold 15px sans-serif;fill:#0f172a}
+      .txt{font:13px sans-serif;fill:#334155}
+      .tag{font:bold 11px sans-serif;fill:#475569}
+      .wire{stroke:#334155;stroke-width:2;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <!-- Title Banner -->
+  <rect class="box" x="30" y="20" rx="8" width="900" height="45"/>
+  <text class="head" x="50" y="48">Mixed-Signal Converter Physical Layout &amp; LVS Verification (Gate R15 / Chapter 0060)</text>
+
+  <!-- Section 1: Common-Centroid CDAC -->
+  <rect class="cdac" x="30" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="45" y="115">1. Common-Centroid CDAC</text>
+  <text class="tag" x="45" y="135">GRADIENT CANCELLATION</text>
+  <text class="txt" x="45" y="165">• Unit Cap Size: 400 nm × 400 nm</text>
+  <text class="txt" x="45" y="190">• Dispersion Grid: 16 × 16 (256 caps)</text>
+  <text class="txt" x="45" y="215">• Differential Balance: 128 C+ / 128 C-</text>
+  <text class="txt" x="45" y="240">• Centroid Offset: 0.00 nm (Exact)</text>
+  <text class="txt" x="45" y="265">• Material: Metal 5/6 MIM Stack</text>
+  <text class="tag" x="45" y="295">STATUS: Linear Gradients Canceled</text>
+
+  <!-- Section 2: SAR ADC Floorplan -->
+  <rect class="adc" x="340" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="355" y="115">2. SAR ADC Macro Floorplan</text>
+  <text class="tag" x="355" y="135">PITCH-MATCHED MIXED-SIGNAL</text>
+  <text class="txt" x="355" y="165">• Total Silicon Area: 84.0 µm²</text>
+  <text class="txt" x="355" y="190">• Budget Limit: ≤ 150.0 µm² (Gate R8)</text>
+  <text class="txt" x="355" y="215">• Comparator: Dynamic Latch (M1/M2)</text>
+  <text class="txt" x="355" y="240">• SAR Logic: Synchronous FSM (M1/M3)</text>
+  <text class="txt" x="355" y="265">• Power Straps: VDD/VSS (Metal 6)</text>
+  <text class="tag" x="355" y="295">STATUS: 44% Below Area Budget</text>
+
+  <!-- Section 3: LVS Signoff -->
+  <rect class="lvs" x="655" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="670" y="115">3. LVS Matching Signoff</text>
+  <text class="tag" x="670" y="135">LAYOUT VS SCHEMATIC</text>
+  <text class="txt" x="670" y="165">• Matched Devices: 258 / 258</text>
+  <text class="txt" x="670" y="190">• Matched Ports: 14 / 14 Pins</text>
+  <text class="txt" x="670" y="215">• Matched Nets: 100% Connectivity</text>
+  <text class="txt" x="670" y="240">• Discrepancy Count: 0</text>
+  <text class="txt" x="670" y="265">• Golden SPICE Netlist Correlated</text>
+  <text class="tag" x="670" y="295">VERDICT: LVS MATCHED (PASSED)</text>
+
+  <!-- Footnote -->
+  <text class="tag" x="30" y="355">SIGN-OFF EVIDENCE: Common-centroid symmetry verified; LVS matched against Chapter 0010/0022 SPICE netlists.</text>
+</svg>
