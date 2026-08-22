@@ -499,12 +499,12 @@ Depends on R13 + R8 + R9.
 
 ## WP14.2 — Bottleneck and break-even analysis
 
-- [ ] Identify the first limiting resource for each tier: crossbar capacity,
+- [x] Identify the first limiting resource for each tier: crossbar capacity,
   programming, ADC bandwidth/area, SRAM/HBM, NoC/inter-die link, digital attention,
   power or thermal envelope.
-- [ ] Sweep tile size/count, converter sharing, model precision, context, batch and
+- [x] Sweep tile size/count, converter sharing, model precision, context, batch and
   residency strategy with deterministic Pareto reports.
-- [ ] Compare against digital baselines only when measurement methodology and
+- [x] Compare against digital baselines only when measurement methodology and
   workload are comparable; otherwise label the comparison assumed/sensitivity-only.
 
 ## WP14.3 — Go/no-go architecture report

@@ -18,6 +18,13 @@ from .block_stream import (
     calculate_execution_memory_budget,
     streamed_linear_mvm,
 )
+from .bottleneck_analysis import (
+    LimitingResource,
+    ParetoPoint,
+    TierBottleneckReport,
+    evaluate_bottleneck_and_pareto,
+    identify_primary_bottleneck,
+)
 from .calibration import OutputCalibration, output_calibration_from_profile
 from .checkpoint_loader import (
     CheckpointIngestionResult,
@@ -132,6 +139,7 @@ __all__ = [
     "LargeModelAttributionReport",
     "LayerEvaluationCheckpoint",
     "LayerSensitivity",
+    "LimitingResource",
     "MechanismEvaluationResult",
     "MechanismMetrics",
     "Metrics",
@@ -139,6 +147,7 @@ __all__ = [
     "ModelResidencySummary",
     "NonIdealityEvaluationResult",
     "OutputCalibration",
+    "ParetoPoint",
     "PhysicalLedgerConfig",
     "RecoveryLedgerEntry",
     "RecoveryStrategy",
@@ -150,6 +159,7 @@ __all__ = [
     "SubsystemEnergyBreakdown",
     "SurrogateCalibrationProfile",
     "TensorSpec",
+    "TierBottleneckReport",
     "TierBudget",
     "TierPhysicalMetrics",
     "TinyGPT",
@@ -180,11 +190,13 @@ __all__ = [
     "converter_config_from_profiles",
     "dac",
     "evaluate_attribution_suite",
+    "evaluate_bottleneck_and_pareto",
     "evaluate_large_model_error_attribution",
     "evaluate_layer_sensitivities",
     "evaluate_projection_nonideality",
     "evaluate_scalable_recovery_suite",
     "gelu",
+    "identify_primary_bottleneck",
     "layer_norm",
     "load_device_profile",
     "load_hf_checkpoint",

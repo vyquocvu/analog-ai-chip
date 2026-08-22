@@ -1,0 +1,652 @@
+{
+  "chapter": "0057-bottleneck-pareto-analysis",
+  "gate": "R14",
+  "status": "PASSED",
+  "claim_level": "system/architecture-exploration",
+  "comparison_methodology": {
+    "digital_baseline": "verified_same_node_28nm (15.0 pJ/MAC)",
+    "advanced_node_projections": "assumed_iso_power_4nm"
+  },
+  "tier_reports": {
+    "hand_calc": {
+      "primary_limiting_resource": "digital_attention_compute_limit",
+      "resource_utilization_pct": {
+        "adc_dac_conversion_pct": 3.15163528245788,
+        "analog_mvm_pct": 30.445986124876118,
+        "digital_attention_pct": 53.91476709613479,
+        "memory_transfer_pct": 12.48761149653122,
+        "inter_die_link_pct": 0.0
+      },
+      "optimal_design_point": {
+        "tile_geometry": "16x16",
+        "adc_sharing_factor": 1,
+        "precision_bits": 8,
+        "energy_delay_product_pj_s": 0.0015535435776000003,
+        "digital_speedup": 489.0224246123029,
+        "digital_energy_reduction": 28.54311199207136
+      },
+      "pareto_points": [
+        {
+          "tile_geometry": "16x16",
+          "adc_sharing_factor": 1,
+          "precision_bits": 8,
+          "silicon_area_mm2": 0.0648388608,
+          "decode_energy_uj": 0.006457599999999999,
+          "decode_tps": 4156690.609204575,
+          "energy_delay_product_pj_s": 0.0015535435776000003,
+          "is_pareto_optimal": true,
+          "digital_28nm_speedup": 489.0224246123029,
+          "digital_28nm_energy_reduction_factor": 28.54311199207136
+        },
+        {
+          "tile_geometry": "16x16",
+          "adc_sharing_factor": 4,
+          "precision_bits": 8,
+          "silicon_area_mm2": 0.0168388608,
+          "decode_energy_uj": 0.00650944,
+          "decode_tps": 2080836.329737648,
+          "energy_delay_product_pj_s": 0.0031282806374400003,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 244.8042740867821,
+          "digital_28nm_energy_reduction_factor": 28.31579982302625
+        },
+        {
+          "tile_geometry": "16x16",
+          "adc_sharing_factor": 8,
+          "precision_bits": 8,
+          "silicon_area_mm2": 0.0088388608,
+          "decode_energy_uj": 0.006578559999999999,
+          "decode_tps": 1471890.1872329086,
+          "energy_delay_product_pj_s": 0.004469463861544871,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 173.1635514391657,
+          "digital_28nm_energy_reduction_factor": 28.018289716898533
+        },
+        {
+          "tile_geometry": "32x32",
+          "adc_sharing_factor": 1,
+          "precision_bits": 8,
+          "silicon_area_mm2": 0.0328388608,
+          "decode_energy_uj": 0.006457599999999999,
+          "decode_tps": 4156690.609204575,
+          "energy_delay_product_pj_s": 0.0015535435776000003,
+          "is_pareto_optimal": true,
+          "digital_28nm_speedup": 489.0224246123029,
+          "digital_28nm_energy_reduction_factor": 28.54311199207136
+        },
+        {
+          "tile_geometry": "32x32",
+          "adc_sharing_factor": 4,
+          "precision_bits": 8,
+          "silicon_area_mm2": 0.0088388608,
+          "decode_energy_uj": 0.00650944,
+          "decode_tps": 2080836.329737648,
+          "energy_delay_product_pj_s": 0.0031282806374400003,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 244.8042740867821,
+          "digital_28nm_energy_reduction_factor": 28.31579982302625
+        },
+        {
+          "tile_geometry": "32x32",
+          "adc_sharing_factor": 4,
+          "precision_bits": 6,
+          "silicon_area_mm2": 0.0088388608,
+          "decode_energy_uj": 0.00645328,
+          "decode_tps": 2080836.329737648,
+          "energy_delay_product_pj_s": 0.0031012914892800006,
+          "is_pareto_optimal": true,
+          "digital_28nm_speedup": 244.8042740867821,
+          "digital_28nm_energy_reduction_factor": 28.56221952247539
+        },
+        {
+          "tile_geometry": "32x32",
+          "adc_sharing_factor": 8,
+          "precision_bits": 4,
+          "silicon_area_mm2": 0.0048388608,
+          "decode_energy_uj": 0.0064316799999999995,
+          "decode_tps": 1471890.1872329086,
+          "energy_delay_product_pj_s": 0.004369673808405018,
+          "is_pareto_optimal": true,
+          "digital_28nm_speedup": 173.1635514391657,
+          "digital_28nm_energy_reduction_factor": 28.65814219612916
+        },
+        {
+          "tile_geometry": "64x64",
+          "adc_sharing_factor": 4,
+          "precision_bits": 8,
+          "silicon_area_mm2": 0.0145165824,
+          "decode_energy_uj": 0.00650944,
+          "decode_tps": 2080836.329737648,
+          "energy_delay_product_pj_s": 0.0031282806374400003,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 244.8042740867821,
+          "digital_28nm_energy_reduction_factor": 28.31579982302625
+        },
+        {
+          "tile_geometry": "64x64",
+          "adc_sharing_factor": 8,
+          "precision_bits": 6,
+          "silicon_area_mm2": 0.0085165824,
+          "decode_energy_uj": 0.00650512,
+          "decode_tps": 1471890.1872329086,
+          "energy_delay_product_pj_s": 0.0044195688349749455,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 173.1635514391657,
+          "digital_28nm_energy_reduction_factor": 28.334604127210564
+        }
+      ]
+    },
+    "t0_gpt2_124m": {
+      "primary_limiting_resource": "adc_area_bandwidth_limit",
+      "resource_utilization_pct": {
+        "adc_dac_conversion_pct": 0.23743746733368185,
+        "analog_mvm_pct": 82.57447920555515,
+        "digital_attention_pct": 16.24729336220414,
+        "memory_transfer_pct": 0.9407899649070413,
+        "inter_die_link_pct": 0.0
+      },
+      "optimal_design_point": {
+        "tile_geometry": "16x16",
+        "adc_sharing_factor": 1,
+        "precision_bits": 8,
+        "energy_delay_product_pj_s": 21.869011324108797,
+        "digital_speedup": 66.40063914599216,
+        "digital_energy_reduction": 51.60904950347197
+      },
+      "pareto_points": [
+        {
+          "tile_geometry": "16x16",
+          "adc_sharing_factor": 1,
+          "precision_bits": 8,
+          "silicon_area_mm2": 336.1246543872,
+          "decode_energy_uj": 12.342988799999997,
+          "decode_tps": 564405.4327409334,
+          "energy_delay_product_pj_s": 21.869011324108797,
+          "is_pareto_optimal": true,
+          "digital_28nm_speedup": 66.40063914599216,
+          "digital_28nm_energy_reduction_factor": 51.60904950347197
+        },
+        {
+          "tile_geometry": "16x16",
+          "adc_sharing_factor": 4,
+          "precision_bits": 8,
+          "silicon_area_mm2": 87.2926543872,
+          "decode_energy_uj": 12.350453759999997,
+          "decode_tps": 311354.21648334136,
+          "energy_delay_product_pj_s": 39.66689097547775,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 36.629907821569574,
+          "digital_28nm_energy_reduction_factor": 51.577855549171346
+        },
+        {
+          "tile_geometry": "16x16",
+          "adc_sharing_factor": 8,
+          "precision_bits": 8,
+          "silicon_area_mm2": 45.8206543872,
+          "decode_energy_uj": 12.360407039999998,
+          "decode_tps": 227029.64767976772,
+          "energy_delay_product_pj_s": 54.4440215906723,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 26.70937031526679,
+          "digital_28nm_energy_reduction_factor": 51.53632222131093
+        },
+        {
+          "tile_geometry": "32x32",
+          "adc_sharing_factor": 1,
+          "precision_bits": 8,
+          "silicon_area_mm2": 170.23665438720002,
+          "decode_energy_uj": 12.342988799999997,
+          "decode_tps": 564405.4327409334,
+          "energy_delay_product_pj_s": 21.869011324108797,
+          "is_pareto_optimal": true,
+          "digital_28nm_speedup": 66.40063914599216,
+          "digital_28nm_energy_reduction_factor": 51.60904950347197
+        },
+        {
+          "tile_geometry": "32x32",
+          "adc_sharing_factor": 4,
+          "precision_bits": 8,
+          "silicon_area_mm2": 45.8206543872,
+          "decode_energy_uj": 12.350453759999997,
+          "decode_tps": 311354.21648334136,
+          "energy_delay_product_pj_s": 39.66689097547775,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 36.629907821569574,
+          "digital_28nm_energy_reduction_factor": 51.577855549171346
+        },
+        {
+          "tile_geometry": "32x32",
+          "adc_sharing_factor": 4,
+          "precision_bits": 6,
+          "silicon_area_mm2": 45.8206543872,
+          "decode_energy_uj": 12.342366719999998,
+          "decode_tps": 311354.21648334136,
+          "energy_delay_product_pj_s": 39.640917214494706,
+          "is_pareto_optimal": true,
+          "digital_28nm_speedup": 36.629907821569574,
+          "digital_28nm_energy_reduction_factor": 51.61165070292127
+        },
+        {
+          "tile_geometry": "32x32",
+          "adc_sharing_factor": 8,
+          "precision_bits": 4,
+          "silicon_area_mm2": 25.0846543872,
+          "decode_energy_uj": 12.339256319999997,
+          "decode_tps": 227029.64767976772,
+          "energy_delay_product_pj_s": 54.35085878036906,
+          "is_pareto_optimal": true,
+          "digital_28nm_speedup": 26.70937031526679,
+          "digital_28nm_energy_reduction_factor": 51.62466063432907
+        },
+        {
+          "tile_geometry": "64x64",
+          "adc_sharing_factor": 4,
+          "precision_bits": 8,
+          "silicon_area_mm2": 25.0846543872,
+          "decode_energy_uj": 12.350453759999997,
+          "decode_tps": 311354.21648334136,
+          "energy_delay_product_pj_s": 39.66689097547775,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 36.629907821569574,
+          "digital_28nm_energy_reduction_factor": 51.577855549171346
+        },
+        {
+          "tile_geometry": "64x64",
+          "adc_sharing_factor": 8,
+          "precision_bits": 6,
+          "silicon_area_mm2": 14.7166543872,
+          "decode_energy_uj": 12.349831679999998,
+          "decode_tps": 227029.64767976772,
+          "energy_delay_product_pj_s": 54.39744018552068,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 26.70937031526679,
+          "digital_28nm_energy_reduction_factor": 51.58045360501627
+        }
+      ]
+    },
+    "t1_llama_1.1b": {
+      "primary_limiting_resource": "digital_attention_compute_limit",
+      "resource_utilization_pct": {
+        "adc_dac_conversion_pct": 0.05066594283989417,
+        "analog_mvm_pct": 43.89495666743819,
+        "digital_attention_pct": 55.47124106647029,
+        "memory_transfer_pct": 0.20075184898825996,
+        "inter_die_link_pct": 0.3823844742633522
+      },
+      "optimal_design_point": {
+        "tile_geometry": "16x16",
+        "adc_sharing_factor": 1,
+        "precision_bits": 8,
+        "energy_delay_product_pj_s": 2427.231711138939,
+        "digital_speedup": 13.706717475823543,
+        "digital_energy_reduction": 29.367127623425453
+      },
+      "pareto_points": [
+        {
+          "tile_geometry": "16x16",
+          "adc_sharing_factor": 1,
+          "precision_bits": 8,
+          "silicon_area_mm2": 4093.6663154688003,
+          "decode_energy_uj": 282.78972416,
+          "decode_tps": 116507.09854450011,
+          "energy_delay_product_pj_s": 2427.231711138939,
+          "is_pareto_optimal": true,
+          "digital_28nm_speedup": 13.706717475823543,
+          "digital_28nm_energy_reduction_factor": 29.367127623425453
+        },
+        {
+          "tile_geometry": "16x16",
+          "adc_sharing_factor": 4,
+          "precision_bits": 8,
+          "silicon_area_mm2": 1063.1383154688,
+          "decode_energy_uj": 282.82621952,
+          "decode_tps": 89101.40167196997,
+          "energy_delay_product_pj_s": 3174.2061764778396,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 10.482517843761173,
+          "digital_28nm_energy_reduction_factor": 29.363338144866493
+        },
+        {
+          "tile_geometry": "16x16",
+          "adc_sharing_factor": 8,
+          "precision_bits": 8,
+          "silicon_area_mm2": 558.0503154688,
+          "decode_energy_uj": 282.87487999999996,
+          "decode_tps": 74570.01655545837,
+          "energy_delay_product_pj_s": 3793.4131312633335,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 8.772943124171572,
+          "digital_28nm_energy_reduction_factor": 29.35828702781951
+        },
+        {
+          "tile_geometry": "32x32",
+          "adc_sharing_factor": 1,
+          "precision_bits": 8,
+          "silicon_area_mm2": 2073.3143154688,
+          "decode_energy_uj": 282.78972416,
+          "decode_tps": 116507.09854450011,
+          "energy_delay_product_pj_s": 2427.231711138939,
+          "is_pareto_optimal": true,
+          "digital_28nm_speedup": 13.706717475823543,
+          "digital_28nm_energy_reduction_factor": 29.367127623425453
+        },
+        {
+          "tile_geometry": "32x32",
+          "adc_sharing_factor": 4,
+          "precision_bits": 8,
+          "silicon_area_mm2": 558.0503154688,
+          "decode_energy_uj": 282.82621952,
+          "decode_tps": 89101.40167196997,
+          "energy_delay_product_pj_s": 3174.2061764778396,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 10.482517843761173,
+          "digital_28nm_energy_reduction_factor": 29.363338144866493
+        },
+        {
+          "tile_geometry": "32x32",
+          "adc_sharing_factor": 4,
+          "precision_bits": 6,
+          "silicon_area_mm2": 558.0503154688,
+          "decode_energy_uj": 282.78668287999994,
+          "decode_tps": 89101.40167196997,
+          "energy_delay_product_pj_s": 3173.762450124964,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 10.482517843761173,
+          "digital_28nm_energy_reduction_factor": 29.367443457456215
+        },
+        {
+          "tile_geometry": "32x32",
+          "adc_sharing_factor": 8,
+          "precision_bits": 4,
+          "silicon_area_mm2": 305.50631546880004,
+          "decode_energy_uj": 281.69013248,
+          "decode_tps": 75561.71287514869,
+          "energy_delay_product_pj_s": 3727.9479482610345,
+          "is_pareto_optimal": true,
+          "digital_28nm_speedup": 8.889613279429257,
+          "digital_28nm_energy_reduction_factor": 29.481763691490457
+        },
+        {
+          "tile_geometry": "64x64",
+          "adc_sharing_factor": 4,
+          "precision_bits": 8,
+          "silicon_area_mm2": 305.50631546880004,
+          "decode_energy_uj": 281.74487551999994,
+          "decode_tps": 90520.93713067457,
+          "energy_delay_product_pj_s": 3112.4829730085266,
+          "is_pareto_optimal": true,
+          "digital_28nm_speedup": 10.64952201537348,
+          "digital_28nm_energy_reduction_factor": 29.476035383686973
+        },
+        {
+          "tile_geometry": "64x64",
+          "adc_sharing_factor": 8,
+          "precision_bits": 6,
+          "silicon_area_mm2": 179.2343154688,
+          "decode_energy_uj": 281.74183423999995,
+          "decode_tps": 75561.71287514869,
+          "energy_delay_product_pj_s": 3728.6321805002563,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 8.889613279429257,
+          "digital_28nm_energy_reduction_factor": 29.47635356461006
+        }
+      ]
+    },
+    "t2_llama_3b": {
+      "primary_limiting_resource": "crossbar_capacity_limit",
+      "resource_utilization_pct": {
+        "adc_dac_conversion_pct": 0.0023970684692564124,
+        "analog_mvm_pct": 3.0211074477864965,
+        "digital_attention_pct": 10.497652305110847,
+        "memory_transfer_pct": 86.46075209584654,
+        "inter_die_link_pct": 0.018091082786840847
+      },
+      "optimal_design_point": {
+        "tile_geometry": "16x16",
+        "adc_sharing_factor": 1,
+        "precision_bits": 8,
+        "energy_delay_product_pj_s": 3643749.186841765,
+        "digital_speedup": 0.3684330000993414,
+        "digital_energy_reduction": 2.0840927370440654
+      },
+      "pareto_points": [
+        {
+          "tile_geometry": "16x16",
+          "adc_sharing_factor": 1,
+          "precision_bits": 8,
+          "silicon_area_mm2": 11369.1052081152,
+          "decode_energy_uj": 11411.0582784,
+          "decode_tps": 3131.6805008444016,
+          "energy_delay_product_pj_s": 3643749.186841765,
+          "is_pareto_optimal": true,
+          "digital_28nm_speedup": 0.3684330000993414,
+          "digital_28nm_energy_reduction_factor": 2.0840927370440654
+        },
+        {
+          "tile_geometry": "16x16",
+          "adc_sharing_factor": 4,
+          "precision_bits": 8,
+          "silicon_area_mm2": 2952.5932081152,
+          "decode_energy_uj": 11411.12795136,
+          "decode_tps": 3099.070695306509,
+          "energy_delay_product_pj_s": 3682112.824545101,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 0.36459655238900107,
+          "digital_28nm_energy_reduction_factor": 2.084080012192454
+        },
+        {
+          "tile_geometry": "16x16",
+          "adc_sharing_factor": 8,
+          "precision_bits": 8,
+          "silicon_area_mm2": 1549.8412081152,
+          "decode_energy_uj": 11411.22084864,
+          "decode_tps": 3072.5657897017836,
+          "energy_delay_product_pj_s": 3713906.1063839896,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 0.36147832820020986,
+          "digital_28nm_energy_reduction_factor": 2.0840630459653515
+        },
+        {
+          "tile_geometry": "32x32",
+          "adc_sharing_factor": 1,
+          "precision_bits": 8,
+          "silicon_area_mm2": 5758.0972081151995,
+          "decode_energy_uj": 11411.0582784,
+          "decode_tps": 3131.6805008444016,
+          "energy_delay_product_pj_s": 3643749.186841765,
+          "is_pareto_optimal": true,
+          "digital_28nm_speedup": 0.3684330000993414,
+          "digital_28nm_energy_reduction_factor": 2.0840927370440654
+        },
+        {
+          "tile_geometry": "32x32",
+          "adc_sharing_factor": 4,
+          "precision_bits": 8,
+          "silicon_area_mm2": 1549.8412081152,
+          "decode_energy_uj": 11411.12795136,
+          "decode_tps": 3099.070695306509,
+          "energy_delay_product_pj_s": 3682112.824545101,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 0.36459655238900107,
+          "digital_28nm_energy_reduction_factor": 2.084080012192454
+        },
+        {
+          "tile_geometry": "32x32",
+          "adc_sharing_factor": 4,
+          "precision_bits": 6,
+          "silicon_area_mm2": 1549.8412081152,
+          "decode_energy_uj": 11411.05247232,
+          "decode_tps": 3099.070695306509,
+          "energy_delay_product_pj_s": 3682088.4691665303,
+          "is_pareto_optimal": true,
+          "digital_28nm_speedup": 0.36459655238900107,
+          "digital_28nm_energy_reduction_factor": 2.0840937974553806
+        },
+        {
+          "tile_geometry": "32x32",
+          "adc_sharing_factor": 8,
+          "precision_bits": 4,
+          "silicon_area_mm2": 848.4652081152,
+          "decode_energy_uj": 11411.02344192,
+          "decode_tps": 3072.5657897017836,
+          "energy_delay_product_pj_s": 3713841.858216982,
+          "is_pareto_optimal": true,
+          "digital_28nm_speedup": 0.36147832820020986,
+          "digital_28nm_energy_reduction_factor": 2.0840990995281423
+        },
+        {
+          "tile_geometry": "64x64",
+          "adc_sharing_factor": 4,
+          "precision_bits": 8,
+          "silicon_area_mm2": 848.4652081152,
+          "decode_energy_uj": 11411.12795136,
+          "decode_tps": 3099.070695306509,
+          "energy_delay_product_pj_s": 3682112.824545101,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 0.36459655238900107,
+          "digital_28nm_energy_reduction_factor": 2.084080012192454
+        },
+        {
+          "tile_geometry": "64x64",
+          "adc_sharing_factor": 8,
+          "precision_bits": 6,
+          "silicon_area_mm2": 497.7772081152,
+          "decode_energy_uj": 11411.12214528,
+          "decode_tps": 3072.5657897017836,
+          "energy_delay_product_pj_s": 3713873.982300486,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 0.36147832820020986,
+          "digital_28nm_energy_reduction_factor": 2.08408107259082
+        }
+      ]
+    },
+    "t3_llama2_7b": {
+      "primary_limiting_resource": "crossbar_capacity_limit",
+      "resource_utilization_pct": {
+        "adc_dac_conversion_pct": 0.0003342282733281823,
+        "analog_mvm_pct": 0.6357652378085665,
+        "digital_attention_pct": 2.9274192614324512,
+        "memory_transfer_pct": 96.4339587949511,
+        "inter_die_link_pct": 0.002522477534552319
+      },
+      "optimal_design_point": {
+        "tile_geometry": "16x16",
+        "adc_sharing_factor": 1,
+        "precision_bits": 8,
+        "energy_delay_product_pj_s": 455258584.14645255,
+        "digital_speedup": 0.03222677091052748,
+        "digital_energy_reduction": 0.38745254930723616
+      },
+      "pareto_points": [
+        {
+          "tile_geometry": "16x16",
+          "adc_sharing_factor": 1,
+          "precision_bits": 8,
+          "silicon_area_mm2": 26147.1783616512,
+          "decode_energy_uj": 124707.86981888,
+          "decode_tps": 273.9275527394836,
+          "energy_delay_product_pj_s": 455258584.14645255,
+          "is_pareto_optimal": true,
+          "digital_28nm_speedup": 0.03222677091052748,
+          "digital_28nm_energy_reduction_factor": 0.38745254930723616
+        },
+        {
+          "tile_geometry": "16x16",
+          "adc_sharing_factor": 4,
+          "precision_bits": 8,
+          "silicon_area_mm2": 6790.5063616512,
+          "decode_energy_uj": 124707.9759872,
+          "decode_tps": 273.6397161016696,
+          "energy_delay_product_pj_s": 455737850.3523418,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 0.03219290777666701,
+          "digital_28nm_energy_reduction_factor": 0.38745221945514846
+        },
+        {
+          "tile_geometry": "16x16",
+          "adc_sharing_factor": 8,
+          "precision_bits": 8,
+          "silicon_area_mm2": 3564.3943616512,
+          "decode_energy_uj": 124708.11754496,
+          "decode_tps": 273.40172215460154,
+          "energy_delay_product_pj_s": 456135084.16176254,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 0.03216490848877665,
+          "digital_28nm_energy_reduction_factor": 0.3874517796532384
+        },
+        {
+          "tile_geometry": "32x32",
+          "adc_sharing_factor": 1,
+          "precision_bits": 8,
+          "silicon_area_mm2": 13242.7303616512,
+          "decode_energy_uj": 124707.86981888,
+          "decode_tps": 273.9275527394836,
+          "energy_delay_product_pj_s": 455258584.14645255,
+          "is_pareto_optimal": true,
+          "digital_28nm_speedup": 0.03222677091052748,
+          "digital_28nm_energy_reduction_factor": 0.38745254930723616
+        },
+        {
+          "tile_geometry": "32x32",
+          "adc_sharing_factor": 4,
+          "precision_bits": 8,
+          "silicon_area_mm2": 3564.3943616512,
+          "decode_energy_uj": 124707.9759872,
+          "decode_tps": 273.6397161016696,
+          "energy_delay_product_pj_s": 455737850.3523418,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 0.03219290777666701,
+          "digital_28nm_energy_reduction_factor": 0.38745221945514846
+        },
+        {
+          "tile_geometry": "32x32",
+          "adc_sharing_factor": 4,
+          "precision_bits": 6,
+          "silicon_area_mm2": 3564.3943616512,
+          "decode_energy_uj": 124707.86097152,
+          "decode_tps": 273.6397161016696,
+          "energy_delay_product_pj_s": 455737430.03440833,
+          "is_pareto_optimal": true,
+          "digital_28nm_speedup": 0.03219290777666701,
+          "digital_28nm_energy_reduction_factor": 0.3874525767949355
+        },
+        {
+          "tile_geometry": "32x32",
+          "adc_sharing_factor": 8,
+          "precision_bits": 4,
+          "silicon_area_mm2": 1951.3383616512,
+          "decode_energy_uj": 124707.81673471999,
+          "decode_tps": 273.40172215460154,
+          "energy_delay_product_pj_s": 456133983.91178006,
+          "is_pareto_optimal": true,
+          "digital_28nm_speedup": 0.03216490848877665,
+          "digital_28nm_energy_reduction_factor": 0.3874527142334907
+        },
+        {
+          "tile_geometry": "64x64",
+          "adc_sharing_factor": 4,
+          "precision_bits": 8,
+          "silicon_area_mm2": 1951.3383616512,
+          "decode_energy_uj": 124707.9759872,
+          "decode_tps": 273.6397161016696,
+          "energy_delay_product_pj_s": 455737850.3523418,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 0.03219290777666701,
+          "digital_28nm_energy_reduction_factor": 0.38745221945514846
+        },
+        {
+          "tile_geometry": "64x64",
+          "adc_sharing_factor": 8,
+          "precision_bits": 6,
+          "silicon_area_mm2": 1144.8103616512,
+          "decode_energy_uj": 124707.96713984,
+          "decode_tps": 273.40172215460154,
+          "energy_delay_product_pj_s": 456134534.0367713,
+          "is_pareto_optimal": false,
+          "digital_28nm_speedup": 0.03216490848877665,
+          "digital_28nm_energy_reduction_factor": 0.387452246942801
+        }
+      ]
+    }
+  }
+}

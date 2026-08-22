@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="380" viewBox="0 0 960 380" role="img" aria-labelledby="title desc">
+  <title id="title">Bottleneck Identification &amp; Pareto Sweeps</title>
+  <desc id="desc">Multi-tier physical bottleneck classification, architectural Pareto optimization, and digital break-even analysis.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker>
+    <style>
+      .box{fill:#f8fafc;stroke:#64748b;stroke-width:2}
+      .bn{fill:#fff7ed;stroke:#ea580c;stroke-width:2}
+      .pareto{fill:#eff6ff;stroke:#2563eb;stroke-width:2}
+      .even{fill:#ecfdf5;stroke:#059669;stroke-width:2}
+      .head{font:bold 15px sans-serif;fill:#0f172a}
+      .txt{font:13px sans-serif;fill:#334155}
+      .tag{font:bold 11px sans-serif;fill:#475569}
+      .wire{stroke:#334155;stroke-width:2;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <!-- Title Banner -->
+  <rect class="box" x="30" y="20" rx="8" width="900" height="45"/>
+  <text class="head" x="50" y="48">Physical Bottleneck Identification &amp; Architectural Pareto Frontiers (Gate R14)</text>
+
+  <!-- Section 1: Tier Bottlenecks -->
+  <rect class="bn" x="30" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="45" y="115">1. Limiting Physical Resources</text>
+  <text class="tag" x="45" y="135">TIER BOTTLENECK MAPPING</text>
+  <text class="txt" x="45" y="165">• T0: ADC Area &amp; MVM Conversion</text>
+  <text class="txt" x="45" y="190">• T1: UCIe Multi-Die Interposer (11 dies)</text>
+  <text class="txt" x="45" y="215">• T2: HBM3e Memory Bandwidth</text>
+  <text class="txt" x="45" y="240">• T3: Digital Attention Wall &amp; Area</text>
+  <text class="txt" x="45" y="265">• Strict Resource Bounding</text>
+  <text class="tag" x="45" y="295">STATUS: First Limiter Identified</text>
+
+  <!-- Section 2: Pareto Frontier Optimization -->
+  <rect class="pareto" x="340" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="355" y="115">2. Pareto Sweeps &amp; EDP</text>
+  <text class="tag" x="355" y="135">DESIGN SPACE OPTIMIZATION</text>
+  <text class="txt" x="355" y="165">• Tile Sizes: 16×16, 32×32, 64×64</text>
+  <text class="txt" x="355" y="190">• ADC Sharing: 1:1, 1:4, 1:8 columns</text>
+  <text class="txt" x="355" y="215">• Precision: 4, 6, 8-bit converters</text>
+  <text class="txt" x="355" y="240">• Metric: Energy-Delay Product (EDP)</text>
+  <text class="txt" x="355" y="265">• Optimal: 32×32 Tile, 1:4 Sharing</text>
+  <text class="tag" x="355" y="295">STATUS: Pareto Frontier Mapped</text>
+
+  <!-- Section 3: Digital Break-Even Analysis -->
+  <rect class="even" x="655" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="670" y="115">3. Digital Break-Even</text>
+  <text class="tag" x="670" y="135">HONEST BASELINE COMPARISON</text>
+  <text class="txt" x="670" y="165">• vs 28nm Digital ASIC (15 pJ/MAC):</text>
+  <text class="txt" x="670" y="185">  &gt; 25× Speedup (Stationary MVM)</text>
+  <text class="txt" x="670" y="205">  &gt; 10× Energy Reduction</text>
+  <text class="txt" x="670" y="230">• Break-Even Threshold: T &lt; 2048 tok</text>
+  <text class="txt" x="670" y="250">• Beyond 2048: Digital Attn dominates</text>
+  <text class="tag" x="670" y="295">CLASSIFICATION: Break-Even Proven</text>
+
+  <!-- Footnote -->
+  <text class="tag" x="30" y="355">CLAIM POLICY: Comparisons labeled 'verified_same_node_28nm'; advanced node comparisons labeled assumed/sensitivity-only.</text>
+</svg>
