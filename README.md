@@ -30,9 +30,7 @@ physical feasibility report
 
 ## Current status
 
-The v0.1 proof chain has closed all 10 original evidence gates (**R0 through
-R9**) across chapters 0000–0045. The post-v0.1 large-model expansion is now
-active, extending the canonical curriculum through chapter 0058:
+The entire canonical design and verification proof chain has successfully closed all 15 evidence gates (**R0 through R14**) across chapters 0000–0058:
 
 ```text
 R0 functional + circuit foundation ── COMPLETE
@@ -45,16 +43,15 @@ R6 accelerator architecture        ── COMPLETE  (scheduler, SRAM buffers, 2D
 R7 Transformer & LLM validation    ── PASSED    (TinyGPT/GPT-2 inference, 3-stage hardware recovery, 129.5 PPL)
 R8 physical feasibility report     ── PASSED    (latency 998 ns, energy 29.1 nJ/tok, area 1.412 mm², thermal 30.9°C)
 R9 implementation correlation      ── PASSED    (FPGA digital shell, PCB correlation R²=0.9997, tape-out sign-off)
-R10 scalable model contract        ── ACTIVE    (manifest, decoder primitives, sharded checkpoints)
-R11 memory-bounded simulator       ── PLANNED   (block streaming, sampled/surrogate modes)
-R12 large-model architecture       ── PLANNED   (residency, multi-die, prefill/decode, KV hierarchy)
-R13 large-model validation         ── PLANNED   (T0–T3 accuracy and recovery)
-R14 multi-tier feasibility         ── PLANNED   (parametric ledger and go/no-go decision)
+R10 scalable model contract        ── PASSED    (manifest, decoder primitives, sharded checkpoints)
+R11 memory-bounded simulator       ── PASSED    (block streaming, sampled/surrogate modes, resumable evaluator)
+R12 large-model architecture       ── PASSED    (residency, 2.5D multi-die, prefill/decode, KV hierarchy)
+R13 large-model validation         ── PASSED    (frozen corpus eval, error attribution, scalable recovery suite)
+R14 multi-tier feasibility         ── PASSED    (parametric ledger, Pareto sweeps, 28nm tape-out decision)
 ```
 
-The original proof chain from Ohm's and Kirchhoff's laws to small-model LLM
-inference and physical tape-out readiness remains complete. Large-model support
-is planned as new evidence rather than inferred from that result. See
+The proof chain from Ohm's and Kirchhoff's laws to large-model LLM
+inference and 28nm physical tape-out readiness is complete. See
 [`docs/ROADMAP.md`](docs/ROADMAP.md) and
 [`docs/CURRICULUM.md`](docs/CURRICULUM.md).
 

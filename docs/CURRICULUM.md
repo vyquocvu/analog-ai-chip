@@ -42,6 +42,10 @@ FPGA / PCB / silicon correlation
 * **Part VI — Profile-driven accelerator architecture:** [`book/0021`](../book/0021-physical-tile-contract/) through [`book/0026`](../book/0026-calibration/)
 * **Part VII & VIII — Transformer & LLM inference:** [`book/0027`](../book/0027-linear-layer/) through [`book/0037`](../book/0037-hardware-recovery/)
 * **Part IX & X — Feasibility & correlation:** [`book/0038`](../book/0038-latency-ledger/) through [`book/0045`](../book/0045-tapeout-readiness/)
-* **Part XI to XIV — Large-model expansion:** `book/0046` through `book/0058`
+* **Part XI — Scalable model semantics & sharded checkpoints:** [`book/0046`](../book/0046-large-model-manifest/) through [`book/0048`](../book/0048-sharded-checkpoint-loader/)
+* **Part XII — Memory-bounded execution & non-ideality surrogates:** [`book/0049`](../book/0049-block-streamed-inference/) through [`book/0051`](../book/0051-resumable-evaluator/)
+* **Part XIII — Large-model architecture & KV-cache hierarchy:** [`book/0052`](../book/0052-weight-residency-topology/) through [`book/0053`](../book/0053-kv-cache-hierarchy/)
+* **Part XIV — Large-model error attribution & hardware recovery:** [`book/0054`](../book/0054-large-model-error-attribution/) through [`book/0055`](../book/0055-scalable-hardware-recovery/)
+* **Part XV — Multi-tier physical feasibility & tape-out decision:** [`book/0056`](../book/0056-parametric-physical-ledger/) through [`book/0058`](../book/0058-tapeout-feasibility-decision/)
 
 > **Tiếng Việt:** Mỗi chương trong `book/` đều có file `README.vi.md` song ngữ bên cạnh `README.md`.
