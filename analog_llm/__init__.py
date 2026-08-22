@@ -58,6 +58,13 @@ from .profile_adapter import (
     nonideality_config_from_profile,
     tile_config_from_profile,
 )
+from .resumable_evaluator import (
+    TIER_BUDGETS,
+    LayerEvaluationCheckpoint,
+    ResumableModelEvaluator,
+    TierBudget,
+    compute_tensor_sha256,
+)
 from .surrogate import (
     EvaluationMode,
     NonIdealityEvaluationResult,
@@ -70,6 +77,7 @@ from .transformer import Metrics, TinyGPT, TinyGPTConfig
 
 __all__ = [
     "CROSSBAR_NONIDEALITY_FIELDS",
+    "TIER_BUDGETS",
     "Accelerator",
     "BlockStreamedLinear",
     "CheckpointIngestionResult",
@@ -79,14 +87,17 @@ __all__ = [
     "EvaluationMode",
     "FileProvenance",
     "GeneralizedDecoder",
+    "LayerEvaluationCheckpoint",
     "MechanismMetrics",
     "Metrics",
     "ModelManifest",
     "NonIdealityEvaluationResult",
     "OutputCalibration",
+    "ResumableModelEvaluator",
     "StreamedMemoryBudget",
     "SurrogateCalibrationProfile",
     "TensorSpec",
+    "TierBudget",
     "TinyGPT",
     "TinyGPTConfig",
     "adc",
@@ -104,6 +115,7 @@ __all__ = [
     "calculate_execution_memory_budget",
     "calibrate_surrogate",
     "causal_attention",
+    "compute_tensor_sha256",
     "converter_config_from_profiles",
     "dac",
     "evaluate_attribution_suite",

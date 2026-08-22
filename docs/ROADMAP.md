@@ -39,8 +39,8 @@ A higher gate may contain exploratory code, but it is not considered physically 
 | **R8** | Physical feasibility report (latency/energy/area) | `book/0038`–`0042` | **PASSED** |
 | **R9** | Implementation correlation (FPGA/PCB/Tape-out) | `book/0043`–`0045` | **PASSED** |
 | **R10** | Scalable model semantics & sharded checkpoints | `book/0046`–`0048` | **PASSED** |
-| **R11** | Memory-bounded model execution | `book/0049`–`0051` | **ACTIVE** |
-| **R12** | Large-model architecture & residency | `book/0052`–`0053` | **PLANNED** |
+| **R11** | Memory-bounded model execution | `book/0049`–`0051` | **PASSED** |
+| **R12** | Large-model architecture & residency | `book/0052`–`0053` | **ACTIVE** |
 | **R13** | Large-model validation & hardware recovery | `book/0054`–`0055` | **PLANNED** |
 | **R14** | Multi-tier physical feasibility & design decision | `book/0056`–`0058` | **PLANNED** |
 
@@ -363,7 +363,7 @@ efficiently on the proposed accelerator.
 
 ---
 
-# R11 — Memory-bounded large-model simulator — ACTIVE
+# R11 — Memory-bounded large-model simulator — PASSED
 
 Depends on R10 + R5.
 
@@ -386,11 +386,11 @@ Depends on R10 + R5.
 
 ## WP11.3 — Reproducible execution envelope
 
-- [ ] Add resumable per-layer artifacts so a multi-hour evaluation can restart
+- [x] Add resumable per-layer artifacts so a multi-hour evaluation can restart
   without changing seeds or double-counting ledger entries.
-- [ ] Define engine-gated T1–T3 tests and small always-on fixtures; committed
+- [x] Define engine-gated T1–T3 tests and small always-on fixtures; committed
   summaries must be reproducible without committing third-party model weights.
-- [ ] Establish host-memory and runtime budgets for each tier before claiming it
+- [x] Establish host-memory and runtime budgets for each tier before claiming it
   is executable by the simulator.
 
 ### Gate R11 exit
@@ -402,7 +402,7 @@ and cross-calibrated.
 
 ---
 
-# R12 — Large-model accelerator capacity and data movement — PLANNED
+# R12 — Large-model accelerator capacity and data movement — ACTIVE
 
 Depends on R11 + R6.
 

@@ -1,0 +1,43 @@
+{
+  "chapter": "0051-resumable-evaluator",
+  "gate": "R11",
+  "status": "PASSED",
+  "claim_level": "functional/execution-envelope",
+  "resumption_benchmark": {
+    "prompt_length": 4,
+    "total_layers": 4,
+    "interrupted_at_layer": 1,
+    "layers_resumed": 2,
+    "layers_computed": 2,
+    "max_logit_abs_error": 0.0,
+    "cumulative_macs_full": 0,
+    "cumulative_macs_resumed": 0,
+    "ledger_idempotency_verified": true
+  },
+  "tier_budgets": {
+    "T0": {
+      "parameter_range": "up to 150M",
+      "max_context_tokens": 2048,
+      "max_rss_mb": 2048,
+      "max_runtime_seconds": 60.0
+    },
+    "T1": {
+      "parameter_range": "1\u20131.5B",
+      "max_context_tokens": 4096,
+      "max_rss_mb": 8192,
+      "max_runtime_seconds": 300.0
+    },
+    "T2": {
+      "parameter_range": "about 3B",
+      "max_context_tokens": 8192,
+      "max_rss_mb": 16384,
+      "max_runtime_seconds": 900.0
+    },
+    "T3": {
+      "parameter_range": "7\u20138B",
+      "max_context_tokens": 8192,
+      "max_rss_mb": 32768,
+      "max_runtime_seconds": 1800.0
+    }
+  }
+}
