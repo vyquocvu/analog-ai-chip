@@ -547,8 +547,8 @@ Depends on R14 + R9 + R5.
 
 ## WP15.3 — Core tile floorplanning & power grid IR drop
 
-- [ ] Generate tile-level floorplan integrating ReRAM macro, SAR ADCs, DACs, and local SRAM buffers.
-- [ ] Route multi-layer power grid (M1-M6) and calculate static/dynamic IR drop margins.
+- [x] Generate tile-level floorplan integrating ReRAM macro, SAR ADCs, DACs, and local SRAM buffers.
+- [x] Route multi-layer power grid (M1-M6) and calculate static/dynamic IR drop margins.
 
 ## WP15.4 — Top-level monolithic chip assembly
 

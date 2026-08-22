@@ -59,10 +59,10 @@ def generate_cdac_layout(config: CDACArrayConfig | None = None) -> tuple[LayoutC
             is_pos = (r + c) % 2 == 0
             net = "CAP_POS" if is_pos else "CAP_NEG"
 
-            # Bottom plate on Metal 5
-            cell.add_rect(Layer.METAL5, x_min, y_min, x_max, y_max, net_name=f"{net}_BOT")
-            # Top plate on Metal 6 (MIM capacitor dielectric in between)
-            cell.add_rect(Layer.METAL6, x_min + 40, y_min + 40, x_max - 40, y_max - 40, net_name=f"{net}_TOP")
+            # Bottom plate on Metal 2
+            cell.add_rect(Layer.METAL2, x_min, y_min, x_max, y_max, net_name=f"{net}_BOT")
+            # Top plate on Metal 3 (MIM capacitor dielectric in between)
+            cell.add_rect(Layer.METAL3, x_min + 40, y_min + 40, x_max - 40, y_max - 40, net_name=f"{net}_TOP")
 
             center_x = (x_min + x_max) // 2
             center_y = (y_min + y_max) // 2
@@ -127,15 +127,15 @@ def generate_sar_adc_layout(config: SARADCLayoutConfig | None = None) -> LayoutC
     cell.add_rect(Layer.METAL1, sar_x_min, sar_y_min, sar_x_max, sar_y_max, net_name="SAR_LOGIC_STDCELLS")
     cell.add_rect(Layer.METAL3, sar_x_min + 100, sar_y_min + 100, sar_x_max - 100, sar_y_max - 100, net_name="SAR_ROUTING")
 
-    # 4. Power & Reference Straps (Metal 6)
-    cell.add_rect(Layer.METAL6, 0, cdac_h + 200, sar_x_max, cdac_h + 600, net_name="VDD_ANA")
-    cell.add_rect(Layer.METAL6, 0, cdac_h + 800, sar_x_max, cdac_h + 1200, net_name="VSS_ANA")
+    # 4. Power & Reference Straps (Metal 4)
+    cell.add_rect(Layer.METAL4, 0, cdac_h + 200, sar_x_max, cdac_h + 600, net_name="VDD_ANA")
+    cell.add_rect(Layer.METAL4, 0, cdac_h + 800, sar_x_max, cdac_h + 1200, net_name="VSS_ANA")
 
     # 5. IO Ports
-    cell.add_port("VIN_P", Layer.METAL5, 0, cdac_h // 2, width=80, direction="input")
-    cell.add_port("VIN_N", Layer.METAL5, 0, (cdac_h // 2) + 500, width=80, direction="input")
-    cell.add_port("VREF_P", Layer.METAL6, 0, cdac_h + 400, width=100, direction="input")
-    cell.add_port("VREF_N", Layer.METAL6, 0, cdac_h + 1000, width=100, direction="input")
+    cell.add_port("VIN_P", Layer.METAL2, 0, cdac_h // 2, width=80, direction="input")
+    cell.add_port("VIN_N", Layer.METAL2, 0, (cdac_h // 2) + 500, width=80, direction="input")
+    cell.add_port("VREF_P", Layer.METAL4, 0, cdac_h + 400, width=100, direction="input")
+    cell.add_port("VREF_N", Layer.METAL4, 0, cdac_h + 1000, width=100, direction="input")
     cell.add_port("CLK", Layer.METAL3, sar_x_max, sar_y_min + 500, width=60, direction="input")
     cell.add_port("VALID", Layer.METAL3, sar_x_max, sar_y_max - 500, width=60, direction="output")
 

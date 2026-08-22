@@ -1,0 +1,39 @@
+{
+  "chapter": "0061-tile-floorplan-power-grid",
+  "gate": "R15",
+  "work_package": "WP15.3",
+  "status": "PASSED",
+  "claim_level": "physical/tile-floorplan-power",
+  "tile_specifications": {
+    "name": "core_imc_tile_28nm",
+    "width_um": 57.3,
+    "height_um": 57.3,
+    "total_area_um2": 3283.2899999999995,
+    "derived_model_area_um2": 3281.5,
+    "area_match_ratio": 1.0005454822489714,
+    "total_shapes": 3530,
+    "port_count": 7,
+    "reram_quadrants": 4,
+    "sar_adc_count": 16,
+    "sram_buffer_kb": 4
+  },
+  "drc_signoff": {
+    "is_clean": true,
+    "total_checks": 6122,
+    "violation_count": 0
+  },
+  "power_grid_ir_drop": {
+    "domain": "VDD_ANA",
+    "nominal_voltage_v": 1.0,
+    "worst_case_voltage_v": 0.9994925867346939,
+    "max_ir_drop_mv": 0.5074132653061223,
+    "ir_drop_pct": 0.05074132653061223,
+    "max_allowed_ir_drop_mv": 30.0,
+    "peak_current_ma": 1.2,
+    "mesh_resistance_ohm": 0.42284438775510197,
+    "max_current_density_ma_um": 0.28571428571428575,
+    "max_allowed_em_limit_ma_um": 1.5,
+    "is_ir_drop_clean": true,
+    "is_em_clean": true
+  }
+}
