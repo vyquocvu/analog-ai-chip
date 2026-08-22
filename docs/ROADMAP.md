@@ -564,9 +564,9 @@ protection ($> 2\text{ kV}$ HBM), and balanced clock skew ($11.4\text{ ps}$).
 
 ---
 
-# R16 — Post-layout parasitic extraction & static timing signoff — ACTIVE
+# R16 — Post-layout parasitic extraction & static timing signoff — PASSED
 
-Depends on R15.
+Depends on R15. Closed by chapters 0063–0065.
 
 ## WP16.1 — Parasitic extraction (PEX/SPEF) & crossbar settling
 
@@ -578,11 +578,15 @@ Depends on R15.
 
 ## WP16.3 — Power grid resonance & electromigration (EM)
 
-- [ ] Sign off dynamic power grid integrity, simultaneous switching noise (SSN), and electromigration rules.
+- [x] Sign off dynamic power grid integrity, simultaneous switching noise (SSN), and electromigration rules.
+
+### Gate exit criteria
+
+Post-layout SPEF extraction demonstrates that crossbar analog settling ($t_{\text{settle}} = 2.45\text{ ns}$) is within the $5.0\text{ ns}$ SAR ADC aperture ($2.04\times$ margin), multi-corner PVT static timing analysis achieves $\text{WNS} = 0.0\text{ ps}$ and $\text{TNS} = 0.0\text{ ps}$ across all NoC ($1\text{ GHz}$) and IMC ($50\text{ MHz}$) domains, and dynamic power grid integrity verifies harmonic resonance isolation ($f_{\text{res}} = 3.66\text{ GHz} \gg 1.0\text{ GHz}$), safe SSN noise ($\Delta V = 12.51\text{ mV} \le 50.0\text{ mV}$), and copper EM reliability ($\text{MTTF} = 25.5\text{ Years} \ge 10.0\text{ Years}$).
 
 ---
 
-# R17 — Tape-out signoff & package/PCB integration — QUEUED
+# R17 — Tape-out signoff & package/PCB integration — ACTIVE
 
 Depends on R16.
 

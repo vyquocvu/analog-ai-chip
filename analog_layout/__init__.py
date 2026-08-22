@@ -12,6 +12,12 @@ from .drc import (
     DRCViolation,
     run_drc,
 )
+from .dynamic_power_em import (
+    DynamicPowerEMReport,
+    ElectromigrationParameters,
+    PDNParameters,
+    run_dynamic_power_em_signoff,
+)
 from .export_svg import export_layout_to_svg
 from .full_chip import (
     FullChipAssemblyConfig,
@@ -73,10 +79,13 @@ __all__ = [
     "DRCReport",
     "DRCViolation",
     "DesignRules28nm",
+    "DynamicPowerEMReport",
+    "ElectromigrationParameters",
     "FullChipAssemblyConfig",
     "LVSReport",
     "Layer",
     "LayoutCell",
+    "PDNParameters",
     "PEXTechnologyProfile",
     "PVTCorner",
     "ParasiticNet",
@@ -108,6 +117,7 @@ __all__ = [
     "get_standard_clock_domains",
     "get_standard_pvt_corners",
     "run_drc",
+    "run_dynamic_power_em_signoff",
     "run_lvs",
     "run_static_timing_analysis",
     "simulate_crossbar_post_layout_settling",
