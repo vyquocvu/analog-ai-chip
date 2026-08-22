@@ -1,0 +1,81 @@
+{
+  "chapter": "0050-nonideality-surrogates",
+  "gate": "R11",
+  "status": "PASSED",
+  "claim_level": "functional/statistical-surrogate",
+  "calibrations": {
+    "attention.q_proj": {
+      "error_mean": -0.0006447023684427746,
+      "error_std": 0.03713252811135038,
+      "snr_db": 32.90206058088937,
+      "max_abs_error": 0.1396339466658264,
+      "relative_l2_error_pct": 2.2641071226301537,
+      "calibrated_weight_max": 0.4
+    },
+    "attention.k_proj": {
+      "error_mean": -0.0006447023684427746,
+      "error_std": 0.03713252811135038,
+      "snr_db": 32.90206058088937,
+      "max_abs_error": 0.1396339466658264,
+      "relative_l2_error_pct": 2.2641071226301537,
+      "calibrated_weight_max": 0.4
+    },
+    "attention.v_proj": {
+      "error_mean": -0.0006447023684427746,
+      "error_std": 0.03713252811135038,
+      "snr_db": 32.90206058088937,
+      "max_abs_error": 0.1396339466658264,
+      "relative_l2_error_pct": 2.2641071226301537,
+      "calibrated_weight_max": 0.4
+    },
+    "attention.out_proj": {
+      "error_mean": -0.0008440340692009816,
+      "error_std": 0.041308658663656316,
+      "snr_db": 31.809117666629835,
+      "max_abs_error": 0.1208640678001367,
+      "relative_l2_error_pct": 2.5676990278453027,
+      "calibrated_weight_max": 0.4
+    },
+    "mlp.gate_proj": {
+      "error_mean": 4.106488245641006e-05,
+      "error_std": 0.03630767336008116,
+      "snr_db": 32.99526576888853,
+      "max_abs_error": 0.12312278388565723,
+      "relative_l2_error_pct": 2.2399416827627254,
+      "calibrated_weight_max": 0.4
+    },
+    "mlp.up_proj": {
+      "error_mean": -0.0012563974443433193,
+      "error_std": 0.03827133688036194,
+      "snr_db": 32.17488540212776,
+      "max_abs_error": 0.13109406068708818,
+      "relative_l2_error_pct": 2.461816793244386,
+      "calibrated_weight_max": 0.4
+    },
+    "mlp.down_proj": {
+      "error_mean": 4.106488245641006e-05,
+      "error_std": 0.03630767336008116,
+      "snr_db": 32.99526576888853,
+      "max_abs_error": 0.12312278388565723,
+      "relative_l2_error_pct": 2.2399416827627254,
+      "calibrated_weight_max": 0.4
+    }
+  },
+  "mode_comparisons": {
+    "exact_mode": {
+      "is_physical_simulation": true,
+      "description": "Full profile-driven physical tile MVM simulation",
+      "macs": 4096
+    },
+    "layer_sampled_mode": {
+      "is_physical_simulation": true,
+      "description": "Exact physical simulation on sampled layer 0",
+      "macs": 4096
+    },
+    "statistical_surrogate_mode": {
+      "is_physical_simulation": false,
+      "description": "Calibrated empirical Gaussian statistical surrogate noise injection",
+      "snr_db": 32.99948250836212
+    }
+  }
+}

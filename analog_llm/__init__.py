@@ -58,6 +58,13 @@ from .profile_adapter import (
     nonideality_config_from_profile,
     tile_config_from_profile,
 )
+from .surrogate import (
+    EvaluationMode,
+    NonIdealityEvaluationResult,
+    SurrogateCalibrationProfile,
+    calibrate_surrogate,
+    evaluate_projection_nonideality,
+)
 from .tile import CrossbarTile
 from .transformer import Metrics, TinyGPT, TinyGPTConfig
 
@@ -69,13 +76,16 @@ __all__ = [
     "CheckpointInventory",
     "CrossbarTile",
     "ErrorAttributionResult",
+    "EvaluationMode",
     "FileProvenance",
     "GeneralizedDecoder",
     "MechanismMetrics",
     "Metrics",
     "ModelManifest",
+    "NonIdealityEvaluationResult",
     "OutputCalibration",
     "StreamedMemoryBudget",
+    "SurrogateCalibrationProfile",
     "TensorSpec",
     "TinyGPT",
     "TinyGPTConfig",
@@ -92,10 +102,12 @@ __all__ = [
     "build_tile_factory_from_converter_profiles",
     "cached_attention_step",
     "calculate_execution_memory_budget",
+    "calibrate_surrogate",
     "causal_attention",
     "converter_config_from_profiles",
     "dac",
     "evaluate_attribution_suite",
+    "evaluate_projection_nonideality",
     "gelu",
     "layer_norm",
     "load_device_profile",

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="380" viewBox="0 0 960 380" role="img" aria-labelledby="title desc">
+  <title id="title">Scalable Non-Ideality Evaluation Modes</title>
+  <desc id="desc">Three explicit evaluation modes: exact physical simulation, layer-sampled simulation, and statistical surrogate noise model, cross-calibrated over stratified matrix domains.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker>
+    <style>
+      .box{fill:#f8fafc;stroke:#64748b;stroke-width:2}
+      .exact{fill:#fff7ed;stroke:#ea580c;stroke-width:2}
+      .sampled{fill:#ecfeff;stroke:#0891b2;stroke-width:2}
+      .surr{fill:#eff6ff;stroke:#2563eb;stroke-width:2}
+      .head{font:bold 16px sans-serif;fill:#0f172a}
+      .txt{font:14px sans-serif;fill:#334155}
+      .tag{font:bold 12px sans-serif;fill:#475569}
+      .wire{stroke:#334155;stroke-width:2;marker-end:url(#arrow)}
+      .dash{stroke:#64748b;stroke-width:2;stroke-dasharray:4,4;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <!-- Top Title Banner -->
+  <rect class="box" x="30" y="20" rx="8" width="900" height="50"/>
+  <text class="head" x="50" y="50">Simulation Fidelity Ladder &amp; Cross-Calibration Bridge</text>
+  <text class="txt" x="500" y="50">Strictly distinguishes physical simulation from statistical approximation</text>
+
+  <!-- Mode 1: EXACT -->
+  <rect class="exact" x="30" y="95" rx="8" width="280" height="210"/>
+  <text class="head" x="45" y="125">1. EXACT Physical Mode</text>
+  <text class="tag" x="45" y="150">STATUS: VERIFIED PHYSICAL</text>
+  <text class="txt" x="45" y="180">• 9 physical mechanisms</text>
+  <text class="txt" x="45" y="205">• Block-by-block MVM ledger</text>
+  <text class="txt" x="45" y="230">• Cycle &amp; MAC accurate</text>
+  <text class="txt" x="45" y="255">• Target: T0 &amp; small matrices</text>
+  <text class="tag" x="45" y="285">Fidelity: 100% | Speed: 1×</text>
+
+  <!-- Mode 2: LAYER_SAMPLED -->
+  <rect class="sampled" x="340" y="95" rx="8" width="280" height="210"/>
+  <text class="head" x="355" y="125">2. LAYER_SAMPLED Mode</text>
+  <text class="tag" x="355" y="150">STATUS: SAMPLED HYBRID</text>
+  <text class="txt" x="355" y="180">• Exact on layer subset (e.g. 0, L/2)</text>
+  <text class="txt" x="355" y="205">• Digital float bypass on remainder</text>
+  <text class="txt" x="355" y="230">• Quantifies error propagation</text>
+  <text class="txt" x="355" y="255">• Target: T1 &amp; deep decoders</text>
+  <text class="tag" x="355" y="285">Fidelity: Stratified | Speed: ~5×</text>
+
+  <!-- Mode 3: STATISTICAL_SURROGATE -->
+  <rect class="surr" x="650" y="95" rx="8" width="280" height="210"/>
+  <text class="head" x="665" y="125">3. SURROGATE Mode</text>
+  <text class="tag" x="665" y="150">STATUS: APPROXIMATE STATISTICAL</text>
+  <text class="txt" x="665" y="180">• Empirical Gaussian noise N(μ, σ)</text>
+  <text class="txt" x="665" y="205">• Calibrated SNR per layer family</text>
+  <text class="txt" x="665" y="230">• Fail-closed outside domain</text>
+  <text class="txt" x="665" y="255">• Target: T2/T3 fast screening</text>
+  <text class="tag" x="665" y="285">Fidelity: Statistical | Speed: &gt;50×</text>
+
+  <!-- Calibration Bridge Arrow -->
+  <path class="dash" d="M 310,200 Q 480,330 650,200"/>
+  <text class="tag" x="420" y="345">Stratified Domain Calibration Bridge</text>
+</svg>

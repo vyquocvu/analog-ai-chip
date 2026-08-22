@@ -378,11 +378,11 @@ Depends on R10 + R5.
 
 ## WP11.2 — Scalable non-ideality evaluation
 
-- [ ] Define `exact`, `layer-sampled` and `statistical-surrogate` evaluation modes;
+- [x] Define `exact`, `layer-sampled` and `statistical-surrogate` evaluation modes;
   never label a sampled/surrogate run as full physical simulation.
-- [ ] Calibrate any surrogate against exact profile-driven tile execution over a
+- [x] Calibrate any surrogate against exact profile-driven tile execution over a
   deterministic stratified matrix suite (layer type, depth, shape and weight range).
-- [ ] Report confidence/error bounds and fail closed outside the calibrated domain.
+- [x] Report confidence/error bounds and fail closed outside the calibrated domain.
 
 ## WP11.3 — Reproducible execution envelope
 
