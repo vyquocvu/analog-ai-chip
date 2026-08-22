@@ -1,0 +1,196 @@
+{
+  "chapter": "0064-multi-corner-sta-signoff",
+  "gate": "R16",
+  "work_package": "WP16.2",
+  "status": "PASSED",
+  "claim_level": "physical/sta-signoff",
+  "timing_signoff_summary": {
+    "is_timing_clean": true,
+    "total_paths_analyzed": 5,
+    "total_timing_checks": 30,
+    "corners_evaluated": [
+      "TT_1p0V_25C",
+      "SS_0p9V_125C",
+      "FF_1p1V_m40C"
+    ],
+    "worst_setup_slack_ps": 216.75,
+    "worst_hold_slack_ps": 16.667499999999997,
+    "wns_setup_ps": 0.0,
+    "wns_hold_ps": 0.0,
+    "tns_setup_ps": 0.0,
+    "tns_hold_ps": 0.0,
+    "cdc_synchronizer_mtbf_years": 1450000000.0
+  },
+  "clock_domains": [
+    {
+      "name": "CLK_NOC",
+      "frequency_mhz": 1000.0,
+      "period_ps": 1000.0,
+      "clock_skew_ps": 11.4
+    },
+    {
+      "name": "CLK_SAR_ADC",
+      "frequency_mhz": 200.0,
+      "period_ps": 5000.0,
+      "clock_skew_ps": 8.2
+    },
+    {
+      "name": "CLK_TILE_IMC",
+      "frequency_mhz": 50.0,
+      "period_ps": 20000.0,
+      "clock_skew_ps": 14.8
+    }
+  ],
+  "critical_path_results": [
+    {
+      "path_name": "NOC_ROUTER_ARBITER_STAGE",
+      "corner": "TT_1p0V_25C",
+      "clock_domain": "CLK_NOC",
+      "data_delay_ps": 540.0,
+      "setup_slack_ps": 393.6,
+      "hold_slack_ps": 508.6,
+      "setup_pass": true,
+      "hold_pass": true
+    },
+    {
+      "path_name": "NOC_CROSSBAR_SWITCH_MUX",
+      "corner": "TT_1p0V_25C",
+      "clock_domain": "CLK_NOC",
+      "data_delay_ps": 480.0,
+      "setup_slack_ps": 458.6,
+      "hold_slack_ps": 448.6,
+      "setup_pass": true,
+      "hold_pass": true
+    },
+    {
+      "path_name": "SRAM_TO_TILE_BUFFER_IF",
+      "corner": "TT_1p0V_25C",
+      "clock_domain": "CLK_TILE_IMC",
+      "data_delay_ps": 3200.0,
+      "setup_slack_ps": 16705.2,
+      "hold_slack_ps": 3155.2,
+      "setup_pass": true,
+      "hold_pass": true
+    },
+    {
+      "path_name": "ADC_COMPARATOR_LATCH_TO_SAR_REG",
+      "corner": "TT_1p0V_25C",
+      "clock_domain": "CLK_SAR_ADC",
+      "data_delay_ps": 1650.0,
+      "setup_slack_ps": 3276.8,
+      "hold_slack_ps": 1616.8,
+      "setup_pass": true,
+      "hold_pass": true
+    },
+    {
+      "path_name": "CDC_SYNCHRONIZER_STAGE_1_TO_2",
+      "corner": "TT_1p0V_25C",
+      "clock_domain": "CLK_NOC",
+      "data_delay_ps": 65.0,
+      "setup_slack_ps": 878.6,
+      "hold_slack_ps": 33.6,
+      "setup_pass": true,
+      "hold_pass": true
+    },
+    {
+      "path_name": "NOC_ROUTER_ARBITER_STAGE",
+      "corner": "SS_0p9V_125C",
+      "clock_domain": "CLK_NOC",
+      "data_delay_ps": 716.85,
+      "setup_slack_ps": 216.75,
+      "hold_slack_ps": 685.45,
+      "setup_pass": true,
+      "hold_pass": true
+    },
+    {
+      "path_name": "NOC_CROSSBAR_SWITCH_MUX",
+      "corner": "SS_0p9V_125C",
+      "clock_domain": "CLK_NOC",
+      "data_delay_ps": 637.1999999999999,
+      "setup_slack_ps": 301.4000000000001,
+      "hold_slack_ps": 605.8,
+      "setup_pass": true,
+      "hold_pass": true
+    },
+    {
+      "path_name": "SRAM_TO_TILE_BUFFER_IF",
+      "corner": "SS_0p9V_125C",
+      "clock_domain": "CLK_TILE_IMC",
+      "data_delay_ps": 4248.0,
+      "setup_slack_ps": 15657.2,
+      "hold_slack_ps": 4203.2,
+      "setup_pass": true,
+      "hold_pass": true
+    },
+    {
+      "path_name": "ADC_COMPARATOR_LATCH_TO_SAR_REG",
+      "corner": "SS_0p9V_125C",
+      "clock_domain": "CLK_SAR_ADC",
+      "data_delay_ps": 2190.375,
+      "setup_slack_ps": 2736.425,
+      "hold_slack_ps": 2157.175,
+      "setup_pass": true,
+      "hold_pass": true
+    },
+    {
+      "path_name": "CDC_SYNCHRONIZER_STAGE_1_TO_2",
+      "corner": "SS_0p9V_125C",
+      "clock_domain": "CLK_NOC",
+      "data_delay_ps": 86.2875,
+      "setup_slack_ps": 857.3125,
+      "hold_slack_ps": 54.88749999999999,
+      "setup_pass": true,
+      "hold_pass": true
+    },
+    {
+      "path_name": "NOC_ROUTER_ARBITER_STAGE",
+      "corner": "FF_1p1V_m40C",
+      "clock_domain": "CLK_NOC",
+      "data_delay_ps": 399.33000000000004,
+      "setup_slack_ps": 534.27,
+      "hold_slack_ps": 367.93000000000006,
+      "setup_pass": true,
+      "hold_pass": true
+    },
+    {
+      "path_name": "NOC_CROSSBAR_SWITCH_MUX",
+      "corner": "FF_1p1V_m40C",
+      "clock_domain": "CLK_NOC",
+      "data_delay_ps": 354.96,
+      "setup_slack_ps": 583.6400000000001,
+      "hold_slack_ps": 323.56,
+      "setup_pass": true,
+      "hold_pass": true
+    },
+    {
+      "path_name": "SRAM_TO_TILE_BUFFER_IF",
+      "corner": "FF_1p1V_m40C",
+      "clock_domain": "CLK_TILE_IMC",
+      "data_delay_ps": 2366.3999999999996,
+      "setup_slack_ps": 17538.800000000003,
+      "hold_slack_ps": 2321.5999999999995,
+      "setup_pass": true,
+      "hold_pass": true
+    },
+    {
+      "path_name": "ADC_COMPARATOR_LATCH_TO_SAR_REG",
+      "corner": "FF_1p1V_m40C",
+      "clock_domain": "CLK_SAR_ADC",
+      "data_delay_ps": 1220.175,
+      "setup_slack_ps": 3706.625,
+      "hold_slack_ps": 1186.975,
+      "setup_pass": true,
+      "hold_pass": true
+    },
+    {
+      "path_name": "CDC_SYNCHRONIZER_STAGE_1_TO_2",
+      "corner": "FF_1p1V_m40C",
+      "clock_domain": "CLK_NOC",
+      "data_delay_ps": 48.067499999999995,
+      "setup_slack_ps": 895.5325,
+      "hold_slack_ps": 16.667499999999997,
+      "setup_pass": true,
+      "hold_pass": true
+    }
+  ]
+}

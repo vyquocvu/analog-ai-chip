@@ -574,7 +574,7 @@ Depends on R15.
 
 ## WP16.2 — Multi-corner PVT static timing analysis (STA)
 
-- [ ] Perform multi-corner PVT STA signoff (TT/FF/SS, -40°C to 125°C) across tile and NoC clock domains.
+- [x] Perform multi-corner PVT STA signoff (TT/FF/SS, -40°C to 125°C) across tile and NoC clock domains.
 
 ## WP16.3 — Power grid resonance & electromigration (EM)
 

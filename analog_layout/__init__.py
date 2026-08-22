@@ -51,6 +51,17 @@ from .reram_macro import (
     ReRAMArrayConfig,
     generate_reram_macro_cell,
 )
+from .sta import (
+    ClockDomain,
+    PathTimingResult,
+    PVTCorner,
+    STAReport,
+    TimingPath,
+    get_critical_timing_paths,
+    get_standard_clock_domains,
+    get_standard_pvt_corners,
+    run_static_timing_analysis,
+)
 from .tile_floorplan import (
     TileFloorplanConfig,
     generate_tile_floorplan,
@@ -58,6 +69,7 @@ from .tile_floorplan import (
 
 __all__ = [
     "CDACArrayConfig",
+    "ClockDomain",
     "DRCReport",
     "DRCViolation",
     "DesignRules28nm",
@@ -66,7 +78,9 @@ __all__ = [
     "Layer",
     "LayoutCell",
     "PEXTechnologyProfile",
+    "PVTCorner",
     "ParasiticNet",
+    "PathTimingResult",
     "Point",
     "Port",
     "PostLayoutSettlingConfig",
@@ -76,10 +90,12 @@ __all__ = [
     "Rectangle",
     "SARADCLayoutConfig",
     "SPEFNetlist",
+    "STAReport",
     "SchematicDevice",
     "SchematicNetlist",
     "SettlingReport",
     "TileFloorplanConfig",
+    "TimingPath",
     "build_golden_sar_adc_schematic",
     "export_layout_to_svg",
     "extract_spef_from_cell",
@@ -88,8 +104,12 @@ __all__ = [
     "generate_reram_macro_cell",
     "generate_sar_adc_layout",
     "generate_tile_floorplan",
+    "get_critical_timing_paths",
+    "get_standard_clock_domains",
+    "get_standard_pvt_corners",
     "run_drc",
     "run_lvs",
+    "run_static_timing_analysis",
     "simulate_crossbar_post_layout_settling",
     "simulate_power_grid_ir_drop",
 ]
