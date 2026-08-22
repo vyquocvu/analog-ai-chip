@@ -12,6 +12,12 @@ from .attribution import (
     attribute_tile_error,
     evaluate_attribution_suite,
 )
+from .block_stream import (
+    BlockStreamedLinear,
+    StreamedMemoryBudget,
+    calculate_execution_memory_budget,
+    streamed_linear_mvm,
+)
 from .calibration import OutputCalibration, output_calibration_from_profile
 from .checkpoint_loader import (
     CheckpointIngestionResult,
@@ -58,6 +64,7 @@ from .transformer import Metrics, TinyGPT, TinyGPTConfig
 __all__ = [
     "CROSSBAR_NONIDEALITY_FIELDS",
     "Accelerator",
+    "BlockStreamedLinear",
     "CheckpointIngestionResult",
     "CheckpointInventory",
     "CrossbarTile",
@@ -68,6 +75,7 @@ __all__ = [
     "Metrics",
     "ModelManifest",
     "OutputCalibration",
+    "StreamedMemoryBudget",
     "TensorSpec",
     "TinyGPT",
     "TinyGPTConfig",
@@ -83,6 +91,7 @@ __all__ = [
     "build_tile_factory",
     "build_tile_factory_from_converter_profiles",
     "cached_attention_step",
+    "calculate_execution_memory_budget",
     "causal_attention",
     "converter_config_from_profiles",
     "dac",
@@ -99,6 +108,7 @@ __all__ = [
     "scale_weights",
     "silu",
     "solve_crossbar_nodal",
+    "streamed_linear_mvm",
     "swiglu",
     "symmetric_converter",
     "tile_config_from_profile",

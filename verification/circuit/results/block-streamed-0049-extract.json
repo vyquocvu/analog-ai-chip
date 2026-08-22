@@ -1,0 +1,92 @@
+{
+  "chapter": "0049-block-streamed-execution",
+  "gate": "R11",
+  "status": "PASSED",
+  "claim_level": "functional/software-reference",
+  "benchmarks": {
+    "hand_calc_4x6": {
+      "out_features": 4,
+      "in_features": 6,
+      "tile_rows": 2,
+      "tile_cols": 2,
+      "max_abs_error": 0.0,
+      "memory_budget": {
+        "whole_matrix_float64_bytes": 192,
+        "working_block_bytes": 8,
+        "input_buffer_bytes": 48,
+        "output_buffer_bytes": 32,
+        "peak_working_bytes": 88,
+        "memory_reduction_ratio": 2.1818181818181817
+      }
+    },
+    "t0_tinygpt_proj": {
+      "out_features": 64,
+      "in_features": 64,
+      "tile_dimension": "16x16",
+      "total_blocks": 16,
+      "max_abs_error": 2.220446049250313e-16,
+      "single_token_memory_budget": {
+        "whole_matrix_float64_bytes": 32768,
+        "working_block_bytes": 512,
+        "input_buffer_bytes": 512,
+        "output_buffer_bytes": 512,
+        "peak_working_bytes": 1536,
+        "memory_reduction_ratio": 21.333333333333332
+      },
+      "batched_prefill_memory_budget": {
+        "whole_matrix_float64_bytes": 32768,
+        "working_block_bytes": 512,
+        "input_buffer_bytes": 2048,
+        "output_buffer_bytes": 2048,
+        "peak_working_bytes": 4608,
+        "memory_reduction_ratio": 7.111111111111111
+      }
+    },
+    "t1_1b_attn_proj": {
+      "out_features": 2048,
+      "in_features": 2048,
+      "tile_dimension": "16x16",
+      "total_blocks": 16384,
+      "max_abs_error": 1.0880185641326534e-14,
+      "single_token_memory_budget": {
+        "whole_matrix_float64_bytes": 33554432,
+        "working_block_bytes": 512,
+        "input_buffer_bytes": 16384,
+        "output_buffer_bytes": 16384,
+        "peak_working_bytes": 33280,
+        "memory_reduction_ratio": 1008.2461538461539
+      },
+      "batched_prefill_memory_budget": {
+        "whole_matrix_float64_bytes": 33554432,
+        "working_block_bytes": 512,
+        "input_buffer_bytes": 65536,
+        "output_buffer_bytes": 65536,
+        "peak_working_bytes": 131584,
+        "memory_reduction_ratio": 255.00389105058366
+      }
+    },
+    "t2_7b_attn_proj": {
+      "out_features": 4096,
+      "in_features": 4096,
+      "tile_dimension": "16x16",
+      "total_blocks": 65536,
+      "max_abs_error": 2.4424906541753444e-14,
+      "single_token_memory_budget": {
+        "whole_matrix_float64_bytes": 134217728,
+        "working_block_bytes": 512,
+        "input_buffer_bytes": 32768,
+        "output_buffer_bytes": 32768,
+        "peak_working_bytes": 66048,
+        "memory_reduction_ratio": 2032.124031007752
+      },
+      "batched_prefill_memory_budget": {
+        "whole_matrix_float64_bytes": 134217728,
+        "working_block_bytes": 512,
+        "input_buffer_bytes": 131072,
+        "output_buffer_bytes": 131072,
+        "peak_working_bytes": 262656,
+        "memory_reduction_ratio": 511.00194931773876
+      }
+    }
+  }
+}

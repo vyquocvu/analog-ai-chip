@@ -363,17 +363,17 @@ efficiently on the proposed accelerator.
 
 ---
 
-# R11 — Memory-bounded large-model simulator — PLANNED
+# R11 — Memory-bounded large-model simulator — ACTIVE
 
 Depends on R10 + R5.
 
 ## WP11.1 — Block-streamed linear execution
 
-- [ ] Replace whole-matrix `float64` conversion/copying with dtype-preserving,
+- [x] Replace whole-matrix `float64` conversion/copying with dtype-preserving,
   memory-mapped block iteration compatible with the physical tile partition.
-- [ ] Add batched token/prefill execution and vectorized tile-block evaluation;
+- [x] Add batched token/prefill execution and vectorized tile-block evaluation;
   retain a deterministic scalar reference for equivalence tests.
-- [ ] Bound peak host memory as a function of checkpoint dtype, active layer,
+- [x] Bound peak host memory as a function of checkpoint dtype, active layer,
   tile block and KV cache; measure process RSS separately from analytical bytes.
 
 ## WP11.2 — Scalable non-ideality evaluation
