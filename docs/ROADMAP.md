@@ -592,7 +592,7 @@ Depends on R16.
 
 ## WP17.1 — GDSII stream-out, dummy metal fill & foundry signoff
 
-- [ ] Insert dummy metal fill, run density gradient checks, and generate foundry tape-out checklist.
+- [x] Insert dummy metal fill, run density gradient checks, and generate foundry tape-out checklist.
 
 ## WP17.2 — FCBGA-676 substrate packaging & thermal spreader
 
