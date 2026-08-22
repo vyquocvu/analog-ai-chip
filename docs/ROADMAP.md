@@ -42,7 +42,7 @@ A higher gate may contain exploratory code, but it is not considered physically 
 | **R11** | Memory-bounded model execution | `book/0049`–`0051` | **PASSED** |
 | **R12** | Large-model architecture & residency | `book/0052`–`0053` | **PASSED** |
 | **R13** | Large-model validation & hardware recovery | `book/0054`–`0055` | **PASSED** |
-| **R14** | Multi-tier physical feasibility & design decision | `book/0056`–`0058` | **ACTIVE** |
+| **R14** | Multi-tier physical feasibility & design decision | `book/0056`–`0058` | **PASSED** |
 
 ---
 
@@ -484,7 +484,7 @@ evidence cannot satisfy a full-model accuracy claim.
 
 ---
 
-# R14 — Multi-tier physical feasibility and design decision — ACTIVE
+# R14 — Multi-tier physical feasibility and design decision — PASSED
 
 Depends on R13 + R8 + R9.
 
@@ -509,12 +509,12 @@ Depends on R13 + R8 + R9.
 
 ## WP14.3 — Go/no-go architecture report
 
-- [ ] Publish one integrated report that classifies each tier as `FEASIBLE`,
+- [x] Publish one integrated report that classifies each tier as `FEASIBLE`,
   `CONDITIONAL` or `INFEASIBLE` under frozen constraints and lists the evidence
   required to change that decision.
-- [ ] Select one implementation target for the next PCB/FPGA/IC correlation loop;
+- [x] Select one implementation target for the next PCB/FPGA/IC correlation loop;
   do not claim all tiers are equally realizable.
-- [ ] Preserve the strongest honest status: simulation-backed physical feasibility
+- [x] Preserve the strongest honest status: simulation-backed physical feasibility
   unless the corresponding large-model implementation is hardware measured.
 
 ### Gate R14 exit
