@@ -13,6 +13,10 @@ from .drc import (
     run_drc,
 )
 from .export_svg import export_layout_to_svg
+from .full_chip import (
+    FullChipAssemblyConfig,
+    generate_full_chip_assembly,
+)
 from .geometry import (
     Layer,
     LayoutCell,
@@ -46,6 +50,7 @@ __all__ = [
     "DRCReport",
     "DRCViolation",
     "DesignRules28nm",
+    "FullChipAssemblyConfig",
     "LVSReport",
     "Layer",
     "LayoutCell",
@@ -62,6 +67,7 @@ __all__ = [
     "build_golden_sar_adc_schematic",
     "export_layout_to_svg",
     "generate_cdac_layout",
+    "generate_full_chip_assembly",
     "generate_reram_macro_cell",
     "generate_sar_adc_layout",
     "generate_tile_floorplan",
