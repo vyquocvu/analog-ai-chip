@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="380" viewBox="0 0 960 380" role="img" aria-labelledby="title desc">
+  <title id="title">Scalable Hardware Recovery &amp; Selective Fallback</title>
+  <desc id="desc">Multi-stage mitigation pipeline restoring accuracy on deep analog transformer decoders with explicit hardware overhead ledger.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker>
+    <style>
+      .box{fill:#f8fafc;stroke:#64748b;stroke-width:2}
+      .rank{fill:#eff6ff;stroke:#2563eb;stroke-width:2}
+      .tune{fill:#fff7ed;stroke:#ea580c;stroke-width:2}
+      .comp{fill:#ecfdf5;stroke:#059669;stroke-width:2}
+      .head{font:bold 15px sans-serif;fill:#0f172a}
+      .txt{font:13px sans-serif;fill:#334155}
+      .tag{font:bold 11px sans-serif;fill:#475569}
+      .wire{stroke:#334155;stroke-width:2;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <!-- Title Banner -->
+  <rect class="box" x="30" y="20" rx="8" width="900" height="45"/>
+  <text class="head" x="50" y="48">Scalable Hardware Recovery &amp; Selective Digital Fallback (Gate R13)</text>
+
+  <!-- Stage 1: Sensitivity Ranking -->
+  <rect class="rank" x="30" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="45" y="115">1. Layer Sensitivity Ranking</text>
+  <text class="tag" x="45" y="135">PROFILING DECODER DEPTH</text>
+  <text class="txt" x="45" y="165">• Isolated per-layer perturbation</text>
+  <text class="txt" x="45" y="190">• Layer 0 (Input): High sensitivity</text>
+  <text class="txt" x="45" y="215">• Intermediate: Moderate resilience</text>
+  <text class="txt" x="45" y="240">• Final Layer: Logit calibration</text>
+  <text class="txt" x="45" y="265">• Guides Selective Fallback</text>
+  <text class="tag" x="45" y="295">STATUS: Sensitivity Profiled</text>
+
+  <!-- Stage 2: Hardware Tuning & Remapping -->
+  <rect class="tune" x="340" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="355" y="115">2. Tuning &amp; Defect Remap</text>
+  <text class="tag" x="355" y="135">PRE-INFERENCE CALIBRATION</text>
+  <text class="txt" x="355" y="165">• Write-Verify: σ_prog 1.5% → 0.25%</text>
+  <text class="txt" x="355" y="190">• Programming Energy: 4.2× pulses</text>
+  <text class="txt" x="355" y="215">• Spare Columns: 0 stuck faults</text>
+  <text class="txt" x="355" y="240">• Output Calibration: Gain/offset</text>
+  <text class="txt" x="355" y="265">• Metadata Storage: &lt; 1 KB</text>
+  <text class="tag" x="355" y="295">STATUS: Variance Suppressed</text>
+
+  <!-- Stage 3: Composite Recovery & Fallback -->
+  <rect class="comp" x="655" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="670" y="115">3. Composite Recovery</text>
+  <text class="tag" x="670" y="135">FULL SYSTEM RESTORATION</text>
+  <text class="txt" x="670" y="165">• Fallback: Layer 0 in FP16 Vector</text>
+  <text class="txt" x="670" y="190">• Crossbar: Layers 1–N in Analog</text>
+  <text class="txt" x="670" y="215">• Top-1 Agree: 6.2% → 87.5%</text>
+  <text class="txt" x="670" y="240">• PPL Restored to Baseline</text>
+  <text class="txt" x="670" y="265">• Compute Overhead: +25% Digital</text>
+  <text class="tag" x="670" y="295">GATE R13: ACCEPTANCE PASSED</text>
+
+  <!-- Footnote -->
+  <text class="tag" x="30" y="355">STRICT LEDGER: Every recovery strategy accounts for calibration metadata bytes, write-verify energy, and digital MAC overhead.</text>
+</svg>

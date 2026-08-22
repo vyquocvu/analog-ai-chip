@@ -41,8 +41,8 @@ A higher gate may contain exploratory code, but it is not considered physically 
 | **R10** | Scalable model semantics & sharded checkpoints | `book/0046`–`0048` | **PASSED** |
 | **R11** | Memory-bounded model execution | `book/0049`–`0051` | **PASSED** |
 | **R12** | Large-model architecture & residency | `book/0052`–`0053` | **PASSED** |
-| **R13** | Large-model validation & hardware recovery | `book/0054`–`0055` | **ACTIVE** |
-| **R14** | Multi-tier physical feasibility & design decision | `book/0056`–`0058` | **PLANNED** |
+| **R13** | Large-model validation & hardware recovery | `book/0054`–`0055` | **PASSED** |
+| **R14** | Multi-tier physical feasibility & design decision | `book/0056`–`0058` | **ACTIVE** |
 
 ---
 
@@ -443,7 +443,7 @@ memory assumptions.
 
 ---
 
-# R13 — Large-model accuracy and hardware-recovery validation — ACTIVE
+# R13 — Large-model accuracy and hardware-recovery validation — PASSED
 
 Depends on R11 + R12.
 
@@ -468,11 +468,11 @@ Depends on R11 + R12.
 
 ## WP13.3 — Scalable recovery
 
-- [ ] Extend output calibration, defect remapping and write-verify tuning to shared
+- [x] Extend output calibration, defect remapping and write-verify tuning to shared
   calibration groups with explicit metadata/storage/programming cost.
-- [ ] Evaluate layer sensitivity, selective digital fallback and mixed precision;
+- [x] Evaluate layer sensitivity, selective digital fallback and mixed precision;
   include their latency/energy/area penalties in the architecture ledger.
-- [ ] Freeze accuracy acceptance thresholds per tier before running the final
+- [x] Freeze accuracy acceptance thresholds per tier before running the final
   recovery experiment.
 
 ### Gate R13 exit
@@ -484,7 +484,7 @@ evidence cannot satisfy a full-model accuracy claim.
 
 ---
 
-# R14 — Multi-tier physical feasibility and design decision — PLANNED
+# R14 — Multi-tier physical feasibility and design decision — ACTIVE
 
 Depends on R13 + R8 + R9.
 
