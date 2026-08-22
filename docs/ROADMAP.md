@@ -333,14 +333,14 @@ test suite.
 
 ## WP10.2 — Generalized decoder functional reference
 
-- [ ] Split the current `TinyGPT`-specific execution into reusable decoder,
+- [x] Split the current `TinyGPT`-specific execution into reusable decoder,
   attention, norm, position and MLP primitives while preserving GPT-2 parity.
-- [ ] Add RoPE, RMSNorm, SwiGLU and grouped-query attention; keep the analog/digital
+- [x] Add RoPE, RMSNorm, SwiGLU and grouped-query attention; keep the analog/digital
   boundary explicit (static projection weights analog-eligible, token-token
   attention and normalization digital).
-- [ ] Prove each new primitive with a tiny hand calculation plus an independent
+- [x] Prove each new primitive with a tiny hand calculation plus an independent
   reference implementation and at least one invalid/boundary test.
-- [ ] Preserve KV-cache versus full-context parity for MHA, GQA and MQA.
+- [x] Preserve KV-cache versus full-context parity for MHA, GQA and MQA.
 
 ## WP10.3 — Sharded HuggingFace checkpoint ingestion
 

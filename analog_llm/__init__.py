@@ -36,6 +36,7 @@ from .decoder_primitives import (
     swiglu,
 )
 from .device_profile import load_device_profile, validate_device_profile
+from .generalized_decoder import GeneralizedDecoder
 from .model_manifest import ModelManifest, TensorSpec
 from .profile_adapter import (
     CROSSBAR_NONIDEALITY_FIELDS,
@@ -53,6 +54,7 @@ __all__ = [
     "Accelerator",
     "CrossbarTile",
     "ErrorAttributionResult",
+    "GeneralizedDecoder",
     "MechanismMetrics",
     "Metrics",
     "ModelManifest",
