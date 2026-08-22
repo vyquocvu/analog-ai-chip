@@ -570,7 +570,7 @@ Depends on R15.
 
 ## WP16.1 — Parasitic extraction (PEX/SPEF) & crossbar settling
 
-- [ ] Extract full RC parasitic SPEF netlist and re-simulate crossbar settling time in ngspice.
+- [x] Extract full RC parasitic SPEF netlist and re-simulate crossbar settling time in ngspice.
 
 ## WP16.2 — Multi-corner PVT static timing analysis (STA)
 

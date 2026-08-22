@@ -31,6 +31,17 @@ from .lvs import (
     build_golden_sar_adc_schematic,
     run_lvs,
 )
+from .pex import (
+    ParasiticNet,
+    PEXTechnologyProfile,
+    SPEFNetlist,
+    extract_spef_from_cell,
+)
+from .post_layout_sim import (
+    PostLayoutSettlingConfig,
+    SettlingReport,
+    simulate_crossbar_post_layout_settling,
+)
 from .power_grid import (
     PowerGridConfig,
     PowerGridReport,
@@ -54,18 +65,24 @@ __all__ = [
     "LVSReport",
     "Layer",
     "LayoutCell",
+    "PEXTechnologyProfile",
+    "ParasiticNet",
     "Point",
     "Port",
+    "PostLayoutSettlingConfig",
     "PowerGridConfig",
     "PowerGridReport",
     "ReRAMArrayConfig",
     "Rectangle",
     "SARADCLayoutConfig",
+    "SPEFNetlist",
     "SchematicDevice",
     "SchematicNetlist",
+    "SettlingReport",
     "TileFloorplanConfig",
     "build_golden_sar_adc_schematic",
     "export_layout_to_svg",
+    "extract_spef_from_cell",
     "generate_cdac_layout",
     "generate_full_chip_assembly",
     "generate_reram_macro_cell",
@@ -73,5 +90,6 @@ __all__ = [
     "generate_tile_floorplan",
     "run_drc",
     "run_lvs",
+    "simulate_crossbar_post_layout_settling",
     "simulate_power_grid_ir_drop",
 ]
