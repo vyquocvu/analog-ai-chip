@@ -38,8 +38,8 @@ A higher gate may contain exploratory code, but it is not considered physically 
 | **R7** | Transformer mapping & small LLM validation | `book/0027`–`0037` | **PASSED** |
 | **R8** | Physical feasibility report (latency/energy/area) | `book/0038`–`0042` | **PASSED** |
 | **R9** | Implementation correlation (FPGA/PCB/Tape-out) | `book/0043`–`0045` | **PASSED** |
-| **R10** | Scalable model semantics & sharded checkpoints | `book/0046`–`0048` | **ACTIVE** |
-| **R11** | Memory-bounded model execution | `book/0049`–`0051` | **PLANNED** |
+| **R10** | Scalable model semantics & sharded checkpoints | `book/0046`–`0048` | **PASSED** |
+| **R11** | Memory-bounded model execution | `book/0049`–`0051` | **ACTIVE** |
 | **R12** | Large-model architecture & residency | `book/0052`–`0053` | **PLANNED** |
 | **R13** | Large-model validation & hardware recovery | `book/0054`–`0055` | **PLANNED** |
 | **R14** | Multi-tier physical feasibility & design decision | `book/0056`–`0058` | **PLANNED** |
@@ -297,7 +297,7 @@ not silicon verification. Gate R8 exited successfully — all physical feasibili
 
 ---
 
-# R10 — Scalable model contract and checkpoint ingestion — ACTIVE
+# R10 — Scalable model contract and checkpoint ingestion — PASSED
 
 Depends on R7 (closed). R10 extends the functional/model contract; it does not
 change or strengthen any circuit/device claim from R0–R9.
@@ -344,13 +344,13 @@ test suite.
 
 ## WP10.3 — Sharded HuggingFace checkpoint ingestion
 
-- [ ] Generalize the GPT-2-only loader to consume indexed/sharded safetensors and
+- [x] Generalize the GPT-2-only loader to consume indexed/sharded safetensors and
   architecture adapters without materializing a second full copy of the model.
-- [ ] Support at least one GPT-2-style and one Llama-style local fixture with strict
+- [x] Support at least one GPT-2-style and one Llama-style local fixture with strict
   tensor-name, shape, dtype, transpose and weight-tying validation.
-- [ ] Record checkpoint/tokenizer provenance and reject mutable or unhashed inputs
+- [x] Record checkpoint/tokenizer provenance and reject mutable or unhashed inputs
   in reproducible verification runs.
-- [ ] Emit a deterministic model inventory: tensors, parameters, bytes, analog-
+- [x] Emit a deterministic model inventory: tensors, parameters, bytes, analog-
   eligible weights, digital-only state and per-layer matrix shapes.
 
 ### Gate R10 exit

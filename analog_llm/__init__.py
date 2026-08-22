@@ -13,6 +13,12 @@ from .attribution import (
     evaluate_attribution_suite,
 )
 from .calibration import OutputCalibration, output_calibration_from_profile
+from .checkpoint_loader import (
+    CheckpointIngestionResult,
+    CheckpointInventory,
+    FileProvenance,
+    load_hf_checkpoint,
+)
 from .converters import adc, dac, symmetric_converter
 from .crossbar import (
     apply_conductance_drift,
@@ -52,8 +58,11 @@ from .transformer import Metrics, TinyGPT, TinyGPTConfig
 __all__ = [
     "CROSSBAR_NONIDEALITY_FIELDS",
     "Accelerator",
+    "CheckpointIngestionResult",
+    "CheckpointInventory",
     "CrossbarTile",
     "ErrorAttributionResult",
+    "FileProvenance",
     "GeneralizedDecoder",
     "MechanismMetrics",
     "Metrics",
@@ -81,6 +90,7 @@ __all__ = [
     "gelu",
     "layer_norm",
     "load_device_profile",
+    "load_hf_checkpoint",
     "map_differential",
     "mvm",
     "nonideality_config_from_profile",
