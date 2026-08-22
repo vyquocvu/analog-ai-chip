@@ -12,6 +12,7 @@ from .drc import (
     DRCViolation,
     run_drc,
 )
+from .export_svg import export_layout_to_svg
 from .geometry import (
     Layer,
     LayoutCell,
@@ -47,6 +48,7 @@ __all__ = [
     "SchematicDevice",
     "SchematicNetlist",
     "build_golden_sar_adc_schematic",
+    "export_layout_to_svg",
     "generate_cdac_layout",
     "generate_reram_macro_cell",
     "generate_sar_adc_layout",
