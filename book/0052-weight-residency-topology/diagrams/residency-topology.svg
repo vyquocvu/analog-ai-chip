@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="380" viewBox="0 0 960 380" role="img" aria-labelledby="title desc">
+  <title id="title">Weight Residency &amp; Topology Scaling</title>
+  <desc id="desc">Hardware topology scaling from single-die stationary crossbars to multi-chiplet interposers and off-chip HBM3e streaming.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker>
+    <style>
+      .box{fill:#f8fafc;stroke:#64748b;stroke-width:2}
+      .t0{fill:#fff7ed;stroke:#ea580c;stroke-width:2}
+      .t1{fill:#eff6ff;stroke:#2563eb;stroke-width:2}
+      .t3{fill:#ecfdf5;stroke:#059669;stroke-width:2}
+      .head{font:bold 15px sans-serif;fill:#0f172a}
+      .txt{font:13px sans-serif;fill:#334155}
+      .tag{font:bold 11px sans-serif;fill:#475569}
+      .wire{stroke:#334155;stroke-width:2;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <!-- Title Banner -->
+  <rect class="box" x="30" y="20" rx="8" width="900" height="45"/>
+  <text class="head" x="50" y="48">Weight Residency Ladder &amp; Multi-Die Silicon Packaging</text>
+
+  <!-- Tier 0: Single-Die Monolithic -->
+  <rect class="t0" x="30" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="45" y="115">T0: Monolithic Single Die</text>
+  <text class="tag" x="45" y="135">GPT-2 (124M Parameters)</text>
+  <text class="txt" x="45" y="165">• Area: 336 mm² (1 Die)</text>
+  <text class="txt" x="45" y="190">• Total Tiles: 331,776 (16×16)</text>
+  <text class="txt" x="45" y="215">• Schedule: FULLY RESIDENT</text>
+  <text class="txt" x="45" y="240">• Reload: 0 B / token</text>
+  <text class="txt" x="45" y="265">• ReRAM Write Energy: 0 μJ/tok</text>
+  <text class="tag" x="45" y="295">STATUS: Single-Die Feasible</text>
+
+  <!-- Tier 1: Multi-Chiplet 2.5D Interposer -->
+  <rect class="t1" x="340" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="355" y="115">T1: 2.5D Multi-Chiplet</text>
+  <text class="tag" x="355" y="135">LLaMA-1B (1.1B Parameters)</text>
+  <text class="txt" x="355" y="165">• Area: 4,054 mm² (11 Dies)</text>
+  <text class="txt" x="355" y="190">• Interconnect: UCIe 512 GB/s</text>
+  <text class="txt" x="355" y="215">• Schedule: FULLY RESIDENT</text>
+  <text class="txt" x="355" y="240">• Reload: 0 B / token</text>
+  <text class="txt" x="355" y="265">• Inter-Die Latency: &lt; 50 ns</text>
+  <text class="tag" x="355" y="295">STATUS: Multi-Chiplet Package</text>
+
+  <!-- Tier 2/3: Dynamic Layer Streaming -->
+  <rect class="t3" x="655" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="670" y="115">T2/T3: Dynamic Streaming</text>
+  <text class="tag" x="670" y="135">LLaMA-2 (7B Parameters)</text>
+  <text class="txt" x="670" y="165">• Area: ~25,000 mm² (&gt;60 Dies)</text>
+  <text class="txt" x="670" y="190">• Full Residency: Infeasible</text>
+  <text class="txt" x="670" y="215">• Schedule: LAYER RESIDENT</text>
+  <text class="txt" x="670" y="240">• Stream: HBM3e (1.2 TB/s)</text>
+  <text class="txt" x="670" y="265">• Reload Latency: 11.2 ms/tok</text>
+  <text class="tag" x="670" y="295">STATUS: HBM Streaming Required</text>
+
+  <!-- Footnote -->
+  <text class="tag" x="30" y="355">STRICT CLAIM SEPARATION: Tier 3 is reported as physically infeasible for single-package full residency; requires dynamic streaming.</text>
+</svg>

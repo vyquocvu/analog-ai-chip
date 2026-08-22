@@ -408,11 +408,11 @@ Depends on R11 + R6.
 
 ## WP12.1 — Weight residency and topology exploration
 
-- [ ] Compute exact tile pairs, usable-cell utilization, programming bytes and
+- [x] Compute exact tile pairs, usable-cell utilization, programming bytes and
   resident area for every projection in T0–T3, including embeddings/LM head.
-- [ ] Compare fully resident, layer-resident and streamed-weight schedules under
+- [x] Compare fully resident, layer-resident and streamed-weight schedules under
   explicit SRAM/HBM/host-link capacities and bandwidths.
-- [ ] Extend scheduling to multiple dies/chiplets with explicit inter-die traffic,
+- [x] Extend scheduling to multiple dies/chiplets with explicit inter-die traffic,
   synchronization, pipeline bubbles and failure/spare capacity.
 
 ## WP12.2 — Prefill/decode and KV-cache hierarchy
