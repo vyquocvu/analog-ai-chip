@@ -449,21 +449,21 @@ Depends on R11 + R12.
 
 ## WP13.1 — Digital baseline and evaluation corpus
 
-- [ ] Freeze tokenizer, prompts/corpus slices, sequence lengths, decoding settings,
+- [x] Freeze tokenizer, prompts/corpus slices, sequence lengths, decoding settings,
   seeds and digital reference outputs for each accessible checkpoint.
-- [ ] Report float/quantized baseline perplexity and token/logit metrics before
+- [x] Report float/quantized baseline perplexity and token/logit metrics before
   injecting analog non-idealities.
-- [ ] Keep copyrighted/licensed model weights and datasets out of the repository;
+- [x] Keep copyrighted/licensed model weights and datasets out of the repository;
   commit hashes, manifests, scripts and aggregate results only.
 
 ## WP13.2 — Profile-driven error at scale
 
-- [ ] Run exact profile-driven end-to-end evaluation for T0 and the bounded T1
+- [x] Run exact profile-driven end-to-end evaluation for T0 and the bounded T1
   workload; use calibrated stratified studies for T2/T3 until exact execution is
   demonstrated.
-- [ ] Attribute degradation by layer family and by each named `crossbar-v1`
+- [x] Attribute degradation by layer family and by each named `crossbar-v1`
   mechanism, including depth-wise error accumulation and clipping incidence.
-- [ ] Compare 4/6/8-bit converter and weight-state design points without promoting
+- [x] Compare 4/6/8-bit converter and weight-state design points without promoting
   assumed higher-resolution hardware to verified evidence.
 
 ## WP13.3 — Scalable recovery

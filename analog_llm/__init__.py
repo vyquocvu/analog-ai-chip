@@ -57,6 +57,14 @@ from .kv_hierarchy import (
     analyze_kv_hierarchy,
     calculate_kv_cache_bytes,
 )
+from .large_model_eval import (
+    LargeModelAttributionReport,
+    MechanismEvaluationResult,
+    compute_cross_entropy_perplexity,
+    compute_mean_kl_divergence,
+    compute_top1_agreement,
+    evaluate_large_model_error_attribution,
+)
 from .model_manifest import ModelManifest, TensorSpec
 from .profile_adapter import (
     CROSSBAR_NONIDEALITY_FIELDS,
@@ -107,7 +115,9 @@ __all__ = [
     "KVCachePlacement",
     "KVHierarchyConfig",
     "KVHierarchySummary",
+    "LargeModelAttributionReport",
     "LayerEvaluationCheckpoint",
+    "MechanismEvaluationResult",
     "MechanismMetrics",
     "Metrics",
     "ModelManifest",
@@ -141,10 +151,14 @@ __all__ = [
     "calculate_kv_cache_bytes",
     "calibrate_surrogate",
     "causal_attention",
+    "compute_cross_entropy_perplexity",
+    "compute_mean_kl_divergence",
     "compute_tensor_sha256",
+    "compute_top1_agreement",
     "converter_config_from_profiles",
     "dac",
     "evaluate_attribution_suite",
+    "evaluate_large_model_error_attribution",
     "evaluate_projection_nonideality",
     "gelu",
     "layer_norm",

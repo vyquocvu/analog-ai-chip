@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="380" viewBox="0 0 960 380" role="img" aria-labelledby="title desc">
+  <title id="title">Large-Model Error Attribution &amp; Depth Compounding</title>
+  <desc id="desc">Decomposes model degradation by physical mechanism and tracks error accumulation through deep decoder layers.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker>
+    <style>
+      .box{fill:#f8fafc;stroke:#64748b;stroke-width:2}
+      .base{fill:#eff6ff;stroke:#2563eb;stroke-width:2}
+      .mech{fill:#fff7ed;stroke:#ea580c;stroke-width:2}
+      .depth{fill:#ecfdf5;stroke:#059669;stroke-width:2}
+      .head{font:bold 15px sans-serif;fill:#0f172a}
+      .txt{font:13px sans-serif;fill:#334155}
+      .tag{font:bold 11px sans-serif;fill:#475569}
+      .wire{stroke:#334155;stroke-width:2;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <!-- Title Banner -->
+  <rect class="box" x="30" y="20" rx="8" width="900" height="45"/>
+  <text class="head" x="50" y="48">Large-Model Error Attribution &amp; Physical Mechanism Decomposition</text>
+
+  <!-- Section 1: Digital Baseline Corpus -->
+  <rect class="base" x="30" y="85" rx="8" width="260" height="240"/>
+  <text class="head" x="45" y="115">1. Digital Baseline &amp; Metrics</text>
+  <text class="tag" x="45" y="135">FROZEN EVALUATION CORPUS</text>
+  <text class="txt" x="45" y="165">• Fixed prompt token slices</text>
+  <text class="txt" x="45" y="190">• Cross-Entropy Perplexity (PPL)</text>
+  <text class="txt" x="45" y="215">• Top-1 Token Agreement (%)</text>
+  <text class="txt" x="45" y="240">• Mean Logit KL-Divergence</text>
+  <text class="txt" x="45" y="265">• Signal-to-Noise Ratio (SNR dB)</text>
+  <text class="tag" x="45" y="295">STATUS: Verified Baseline</text>
+
+  <!-- Section 2: Isolated Mechanism Attribution -->
+  <rect class="mech" x="320" y="85" rx="8" width="310" height="240"/>
+  <text class="head" x="335" y="115">2. Mechanism Attribution</text>
+  <text class="tag" x="335" y="135">PHYSICAL DECOMPOSITION</text>
+  <text class="txt" x="335" y="165">• DAC / ADC Quantization (4/6/8-bit)</text>
+  <text class="txt" x="335" y="190">• Programming Variation (σ_prog = 1.5%)</text>
+  <text class="txt" x="335" y="215">• MVM Read Noise (σ_read = 0.8%)</text>
+  <text class="txt" x="335" y="240">• 24h Conductance Drift (ν = 0.08)</text>
+  <text class="txt" x="335" y="265">• Stuck-HRS / Stuck-LRS Defect Cells</text>
+  <text class="tag" x="335" y="295">Full Composite: crossbar-v1 profile</text>
+
+  <!-- Section 3: Depth-Wise Compounding -->
+  <rect class="depth" x="660" y="85" rx="8" width="270" height="240"/>
+  <text class="head" x="675" y="115">3. Depth-Wise Compounding</text>
+  <text class="tag" x="675" y="135">LAYER-BY-LAYER PROPAGATION</text>
+  <text class="txt" x="675" y="165">• Layer 0: Local quantization noise</text>
+  <text class="txt" x="675" y="190">• Mid Layers: Variance accumulation</text>
+  <text class="txt" x="675" y="215">• Deep Layers: Softmax saturation</text>
+  <text class="txt" x="675" y="240">• Non-linear error amplification</text>
+  <text class="txt" x="675" y="265">• Quantifies Recovery Urgency</text>
+  <text class="tag" x="675" y="295">STATUS: Measured MSE Profile</text>
+
+  <!-- Footnote -->
+  <text class="tag" x="30" y="355">PROVENANCE: T0/T1 evaluated with EXACT profile-driven hardware simulation; T2/T3 stratified studies.</text>
+</svg>
