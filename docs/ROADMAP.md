@@ -490,11 +490,11 @@ Depends on R13 + R8 + R9.
 
 ## WP14.1 — Parametric physical ledger
 
-- [ ] Replace TinyGPT-fixed latency, energy, area and thermal constants with a
+- [x] Replace TinyGPT-fixed latency, energy, area and thermal constants with a
   manifest- and schedule-driven ledger for T0–T3 prefill and decode.
-- [ ] Propagate evidence class and sensitivity ranges through every memory,
+- [x] Propagate evidence class and sensitivity ranges through every memory,
   converter, NoC, inter-die and digital-attention coefficient.
-- [ ] Report throughput at stated batch/context, time-to-first-token, tokens/s,
+- [x] Report throughput at stated batch/context, time-to-first-token, tokens/s,
   joules/token, die count/area, power density and thermal envelope.
 
 ## WP14.2 — Bottleneck and break-even analysis

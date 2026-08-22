@@ -66,6 +66,12 @@ from .large_model_eval import (
     evaluate_large_model_error_attribution,
 )
 from .model_manifest import ModelManifest, TensorSpec
+from .physical_ledger import (
+    PhysicalLedgerConfig,
+    SubsystemEnergyBreakdown,
+    TierPhysicalMetrics,
+    compute_tier_physical_ledger,
+)
 from .profile_adapter import (
     CROSSBAR_NONIDEALITY_FIELDS,
     build_tile_factory,
@@ -133,6 +139,7 @@ __all__ = [
     "ModelResidencySummary",
     "NonIdealityEvaluationResult",
     "OutputCalibration",
+    "PhysicalLedgerConfig",
     "RecoveryLedgerEntry",
     "RecoveryStrategy",
     "ResidencySchedule",
@@ -140,9 +147,11 @@ __all__ = [
     "ScalableRecoveryReport",
     "ScheduleMetrics",
     "StreamedMemoryBudget",
+    "SubsystemEnergyBreakdown",
     "SurrogateCalibrationProfile",
     "TensorSpec",
     "TierBudget",
+    "TierPhysicalMetrics",
     "TinyGPT",
     "TinyGPTConfig",
     "adc",
@@ -166,6 +175,7 @@ __all__ = [
     "compute_cross_entropy_perplexity",
     "compute_mean_kl_divergence",
     "compute_tensor_sha256",
+    "compute_tier_physical_ledger",
     "compute_top1_agreement",
     "converter_config_from_profiles",
     "dac",
