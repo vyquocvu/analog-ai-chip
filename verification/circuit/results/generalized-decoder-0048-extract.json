@@ -1,0 +1,76 @@
+{
+  "chapter": "0048-generalized-decoder",
+  "gate": "R10",
+  "status": "PASSED",
+  "claim_level": "functional/software-reference",
+  "model_reports": {
+    "hand_calc_mqa": {
+      "norm_type": "rmsnorm",
+      "position_type": "rope",
+      "activation_type": "swiglu",
+      "attention_type": "mqa",
+      "parameter_count": 152,
+      "per_layer_projection_macs": 120,
+      "kv_cache_full_bytes": 24,
+      "max_abs_logit_error_vs_cache": 6.938893903907228e-18,
+      "greedy_generation_parity": true,
+      "generated_tokens": [
+        0,
+        1,
+        2,
+        0
+      ]
+    },
+    "gpt2_style_mha": {
+      "norm_type": "layernorm",
+      "position_type": "learned",
+      "activation_type": "gelu",
+      "attention_type": "mha",
+      "parameter_count": 109312,
+      "per_layer_projection_macs": 49152,
+      "kv_cache_full_bytes": 16384,
+      "max_abs_logit_error_vs_cache": 4.718447854656915e-16,
+      "greedy_generation_parity": true,
+      "generated_tokens": [
+        0,
+        1,
+        2,
+        3,
+        3,
+        3,
+        3,
+        3
+      ]
+    },
+    "llama_style_gqa": {
+      "norm_type": "rmsnorm",
+      "position_type": "rope",
+      "activation_type": "swiglu",
+      "attention_type": "gqa",
+      "parameter_count": 115008,
+      "per_layer_projection_macs": 49152,
+      "kv_cache_full_bytes": 8192,
+      "max_abs_logit_error_vs_cache": 2.7755575615628914e-16,
+      "greedy_generation_parity": true,
+      "generated_tokens": [
+        0,
+        1,
+        2,
+        3,
+        84,
+        89,
+        28,
+        29
+      ]
+    }
+  },
+  "analog_accelerator_integration": {
+    "status": "PASSED",
+    "analog_macs_executed": 319488,
+    "analog_tile_cycles": 63,
+    "output_shape": [
+      3,
+      128
+    ]
+  }
+}

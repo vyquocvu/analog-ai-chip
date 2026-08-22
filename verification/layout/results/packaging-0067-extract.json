@@ -1,0 +1,43 @@
+{
+  "chapter": "0067-fcbga676-packaging-thermal-spreader",
+  "gate": "R17",
+  "work_package": "WP17.2",
+  "status": "PASSED",
+  "claim_level": "physical/packaging-thermal",
+  "fcbga676_package": {
+    "body_width_mm": 27.0,
+    "body_height_mm": 27.0,
+    "ball_pitch_mm": 1.0,
+    "total_bga_balls": 676,
+    "c4_bump_pitch_um": 150.0,
+    "c4_bump_count": 1296,
+    "die_area_mm2": 336.14
+  },
+  "ball_map_allocations": {
+    "vss_ground_balls": 230,
+    "vdd_dig_core_balls": 140,
+    "vdd_ana_analog_balls": 90,
+    "pcie_gen5_serdes_balls": 64,
+    "lpddr5_memory_if_balls": 96,
+    "control_jtag_ref_balls": 56
+  },
+  "substrate_stackup": {
+    "buildup_structure": "4-2-4 Organic Buildup",
+    "layer_count": 10,
+    "core_thickness_um": 800.0,
+    "single_ended_impedance_ohm": 50.0,
+    "differential_pcie_impedance_ohm": 85.0,
+    "loss_tangent": 0.004
+  },
+  "thermal_signoff": {
+    "chip_tdp_w": 23.2,
+    "ambient_temp_c": 30.0,
+    "theta_jc_c_per_w": 0.09601896645628424,
+    "theta_ca_c_per_w": 1.52,
+    "theta_ja_c_per_w": 1.6160189664562843,
+    "peak_junction_temp_c": 67.4916400217858,
+    "max_junction_temp_budget_c": 85.0,
+    "thermal_margin_c": 17.5083599782142,
+    "is_thermal_compliant": true
+  }
+}

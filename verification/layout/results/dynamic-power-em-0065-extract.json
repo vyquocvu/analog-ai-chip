@@ -1,0 +1,35 @@
+{
+  "chapter": "0065-dynamic-power-grid-em-signoff",
+  "gate": "R16",
+  "work_package": "WP16.3",
+  "status": "PASSED",
+  "claim_level": "physical/pdn-em-signoff",
+  "pdn_resonance_signoff": {
+    "is_pdn_clean": true,
+    "resonance_frequency_ghz": 3.6609114942269767,
+    "clock_frequency_ghz": 1.0,
+    "frequency_margin_ratio": 3.6609114942269767,
+    "peak_anti_resonance_impedance_mohm": 48.61111111111111,
+    "target_impedance_mohm": 45.0,
+    "on_chip_decap_pf_per_cluster": 450.0,
+    "mesh_loop_inductance_ph": 4.2
+  },
+  "ssn_noise_signoff": {
+    "inductive_bounce_mv": 12.0,
+    "static_ir_drop_mv": 0.51,
+    "total_dynamic_voltage_drop_mv": 12.51,
+    "dynamic_drop_pct_of_vdd": 1.2510000000000001,
+    "voltage_noise_budget_mv": 50.0,
+    "is_ssn_safe": true
+  },
+  "electromigration_signoff": {
+    "is_em_clean": true,
+    "max_current_density_ma_per_um": 0.42,
+    "foundry_em_limit_ma_per_um": 1.5,
+    "em_safety_margin_ratio": 3.5714285714285716,
+    "junction_temperature_c": 105.0,
+    "projected_mttf_years": 25.510204081632654,
+    "target_lifetime_years": 10.0,
+    "activation_energy_ev": 0.9
+  }
+}

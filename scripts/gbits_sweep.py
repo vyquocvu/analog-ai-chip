@@ -54,8 +54,8 @@ def make_svg(rows: list, path: str) -> None:
 
     meas = " ".join(f"{px(r['levels']):.1f},{py(max(r['err'], 5e-4)):.1f}" for r in rows)
     theo = " ".join(f"{px(r['levels']):.1f},{py(max(r['bound'], 5e-4)):.1f}" for r in rows)
-    ticks = [f'<text x="{px(l)}" y="{Y0 + 16}" text-anchor="middle" font-size="11" fill="#666">{l}</text>'
-             for l in levels]
+    ticks = [f'<text x="{px(level)}" y="{Y0 + 16}" text-anchor="middle" font-size="11" fill="#666">{level}</text>'
+             for level in levels]
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="Menlo,Consolas,monospace">
 <rect width="960" height="540" fill="#ffffff"/>
 <text x="480" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#111">Effective-weight error vs conductance resolution</text>

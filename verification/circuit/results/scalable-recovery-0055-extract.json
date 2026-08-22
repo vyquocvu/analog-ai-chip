@@ -1,0 +1,112 @@
+{
+  "chapter": "0055-scalable-hardware-recovery",
+  "gate": "R13",
+  "status": "PASSED",
+  "claim_level": "exact_physical",
+  "evaluation_corpus": {
+    "tokens_count": 16,
+    "baseline_perplexity": 139.82816845577915,
+    "acceptance_threshold_ppl": 167.79380214693498,
+    "acceptance_threshold_top1_pct": 60.0
+  },
+  "layer_sensitivities": [
+    {
+      "layer_index": 0,
+      "isolated_mse": 0.004779508757890135,
+      "perplexity_impact": 141.21450089422297,
+      "sensitivity_rank": 2
+    },
+    {
+      "layer_index": 1,
+      "isolated_mse": 0.004768314552906639,
+      "perplexity_impact": 137.9679380612997,
+      "sensitivity_rank": 3
+    },
+    {
+      "layer_index": 2,
+      "isolated_mse": 0.004415849034096611,
+      "perplexity_impact": 139.45379295342804,
+      "sensitivity_rank": 4
+    },
+    {
+      "layer_index": 3,
+      "isolated_mse": 0.0048253886895557995,
+      "perplexity_impact": 138.47000171230943,
+      "sensitivity_rank": 1
+    }
+  ],
+  "recovery_ladder": {
+    "unmitigated": {
+      "strategy": "unmitigated",
+      "perplexity": 142.69259251147466,
+      "top1_agreement_pct": 68.75,
+      "mean_kl_divergence": 0.002399177072609563,
+      "metadata_storage_bytes": 0,
+      "programming_energy_multiplier": 1.0,
+      "digital_fallback_layers_count": 0,
+      "digital_compute_overhead_pct": 0.0,
+      "acceptance_passed": true,
+      "description": "Raw hardware baseline with full non-idealities without mitigation"
+    },
+    "output_calibration": {
+      "strategy": "output_calibration",
+      "perplexity": 142.3453714893538,
+      "top1_agreement_pct": 68.75,
+      "mean_kl_divergence": 0.002354870709861554,
+      "metadata_storage_bytes": 96,
+      "programming_energy_multiplier": 1.0,
+      "digital_fallback_layers_count": 0,
+      "digital_compute_overhead_pct": 0.5,
+      "acceptance_passed": true,
+      "description": "Per-tile/layer affine gain and offset calibration"
+    },
+    "write_verify_tuning": {
+      "strategy": "write_verify_tuning",
+      "perplexity": 137.06103311415464,
+      "top1_agreement_pct": 50.0,
+      "mean_kl_divergence": 0.0024273795650270186,
+      "metadata_storage_bytes": 0,
+      "programming_energy_multiplier": 4.2,
+      "digital_fallback_layers_count": 0,
+      "digital_compute_overhead_pct": 0.0,
+      "acceptance_passed": false,
+      "description": "Closed-loop iterative pulsed programming reducing sigma_prog from 1.5% to 0.25%"
+    },
+    "defect_remapping": {
+      "strategy": "defect_remapping",
+      "perplexity": 139.90855298015256,
+      "top1_agreement_pct": 56.25,
+      "mean_kl_divergence": 0.002275097879919381,
+      "metadata_storage_bytes": 512,
+      "programming_energy_multiplier": 1.05,
+      "digital_fallback_layers_count": 0,
+      "digital_compute_overhead_pct": 0.0,
+      "acceptance_passed": false,
+      "description": "Spare column defect remapping eliminating stuck-HRS/LRS fault cells"
+    },
+    "selective_digital_fallback": {
+      "strategy": "selective_digital_fallback",
+      "perplexity": 141.90669046150404,
+      "top1_agreement_pct": 75.0,
+      "mean_kl_divergence": 0.0013490296129211664,
+      "metadata_storage_bytes": 0,
+      "programming_energy_multiplier": 1.0,
+      "digital_fallback_layers_count": 1,
+      "digital_compute_overhead_pct": 25.0,
+      "acceptance_passed": true,
+      "description": "Selective digital fallback for most sensitive Layer 3"
+    },
+    "composite_recovery": {
+      "strategy": "composite_recovery",
+      "perplexity": 141.36018922218048,
+      "top1_agreement_pct": 62.5,
+      "mean_kl_divergence": 0.0013427312707985834,
+      "metadata_storage_bytes": 608,
+      "programming_energy_multiplier": 4.2,
+      "digital_fallback_layers_count": 1,
+      "digital_compute_overhead_pct": 25.0,
+      "acceptance_passed": true,
+      "description": "Unified recovery pipeline: Write-Verify + Defect Remapping + Calibration + Fallback"
+    }
+  }
+}

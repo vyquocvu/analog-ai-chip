@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="360" viewBox="0 0 960 360" role="img" aria-labelledby="title desc">
+  <title id="title">Block-Streamed Linear Tile Partitioning</title>
+  <desc id="desc">Weight matrices are streamed in tile blocks (RxC), accumulating partial sums digitally without materializing large float64 copies.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker>
+    <style>
+      .box{fill:#f8fafc;stroke:#64748b;stroke-width:2}
+      .blk{fill:#fff7ed;stroke:#ea580c;stroke-width:2}
+      .act{fill:#eff6ff;stroke:#2563eb;stroke-width:2}
+      .acc{fill:#ecfdf5;stroke:#059669;stroke-width:2}
+      .head{font:bold 15px sans-serif;fill:#0f172a}
+      .txt{font:13px sans-serif;fill:#334155}
+      .tag{font:bold 12px sans-serif;fill:#475569}
+      .wire{stroke:#334155;stroke-width:2;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <!-- Large Logical Weight Matrix Partition -->
+  <rect class="box" x="30" y="30" rx="8" width="260" height="260"/>
+  <text class="head" x="45" y="55">Logical Weight Matrix W</text>
+  <text class="txt" x="45" y="75">[out_features, in_features]</text>
+
+  <!-- 4 Tile Blocks inside -->
+  <rect class="blk" x="50" y="95" rx="4" width="105" height="75"/>
+  <text class="tag" x="65" y="135">Block W_0,0</text>
+  <text class="txt" x="75" y="155">[R × C]</text>
+
+  <rect class="blk" x="165" y="95" rx="4" width="105" height="75"/>
+  <text class="tag" x="180" y="135">Block W_0,1</text>
+  <text class="txt" x="190" y="155">[R × C]</text>
+
+  <rect class="blk" x="50" y="185" rx="4" width="105" height="75"/>
+  <text class="tag" x="65" y="225">Block W_1,0</text>
+  <text class="txt" x="75" y="245">[R × C]</text>
+
+  <rect class="blk" x="165" y="185" rx="4" width="105" height="75"/>
+  <text class="tag" x="180" y="225">Block W_1,1</text>
+  <text class="txt" x="190" y="245">[R × C]</text>
+
+  <!-- Streaming Arrow -->
+  <line class="wire" x1="290" y1="160" x2="350" y2="160"/>
+
+  <!-- Active Tile Block MVM -->
+  <rect class="act" x="360" y="70" rx="8" width="220" height="180"/>
+  <text class="head" x="380" y="100">Active Tile MVM Pass</text>
+  <text class="txt" x="380" y="125">Input chunk: X_j [Tokens × R]</text>
+  <text class="txt" x="380" y="150">Tile block: W_i,j [C × R]</text>
+  <text class="txt" x="380" y="180">Analog / Vectorized MVM</text>
+  <text class="tag" x="380" y="210">Working Mem: &lt; 1 KB / tile</text>
+
+  <!-- Partial Sum Arrow -->
+  <line class="wire" x1="580" y1="160" x2="640" y2="160"/>
+
+  <!-- Digital Accumulator -->
+  <rect class="acc" x="650" y="70" rx="8" width="270" height="180"/>
+  <text class="head" x="670" y="100">Digital Partial Sum Accumulation</text>
+  <text class="txt" x="670" y="125">Y_i = Σ_j (X_j @ W_i,j^T)</text>
+  <text class="txt" x="670" y="155">+ Additive Bias Vector b_i</text>
+  <text class="tag" x="670" y="190">Output Buffer: [Tokens × out_features]</text>
+  <text class="txt" x="670" y="220">Exact bitwise scalar equivalence</text>
+
+  <!-- Legend -->
+  <text class="tag" x="30" y="325">MEMORY BOUND: Host memory scales with O(T · in + R · C) instead of full-model float64 matrix storage.</text>
+</svg>

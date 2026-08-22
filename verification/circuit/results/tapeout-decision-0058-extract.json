@@ -1,0 +1,106 @@
+{
+  "chapter": "0058-tapeout-feasibility-decision",
+  "gate": "R14",
+  "status": "PASSED",
+  "claim_level": "system/tapeout-decision",
+  "tier_decisions": {
+    "T0": {
+      "model_name": "t0_gpt2_124m",
+      "status": "FEASIBLE",
+      "verdict": "GO",
+      "total_parameters": 124439808,
+      "silicon_area_mm2": 336.1246543872,
+      "die_count": 1,
+      "decode_tokens_per_second": 244247.48327393236,
+      "decode_energy_per_token_uj": 26.380799999999997,
+      "active_power_w": 6.443444006752953,
+      "power_density_w_cm2": 1.916980478120598,
+      "primary_bottleneck": "digital_attention_compute_limit",
+      "rationale": "Monolithic single-die silicon (336 mm\u00b2 <= 400 mm\u00b2 reticle limit) with 100% stationary ReRAM weights, air-cooled (1.92 W/cm\u00b2), achieving 244k TPS.",
+      "required_evidence_for_promotion": [
+        "Pass physical DRC/LVS clean tape-out signoff",
+        "Silicon foundry shuttle slot allocation"
+      ]
+    },
+    "T1": {
+      "model_name": "t1_llama_1.1b",
+      "status": "CONDITIONAL",
+      "verdict": "CONDITIONAL_GO",
+      "total_parameters": 1100442624,
+      "silicon_area_mm2": 4093.6663154688003,
+      "die_count": 11,
+      "decode_tokens_per_second": 69684.77950620807,
+      "decode_energy_per_token_uj": 439.65669375999994,
+      "active_power_w": 30.637379763094042,
+      "power_density_w_cm2": 0.7484093084803737,
+      "primary_bottleneck": "digital_attention_compute_limit",
+      "rationale": "Fits within advanced 11-chiplet 2.5D interposer package (4,094 mm\u00b2). Feasible with high-bandwidth UCIe links, but requires multi-die yield qualification.",
+      "required_evidence_for_promotion": [
+        "2.5D high-density silicon interposer thermal stress simulation",
+        "UCIe PHY physical macro silicon measurement correlation",
+        "Known Good Die (KGD) test protocol specification"
+      ]
+    },
+    "T2": {
+      "model_name": "t2_llama_3b",
+      "status": "INFEASIBLE",
+      "verdict": "NO_GO",
+      "total_parameters": 2972075008,
+      "silicon_area_mm2": 11369.1052081152,
+      "die_count": 29,
+      "decode_tokens_per_second": 3131.6805008444016,
+      "decode_energy_per_token_uj": 11411.0582784,
+      "active_power_w": 35.73578870446436,
+      "power_density_w_cm2": 0.31432366971990344,
+      "primary_bottleneck": "crossbar_capacity_limit",
+      "rationale": "Exceeds multi-chiplet single package packaging limit (29 chiplets, 11,369 mm\u00b2). Layer reload from HBM introduces severe memory bottleneck, losing analog energy advantage.",
+      "required_evidence_for_promotion": [
+        "3D monolithic BEOL stacking with > 4 active device layers",
+        "Sub-100nm ReRAM cell pitch scaling"
+      ]
+    },
+    "T3": {
+      "model_name": "t3_llama2_7b",
+      "status": "INFEASIBLE",
+      "verdict": "NO_GO",
+      "total_parameters": 6739775488,
+      "silicon_area_mm2": 26147.1783616512,
+      "die_count": 66,
+      "decode_tokens_per_second": 547.2027671614928,
+      "decode_energy_per_token_uj": 62752.96657408,
+      "active_power_w": 34.338596956929244,
+      "power_density_w_cm2": 0.13132811686974225,
+      "primary_bottleneck": "crossbar_capacity_limit",
+      "rationale": "Exceeds packaging envelope (66 chiplets, 26,147 mm\u00b2). Dominated by Digital Attention Wall (> 85% decode latency) and DRAM memory wall.",
+      "required_evidence_for_promotion": [
+        "Optical inter-chiplet interconnect fabric",
+        "Analog photonic / optical attention acceleration co-processor"
+      ]
+    }
+  },
+  "selected_tapeout_target": {
+    "target_tier": "T0_GPT2_124M",
+    "model_name": "GPT-2 (124M Parameters)",
+    "process_technology": "28nm BEOL Via4-M5 ReRAM (160nm cell pitch)",
+    "die_size_mm2": 336.1,
+    "package_type": "FCBGA-676 (21 mm x 21 mm)",
+    "decode_throughput_tps": 244247.5,
+    "decode_energy_uj_per_token": 26.38,
+    "thermal_envelope": "Passive / standard air-cooled (< 10W total power)",
+    "risk_assessment": [
+      {
+        "risk": "Conductance Drift (> 24h)",
+        "mitigation": "Affine output gain calibration (Chapter 0055)"
+      },
+      {
+        "risk": "Programming Variation (sigma=1.5%)",
+        "mitigation": "Closed-loop iterative write-verify pulses"
+      },
+      {
+        "risk": "Defective Crosspoints (0.15%)",
+        "mitigation": "Redundant column remapping"
+      }
+    ]
+  },
+  "roadmap_milestone": "ALL_GATES_PASSED_R0_THROUGH_R14"
+}

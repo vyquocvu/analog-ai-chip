@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="380" viewBox="0 0 960 380" role="img" aria-labelledby="title desc">
+  <title id="title">28nm BEOL ReRAM Macro Physical Layout &amp; DRC Signoff</title>
+  <desc id="desc">Physical layout cross-section, 160nm pitch crosspoint geometry, and DRC verification results for Gate R15.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker>
+    <style>
+      .box{fill:#f8fafc;stroke:#64748b;stroke-width:2}
+      .stack{fill:#fff7ed;stroke:#ea580c;stroke-width:2}
+      .array{fill:#eff6ff;stroke:#2563eb;stroke-width:2}
+      .drc{fill:#ecfdf5;stroke:#059669;stroke-width:2}
+      .head{font:bold 15px sans-serif;fill:#0f172a}
+      .txt{font:13px sans-serif;fill:#334155}
+      .tag{font:bold 11px sans-serif;fill:#475569}
+      .wire{stroke:#334155;stroke-width:2;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <!-- Title Banner -->
+  <rect class="box" x="30" y="20" rx="8" width="900" height="45"/>
+  <text class="head" x="50" y="48">28nm BEOL ReRAM Macro Physical Layout &amp; DRC Signoff (Gate R15 / Chapter 0059)</text>
+
+  <!-- Section 1: BEOL Material Stack -->
+  <rect class="stack" x="30" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="45" y="115">1. 28nm BEOL Stack</text>
+  <text class="tag" x="45" y="135">VIA4-M5 INTEGRATION</text>
+  <text class="txt" x="45" y="165">• Metal 5: Bitlines (60 nm width)</text>
+  <text class="txt" x="45" y="190">• Via4: HfO₂ ReRAM Cell (32 nm)</text>
+  <text class="txt" x="45" y="215">• Metal 4: Wordlines (60 nm width)</text>
+  <text class="txt" x="45" y="240">• Cell Pitch: 160 nm × 160 nm</text>
+  <text class="txt" x="45" y="265">• Enclosure: 14 nm (min 10 nm)</text>
+  <text class="tag" x="45" y="295">STATUS: Foundry PDK Aligned</text>
+
+  <!-- Section 2: 16x16 Physical Macro -->
+  <rect class="array" x="340" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="355" y="115">2. Physical Macro Array</text>
+  <text class="tag" x="355" y="135">16×16 WITH DUMMY GUARD RING</text>
+  <text class="txt" x="355" y="165">• Core Grid: 16 × 16 (256 cells)</text>
+  <text class="txt" x="355" y="190">• Total Grid: 18 × 18 (with dummies)</text>
+  <text class="txt" x="355" y="215">• Macro Dimension: 2.88 × 2.88 µm</text>
+  <text class="txt" x="355" y="240">• Core Area: 8.29 µm²</text>
+  <text class="txt" x="355" y="265">• Total Ports: 16 WL (In) + 16 BL (Out)</text>
+  <text class="tag" x="355" y="295">STATUS: Generated &amp; Streamed</text>
+
+  <!-- Section 3: DRC Signoff Report -->
+  <rect class="drc" x="655" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="670" y="115">3. DRC Signoff Signoff</text>
+  <text class="tag" x="670" y="135">GEOMETRIC RULE CHECKS</text>
+  <text class="txt" x="670" y="165">• Min Width (M4/M5 ≥ 40nm): PASS</text>
+  <text class="txt" x="670" y="190">• Min Spacing (M4/M5 ≥ 40nm): PASS</text>
+  <text class="txt" x="670" y="215">• Via Enclosure (≥ 10nm): PASS</text>
+  <text class="txt" x="670" y="240">• Metal Density (20–80%): 37.5%</text>
+  <text class="txt" x="670" y="265">• Total DRC Violations: 0</text>
+  <text class="tag" x="670" y="295">VERDICT: DRC CLEAN (PASSED)</text>
+
+  <!-- Footnote -->
+  <text class="tag" x="30" y="355">CLAIM LEVEL: Physical Layout &amp; DRC Signoff for primary 28nm ReRAM tape-out target.</text>
+</svg>

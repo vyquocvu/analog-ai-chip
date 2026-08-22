@@ -1,0 +1,404 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800" role="img">
+  <title>reram_macro_16x16 Physical IC Layout</title>
+  <rect width="800" height="800" fill="#0f172a"/>
+  <g id="grid_border">
+    <rect x="40.0" y="40.0" width="720.0" height="720.0" fill="none" stroke="#334155" stroke-width="1" stroke-dasharray="4,4"/>
+  </g>
+  <g id="shapes">
+    <rect x="40.00" y="732.50" width="720.00" height="15.00" fill="#fde047" fill-opacity="0.75" stroke="#eab308" stroke-width="1"><title>METAL4: DUMMY_WL (2880x60nm)</title></rect>
+    <rect x="40.00" y="692.50" width="720.00" height="15.00" fill="#fde047" fill-opacity="0.75" stroke="#eab308" stroke-width="1"><title>METAL4: WL_0 (2880x60nm)</title></rect>
+    <rect x="40.00" y="652.50" width="720.00" height="15.00" fill="#fde047" fill-opacity="0.75" stroke="#eab308" stroke-width="1"><title>METAL4: WL_1 (2880x60nm)</title></rect>
+    <rect x="40.00" y="612.50" width="720.00" height="15.00" fill="#fde047" fill-opacity="0.75" stroke="#eab308" stroke-width="1"><title>METAL4: WL_2 (2880x60nm)</title></rect>
+    <rect x="40.00" y="572.50" width="720.00" height="15.00" fill="#fde047" fill-opacity="0.75" stroke="#eab308" stroke-width="1"><title>METAL4: WL_3 (2880x60nm)</title></rect>
+    <rect x="40.00" y="532.50" width="720.00" height="15.00" fill="#fde047" fill-opacity="0.75" stroke="#eab308" stroke-width="1"><title>METAL4: WL_4 (2880x60nm)</title></rect>
+    <rect x="40.00" y="492.50" width="720.00" height="15.00" fill="#fde047" fill-opacity="0.75" stroke="#eab308" stroke-width="1"><title>METAL4: WL_5 (2880x60nm)</title></rect>
+    <rect x="40.00" y="452.50" width="720.00" height="15.00" fill="#fde047" fill-opacity="0.75" stroke="#eab308" stroke-width="1"><title>METAL4: WL_6 (2880x60nm)</title></rect>
+    <rect x="40.00" y="412.50" width="720.00" height="15.00" fill="#fde047" fill-opacity="0.75" stroke="#eab308" stroke-width="1"><title>METAL4: WL_7 (2880x60nm)</title></rect>
+    <rect x="40.00" y="372.50" width="720.00" height="15.00" fill="#fde047" fill-opacity="0.75" stroke="#eab308" stroke-width="1"><title>METAL4: WL_8 (2880x60nm)</title></rect>
+    <rect x="40.00" y="332.50" width="720.00" height="15.00" fill="#fde047" fill-opacity="0.75" stroke="#eab308" stroke-width="1"><title>METAL4: WL_9 (2880x60nm)</title></rect>
+    <rect x="40.00" y="292.50" width="720.00" height="15.00" fill="#fde047" fill-opacity="0.75" stroke="#eab308" stroke-width="1"><title>METAL4: WL_10 (2880x60nm)</title></rect>
+    <rect x="40.00" y="252.50" width="720.00" height="15.00" fill="#fde047" fill-opacity="0.75" stroke="#eab308" stroke-width="1"><title>METAL4: WL_11 (2880x60nm)</title></rect>
+    <rect x="40.00" y="212.50" width="720.00" height="15.00" fill="#fde047" fill-opacity="0.75" stroke="#eab308" stroke-width="1"><title>METAL4: WL_12 (2880x60nm)</title></rect>
+    <rect x="40.00" y="172.50" width="720.00" height="15.00" fill="#fde047" fill-opacity="0.75" stroke="#eab308" stroke-width="1"><title>METAL4: WL_13 (2880x60nm)</title></rect>
+    <rect x="40.00" y="132.50" width="720.00" height="15.00" fill="#fde047" fill-opacity="0.75" stroke="#eab308" stroke-width="1"><title>METAL4: WL_14 (2880x60nm)</title></rect>
+    <rect x="40.00" y="92.50" width="720.00" height="15.00" fill="#fde047" fill-opacity="0.75" stroke="#eab308" stroke-width="1"><title>METAL4: WL_15 (2880x60nm)</title></rect>
+    <rect x="40.00" y="52.50" width="720.00" height="15.00" fill="#fde047" fill-opacity="0.75" stroke="#eab308" stroke-width="1"><title>METAL4: DUMMY_WL (2880x60nm)</title></rect>
+    <rect x="56.00" y="736.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="96.00" y="736.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="136.00" y="736.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="176.00" y="736.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="216.00" y="736.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="256.00" y="736.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="296.00" y="736.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="336.00" y="736.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="376.00" y="736.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="416.00" y="736.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="456.00" y="736.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="496.00" y="736.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="536.00" y="736.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="576.00" y="736.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="616.00" y="736.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="656.00" y="736.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="696.00" y="736.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="736.00" y="736.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="56.00" y="696.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="96.00" y="696.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_0_0 (32x32nm)</title></rect>
+    <rect x="136.00" y="696.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_0_1 (32x32nm)</title></rect>
+    <rect x="176.00" y="696.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_0_2 (32x32nm)</title></rect>
+    <rect x="216.00" y="696.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_0_3 (32x32nm)</title></rect>
+    <rect x="256.00" y="696.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_0_4 (32x32nm)</title></rect>
+    <rect x="296.00" y="696.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_0_5 (32x32nm)</title></rect>
+    <rect x="336.00" y="696.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_0_6 (32x32nm)</title></rect>
+    <rect x="376.00" y="696.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_0_7 (32x32nm)</title></rect>
+    <rect x="416.00" y="696.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_0_8 (32x32nm)</title></rect>
+    <rect x="456.00" y="696.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_0_9 (32x32nm)</title></rect>
+    <rect x="496.00" y="696.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_0_10 (32x32nm)</title></rect>
+    <rect x="536.00" y="696.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_0_11 (32x32nm)</title></rect>
+    <rect x="576.00" y="696.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_0_12 (32x32nm)</title></rect>
+    <rect x="616.00" y="696.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_0_13 (32x32nm)</title></rect>
+    <rect x="656.00" y="696.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_0_14 (32x32nm)</title></rect>
+    <rect x="696.00" y="696.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_0_15 (32x32nm)</title></rect>
+    <rect x="736.00" y="696.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="56.00" y="656.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="96.00" y="656.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_1_0 (32x32nm)</title></rect>
+    <rect x="136.00" y="656.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_1_1 (32x32nm)</title></rect>
+    <rect x="176.00" y="656.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_1_2 (32x32nm)</title></rect>
+    <rect x="216.00" y="656.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_1_3 (32x32nm)</title></rect>
+    <rect x="256.00" y="656.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_1_4 (32x32nm)</title></rect>
+    <rect x="296.00" y="656.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_1_5 (32x32nm)</title></rect>
+    <rect x="336.00" y="656.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_1_6 (32x32nm)</title></rect>
+    <rect x="376.00" y="656.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_1_7 (32x32nm)</title></rect>
+    <rect x="416.00" y="656.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_1_8 (32x32nm)</title></rect>
+    <rect x="456.00" y="656.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_1_9 (32x32nm)</title></rect>
+    <rect x="496.00" y="656.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_1_10 (32x32nm)</title></rect>
+    <rect x="536.00" y="656.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_1_11 (32x32nm)</title></rect>
+    <rect x="576.00" y="656.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_1_12 (32x32nm)</title></rect>
+    <rect x="616.00" y="656.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_1_13 (32x32nm)</title></rect>
+    <rect x="656.00" y="656.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_1_14 (32x32nm)</title></rect>
+    <rect x="696.00" y="656.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_1_15 (32x32nm)</title></rect>
+    <rect x="736.00" y="656.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="56.00" y="616.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="96.00" y="616.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_2_0 (32x32nm)</title></rect>
+    <rect x="136.00" y="616.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_2_1 (32x32nm)</title></rect>
+    <rect x="176.00" y="616.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_2_2 (32x32nm)</title></rect>
+    <rect x="216.00" y="616.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_2_3 (32x32nm)</title></rect>
+    <rect x="256.00" y="616.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_2_4 (32x32nm)</title></rect>
+    <rect x="296.00" y="616.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_2_5 (32x32nm)</title></rect>
+    <rect x="336.00" y="616.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_2_6 (32x32nm)</title></rect>
+    <rect x="376.00" y="616.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_2_7 (32x32nm)</title></rect>
+    <rect x="416.00" y="616.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_2_8 (32x32nm)</title></rect>
+    <rect x="456.00" y="616.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_2_9 (32x32nm)</title></rect>
+    <rect x="496.00" y="616.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_2_10 (32x32nm)</title></rect>
+    <rect x="536.00" y="616.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_2_11 (32x32nm)</title></rect>
+    <rect x="576.00" y="616.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_2_12 (32x32nm)</title></rect>
+    <rect x="616.00" y="616.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_2_13 (32x32nm)</title></rect>
+    <rect x="656.00" y="616.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_2_14 (32x32nm)</title></rect>
+    <rect x="696.00" y="616.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_2_15 (32x32nm)</title></rect>
+    <rect x="736.00" y="616.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="56.00" y="576.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="96.00" y="576.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_3_0 (32x32nm)</title></rect>
+    <rect x="136.00" y="576.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_3_1 (32x32nm)</title></rect>
+    <rect x="176.00" y="576.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_3_2 (32x32nm)</title></rect>
+    <rect x="216.00" y="576.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_3_3 (32x32nm)</title></rect>
+    <rect x="256.00" y="576.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_3_4 (32x32nm)</title></rect>
+    <rect x="296.00" y="576.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_3_5 (32x32nm)</title></rect>
+    <rect x="336.00" y="576.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_3_6 (32x32nm)</title></rect>
+    <rect x="376.00" y="576.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_3_7 (32x32nm)</title></rect>
+    <rect x="416.00" y="576.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_3_8 (32x32nm)</title></rect>
+    <rect x="456.00" y="576.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_3_9 (32x32nm)</title></rect>
+    <rect x="496.00" y="576.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_3_10 (32x32nm)</title></rect>
+    <rect x="536.00" y="576.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_3_11 (32x32nm)</title></rect>
+    <rect x="576.00" y="576.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_3_12 (32x32nm)</title></rect>
+    <rect x="616.00" y="576.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_3_13 (32x32nm)</title></rect>
+    <rect x="656.00" y="576.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_3_14 (32x32nm)</title></rect>
+    <rect x="696.00" y="576.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_3_15 (32x32nm)</title></rect>
+    <rect x="736.00" y="576.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="56.00" y="536.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="96.00" y="536.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_4_0 (32x32nm)</title></rect>
+    <rect x="136.00" y="536.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_4_1 (32x32nm)</title></rect>
+    <rect x="176.00" y="536.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_4_2 (32x32nm)</title></rect>
+    <rect x="216.00" y="536.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_4_3 (32x32nm)</title></rect>
+    <rect x="256.00" y="536.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_4_4 (32x32nm)</title></rect>
+    <rect x="296.00" y="536.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_4_5 (32x32nm)</title></rect>
+    <rect x="336.00" y="536.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_4_6 (32x32nm)</title></rect>
+    <rect x="376.00" y="536.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_4_7 (32x32nm)</title></rect>
+    <rect x="416.00" y="536.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_4_8 (32x32nm)</title></rect>
+    <rect x="456.00" y="536.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_4_9 (32x32nm)</title></rect>
+    <rect x="496.00" y="536.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_4_10 (32x32nm)</title></rect>
+    <rect x="536.00" y="536.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_4_11 (32x32nm)</title></rect>
+    <rect x="576.00" y="536.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_4_12 (32x32nm)</title></rect>
+    <rect x="616.00" y="536.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_4_13 (32x32nm)</title></rect>
+    <rect x="656.00" y="536.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_4_14 (32x32nm)</title></rect>
+    <rect x="696.00" y="536.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_4_15 (32x32nm)</title></rect>
+    <rect x="736.00" y="536.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="56.00" y="496.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="96.00" y="496.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_5_0 (32x32nm)</title></rect>
+    <rect x="136.00" y="496.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_5_1 (32x32nm)</title></rect>
+    <rect x="176.00" y="496.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_5_2 (32x32nm)</title></rect>
+    <rect x="216.00" y="496.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_5_3 (32x32nm)</title></rect>
+    <rect x="256.00" y="496.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_5_4 (32x32nm)</title></rect>
+    <rect x="296.00" y="496.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_5_5 (32x32nm)</title></rect>
+    <rect x="336.00" y="496.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_5_6 (32x32nm)</title></rect>
+    <rect x="376.00" y="496.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_5_7 (32x32nm)</title></rect>
+    <rect x="416.00" y="496.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_5_8 (32x32nm)</title></rect>
+    <rect x="456.00" y="496.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_5_9 (32x32nm)</title></rect>
+    <rect x="496.00" y="496.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_5_10 (32x32nm)</title></rect>
+    <rect x="536.00" y="496.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_5_11 (32x32nm)</title></rect>
+    <rect x="576.00" y="496.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_5_12 (32x32nm)</title></rect>
+    <rect x="616.00" y="496.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_5_13 (32x32nm)</title></rect>
+    <rect x="656.00" y="496.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_5_14 (32x32nm)</title></rect>
+    <rect x="696.00" y="496.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_5_15 (32x32nm)</title></rect>
+    <rect x="736.00" y="496.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="56.00" y="456.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="96.00" y="456.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_6_0 (32x32nm)</title></rect>
+    <rect x="136.00" y="456.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_6_1 (32x32nm)</title></rect>
+    <rect x="176.00" y="456.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_6_2 (32x32nm)</title></rect>
+    <rect x="216.00" y="456.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_6_3 (32x32nm)</title></rect>
+    <rect x="256.00" y="456.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_6_4 (32x32nm)</title></rect>
+    <rect x="296.00" y="456.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_6_5 (32x32nm)</title></rect>
+    <rect x="336.00" y="456.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_6_6 (32x32nm)</title></rect>
+    <rect x="376.00" y="456.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_6_7 (32x32nm)</title></rect>
+    <rect x="416.00" y="456.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_6_8 (32x32nm)</title></rect>
+    <rect x="456.00" y="456.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_6_9 (32x32nm)</title></rect>
+    <rect x="496.00" y="456.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_6_10 (32x32nm)</title></rect>
+    <rect x="536.00" y="456.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_6_11 (32x32nm)</title></rect>
+    <rect x="576.00" y="456.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_6_12 (32x32nm)</title></rect>
+    <rect x="616.00" y="456.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_6_13 (32x32nm)</title></rect>
+    <rect x="656.00" y="456.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_6_14 (32x32nm)</title></rect>
+    <rect x="696.00" y="456.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_6_15 (32x32nm)</title></rect>
+    <rect x="736.00" y="456.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="56.00" y="416.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="96.00" y="416.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_7_0 (32x32nm)</title></rect>
+    <rect x="136.00" y="416.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_7_1 (32x32nm)</title></rect>
+    <rect x="176.00" y="416.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_7_2 (32x32nm)</title></rect>
+    <rect x="216.00" y="416.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_7_3 (32x32nm)</title></rect>
+    <rect x="256.00" y="416.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_7_4 (32x32nm)</title></rect>
+    <rect x="296.00" y="416.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_7_5 (32x32nm)</title></rect>
+    <rect x="336.00" y="416.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_7_6 (32x32nm)</title></rect>
+    <rect x="376.00" y="416.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_7_7 (32x32nm)</title></rect>
+    <rect x="416.00" y="416.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_7_8 (32x32nm)</title></rect>
+    <rect x="456.00" y="416.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_7_9 (32x32nm)</title></rect>
+    <rect x="496.00" y="416.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_7_10 (32x32nm)</title></rect>
+    <rect x="536.00" y="416.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_7_11 (32x32nm)</title></rect>
+    <rect x="576.00" y="416.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_7_12 (32x32nm)</title></rect>
+    <rect x="616.00" y="416.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_7_13 (32x32nm)</title></rect>
+    <rect x="656.00" y="416.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_7_14 (32x32nm)</title></rect>
+    <rect x="696.00" y="416.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_7_15 (32x32nm)</title></rect>
+    <rect x="736.00" y="416.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="56.00" y="376.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="96.00" y="376.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_8_0 (32x32nm)</title></rect>
+    <rect x="136.00" y="376.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_8_1 (32x32nm)</title></rect>
+    <rect x="176.00" y="376.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_8_2 (32x32nm)</title></rect>
+    <rect x="216.00" y="376.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_8_3 (32x32nm)</title></rect>
+    <rect x="256.00" y="376.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_8_4 (32x32nm)</title></rect>
+    <rect x="296.00" y="376.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_8_5 (32x32nm)</title></rect>
+    <rect x="336.00" y="376.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_8_6 (32x32nm)</title></rect>
+    <rect x="376.00" y="376.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_8_7 (32x32nm)</title></rect>
+    <rect x="416.00" y="376.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_8_8 (32x32nm)</title></rect>
+    <rect x="456.00" y="376.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_8_9 (32x32nm)</title></rect>
+    <rect x="496.00" y="376.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_8_10 (32x32nm)</title></rect>
+    <rect x="536.00" y="376.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_8_11 (32x32nm)</title></rect>
+    <rect x="576.00" y="376.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_8_12 (32x32nm)</title></rect>
+    <rect x="616.00" y="376.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_8_13 (32x32nm)</title></rect>
+    <rect x="656.00" y="376.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_8_14 (32x32nm)</title></rect>
+    <rect x="696.00" y="376.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_8_15 (32x32nm)</title></rect>
+    <rect x="736.00" y="376.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="56.00" y="336.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="96.00" y="336.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_9_0 (32x32nm)</title></rect>
+    <rect x="136.00" y="336.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_9_1 (32x32nm)</title></rect>
+    <rect x="176.00" y="336.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_9_2 (32x32nm)</title></rect>
+    <rect x="216.00" y="336.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_9_3 (32x32nm)</title></rect>
+    <rect x="256.00" y="336.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_9_4 (32x32nm)</title></rect>
+    <rect x="296.00" y="336.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_9_5 (32x32nm)</title></rect>
+    <rect x="336.00" y="336.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_9_6 (32x32nm)</title></rect>
+    <rect x="376.00" y="336.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_9_7 (32x32nm)</title></rect>
+    <rect x="416.00" y="336.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_9_8 (32x32nm)</title></rect>
+    <rect x="456.00" y="336.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_9_9 (32x32nm)</title></rect>
+    <rect x="496.00" y="336.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_9_10 (32x32nm)</title></rect>
+    <rect x="536.00" y="336.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_9_11 (32x32nm)</title></rect>
+    <rect x="576.00" y="336.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_9_12 (32x32nm)</title></rect>
+    <rect x="616.00" y="336.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_9_13 (32x32nm)</title></rect>
+    <rect x="656.00" y="336.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_9_14 (32x32nm)</title></rect>
+    <rect x="696.00" y="336.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_9_15 (32x32nm)</title></rect>
+    <rect x="736.00" y="336.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="56.00" y="296.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="96.00" y="296.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_10_0 (32x32nm)</title></rect>
+    <rect x="136.00" y="296.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_10_1 (32x32nm)</title></rect>
+    <rect x="176.00" y="296.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_10_2 (32x32nm)</title></rect>
+    <rect x="216.00" y="296.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_10_3 (32x32nm)</title></rect>
+    <rect x="256.00" y="296.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_10_4 (32x32nm)</title></rect>
+    <rect x="296.00" y="296.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_10_5 (32x32nm)</title></rect>
+    <rect x="336.00" y="296.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_10_6 (32x32nm)</title></rect>
+    <rect x="376.00" y="296.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_10_7 (32x32nm)</title></rect>
+    <rect x="416.00" y="296.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_10_8 (32x32nm)</title></rect>
+    <rect x="456.00" y="296.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_10_9 (32x32nm)</title></rect>
+    <rect x="496.00" y="296.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_10_10 (32x32nm)</title></rect>
+    <rect x="536.00" y="296.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_10_11 (32x32nm)</title></rect>
+    <rect x="576.00" y="296.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_10_12 (32x32nm)</title></rect>
+    <rect x="616.00" y="296.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_10_13 (32x32nm)</title></rect>
+    <rect x="656.00" y="296.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_10_14 (32x32nm)</title></rect>
+    <rect x="696.00" y="296.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_10_15 (32x32nm)</title></rect>
+    <rect x="736.00" y="296.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="56.00" y="256.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="96.00" y="256.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_11_0 (32x32nm)</title></rect>
+    <rect x="136.00" y="256.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_11_1 (32x32nm)</title></rect>
+    <rect x="176.00" y="256.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_11_2 (32x32nm)</title></rect>
+    <rect x="216.00" y="256.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_11_3 (32x32nm)</title></rect>
+    <rect x="256.00" y="256.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_11_4 (32x32nm)</title></rect>
+    <rect x="296.00" y="256.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_11_5 (32x32nm)</title></rect>
+    <rect x="336.00" y="256.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_11_6 (32x32nm)</title></rect>
+    <rect x="376.00" y="256.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_11_7 (32x32nm)</title></rect>
+    <rect x="416.00" y="256.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_11_8 (32x32nm)</title></rect>
+    <rect x="456.00" y="256.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_11_9 (32x32nm)</title></rect>
+    <rect x="496.00" y="256.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_11_10 (32x32nm)</title></rect>
+    <rect x="536.00" y="256.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_11_11 (32x32nm)</title></rect>
+    <rect x="576.00" y="256.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_11_12 (32x32nm)</title></rect>
+    <rect x="616.00" y="256.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_11_13 (32x32nm)</title></rect>
+    <rect x="656.00" y="256.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_11_14 (32x32nm)</title></rect>
+    <rect x="696.00" y="256.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_11_15 (32x32nm)</title></rect>
+    <rect x="736.00" y="256.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="56.00" y="216.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="96.00" y="216.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_12_0 (32x32nm)</title></rect>
+    <rect x="136.00" y="216.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_12_1 (32x32nm)</title></rect>
+    <rect x="176.00" y="216.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_12_2 (32x32nm)</title></rect>
+    <rect x="216.00" y="216.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_12_3 (32x32nm)</title></rect>
+    <rect x="256.00" y="216.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_12_4 (32x32nm)</title></rect>
+    <rect x="296.00" y="216.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_12_5 (32x32nm)</title></rect>
+    <rect x="336.00" y="216.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_12_6 (32x32nm)</title></rect>
+    <rect x="376.00" y="216.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_12_7 (32x32nm)</title></rect>
+    <rect x="416.00" y="216.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_12_8 (32x32nm)</title></rect>
+    <rect x="456.00" y="216.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_12_9 (32x32nm)</title></rect>
+    <rect x="496.00" y="216.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_12_10 (32x32nm)</title></rect>
+    <rect x="536.00" y="216.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_12_11 (32x32nm)</title></rect>
+    <rect x="576.00" y="216.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_12_12 (32x32nm)</title></rect>
+    <rect x="616.00" y="216.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_12_13 (32x32nm)</title></rect>
+    <rect x="656.00" y="216.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_12_14 (32x32nm)</title></rect>
+    <rect x="696.00" y="216.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_12_15 (32x32nm)</title></rect>
+    <rect x="736.00" y="216.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="56.00" y="176.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="96.00" y="176.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_13_0 (32x32nm)</title></rect>
+    <rect x="136.00" y="176.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_13_1 (32x32nm)</title></rect>
+    <rect x="176.00" y="176.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_13_2 (32x32nm)</title></rect>
+    <rect x="216.00" y="176.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_13_3 (32x32nm)</title></rect>
+    <rect x="256.00" y="176.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_13_4 (32x32nm)</title></rect>
+    <rect x="296.00" y="176.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_13_5 (32x32nm)</title></rect>
+    <rect x="336.00" y="176.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_13_6 (32x32nm)</title></rect>
+    <rect x="376.00" y="176.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_13_7 (32x32nm)</title></rect>
+    <rect x="416.00" y="176.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_13_8 (32x32nm)</title></rect>
+    <rect x="456.00" y="176.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_13_9 (32x32nm)</title></rect>
+    <rect x="496.00" y="176.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_13_10 (32x32nm)</title></rect>
+    <rect x="536.00" y="176.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_13_11 (32x32nm)</title></rect>
+    <rect x="576.00" y="176.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_13_12 (32x32nm)</title></rect>
+    <rect x="616.00" y="176.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_13_13 (32x32nm)</title></rect>
+    <rect x="656.00" y="176.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_13_14 (32x32nm)</title></rect>
+    <rect x="696.00" y="176.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_13_15 (32x32nm)</title></rect>
+    <rect x="736.00" y="176.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="56.00" y="136.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="96.00" y="136.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_14_0 (32x32nm)</title></rect>
+    <rect x="136.00" y="136.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_14_1 (32x32nm)</title></rect>
+    <rect x="176.00" y="136.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_14_2 (32x32nm)</title></rect>
+    <rect x="216.00" y="136.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_14_3 (32x32nm)</title></rect>
+    <rect x="256.00" y="136.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_14_4 (32x32nm)</title></rect>
+    <rect x="296.00" y="136.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_14_5 (32x32nm)</title></rect>
+    <rect x="336.00" y="136.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_14_6 (32x32nm)</title></rect>
+    <rect x="376.00" y="136.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_14_7 (32x32nm)</title></rect>
+    <rect x="416.00" y="136.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_14_8 (32x32nm)</title></rect>
+    <rect x="456.00" y="136.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_14_9 (32x32nm)</title></rect>
+    <rect x="496.00" y="136.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_14_10 (32x32nm)</title></rect>
+    <rect x="536.00" y="136.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_14_11 (32x32nm)</title></rect>
+    <rect x="576.00" y="136.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_14_12 (32x32nm)</title></rect>
+    <rect x="616.00" y="136.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_14_13 (32x32nm)</title></rect>
+    <rect x="656.00" y="136.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_14_14 (32x32nm)</title></rect>
+    <rect x="696.00" y="136.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_14_15 (32x32nm)</title></rect>
+    <rect x="736.00" y="136.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="56.00" y="96.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="96.00" y="96.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_15_0 (32x32nm)</title></rect>
+    <rect x="136.00" y="96.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_15_1 (32x32nm)</title></rect>
+    <rect x="176.00" y="96.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_15_2 (32x32nm)</title></rect>
+    <rect x="216.00" y="96.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_15_3 (32x32nm)</title></rect>
+    <rect x="256.00" y="96.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_15_4 (32x32nm)</title></rect>
+    <rect x="296.00" y="96.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_15_5 (32x32nm)</title></rect>
+    <rect x="336.00" y="96.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_15_6 (32x32nm)</title></rect>
+    <rect x="376.00" y="96.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_15_7 (32x32nm)</title></rect>
+    <rect x="416.00" y="96.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_15_8 (32x32nm)</title></rect>
+    <rect x="456.00" y="96.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_15_9 (32x32nm)</title></rect>
+    <rect x="496.00" y="96.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_15_10 (32x32nm)</title></rect>
+    <rect x="536.00" y="96.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_15_11 (32x32nm)</title></rect>
+    <rect x="576.00" y="96.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_15_12 (32x32nm)</title></rect>
+    <rect x="616.00" y="96.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_15_13 (32x32nm)</title></rect>
+    <rect x="656.00" y="96.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_15_14 (32x32nm)</title></rect>
+    <rect x="696.00" y="96.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: CELL_15_15 (32x32nm)</title></rect>
+    <rect x="736.00" y="96.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="56.00" y="56.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="96.00" y="56.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="136.00" y="56.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="176.00" y="56.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="216.00" y="56.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="256.00" y="56.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="296.00" y="56.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="336.00" y="56.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="376.00" y="56.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="416.00" y="56.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="456.00" y="56.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="496.00" y="56.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="536.00" y="56.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="576.00" y="56.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="616.00" y="56.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="656.00" y="56.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="696.00" y="56.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="736.00" y="56.00" width="8.00" height="8.00" fill="#dc2626" fill-opacity="0.95" stroke="#991b1b" stroke-width="1"><title>VIA4_RERAM: DUMMY_CELL (32x32nm)</title></rect>
+    <rect x="52.50" y="40.00" width="15.00" height="720.00" fill="#67e8f9" fill-opacity="0.75" stroke="#06b6d4" stroke-width="1"><title>METAL5: DUMMY_BL (60x2880nm)</title></rect>
+    <rect x="92.50" y="40.00" width="15.00" height="720.00" fill="#67e8f9" fill-opacity="0.75" stroke="#06b6d4" stroke-width="1"><title>METAL5: BL_0 (60x2880nm)</title></rect>
+    <rect x="132.50" y="40.00" width="15.00" height="720.00" fill="#67e8f9" fill-opacity="0.75" stroke="#06b6d4" stroke-width="1"><title>METAL5: BL_1 (60x2880nm)</title></rect>
+    <rect x="172.50" y="40.00" width="15.00" height="720.00" fill="#67e8f9" fill-opacity="0.75" stroke="#06b6d4" stroke-width="1"><title>METAL5: BL_2 (60x2880nm)</title></rect>
+    <rect x="212.50" y="40.00" width="15.00" height="720.00" fill="#67e8f9" fill-opacity="0.75" stroke="#06b6d4" stroke-width="1"><title>METAL5: BL_3 (60x2880nm)</title></rect>
+    <rect x="252.50" y="40.00" width="15.00" height="720.00" fill="#67e8f9" fill-opacity="0.75" stroke="#06b6d4" stroke-width="1"><title>METAL5: BL_4 (60x2880nm)</title></rect>
+    <rect x="292.50" y="40.00" width="15.00" height="720.00" fill="#67e8f9" fill-opacity="0.75" stroke="#06b6d4" stroke-width="1"><title>METAL5: BL_5 (60x2880nm)</title></rect>
+    <rect x="332.50" y="40.00" width="15.00" height="720.00" fill="#67e8f9" fill-opacity="0.75" stroke="#06b6d4" stroke-width="1"><title>METAL5: BL_6 (60x2880nm)</title></rect>
+    <rect x="372.50" y="40.00" width="15.00" height="720.00" fill="#67e8f9" fill-opacity="0.75" stroke="#06b6d4" stroke-width="1"><title>METAL5: BL_7 (60x2880nm)</title></rect>
+    <rect x="412.50" y="40.00" width="15.00" height="720.00" fill="#67e8f9" fill-opacity="0.75" stroke="#06b6d4" stroke-width="1"><title>METAL5: BL_8 (60x2880nm)</title></rect>
+    <rect x="452.50" y="40.00" width="15.00" height="720.00" fill="#67e8f9" fill-opacity="0.75" stroke="#06b6d4" stroke-width="1"><title>METAL5: BL_9 (60x2880nm)</title></rect>
+    <rect x="492.50" y="40.00" width="15.00" height="720.00" fill="#67e8f9" fill-opacity="0.75" stroke="#06b6d4" stroke-width="1"><title>METAL5: BL_10 (60x2880nm)</title></rect>
+    <rect x="532.50" y="40.00" width="15.00" height="720.00" fill="#67e8f9" fill-opacity="0.75" stroke="#06b6d4" stroke-width="1"><title>METAL5: BL_11 (60x2880nm)</title></rect>
+    <rect x="572.50" y="40.00" width="15.00" height="720.00" fill="#67e8f9" fill-opacity="0.75" stroke="#06b6d4" stroke-width="1"><title>METAL5: BL_12 (60x2880nm)</title></rect>
+    <rect x="612.50" y="40.00" width="15.00" height="720.00" fill="#67e8f9" fill-opacity="0.75" stroke="#06b6d4" stroke-width="1"><title>METAL5: BL_13 (60x2880nm)</title></rect>
+    <rect x="652.50" y="40.00" width="15.00" height="720.00" fill="#67e8f9" fill-opacity="0.75" stroke="#06b6d4" stroke-width="1"><title>METAL5: BL_14 (60x2880nm)</title></rect>
+    <rect x="692.50" y="40.00" width="15.00" height="720.00" fill="#67e8f9" fill-opacity="0.75" stroke="#06b6d4" stroke-width="1"><title>METAL5: BL_15 (60x2880nm)</title></rect>
+    <rect x="732.50" y="40.00" width="15.00" height="720.00" fill="#67e8f9" fill-opacity="0.75" stroke="#06b6d4" stroke-width="1"><title>METAL5: DUMMY_BL (60x2880nm)</title></rect>
+  </g>
+  <g id="ports">
+    <circle cx="40.00" cy="700.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="40.00" cy="660.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="40.00" cy="620.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="40.00" cy="580.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="40.00" cy="540.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="40.00" cy="500.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="40.00" cy="460.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="40.00" cy="420.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="40.00" cy="380.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="40.00" cy="340.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="40.00" cy="300.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="40.00" cy="260.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="40.00" cy="220.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="40.00" cy="180.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="40.00" cy="140.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="40.00" cy="100.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="100.00" cy="40.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="140.00" cy="40.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="180.00" cy="40.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="220.00" cy="40.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="260.00" cy="40.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="300.00" cy="40.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="340.00" cy="40.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="380.00" cy="40.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="420.00" cy="40.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="460.00" cy="40.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="500.00" cy="40.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="540.00" cy="40.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="580.00" cy="40.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="620.00" cy="40.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="660.00" cy="40.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="700.00" cy="40.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+  </g>
+  <text x="20" y="25" fill="#f8fafc" font-family="monospace" font-size="13" font-weight="bold">CELL: reram_macro_16x16 | BBOX: 2.88um x 2.88um | SHAPES: 360</text>
+</svg>

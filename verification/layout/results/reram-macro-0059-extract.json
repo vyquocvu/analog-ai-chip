@@ -1,0 +1,34 @@
+{
+  "chapter": "0059-reram-macro-layout",
+  "gate": "R15",
+  "work_package": "WP15.1",
+  "status": "PASSED",
+  "claim_level": "physical/layout-drc",
+  "process_technology": "28nm BEOL Via4-M5 ReRAM",
+  "macro_geometry": {
+    "name": "reram_macro_16x16",
+    "core_rows": 16,
+    "core_cols": 16,
+    "cell_pitch_nm": 160,
+    "wordline_width_nm": 60,
+    "bitline_width_nm": 60,
+    "reram_via_size_nm": 32,
+    "array_width_um": 2.88,
+    "array_height_um": 2.88,
+    "macro_area_um2": 8.2944,
+    "total_rectangles": 360,
+    "total_ports": 32,
+    "total_active_crosspoints": 256
+  },
+  "drc_signoff": {
+    "is_clean": true,
+    "total_checks": 1008,
+    "violation_count": 0,
+    "violations": [],
+    "metal_densities_pct": {
+      "METAL4": 37.5,
+      "METAL5": 37.5,
+      "VIA4_RERAM": 4.0
+    }
+  }
+}

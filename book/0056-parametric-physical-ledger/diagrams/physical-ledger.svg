@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="380" viewBox="0 0 960 380" role="img" aria-labelledby="title desc">
+  <title id="title">Parametric Physical Accelerator Ledger</title>
+  <desc id="desc">Subsystem energy breakdown, prefill/decode timing, and thermal dissipation envelope across T0–T3 model tiers.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker>
+    <style>
+      .box{fill:#f8fafc;stroke:#64748b;stroke-width:2}
+      .mvm{fill:#fff7ed;stroke:#ea580c;stroke-width:2}
+      .mem{fill:#eff6ff;stroke:#2563eb;stroke-width:2}
+      .therm{fill:#ecfdf5;stroke:#059669;stroke-width:2}
+      .head{font:bold 15px sans-serif;fill:#0f172a}
+      .txt{font:13px sans-serif;fill:#334155}
+      .tag{font:bold 11px sans-serif;fill:#475569}
+      .wire{stroke:#334155;stroke-width:2;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <!-- Title Banner -->
+  <rect class="box" x="30" y="20" rx="8" width="900" height="45"/>
+  <text class="head" x="50" y="48">Parametric Physical Ledger: Energy, Latency &amp; Thermal Dissipation</text>
+
+  <!-- Subsystem 1: Analog Compute & Converters -->
+  <rect class="mvm" x="30" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="45" y="115">1. Compute &amp; Converters</text>
+  <text class="tag" x="45" y="135">SPICE &amp; MEASURED COEFFICIENTS</text>
+  <text class="txt" x="45" y="165">• ReRAM MVM: 0.12 pJ / MAC</text>
+  <text class="txt" x="45" y="190">• 8-bit SAR ADC: 0.45 pJ / conv</text>
+  <text class="txt" x="45" y="215">• 8-bit DAC: 0.08 pJ / conv</text>
+  <text class="txt" x="45" y="240">• Tile Clock: 50 MHz (20 ns cycle)</text>
+  <text class="txt" x="45" y="265">• Vector Attn: 0.85 pJ / FLOP</text>
+  <text class="tag" x="45" y="295">STATUS: Dominates Short Context</text>
+
+  <!-- Subsystem 2: Data Movement & Memory -->
+  <rect class="mem" x="340" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="355" y="115">2. Data Movement &amp; Links</text>
+  <text class="tag" x="355" y="135">ON-CHIP &amp; PACKAGE NETWORKS</text>
+  <text class="txt" x="355" y="165">• Tile SRAM: 0.25 pJ / Byte</text>
+  <text class="txt" x="355" y="190">• 2D Mesh NoC: 0.80 pJ / Byte</text>
+  <text class="txt" x="355" y="215">• UCIe 2.5D Link: 12.0 pJ / Byte</text>
+  <text class="txt" x="355" y="240">• HBM3e Stack: 28.0 pJ / Byte</text>
+  <text class="txt" x="355" y="265">• Inter-Die Latency: &lt; 50 ns</text>
+  <text class="tag" x="355" y="295">STATUS: Multi-Die Overhead Included</text>
+
+  <!-- Subsystem 3: Power & Thermal Envelope -->
+  <rect class="therm" x="655" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="670" y="115">3. Thermal Envelope</text>
+  <text class="tag" x="670" y="135">PHYSICAL BOUNDARIES</text>
+  <text class="txt" x="670" y="165">• Air-Cooled Max: 150 W/cm²</text>
+  <text class="txt" x="670" y="190">• Liquid-Cooled Max: 350 W/cm²</text>
+  <text class="txt" x="670" y="215">• T0 Power Density: 1.5 W/cm²</text>
+  <text class="txt" x="670" y="240">• T1 Power Density: 4.8 W/cm²</text>
+  <text class="txt" x="670" y="265">• Decode Throughput: &gt; 1000 TPS</text>
+  <text class="tag" x="670" y="295">CLASSIFICATION: PASS_AIR_COOLED</text>
+
+  <!-- Footnote -->
+  <text class="tag" x="30" y="355">PROVENANCE: Replaces TinyGPT fixed constants with manifest-driven parametric physical simulation.</text>
+</svg>

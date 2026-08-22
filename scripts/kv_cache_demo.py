@@ -55,7 +55,8 @@ def main() -> None:
     print(f"greedy parity : {np.array_equal(base, cached)}")
 
     # sampling parity under identical RNG draws
-    r1 = np.random.default_rng(11); r2 = np.random.default_rng(11)
+    r1 = np.random.default_rng(11)
+    r2 = np.random.default_rng(11)
     sbase = model.generate(prompt, max_new=max_new, greedy=False, rng=r1)
     scache = model.generate_kvcache(prompt, max_new=max_new, greedy=False, rng=r2)
     print(f"sampling parity (same seed): {np.array_equal(sbase, scache)}")

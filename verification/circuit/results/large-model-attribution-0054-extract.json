@@ -1,0 +1,86 @@
+{
+  "chapter": "0054-large-model-error-attribution",
+  "gate": "R13",
+  "status": "PASSED",
+  "claim_level": "exact_physical",
+  "evaluation_corpus": {
+    "tokens_count": 16,
+    "baseline_perplexity": 139.82816845577915
+  },
+  "mechanisms": {
+    "dac_quantization_8bit": {
+      "description": "8-bit input DAC quantization",
+      "perplexity": 139.8343983773531,
+      "top1_agreement_pct": 100.0,
+      "mean_kl_divergence": 2.170752411072877e-06,
+      "max_logit_error": 0.008293873394867904,
+      "snr_db": 37.875319925598504,
+      "claim_level": "exact_physical"
+    },
+    "adc_quantization_8bit": {
+      "description": "8-bit output ADC quantization",
+      "perplexity": 138.8269703239162,
+      "top1_agreement_pct": 31.25,
+      "mean_kl_divergence": 0.01471240631391235,
+      "max_logit_error": 0.6280036248096168,
+      "snr_db": -0.43044596645578703,
+      "claim_level": "exact_physical"
+    },
+    "programming_variation": {
+      "description": "1.5% ReRAM programming variation (sigma_prog)",
+      "perplexity": 144.18820396792844,
+      "top1_agreement_pct": 25.0,
+      "mean_kl_divergence": 0.015666436932804374,
+      "max_logit_error": 0.7821585924843525,
+      "snr_db": -0.7183066415598551,
+      "claim_level": "exact_physical"
+    },
+    "read_noise": {
+      "description": "0.8% read noise during MVM (sigma_read)",
+      "perplexity": 145.282812874027,
+      "top1_agreement_pct": 25.0,
+      "mean_kl_divergence": 0.014788537013349073,
+      "max_logit_error": 0.6553963785711129,
+      "snr_db": -0.43996629425305195,
+      "claim_level": "exact_physical"
+    },
+    "conductance_drift_24h": {
+      "description": "24-hour conductance drift (nu=0.08, t=86400s)",
+      "perplexity": 134.8986667877095,
+      "top1_agreement_pct": 25.0,
+      "mean_kl_divergence": 0.011293968980505359,
+      "max_logit_error": 0.6423790167282002,
+      "snr_db": 0.6746003261476095,
+      "claim_level": "exact_physical"
+    },
+    "stuck_faults": {
+      "description": "0.1% stuck-HRS / 0.05% stuck-LRS defect cells",
+      "perplexity": 142.69220977766926,
+      "top1_agreement_pct": 25.0,
+      "mean_kl_divergence": 0.014847810834732102,
+      "max_logit_error": 0.5924042525868609,
+      "snr_db": -0.4873507032269869,
+      "claim_level": "exact_physical"
+    },
+    "composite_crossbar_v1": {
+      "description": "Full composite physical crossbar-v1 profile",
+      "perplexity": 128.54699987006853,
+      "top1_agreement_pct": 6.25,
+      "mean_kl_divergence": 0.02385944189722805,
+      "max_logit_error": 0.7683632686967041,
+      "snr_db": -2.5517214874871526,
+      "claim_level": "exact_physical"
+    }
+  },
+  "converter_bit_sweep": {
+    "4-bit": 128.88746530277862,
+    "6-bit": 145.04993768789006,
+    "8-bit": 139.04213615737964
+  },
+  "depth_wise_layer_mse": [
+    0.0003871110336899599,
+    0.0016635498872317434,
+    0.0037106798429485154,
+    0.006034154147604275
+  ]
+}

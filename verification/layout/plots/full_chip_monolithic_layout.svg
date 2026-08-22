@@ -1,0 +1,891 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800" role="img">
+  <title>top_analog_ai_monolithic_chip Physical IC Layout</title>
+  <rect width="800" height="800" fill="#0f172a"/>
+  <g id="grid_border">
+    <rect x="40.0" y="40.0" width="720.0" height="720.0" fill="none" stroke="#334155" stroke-width="1" stroke-dasharray="4,4"/>
+  </g>
+  <g id="shapes">
+    <rect x="40.00" y="40.00" width="720.00" height="720.00" fill="#e2e8f0" fill-opacity="0.3" stroke="#94a3b8" stroke-width="1"><title>SUBSTRATE: DIE_SUBSTRATE (18334000x18334000nm)</title></rect>
+    <rect x="58.06" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_0 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_1 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_2 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="662.21" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_3 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="636.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_4 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="611.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_5 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="585.64" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_6 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="560.11" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_7 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="534.58" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_8 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="509.06" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_9 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="483.53" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_10 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="458.00" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_11 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="432.48" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_12 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="406.95" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_13 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="381.42" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_14 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="355.90" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_15 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="330.37" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_16 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="304.85" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_17 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="279.32" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_18 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="253.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_19 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="228.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_20 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="202.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_21 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="177.21" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_22 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_23 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_24 (80000x80000nm)</title></rect>
+    <rect x="58.06" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_0_25 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_0 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_1 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_2 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="662.21" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_3 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="636.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_4 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="611.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_5 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="585.64" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_6 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="560.11" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_7 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="534.58" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_8 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="509.06" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_9 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="483.53" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_10 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="458.00" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_11 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="432.48" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_12 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="406.95" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_13 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="381.42" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_14 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="355.90" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_15 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="330.37" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_16 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="304.85" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_17 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="279.32" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_18 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="253.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_19 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="228.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_20 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="202.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_21 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="177.21" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_22 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_23 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_24 (80000x80000nm)</title></rect>
+    <rect x="83.59" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_1_25 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_0 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_1 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_2 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="662.21" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_3 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="636.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_4 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="611.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_5 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="585.64" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_6 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="560.11" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_7 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="534.58" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_8 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="509.06" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_9 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="483.53" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_10 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="458.00" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_11 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="432.48" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_12 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="406.95" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_13 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="381.42" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_14 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="355.90" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_15 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="330.37" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_16 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="304.85" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_17 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="279.32" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_18 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="253.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_19 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="228.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_20 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="202.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_21 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="177.21" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_22 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_23 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_24 (80000x80000nm)</title></rect>
+    <rect x="109.12" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_2_25 (80000x80000nm)</title></rect>
+    <rect x="134.64" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_3_0 (80000x80000nm)</title></rect>
+    <rect x="134.64" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_3_1 (80000x80000nm)</title></rect>
+    <rect x="134.64" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_3_2 (80000x80000nm)</title></rect>
+    <rect x="134.64" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_3_23 (80000x80000nm)</title></rect>
+    <rect x="134.64" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_3_24 (80000x80000nm)</title></rect>
+    <rect x="134.64" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_3_25 (80000x80000nm)</title></rect>
+    <rect x="160.17" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_4_0 (80000x80000nm)</title></rect>
+    <rect x="160.17" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_4_1 (80000x80000nm)</title></rect>
+    <rect x="160.17" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_4_2 (80000x80000nm)</title></rect>
+    <rect x="160.17" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_4_23 (80000x80000nm)</title></rect>
+    <rect x="160.17" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_4_24 (80000x80000nm)</title></rect>
+    <rect x="160.17" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_4_25 (80000x80000nm)</title></rect>
+    <rect x="185.70" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_5_0 (80000x80000nm)</title></rect>
+    <rect x="185.70" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_5_1 (80000x80000nm)</title></rect>
+    <rect x="185.70" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_5_2 (80000x80000nm)</title></rect>
+    <rect x="185.70" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_5_23 (80000x80000nm)</title></rect>
+    <rect x="185.70" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_5_24 (80000x80000nm)</title></rect>
+    <rect x="185.70" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_5_25 (80000x80000nm)</title></rect>
+    <rect x="211.22" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_6_0 (80000x80000nm)</title></rect>
+    <rect x="211.22" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_6_1 (80000x80000nm)</title></rect>
+    <rect x="211.22" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_6_2 (80000x80000nm)</title></rect>
+    <rect x="211.22" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_6_23 (80000x80000nm)</title></rect>
+    <rect x="211.22" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_6_24 (80000x80000nm)</title></rect>
+    <rect x="211.22" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_6_25 (80000x80000nm)</title></rect>
+    <rect x="236.75" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_7_0 (80000x80000nm)</title></rect>
+    <rect x="236.75" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_7_1 (80000x80000nm)</title></rect>
+    <rect x="236.75" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_7_2 (80000x80000nm)</title></rect>
+    <rect x="236.75" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_7_23 (80000x80000nm)</title></rect>
+    <rect x="236.75" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_7_24 (80000x80000nm)</title></rect>
+    <rect x="236.75" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_7_25 (80000x80000nm)</title></rect>
+    <rect x="262.28" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_8_0 (80000x80000nm)</title></rect>
+    <rect x="262.28" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_8_1 (80000x80000nm)</title></rect>
+    <rect x="262.28" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_8_2 (80000x80000nm)</title></rect>
+    <rect x="262.28" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_8_23 (80000x80000nm)</title></rect>
+    <rect x="262.28" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_8_24 (80000x80000nm)</title></rect>
+    <rect x="262.28" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_8_25 (80000x80000nm)</title></rect>
+    <rect x="287.80" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_9_0 (80000x80000nm)</title></rect>
+    <rect x="287.80" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_9_1 (80000x80000nm)</title></rect>
+    <rect x="287.80" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_9_2 (80000x80000nm)</title></rect>
+    <rect x="287.80" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_9_23 (80000x80000nm)</title></rect>
+    <rect x="287.80" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_9_24 (80000x80000nm)</title></rect>
+    <rect x="287.80" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_9_25 (80000x80000nm)</title></rect>
+    <rect x="313.33" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_10_0 (80000x80000nm)</title></rect>
+    <rect x="313.33" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_10_1 (80000x80000nm)</title></rect>
+    <rect x="313.33" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_10_2 (80000x80000nm)</title></rect>
+    <rect x="313.33" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_10_23 (80000x80000nm)</title></rect>
+    <rect x="313.33" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_10_24 (80000x80000nm)</title></rect>
+    <rect x="313.33" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_10_25 (80000x80000nm)</title></rect>
+    <rect x="338.85" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_11_0 (80000x80000nm)</title></rect>
+    <rect x="338.85" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_11_1 (80000x80000nm)</title></rect>
+    <rect x="338.85" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_11_2 (80000x80000nm)</title></rect>
+    <rect x="338.85" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_11_23 (80000x80000nm)</title></rect>
+    <rect x="338.85" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_11_24 (80000x80000nm)</title></rect>
+    <rect x="338.85" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_11_25 (80000x80000nm)</title></rect>
+    <rect x="364.38" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_12_0 (80000x80000nm)</title></rect>
+    <rect x="364.38" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_12_1 (80000x80000nm)</title></rect>
+    <rect x="364.38" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_12_2 (80000x80000nm)</title></rect>
+    <rect x="364.38" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_12_23 (80000x80000nm)</title></rect>
+    <rect x="364.38" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_12_24 (80000x80000nm)</title></rect>
+    <rect x="364.38" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_12_25 (80000x80000nm)</title></rect>
+    <rect x="389.91" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_13_0 (80000x80000nm)</title></rect>
+    <rect x="389.91" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_13_1 (80000x80000nm)</title></rect>
+    <rect x="389.91" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_13_2 (80000x80000nm)</title></rect>
+    <rect x="389.91" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_13_23 (80000x80000nm)</title></rect>
+    <rect x="389.91" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_13_24 (80000x80000nm)</title></rect>
+    <rect x="389.91" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_13_25 (80000x80000nm)</title></rect>
+    <rect x="415.43" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_14_0 (80000x80000nm)</title></rect>
+    <rect x="415.43" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_14_1 (80000x80000nm)</title></rect>
+    <rect x="415.43" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_14_2 (80000x80000nm)</title></rect>
+    <rect x="415.43" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_14_23 (80000x80000nm)</title></rect>
+    <rect x="415.43" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_14_24 (80000x80000nm)</title></rect>
+    <rect x="415.43" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_14_25 (80000x80000nm)</title></rect>
+    <rect x="440.96" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_15_0 (80000x80000nm)</title></rect>
+    <rect x="440.96" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_15_1 (80000x80000nm)</title></rect>
+    <rect x="440.96" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_15_2 (80000x80000nm)</title></rect>
+    <rect x="440.96" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_15_23 (80000x80000nm)</title></rect>
+    <rect x="440.96" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_15_24 (80000x80000nm)</title></rect>
+    <rect x="440.96" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_15_25 (80000x80000nm)</title></rect>
+    <rect x="466.49" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_16_0 (80000x80000nm)</title></rect>
+    <rect x="466.49" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_16_1 (80000x80000nm)</title></rect>
+    <rect x="466.49" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_16_2 (80000x80000nm)</title></rect>
+    <rect x="466.49" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_16_23 (80000x80000nm)</title></rect>
+    <rect x="466.49" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_16_24 (80000x80000nm)</title></rect>
+    <rect x="466.49" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_16_25 (80000x80000nm)</title></rect>
+    <rect x="492.01" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_17_0 (80000x80000nm)</title></rect>
+    <rect x="492.01" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_17_1 (80000x80000nm)</title></rect>
+    <rect x="492.01" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_17_2 (80000x80000nm)</title></rect>
+    <rect x="492.01" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_17_23 (80000x80000nm)</title></rect>
+    <rect x="492.01" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_17_24 (80000x80000nm)</title></rect>
+    <rect x="492.01" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_17_25 (80000x80000nm)</title></rect>
+    <rect x="517.54" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_18_0 (80000x80000nm)</title></rect>
+    <rect x="517.54" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_18_1 (80000x80000nm)</title></rect>
+    <rect x="517.54" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_18_2 (80000x80000nm)</title></rect>
+    <rect x="517.54" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_18_23 (80000x80000nm)</title></rect>
+    <rect x="517.54" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_18_24 (80000x80000nm)</title></rect>
+    <rect x="517.54" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_18_25 (80000x80000nm)</title></rect>
+    <rect x="543.07" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_19_0 (80000x80000nm)</title></rect>
+    <rect x="543.07" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_19_1 (80000x80000nm)</title></rect>
+    <rect x="543.07" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_19_2 (80000x80000nm)</title></rect>
+    <rect x="543.07" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_19_23 (80000x80000nm)</title></rect>
+    <rect x="543.07" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_19_24 (80000x80000nm)</title></rect>
+    <rect x="543.07" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_19_25 (80000x80000nm)</title></rect>
+    <rect x="568.59" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_20_0 (80000x80000nm)</title></rect>
+    <rect x="568.59" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_20_1 (80000x80000nm)</title></rect>
+    <rect x="568.59" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_20_2 (80000x80000nm)</title></rect>
+    <rect x="568.59" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_20_23 (80000x80000nm)</title></rect>
+    <rect x="568.59" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_20_24 (80000x80000nm)</title></rect>
+    <rect x="568.59" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_20_25 (80000x80000nm)</title></rect>
+    <rect x="594.12" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_21_0 (80000x80000nm)</title></rect>
+    <rect x="594.12" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_21_1 (80000x80000nm)</title></rect>
+    <rect x="594.12" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_21_2 (80000x80000nm)</title></rect>
+    <rect x="594.12" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_21_23 (80000x80000nm)</title></rect>
+    <rect x="594.12" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_21_24 (80000x80000nm)</title></rect>
+    <rect x="594.12" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_21_25 (80000x80000nm)</title></rect>
+    <rect x="619.64" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_22_0 (80000x80000nm)</title></rect>
+    <rect x="619.64" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_22_1 (80000x80000nm)</title></rect>
+    <rect x="619.64" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_22_2 (80000x80000nm)</title></rect>
+    <rect x="619.64" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_22_23 (80000x80000nm)</title></rect>
+    <rect x="619.64" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_22_24 (80000x80000nm)</title></rect>
+    <rect x="619.64" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_22_25 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_0 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_1 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_2 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="662.21" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_3 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="636.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_4 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="611.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_5 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="585.64" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_6 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="560.11" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_7 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="534.58" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_8 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="509.06" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_9 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="483.53" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_10 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="458.00" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_11 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="432.48" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_12 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="406.95" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_13 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="381.42" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_14 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="355.90" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_15 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="330.37" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_16 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="304.85" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_17 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="279.32" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_18 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="253.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_19 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="228.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_20 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="202.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_21 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="177.21" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_22 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_23 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_24 (80000x80000nm)</title></rect>
+    <rect x="645.17" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_23_25 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_0 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_1 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_2 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="662.21" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_3 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="636.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_4 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="611.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_5 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="585.64" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_6 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="560.11" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_7 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="534.58" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_8 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="509.06" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_9 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="483.53" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_10 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="458.00" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_11 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="432.48" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_12 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="406.95" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_13 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="381.42" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_14 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="355.90" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_15 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="330.37" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_16 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="304.85" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_17 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="279.32" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_18 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="253.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_19 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="228.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_20 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="202.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_21 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="177.21" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_22 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_23 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_24 (80000x80000nm)</title></rect>
+    <rect x="670.70" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_24_25 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="738.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_0 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="713.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_1 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="687.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_2 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="662.21" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_3 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="636.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_4 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="611.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_5 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="585.64" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_6 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="560.11" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_7 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="534.58" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_8 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="509.06" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_9 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="483.53" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_10 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="458.00" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_11 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="432.48" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_12 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="406.95" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_13 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="381.42" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_14 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="355.90" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_15 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="330.37" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_16 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="304.85" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_17 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="279.32" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_18 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="253.79" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_19 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="228.27" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_20 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="202.74" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_21 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="177.21" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_22 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="151.69" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_23 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="126.16" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_24 (80000x80000nm)</title></rect>
+    <rect x="696.22" y="100.63" width="3.14" height="3.14" fill="#86efac" fill-opacity="0.6" stroke="#22c55e" stroke-width="1"><title>DIFFUSION: ESD_CLAMP_GGNMOS_25_25 (80000x80000nm)</title></rect>
+    <rect x="79.27" y="584.42" width="136.31" height="136.31" fill="#93c5fd" fill-opacity="0.7" stroke="#3b82f6" stroke-width="1"><title>METAL1: TPU_CLUSTER_0_0 (3470975x3470975nm)</title></rect>
+    <rect x="79.27" y="424.05" width="136.31" height="136.31" fill="#93c5fd" fill-opacity="0.7" stroke="#3b82f6" stroke-width="1"><title>METAL1: TPU_CLUSTER_0_1 (3470975x3470975nm)</title></rect>
+    <rect x="79.27" y="263.69" width="136.31" height="136.31" fill="#93c5fd" fill-opacity="0.7" stroke="#3b82f6" stroke-width="1"><title>METAL1: TPU_CLUSTER_0_2 (3470975x3470975nm)</title></rect>
+    <rect x="79.27" y="103.33" width="136.31" height="136.31" fill="#93c5fd" fill-opacity="0.7" stroke="#3b82f6" stroke-width="1"><title>METAL1: TPU_CLUSTER_0_3 (3470975x3470975nm)</title></rect>
+    <rect x="239.64" y="584.42" width="136.31" height="136.31" fill="#93c5fd" fill-opacity="0.7" stroke="#3b82f6" stroke-width="1"><title>METAL1: TPU_CLUSTER_1_0 (3470975x3470975nm)</title></rect>
+    <rect x="239.64" y="424.05" width="136.31" height="136.31" fill="#93c5fd" fill-opacity="0.7" stroke="#3b82f6" stroke-width="1"><title>METAL1: TPU_CLUSTER_1_1 (3470975x3470975nm)</title></rect>
+    <rect x="239.64" y="263.69" width="136.31" height="136.31" fill="#93c5fd" fill-opacity="0.7" stroke="#3b82f6" stroke-width="1"><title>METAL1: TPU_CLUSTER_1_2 (3470975x3470975nm)</title></rect>
+    <rect x="239.64" y="103.33" width="136.31" height="136.31" fill="#93c5fd" fill-opacity="0.7" stroke="#3b82f6" stroke-width="1"><title>METAL1: TPU_CLUSTER_1_3 (3470975x3470975nm)</title></rect>
+    <rect x="400.00" y="584.42" width="136.31" height="136.31" fill="#93c5fd" fill-opacity="0.7" stroke="#3b82f6" stroke-width="1"><title>METAL1: TPU_CLUSTER_2_0 (3470975x3470975nm)</title></rect>
+    <rect x="400.00" y="424.05" width="136.31" height="136.31" fill="#93c5fd" fill-opacity="0.7" stroke="#3b82f6" stroke-width="1"><title>METAL1: TPU_CLUSTER_2_1 (3470975x3470975nm)</title></rect>
+    <rect x="400.00" y="263.69" width="136.31" height="136.31" fill="#93c5fd" fill-opacity="0.7" stroke="#3b82f6" stroke-width="1"><title>METAL1: TPU_CLUSTER_2_2 (3470975x3470975nm)</title></rect>
+    <rect x="400.00" y="103.33" width="136.31" height="136.31" fill="#93c5fd" fill-opacity="0.7" stroke="#3b82f6" stroke-width="1"><title>METAL1: TPU_CLUSTER_2_3 (3470975x3470975nm)</title></rect>
+    <rect x="560.36" y="584.42" width="136.31" height="136.31" fill="#93c5fd" fill-opacity="0.7" stroke="#3b82f6" stroke-width="1"><title>METAL1: TPU_CLUSTER_3_0 (3470975x3470975nm)</title></rect>
+    <rect x="560.36" y="424.05" width="136.31" height="136.31" fill="#93c5fd" fill-opacity="0.7" stroke="#3b82f6" stroke-width="1"><title>METAL1: TPU_CLUSTER_3_1 (3470975x3470975nm)</title></rect>
+    <rect x="560.36" y="263.69" width="136.31" height="136.31" fill="#93c5fd" fill-opacity="0.7" stroke="#3b82f6" stroke-width="1"><title>METAL1: TPU_CLUSTER_3_2 (3470975x3470975nm)</title></rect>
+    <rect x="560.36" y="103.33" width="136.31" height="136.31" fill="#93c5fd" fill-opacity="0.7" stroke="#3b82f6" stroke-width="1"><title>METAL1: TPU_CLUSTER_3_3 (3470975x3470975nm)</title></rect>
+    <rect x="87.13" y="592.27" width="120.60" height="120.60" fill="#c4b5fd" fill-opacity="0.7" stroke="#8b5cf6" stroke-width="1"><title>METAL2: CLUSTER_SRAM_NOC_0_0 (3070975x3070975nm)</title></rect>
+    <rect x="87.13" y="431.91" width="120.60" height="120.60" fill="#c4b5fd" fill-opacity="0.7" stroke="#8b5cf6" stroke-width="1"><title>METAL2: CLUSTER_SRAM_NOC_0_1 (3070975x3070975nm)</title></rect>
+    <rect x="87.13" y="271.54" width="120.60" height="120.60" fill="#c4b5fd" fill-opacity="0.7" stroke="#8b5cf6" stroke-width="1"><title>METAL2: CLUSTER_SRAM_NOC_0_2 (3070975x3070975nm)</title></rect>
+    <rect x="87.13" y="111.18" width="120.60" height="120.60" fill="#c4b5fd" fill-opacity="0.7" stroke="#8b5cf6" stroke-width="1"><title>METAL2: CLUSTER_SRAM_NOC_0_3 (3070975x3070975nm)</title></rect>
+    <rect x="247.49" y="592.27" width="120.60" height="120.60" fill="#c4b5fd" fill-opacity="0.7" stroke="#8b5cf6" stroke-width="1"><title>METAL2: CLUSTER_SRAM_NOC_1_0 (3070975x3070975nm)</title></rect>
+    <rect x="247.49" y="431.91" width="120.60" height="120.60" fill="#c4b5fd" fill-opacity="0.7" stroke="#8b5cf6" stroke-width="1"><title>METAL2: CLUSTER_SRAM_NOC_1_1 (3070975x3070975nm)</title></rect>
+    <rect x="247.49" y="271.54" width="120.60" height="120.60" fill="#c4b5fd" fill-opacity="0.7" stroke="#8b5cf6" stroke-width="1"><title>METAL2: CLUSTER_SRAM_NOC_1_2 (3070975x3070975nm)</title></rect>
+    <rect x="247.49" y="111.18" width="120.60" height="120.60" fill="#c4b5fd" fill-opacity="0.7" stroke="#8b5cf6" stroke-width="1"><title>METAL2: CLUSTER_SRAM_NOC_1_3 (3070975x3070975nm)</title></rect>
+    <rect x="407.85" y="592.27" width="120.60" height="120.60" fill="#c4b5fd" fill-opacity="0.7" stroke="#8b5cf6" stroke-width="1"><title>METAL2: CLUSTER_SRAM_NOC_2_0 (3070975x3070975nm)</title></rect>
+    <rect x="407.85" y="431.91" width="120.60" height="120.60" fill="#c4b5fd" fill-opacity="0.7" stroke="#8b5cf6" stroke-width="1"><title>METAL2: CLUSTER_SRAM_NOC_2_1 (3070975x3070975nm)</title></rect>
+    <rect x="407.85" y="271.54" width="120.60" height="120.60" fill="#c4b5fd" fill-opacity="0.7" stroke="#8b5cf6" stroke-width="1"><title>METAL2: CLUSTER_SRAM_NOC_2_2 (3070975x3070975nm)</title></rect>
+    <rect x="407.85" y="111.18" width="120.60" height="120.60" fill="#c4b5fd" fill-opacity="0.7" stroke="#8b5cf6" stroke-width="1"><title>METAL2: CLUSTER_SRAM_NOC_2_3 (3070975x3070975nm)</title></rect>
+    <rect x="568.22" y="592.27" width="120.60" height="120.60" fill="#c4b5fd" fill-opacity="0.7" stroke="#8b5cf6" stroke-width="1"><title>METAL2: CLUSTER_SRAM_NOC_3_0 (3070975x3070975nm)</title></rect>
+    <rect x="568.22" y="431.91" width="120.60" height="120.60" fill="#c4b5fd" fill-opacity="0.7" stroke="#8b5cf6" stroke-width="1"><title>METAL2: CLUSTER_SRAM_NOC_3_1 (3070975x3070975nm)</title></rect>
+    <rect x="568.22" y="271.54" width="120.60" height="120.60" fill="#c4b5fd" fill-opacity="0.7" stroke="#8b5cf6" stroke-width="1"><title>METAL2: CLUSTER_SRAM_NOC_3_2 (3070975x3070975nm)</title></rect>
+    <rect x="568.22" y="111.18" width="120.60" height="120.60" fill="#c4b5fd" fill-opacity="0.7" stroke="#8b5cf6" stroke-width="1"><title>METAL2: CLUSTER_SRAM_NOC_3_3 (3070975x3070975nm)</title></rect>
+    <rect x="78.88" y="79.27" width="0.79" height="641.46" fill="#f472b6" fill-opacity="0.75" stroke="#db2777" stroke-width="1"><title>METAL7: NOC_VERTICAL_CHANNEL_0 (20000x16334000nm)</title></rect>
+    <rect x="239.24" y="79.27" width="0.79" height="641.46" fill="#f472b6" fill-opacity="0.75" stroke="#db2777" stroke-width="1"><title>METAL7: NOC_VERTICAL_CHANNEL_1 (20000x16334000nm)</title></rect>
+    <rect x="399.61" y="79.27" width="0.79" height="641.46" fill="#f472b6" fill-opacity="0.75" stroke="#db2777" stroke-width="1"><title>METAL7: NOC_VERTICAL_CHANNEL_2 (20000x16334000nm)</title></rect>
+    <rect x="559.97" y="79.27" width="0.79" height="641.46" fill="#f472b6" fill-opacity="0.75" stroke="#db2777" stroke-width="1"><title>METAL7: NOC_VERTICAL_CHANNEL_3 (20000x16334000nm)</title></rect>
+    <rect x="720.34" y="79.27" width="0.79" height="641.46" fill="#f472b6" fill-opacity="0.75" stroke="#db2777" stroke-width="1"><title>METAL7: NOC_VERTICAL_CHANNEL_4 (20000x16334000nm)</title></rect>
+    <rect x="79.27" y="720.34" width="641.46" height="0.79" fill="#f472b6" fill-opacity="0.75" stroke="#db2777" stroke-width="1"><title>METAL7: NOC_HORIZONTAL_CHANNEL_0 (16334000x20000nm)</title></rect>
+    <rect x="79.27" y="559.97" width="641.46" height="0.79" fill="#f472b6" fill-opacity="0.75" stroke="#db2777" stroke-width="1"><title>METAL7: NOC_HORIZONTAL_CHANNEL_1 (16334000x20000nm)</title></rect>
+    <rect x="79.27" y="399.61" width="641.46" height="0.79" fill="#f472b6" fill-opacity="0.75" stroke="#db2777" stroke-width="1"><title>METAL7: NOC_HORIZONTAL_CHANNEL_2 (16334000x20000nm)</title></rect>
+    <rect x="79.27" y="239.24" width="641.46" height="0.79" fill="#f472b6" fill-opacity="0.75" stroke="#db2777" stroke-width="1"><title>METAL7: NOC_HORIZONTAL_CHANNEL_3 (16334000x20000nm)</title></rect>
+    <rect x="79.27" y="78.88" width="641.46" height="0.79" fill="#f472b6" fill-opacity="0.75" stroke="#db2777" stroke-width="1"><title>METAL7: NOC_HORIZONTAL_CHANNEL_4 (16334000x20000nm)</title></rect>
+    <rect x="399.21" y="130.00" width="1.57" height="540.00" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: CLK_ROOT_TRUNK (40000x13750500nm)</title></rect>
+    <rect x="130.00" y="129.41" width="540.00" height="1.18" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: CLK_BRANCH_NORTH (13750500x30000nm)</title></rect>
+    <rect x="130.00" y="669.41" width="540.00" height="1.18" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: CLK_BRANCH_SOUTH (13750500x30000nm)</title></rect>
+    <rect x="57.28" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_0 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_1 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_2 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="661.43" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_3 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="635.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_4 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="610.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_5 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="584.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_6 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="559.32" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_7 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="533.80" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_8 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="508.27" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_9 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="482.74" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_10 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="457.22" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_11 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="431.69" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_12 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="406.17" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_13 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="380.64" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_14 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="355.11" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_15 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="329.59" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_16 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="304.06" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_17 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="278.53" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_18 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="253.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_19 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="227.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_20 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="201.95" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_21 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="176.43" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_22 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_23 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_24 (120000x120000nm)</title></rect>
+    <rect x="57.28" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_0_25 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_0 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_1 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_2 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="661.43" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_3 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="635.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_4 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="610.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_5 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="584.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_6 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="559.32" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_7 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="533.80" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_8 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="508.27" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_9 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="482.74" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_10 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="457.22" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_11 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="431.69" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_12 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="406.17" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_13 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="380.64" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_14 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="355.11" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_15 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="329.59" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_16 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="304.06" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_17 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="278.53" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_18 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="253.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_19 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="227.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_20 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="201.95" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_21 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="176.43" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_22 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_23 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_24 (120000x120000nm)</title></rect>
+    <rect x="82.81" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_1_25 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_0 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_1 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_2 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="661.43" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_3 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="635.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_4 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="610.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_5 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="584.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_6 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="559.32" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_7 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="533.80" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_8 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="508.27" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_9 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="482.74" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_10 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="457.22" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_11 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="431.69" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_12 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="406.17" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_13 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="380.64" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_14 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="355.11" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_15 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="329.59" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_16 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="304.06" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_17 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="278.53" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_18 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="253.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_19 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="227.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_20 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="201.95" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_21 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="176.43" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_22 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_23 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_24 (120000x120000nm)</title></rect>
+    <rect x="108.33" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_2_25 (120000x120000nm)</title></rect>
+    <rect x="133.86" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_3_0 (120000x120000nm)</title></rect>
+    <rect x="133.86" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_3_1 (120000x120000nm)</title></rect>
+    <rect x="133.86" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_3_2 (120000x120000nm)</title></rect>
+    <rect x="133.86" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_3_23 (120000x120000nm)</title></rect>
+    <rect x="133.86" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_3_24 (120000x120000nm)</title></rect>
+    <rect x="133.86" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_3_25 (120000x120000nm)</title></rect>
+    <rect x="159.38" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_4_0 (120000x120000nm)</title></rect>
+    <rect x="159.38" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_4_1 (120000x120000nm)</title></rect>
+    <rect x="159.38" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_4_2 (120000x120000nm)</title></rect>
+    <rect x="159.38" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_4_23 (120000x120000nm)</title></rect>
+    <rect x="159.38" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_4_24 (120000x120000nm)</title></rect>
+    <rect x="159.38" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_4_25 (120000x120000nm)</title></rect>
+    <rect x="184.91" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_5_0 (120000x120000nm)</title></rect>
+    <rect x="184.91" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_5_1 (120000x120000nm)</title></rect>
+    <rect x="184.91" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_5_2 (120000x120000nm)</title></rect>
+    <rect x="184.91" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_5_23 (120000x120000nm)</title></rect>
+    <rect x="184.91" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_5_24 (120000x120000nm)</title></rect>
+    <rect x="184.91" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_5_25 (120000x120000nm)</title></rect>
+    <rect x="210.44" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_6_0 (120000x120000nm)</title></rect>
+    <rect x="210.44" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_6_1 (120000x120000nm)</title></rect>
+    <rect x="210.44" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_6_2 (120000x120000nm)</title></rect>
+    <rect x="210.44" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_6_23 (120000x120000nm)</title></rect>
+    <rect x="210.44" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_6_24 (120000x120000nm)</title></rect>
+    <rect x="210.44" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_6_25 (120000x120000nm)</title></rect>
+    <rect x="235.96" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_7_0 (120000x120000nm)</title></rect>
+    <rect x="235.96" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_7_1 (120000x120000nm)</title></rect>
+    <rect x="235.96" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_7_2 (120000x120000nm)</title></rect>
+    <rect x="235.96" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_7_23 (120000x120000nm)</title></rect>
+    <rect x="235.96" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_7_24 (120000x120000nm)</title></rect>
+    <rect x="235.96" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_7_25 (120000x120000nm)</title></rect>
+    <rect x="261.49" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_8_0 (120000x120000nm)</title></rect>
+    <rect x="261.49" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_8_1 (120000x120000nm)</title></rect>
+    <rect x="261.49" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_8_2 (120000x120000nm)</title></rect>
+    <rect x="261.49" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_8_23 (120000x120000nm)</title></rect>
+    <rect x="261.49" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_8_24 (120000x120000nm)</title></rect>
+    <rect x="261.49" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_8_25 (120000x120000nm)</title></rect>
+    <rect x="287.02" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_9_0 (120000x120000nm)</title></rect>
+    <rect x="287.02" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_9_1 (120000x120000nm)</title></rect>
+    <rect x="287.02" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_9_2 (120000x120000nm)</title></rect>
+    <rect x="287.02" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_9_23 (120000x120000nm)</title></rect>
+    <rect x="287.02" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_9_24 (120000x120000nm)</title></rect>
+    <rect x="287.02" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_9_25 (120000x120000nm)</title></rect>
+    <rect x="312.54" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_10_0 (120000x120000nm)</title></rect>
+    <rect x="312.54" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_10_1 (120000x120000nm)</title></rect>
+    <rect x="312.54" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_10_2 (120000x120000nm)</title></rect>
+    <rect x="312.54" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_10_23 (120000x120000nm)</title></rect>
+    <rect x="312.54" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_10_24 (120000x120000nm)</title></rect>
+    <rect x="312.54" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_10_25 (120000x120000nm)</title></rect>
+    <rect x="338.07" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_11_0 (120000x120000nm)</title></rect>
+    <rect x="338.07" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_11_1 (120000x120000nm)</title></rect>
+    <rect x="338.07" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_11_2 (120000x120000nm)</title></rect>
+    <rect x="338.07" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_11_23 (120000x120000nm)</title></rect>
+    <rect x="338.07" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_11_24 (120000x120000nm)</title></rect>
+    <rect x="338.07" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_11_25 (120000x120000nm)</title></rect>
+    <rect x="363.60" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_12_0 (120000x120000nm)</title></rect>
+    <rect x="363.60" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_12_1 (120000x120000nm)</title></rect>
+    <rect x="363.60" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_12_2 (120000x120000nm)</title></rect>
+    <rect x="363.60" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_12_23 (120000x120000nm)</title></rect>
+    <rect x="363.60" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_12_24 (120000x120000nm)</title></rect>
+    <rect x="363.60" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_12_25 (120000x120000nm)</title></rect>
+    <rect x="389.12" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_13_0 (120000x120000nm)</title></rect>
+    <rect x="389.12" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_13_1 (120000x120000nm)</title></rect>
+    <rect x="389.12" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_13_2 (120000x120000nm)</title></rect>
+    <rect x="389.12" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_13_23 (120000x120000nm)</title></rect>
+    <rect x="389.12" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_13_24 (120000x120000nm)</title></rect>
+    <rect x="389.12" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_13_25 (120000x120000nm)</title></rect>
+    <rect x="414.65" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_14_0 (120000x120000nm)</title></rect>
+    <rect x="414.65" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_14_1 (120000x120000nm)</title></rect>
+    <rect x="414.65" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_14_2 (120000x120000nm)</title></rect>
+    <rect x="414.65" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_14_23 (120000x120000nm)</title></rect>
+    <rect x="414.65" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_14_24 (120000x120000nm)</title></rect>
+    <rect x="414.65" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_14_25 (120000x120000nm)</title></rect>
+    <rect x="440.17" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_15_0 (120000x120000nm)</title></rect>
+    <rect x="440.17" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_15_1 (120000x120000nm)</title></rect>
+    <rect x="440.17" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_15_2 (120000x120000nm)</title></rect>
+    <rect x="440.17" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_15_23 (120000x120000nm)</title></rect>
+    <rect x="440.17" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_15_24 (120000x120000nm)</title></rect>
+    <rect x="440.17" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_15_25 (120000x120000nm)</title></rect>
+    <rect x="465.70" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_16_0 (120000x120000nm)</title></rect>
+    <rect x="465.70" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_16_1 (120000x120000nm)</title></rect>
+    <rect x="465.70" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_16_2 (120000x120000nm)</title></rect>
+    <rect x="465.70" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_16_23 (120000x120000nm)</title></rect>
+    <rect x="465.70" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_16_24 (120000x120000nm)</title></rect>
+    <rect x="465.70" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_16_25 (120000x120000nm)</title></rect>
+    <rect x="491.23" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_17_0 (120000x120000nm)</title></rect>
+    <rect x="491.23" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_17_1 (120000x120000nm)</title></rect>
+    <rect x="491.23" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_17_2 (120000x120000nm)</title></rect>
+    <rect x="491.23" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_17_23 (120000x120000nm)</title></rect>
+    <rect x="491.23" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_17_24 (120000x120000nm)</title></rect>
+    <rect x="491.23" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_17_25 (120000x120000nm)</title></rect>
+    <rect x="516.75" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_18_0 (120000x120000nm)</title></rect>
+    <rect x="516.75" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_18_1 (120000x120000nm)</title></rect>
+    <rect x="516.75" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_18_2 (120000x120000nm)</title></rect>
+    <rect x="516.75" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_18_23 (120000x120000nm)</title></rect>
+    <rect x="516.75" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_18_24 (120000x120000nm)</title></rect>
+    <rect x="516.75" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_18_25 (120000x120000nm)</title></rect>
+    <rect x="542.28" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_19_0 (120000x120000nm)</title></rect>
+    <rect x="542.28" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_19_1 (120000x120000nm)</title></rect>
+    <rect x="542.28" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_19_2 (120000x120000nm)</title></rect>
+    <rect x="542.28" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_19_23 (120000x120000nm)</title></rect>
+    <rect x="542.28" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_19_24 (120000x120000nm)</title></rect>
+    <rect x="542.28" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_19_25 (120000x120000nm)</title></rect>
+    <rect x="567.81" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_20_0 (120000x120000nm)</title></rect>
+    <rect x="567.81" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_20_1 (120000x120000nm)</title></rect>
+    <rect x="567.81" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_20_2 (120000x120000nm)</title></rect>
+    <rect x="567.81" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_20_23 (120000x120000nm)</title></rect>
+    <rect x="567.81" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_20_24 (120000x120000nm)</title></rect>
+    <rect x="567.81" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_20_25 (120000x120000nm)</title></rect>
+    <rect x="593.33" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_21_0 (120000x120000nm)</title></rect>
+    <rect x="593.33" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_21_1 (120000x120000nm)</title></rect>
+    <rect x="593.33" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_21_2 (120000x120000nm)</title></rect>
+    <rect x="593.33" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_21_23 (120000x120000nm)</title></rect>
+    <rect x="593.33" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_21_24 (120000x120000nm)</title></rect>
+    <rect x="593.33" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_21_25 (120000x120000nm)</title></rect>
+    <rect x="618.86" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_22_0 (120000x120000nm)</title></rect>
+    <rect x="618.86" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_22_1 (120000x120000nm)</title></rect>
+    <rect x="618.86" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_22_2 (120000x120000nm)</title></rect>
+    <rect x="618.86" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_22_23 (120000x120000nm)</title></rect>
+    <rect x="618.86" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_22_24 (120000x120000nm)</title></rect>
+    <rect x="618.86" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_22_25 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_0 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_1 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_2 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="661.43" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_3 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="635.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_4 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="610.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_5 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="584.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_6 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="559.32" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_7 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="533.80" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_8 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="508.27" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_9 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="482.74" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_10 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="457.22" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_11 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="431.69" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_12 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="406.17" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_13 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="380.64" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_14 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="355.11" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_15 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="329.59" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_16 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="304.06" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_17 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="278.53" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_18 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="253.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_19 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="227.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_20 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="201.95" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_21 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="176.43" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_22 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_23 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_24 (120000x120000nm)</title></rect>
+    <rect x="644.39" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_23_25 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_0 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_1 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_2 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="661.43" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_3 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="635.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_4 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="610.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_5 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="584.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_6 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="559.32" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_7 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="533.80" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_8 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="508.27" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_9 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="482.74" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_10 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="457.22" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_11 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="431.69" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_12 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="406.17" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_13 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="380.64" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_14 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="355.11" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_15 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="329.59" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_16 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="304.06" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_17 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="278.53" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_18 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="253.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_19 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="227.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_20 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="201.95" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_21 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="176.43" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_22 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_23 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_24 (120000x120000nm)</title></rect>
+    <rect x="669.91" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_24_25 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="738.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_0 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="712.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_1 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="686.96" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_2 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="661.43" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_3 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="635.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_4 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="610.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_5 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="584.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_6 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="559.32" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_7 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="533.80" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_8 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="508.27" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_9 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="482.74" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_10 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="457.22" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_11 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="431.69" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_12 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="406.17" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_13 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="380.64" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_14 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="355.11" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_15 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="329.59" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_16 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="304.06" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_17 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="278.53" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_18 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="253.01" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_19 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="227.48" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_20 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="201.95" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_21 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="176.43" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_22 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="150.90" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_23 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="125.38" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_24 (120000x120000nm)</title></rect>
+    <rect x="695.44" y="99.85" width="4.71" height="4.71" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: FCBGA_PAD_25_25 (120000x120000nm)</title></rect>
+    <rect x="59.64" y="736.44" width="680.73" height="3.93" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: GLOBAL_VDD_RING_SOUTH (17334000x100000nm)</title></rect>
+    <rect x="59.64" y="59.64" width="680.73" height="3.93" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: GLOBAL_VDD_RING_NORTH (17334000x100000nm)</title></rect>
+    <rect x="59.64" y="59.64" width="3.93" height="680.73" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: GLOBAL_VSS_RING_WEST (100000x17334000nm)</title></rect>
+    <rect x="736.44" y="59.64" width="3.93" height="680.73" fill="#fb923c" fill-opacity="0.8" stroke="#ea580c" stroke-width="1"><title>METAL8: GLOBAL_VSS_RING_EAST (100000x17334000nm)</title></rect>
+    <rect x="43.93" y="43.93" width="712.15" height="712.15" fill="#94a3b8" fill-opacity="0.7" stroke="#64748b" stroke-width="1"><title>PASSIVATION_OPEN: SEAL_RING (18134000x18134000nm)</title></rect>
+  </g>
+  <g id="ports">
+    <circle cx="59.64" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="663.79" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="638.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="612.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="587.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="561.68" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="536.15" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="510.63" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="485.10" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="459.57" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="434.05" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="408.52" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="383.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="357.47" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="331.94" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="306.42" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="280.89" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="255.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="229.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="204.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="178.78" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="59.64" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="663.79" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="638.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="612.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="587.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="561.68" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="536.15" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="510.63" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="485.10" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="459.57" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="434.05" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="408.52" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="383.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="357.47" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="331.94" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="306.42" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="280.89" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="255.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="229.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="204.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="178.78" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="85.16" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="663.79" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="638.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="612.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="587.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="561.68" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="536.15" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="510.63" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="485.10" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="459.57" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="434.05" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="408.52" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="383.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="357.47" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="331.94" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="306.42" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="280.89" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="255.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="229.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="204.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="178.78" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="110.69" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="136.21" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="136.21" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="136.21" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="136.21" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="136.21" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="136.21" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="161.74" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="161.74" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="161.74" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="161.74" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="161.74" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="161.74" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="187.27" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="187.27" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="187.27" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="187.27" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="187.27" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="187.27" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="212.79" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="212.79" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="212.79" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="212.79" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="212.79" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="212.79" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="238.32" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="238.32" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="238.32" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="238.32" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="238.32" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="238.32" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="263.85" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="263.85" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="263.85" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="263.85" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="263.85" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="263.85" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="289.37" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="289.37" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="289.37" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="289.37" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="289.37" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="289.37" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="314.90" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="314.90" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="314.90" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="314.90" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="314.90" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="314.90" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="340.43" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="340.43" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="340.43" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="340.43" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="340.43" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="340.43" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="365.95" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="365.95" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="365.95" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="365.95" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="365.95" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="365.95" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="391.48" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="391.48" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="391.48" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="391.48" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="391.48" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="391.48" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="417.00" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="417.00" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="417.00" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="417.00" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="417.00" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="417.00" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="442.53" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="442.53" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="442.53" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="442.53" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="442.53" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="442.53" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="468.06" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="468.06" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="468.06" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="468.06" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="468.06" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="468.06" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="493.58" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="493.58" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="493.58" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="493.58" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="493.58" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="493.58" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="519.11" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="519.11" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="519.11" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="519.11" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="519.11" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="519.11" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="544.64" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="544.64" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="544.64" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="544.64" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="544.64" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="544.64" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="570.16" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="570.16" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="570.16" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="570.16" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="570.16" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="570.16" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="595.69" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="595.69" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="595.69" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="595.69" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="595.69" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="595.69" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="621.22" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="621.22" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="621.22" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="621.22" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="621.22" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="621.22" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="663.79" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="638.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="612.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="587.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="561.68" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="536.15" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="510.63" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="485.10" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="459.57" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="434.05" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="408.52" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="383.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="357.47" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="331.94" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="306.42" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="280.89" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="255.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="229.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="204.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="178.78" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="646.74" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="663.79" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="638.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="612.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="587.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="561.68" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="536.15" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="510.63" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="485.10" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="459.57" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="434.05" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="408.52" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="383.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="357.47" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="331.94" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="306.42" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="280.89" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="255.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="229.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="204.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="178.78" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="672.27" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="740.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="714.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="689.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="663.79" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="638.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="612.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="587.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="561.68" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="536.15" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="510.63" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="485.10" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="459.57" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="434.05" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="408.52" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="383.00" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="357.47" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="331.94" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="306.42" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="280.89" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="255.36" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="229.84" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="204.31" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="178.78" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="153.26" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="127.73" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="697.79" cy="102.21" r="3" fill="#ffffff" stroke="#ef4444" stroke-width="1"/>
+  </g>
+  <text x="20" y="25" fill="#f8fafc" font-family="monospace" font-size="13" font-weight="bold">CELL: top_analog_ai_monolithic_chip | BBOX: 18334.00um x 18334.00um | SHAPES: 603</text>
+</svg>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="380" viewBox="0 0 960 380" role="img">
+  <title>4-2-4 Organic Substrate Stackup &amp; Thermal Network</title>
+  <rect width="960" height="380" fill="#0f172a"/>
+  
+  <!-- Title -->
+  <text x="30" y="35" fill="#f8fafc" font-family="sans-serif" font-size="16" font-weight="bold">
+    FCBGA-676 4-2-4 Organic Substrate Layer Stackup &amp; Thermal Resistance Network
+  </text>
+  
+  <!-- Left Side: Substrate Layer Stackup (10 Layers) -->
+  <rect x="50" y="70" width="380" height="260" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5" rx="6"/>
+  <text x="70" y="95" fill="#f8fafc" font-family="sans-serif" font-size="13" font-weight="bold">4-2-4 Organic Buildup Stackup (10 Copper Layers)</text>
+  
+  <!-- Buildup Top (4 Layers) -->
+  <rect x="70" y="110" width="340" height="35" fill="#0284c7" fill-opacity="0.3" stroke="#38bdf8" stroke-width="1"/>
+  <text x="80" y="132" fill="#bae6fd" font-family="monospace" font-size="11">Top Buildup (L1-L4): C4 Bumps &amp; PCIe Diff Pairs</text>
+  
+  <!-- Core Layer (2 Layers) -->
+  <rect x="70" y="155" width="340" height="60" fill="#0f766e" fill-opacity="0.4" stroke="#14b8a6" stroke-width="1.5"/>
+  <text x="80" y="180" fill="#5eead4" font-family="monospace" font-size="11" font-weight="bold">Core Dielectric (800 µm): Thick Power/GND Planes</text>
+  <text x="80" y="200" fill="#99f6e4" font-family="monospace" font-size="10">Copper Thickness: 35 µm | High Rigidity Glass</text>
+  
+  <!-- Buildup Bottom (4 Layers) -->
+  <rect x="70" y="225" width="340" height="35" fill="#0284c7" fill-opacity="0.3" stroke="#38bdf8" stroke-width="1"/>
+  <text x="80" y="247" fill="#bae6fd" font-family="monospace" font-size="11">Bottom Buildup (L7-L10): BGA Ball Pads (1.0mm)</text>
+  
+  <!-- Substrate Dimensions Note -->
+  <text x="70" y="295" fill="#94a3b8" font-family="sans-serif" font-size="11">Single-Ended Zo: 50.0 Ω | Differential PCIe: 85.0 Ω</text>
+  <text x="70" y="315" fill="#94a3b8" font-family="sans-serif" font-size="11">Total Substrate Thickness: ~1.10 mm</text>
+
+  <!-- Right Side: Thermal Resistance Network -->
+  <rect x="490" y="70" width="420" height="260" fill="#1e293b" stroke="#10b981" stroke-width="1.5" rx="6"/>
+  <text x="510" y="95" fill="#f8fafc" font-family="sans-serif" font-size="13" font-weight="bold">Thermal Network (θ_ja = θ_jc + θ_ca = 1.616 °C/W)</text>
+  
+  <!-- Die Junction Box -->
+  <rect x="520" y="115" width="100" height="40" rx="4" fill="#ef4444"/>
+  <text x="530" y="140" fill="#ffffff" font-family="sans-serif" font-size="12" font-weight="bold">Tj = 67.5 °C</text>
+  <text x="530" y="170" fill="#94a3b8" font-family="sans-serif" font-size="10">23.2W Die</text>
+
+  <!-- Resistor 1: theta_jc -->
+  <line x1="620" y1="135" x2="680" y2="135" stroke="#f59e0b" stroke-width="3"/>
+  <text x="625" y="125" fill="#fcd34d" font-family="monospace" font-size="10">θ_jc: 0.096</text>
+
+  <!-- IHS Case Box -->
+  <rect x="680" y="115" width="100" height="40" rx="4" fill="#f97316"/>
+  <text x="690" y="140" fill="#ffffff" font-family="sans-serif" font-size="12" font-weight="bold">Tc = 32.2 °C</text>
+  <text x="690" y="170" fill="#94a3b8" font-family="sans-serif" font-size="10">Copper IHS</text>
+
+  <!-- Resistor 2: theta_ca -->
+  <line x1="780" y1="135" x2="840" y2="135" stroke="#f59e0b" stroke-width="3"/>
+  <text x="785" y="125" fill="#fcd34d" font-family="monospace" font-size="10">θ_ca: 1.520</text>
+
+  <!-- Ambient Box -->
+  <rect x="840" y="115" width="60" height="40" rx="4" fill="#0284c7"/>
+  <text x="845" y="140" fill="#ffffff" font-family="sans-serif" font-size="12" font-weight="bold">30 °C</text>
+  <text x="845" y="170" fill="#94a3b8" font-family="sans-serif" font-size="10">Ambient</text>
+  
+  <!-- Temperature Margin Summary -->
+  <rect x="520" y="200" width="360" height="90" rx="6" fill="#064e3b" stroke="#059669" stroke-width="1"/>
+  <text x="535" y="225" fill="#a7f3d0" font-family="sans-serif" font-size="12" font-weight="bold">Thermal Margin Signoff Summary:</text>
+  <text x="535" y="248" fill="#ecfdf5" font-family="sans-serif" font-size="11">• Peak Junction Temp: 67.49 °C &lt; 85.0 °C Budget</text>
+  <text x="535" y="268" fill="#ecfdf5" font-family="sans-serif" font-size="11">• Thermal Headroom: +17.51 °C Safety Margin</text>
+</svg>

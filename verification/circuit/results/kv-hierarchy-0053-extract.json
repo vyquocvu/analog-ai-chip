@@ -1,0 +1,214 @@
+{
+  "chapter": "0053-kv-cache-hierarchy",
+  "gate": "R12",
+  "status": "PASSED",
+  "claim_level": "system/architecture-exploration",
+  "hardware_config": {
+    "paged_block_size": 16,
+    "sram_kv_capacity_mb": 64.0,
+    "hbm_capacity_gb": 32.0,
+    "sram_bandwidth_tb_s": 8.0,
+    "hbm_bandwidth_tb_s": 1.2,
+    "digital_tflops": 64.0,
+    "analog_projection_latency_us": 15.0
+  },
+  "ladder_summaries": {
+    "hand_calc": {
+      "attention_type": "gqa",
+      "gqa_compression_ratio": 2.0,
+      "crossover_context_length": null,
+      "context_steps": {
+        "16": {
+          "kv_cache_bytes": 2048,
+          "paged_blocks_count": 1,
+          "placement": "on_chip_sram",
+          "prefill_attention_macs": 32768,
+          "decode_attention_macs_per_token": 2048,
+          "digital_attention_latency_us": 0.00031999999999999997,
+          "is_digital_attention_bottleneck": false
+        },
+        "32": {
+          "kv_cache_bytes": 4096,
+          "paged_blocks_count": 2,
+          "placement": "on_chip_sram",
+          "prefill_attention_macs": 131072,
+          "decode_attention_macs_per_token": 4096,
+          "digital_attention_latency_us": 0.0006399999999999999,
+          "is_digital_attention_bottleneck": false
+        },
+        "64": {
+          "kv_cache_bytes": 8192,
+          "paged_blocks_count": 4,
+          "placement": "on_chip_sram",
+          "prefill_attention_macs": 524288,
+          "decode_attention_macs_per_token": 8192,
+          "digital_attention_latency_us": 0.0012799999999999999,
+          "is_digital_attention_bottleneck": false
+        }
+      }
+    },
+    "t0_gpt2_124m": {
+      "attention_type": "mha",
+      "gqa_compression_ratio": 1.0,
+      "crossover_context_length": null,
+      "context_steps": {
+        "128": {
+          "kv_cache_bytes": 4718592,
+          "paged_blocks_count": 8,
+          "placement": "on_chip_sram",
+          "prefill_attention_macs": 301989888,
+          "decode_attention_macs_per_token": 2359296,
+          "digital_attention_latency_us": 0.6635519999999999,
+          "is_digital_attention_bottleneck": false
+        },
+        "512": {
+          "kv_cache_bytes": 18874368,
+          "paged_blocks_count": 32,
+          "placement": "on_chip_sram",
+          "prefill_attention_macs": 4831838208,
+          "decode_attention_macs_per_token": 9437184,
+          "digital_attention_latency_us": 2.6542079999999997,
+          "is_digital_attention_bottleneck": false
+        },
+        "1024": {
+          "kv_cache_bytes": 37748736,
+          "paged_blocks_count": 64,
+          "placement": "on_chip_sram",
+          "prefill_attention_macs": 19327352832,
+          "decode_attention_macs_per_token": 18874368,
+          "digital_attention_latency_us": 5.308415999999999,
+          "is_digital_attention_bottleneck": false
+        }
+      }
+    },
+    "t1_llama_1.1b": {
+      "attention_type": "gqa",
+      "gqa_compression_ratio": 8.0,
+      "crossover_context_length": 4096,
+      "context_steps": {
+        "512": {
+          "kv_cache_bytes": 11534336,
+          "paged_blocks_count": 32,
+          "placement": "on_chip_sram",
+          "prefill_attention_macs": 23622320128,
+          "decode_attention_macs_per_token": 46137344,
+          "digital_attention_latency_us": 2.8835840000000004,
+          "is_digital_attention_bottleneck": false
+        },
+        "1024": {
+          "kv_cache_bytes": 23068672,
+          "paged_blocks_count": 64,
+          "placement": "on_chip_sram",
+          "prefill_attention_macs": 94489280512,
+          "decode_attention_macs_per_token": 92274688,
+          "digital_attention_latency_us": 5.767168000000001,
+          "is_digital_attention_bottleneck": false
+        },
+        "2048": {
+          "kv_cache_bytes": 46137344,
+          "paged_blocks_count": 128,
+          "placement": "on_chip_sram",
+          "prefill_attention_macs": 377957122048,
+          "decode_attention_macs_per_token": 184549376,
+          "digital_attention_latency_us": 11.534336000000001,
+          "is_digital_attention_bottleneck": false
+        },
+        "4096": {
+          "kv_cache_bytes": 92274688,
+          "paged_blocks_count": 256,
+          "placement": "package_hbm",
+          "prefill_attention_macs": 1511828488192,
+          "decode_attention_macs_per_token": 369098752,
+          "digital_attention_latency_us": 88.42990933333334,
+          "is_digital_attention_bottleneck": true
+        }
+      }
+    },
+    "t2_llama_3b": {
+      "attention_type": "gqa",
+      "gqa_compression_ratio": 4.0,
+      "crossover_context_length": 1024,
+      "context_steps": {
+        "1024": {
+          "kv_cache_bytes": 88080384,
+          "paged_blocks_count": 64,
+          "placement": "package_hbm",
+          "prefill_attention_macs": 180388626432,
+          "decode_attention_macs_per_token": 176160768,
+          "digital_attention_latency_us": 78.905344,
+          "is_digital_attention_bottleneck": true
+        },
+        "2048": {
+          "kv_cache_bytes": 176160768,
+          "paged_blocks_count": 128,
+          "placement": "package_hbm",
+          "prefill_attention_macs": 721554505728,
+          "decode_attention_macs_per_token": 352321536,
+          "digital_attention_latency_us": 157.810688,
+          "is_digital_attention_bottleneck": true
+        },
+        "4096": {
+          "kv_cache_bytes": 352321536,
+          "paged_blocks_count": 256,
+          "placement": "package_hbm",
+          "prefill_attention_macs": 2886218022912,
+          "decode_attention_macs_per_token": 704643072,
+          "digital_attention_latency_us": 315.621376,
+          "is_digital_attention_bottleneck": true
+        },
+        "8192": {
+          "kv_cache_bytes": 704643072,
+          "paged_blocks_count": 512,
+          "placement": "package_hbm",
+          "prefill_attention_macs": 11544872091648,
+          "decode_attention_macs_per_token": 1409286144,
+          "digital_attention_latency_us": 631.242752,
+          "is_digital_attention_bottleneck": true
+        }
+      }
+    },
+    "t3_llama2_7b": {
+      "attention_type": "mha",
+      "gqa_compression_ratio": 1.0,
+      "crossover_context_length": 1024,
+      "context_steps": {
+        "1024": {
+          "kv_cache_bytes": 536870912,
+          "paged_blocks_count": 64,
+          "placement": "package_hbm",
+          "prefill_attention_macs": 274877906944,
+          "decode_attention_macs_per_token": 268435456,
+          "digital_attention_latency_us": 455.78103466666664,
+          "is_digital_attention_bottleneck": true
+        },
+        "2048": {
+          "kv_cache_bytes": 1073741824,
+          "paged_blocks_count": 128,
+          "placement": "package_hbm",
+          "prefill_attention_macs": 1099511627776,
+          "decode_attention_macs_per_token": 536870912,
+          "digital_attention_latency_us": 911.5620693333333,
+          "is_digital_attention_bottleneck": true
+        },
+        "4096": {
+          "kv_cache_bytes": 2147483648,
+          "paged_blocks_count": 256,
+          "placement": "package_hbm",
+          "prefill_attention_macs": 4398046511104,
+          "decode_attention_macs_per_token": 1073741824,
+          "digital_attention_latency_us": 1823.1241386666666,
+          "is_digital_attention_bottleneck": true
+        },
+        "8192": {
+          "kv_cache_bytes": 4294967296,
+          "paged_blocks_count": 512,
+          "placement": "package_hbm",
+          "prefill_attention_macs": 17592186044416,
+          "decode_attention_macs_per_token": 2147483648,
+          "digital_attention_latency_us": 3646.248277333333,
+          "is_digital_attention_bottleneck": true
+        }
+      }
+    }
+  }
+}

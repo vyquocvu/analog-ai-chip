@@ -30,9 +30,7 @@ physical feasibility report
 
 ## Current status
 
-The v0.1 proof chain has closed all 10 original evidence gates (**R0 through
-R9**) across chapters 0000–0045. The post-v0.1 large-model expansion is now
-active, extending the canonical curriculum through chapter 0058:
+The entire canonical design and verification proof chain has successfully closed all 18 evidence gates (**R0 through R17**) across chapters 0000–0068:
 
 ```text
 R0 functional + circuit foundation ── COMPLETE
@@ -45,16 +43,19 @@ R6 accelerator architecture        ── COMPLETE  (scheduler, SRAM buffers, 2D
 R7 Transformer & LLM validation    ── PASSED    (TinyGPT/GPT-2 inference, 3-stage hardware recovery, 129.5 PPL)
 R8 physical feasibility report     ── PASSED    (latency 998 ns, energy 29.1 nJ/tok, area 1.412 mm², thermal 30.9°C)
 R9 implementation correlation      ── PASSED    (FPGA digital shell, PCB correlation R²=0.9997, tape-out sign-off)
-R10 scalable model contract        ── ACTIVE    (manifest, decoder primitives, sharded checkpoints)
-R11 memory-bounded simulator       ── PLANNED   (block streaming, sampled/surrogate modes)
-R12 large-model architecture       ── PLANNED   (residency, multi-die, prefill/decode, KV hierarchy)
-R13 large-model validation         ── PLANNED   (T0–T3 accuracy and recovery)
-R14 multi-tier feasibility         ── PLANNED   (parametric ledger and go/no-go decision)
+R10 scalable model contract        ── PASSED    (manifest, decoder primitives, sharded checkpoints)
+R11 memory-bounded simulator       ── PASSED    (block streaming, sampled/surrogate modes, resumable evaluator)
+R12 large-model architecture       ── PASSED    (residency, 2.5D multi-die, prefill/decode, KV hierarchy)
+R13 large-model validation         ── PASSED    (frozen corpus eval, error attribution, scalable recovery suite)
+R14 multi-tier feasibility         ── PASSED    (parametric ledger, Pareto sweeps, 28nm tape-out decision)
+R15 physical layout & DRC/LVS      ── PASSED    (28nm BEOL ReRAM, common-centroid CDAC, tile floorplan, full-chip 336mm²)
+R16 post-layout PEX & STA signoff  ── PASSED    (SPEF extraction, multi-corner STA, dynamic EM signoff)
+R17 tape-out & package/PCB signoff ── PASSED    (GDSII stream-out, FCBGA-676 substrate, PCIe Gen5 evaluation carrier)
 ```
 
-The original proof chain from Ohm's and Kirchhoff's laws to small-model LLM
-inference and physical tape-out readiness remains complete. Large-model support
-is planned as new evidence rather than inferred from that result. See
+The proof chain from Ohm's and Kirchhoff's laws to large-model LLM
+inference, 28nm physical layout, post-layout timing signoff, and full
+tape-out / packaging / PCB integration is complete and proven. See
 [`docs/ROADMAP.md`](docs/ROADMAP.md) and
 [`docs/CURRICULUM.md`](docs/CURRICULUM.md).
 
@@ -128,6 +129,8 @@ See [`docs/SIMULATION_STACK.md`](docs/SIMULATION_STACK.md).
 | 0021 | Physical tile contract | done | `book/0021-physical-tile-contract/` |
 | 0022 | Partial sums | done | `book/0022-partial-sums/` |
 | 0023 | Scheduler and temporal reuse | done | `book/0023-scheduler/` |
+| 0046 | Architecture-neutral model manifest | done | `book/0046-model-manifest/` |
+| 0047 | Reusable decoder primitives | in progress | `book/0047-decoder-primitives/` |
 
 > **Tiếng Việt:** every chapter has a `README.vi.md` beside the English `README.md`.
 

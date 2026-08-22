@@ -1,0 +1,27 @@
+{
+  "chapter": "0063-post-layout-parasitic-extraction",
+  "gate": "R16",
+  "work_package": "WP16.1",
+  "status": "PASSED",
+  "claim_level": "physical/pex-settling",
+  "cell_name": "reram_macro_16x16",
+  "pex_extraction_summary": {
+    "total_nets_extracted": 291,
+    "total_parasitic_cap_ff": 33.17760000000002,
+    "total_parasitic_res_ohm": 610.416,
+    "avg_net_capacitance_ff": 0.11401237113402068,
+    "avg_net_resistance_ohm": 2.0976494845360825,
+    "technology_node": "28nm BEOL Via4-M5 ReRAM"
+  },
+  "transient_settling_signoff": {
+    "pre_layout_tau_ns": 1.18,
+    "post_layout_tau_ns": 1.5800297067911742,
+    "settling_degradation_pct": 33.900822609421546,
+    "settling_90_time_ns": 1.896035648149409,
+    "settling_99_9_time_ns": 2.44904604552632,
+    "sampling_window_ns": 5.0,
+    "timing_margin_ratio": 2.041611267021098,
+    "is_settling_clean": true,
+    "sampling_frequency_mhz": 200.0
+  }
+}

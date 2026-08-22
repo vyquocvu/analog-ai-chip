@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="380" viewBox="0 0 960 380" role="img" aria-labelledby="title desc">
+  <title id="title">Resumable Model Evaluation Pipeline</title>
+  <desc id="desc">Per-layer checkpoints persist intermediate states and cumulative ledgers, enabling crash/restart resumption without recomputation or double-counting.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker>
+    <style>
+      .box{fill:#f8fafc;stroke:#64748b;stroke-width:2}
+      .layer{fill:#eff6ff;stroke:#2563eb;stroke-width:2}
+      .ckpt{fill:#ecfdf5;stroke:#059669;stroke-width:2}
+      .resumed{fill:#fff7ed;stroke:#ea580c;stroke-width:2}
+      .head{font:bold 15px sans-serif;fill:#0f172a}
+      .txt{font:13px sans-serif;fill:#334155}
+      .tag{font:bold 11px sans-serif;fill:#475569}
+      .wire{stroke:#334155;stroke-width:2;marker-end:url(#arrow)}
+      .dash{stroke:#059669;stroke-width:2;stroke-dasharray:4,4;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <!-- Title Banner -->
+  <rect class="box" x="30" y="20" rx="8" width="900" height="45"/>
+  <text class="head" x="50" y="48">Resumable Multi-Layer Evaluation &amp; Ledger Anti-Double-Counting</text>
+
+  <!-- Layer 0 (Resumed from disk) -->
+  <rect class="resumed" x="30" y="90" rx="8" width="190" height="150"/>
+  <text class="head" x="45" y="115">Layer 0 (Resumed)</text>
+  <text class="tag" x="45" y="135">CACHE HIT: Disk</text>
+  <text class="txt" x="45" y="160">• Input SHA256 verified</text>
+  <text class="txt" x="45" y="180">• Load state.npy</text>
+  <text class="txt" x="45" y="200">• Cumulative MACs: 8.2k</text>
+  <text class="txt" x="45" y="220">• 0 new compute cycles</text>
+
+  <line class="wire" x1="220" y1="165" x2="265" y2="165"/>
+
+  <!-- Layer 1 (Resumed from disk) -->
+  <rect class="resumed" x="270" y="90" rx="8" width="190" height="150"/>
+  <text class="head" x="285" y="115">Layer 1 (Resumed)</text>
+  <text class="tag" x="285" y="135">CACHE HIT: Disk</text>
+  <text class="txt" x="285" y="160">• Input SHA256 verified</text>
+  <text class="txt" x="285" y="180">• Load state.npy</text>
+  <text class="txt" x="285" y="200">• Cumulative MACs: 16.4k</text>
+  <text class="txt" x="285" y="220">• 0 new compute cycles</text>
+
+  <line class="wire" x1="460" y1="165" x2="505" y2="165"/>
+
+  <!-- Layer 2 (Active Evaluation) -->
+  <rect class="layer" x="510" y="90" rx="8" width="190" height="150"/>
+  <text class="head" x="525" y="115">Layer 2 (Computed)</text>
+  <text class="tag" x="525" y="135">NEW EVALUATION</text>
+  <text class="txt" x="525" y="160">• Attention + MLP MVM</text>
+  <text class="txt" x="525" y="180">• +8.2k MACs computed</text>
+  <text class="txt" x="525" y="200">• Save state_0002.npy</text>
+  <text class="txt" x="525" y="220">• Save meta_0002.json</text>
+
+  <line class="wire" x1="700" y1="165" x2="745" y2="165"/>
+
+  <!-- Layer 3 (Active Evaluation) -->
+  <rect class="layer" x="750" y="90" rx="8" width="180" height="150"/>
+  <text class="head" x="765" y="115">Layer 3 (Computed)</text>
+  <text class="tag" x="765" y="135">NEW EVALUATION</text>
+  <text class="txt" x="765" y="160">• Attention + MLP MVM</text>
+  <text class="txt" x="765" y="180">• +8.2k MACs computed</text>
+  <text class="txt" x="765" y="200">• Final Norm &amp; LM Head</text>
+  <text class="txt" x="765" y="220">• Total MACs: 32.8k</text>
+
+  <!-- Checkpoint Artifact Box -->
+  <rect class="ckpt" x="30" y="265" rx="8" width="900" height="95"/>
+  <text class="head" x="50" y="290">Checkpoint State Persistence &amp; Integrity Verification</text>
+  <text class="txt" x="50" y="315">• Hash Verification: Strict SHA256 input match prevents state divergence across restarts.</text>
+  <text class="txt" x="50" y="335">• Idempotent Accounting: Cumulative hardware ledgers (MACs, tile cycles) resume without double-counting.</text>
+  <text class="tag" x="50" y="353">RESOURCE ENVELOPE: Enforces strict host memory RSS and runtime ceilings across T0–T3 design tiers.</text>
+</svg>

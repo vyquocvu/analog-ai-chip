@@ -22,7 +22,7 @@ def _bytes_to_unicode() -> dict[int, str]:
     for b in range(256):
         if b not in bs:
             bs.append(b)
-            cs.append(2 ** 8 + n)
+            cs.append(2**8 + n)
             n += 1
     return dict(zip(bs, (chr(c) for c in cs)))
 
@@ -41,7 +41,9 @@ class GPT2Tokenizer:
         with open(vocab_path) as fh:
             self.vocab: dict[str, int] = json.load(fh)
         with open(merges_path) as fh:
-            lines = [l.split() for l in fh if l.strip() and not l.strip().startswith("#")]
+            lines = [
+                line.split() for line in fh if line.strip() and not line.strip().startswith("#")
+            ]
         self.merges = [tuple(pair) for pair in lines]
         self.merge_rank = {pair: i for i, pair in enumerate(self.merges)}
         self.b2u = _bytes_to_unicode()
@@ -60,8 +62,7 @@ class GPT2Tokenizer:
             merged: list[str] = []
             i = 0
             while i < len(tokens):
-                if (tokens[i] == first and i + 1 < len(tokens)
-                        and tokens[i + 1] == second):
+                if tokens[i] == first and i + 1 < len(tokens) and tokens[i + 1] == second:
                     merged.append(first + second)
                     i += 2
                 else:

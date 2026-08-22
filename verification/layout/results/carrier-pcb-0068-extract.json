@@ -1,0 +1,43 @@
+{
+  "chapter": "0068-pcie-gen5-carrier-board-signoff",
+  "gate": "R17",
+  "work_package": "WP17.3",
+  "status": "PASSED",
+  "claim_level": "physical/carrier-pcb-signoff",
+  "carrier_board_summary": {
+    "is_carrier_ready": true,
+    "form_factor": "PCIe Gen5 CEM Add-In Card (AIC)",
+    "board_dimensions_mm": "167.65 x 111.15",
+    "substrate_material": "Panasonic Megtron 6 (R-5775)",
+    "layer_count": 12,
+    "single_ended_impedance_ohm": 50.0,
+    "differential_pcie_impedance_ohm": 85.0,
+    "host_interface_bandwidth_gbs": 63.0
+  },
+  "vrm_power_delivery": {
+    "is_vrm_compliant": true,
+    "vdd_dig_voltage_v": 0.9,
+    "vdd_dig_max_current_a": 25.0,
+    "vdd_ana_voltage_v": 1.0,
+    "vdd_ana_max_current_a": 10.0,
+    "output_voltage_ripple_mv_pp": 6.4,
+    "voltage_ripple_budget_mv_pp": 10.0,
+    "transient_step_response_mv": 18.5,
+    "vrm_efficiency_pct": 92.4
+  },
+  "pcie_gen5_signal_integrity": {
+    "is_signal_integrity_compliant": true,
+    "data_rate_gts": 32.0,
+    "nyquist_frequency_ghz": 16.0,
+    "insertion_loss_db": -8.45,
+    "insertion_loss_limit_db": -28.0,
+    "insertion_loss_margin_db": 19.55,
+    "eye_height_mv": 245.0,
+    "eye_height_min_mv": 30.0,
+    "eye_height_margin_mv": 215.0,
+    "eye_width_ui": 0.62,
+    "eye_width_min_ui": 0.3,
+    "eye_width_margin_ui": 0.32,
+    "eye_width_ps": 19.38
+  }
+}

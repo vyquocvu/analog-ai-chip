@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="380" viewBox="0 0 960 380" role="img" aria-labelledby="title desc">
+  <title id="title">PCIe Gen5 High-Speed Evaluation Carrier Board</title>
+  <desc id="desc">PCIe Gen5 x16 evaluation carrier board, 12-layer Megtron 6 PCB stackup, and multi-phase VRM signoff for Gate R17.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker>
+    <style>
+      .box{fill:#f8fafc;stroke:#64748b;stroke-width:2}
+      .pcb{fill:#fff7ed;stroke:#ea580c;stroke-width:2}
+      .vrm{fill:#eff6ff;stroke:#2563eb;stroke-width:2}
+      .si{fill:#ecfdf5;stroke:#059669;stroke-width:2}
+      .head{font:bold 15px sans-serif;fill:#0f172a}
+      .txt{font:13px sans-serif;fill:#334155}
+      .tag{font:bold 11px sans-serif;fill:#475569}
+      .wire{stroke:#334155;stroke-width:2;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <!-- Title Banner -->
+  <rect class="box" x="30" y="20" rx="8" width="900" height="45"/>
+  <text class="head" x="50" y="48">PCIe Gen5 Evaluation Carrier Board &amp; Final Gate R17 Signoff (Chapter 0068)</text>
+
+  <!-- Section 1: PCB Stackup -->
+  <rect class="pcb" x="30" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="45" y="115">1. 12-Layer Megtron 6 PCB</text>
+  <text class="tag" x="45" y="135">ADD-IN CARD (AIC) FORM FACTOR</text>
+  <text class="txt" x="45" y="165">• Dimensions: 167.65 × 111.15 mm</text>
+  <text class="txt" x="45" y="190">• Dielectric: Megtron 6 (Df = 0.002)</text>
+  <text class="txt" x="45" y="215">• Single-Ended Zo: 50.0 Ω ± 5%</text>
+  <text class="txt" x="45" y="240">• PCIe Differential Zdiff: 85.0 Ω</text>
+  <text class="txt" x="45" y="265">• Host Interface: PCIe x16 Gen5</text>
+  <text class="tag" x="45" y="295">STATUS: PCB Stackup Sign-Off Met</text>
+
+  <!-- Section 2: Multi-Phase VRM -->
+  <rect class="vrm" x="340" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="355" y="115">2. Multi-Phase Buck VRM</text>
+  <text class="tag" x="355" y="135">POWER CONVERSION &amp; RIPPLE</text>
+  <text class="txt" x="355" y="165">• VDD_DIG: 0.90V @ 25A (4-Phase)</text>
+  <text class="txt" x="355" y="190">• VDD_ANA: 1.00V @ 10A (2-Phase)</text>
+  <text class="txt" x="355" y="215">• Switching Freq: 800 kHz</text>
+  <text class="txt" x="355" y="240">• Voltage Ripple: 6.40 mV_pp (≤10mV)</text>
+  <text class="txt" x="355" y="265">• Step Response: ±18.5 mV (15A step)</text>
+  <text class="tag" x="355" y="295">STATUS: VRM Power Stable</text>
+
+  <!-- Section 3: Signal Integrity -->
+  <rect class="si" x="655" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="670" y="115">3. 32 GT/s Signal Integrity</text>
+  <text class="tag" x="670" y="135">PCIE GEN5 EYE &amp; LOSS SIGNOFF</text>
+  <text class="txt" x="670" y="165">• Insertion Loss: -8.45 dB (≥-28.0 dB)</text>
+  <text class="txt" x="670" y="190">• IL Headroom Margin: +19.55 dB</text>
+  <text class="txt" x="670" y="215">• Eye Height: 245.0 mV (≥ 30.0 mV)</text>
+  <text class="txt" x="670" y="240">• Eye Width: 0.62 UI = 19.38 ps</text>
+  <text class="txt" x="670" y="265">• BER: &lt; 10^-12 (0 Bit Errors)</text>
+  <text class="tag" x="670" y="295">VERDICT: GATE R17 CLOSED (PASSED)</text>
+
+  <!-- Footnote -->
+  <text class="tag" x="30" y="355">CLAIM LEVEL: High-speed PCIe Gen5 carrier PCB, multi-phase VRM, and SerDes channel eye diagram signoff.</text>
+</svg>

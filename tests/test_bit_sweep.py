@@ -18,8 +18,8 @@ def test_accuracy_improves_with_more_conductance_bits() -> None:
         acc = Accelerator(lambda: CrossbarTile(32, 32, g_bits=g_bits, dac_bits=14,
                                                adc_bits=14, vout_max=8.0), 32, 32, 16)
         t = model.generate(prompt, max_new=2, greedy=True, accelerator=acc)
-        l = model.forward_logits(t, accelerator=acc)
-        return token_agreement(float_tokens, t), max_abs_logit_error(float_l, l)
+        logits = model.forward_logits(t, accelerator=acc)
+        return token_agreement(float_tokens, t), max_abs_logit_error(float_l, logits)
 
     lo = run(2)
     hi = run(10)

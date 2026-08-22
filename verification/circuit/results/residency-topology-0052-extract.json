@@ -1,0 +1,200 @@
+{
+  "chapter": "0052-weight-residency-topology",
+  "gate": "R12",
+  "status": "PASSED",
+  "claim_level": "system/architecture-exploration",
+  "hardware_topology": {
+    "tile_geometry": "16x16",
+    "cell_pitch_nm": 160.0,
+    "cells_per_weight": 2,
+    "max_die_area_mm2": 400.0,
+    "max_chiplets_per_package": 12
+  },
+  "tier_analyses": {
+    "hand_calc": {
+      "total_parameters": 18240,
+      "analog_projection_parameters": 16384,
+      "digital_parameters": 1856,
+      "total_physical_tiles": 64,
+      "total_physical_cells": 32768,
+      "usable_cell_utilization_pct": 100.0,
+      "reram_core_area_mm2": 0.0008388608,
+      "peripheral_area_mm2": 0.064,
+      "total_silicon_area_mm2": 0.0648388608,
+      "chiplets_required_for_full_residency": 1,
+      "is_single_die_resident": true,
+      "is_multi_die_package_resident": true,
+      "schedules": {
+        "fully_resident": {
+          "weight_reload_bytes_per_token": 0,
+          "reload_time_per_token_us": 0.0,
+          "programming_energy_per_token_uj": 0.0,
+          "is_physically_viable": true,
+          "viability_note": "Viable on single die"
+        },
+        "layer_resident": {
+          "weight_reload_bytes_per_token": 65536,
+          "reload_time_per_token_us": 0.05461333333333333,
+          "programming_energy_per_token_uj": 0.16384,
+          "is_physically_viable": true,
+          "viability_note": "Requires active HBM3e streaming and ReRAM write endurance budget"
+        },
+        "streamed_weight": {
+          "weight_reload_bytes_per_token": 65536,
+          "reload_time_per_token_us": 1.024,
+          "programming_energy_per_token_uj": 0.0,
+          "is_physically_viable": true,
+          "viability_note": "High latency bottleneck on host PCIe link (bounded decode throughput)"
+        }
+      }
+    },
+    "t0_gpt2_124m": {
+      "total_parameters": 124439808,
+      "analog_projection_parameters": 84934656,
+      "digital_parameters": 39505152,
+      "total_physical_tiles": 331776,
+      "total_physical_cells": 169869312,
+      "usable_cell_utilization_pct": 100.0,
+      "reram_core_area_mm2": 4.3486543872,
+      "peripheral_area_mm2": 331.776,
+      "total_silicon_area_mm2": 336.1246543872,
+      "chiplets_required_for_full_residency": 1,
+      "is_single_die_resident": true,
+      "is_multi_die_package_resident": true,
+      "schedules": {
+        "fully_resident": {
+          "weight_reload_bytes_per_token": 0,
+          "reload_time_per_token_us": 0.0,
+          "programming_energy_per_token_uj": 0.0,
+          "is_physically_viable": true,
+          "viability_note": "Viable on single die"
+        },
+        "layer_resident": {
+          "weight_reload_bytes_per_token": 169869312,
+          "reload_time_per_token_us": 141.55776,
+          "programming_energy_per_token_uj": 849.34656,
+          "is_physically_viable": true,
+          "viability_note": "Requires active HBM3e streaming and ReRAM write endurance budget"
+        },
+        "streamed_weight": {
+          "weight_reload_bytes_per_token": 169869312,
+          "reload_time_per_token_us": 2654.208,
+          "programming_energy_per_token_uj": 0.0,
+          "is_physically_viable": true,
+          "viability_note": "High latency bottleneck on host PCIe link (bounded decode throughput)"
+        }
+      }
+    },
+    "t1_llama_1.1b": {
+      "total_parameters": 1100442624,
+      "analog_projection_parameters": 1034420224,
+      "digital_parameters": 66022400,
+      "total_physical_tiles": 4040704,
+      "total_physical_cells": 2068840448,
+      "usable_cell_utilization_pct": 100.0,
+      "reram_core_area_mm2": 52.9623154688,
+      "peripheral_area_mm2": 4040.704,
+      "total_silicon_area_mm2": 4093.6663154688003,
+      "chiplets_required_for_full_residency": 11,
+      "is_single_die_resident": false,
+      "is_multi_die_package_resident": true,
+      "schedules": {
+        "fully_resident": {
+          "weight_reload_bytes_per_token": 0,
+          "reload_time_per_token_us": 0.0,
+          "programming_energy_per_token_uj": 0.0,
+          "is_physically_viable": true,
+          "viability_note": "Viable across 11 chiplets on interposer"
+        },
+        "layer_resident": {
+          "weight_reload_bytes_per_token": 2068840448,
+          "reload_time_per_token_us": 1724.0337033333333,
+          "programming_energy_per_token_uj": 10344.20224,
+          "is_physically_viable": true,
+          "viability_note": "Requires active HBM3e streaming and ReRAM write endurance budget"
+        },
+        "streamed_weight": {
+          "weight_reload_bytes_per_token": 2068840448,
+          "reload_time_per_token_us": 32325.632,
+          "programming_energy_per_token_uj": 0.0,
+          "is_physically_viable": true,
+          "viability_note": "High latency bottleneck on host PCIe link (bounded decode throughput)"
+        }
+      }
+    },
+    "t2_llama_3b": {
+      "total_parameters": 2972075008,
+      "analog_projection_parameters": 2872836096,
+      "digital_parameters": 99238912,
+      "total_physical_tiles": 11222016,
+      "total_physical_cells": 5745672192,
+      "usable_cell_utilization_pct": 100.0,
+      "reram_core_area_mm2": 147.08920811520002,
+      "peripheral_area_mm2": 11222.016,
+      "total_silicon_area_mm2": 11369.1052081152,
+      "chiplets_required_for_full_residency": 29,
+      "is_single_die_resident": false,
+      "is_multi_die_package_resident": false,
+      "schedules": {
+        "fully_resident": {
+          "weight_reload_bytes_per_token": 0,
+          "reload_time_per_token_us": 0.0,
+          "programming_energy_per_token_uj": 0.0,
+          "is_physically_viable": false,
+          "viability_note": "Infeasible: requires 29 dies (exceeds package limit 12)"
+        },
+        "layer_resident": {
+          "weight_reload_bytes_per_token": 5745672192,
+          "reload_time_per_token_us": 4788.060153333333,
+          "programming_energy_per_token_uj": 28728.36096,
+          "is_physically_viable": true,
+          "viability_note": "Requires active HBM3e streaming and ReRAM write endurance budget"
+        },
+        "streamed_weight": {
+          "weight_reload_bytes_per_token": 5745672192,
+          "reload_time_per_token_us": 89776.128,
+          "programming_energy_per_token_uj": 0.0,
+          "is_physically_viable": true,
+          "viability_note": "High latency bottleneck on host PCIe link (bounded decode throughput)"
+        }
+      }
+    },
+    "t3_llama2_7b": {
+      "total_parameters": 6739775488,
+      "analog_projection_parameters": 6607077376,
+      "digital_parameters": 132698112,
+      "total_physical_tiles": 25808896,
+      "total_physical_cells": 13214154752,
+      "usable_cell_utilization_pct": 100.0,
+      "reram_core_area_mm2": 338.2823616512,
+      "peripheral_area_mm2": 25808.896,
+      "total_silicon_area_mm2": 26147.1783616512,
+      "chiplets_required_for_full_residency": 66,
+      "is_single_die_resident": false,
+      "is_multi_die_package_resident": false,
+      "schedules": {
+        "fully_resident": {
+          "weight_reload_bytes_per_token": 0,
+          "reload_time_per_token_us": 0.0,
+          "programming_energy_per_token_uj": 0.0,
+          "is_physically_viable": false,
+          "viability_note": "Infeasible: requires 66 dies (exceeds package limit 12)"
+        },
+        "layer_resident": {
+          "weight_reload_bytes_per_token": 13214154752,
+          "reload_time_per_token_us": 11011.795626666666,
+          "programming_energy_per_token_uj": 66070.77376,
+          "is_physically_viable": true,
+          "viability_note": "Requires active HBM3e streaming and ReRAM write endurance budget"
+        },
+        "streamed_weight": {
+          "weight_reload_bytes_per_token": 13214154752,
+          "reload_time_per_token_us": 206471.168,
+          "programming_energy_per_token_uj": 0.0,
+          "is_physically_viable": true,
+          "viability_note": "High latency bottleneck on host PCIe link (bounded decode throughput)"
+        }
+      }
+    }
+  }
+}

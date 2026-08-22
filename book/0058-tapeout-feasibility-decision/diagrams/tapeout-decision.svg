@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="380" viewBox="0 0 960 380" role="img" aria-labelledby="title desc">
+  <title id="title">Physical Tape-Out Feasibility Decision Matrix</title>
+  <desc id="desc">Multi-tier go/no-go architecture report and selected 28nm ReRAM tape-out implementation target.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker>
+    <style>
+      .box{fill:#f8fafc;stroke:#64748b;stroke-width:2}
+      .go{fill:#ecfdf5;stroke:#059669;stroke-width:2}
+      .cond{fill:#fff7ed;stroke:#ea580c;stroke-width:2}
+      .nogo{fill:#fef2f2;stroke:#dc2626;stroke-width:2}
+      .head{font:bold 15px sans-serif;fill:#0f172a}
+      .txt{font:13px sans-serif;fill:#334155}
+      .tag{font:bold 11px sans-serif;fill:#475569}
+      .wire{stroke:#334155;stroke-width:2;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <!-- Title Banner -->
+  <rect class="box" x="30" y="20" rx="8" width="900" height="45"/>
+  <text class="head" x="50" y="48">Integrated Architecture Decision Report &amp; Physical Tape-Out Target (Gate R14 Exit)</text>
+
+  <!-- T0: FEASIBLE / GO -->
+  <rect class="go" x="30" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="45" y="115">T0 (124M): TAPE-OUT TARGET</text>
+  <text class="tag" x="45" y="135">VERDICT: GO (FEASIBLE)</text>
+  <text class="txt" x="45" y="165">• Process: 28nm BEOL ReRAM</text>
+  <text class="txt" x="45" y="190">• Die Area: 336.1 mm² (1 Die)</text>
+  <text class="txt" x="45" y="215">• Throughput: 244,247 TPS</text>
+  <text class="txt" x="45" y="240">• Decode Energy: 26.4 μJ / tok</text>
+  <text class="txt" x="45" y="265">• Power: 6.44 W (Passive Air)</text>
+  <text class="tag" x="45" y="295">STATUS: Primary Tape-Out Target</text>
+
+  <!-- T1: CONDITIONAL -->
+  <rect class="cond" x="340" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="355" y="115">T1 (1.1B): 2.5D INTERPOSER</text>
+  <text class="tag" x="355" y="135">VERDICT: CONDITIONAL_GO</text>
+  <text class="txt" x="355" y="165">• Packaging: 11-Chiplet UCIe</text>
+  <text class="txt" x="355" y="190">• Total Area: 4,093.7 mm²</text>
+  <text class="txt" x="355" y="215">• Throughput: 69,685 TPS</text>
+  <text class="txt" x="355" y="240">• Decode Energy: 439.7 μJ / tok</text>
+  <text class="txt" x="355" y="265">• Prereq: KGD &amp; Interposer stress</text>
+  <text class="tag" x="355" y="295">STATUS: Multi-Die Feasibility</text>
+
+  <!-- T2/T3: INFEASIBLE -->
+  <rect class="nogo" x="655" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="670" y="115">T2/T3 (3B/7B): STREAMING</text>
+  <text class="tag" x="670" y="135">VERDICT: NO_GO (INFEASIBLE)</text>
+  <text class="txt" x="670" y="165">• Area: &gt; 11,000 mm² (&gt;29 Dies)</text>
+  <text class="txt" x="670" y="190">• Exceeds Package Envelope</text>
+  <text class="txt" x="670" y="215">• Bottleneck: HBM &amp; Attn Wall</text>
+  <text class="txt" x="670" y="240">• Infeasible for stationary IMC</text>
+  <text class="txt" x="670" y="265">• Requires 3D BEOL &amp; Optics</text>
+  <text class="tag" x="670" y="295">STATUS: Honestly Disqualified</text>
+
+  <!-- Footnote -->
+  <text class="tag" x="30" y="355">ROADMAP COMPLETION: Complete deterministic evidence chain from KiCad/ngspice/Xyce to large-model tape-out signoff.</text>
+</svg>

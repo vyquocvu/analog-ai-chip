@@ -1,0 +1,43 @@
+{
+  "chapter": "0060-mixed-signal-converter-layout",
+  "gate": "R15",
+  "work_package": "WP15.2",
+  "status": "PASSED",
+  "claim_level": "physical/layout-lvs",
+  "converter_specifications": {
+    "name": "sar_adc_8bit_macro",
+    "resolution_bits": 8,
+    "total_silicon_area_um2": 98.28,
+    "target_area_budget_um2": 150.0,
+    "is_within_area_budget": true,
+    "port_count": 14,
+    "cdac_common_centroid": {
+      "unit_caps_total": 256,
+      "pos_caps": 128,
+      "neg_caps": 128,
+      "pos_centroid_nm": [
+        3950.0,
+        3950.0
+      ],
+      "neg_centroid_nm": [
+        3950.0,
+        3950.0
+      ],
+      "centroid_offset_nm": 0.0,
+      "is_perfect_centroid_matched": true
+    }
+  },
+  "drc_signoff": {
+    "is_clean": true,
+    "total_checks": 518,
+    "violation_count": 0
+  },
+  "lvs_signoff": {
+    "is_matched": true,
+    "matched_devices": 258,
+    "matched_ports": 14,
+    "matched_nets": 10,
+    "discrepancy_count": 0,
+    "discrepancies": []
+  }
+}

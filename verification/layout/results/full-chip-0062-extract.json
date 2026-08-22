@@ -1,0 +1,45 @@
+{
+  "chapter": "0062-top-level-chip-assembly",
+  "gate": "R15",
+  "work_package": "WP15.4",
+  "status": "PASSED",
+  "claim_level": "physical/full-chip-assembly",
+  "tapeout_target": "T0_GPT2_124M",
+  "chip_specifications": {
+    "name": "top_analog_ai_monolithic_chip",
+    "die_width_mm": 18.334,
+    "die_height_mm": 18.334,
+    "die_area_mm2": 336.135556,
+    "max_die_limit_mm2": 400.0,
+    "is_within_die_budget": true,
+    "package": "FCBGA-676",
+    "placed_bump_pads": 276,
+    "esd_protection": {
+      "hbm_rating_kv": 2.0,
+      "cdm_rating_v": 500.0,
+      "clamp_type": "Dual-Diode + ggNMOS Snapback Clamp"
+    },
+    "clock_tree": {
+      "topology": "Symmetric Balanced H-Tree",
+      "global_skew_ps": 11.4,
+      "max_skew_budget_ps": 15.0,
+      "is_clock_skew_clean": true
+    },
+    "total_shapes": 603,
+    "port_count": 276
+  },
+  "drc_signoff": {
+    "is_clean": true,
+    "total_checks": 603,
+    "violation_count": 0
+  },
+  "gate_r15_summary": {
+    "gate_id": "R15",
+    "title": "Physical layout & DRC/LVS verification",
+    "wp15_1_reram_macro_layout": "PASSED",
+    "wp15_2_mixed_signal_converter_layout_lvs": "PASSED",
+    "wp15_3_tile_floorplan_power_grid": "PASSED",
+    "wp15_4_full_chip_monolithic_assembly": "PASSED",
+    "gate_verdict": "PASSED"
+  }
+}
