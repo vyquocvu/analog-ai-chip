@@ -49,6 +49,14 @@ from .decoder_primitives import (
 )
 from .device_profile import load_device_profile, validate_device_profile
 from .generalized_decoder import GeneralizedDecoder
+from .kv_hierarchy import (
+    AttentionWorkloadStep,
+    KVCachePlacement,
+    KVHierarchyConfig,
+    KVHierarchySummary,
+    analyze_kv_hierarchy,
+    calculate_kv_cache_bytes,
+)
 from .model_manifest import ModelManifest, TensorSpec
 from .profile_adapter import (
     CROSSBAR_NONIDEALITY_FIELDS,
@@ -86,6 +94,7 @@ __all__ = [
     "CROSSBAR_NONIDEALITY_FIELDS",
     "TIER_BUDGETS",
     "Accelerator",
+    "AttentionWorkloadStep",
     "BlockStreamedLinear",
     "CheckpointIngestionResult",
     "CheckpointInventory",
@@ -95,6 +104,9 @@ __all__ = [
     "FileProvenance",
     "GeneralizedDecoder",
     "HardwareTopologyConfig",
+    "KVCachePlacement",
+    "KVHierarchyConfig",
+    "KVHierarchySummary",
     "LayerEvaluationCheckpoint",
     "MechanismMetrics",
     "Metrics",
@@ -112,6 +124,7 @@ __all__ = [
     "TinyGPT",
     "TinyGPTConfig",
     "adc",
+    "analyze_kv_hierarchy",
     "analyze_model_residency",
     "apply_conductance_drift",
     "apply_iv_nonlinearity",
@@ -125,6 +138,7 @@ __all__ = [
     "build_tile_factory_from_converter_profiles",
     "cached_attention_step",
     "calculate_execution_memory_budget",
+    "calculate_kv_cache_bytes",
     "calibrate_surrogate",
     "causal_attention",
     "compute_tensor_sha256",

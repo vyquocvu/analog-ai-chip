@@ -40,8 +40,8 @@ A higher gate may contain exploratory code, but it is not considered physically 
 | **R9** | Implementation correlation (FPGA/PCB/Tape-out) | `book/0043`–`0045` | **PASSED** |
 | **R10** | Scalable model semantics & sharded checkpoints | `book/0046`–`0048` | **PASSED** |
 | **R11** | Memory-bounded model execution | `book/0049`–`0051` | **PASSED** |
-| **R12** | Large-model architecture & residency | `book/0052`–`0053` | **ACTIVE** |
-| **R13** | Large-model validation & hardware recovery | `book/0054`–`0055` | **PLANNED** |
+| **R12** | Large-model architecture & residency | `book/0052`–`0053` | **PASSED** |
+| **R13** | Large-model validation & hardware recovery | `book/0054`–`0055` | **ACTIVE** |
 | **R14** | Multi-tier physical feasibility & design decision | `book/0056`–`0058` | **PLANNED** |
 
 ---
@@ -402,7 +402,7 @@ and cross-calibrated.
 
 ---
 
-# R12 — Large-model accelerator capacity and data movement — ACTIVE
+# R12 — Large-model accelerator capacity and data movement — PASSED
 
 Depends on R11 + R6.
 
@@ -417,20 +417,20 @@ Depends on R11 + R6.
 
 ## WP12.2 — Prefill/decode and KV-cache hierarchy
 
-- [ ] Separate prefill throughput from single-token decode latency; do not reuse
+- [x] Separate prefill throughput from single-token decode latency; do not reuse
   the TinyGPT per-token ledger for batched prefill.
-- [ ] Model GQA/MQA KV capacity, paged allocation, precision, context length and
+- [x] Model GQA/MQA KV capacity, paged allocation, precision, context length and
   SRAM/HBM placement for all four tiers.
-- [ ] Account for digital attention MACs, softmax, KV reads/writes and long-context
+- [x] Account for digital attention MACs, softmax, KV reads/writes and long-context
   bandwidth; report when the digital path becomes the bottleneck.
 
 ## WP12.3 — End-to-end traffic and utilization ledger
 
-- [ ] Emit per-layer/per-token bytes across tile SRAM, shared SRAM, NoC,
+- [x] Emit per-layer/per-token bytes across tile SRAM, shared SRAM, NoC,
   inter-die links and off-chip memory with provenance-tagged energy coefficients.
-- [ ] Report tile/ADC/NoC/memory utilization and distinguish useful MACs from
+- [x] Report tile/ADC/NoC/memory utilization and distinguish useful MACs from
   padding, differential-cell overhead and re-execution.
-- [ ] Add hand-computable two-layer/two-die scheduling assertions plus invalid
+- [x] Add hand-computable two-layer/two-die scheduling assertions plus invalid
   capacity/bandwidth boundary tests.
 
 ### Gate R12 exit
@@ -443,7 +443,7 @@ memory assumptions.
 
 ---
 
-# R13 — Large-model accuracy and hardware-recovery validation — PLANNED
+# R13 — Large-model accuracy and hardware-recovery validation — ACTIVE
 
 Depends on R11 + R12.
 

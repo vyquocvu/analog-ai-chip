@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="380" viewBox="0 0 960 380" role="img" aria-labelledby="title desc">
+  <title id="title">KV-Cache Hierarchy &amp; Digital Attention Wall</title>
+  <desc id="desc">Paged memory hierarchy and bottleneck analysis showing the crossover where digital attention traffic surpasses analog crossbar latency.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker>
+    <style>
+      .box{fill:#f8fafc;stroke:#64748b;stroke-width:2}
+      .sram{fill:#ecfdf5;stroke:#059669;stroke-width:2}
+      .hbm{fill:#eff6ff;stroke:#2563eb;stroke-width:2}
+      .wall{fill:#fff7ed;stroke:#ea580c;stroke-width:2}
+      .head{font:bold 15px sans-serif;fill:#0f172a}
+      .txt{font:13px sans-serif;fill:#334155}
+      .tag{font:bold 11px sans-serif;fill:#475569}
+      .wire{stroke:#334155;stroke-width:2;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <!-- Title Banner -->
+  <rect class="box" x="30" y="20" rx="8" width="900" height="45"/>
+  <text class="head" x="50" y="48">KV-Cache Memory Hierarchy &amp; The Digital Attention Wall</text>
+
+  <!-- Memory Tier 1: On-Chip SRAM -->
+  <rect class="sram" x="30" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="45" y="115">1. On-Chip Paged SRAM</text>
+  <text class="tag" x="45" y="135">CAPACITY: 64–128 MB | 8.0 TB/s</text>
+  <text class="txt" x="45" y="165">• Ultra-low latency (&lt; 5 ns)</text>
+  <text class="txt" x="45" y="190">• Paged allocation (16 tok/block)</text>
+  <text class="txt" x="45" y="215">• Accommodates T0 &amp; short T1</text>
+  <text class="txt" x="45" y="240">• GQA 8× compression enables</text>
+  <text class="txt" x="45" y="265">  up to 2K context on-chip</text>
+  <text class="tag" x="45" y="295">LATENCY: Analog-Dominant Zone</text>
+
+  <!-- Memory Tier 2: Package HBM3e -->
+  <rect class="hbm" x="340" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="355" y="115">2. Package HBM3e</text>
+  <text class="tag" x="355" y="135">CAPACITY: 32–96 GB | 1.2 TB/s</text>
+  <text class="txt" x="355" y="165">• High capacity for long context</text>
+  <text class="txt" x="355" y="190">• Paged transfer across 2.5D link</text>
+  <text class="txt" x="355" y="215">• Stores T2/T3 KV cache (8K+)</text>
+  <text class="txt" x="355" y="240">• Memory read time scales O(T)</text>
+  <text class="txt" x="355" y="265">• Traffic: ~4.2 GB/s per token</text>
+  <text class="tag" x="355" y="295">LATENCY: Memory-Bound Zone</text>
+
+  <!-- The Digital Attention Wall -->
+  <rect class="wall" x="655" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="670" y="115">3. The Attention Wall</text>
+  <text class="tag" x="670" y="135">CROSSOVER BOTTLENECK</text>
+  <text class="txt" x="670" y="165">• Short Context (T &lt; 1K):</text>
+  <text class="txt" x="670" y="185">  Stationary Analog MVM dominates</text>
+  <text class="txt" x="670" y="210">• Long Context (T &gt; 2K):</text>
+  <text class="txt" x="670" y="230">  Digital attention memory reads</text>
+  <text class="txt" x="670" y="250">  surpass analog projection time</text>
+  <text class="tag" x="670" y="295">STATUS: Digital Path Limits Speed</text>
+
+  <!-- Footnote -->
+  <text class="tag" x="30" y="355">GATE R12 EXIT: Physical ledger reports exact KV bytes, paged allocation, and the digital bottleneck crossover.</text>
+</svg>
