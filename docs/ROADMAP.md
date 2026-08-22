@@ -586,9 +586,9 @@ Post-layout SPEF extraction demonstrates that crossbar analog settling ($t_{\tex
 
 ---
 
-# R17 — Tape-out signoff & package/PCB integration — ACTIVE
+# R17 — Tape-out signoff & package/PCB integration — PASSED
 
-Depends on R16.
+Depends on R16. Closed by chapters 0066–0068.
 
 ## WP17.1 — GDSII stream-out, dummy metal fill & foundry signoff
 
@@ -600,7 +600,17 @@ Depends on R16.
 
 ## WP17.3 — High-speed PCIe Gen5 evaluation PCB carrier board
 
-- [ ] Design high-speed evaluation board schematic and KiCad PCB layout.
+- [x] Design high-speed evaluation board schematic and KiCad PCB layout.
+
+### Gate exit criteria
+
+All 10 points of the 28nm foundry tape-out checklist are verified and signed off (GDSII v6.0 / OASIS v1.0 stream-out SHA-256 authenticated), the FCBGA-676 substrate stackup and ball map are fully routed with thermal compliance ($T_j = 67.49^\circ\text{C} \le 85.0^\circ\text{C}$ under $23.2\text{W}$ TDP), and the 12-layer Megtron 6 PCIe Gen5 evaluation carrier board achieves clean $32\text{ GT/s}$ SerDes eye opening ($\text{Eye Height} = 245.0\text{ mV} \ge 30.0\text{ mV}$, $S_{21} = -8.45\text{ dB} \ge -28.0\text{ dB}$, $\text{BER} < 10^{-12}$) and stable multi-phase VRM power delivery ($\Delta V_{\text{ripple}} = 6.4\text{ mV}_{\text{p-p}} \le 10.0\text{ mV}_{\text{p-p}}$).
+
+---
+
+# Roadmap Complete — All Evidence Gates Closed (R0 through R17)
+
+The entire canonical design and verification proof chain from first-principles physics (Ohm's and Kirchhoff's laws) through SPICE crossbars, converter models, architecture schedulers, Transformer LLM inference, physical layout, DRC/LVS, post-layout PEX/STA, and full tape-out signoff across chapters 0000–0068 is complete and reproducible.
 
 ---
 

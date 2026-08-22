@@ -30,7 +30,7 @@ physical feasibility report
 
 ## Current status
 
-The entire canonical design and verification proof chain has successfully closed all 17 evidence gates (**R0 through R16**) across chapters 0000–0065:
+The entire canonical design and verification proof chain has successfully closed all 18 evidence gates (**R0 through R17**) across chapters 0000–0068:
 
 ```text
 R0 functional + circuit foundation ── COMPLETE
@@ -50,11 +50,12 @@ R13 large-model validation         ── PASSED    (frozen corpus eval, error a
 R14 multi-tier feasibility         ── PASSED    (parametric ledger, Pareto sweeps, 28nm tape-out decision)
 R15 physical layout & DRC/LVS      ── PASSED    (28nm BEOL ReRAM, common-centroid CDAC, tile floorplan, full-chip 336mm²)
 R16 post-layout PEX & STA signoff  ── PASSED    (SPEF extraction, multi-corner STA, dynamic EM signoff)
-R17 tape-out & package/PCB signoff ── ACTIVE    (GDSII stream-out, FCBGA-676 substrate, PCIe Gen5 board)
+R17 tape-out & package/PCB signoff ── PASSED    (GDSII stream-out, FCBGA-676 substrate, PCIe Gen5 evaluation carrier)
 ```
 
 The proof chain from Ohm's and Kirchhoff's laws to large-model LLM
-inference, 28nm physical layout, and post-layout timing signoff is complete. See
+inference, 28nm physical layout, post-layout timing signoff, and full
+tape-out / packaging / PCB integration is complete and proven. See
 [`docs/ROADMAP.md`](docs/ROADMAP.md) and
 [`docs/CURRICULUM.md`](docs/CURRICULUM.md).
 
