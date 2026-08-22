@@ -47,5 +47,8 @@ FPGA / PCB / silicon correlation
 * **Part XIII — Large-model architecture & KV-cache hierarchy:** [`book/0052`](../book/0052-weight-residency-topology/) through [`book/0053`](../book/0053-kv-cache-hierarchy/)
 * **Part XIV — Large-model error attribution & hardware recovery:** [`book/0054`](../book/0054-large-model-error-attribution/) through [`book/0055`](../book/0055-scalable-hardware-recovery/)
 * **Part XV — Multi-tier physical feasibility & tape-out decision:** [`book/0056`](../book/0056-parametric-physical-ledger/) through [`book/0058`](../book/0058-tapeout-feasibility-decision/)
+* **Part XVI — Physical layout & DRC/LVS verification:** [`book/0059`](../book/0059-reram-macro-layout/) through [`book/0062`](../book/0062-full-chip-assembly/)
+* **Part XVII — Post-layout parasitic extraction & static timing:** [`book/0063`](../book/0063-parasitic-extraction/) through [`book/0065`](../book/0065-power-grid-resonance/)
+* **Part XVIII — Tape-out signoff & packaging integration:** [`book/0066`](../book/0066-gdsii-streamout-signoff/) through [`book/0068`](../book/0068-pcb-evaluation-board/)
 
 > **Tiếng Việt:** Mỗi chương trong `book/` đều có file `README.vi.md` song ngữ bên cạnh `README.md`.

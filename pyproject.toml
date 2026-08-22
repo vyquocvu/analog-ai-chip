@@ -18,10 +18,11 @@ sim = ["pyspice>=1.5"]
 load = ["safetensors>=0.4"]
 
 [tool.setuptools.packages.find]
-include = ["analog_ai*", "analog_llm*"]
+include = ["analog_ai*", "analog_llm*", "analog_layout*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["."]
 addopts = "-q"
 
 [tool.ruff]

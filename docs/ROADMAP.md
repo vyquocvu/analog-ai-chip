@@ -43,6 +43,9 @@ A higher gate may contain exploratory code, but it is not considered physically 
 | **R12** | Large-model architecture & residency | `book/0052`–`0053` | **PASSED** |
 | **R13** | Large-model validation & hardware recovery | `book/0054`–`0055` | **PASSED** |
 | **R14** | Multi-tier physical feasibility & design decision | `book/0056`–`0058` | **PASSED** |
+| **R15** | Physical layout & DRC/LVS verification | `book/0059`–`0062` | **ACTIVE** |
+| **R16** | Post-layout extraction & static timing signoff | `book/0063`–`0065` | **QUEUED** |
+| **R17** | Tape-out signoff & package/PCB integration | `book/0066`–`0068` | **QUEUED** |
 
 ---
 
@@ -523,6 +526,70 @@ The repository has an auditable, reproducible design decision for all four
 model tiers and a single justified implementation target. A passed gate does
 not require every tier to be feasible; it requires that feasibility or
 infeasibility follows from bounded resources and evidence-tagged assumptions.
+
+---
+
+# R15 — Physical layout & DRC/LVS verification — ACTIVE
+
+Depends on R14 + R9 + R5.
+
+## WP15.1 — 28nm BEOL ReRAM macro cell layout & DRC
+
+- [x] Implement parametric GDSII/OASIS geometry generator for 16x16 crosspoint array at 160nm pitch.
+- [x] Formulate design rules (DRC) for Via4-M5 BEOL stack: minimum width, spacing, enclosure, and density.
+- [x] Generate clean DRC execution report with zero geometric design rule violations.
+
+## WP15.2 — Mixed-signal SAR ADC / DAC layout & LVS
+
+- [ ] Implement common-centroid binary-weighted CDAC capacitor array layout for parasitic matching.
+- [ ] Perform Layout-Versus-Schematic (LVS) matching against SPICE netlists with pin/port extraction.
+- [ ] Report zero topological discrepancies in LVS signoff.
+
+## WP15.3 — Core tile floorplanning & power grid IR drop
+
+- [ ] Generate tile-level floorplan integrating ReRAM macro, SAR ADCs, DACs, and local SRAM buffers.
+- [ ] Route multi-layer power grid (M1-M6) and calculate static/dynamic IR drop margins.
+
+## WP15.4 — Top-level monolithic chip assembly
+
+- [ ] Assemble full monolithic die (18.3 mm x 18.3 mm, 336.1 mm²) with 2D mesh NoC backbone.
+- [ ] Place pad ring, ESD protection clamps, power/ground IOs, and clock distribution network.
+
+---
+
+# R16 — Post-layout parasitic extraction & static timing signoff — QUEUED
+
+Depends on R15.
+
+## WP16.1 — Parasitic extraction (PEX/SPEF) & crossbar settling
+
+- [ ] Extract full RC parasitic SPEF netlist and re-simulate crossbar settling time in ngspice.
+
+## WP16.2 — Multi-corner PVT static timing analysis (STA)
+
+- [ ] Perform multi-corner PVT STA signoff (TT/FF/SS, -40°C to 125°C) across tile and NoC clock domains.
+
+## WP16.3 — Power grid resonance & electromigration (EM)
+
+- [ ] Sign off dynamic power grid integrity, simultaneous switching noise (SSN), and electromigration rules.
+
+---
+
+# R17 — Tape-out signoff & package/PCB integration — QUEUED
+
+Depends on R16.
+
+## WP17.1 — GDSII stream-out, dummy metal fill & foundry signoff
+
+- [ ] Insert dummy metal fill, run density gradient checks, and generate foundry tape-out checklist.
+
+## WP17.2 — FCBGA-676 substrate packaging & thermal spreader
+
+- [ ] Design flip-chip BGA substrate ball map and passive thermal heat spreader.
+
+## WP17.3 — High-speed PCIe Gen5 evaluation PCB carrier board
+
+- [ ] Design high-speed evaluation board schematic and KiCad PCB layout.
 
 ---
 
