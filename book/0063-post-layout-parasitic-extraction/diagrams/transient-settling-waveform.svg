@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="380" viewBox="0 0 960 380" role="img">
+  <title>Post-Layout Crossbar Transient Settling Waveforms</title>
+  <rect width="960" height="380" fill="#0f172a"/>
+  
+  <!-- Title -->
+  <text x="30" y="35" fill="#f8fafc" font-family="sans-serif" font-size="16" font-weight="bold">
+    Post-Layout Bitline Settling Transient vs 200 MSPS SAR ADC Sampling Aperture
+  </text>
+  
+  <!-- Coordinate Axis -->
+  <line x1="80" y1="310" x2="880" y2="310" stroke="#64748b" stroke-width="2"/>
+  <line x1="80" y1="310" x2="80" y2="70" stroke="#64748b" stroke-width="2"/>
+  
+  <!-- Y-Axis Labels -->
+  <text x="30" y="75" fill="#94a3b8" font-family="monospace" font-size="12">1.0V (100%)</text>
+  <text x="30" y="115" fill="#94a3b8" font-family="monospace" font-size="12">0.999V (99.9%)</text>
+  <text x="30" y="190" fill="#94a3b8" font-family="monospace" font-size="12">0.90V (90%)</text>
+  <text x="30" y="315" fill="#94a3b8" font-family="monospace" font-size="12">0.0V (0%)</text>
+  
+  <!-- Grid Lines -->
+  <line x1="80" y1="115" x2="880" y2="115" stroke="#334155" stroke-dasharray="4,4" stroke-width="1"/>
+  <line x1="80" y1="190" x2="880" y2="190" stroke="#334155" stroke-dasharray="4,4" stroke-width="1"/>
+  
+  <!-- X-Axis Labels (Time in ns) -->
+  <text x="80" y="335" fill="#94a3b8" font-family="monospace" font-size="12">0.0 ns</text>
+  <text x="240" y="335" fill="#94a3b8" font-family="monospace" font-size="12">1.18 ns (τ_pre)</text>
+  <text x="390" y="335" fill="#94a3b8" font-family="monospace" font-size="12">2.45 ns (t_settle)</text>
+  <text x="720" y="335" fill="#38bdf8" font-family="monospace" font-size="12" font-weight="bold">5.00 ns (ADC Sample)</text>
+  
+  <!-- Sampling Aperture Zone -->
+  <rect x="720" y="70" width="160" height="240" fill="#0284c7" fill-opacity="0.15" stroke="#38bdf8" stroke-dasharray="4,4" stroke-width="1.5"/>
+  <text x="730" y="95" fill="#38bdf8" font-family="sans-serif" font-size="12" font-weight="bold">ADC Aperture Window (200 MSPS)</text>
+  <text x="730" y="115" fill="#bae6fd" font-family="sans-serif" font-size="11">Timing Margin: 2.04× (Clean)</text>
+  
+  <!-- Pre-Layout Waveform (Green dashed) -->
+  <path d="M 80 310 Q 150 160, 240 135 T 500 75 L 880 75" fill="none" stroke="#22c55e" stroke-dasharray="6,6" stroke-width="2.5"/>
+  
+  <!-- Post-Layout Waveform (Orange solid) -->
+  <path d="M 80 310 Q 200 210, 390 115 T 600 75 L 880 75" fill="none" stroke="#f97316" stroke-width="3"/>
+  
+  <!-- Legend -->
+  <rect x="100" y="80" width="260" height="70" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <line x1="115" y1="100" x2="145" y2="100" stroke="#22c55e" stroke-dasharray="6,6" stroke-width="2.5"/>
+  <text x="155" y="104" fill="#f8fafc" font-family="sans-serif" font-size="12">Pre-Layout Step Response (τ = 1.18 ns)</text>
+  <line x1="115" y1="130" x2="145" y2="130" stroke="#f97316" stroke-width="3"/>
+  <text x="155" y="134" fill="#f8fafc" font-family="sans-serif" font-size="12">Post-Layout PEX (τ = 1.58 ns, t_settle = 2.45 ns)</text>
+</svg>

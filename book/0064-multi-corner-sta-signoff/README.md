@@ -33,6 +33,8 @@ This chapter advances **Gate R16 (Post-Layout Parasitic Extraction & Static Timi
 
 ## 3. Critical Path Timing Slack Breakdown
 
+![STA Slack Distribution Waterfall](diagrams/sta-slack-distribution.svg)
+
 | Critical Path Name | Clock Domain | Logic Depth | Nominal Delay | Worst Setup Slack (SS) | Worst Hold Slack (FF) | Status |
 |---|---|---|---|---|---|---|
 | **NoC Router Arbiter Stage** | `CLK_NOC` ($1\text{ GHz}$) | 8 gates | $540.0\text{ ps}$ | **$+216.8\text{ ps}$** | $+364.5\text{ ps}$ | ✓ PASS |

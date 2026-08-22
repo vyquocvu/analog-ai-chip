@@ -9,6 +9,7 @@ This chapter advances **Gate R15 (Physical Layout & DRC/LVS Verification)** by g
 ## 1. 2D Common-Centroid CDAC Matrix & Gradient Cancellation
 
 ![Mixed-Signal Converter Layout](diagrams/converter-layout.svg)
+![CDAC Common-Centroid Mask](diagrams/cdac-common-centroid-mask.svg)
 
 - **Gradient-Immune Topology**:
   - Binary-weighted differential capacitor DAC consisting of $256\text{ unit MIM capacitors}$ ($C_u = 1.0\text{ fF}$, $400\text{ nm} \times 400\text{ nm}$ per unit cell).
@@ -21,6 +22,8 @@ This chapter advances **Gate R15 (Physical Layout & DRC/LVS Verification)** by g
 ---
 
 ## 2. Mixed-Signal SAR ADC Macro Floorplan & Area Budget
+
+![SAR ADC Mask Layout](diagrams/sar-adc-mask.svg)
 
 | Sub-Block | Implementation Details | Area Footprint |
 |---|---|---|

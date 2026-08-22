@@ -21,6 +21,8 @@ Chương này mở đầu cho **Phase 3 (Thiết Kế Layout Vật Lý, Ký Duy�
 
 ## 2. Thông Số Hình Học & Vành Đai Ô Giả (Dummy Ring)
 
+![Mặt Nạ Layout Mảng ReRAM](diagrams/reram-macro-mask.svg)
+
 Nhằm đảm bảo tính đồng nhất quang khắc và độ chính xác khắc axit khi áp dụng kỹ thuật hiệu chỉnh lân cận quang học (OPC), mảng $16 \times 16$ được bao quanh bởi một **vành đai ô giả bảo vệ (dummy guard ring)** liên tục:
 
 | Kích Thước / Đặc Tính | Thông Số Lõi Hoạt Động | Kèm Vành Đai Giả ($18 \times 18$) |

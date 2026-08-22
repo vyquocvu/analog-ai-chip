@@ -9,6 +9,7 @@ Chương này thúc đẩy **Gate R15 (Physical Layout & DRC/LVS Verification)**
 ## 1. Floorplan Vật Lý Tile & Tích Hợp Các Khối Chức Năng
 
 ![Floorplan Tile Lõi](diagrams/tile-floorplan.svg)
+![Mặt Nạ Layout Tile Lõi](diagrams/tile-floorplan-mask.svg)
 
 - **Phân Vùng Floorplan Các Khối Con**:
   - **4× Mảng Con ReRAM Macro**: Các mảng giao chéo $16 \times 16$ bố trí dạng lưới 4 góc phần tư $2 \times 2$ ($32 \times 32 = 1,024$ ô nhớ memristor vật lý kèm cặp bitline vi sai).

@@ -9,6 +9,7 @@ Chương này thúc đẩy **Gate R15 (Physical Layout & DRC/LVS Verification)**
 ## 1. Ma Trận Tụ Điện CDAC Common-Centroid 2D & Triệt Tiêu Gradient
 
 ![Layout Bộ Chuyển Đổi Tín Hiệu Hỗn Hợp](diagrams/converter-layout.svg)
+![Mặt Nạ Tụ Điện CDAC Common-Centroid](diagrams/cdac-common-centroid-mask.svg)
 
 - **Cấu Trúc Kháng Biến Thiên Gradient Tiến Trình**:
   - Mảng tụ điện nhị phân vi sai gồm $256\text{ tụ MIM đơn vị}$ ($C_u = 1.0\text{ fF}$, kích thước ô cơ sở $400\text{ nm} \times 400\text{ nm}$).
@@ -21,6 +22,8 @@ Chương này thúc đẩy **Gate R15 (Physical Layout & DRC/LVS Verification)**
 ---
 
 ## 2. Floorplan Macro SAR ADC Tín Hiệu Hỗn Hợp & Ngân Sách Diện Tích
+
+![Mặt Nạ Layout SAR ADC](diagrams/sar-adc-mask.svg)
 
 | Khối Chức Năng | Chi Tiết Hiện Thực Vật Lý | Diện Tích Chiếm Dụng |
 |---|---|---|

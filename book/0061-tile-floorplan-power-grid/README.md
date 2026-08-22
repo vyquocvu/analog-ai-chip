@@ -9,6 +9,7 @@ This chapter advances **Gate R15 (Physical Layout & DRC/LVS Verification)** by a
 ## 1. Physical Tile Floorplan & Sub-Block Integration
 
 ![Core Tile Floorplan](diagrams/tile-floorplan.svg)
+![Core Tile Layout Mask](diagrams/tile-floorplan-mask.svg)
 
 - **Sub-Block Floorplan Partitioning**:
   - **4× ReRAM Sub-Array Macros**: $16 \times 16$ crosspoint arrays arranged in a $2 \times 2$ quadrant grid ($32 \times 32 = 1,024$ physical memristor cells with differential bitline pairs).

@@ -34,6 +34,8 @@ Công cụ trích xuất layout chuyển đổi các phần tử ký sinh hình 
 
 ## 3. Mô Phỏng Động Học Xác Lập Tín Hiệu (Transient Settling)
 
+![Dạng Sóng Xác Lập Hậu Layout](diagrams/transient-settling-waveform.svg)
+
 Gán ngược các thông số ký sinh SPEF vào mạng lưới bitline mô phỏng đáp ứng bước nhảy analog thực tế:
 
 $$\tau_{\text{pre}} = \mathbf{1.18\text{ ns}} \quad \longrightarrow \quad \tau_{\text{post}} = \mathbf{1.58\text{ ns}} \quad (+33.9\%\text{ suy giảm do ký sinh})$$

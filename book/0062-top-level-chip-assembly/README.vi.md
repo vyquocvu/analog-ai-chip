@@ -9,6 +9,7 @@ Chương này khép lại **Gate R15 (Physical Layout & DRC/LVS Verification)** 
 ## 1. Floorplan Chip Đơn Phiến & Cấu Trúc Cụm Tính Toán
 
 ![Lắp Ráp Toàn Chip](diagrams/full-chip-assembly.svg)
+![Mặt Nạ Layout Toàn Chip Đơn Phiến](diagrams/full-chip-mask.svg)
 
 - **Tích Hợp Nguyên Khối (Monolithic Single-Die)**:
   - **Mục Tiêu Tape-Out**: Bộ tăng tốc analog `T0_GPT2_124M` trên tiến trình 28nm BEOL Via4-M5 ReRAM.

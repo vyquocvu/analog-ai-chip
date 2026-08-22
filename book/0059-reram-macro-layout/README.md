@@ -21,6 +21,8 @@ This chapter opens **Phase 3 (Physical Implementation, Silicon Signoff & Packagi
 
 ## 2. Geometric Layout Parameters & Boundary Dummy Rings
 
+![ReRAM Macro Physical Mask](diagrams/reram-macro-mask.svg)
+
 To guarantee lithographic uniformity and etch fidelity during optical proximity correction (OPC), the active $16 \times 16$ array is enclosed within a **continuous dummy cell guard ring**:
 
 | Dimension / Property | Core Specification | With Dummy Guard Ring ($18 \times 18$) |

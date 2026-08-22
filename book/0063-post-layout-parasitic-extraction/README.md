@@ -34,6 +34,8 @@ The layout extraction engine serializes physical RC parasitics into standard IEE
 
 ## 3. Distributed RC Transient Settling Simulation
 
+![Transient Settling Waveform](diagrams/transient-settling-waveform.svg)
+
 Back-annotating the extracted SPEF parasitics onto the crossbar bitline summing network models the post-layout analog step response:
 
 $$\tau_{\text{pre}} = \mathbf{1.18\text{ ns}} \quad \longrightarrow \quad \tau_{\text{post}} = \mathbf{1.58\text{ ns}} \quad (+33.9\%\text{ settling degradation})$$

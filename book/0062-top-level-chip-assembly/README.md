@@ -9,6 +9,7 @@ This chapter concludes **Gate R15 (Physical Layout & DRC/LVS Verification)** by 
 ## 1. Monolithic Die Floorplan & Compute Cluster Hierarchy
 
 ![Top-Level Full-Chip Assembly](diagrams/full-chip-assembly.svg)
+![Monolithic Full-Chip Layout Mask](diagrams/full-chip-mask.svg)
 
 - **Monolithic Single-Die Integration**:
   - **Tape-Out Target**: `T0_GPT2_124M` analog accelerator on 28nm BEOL Via4-M5 ReRAM.

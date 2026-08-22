@@ -33,6 +33,8 @@ Chương này thúc đẩy **Gate R16 (Post-Layout Parasitic Extraction & Static
 
 ## 3. Phân Tích Độ Dư Định Thời (Slack) Trên Các Đường Xung Yếu
 
+![Biểu Đồ Thác Đổ Slack STA](diagrams/sta-slack-distribution.svg)
+
 | Tên Tuyến Tín Hiệu | Miền Đồng Hồ | Chiều Sâu Cổng | Độ Trễ Danh Định | Setup Slack Xấu Nhất (SS) | Hold Slack Xấu Nhất (FF) | Kết Quả |
 |---|---|---|---|---|---|---|
 | **Bộ Trọng Tài Router NoC** | `CLK_NOC` ($1\text{ GHz}$) | 8 gates | $540.0\text{ ps}$ | **$+216.8\text{ ps}$** | $+364.5\text{ ps}$ | ✓ ĐẠT |
