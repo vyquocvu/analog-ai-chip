@@ -596,7 +596,7 @@ Depends on R16.
 
 ## WP17.2 — FCBGA-676 substrate packaging & thermal spreader
 
-- [ ] Design flip-chip BGA substrate ball map and passive thermal heat spreader.
+- [x] Design flip-chip BGA substrate ball map and passive thermal heat spreader.
 
 ## WP17.3 — High-speed PCIe Gen5 evaluation PCB carrier board
 

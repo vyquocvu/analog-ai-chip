@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="380" viewBox="0 0 960 380" role="img" aria-labelledby="title desc">
+  <title id="title">FCBGA-676 Substrate Packaging &amp; Thermal Spreader</title>
+  <desc id="desc">FCBGA-676 packaging architecture, 4-2-4 organic substrate, and thermal heat spreader signoff for Gate R17.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker>
+    <style>
+      .box{fill:#f8fafc;stroke:#64748b;stroke-width:2}
+      .pkg{fill:#fff7ed;stroke:#ea580c;stroke-width:2}
+      .sub{fill:#eff6ff;stroke:#2563eb;stroke-width:2}
+      .thm{fill:#ecfdf5;stroke:#059669;stroke-width:2}
+      .head{font:bold 15px sans-serif;fill:#0f172a}
+      .txt{font:13px sans-serif;fill:#334155}
+      .tag{font:bold 11px sans-serif;fill:#475569}
+      .wire{stroke:#334155;stroke-width:2;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <!-- Title Banner -->
+  <rect class="box" x="30" y="20" rx="8" width="900" height="45"/>
+  <text class="head" x="50" y="48">FCBGA-676 Substrate Packaging &amp; Thermal Heat Spreader (Gate R17 / Chapter 0067)</text>
+
+  <!-- Section 1: FCBGA-676 Ball Map -->
+  <rect class="pkg" x="30" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="45" y="115">1. FCBGA-676 Package</text>
+  <text class="tag" x="45" y="135">BGA BALL MAP ALLOCATION</text>
+  <text class="txt" x="45" y="165">• Package Size: 27.0 × 27.0 mm</text>
+  <text class="txt" x="45" y="190">• Ball Pitch: 1.00 mm (26 × 26 array)</text>
+  <text class="txt" x="45" y="215">• VSS Ground: 230 balls</text>
+  <text class="txt" x="45" y="240">• VDD Core/Ana: 230 balls (0.9/1.0V)</text>
+  <text class="txt" x="45" y="265">• PCIe Gen5 x16 SerDes: 64 balls</text>
+  <text class="tag" x="45" y="295">STATUS: Ball Map 100% Routed</text>
+
+  <!-- Section 2: 4-2-4 Organic Substrate -->
+  <rect class="sub" x="340" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="355" y="115">2. 4-2-4 Organic Substrate</text>
+  <text class="tag" x="355" y="135">10-LAYER BUILDUP STACKUP</text>
+  <text class="txt" x="355" y="165">• 4 Top Buildup + 2 Core + 4 Bottom</text>
+  <text class="txt" x="355" y="190">• Core Thickness: 800 µm</text>
+  <text class="txt" x="355" y="215">• Single-Ended Zo: 50.0 Ω ± 5%</text>
+  <text class="txt" x="355" y="240">• PCIe Differential Zdiff: 85.0 Ω</text>
+  <text class="txt" x="355" y="265">• Low-Loss Dielectric: Df = 0.004</text>
+  <text class="tag" x="355" y="295">STATUS: Signal Integrity Verified</text>
+
+  <!-- Section 3: Thermal Spreader -->
+  <rect class="thm" x="655" y="85" rx="8" width="275" height="240"/>
+  <text class="head" x="670" y="115">3. Thermal Spreader Signoff</text>
+  <text class="tag" x="670" y="135">TDP 23.2W THERMAL BUDGET</text>
+  <text class="txt" x="670" y="165">• IHS: Nickel-Plated Copper (390 W/mK)</text>
+  <text class="txt" x="670" y="190">• TIM-1: k = 6.5 W/mK (BLT = 35 µm)</text>
+  <text class="txt" x="670" y="215">• θ_ja: 1.616 °C/W (≤ 1.80 °C/W)</text>
+  <text class="txt" x="670" y="240">• Peak Tj: 67.49 °C (≤ 85.0 °C budget)</text>
+  <text class="txt" x="670" y="265">• Thermal Margin: +17.51 °C</text>
+  <text class="tag" x="670" y="295">VERDICT: THERMAL COMPLIANT</text>
+
+  <!-- Footnote -->
+  <text class="tag" x="30" y="355">CLAIM LEVEL: FCBGA-676 package substrate stackup, BGA ball map, and passive thermal heat spreader signoff.</text>
+</svg>
