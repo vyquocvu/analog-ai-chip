@@ -1,0 +1,46 @@
+{
+  "chapter": "0047-decoder-primitives",
+  "gate": "R10",
+  "status": "PASSED",
+  "claim_level": "functional/software-reference",
+  "hand_calculation_tolerances": {
+    "rms_norm_max_abs_error": 1.1102230246251565e-16,
+    "layer_norm_max_abs_error": 0.0,
+    "gelu_max_abs_error": 0.0,
+    "silu_max_abs_error": 0.0,
+    "swiglu_max_abs_error": 0.0,
+    "rope_pos0_max_abs_error": 0.0,
+    "rope_pos1_max_abs_error": 0.0
+  },
+  "attention_parity_suite": {
+    "mha_4x4": {
+      "query_heads": 4,
+      "kv_heads": 4,
+      "head_dimension": 8,
+      "full_vs_scalar_ref_max_abs_error": 4.440892098500626e-16,
+      "cached_step_vs_full_max_abs_error": 0.0,
+      "parity_status": "PASSED"
+    },
+    "gqa_4x2": {
+      "query_heads": 4,
+      "kv_heads": 2,
+      "head_dimension": 8,
+      "full_vs_scalar_ref_max_abs_error": 4.440892098500626e-16,
+      "cached_step_vs_full_max_abs_error": 0.0,
+      "parity_status": "PASSED"
+    },
+    "mqa_4x1": {
+      "query_heads": 4,
+      "kv_heads": 1,
+      "head_dimension": 8,
+      "full_vs_scalar_ref_max_abs_error": 2.7755575615628914e-16,
+      "cached_step_vs_full_max_abs_error": 0.0,
+      "parity_status": "PASSED"
+    }
+  },
+  "boundary_guardrails": {
+    "odd_rope_dimension_rejected": true,
+    "mismatched_swiglu_shapes_rejected": true,
+    "indivisible_attention_groups_rejected": true
+  }
+}
