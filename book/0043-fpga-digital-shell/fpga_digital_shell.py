@@ -599,6 +599,7 @@ def render_summary_svg(extract: dict[str, Any]) -> str:
     cl = extract["control_ledger"]
     cc = extract["ch0038_crosscheck"]
     arch = extract["architecture"]
+    timing = {p["symbol"]: p for p in extract["timing_parameters"]}
     return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
 <style>
 text {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }}
@@ -645,19 +646,19 @@ text {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; 
 <!-- Right: Timing param summary -->
 <rect x="650" y="128" width="260" height="195" rx="8" fill="#fef3c7" stroke="#f59e0b"/>
 <text x="670" y="155" class="box-title" fill="#b45309">Timing Parameters</text>
-<text x="670" y="177" class="box-text">t_dac = 5.0 ns (SPICE)</text>
-<text x="670" y="197" class="box-text">t_xbar = 0.05 ns (SPICE)</text>
-<text x="670" y="217" class="box-text">t_tia = 5.0 ns (derived)</text>
-<text x="670" y="237" class="box-text">t_adc = 50.0 ns (SPICE)</text>
-<text x="670" y="257" class="box-text">t_prog = 500 ns (ASSUMED)</text>
-<text x="670" y="277" class="box-text">t_add = 2.0 ns (ASSUMED)</text>
-<text x="670" y="297" class="box-text">t_sram_rd = 1.0 ns (ASSUMED)</text>
-<text x="670" y="317" class="box-text">t_sram_wr = 1.5 ns (ASSUMED)</text>
+<text x="670" y="177" class="box-text">t_dac = {timing['t_dac'].value_ns} ns (SPICE)</text>
+<text x="670" y="197" class="box-text">t_settle = {timing['t_settle'].value_ns} ns (SPICE)</text>
+<text x="670" y="217" class="box-text">t_adc = {timing['t_adc'].value_ns} ns (SPICE)</text>
+<text x="670" y="237" class="box-text">t_tile = {timing['t_tile'].value_ns} ns (derived)</text>
+<text x="670" y="257" class="box-text">t_prog = {timing['t_prog'].value_ns} ns (ASSUMED)</text>
+<text x="670" y="277" class="box-text">t_add = {timing['t_add'].value_ns} ns (ASSUMED)</text>
+<text x="670" y="297" class="box-text">t_sram = {timing['t_sram'].value_ns} ns (ASSUMED)</text>
+<text x="670" y="317" class="box-text">t_noc = {timing['t_noc'].value_ns} ns (ASSUMED)</text>
 
 <!-- Bottom banner -->
 <rect x="50" y="345" width="860" height="165" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
 <text x="70" y="375" class="box-title">Key Finding</text>
-<text x="70" y="398" class="box-text">★ Programming (NVM write, t_prog = 500 ns ASSUMED) dominates at {cl["program_fraction_pct"]:.0f}% of total execution — matching Ch.0038/0039.</text>
+<text x="70" y="398" class="box-text">★ Programming (NVM write, t_prog = {timing['t_prog'].value_ns:.0f} ns ASSUMED) dominates at {cl["program_fraction_pct"]:.0f}% of total execution — matching Ch.0038/0039.</text>
 <text x="70" y="420" class="box-text">★ Compute kernel (DAC+xbar+TIA+ADC = {cc["digital_shell_t_tile_ns"]:.2f} ns) matches Ch.0038 latency model within 1% — cross-chapter consistency proven.</text>
 <text x="70" y="442" class="box-text">★ Partial-sum accumulator: {extract["partial_sum_accumulator"]["bit_growth_formula"]} — overflow safe.</text>
 <text x="70" y="464" class="box-text">★ Buffer pressure: {cl["stall_fraction_pct"]:.1f}% stall rate — double-buffer SRAM refill is the dominant latency risk, not compute.</text>
@@ -708,7 +709,7 @@ text {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; 
 <text x="270" y="120" class="box-title">Occurrence Frequency</text>
 <text x="800" y="120" class="box-title">Count (% of total transitions)</text>
 {state_rows}
-<text x="90" y="510" class="box-text" fill="#b45309">★ PROGRAM state ({hist.get("PROGRAM", 0)} transitions) dominates — NVM write is the primary FPGA scheduling bottleneck (t_prog = 500 ns, ASSUMED).</text>
+<text x="90" y="510" class="box-text" fill="#b45309">★ PROGRAM state ({hist.get("PROGRAM", 0)} transitions) dominates — NVM write is the primary FPGA scheduling bottleneck (t_prog = {extract["timing_parameters"][7]["value_ns"]:.0f} ns, ASSUMED).</text>
 </svg>
 """
 
@@ -766,7 +767,7 @@ text {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; 
 <text x="70" y="320" class="box-title">Stall Model — Buffer Pressure Analysis</text>
 <text x="70" y="350" class="box-text">Double-buffer strategy: while tile N computes, tile N+1's activations are prefetched from SRAM.</text>
 <text x="70" y="375" class="box-text">Stall occurs if SRAM read latency ({extract["timing_parameters"][5]["value_ns"]} ns, ASSUMED) overlaps compute ({extract["timing_parameters"][0]["value_ns"] + extract["timing_parameters"][3]["value_ns"]:.0f} ns compute).</text>
-<text x="70" y="400" class="box-text">With t_compute = 60.05 ns >> t_sram_rd = 1 ns, prefetch completes well before next compute begins.</text>
+<text x="70" y="400" class="box-text">With t_compute = {extract["timing_parameters"][3]["value_ns"]:.0f} ns >> t_sram = {extract["timing_parameters"][5]["value_ns"]} ns, prefetch completes well before next compute begins.</text>
 <text x="70" y="425" class="box-text">Modelled stall rate: {extract["control_ledger"]["stall_fraction_pct"]:.1f}% — stalls occur at double-buffer refill boundaries (every 4 blocks).</text>
 <text x="70" y="450" class="box-text" fill="#b45309">⚠ t_sram_rd = 1 ns and t_sram_wr = 1.5 ns are ASSUMED (28nm BRAM). FPGA BRAM latency must be measured to validate.</text>
 <text x="70" y="478" class="box-text">★ Activation buffer dominates buffer stall risk. Weight shadow and accumulator buffers are non-stalling (pipelined).</text>
@@ -828,7 +829,7 @@ text {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; 
 {bars}
 <rect x="50" y="490" width="860" height="38" rx="6" fill="#dbeafe" stroke="#93c5fd"/>
 <text x="70" y="510" class="box-text">t_mvm per block = {cc["digital_shell_t_tile_ns"]:.2f} ns | Total {cl["n_blocks"]} blocks | Dominates: PROGRAM ({cl["total_program_ns"]:.0f} ns) >> COMPUTE ({cl["total_compute_ns"]:.0f} ns)</text>
-<text x="70" y="525" class="box-text" fill="#b45309">⚠ PROGRAM bar (500 ns NVM write) is ASSUMED — replace with FPGA measured write pulse timing for Gate R9.</text>
+<text x="70" y="525" class="box-text" fill="#b45309">⚠ PROGRAM bar ({timing['t_prog'].value_ns:.0f} ns NVM write) is ASSUMED — replace with FPGA measured write pulse timing for Gate R9.</text>
 </svg>
 """
 

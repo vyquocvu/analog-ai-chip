@@ -57,7 +57,7 @@ Chương này chuẩn hóa quy trình **tiếp nhận, chuyển vị trọng s�
 
 ---
 
-## 3. Phát Hiện Chính
+## 6. Phát Hiện Chính
 
 1. **Tiếp Nhận Checkpoint Mượt Mà**: Bộ nạp `analog_llm.gpt_loader.load_gpt2` xử lý chính xác checkpoint GPT-2 HuggingFace với cơ chế fail-closed kiểm tra kích thước và tự động chuyển vị trọng số Conv1D.
 2. **Thực Thi Phần Cứng Theo Hồ Sơ**: Tất cả 416 tile crossbar vật lý được cấu hình với dải độ dẫn $[10\,\mu\text{S}, 100\,\mu\text{S}]$, bộ chuyển đổi DAC/ADC 4-bit, sụt áp dây dẫn, phân tán ghi, nhiễu đọc, trôi độ dẫn và lỗi kẹt linh kiện.
@@ -65,7 +65,7 @@ Chương này chuẩn hóa quy trình **tiếp nhận, chuyển vị trọng s�
 
 ---
 
-## 4. Thực Thi & Kiểm Thử
+## 7. Thực Thi & Kiểm Thử
 
 Chạy mã nguồn mô phỏng checkpoint thực tế:
 ```bash

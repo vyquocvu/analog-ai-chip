@@ -59,7 +59,7 @@ The execution schedule demonstrates that analog matrix-vector multiplications ac
 
 ---
 
-## 3. KV Cache vs Full Recomputation Efficiency
+## 6. KV Cache vs Full Recomputation Efficiency
 
 | Metric | With KV Cache (Hardware Baseline) | Without KV Cache (Full Recompute) | Efficiency Advantage |
 |---|---|---|---|
@@ -71,7 +71,7 @@ The execution schedule demonstrates that analog matrix-vector multiplications ac
 
 ---
 
-## 4. Execution & Artifacts
+## 7. Execution & Artifacts
 
 Run the deterministic autoregressive architecture ledger generator:
 ```bash

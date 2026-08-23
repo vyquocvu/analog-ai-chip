@@ -59,7 +59,7 @@ Lịch trình thực thi chỉ ra rằng các phép nhân ma trận tương tự
 
 ---
 
-## 3. Hiệu Quả Khi Dùng KV Cache So Với Tính Lại Toàn Bộ
+## 6. Hiệu Quả Khi Dùng KV Cache So Với Tính Lại Toàn Bộ
 
 | Chỉ Số | Dùng KV Cache (Mặc Định Phần Cứng) | Không Dùng KV Cache (Tính Lại Toàn Bộ) | Ưu Thế Hiệu Quả |
 |---|---|---|---|
@@ -71,7 +71,7 @@ Lịch trình thực thi chỉ ra rằng các phép nhân ma trận tương tự
 
 ---
 
-## 4. Thực Thi & Kiểm Thử
+## 7. Thực Thi & Kiểm Thử
 
 Chạy mã nguồn xuất sổ cái tự hồi quy:
 ```bash

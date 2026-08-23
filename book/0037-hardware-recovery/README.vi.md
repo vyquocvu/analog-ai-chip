@@ -55,7 +55,7 @@ Chương này chuẩn hóa **khung phục hồi nhận biết phần cứng 3 gi
 
 ---
 
-## 5. Thực Thi & Kiểm Thử
+## 7. Thực Thi & Kiểm Thử
 
 Chạy mô phỏng phục hồi nhận biết phần cứng:
 ```bash

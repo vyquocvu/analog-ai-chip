@@ -67,7 +67,7 @@ SPICE array.
 
 All gate items are ticked in `docs/ROADMAP.md` with committed, reproducible
 SPICE evidence + behavioral-equivalence report
-(`verification/reports/crossbar-4x4-summary.md`). R3 is **COMPLETE**; R4
+(`verification/reports/crossbar-4x4-0013-summary.md`). R3 is **COMPLETE**; R4
 (programmable-conductance device realism) is the next gate.
 
 ## Diagrams

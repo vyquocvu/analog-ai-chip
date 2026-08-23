@@ -57,7 +57,7 @@ This chapter formalizes the **ingestion, weight transposition, physical tile map
 
 ---
 
-## 3. Key Findings
+## 6. Key Findings
 
 1. **Seamless Checkpoint Ingestion**: `analog_llm.gpt_loader.load_gpt2` successfully ingests standard HuggingFace GPT-2 checkpoints with fail-closed shape verification and Conv1D weight transpositions.
 2. **Profile-Driven Hardware Execution**: All 416 physical crossbar tiles are programmed with conductance ranges $[10\,\mu\text{S}, 100\,\mu\text{S}]$, 4-bit DAC/ADC converters, wire resistance, programming variance, read noise, retention drift, and stuck faults.
@@ -65,7 +65,7 @@ This chapter formalizes the **ingestion, weight transposition, physical tile map
 
 ---
 
-## 4. Execution & Artifacts
+## 7. Execution & Artifacts
 
 Run the deterministic pretrained checkpoint simulation:
 ```bash

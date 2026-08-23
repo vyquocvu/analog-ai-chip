@@ -6,6 +6,19 @@ This chapter investigates the physical and numerical scaling behavior of current
 
 ---
 
+## Units and assumptions
+
+| Quantity | Value | Units | Source |
+|---|---|---|---|
+| `VREF` | 2.5 | V | spice (Ch. 0005) |
+| `G0` | 0.1 | mS | spice (Ch. 0007) |
+| `GSCALE` | 0.1 | mS per weight unit | spice (Ch. 0007) |
+| `RF` | 10 | kΩ | spice (Ch. 0005) |
+| `A_OL` | $10^4$ | V/V | assumed (op-amp model) |
+| `C_cell` | 1.0 | fF | assumed (junction + wire) |
+
+---
+
 ## 1. Circuit Architecture & TIA Loading Model
 
 ![Summing Node Loading & Noise Gain Theory](diagrams/theory.svg)
@@ -71,3 +84,9 @@ python book/0014-array-timing/array_timing.py
 ```
 Committed extract: [`verification/circuit/results/array-timing-0014-extract.json`](../../verification/circuit/results/array-timing-0014-extract.json).
 Tested by: [`tests/test_array_timing.py`](../../tests/test_array_timing.py).
+
+## What this chapter does NOT prove
+
+- It does **not** model coupled interconnect parasitics or multi-column transient feedback — deferred to Ch. 0017–0018.
+- Capacitance values ($C_\text{cell}$) are **assumed**, not extracted from SPICE.
+- SPICE MVM Error column data source: `array_timing.py` extract sweep.

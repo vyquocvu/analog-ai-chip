@@ -37,6 +37,8 @@ FPGA / PCB / silicon correlation
 * **Part I — Math and functional reference:** [`book/0000`](../book/0000-what-we-are-building/) through [`book/0004`](../book/0004-tiling/)
 * **Part II — Circuit primitives & current-mode compute:** [`book/0005`](../book/0005-one-analog-neuron/) through [`book/0007`](../book/0007-crossbar-column/)
 * **Part III — Converter signal path:** [`book/0009`](../book/0009-dac-r2r/) through [`book/0011`](../book/0011-converter-variation/)
+
+> **Note:** Chapter 0008 (Profile bridge — circuit → profile → simulator proof chain) was delivered as an implementation-only gate (R1) through `verification/circuit/` scripts and `device_profiles/` without a narrative chapter.
 * **Part IV — Small physical crossbar arrays:** [`book/0012`](../book/0012-crossbar-2x2/) through [`book/0014`](../book/0014-array-timing/)
 * **Part V — Device realism & variation:** [`book/0015`](../book/0015-conductance-model/) through [`book/0020`](../book/0020-crossbar-v1/)
 * **Part VI — Profile-driven accelerator architecture:** [`book/0021`](../book/0021-physical-tile-contract/) through [`book/0026`](../book/0026-calibration/)

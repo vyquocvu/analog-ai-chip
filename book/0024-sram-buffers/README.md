@@ -62,3 +62,4 @@ Run the deterministic sizing generator:
 python book/0024-sram-buffers/sram_buffers.py
 ```
 Output artifact committed at: `verification/circuit/results/sram-buffers-0024-extract.json`.
+Tested by: [`tests/test_sram_buffers.py`](../../tests/test_sram_buffers.py).

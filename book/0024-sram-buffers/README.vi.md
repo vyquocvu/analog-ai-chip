@@ -27,9 +27,9 @@ Chương này chuẩn hóa **hệ thống lưu trữ SRAM on-chip, phân cấp b
 
 | Cấu hình Tile | SRAM Kích hoạt Đầu vào | SRAM Lưu Trọng số | SRAM Bộ tích lũy ($K_c \le 16$) | Tổng SRAM / Tile | Ước tính Diện tích ($0.12\,\mu\text{m}^2/\text{bit}$) |
 |---|---|---|---|---|---|
-| **Tile $16\times 16$ (4-bit)** | $128\text{ bits}$ ($16\text{ B}$) | $2.048\text{ bits}$ ($256\text{ B}$) | $128\text{ bits}$ ($16\text{ B}$) | **$2.304\text{ bits}$ ($288\text{ B}$)** | **$276.5\,\mu\text{m}^2$** |
-| **Tile $32\times 32$ (4-bit)** | $256\text{ bits}$ ($32\text{ B}$) | $8.192\text{ bits}$ ($1.024\text{ B}$) | $288\text{ bits}$ ($36\text{ B}$) | **$8.736\text{ bits}$ ($1.092\text{ B}$)** | **$1.048.3\,\mu\text{m}^2$** |
-| **Tile $64\times 64$ (4-bit)** | $512\text{ bits}$ ($64\text{ B}$) | $32.768\text{ bits}$ ($4.096\text{ B}$) | $640\text{ bits}$ ($80\text{ B}$) | **$33.920\text{ bits}$ ($4.240\text{ B}$)** | **$4.070.4\,\mu\text{m}^2$** |
+| **Tile $16\times 16$ (4-bit)** | $128\text{ bits}$ ($16\text{ B}$) | $2{,}048\text{ bits}$ ($256\text{ B}$) | $128\text{ bits}$ ($16\text{ B}$) | **$2{,}304\text{ bits}$ ($288\text{ B}$)** | **$276.5\,\mu\text{m}^2$** |
+| **Tile $32\times 32$ (4-bit)** | $256\text{ bits}$ ($32\text{ B}$) | $8{,}192\text{ bits}$ ($1{,}024\text{ B}$) | $288\text{ bits}$ ($36\text{ B}$) | **$8{,}736\text{ bits}$ ($1{,}092\text{ B}$)** | **$1{,}048.3\,\mu\text{m}^2$** |
+| **Tile $64\times 64$ (4-bit)** | $512\text{ bits}$ ($64\text{ B}$) | $32{,}768\text{ bits}$ ($4{,}096\text{ B}$) | $640\text{ bits}$ ($80\text{ B}$) | **$33{,}920\text{ bits}$ ($4{,}240\text{ B}$)** | **$4{,}070.4\,\mu\text{m}^2$** |
 
 ---
 
@@ -41,8 +41,8 @@ $$S_{\text{KV}}(L) = 2 \times L \times n_{\text{layers}} \times d_{\text{model}}
 | Kiến trúc Mô hình | Số lớp | $d_{\text{model}}$ | Độ dài ngữ cảnh $L$ | Độ chính xác | Tổng dung lượng KV Cache |
 |---|---|---|---|---|---|
 | **TinyGPT** | $4$ | $64$ | $128$ tokens | $16\text{-bit}$ | **$128\text{ KB}$** |
-| **LLaMA-7B** | $32$ | $4.096$ | $2.048$ tokens | $16\text{-bit}$ | **$1.00\text{ GB}$** |
-| **LLaMA-13B** | $40$ | $5.120$ | $4.096$ tokens | $16\text{-bit}$ | **$3.20\text{ GB}$** |
+| **LLaMA-7B** | $32$ | $4{,}096$ | $2{,}048$ tokens | $16\text{-bit}$ | **$1.00\text{ GB}$** |
+| **LLaMA-13B** | $40$ | $5{,}120$ | $4{,}096$ tokens | $16\text{-bit}$ | **$3.20\text{ GB}$** |
 
 ---
 

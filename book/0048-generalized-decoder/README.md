@@ -2,7 +2,7 @@
 
 > **Bản tiếng Việt:** [`README.vi.md`](README.vi.md)
 
-This chapter formalizes the **manifest-driven generalized decoder reference engine (`GeneralizedDecoder`)** for **Gate R10 (Scalable model semantics & sharded checkpoints)**. It unifies the schema contracts from Chapter 0046 ([`ModelManifest`](../0046-model-manifest/)) and mathematical primitives from Chapter 0047 ([`decoder_primitives`](../0047-decoder-primitives/)) into an architecture-neutral execution engine capable of evaluating modern decoder transformer variants (GPT-2 MHA, LLaMA GQA, Hand-Calc MQA) under strict float reference and profile-driven analog acceleration.
+This chapter formalizes the **manifest-driven generalized decoder reference engine (`GeneralizedDecoder`)** for **Gate R10 (Scalable model semantics & sharded checkpoints)**. It unifies the schema contracts from Chapter 0046 ([`ModelManifest`](../0046-model-manifest/README.md)) and mathematical primitives from Chapter 0047 ([`decoder_primitives`](../0047-decoder-primitives/README.md)) into an architecture-neutral execution engine capable of evaluating modern decoder transformer variants (GPT-2 MHA, LLaMA GQA, Hand-Calc MQA) under strict float reference and profile-driven analog acceleration.
 
 ---
 

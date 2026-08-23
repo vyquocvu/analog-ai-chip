@@ -63,3 +63,15 @@ ngspice note: the two TIA stages are independent linear networks, so `Vout = Vm 
 holds by superposition. ngspice's DC operating point is numerically fragile when two
 ideal/OTA gain loops share one netlist, so each stage is solved in its own netlist and
 combined — exact, since the stages are uncoupled.
+
+## What this chapter does NOT prove
+
+- It does **not** characterize converter non-idealities (DAC/ADC INL/DNR, quantization noise) — deferred to Ch. 0009–0011.
+- It does **not** model interconnect parasitics, IR drop, or transient settling — deferred to Ch. 0017–0018.
+- It does **not** prove array-level scaling behavior — deferred to Ch. 0012–0014.
+
+## Exercises
+
+1. **Hand calculation**: Given $W = [0.5, -0.25]$ and $x = [2.6, 2.4]$ V, compute the expected $V_\text{out}$ using the formula $V_\text{out} = R_F \cdot G_\text{scale} \cdot \sum w_i (x_i - V_\text{REF})$.
+2. **Sign change**: If all weights are negated ($W \to -W$), what happens to $V_\text{out}$? Verify with the script.
+3. **Scaling**: What is $V_\text{out}$ if $G_\text{scale}$ is doubled to $0.2\text{ mS}$? What current does each cell source?

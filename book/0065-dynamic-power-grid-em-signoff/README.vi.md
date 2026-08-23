@@ -51,9 +51,9 @@ $$\text{MTTF} = A \cdot J^{-2} \exp\left(\frac{E_a}{k_B T}\right)$$
 
 | Gói Công Việc | Tên Chương | Nội Dung Ký Duyệt | Kết Quả |
 |---|---|---|---|
-| **WP16.1** | [Chương 0063: Trích Xuất PEX / SPEF & Xác Lập](file:///Users/vyquocvu/Develop/analog-ai-chip/book/0063-post-layout-parasitic-extraction/) | Netlist SPEF, thời gian xác lập $t_{\text{settle}} = 2.45\text{ ns} \le 5.0\text{ ns}$ | **✓ PASSED** |
-| **WP16.2** | [Chương 0064: Ký Duyệt STA Đa Góc PVT](file:///Users/vyquocvu/Develop/analog-ai-chip/book/0064-multi-corner-sta-signoff/) | Quét góc TT/SS/FF, $\text{WNS} = 0.0\text{ ps}$, $\text{TNS} = 0.0\text{ ps}$ | **✓ PASSED** |
-| **WP16.3** | [Chương 0065: Lưới Nguồn Động & Di Trú Điện Tử](file:///Users/vyquocvu/Develop/analog-ai-chip/book/0065-dynamic-power-grid-em-signoff/) | $f_{\text{res}} = 3.66\text{ GHz}$, $\Delta V_{\text{dyn}} = 12.51\text{ mV}$, $\text{MTTF} = 25.5\text{ năm}$ | **✓ PASSED** |
+| **WP16.1** | [Chương 0063: Trích Xuất PEX / SPEF & Xác Lập](../0063-post-layout-parasitic-extraction/) | Netlist SPEF, thời gian xác lập $t_{\text{settle}} = 2.45\text{ ns} \le 5.0\text{ ns}$ | **✓ PASSED** |
+| **WP16.2** | [Chương 0064: Ký Duyệt STA Đa Góc PVT](../0064-multi-corner-sta-signoff/) | Quét góc TT/SS/FF, $\text{WNS} = 0.0\text{ ps}$, $\text{TNS} = 0.0\text{ ps}$ | **✓ PASSED** |
+| **WP16.3** | [Chương 0065: Lưới Nguồn Động & Di Trú Điện Tử](../0065-dynamic-power-grid-em-signoff/) | $f_{\text{res}} = 3.66\text{ GHz}$, $\Delta V_{\text{dyn}} = 12.51\text{ mV}$, $\text{MTTF} = 25.5\text{ năm}$ | **✓ PASSED** |
 | **GATE R16** | **Post-Layout Parasitic Extraction & Static Timing Signoff** | **Trích Xuất RC, Định Thời PVT & Độ Tin Cậy Lưới Nguồn** | **✓ PASSED (CLOSED)** |
 
 ---

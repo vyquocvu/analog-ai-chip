@@ -68,3 +68,4 @@ Generate the deterministic NoC extract:
 python book/0025-noc-interconnect/noc_interconnect.py
 ```
 Committed artifact at: `verification/circuit/results/noc-interconnect-0025-extract.json`.
+Tested by: [`tests/test_noc_interconnect.py`](../../tests/test_noc_interconnect.py).

@@ -73,3 +73,4 @@ Run the deterministic ledger generator:
 python book/0026-calibration/architecture_ledger.py
 ```
 Output committed at: `verification/circuit/results/architecture-ledger-0026-extract.json`.
+Tested by: [`tests/test_architecture_ledger.py`](../../tests/test_architecture_ledger.py).

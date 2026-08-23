@@ -51,9 +51,9 @@ $$\text{MTTF} = A \cdot J^{-2} \exp\left(\frac{E_a}{k_B T}\right)$$
 
 | Work Package | Chapter Title | Verification Scope | Status |
 |---|---|---|---|
-| **WP16.1** | [0063: PEX / SPEF & Crossbar Settling](file:///Users/vyquocvu/Develop/analog-ai-chip/book/0063-post-layout-parasitic-extraction/) | SPEF RC extraction, $t_{\text{settle}} = 2.45\text{ ns} \le 5.0\text{ ns}$ ADC aperture | **✓ PASSED** |
-| **WP16.2** | [0064: Multi-Corner PVT STA Signoff](file:///Users/vyquocvu/Develop/analog-ai-chip/book/0064-multi-corner-sta-signoff/) | TT/SS/FF timing signoff, $\text{WNS} = 0.0\text{ ps}$, $\text{TNS} = 0.0\text{ ps}$ | **✓ PASSED** |
-| **WP16.3** | [0065: Dynamic Power Grid & EM Signoff](file:///Users/vyquocvu/Develop/analog-ai-chip/book/0065-dynamic-power-grid-em-signoff/) | $f_{\text{res}} = 3.66\text{ GHz}$, $\Delta V_{\text{dyn}} = 12.51\text{ mV}$, $\text{MTTF} = 25.5\text{ yr}$ | **✓ PASSED** |
+| **WP16.1** | [0063: PEX / SPEF & Crossbar Settling](../0063-post-layout-parasitic-extraction/) | SPEF RC extraction, $t_{\text{settle}} = 2.45\text{ ns} \le 5.0\text{ ns}$ ADC aperture | **✓ PASSED** |
+| **WP16.2** | [0064: Multi-Corner PVT STA Signoff](../0064-multi-corner-sta-signoff/) | TT/SS/FF timing signoff, $\text{WNS} = 0.0\text{ ps}$, $\text{TNS} = 0.0\text{ ps}$ | **✓ PASSED** |
+| **WP16.3** | [0065: Dynamic Power Grid & EM Signoff](../0065-dynamic-power-grid-em-signoff/) | $f_{\text{res}} = 3.66\text{ GHz}$, $\Delta V_{\text{dyn}} = 12.51\text{ mV}$, $\text{MTTF} = 25.5\text{ yr}$ | **✓ PASSED** |
 | **GATE R16** | **Post-Layout Parasitic Extraction & Static Timing Signoff** | **Full Interconnect RC, PVT Timing & EM Signoff** | **✓ PASSED (CLOSED)** |
 
 ---

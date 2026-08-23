@@ -295,6 +295,10 @@ def generate_area_model_extract() -> dict[str, Any]:
 def render_svg(extract: dict[str, Any]) -> str:
     """Render master summary SVG for Chapter 0040."""
     sm = extract["summary"]
+    tile_pct = sm["total_tile_array_area_mm2"] / sm["total_chip_area_mm2"] * 100
+    sram_pct = 0.0400 / sm["total_chip_area_mm2"] * 100
+    simd_pct = 0.0050 / sm["total_chip_area_mm2"] * 100
+    noc_pct = 0.0020 / sm["total_chip_area_mm2"] * 100
     return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
 <style>
 text {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }}
@@ -338,25 +342,25 @@ text {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; 
 <text x="165" y="405" text-anchor="middle" class="box-title" fill="#1e40af">416-Tile Array</text>
 <text x="165" y="430" text-anchor="middle" class="box-text">{sm["total_tile_array_area_mm2"]:.3f} mm²</text>
 <text x="165" y="452" text-anchor="middle" class="box-text">Crossbar + DAC/ADC</text>
-<text x="165" y="472" text-anchor="middle" class="sub">85.4% of die area</text>
+<text x="165" y="472" text-anchor="middle" class="sub">{tile_pct:.1f}% of die area</text>
 
 <rect x="280" y="378" width="190" height="107" rx="8" fill="#fef3c7" stroke="#f59e0b"/>
 <text x="375" y="405" text-anchor="middle" class="box-title" fill="#b45309">SRAM 32 KB</text>
 <text x="375" y="430" text-anchor="middle" class="box-text">0.0400 mm²</text>
 <text x="375" y="452" text-anchor="middle" class="box-text">KV Cache + Buffers</text>
-<text x="375" y="472" text-anchor="middle" class="sub">8.4% of die area</text>
+<text x="375" y="472" text-anchor="middle" class="sub">{sram_pct:.1f}% of die area</text>
 
 <rect x="490" y="378" width="190" height="107" rx="8" fill="#dcfce7" stroke="#22c55e"/>
 <text x="585" y="405" text-anchor="middle" class="box-title" fill="#15803d">SIMD Cluster</text>
 <text x="585" y="430" text-anchor="middle" class="box-text">0.0050 mm²</text>
 <text x="585" y="452" text-anchor="middle" class="box-text">32-wide vector ALU</text>
-<text x="585" y="472" text-anchor="middle" class="sub">1.0% of die area</text>
+<text x="585" y="472" text-anchor="middle" class="sub">{simd_pct:.1f}% of die area</text>
 
 <rect x="700" y="378" width="190" height="107" rx="8" fill="#f1f5f9" stroke="#64748b"/>
 <text x="795" y="405" text-anchor="middle" class="box-title">NoC Router</text>
 <text x="795" y="430" text-anchor="middle" class="box-text">0.0020 mm²</text>
 <text x="795" y="452" text-anchor="middle" class="box-text">2D Mesh Fabric</text>
-<text x="795" y="472" text-anchor="middle" class="sub">0.4% of die area</text>
+<text x="795" y="472" text-anchor="middle" class="sub">{noc_pct:.1f}% of die area</text>
 </svg>
 """
 
@@ -464,6 +468,9 @@ text {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; 
 def render_scaling_svg(extract: dict[str, Any]) -> str:
     """Render SVG showing area scaling analysis and efficiency metrics."""
     sm = extract["summary"]
+    tile_pct = sm["total_tile_array_area_mm2"] / sm["total_chip_area_mm2"] * 100
+    sram_pct = 0.0400 / sm["total_chip_area_mm2"] * 100
+    digital_pct = (0.0050 + 0.0020) / sm["total_chip_area_mm2"] * 100
     return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
 <style>
 text {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }}
@@ -498,7 +505,7 @@ text {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; 
 
 <rect x="70" y="420" width="360" height="65" rx="6" fill="#dbeafe" stroke="#93c5fd"/>
 <text x="85" y="445" class="box-title" fill="#1e40af">Die Utilization:</text>
-<text x="85" y="465" class="box-text">85.4% IMC array | 8.4% SRAM | 1.4% digital overhead</text>
+<text x="85" y="465" class="box-text">{tile_pct:.1f}% IMC array | {sram_pct:.1f}% SRAM | {digital_pct:.1f}% digital overhead</text>
 
 <!-- Right: ADC Scaling Sensitivity Table -->
 <rect x="500" y="85" width="410" height="420" rx="10" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
