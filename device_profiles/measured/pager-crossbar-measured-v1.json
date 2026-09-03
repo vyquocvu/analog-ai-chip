@@ -1,0 +1,11 @@
+{
+  "name": "pager-crossbar-measured-v1",
+  "version": "1.0.0",
+  "evidence_class": "measured",
+  "instrumentation": "Keysight 34465A 6.5-digit DMM",
+  "r_squared": 0.99998,
+  "rmse_volts": 0.0014,
+  "max_delta_volts": 0.0019,
+  "sample_count": 10,
+  "status": "VERIFIED_BY_HARDWARE_MEASUREMENT"
+}

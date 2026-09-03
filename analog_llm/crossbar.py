@@ -20,6 +20,7 @@ Physical units
 
 from __future__ import annotations
 
+from functools import lru_cache
 from typing import Any
 
 import numpy as np
@@ -197,6 +198,38 @@ def apply_iv_nonlinearity(
     return v * (1.0 + beta * (v_phys**2))
 
 
+@lru_cache(maxsize=64)
+def _get_g_wire_template(N: int, M: int, r_wire: float) -> np.ndarray:
+    """Precompute static wire conductance connectivity matrix for an (N, M) crossbar."""
+    dim = 2 * N * M
+    G_wire = np.zeros((dim, dim), dtype=np.float64)
+    g_wire = 1.0 / r_wire
+
+    for i in range(N):
+        for j in range(M):
+            kr = i * M + j
+            kc = N * M + kr
+            # Row wire to left / driver
+            G_wire[kr, kr] += g_wire
+            if j > 0:
+                G_wire[kr, kr - 1] -= g_wire
+            # Row wire to right
+            if j < M - 1:
+                G_wire[kr, kr] += g_wire
+                G_wire[kr, kr + 1] -= g_wire
+
+            # Column wire from top
+            if i > 0:
+                G_wire[kc, kc] += g_wire
+                G_wire[kc, kc - M] -= g_wire
+            # Column wire to bottom / virtual ground
+            G_wire[kc, kc] += g_wire
+            if i < N - 1:
+                G_wire[kc, kc + M] -= g_wire
+
+    return G_wire
+
+
 def solve_crossbar_nodal(
     v_in: ArrayLike,
     g_matrix: ArrayLike,
@@ -207,7 +240,7 @@ def solve_crossbar_nodal(
 
     Parameters
     ----------
-    v_in : ndarray of shape (N,)
+    v_in : ndarray of shape (N,) or (N, B)
         Row input driving voltages.
     g_matrix : ndarray of shape (N, M)
         Crosspoint conductances (N inputs x M outputs).
@@ -219,91 +252,95 @@ def solve_crossbar_nodal(
     Returns
     -------
     dict containing:
-        - 'i_out': output column currents exiting at bottom nodes (A), shape (M,)
-        - 'i_ideal': ideal column currents without IR drop (A), shape (M,)
-        - 'v_row': row node voltages (N, M)
-        - 'v_col': column node voltages (N, M)
+        - 'i_out': output column currents exiting at bottom nodes (A), shape (M,) or (M, B)
+        - 'i_ideal': ideal column currents without IR drop (A), shape (M,) or (M, B)
+        - 'v_row': row node voltages (N, M) (only populated for 1D input)
+        - 'v_col': column node voltages (N, M) (only populated for 1D input)
     """
     g_mat = np.asarray(g_matrix, dtype=np.float64)
     if g_mat.ndim != 2:
         raise ValueError("g_matrix must be a 2D array (N, M)")
     N, M = g_mat.shape
-    v_arr = np.asarray(v_in, dtype=np.float64).reshape(N)
-    u_in = v_arr - vref
+    v_arr = np.asarray(v_in, dtype=np.float64)
+    is_1d = v_arr.ndim == 1
+    if is_1d:
+        v_2d = v_arr.reshape(N, 1)
+    elif v_arr.ndim == 2:
+        if v_arr.shape[0] != N:
+            raise ValueError(f"expected {N} input rows, got {v_arr.shape[0]}")
+        v_2d = v_arr
+    else:
+        raise ValueError(f"v_in must be 1D or 2D, got shape {v_arr.shape}")
 
+    u_in = v_2d - vref
     i_ideal = g_mat.T @ u_in
 
     if r_wire <= 1e-12:
-        v_row = np.repeat(v_arr[:, None], M, axis=1)
-        v_col = np.full((N, M), vref, dtype=np.float64)
+        if is_1d:
+            v_row = np.repeat(v_arr[:, None], M, axis=1)
+            v_col = np.full((N, M), vref, dtype=np.float64)
+            return {
+                "i_out": i_ideal.ravel(),
+                "i_ideal": i_ideal.ravel(),
+                "v_row": v_row,
+                "v_col": v_col,
+            }
         return {
             "i_out": i_ideal,
             "i_ideal": i_ideal,
+            "v_row": None,
+            "v_col": None,
+        }
+
+    dim = 2 * N * M
+    g_wire = 1.0 / r_wire
+    G_wire = _get_g_wire_template(N, M, r_wire)
+    G_sys = G_wire.copy()
+
+    kr = np.arange(N * M)
+    kc = N * M + kr
+    g_flat = g_mat.ravel()
+
+    # Vectorized cell conductance stamping
+    G_sys[kr, kr] += g_flat
+    G_sys[kc, kc] += g_flat
+    G_sys[kr, kc] -= g_flat
+    G_sys[kc, kr] -= g_flat
+
+    B = v_2d.shape[1]
+    if is_1d:
+        I_rhs = np.zeros(dim, dtype=np.float64)
+        I_rhs[: N * M : M] = v_arr * g_wire
+        if vref != 0.0:
+            I_rhs[N * M + (N - 1) * M :] = vref * g_wire
+
+        v_nodes = np.linalg.solve(G_sys, I_rhs)
+        v_row = v_nodes[: N * M].reshape((N, M))
+        v_col = v_nodes[N * M :].reshape((N, M))
+        i_out = (v_col[N - 1, :] - vref) * g_wire
+
+        return {
+            "i_out": i_out,
+            "i_ideal": i_ideal.ravel(),
             "v_row": v_row,
             "v_col": v_col,
         }
 
-    dim = 2 * N * M
-    G_sys = np.zeros((dim, dim), dtype=np.float64)
-    I_rhs = np.zeros(dim, dtype=np.float64)
-    g_wire = 1.0 / r_wire
-
-    def r_idx(i: int, j: int) -> int:
-        return i * M + j
-
-    def c_idx(i: int, j: int) -> int:
-        return N * M + i * M + j
-
-    for i in range(N):
-        for j in range(M):
-            kr = r_idx(i, j)
-            kc = c_idx(i, j)
-            g_cell = g_mat[i, j]
-
-            # Row Node (i, j)
-            G_sys[kr, kr] += g_cell
-            G_sys[kr, kc] -= g_cell
-
-            if j == 0:
-                G_sys[kr, kr] += g_wire
-                I_rhs[kr] += v_arr[i] * g_wire
-            else:
-                kr_left = r_idx(i, j - 1)
-                G_sys[kr, kr] += g_wire
-                G_sys[kr, kr_left] -= g_wire
-
-            if j < M - 1:
-                kr_right = r_idx(i, j + 1)
-                G_sys[kr, kr] += g_wire
-                G_sys[kr, kr_right] -= g_wire
-
-            # Column Node (i, j)
-            G_sys[kc, kc] += g_cell
-            G_sys[kc, kr] -= g_cell
-
-            if i > 0:
-                kc_top = c_idx(i - 1, j)
-                G_sys[kc, kc] += g_wire
-                G_sys[kc, kc_top] -= g_wire
-
-            if i == N - 1:
-                G_sys[kc, kc] += g_wire
-                I_rhs[kc] += vref * g_wire
-            else:
-                kc_bot = c_idx(i + 1, j)
-                G_sys[kc, kc] += g_wire
-                G_sys[kc, kc_bot] -= g_wire
+    # Batched RHS evaluation
+    I_rhs = np.zeros((dim, B), dtype=np.float64)
+    I_rhs[: N * M : M, :] = v_2d * g_wire
+    if vref != 0.0:
+        I_rhs[N * M + (N - 1) * M :, :] = vref * g_wire
 
     v_nodes = np.linalg.solve(G_sys, I_rhs)
-    v_row = v_nodes[: N * M].reshape((N, M))
-    v_col = v_nodes[N * M :].reshape((N, M))
-    i_out = (v_col[N - 1, :] - vref) * g_wire
+    v_col_bottom = v_nodes[N * M + (N - 1) * M :, :]
+    i_out = (v_col_bottom - vref) * g_wire
 
     return {
         "i_out": i_out,
         "i_ideal": i_ideal,
-        "v_row": v_row,
-        "v_col": v_col,
+        "v_row": None,
+        "v_col": None,
     }
 
 

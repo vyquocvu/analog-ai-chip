@@ -58,7 +58,8 @@ def symmetric_converter(
         raise ValueError("noise_std must be non-negative")
 
     x = np.asarray(values, dtype=np.float64)
-    x = x * gain + offset
+    if gain != 1.0 or offset != 0.0:
+        x = x * gain + offset
     if noise_std > 0:
         if rng is None:
             raise ValueError("rng is required when noise_std > 0")

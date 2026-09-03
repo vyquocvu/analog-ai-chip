@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+  <defs>
+    <linearGradient id="gradHeader" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <linearGradient id="gradPager" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="gradScreen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e2e8f0" />
+      <stop offset="100%" stop-color="#cbd5e1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="540" fill="#f8fafc" />
+
+  <!-- Header Banner -->
+  <rect width="960" height="60" fill="url(#gradHeader)" />
+  <text x="30" y="38" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="20" font-weight="700">POCKET ANALOG AI COMMUNICATOR (PAGER-1) — PRODUCT ARCHITECTURE</text>
+  <text x="820" y="38" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="14" font-weight="600">GATE R18 / WP18.1</text>
+
+  <!-- Pager Device Illustration -->
+  <rect x="50" y="85" width="340" height="420" rx="24" fill="url(#gradPager)" stroke="#334155" stroke-width="4" />
+  
+  <!-- Belt Clip visual -->
+  <rect x="35" y="140" width="15" height="180" rx="6" fill="#64748b" stroke="#475569" stroke-width="2" />
+
+  <!-- Sharp Memory LCD Display -->
+  <rect x="75" y="115" width="290" height="175" rx="8" fill="url(#gradScreen)" stroke="#475569" stroke-width="3" />
+  <!-- Display text stream -->
+  <text x="90" y="140" fill="#0f172a" font-family="Courier, monospace" font-size="12" font-weight="700">AI COMMUNICATOR // READY</text>
+  <text x="90" y="165" fill="#334155" font-family="Courier, monospace" font-size="11">BATTERY: 100% [30+ DAYS STANDBY]</text>
+  <line x1="90" y1="175" x2="345" y2="175" stroke="#94a3b8" stroke-width="1" />
+  <text x="90" y="195" fill="#0f172a" font-family="Courier, monospace" font-size="11">&gt; Prompt: Verify 16x16 tile</text>
+  <text x="90" y="215" fill="#1e293b" font-family="Courier, monospace" font-size="11">&gt; AI: Analog crossbar MVM</text>
+  <text x="90" y="235" fill="#1e293b" font-family="Courier, monospace" font-size="11">  settled in 2.45 ns with</text>
+  <text x="90" y="255" fill="#1e293b" font-family="Courier, monospace" font-size="11">  zero DAC/ADC clipping.</text>
+
+  <!-- LED & Jog Wheel Indicator -->
+  <circle cx="345" cy="305" r="5" fill="#22c55e" />
+  <text x="280" y="309" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="10">ONLINE</text>
+
+  <!-- Tactile QWERTY Thumb Keypad Grid -->
+  <g id="keypad">
+    <rect x="75" y="325" width="290" height="155" rx="10" fill="#1e293b" stroke="#334155" stroke-width="2" />
+    <!-- 4 rows of tactile chiclet keys -->
+    <!-- Row 1 -->
+    <rect x="85" y="335" width="22" height="22" rx="4" fill="#334155" /><text x="92" y="350" fill="#f8fafc" font-size="10" font-family="sans-serif">Q</text>
+    <rect x="112" y="335" width="22" height="22" rx="4" fill="#334155" /><text x="119" y="350" fill="#f8fafc" font-size="10" font-family="sans-serif">W</text>
+    <rect x="139" y="335" width="22" height="22" rx="4" fill="#334155" /><text x="146" y="350" fill="#f8fafc" font-size="10" font-family="sans-serif">E</text>
+    <rect x="166" y="335" width="22" height="22" rx="4" fill="#334155" /><text x="173" y="350" fill="#f8fafc" font-size="10" font-family="sans-serif">R</text>
+    <rect x="193" y="335" width="22" height="22" rx="4" fill="#334155" /><text x="200" y="350" fill="#f8fafc" font-size="10" font-family="sans-serif">T</text>
+    <rect x="220" y="335" width="22" height="22" rx="4" fill="#334155" /><text x="227" y="350" fill="#f8fafc" font-size="10" font-family="sans-serif">Y</text>
+    <rect x="247" y="335" width="22" height="22" rx="4" fill="#334155" /><text x="254" y="350" fill="#f8fafc" font-size="10" font-family="sans-serif">U</text>
+    <rect x="274" y="335" width="22" height="22" rx="4" fill="#334155" /><text x="281" y="350" fill="#f8fafc" font-size="10" font-family="sans-serif">I</text>
+    <rect x="301" y="335" width="22" height="22" rx="4" fill="#334155" /><text x="308" y="350" fill="#f8fafc" font-size="10" font-family="sans-serif">O</text>
+    <rect x="328" y="335" width="26" height="22" rx="4" fill="#0284c7" /><text x="333" y="350" fill="#ffffff" font-size="9" font-family="sans-serif">DEL</text>
+    <!-- Space bar -->
+    <rect x="155" y="445" width="130" height="24" rx="5" fill="#475569" /><text x="205" y="461" fill="#f8fafc" font-size="10" font-family="sans-serif">SPACE</text>
+  </g>
+
+  <!-- Architecture Cards (Right Column) -->
+  <!-- Card 1: Form Factor & Chassis -->
+  <rect x="420" y="85" width="500" height="125" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
+  <text x="440" y="115" fill="#0f172a" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15" font-weight="700">1. POCKET FORM FACTOR &amp; ERGONOMICS</text>
+  <text x="440" y="140" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12">• Dimensions: 72.0x54.0x14.5 mm | Total Mass: 85.0 g</text>
+  <text x="440" y="162" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12">• Chassis: CNC Aluminum 6061-T6 / Anodized Black (IP54 (Splash and Dust Resistant))</text>
+  <text x="440" y="184" fill="#0284c7" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="600">✓ Integrated spring-steel belt clip + tactile QWERTY thumb pad</text>
+
+  <!-- Card 2: Display & Host MCU -->
+  <rect x="420" y="225" width="500" height="135" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
+  <text x="440" y="255" fill="#0f172a" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15" font-weight="700">2. ULTRA-LOW-POWER SCREEN &amp; CONTROLLER</text>
+  <text x="440" y="280" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12">• Display: Sharp LS027B7DH01 Memory LCD (400x240 pixels)</text>
+  <text x="440" y="302" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12">• Static Hold: 15.0 µW | Active Streaming: 120.0 µW @ 10 Hz</text>
+  <text x="440" y="324" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12">• Host MCU: STM32U575 / RP2040 (Cortex-M33, 520 KB SRAM, 16 MB Flash)</text>
+  <text x="440" y="346" fill="#0284c7" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="600">✓ Instant-on reflective sunlight readability with microamp standby</text>
+
+  <!-- Card 3: Energy Budget & Battery Autonomy -->
+  <rect x="420" y="375" width="500" height="130" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
+  <text x="440" y="405" fill="#0f172a" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15" font-weight="700">3. BATTERY AUTONOMY &amp; POWER TREE</text>
+  <text x="440" y="430" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12">• Battery: 1200 mAh Li-Po (4.44 Wh) | Standby Power: 33.1 µW</text>
+  <text x="440" y="452" fill="#16a34a" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="700">★ Standby Life: 5589.1 Days (Target ≥ 30.0d) — PASSED</text>
+  <text x="440" y="474" fill="#16a34a" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="700">★ Continuous Active Life: 99.9 Hours (Target ≥ 40.0h) — PASSED</text>
+  <text x="440" y="494" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="11">• Surface Temp: 25.4°C at 25°C ambient (Natural Convection)</text>
+</svg>

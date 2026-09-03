@@ -781,6 +781,7 @@ def render_trace_svg(extract: dict[str, Any]) -> str:
     trace = extract["fsm_trace"]["first_10_transitions"]
     cl = extract["control_ledger"]
     cc = extract["ch0038_crosscheck"]
+    timing = {p["symbol"]: p for p in extract["timing_parameters"]}
 
     state_colors = {
         "FETCH_ACT": "#3b82f6",
@@ -829,7 +830,7 @@ text {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; 
 {bars}
 <rect x="50" y="490" width="860" height="38" rx="6" fill="#dbeafe" stroke="#93c5fd"/>
 <text x="70" y="510" class="box-text">t_mvm per block = {cc["digital_shell_t_tile_ns"]:.2f} ns | Total {cl["n_blocks"]} blocks | Dominates: PROGRAM ({cl["total_program_ns"]:.0f} ns) >> COMPUTE ({cl["total_compute_ns"]:.0f} ns)</text>
-<text x="70" y="525" class="box-text" fill="#b45309">⚠ PROGRAM bar ({timing['t_prog'].value_ns:.0f} ns NVM write) is ASSUMED — replace with FPGA measured write pulse timing for Gate R9.</text>
+<text x="70" y="525" class="box-text" fill="#b45309">⚠ PROGRAM bar ({timing['t_prog']['value_ns']:.0f} ns NVM write) is ASSUMED — replace with FPGA measured write pulse timing for Gate R9.</text>
 </svg>
 """
 

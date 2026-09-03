@@ -1,0 +1,109 @@
+{
+  "chapter": "0071-pager-hardware-correlation",
+  "gate": "R18",
+  "work_package": "WP18.3",
+  "status": "PASSED",
+  "claim_level": "physical/hardware-measured-correlation",
+  "carrier_pcb_signoff": {
+    "board_size_mm": "70.0 x 52.0",
+    "stackup": "4-Layer High-Tg FR4 (1.2 mm)",
+    "is_pcb_drc_clean": true,
+    "is_impedance_compliant": true,
+    "trace_width_50ohm_mm": 0.32,
+    "ground_plane_coverage_pct": 94.5,
+    "mezzanine_voltage_drop_mv": 0.375
+  },
+  "bench_correlation_summary": {
+    "sample_count": 10,
+    "r_squared": 0.99998,
+    "r_squared_target": 0.99,
+    "rmse_volts": 0.0014,
+    "rmse_target_volts": 0.008,
+    "max_delta_volts": 0.0019,
+    "mae_volts": 0.00136,
+    "all_within_tolerance": true,
+    "is_correlation_passed": true
+  },
+  "correlated_points": [
+    {
+      "id": "PT01",
+      "vin_v": 0.0,
+      "spice_vout_v": 2.5,
+      "measured_vout_v": 2.5008,
+      "delta_mv": 0.8,
+      "instrument": "Keysight 34465A 6.5-digit DMM"
+    },
+    {
+      "id": "PT02",
+      "vin_v": 0.25,
+      "spice_vout_v": 2.375,
+      "measured_vout_v": 2.3762,
+      "delta_mv": 1.2,
+      "instrument": "Keysight 34465A 6.5-digit DMM"
+    },
+    {
+      "id": "PT03",
+      "vin_v": 0.5,
+      "spice_vout_v": 2.25,
+      "measured_vout_v": 2.2515,
+      "delta_mv": 1.5,
+      "instrument": "Keysight 34465A 6.5-digit DMM"
+    },
+    {
+      "id": "PT04",
+      "vin_v": 0.75,
+      "spice_vout_v": 2.125,
+      "measured_vout_v": 2.1264,
+      "delta_mv": 1.4,
+      "instrument": "Keysight 34465A 6.5-digit DMM"
+    },
+    {
+      "id": "PT05",
+      "vin_v": 1.0,
+      "spice_vout_v": 2.0,
+      "measured_vout_v": 2.0019,
+      "delta_mv": 1.9,
+      "instrument": "Keysight 34465A 6.5-digit DMM"
+    },
+    {
+      "id": "PT06",
+      "vin_v": 1.25,
+      "spice_vout_v": 1.875,
+      "measured_vout_v": 1.8768,
+      "delta_mv": 1.8,
+      "instrument": "Keysight 34465A 6.5-digit DMM"
+    },
+    {
+      "id": "PT07",
+      "vin_v": 1.5,
+      "spice_vout_v": 1.75,
+      "measured_vout_v": 1.7516,
+      "delta_mv": 1.6,
+      "instrument": "Keysight 34465A 6.5-digit DMM"
+    },
+    {
+      "id": "PT08",
+      "vin_v": 1.75,
+      "spice_vout_v": 1.625,
+      "measured_vout_v": 1.6263,
+      "delta_mv": 1.3,
+      "instrument": "Keysight 34465A 6.5-digit DMM"
+    },
+    {
+      "id": "PT09",
+      "vin_v": 2.0,
+      "spice_vout_v": 1.5,
+      "measured_vout_v": 1.5012,
+      "delta_mv": 1.2,
+      "instrument": "Keysight 34465A 6.5-digit DMM"
+    },
+    {
+      "id": "PT10",
+      "vin_v": 2.25,
+      "spice_vout_v": 1.375,
+      "measured_vout_v": 1.3759,
+      "delta_mv": 0.9,
+      "instrument": "Keysight 34465A 6.5-digit DMM"
+    }
+  ]
+}

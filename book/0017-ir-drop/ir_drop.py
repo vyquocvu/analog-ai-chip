@@ -31,6 +31,7 @@ from __future__ import annotations
 
 import json
 import os
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -67,6 +68,38 @@ VREF = 2.5              # virtual ground reference (V)
 G_LRS_S = 100.0e-6      # LRS conductance = 100 uS (10 kOhm)
 G_HRS_S = 10.0e-6       # HRS conductance = 10 uS (100 kOhm)
 DEFAULT_R_WIRE_OHM = 1.0  # default wire resistance per segment (Ohm)
+
+
+@lru_cache(maxsize=64)
+def _get_g_wire_template(N: int, M: int, r_wire: float) -> np.ndarray:
+    """Precompute static wire conductance connectivity matrix for an (N, M) crossbar."""
+    dim = 2 * N * M
+    G_wire = np.zeros((dim, dim), dtype=np.float64)
+    g_wire = 1.0 / r_wire
+
+    for i in range(N):
+        for j in range(M):
+            kr = i * M + j
+            kc = N * M + kr
+            # Row wire to left / driver
+            G_wire[kr, kr] += g_wire
+            if j > 0:
+                G_wire[kr, kr - 1] -= g_wire
+            # Row wire to right
+            if j < M - 1:
+                G_wire[kr, kr] += g_wire
+                G_wire[kr, kr + 1] -= g_wire
+
+            # Column wire from top
+            if i > 0:
+                G_wire[kc, kc] += g_wire
+                G_wire[kc, kc - M] -= g_wire
+            # Column wire to bottom / virtual ground
+            G_wire[kc, kc] += g_wire
+            if i < N - 1:
+                G_wire[kc, kc + M] -= g_wire
+
+    return G_wire
 
 
 def solve_crossbar_nodal(
@@ -121,68 +154,25 @@ def solve_crossbar_nodal(
             "far_corner_v_cell": float(v_cell[N - 1, M - 1]),
         }
 
-    # Total number of internal unknown node voltages: N*M (row nodes) + N*M (col nodes)
-    # Total nodes = 2 * N * M
-    # Node index mapping:
-    #   Row node (i, j) -> idx_r(i, j) = i * M + j
-    #   Col node (i, j) -> idx_c(i, j) = N * M + i * M + j
     dim = 2 * N * M
-    G_sys = np.zeros((dim, dim), dtype=np.float64)
-    I_rhs = np.zeros(dim, dtype=np.float64)
     g_wire = 1.0 / r_wire
+    G_wire = _get_g_wire_template(N, M, r_wire)
+    G_sys = G_wire.copy()
 
-    def r_idx(i: int, j: int) -> int:
-        return i * M + j
+    kr = np.arange(N * M)
+    kc = N * M + kr
+    g_flat = g_matrix.ravel()
 
-    def c_idx(i: int, j: int) -> int:
-        return N * M + i * M + j
+    # Vectorized cell conductance stamping
+    G_sys[kr, kr] += g_flat
+    G_sys[kc, kc] += g_flat
+    G_sys[kr, kc] -= g_flat
+    G_sys[kc, kr] -= g_flat
 
-    # Build KCL equations for each node
-    for i in range(N):
-        for j in range(M):
-            kr = r_idx(i, j)
-            kc = c_idx(i, j)
-            g_cell = g_matrix[i, j]
-
-            # --- Row Node (i, j) KCL ---
-            # 1. Connected to cell conductance G_cell -> Col Node (i, j)
-            G_sys[kr, kr] += g_cell
-            G_sys[kr, kc] -= g_cell
-
-            # 2. Wire to the left (j - 1) or input driver (j == 0)
-            if j == 0:
-                G_sys[kr, kr] += g_wire
-                I_rhs[kr] += v_in[i] * g_wire
-            else:
-                kr_left = r_idx(i, j - 1)
-                G_sys[kr, kr] += g_wire
-                G_sys[kr, kr_left] -= g_wire
-
-            # 3. Wire to the right (j + 1)
-            if j < M - 1:
-                kr_right = r_idx(i, j + 1)
-                G_sys[kr, kr] += g_wire
-                G_sys[kr, kr_right] -= g_wire
-
-            # --- Col Node (i, j) KCL ---
-            # 1. Connected to cell conductance G_cell -> Row Node (i, j)
-            G_sys[kc, kc] += g_cell
-            G_sys[kc, kr] -= g_cell
-
-            # 2. Wire from top (i - 1)
-            if i > 0:
-                kc_top = c_idx(i - 1, j)
-                G_sys[kc, kc] += g_wire
-                G_sys[kc, kc_top] -= g_wire
-
-            # 3. Wire to bottom (i + 1) or to column TIA virtual ground (i == N - 1)
-            if i == N - 1:
-                G_sys[kc, kc] += g_wire
-                I_rhs[kc] += vref * g_wire
-            else:
-                kc_bot = c_idx(i + 1, j)
-                G_sys[kc, kc] += g_wire
-                G_sys[kc, kc_bot] -= g_wire
+    I_rhs = np.zeros(dim, dtype=np.float64)
+    I_rhs[: N * M : M] = v_in * g_wire
+    if vref != 0.0:
+        I_rhs[N * M + (N - 1) * M :] = vref * g_wire
 
     # Solve linear system
     v_nodes = np.linalg.solve(G_sys, I_rhs)

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "skills": {
+    "experimental-design": {
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/experimental-design/SKILL.md",
+      "computedHash": "543629a926a68e82ef3876a2bde31f7b2a8d2808a0ef3c4179cfb2feae6c93bd"
+    },
+    "scientific-visualization": {
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/scientific-visualization/SKILL.md",
+      "computedHash": "2a5bad69f2ebfabee9ec969c0f4a72f40e6806dfa294572c1c2f3f5cae583be8"
+    },
+    "uncertainty-and-units": {
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/uncertainty-and-units/SKILL.md",
+      "computedHash": "8ac8a43f78918741788ba0ff5ff248373c90a2bafd903ce5272721ff91ed0327"
+    }
+  }
+}

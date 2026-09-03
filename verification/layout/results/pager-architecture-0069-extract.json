@@ -1,0 +1,52 @@
+{
+  "chapter": "0069-pager-product-architecture",
+  "gate": "R18",
+  "work_package": "WP18.1",
+  "status": "PASSED",
+  "claim_level": "physical/appliance-product-architecture",
+  "chassis_and_ergonomics": {
+    "form_factor_mm": "72.0x54.0x14.5",
+    "total_mass_g": 85.0,
+    "material": "CNC Aluminum 6061-T6 / Anodized Black",
+    "has_belt_clip": true,
+    "water_resistance": "IP54 (Splash and Dust Resistant)"
+  },
+  "display_specification": {
+    "model": "Sharp LS027B7DH01 Memory LCD",
+    "diagonal_inch": 2.7,
+    "resolution": "400x240",
+    "static_hold_power_uw": 15.0,
+    "active_refresh_power_uw": 120.0,
+    "contrast_ratio": 14.0
+  },
+  "host_controller": {
+    "model": "STM32U575 / RP2040 Dual-Core",
+    "active_clock_mhz": 48.0,
+    "active_current_ma": 8.5,
+    "sleep_current_ua": 3.2,
+    "on_chip_sram_kb": 520,
+    "qspi_flash_mb": 16
+  },
+  "power_and_battery_budget": {
+    "battery_model": "1200 mAh Li-Po (4.44 Wh)",
+    "standby_power_uw": 33.1,
+    "standby_battery_life_days": 5589.1,
+    "standby_life_target_days": 30.0,
+    "active_typing_power_mw": 30.79,
+    "active_inference_power_mw": 44.45,
+    "continuous_active_life_hours": 99.9,
+    "continuous_life_target_hours": 40.0,
+    "daily_mixed_use_days": 49.5,
+    "is_autonomy_compliant": true,
+    "peak_surface_temp_c": 25.39,
+    "is_thermal_compliant": true
+  },
+  "keypad_and_haptics": {
+    "key_count": 35,
+    "switch_type": "Tactile Metal Dome (6.0 mm, 160 gf)",
+    "controller": "TI TCA8418 I2C Matrix Controller",
+    "has_jog_dial": true,
+    "haptic_driver": "TI DRV2605L",
+    "lra_motor": "10mm Linear Resonant Actuator (205 Hz)"
+  }
+}

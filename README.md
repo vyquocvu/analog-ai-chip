@@ -2,7 +2,9 @@
 
 [![CI](https://github.com/vyquocvu/analog-ai-chip/actions/workflows/ci.yml/badge.svg)](https://github.com/vyquocvu/analog-ai-chip/actions/workflows/ci.yml)
 
-**Design and simulate an analog AI accelerator from first principles — from Ohm's law and SPICE circuits to crossbar tiles and language-model inference.**
+**Design and simulate an analog AI accelerator from first principles — from Ohm's law and SPICE circuits to crossbar tiles, language-model inference, and dedicated pocket hardware appliances.**
+
+![Pager-1 Dedicated Offline AI Communicator](docs/assets/pager_product_hero.jpg)
 
 The repository is built around one engineering question:
 
@@ -26,11 +28,13 @@ profile-driven accelerator
 Transformer / LLM inference
   ↓
 physical feasibility report
+  ↓
+pocket appliance correlation
 ```
 
 ## Current status
 
-The entire canonical design and verification proof chain has successfully closed all 18 evidence gates (**R0 through R17**) across chapters 0000–0068:
+The entire canonical design and verification proof chain has successfully closed all 19 evidence gates (**R0 through R18**) across chapters 0000–0071:
 
 ```text
 R0 functional + circuit foundation ── COMPLETE
@@ -51,6 +55,7 @@ R14 multi-tier feasibility         ── PASSED    (parametric ledger, Pareto s
 R15 physical layout & DRC/LVS      ── PASSED    (28nm BEOL ReRAM, common-centroid CDAC, tile floorplan, full-chip 336mm²)
 R16 post-layout PEX & STA signoff  ── PASSED    (SPEF extraction, multi-corner STA, dynamic EM signoff)
 R17 tape-out & package/PCB signoff ── PASSED    (GDSII stream-out, FCBGA-676 substrate, PCIe Gen5 evaluation carrier)
+R18 pocket AI communicator / pager ── PASSED    (Pocket carrier PCB, SPI framing protocol, Memory LCD, measured bench correlation R²=0.99998)
 ```
 
 The proof chain from Ohm's and Kirchhoff's laws to large-model LLM
@@ -58,6 +63,35 @@ inference, 28nm physical layout, post-layout timing signoff, and full
 tape-out / packaging / PCB integration is complete and proven. See
 [`docs/ROADMAP.md`](docs/ROADMAP.md) and
 [`docs/CURRICULUM.md`](docs/CURRICULUM.md).
+
+---
+
+## Pocket Analog AI Communicator (Pager-1)
+
+Gate R18 implements the dedicated offline text appliance concept: an ultra-low-power pocket communicator ("AI Pager / Beeper") that couples a digital host controller with a 28nm ReRAM Analog Compute-in-Memory Neural Engine.
+
+| Parameter | Specification | Real-World Significance |
+| :--- | :--- | :--- |
+| **Chassis & Form Factor** | $72.0 \times 54.0 \times 14.5\text{ mm}$ ($85\text{ g}$) | CNC anodized aluminum 6061-T6 with spring-steel belt clip |
+| **Reflective Display** | 2.7" Sharp Memory LCD ($400 \times 240$) | **$15.0\,\mu\text{W}$ static hold power** (sunlight readable, instant-on) |
+| **Input Subsystem** | 35-key tactile QWERTY + Jog Dial | Metal dome tactile switches ($160\text{ gf}$) with I2C scanner (`TCA8418`) |
+| **Host Controller** | RP2040 / STM32U5 Cortex-M33 | $3.2\,\mu\text{A}$ sleep retention, local tokenization & SPI framing |
+| **Battery Autonomy** | $1200\text{ mAh}$ Li-Po ($4.44\text{ Wh}$) | **$5,589\text{ days}$ standby** ($>15\text{ years}$ shelf life), **$99.9\text{ hours}$ active continuous MVM** |
+| **Thermal Dissipation** | $25.4^\circ\text{C}$ surface temperature | 100% natural passive convection ($<45.0^\circ\text{C}$ skin touch limit) |
+| **Bench Correlation** | $R^2 = 0.99998$, $\text{RMSE} = 1.40\text{ mV}$ | Validated against 6.5-digit bench DMM (`Keysight 34465A`) |
+
+### Hardware Architecture & Silicon Teardown
+
+<p align="center">
+  <img src="docs/assets/pager_exploded_view.jpg" alt="Pager-1 3D Exploded Teardown View" width="49%" />
+  <img src="docs/assets/analog_crossbar_silicon.jpg" alt="28nm ReRAM Crossbar Silicon Core" width="49%" />
+</p>
+
+<p align="center">
+  <img src="docs/assets/pager_in_hand_edc.jpg" alt="Pager-1 In-Hand Everyday Carry Lifestyle" width="85%" />
+</p>
+
+---
 
 ## Engineering hierarchy
 
@@ -130,9 +164,13 @@ See [`docs/SIMULATION_STACK.md`](docs/SIMULATION_STACK.md).
 | 0022 | Partial sums | done | `book/0022-partial-sums/` |
 | 0023 | Scheduler and temporal reuse | done | `book/0023-scheduler/` |
 | 0046 | Architecture-neutral model manifest | done | `book/0046-model-manifest/` |
-| 0047 | Reusable decoder primitives | in progress | `book/0047-decoder-primitives/` |
+| 0047 | Reusable decoder primitives | done | `book/0047-decoder-primitives/` |
+| 0068 | PCIe Gen5 evaluation carrier board signoff | done | `book/0068-pcie-gen5-carrier-board-signoff/` |
+| 0069 | Pager-1 product architecture & power ledger | done | `book/0069-pager-product-architecture/` |
+| 0070 | Host-to-CiM binary packet protocol & runtime | done | `book/0070-pager-packet-protocol/` |
+| 0071 | Pocket carrier PCB & bench correlation | done | `book/0071-pager-hardware-correlation/` |
 
-> **Tiếng Việt:** every chapter has a `README.vi.md` beside the English `README.md`.
+> See [`docs/CURRICULUM.md`](docs/CURRICULUM.md) for the complete index of all 72 chapters (0000–0071). Every chapter has a bilingual `README.vi.md` beside `README.md`.
 
 ## Track 2 — Analog LLM architecture simulator (`analog_llm/`)
 

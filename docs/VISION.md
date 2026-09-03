@@ -5,6 +5,8 @@
 ## Core Objective
 Develop a **Dedicated Offline AI Text Appliance / AI Typewriter** for conversational and creative text generation (consisting solely of a Screen, Keyboard, and Text I/O processing pipeline), powered by custom **Analog Compute-in-Memory (CiM)** silicon.
 
+![Pager-1 Dedicated Offline AI Communicator](assets/pager_product_hero.jpg)
+
 Key characteristics:
 1. **100% Offline & Air-Gapped**: The entire language model executes locally on analog hardware—no internet connectivity required, zero data telemetry.
 2. **Instant-On & Real-Time Streaming**: Single-cycle analog matrix-vector multiplication (MVM) generating tokens with ultra-low latency.
@@ -63,6 +65,8 @@ Key characteristics:
 
 ## 3. Architecture & Technical Innovations on Analog Silicon
 
+![28nm ReRAM Crossbar Computing Core Infographic](assets/analog_crossbar_silicon.jpg)
+
 To optimize LLM inference on analog hardware, the project explores four complementary pillars:
 
 1. **Ternary LLM Architecture (BitNet b1.58):**
@@ -81,10 +85,15 @@ To optimize LLM inference on analog hardware, the project explores four compleme
 ## 4. Physical Form Factor & User Experience
 
 The final device is an **AI Communicator / Dedicated AI Typewriter**:
+
+![Pager-1 Everyday Carry Lifestyle](assets/pager_in_hand_edc.jpg)
+
 * **Hardware Interface:**
   * **Keyboard:** Compact mechanical keyboard (40%/60% or Ortholinear layout) or low-profile chiclet keyboard.
-  * **Display:** E-Paper display (E-Ink 4.2"–6.0") or high-contrast monochrome OLED for glare-free, eye-friendly reading.
-  * **Chassis:** CNC aluminum or industrial 3D printed body, integrated Li-ion/18650 battery and USB Type-C charging.
+  * **Display:** E-Paper display (E-Ink 4.2"–6.0") or high-contrast monochrome Memory LCD for glare-free, eye-friendly reading.
+  * **Chassis:** CNC aluminum or industrial 3D printed body, integrated Li-ion battery and USB Type-C charging.
+
+![Pager-1 3D Exploded Teardown Diagram](assets/pager_exploded_view.jpg)
 * **Software Experience:**
   * Zero bloated OS: Instant-on boot (< 1 second).
   * Distraction-free prompt interface: Type query $\rightarrow$ real-time analog token stream.

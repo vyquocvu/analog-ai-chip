@@ -52,5 +52,6 @@ FPGA / PCB / silicon correlation
 * **Part XVI — Physical layout & DRC/LVS verification:** [`book/0059`](../book/0059-reram-macro-layout/) through [`book/0062`](../book/0062-top-level-chip-assembly/)
 * **Part XVII — Post-layout parasitic extraction & static timing:** [`book/0063`](../book/0063-post-layout-parasitic-extraction/) through [`book/0065`](../book/0065-dynamic-power-grid-em-signoff/)
 * **Part XVIII — Tape-out signoff, packaging & PCB carrier integration:** [`book/0066`](../book/0066-gdsii-streamout-tapeout-signoff/) through [`book/0068`](../book/0068-pcie-gen5-carrier-board-signoff/)
+* **Part XIX — Pocket Analog AI communicator / pager product prototype:** [`book/0069`](../book/0069-pager-product-architecture/) through [`book/0071`](../book/0071-pager-hardware-correlation/)
 
 > **Tiếng Việt:** Mỗi chương trong `book/` đều có file `README.vi.md` song ngữ bên cạnh `README.md`.
