@@ -44,7 +44,7 @@ def run_pager_architecture_extract() -> dict[str, Any]:
         "gate": "R18",
         "work_package": "WP18.1",
         "status": "PASSED" if report.is_autonomy_compliant and report.is_thermal_compliant else "FAILED",
-        "claim_level": "physical/appliance-product-architecture",
+        "claim_level": "functional/product-architecture-with-assumed-power",
         "chassis_and_ergonomics": {
             "form_factor_mm": report.metadata["form_factor_mm"],
             "total_mass_g": form.total_mass_g,
@@ -56,7 +56,8 @@ def run_pager_architecture_extract() -> dict[str, Any]:
             "model": disp.model,
             "diagonal_inch": disp.diagonal_inch,
             "resolution": f"{disp.resolution_width}x{disp.resolution_height}",
-            "static_hold_power_uw": disp.static_hold_power_uw,
+            "published_update_power_uw": disp.published_update_power_uw,
+            "standby_power_assumption_uw": disp.standby_power_assumption_uw,
             "active_refresh_power_uw": disp.active_refresh_power_uw,
             "contrast_ratio": disp.contrast_ratio,
         },
@@ -184,8 +185,8 @@ def _generate_architecture_svg(data: dict[str, Any], out_path: Path) -> None:
   <rect x="420" y="225" width="500" height="135" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
   <text x="440" y="255" fill="#0f172a" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15" font-weight="700">2. ULTRA-LOW-POWER SCREEN &amp; CONTROLLER</text>
   <text x="440" y="280" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12">• Display: {disp["model"]} ({disp["resolution"]} pixels)</text>
-  <text x="440" y="302" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12">• Static Hold: {disp["static_hold_power_uw"]:.1f} µW | Active Streaming: {disp["active_refresh_power_uw"]:.1f} µW @ 10 Hz</text>
-  <text x="440" y="324" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12">• Host MCU: STM32U575 / RP2040 (Cortex-M33, 520 KB SRAM, 16 MB Flash)</text>
+  <text x="440" y="302" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12">• Sharp listed update pattern: {disp["published_update_power_uw"]:.1f} µW; standby assumed</text>
+  <text x="440" y="324" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12">• Host MCU: STM32U575VGT6 (Cortex-M33, 786 KB SRAM, 16 MB QSPI)</text>
   <text x="440" y="346" fill="#0284c7" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="600">✓ Instant-on reflective sunlight readability with microamp standby</text>
 
   <!-- Card 3: Energy Budget & Battery Autonomy -->
@@ -215,7 +216,10 @@ def main() -> None:
     d = results["display_specification"]
     print("2. Memory LCD Display:")
     print(f"  • Model: {d['model']} ({d['resolution']} pixels, {d['diagonal_inch']}\")")
-    print(f"  • Static Power: {d['static_hold_power_uw']:.1f} µW | Active Streaming: {d['active_refresh_power_uw']:.1f} µW\n")
+    print(
+        f"  • Published update pattern: {d['published_update_power_uw']:.1f} µW | "
+        f"Standby assumption: {d['standby_power_assumption_uw']:.1f} µW\n"
+    )
     p = results["power_and_battery_budget"]
     print("3. Power Budget & Battery Autonomy:")
     print(f"  • Battery: {p['battery_model']}")

@@ -52,7 +52,7 @@ Toàn bộ 18 cổng bằng chứng trên toàn bộ giáo trình 68 chương đ
 | **R10–R14** | Kiến Trúc Mô Hình Lớn & Đánh Giá Đa Tầng | Quyết Định Tape-Out 28nm | **✓ ĐẠT CHUẨN** |
 | **R15** | Thiết Kế Layout Vật Lý & Ký Duyệt DRC/LVS | GDSII Die 28nm ($336\text{ mm}^2$) | **✓ ĐẠT CHUẨN** |
 | **R16** | Trích Xuất PEX, Định Thời STA & Lưới Nguồn Động | SPEF, STA Đa Góc, PDN EM | **✓ ĐẠT CHUẨN** |
-| **R17** | Ký Duyệt Tape-Out, Vỏ FCBGA-676 & Bo Mạch PCIe Gen5 | GDSII, Vỏ Chip & Bo Mạch Carrier | **✓ PASSED (CLOSED)** |
+| **R17** | Ký Duyệt Tape-Out, Vỏ FCBGA-676 & Bo Mạch PCIe Gen5 | Mô hình phân tích; bằng chứng KiCad và phần cứng đang chờ | **PARTIAL** |
 
 ---
 

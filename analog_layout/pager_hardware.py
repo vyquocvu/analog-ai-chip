@@ -34,22 +34,23 @@ class PagerDisplayConfig:
     active_width_mm: float = 58.80
     active_height_mm: float = 35.28
     color_depth_bits: int = 1  # Monochrome
-    static_hold_power_uw: float = 15.0  # 5.0 uA at 3.0V
-    active_refresh_power_uw: float = 120.0  # At 10 Hz text streaming
+    published_update_power_uw: float = 175.0  # Sharp-specified update pattern
+    standby_power_assumption_uw: float = 175.0  # Conservative until measured
+    active_refresh_power_uw: float = 175.0
     refresh_rate_hz: float = 10.0
     contrast_ratio: float = 14.0
 
 
 @dataclass(frozen=True)
 class PagerHostMCUConfig:
-    """Host digital controller (RP2040 / STM32U5 Cortex-M33)."""
+    """Host digital controller selected for carrier Rev A."""
 
-    model: str = "STM32U575 / RP2040 Dual-Core"
+    model: str = "STM32U575VGT6"
     active_clock_mhz: float = 48.0
     sleep_clock_mhz: float = 1.0
     active_current_ma: float = 8.50  # at 3.3V (28.05 mW)
     sleep_current_ua: float = 3.20  # Deep stop mode with RAM retention
-    on_chip_sram_kb: int = 520
+    on_chip_sram_kb: int = 786
     qspi_flash_mb: int = 16
     bus_frequency_mhz: float = 24.0  # QSPI to analog accelerator
 
@@ -61,7 +62,7 @@ class PagerPowerTreeConfig:
     battery_capacity_mah: float = 1200.0  # 1S Li-Po pouch cell
     battery_nominal_voltage_v: float = 3.70
     battery_energy_wh: float = 4.44  # 1.2 Ah * 3.7 V
-    pmic_model: str = "TI BQ25120"
+    pmic_model: str = "TI BQ25120A"
     pmic_quiescent_current_ua: float = 0.70  # 700 nA Iq
     vdd_dig_voltage_v: float = 3.30
     vdd_ref_voltage_v: float = 2.50  # Analog virtual ground VREF
@@ -116,7 +117,7 @@ def simulate_pager_power_budget(
     _key = key or PagerKeypadHapticConfig()
 
     # 1. Standby Power (Display hold + MCU sleep + PMIC Iq + Keypad standby)
-    p_disp_standby_uw = _disp.static_hold_power_uw
+    p_disp_standby_uw = _disp.standby_power_assumption_uw
     p_mcu_standby_uw = _mcu.sleep_current_ua * _pwr.vdd_dig_voltage_v
     p_pmic_standby_uw = _pwr.pmic_quiescent_current_ua * _pwr.battery_nominal_voltage_v
     p_key_standby_uw = _key.keypad_standby_current_ua * _pwr.vdd_dig_voltage_v

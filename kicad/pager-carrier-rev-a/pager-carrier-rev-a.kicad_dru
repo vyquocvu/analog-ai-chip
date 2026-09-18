@@ -1,0 +1,9 @@
+(version 1)
+(rule "Rev A minimum copper spacing"
+  (constraint clearance (min 0.127mm)))
+(rule "Rev A minimum routed width"
+  (constraint track_width (min 0.127mm)))
+(rule "Rev A minimum via drill"
+  (constraint hole_size (min 0.20mm)))
+(rule "Edge clearance"
+  (constraint edge_clearance (min 0.25mm)))

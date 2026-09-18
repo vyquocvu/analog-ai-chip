@@ -50,3 +50,22 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y ngspice || true
       - run: python -m pip install -e '.[dev,sim]'
       - run: python -m pytest -q
+
+  pager-kicad:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install KiCad 10.0.x
+        run: |
+          sudo add-apt-repository --yes ppa:kicad/kicad-10.0-releases
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends kicad
+          kicad-cli version --format plain | grep '^10\.0\.'
+      - name: Validate and export Pager-1 carrier
+        run: python3 scripts/build_pager_kicad.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pager-carrier-rev-a-${{ github.sha }}
+          path: build/kicad/pager-carrier-rev-a
+          if-no-files-found: error

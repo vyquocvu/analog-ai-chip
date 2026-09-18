@@ -7,7 +7,7 @@ This chapter specifies the hardware architecture, physical form factor, bill of 
 ## 1. Product Vision & Concept
 
 The **Pager-1** is a pocket-sized, offline, air-gapped language communicator designed for focused text processing, laboratory logging, and field prompting. Unlike general-purpose smartphones that consume hundreds of milliwatts idling on wireless radios and LCD backlights, the Pager-1 relies on:
-1. **Reflective Memory LCD / E-Paper Display**: Sunlight-readable display consuming only $15\,\mu\text{W}$ in static text hold.
+1. **Reflective Memory LCD Display**: Sunlight-readable Sharp LS027B7DH01; the official listing specifies $175\,\mu\text{W}$ for its stated update pattern.
 2. **Analog Compute-in-Memory Neural Core**: Zero-leakage non-volatile ReRAM crossbars evaluating matrix-vector multiplications directly at the physical storage cells.
 3. **Dedicated Tactile Input**: Full 35-key QWERTY thumb pad with tactile metal domes and side rotary jog dial for single-handed navigation.
 4. **Month-Long Standby Autonomy**: Powered by an integrated $1200\text{ mAh}$ Li-Po battery and ultra-low quiescent current PMIC ($700\text{ nA}$ $I_q$), delivering $>30\text{ days}$ of standby life.
@@ -22,20 +22,20 @@ The **Pager-1** is a pocket-sized, offline, air-gapped language communicator des
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
 │  [2.7" SHARP MEMORY LCD] ── [HOST CONTROLLER] ── [ANALOG CIM MEZZANINE]     │
-│   400x240 @ 15 µW hold       STM32U5 / RP2040     Differential Crossbars    │
+│   400x240 @ 175 µW update    STM32U575VGT6        Differential Crossbars    │
 │                                                                             │
 │  [TACTILE QWERTY DOME]   ── [I2C TCA8418]     ── [DRV2605L LRA HAPTIC]      │
 │   35 Keys + Jog Dial         Keypad Scanner       Silent Pager Buzz         │
 │                                                                             │
-│  [1200 mAh LI-PO POUCH]  ── [TI BQ25120 PMIC] ── [3.3V / 2.5V / 1.0V RAILS]│
+│  [1200 mAh LI-PO POUCH]  ── [TI BQ25120A PMIC] ─ [3.3V / 2.5V / 1.0V RAILS]│
 │   4.44 Wh Capacity           700 nA Iq Buck       91.5% VRM Efficiency      │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ### Power Ledger Summary
-* **Standby Mode**: $35.6\,\mu\text{W}$ total consumption ($9.6\,\mu\text{A}$ at $3.7\text{V}$) $\implies \mathbf{5,200\text{ hours} \approx 216\text{ days}}$ standby autonomy (Target $\ge 30\text{ days}$).
-* **Active Inference Mode**: $44.8\text{ mW}$ total consumption (Host MCU + Memory LCD refresh + Analog Crossbars) $\implies \mathbf{99\text{ hours}}$ continuous generation (Target $\ge 40\text{ hours}$).
-* **Mixed Daily Usage**: $\mathbf{41.5\text{ days}}$ (assuming 2 hours of active inference and 22 hours of standby per day).
+* **Standby Mode**: $193.1\,\mu\text{W}$ assumed total, giving about $958\text{ days}$ analytically; bench validation is pending.
+* **Active Inference Mode**: $44.5\text{ mW}$ assumed total, giving about $99.8\text{ hours}$ analytically.
+* **Mixed Daily Usage**: about $47.6\text{ days}$ under the stated assumed duty cycle.
 * **Thermal Envelope**: Natural passive convection maintains peak surface temperature at $25.4^\circ\text{C}$ ($< 45^\circ\text{C}$ skin touch limit).
 
 ---

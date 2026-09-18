@@ -34,7 +34,8 @@ pocket appliance correlation
 
 ## Current status
 
-The entire canonical design and verification proof chain has successfully closed all 19 evidence gates (**R0 through R18**) across chapters 0000–0071:
+The repository contains a broad functional and simulation chain. R9, R17, and
+R18 remain open where physical artifacts or measurements are still missing:
 
 ```text
 R0 functional + circuit foundation ── COMPLETE
@@ -46,7 +47,7 @@ R5 profile-driven physical tile    ── COMPLETE  (calibrated tile, spatial pa
 R6 accelerator architecture        ── COMPLETE  (scheduler, SRAM buffers, 2D mesh NoC, unified physical ledger)
 R7 Transformer & LLM validation    ── PASSED    (TinyGPT/GPT-2 inference, 3-stage hardware recovery, 129.5 PPL)
 R8 physical feasibility report     ── PASSED    (latency 998 ns, energy 29.1 nJ/tok, area 1.412 mm², thermal 30.9°C)
-R9 implementation correlation      ── PASSED    (FPGA digital shell, PCB correlation R²=0.9997, tape-out sign-off)
+R9 implementation correlation      ── PARTIAL   (FPGA shell; physical PCB/bench evidence pending)
 R10 scalable model contract        ── PASSED    (manifest, decoder primitives, sharded checkpoints)
 R11 memory-bounded simulator       ── PASSED    (block streaming, sampled/surrogate modes, resumable evaluator)
 R12 large-model architecture       ── PASSED    (residency, 2.5D multi-die, prefill/decode, KV hierarchy)
@@ -54,13 +55,11 @@ R13 large-model validation         ── PASSED    (frozen corpus eval, error a
 R14 multi-tier feasibility         ── PASSED    (parametric ledger, Pareto sweeps, 28nm tape-out decision)
 R15 physical layout & DRC/LVS      ── PASSED    (28nm BEOL ReRAM, common-centroid CDAC, tile floorplan, full-chip 336mm²)
 R16 post-layout PEX & STA signoff  ── PASSED    (SPEF extraction, multi-corner STA, dynamic EM signoff)
-R17 tape-out & package/PCB signoff ── PASSED    (GDSII stream-out, FCBGA-676 substrate, PCIe Gen5 evaluation carrier)
-R18 pocket AI communicator / pager ── PASSED    (Pocket carrier PCB, SPI framing protocol, Memory LCD, measured bench correlation R²=0.99998)
+R17 tape-out & package/PCB signoff ── PARTIAL   (analytical models; physical artifacts pending)
+R18 pocket AI communicator / pager ── PARTIAL   (KiCad design ERC/DRC verified; hardware pending)
 ```
 
-The proof chain from Ohm's and Kirchhoff's laws to large-model LLM
-inference, 28nm physical layout, post-layout timing signoff, and full
-tape-out / packaging / PCB integration is complete and proven. See
+The strongest claims and their remaining evidence gaps are tracked in
 [`docs/ROADMAP.md`](docs/ROADMAP.md) and
 [`docs/CURRICULUM.md`](docs/CURRICULUM.md).
 
@@ -73,12 +72,12 @@ Gate R18 implements the dedicated offline text appliance concept: an ultra-low-p
 | Parameter | Specification | Real-World Significance |
 | :--- | :--- | :--- |
 | **Chassis & Form Factor** | $72.0 \times 54.0 \times 14.5\text{ mm}$ ($85\text{ g}$) | CNC anodized aluminum 6061-T6 with spring-steel belt clip |
-| **Reflective Display** | 2.7" Sharp Memory LCD ($400 \times 240$) | **$15.0\,\mu\text{W}$ static hold power** (sunlight readable, instant-on) |
+| **Reflective Display** | 2.7" Sharp LS027B7DH01 ($400 \times 240$) | Sharp lists **$175\,\mu\text{W}$** for its specified update pattern; standby remains assumed |
 | **Input Subsystem** | 35-key tactile QWERTY + Jog Dial | Metal dome tactile switches ($160\text{ gf}$) with I2C scanner (`TCA8418`) |
-| **Host Controller** | RP2040 / STM32U5 Cortex-M33 | $3.2\,\mu\text{A}$ sleep retention, local tokenization & SPI framing |
-| **Battery Autonomy** | $1200\text{ mAh}$ Li-Po ($4.44\text{ Wh}$) | **$5,589\text{ days}$ standby** ($>15\text{ years}$ shelf life), **$99.9\text{ hours}$ active continuous MVM** |
+| **Host Controller** | STM32U575VGT6 Cortex-M33 | Rev A selection; local tokenization and accelerator framing |
+| **Battery Autonomy** | $1200\text{ mAh}$ Li-Po ($4.44\text{ Wh}$) | Representative budget: **958 days standby**, **99.8 hours active**; hardware validation pending |
 | **Thermal Dissipation** | $25.4^\circ\text{C}$ surface temperature | 100% natural passive convection ($<45.0^\circ\text{C}$ skin touch limit) |
-| **Bench Correlation** | $R^2 = 0.99998$, $\text{RMSE} = 1.40\text{ mV}$ | Validated against 6.5-digit bench DMM (`Keysight 34465A`) |
+| **Bench Correlation** | Pending | Existing numerical sweep is representative synthetic data, not a measurement |
 
 ### Hardware Architecture & Silicon Teardown
 

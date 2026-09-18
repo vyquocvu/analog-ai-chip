@@ -2,8 +2,13 @@
   "chapter": "0068-pcie-gen5-carrier-board-signoff",
   "gate": "R17",
   "work_package": "WP17.3",
-  "status": "PASSED",
-  "claim_level": "physical/carrier-pcb-signoff",
+  "status": "PARTIAL",
+  "claim_level": "ANALYTICAL_CARRIER_MODEL",
+  "hardware_evidence": {
+    "kicad_project_present": false,
+    "fabricated_board_present": false,
+    "measured_channel_data_present": false
+  },
   "carrier_board_summary": {
     "is_carrier_ready": true,
     "form_factor": "PCIe Gen5 CEM Add-In Card (AIC)",

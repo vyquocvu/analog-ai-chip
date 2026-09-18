@@ -25,16 +25,18 @@ def test_pcb_correlation_statistical_accuracy() -> None:
 
 
 def test_pcb_correlation_metrics_provenance() -> None:
-    """Verifies that all correlation metrics carry 'measured' evidence class."""
+    """Representative metrics must remain assumed without raw captures."""
     assert _EXTRACT.is_file()
     data = json.loads(_EXTRACT.read_text("utf-8"))
     metrics = data["correlation_metrics"]
     assert len(metrics) >= 5
 
     for m in metrics:
-        assert m["evidence_class"] == "measured"
+        assert m["evidence_class"] == "assumed"
         assert m["within_tolerance"] is True
         assert len(m["notes"]) > 10
+    assert data["claim_level"] == "REPRESENTATIVE_ONLY"
+    assert data["provenance"]["measurement_hardware"] is None
 
 
 def test_pcb_testbench_vectors() -> None:

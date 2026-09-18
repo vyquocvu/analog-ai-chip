@@ -1,13 +1,13 @@
 {
   "chapter": "0044-pcb-board-correlation",
-  "claim_level": "HARDWARE_CORRELATED",
+  "claim_level": "REPRESENTATIVE_ONLY",
   "correlation_metrics": [
     {
       "abs_delta": 0.0028,
-      "evidence_class": "measured",
+      "evidence_class": "assumed",
       "measured_value": 0.9972,
       "metric_name": "Summer Transimpedance Gain",
-      "notes": "0.28% gain error due to 0.1% resistor tolerances and op-amp open-loop gain rolloff",
+      "notes": "Representative 0.28% gain error for a tolerance sensitivity study",
       "rel_error_pct": 0.28,
       "spice_value": 1.0,
       "tolerance_threshold_pct": 1.0,
@@ -16,10 +16,10 @@
     },
     {
       "abs_delta": 0.0018,
-      "evidence_class": "measured",
+      "evidence_class": "assumed",
       "measured_value": 0.0018,
       "metric_name": "Output DC Offset Voltage",
-      "notes": "1.8 mV input-offset voltage matches OPA2350 datasheet specs (max 2.5 mV)",
+      "notes": "Representative 1.8 mV offset within the selected design envelope",
       "rel_error_pct": 0.07,
       "spice_value": 0.0,
       "tolerance_threshold_pct": 0.5,
@@ -28,7 +28,7 @@
     },
     {
       "abs_delta": 0.0063,
-      "evidence_class": "measured",
+      "evidence_class": "assumed",
       "measured_value": 0.0063,
       "metric_name": "DAC Full-Scale INL",
       "notes": "0.04 LSB maximum INL with 0.1% thin-film ladder resistors",
@@ -40,10 +40,10 @@
     },
     {
       "abs_delta": 3.2,
-      "evidence_class": "measured",
+      "evidence_class": "assumed",
       "measured_value": 78.2,
       "metric_name": "ADC Conversion Latency (4-bit)",
-      "notes": "Measured across 4 SAR trials using high-speed logic analyzer on breadboard breakout",
+      "notes": "Representative SAR latency; no logic-analyzer capture is present",
       "rel_error_pct": 4.27,
       "spice_value": 75.0,
       "tolerance_threshold_pct": 10.0,
@@ -52,10 +52,10 @@
     },
     {
       "abs_delta": 0.7,
-      "evidence_class": "measured",
+      "evidence_class": "assumed",
       "measured_value": 11.8,
       "metric_name": "Small-Signal -3dB Bandwidth",
-      "notes": "PCB parasitic trace capacitance (~2.5 pF) slightly reduces closed-loop bandwidth",
+      "notes": "Representative parasitic sensitivity; no PCB sweep is present",
       "rel_error_pct": 5.6,
       "spice_value": 12.5,
       "tolerance_threshold_pct": 15.0,
@@ -68,28 +68,29 @@
     {
       "board_name": "Discrete Neuron Summer PCB (Rev A)",
       "description": "2-input differential summing amplifier board with buffered VREF",
-      "evidence_class": "derived",
+      "evidence_class": "assumed",
       "opamp_part_number": "OPA2350 (Rail-to-Rail, 38 MHz)",
       "reference_voltage_v": 2.5,
       "resistor_tolerance_pct": 0.1,
-      "schematic_ref": "kicad/summer-2in-v1.kicad_sch",
+      "schematic_ref": "PENDING: kicad/summer-2in-v1.kicad_sch",
       "supply_voltage_v": 5.0,
       "target_bandwidth_mhz": 10.0
     },
     {
       "board_name": "4-bit R-2R DAC & SAR ADC Breakout (Rev A)",
       "description": "4-bit discrete R-2R ladder with SAR comparator and sample-and-hold",
-      "evidence_class": "derived",
+      "evidence_class": "assumed",
       "opamp_part_number": "TLV3501 (Fast Comparator, 4.5 ns)",
       "reference_voltage_v": 2.5,
       "resistor_tolerance_pct": 0.1,
-      "schematic_ref": "kicad/dac-adc-4bit-v1.kicad_sch",
+      "schematic_ref": "PENDING: kicad/dac-adc-4bit-v1.kicad_sch",
       "supply_voltage_v": 5.0,
       "target_bandwidth_mhz": 25.0
     }
   ],
   "provenance": {
-    "measurement_hardware": "Keysight DSOX1204G Oscilloscope + Rigol DP832 DC Supply",
+    "measurement_hardware": null,
+    "measurement_status": "pending raw files and instrument metadata",
     "simulation_source": "PySpice / ngspice DC OP & Transient extraction",
     "testbench_source": "Chapter 0005 Discrete Neuron Summer + Chapter 0009 R-2R Breakout"
   },
@@ -102,8 +103,8 @@
   },
   "summary": {
     "all_metrics_within_tolerance": true,
-    "correlation_status": "EXCELLENT (R\u00b2 &gt; 0.999, Max error &lt; 0.5% FS)",
-    "evidence_class": "measured",
+    "correlation_status": "NUMERICAL FIT ONLY \u2014 HARDWARE CORRELATION PENDING",
+    "evidence_class": "assumed",
     "max_delta_volts": 0.0022,
     "num_metrics_evaluated": 5,
     "num_test_cases": 6,

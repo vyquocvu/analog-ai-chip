@@ -2,7 +2,9 @@
 
 > **Bản tiếng Việt:** [`README.vi.md`](README.vi.md)
 
-This chapter formalizes the **hardware-to-simulation correlation methodology**, comparing PySpice / ngspice circuit predictions against physical discrete PCB breadboard measurements for Gate R9.
+This chapter formalizes a future **hardware-to-simulation correlation methodology**.
+The committed values are representative assumptions; the cited KiCad boards and
+raw bench captures do not yet exist, so Gate R9 remains partial.
 
 ---
 
@@ -13,7 +15,7 @@ This chapter formalizes the **hardware-to-simulation correlation methodology**, 
 - **Pearson Goodness-of-Fit**: $R^2 = \mathbf{0.999683}$ (exceeds $>0.999$ threshold).
 - **Output Voltage RMSE**: $\mathbf{1.58\text{ mV}}$ ($<0.08\%$ of $2.5\text{ V}$ Full-Scale).
 - **Max Peak Residual**: $\mathbf{2.20\text{ mV}}$ (well below the $10\text{ mV}$ engineering budget).
-- **Evidence Promotion**: Proves that SPICE circuit models faithfully represent physical hardware behavior, enabling the promotion of simulation parameters to `measured` status for Gate R9.
+- **Evidence boundary**: No promotion is allowed until raw measurements and instrument metadata are imported.
 
 ---
 

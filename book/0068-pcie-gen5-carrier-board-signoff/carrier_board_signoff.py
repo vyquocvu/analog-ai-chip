@@ -1,7 +1,8 @@
-r"""Chapter 0068 — PCIe Gen5 Evaluation Carrier Board & Final Gate R17 Closure.
+r"""Chapter 0068 — analytical PCIe Gen5 evaluation-carrier model.
 
 Models 12-layer Megtron 6 carrier PCB stackup, multi-phase synchronous buck VRM power delivery,
-simulates PCIe Gen5 32 GT/s channel eye diagrams, and formally closes Gate R17 and the entire curriculum.
+simulates PCIe Gen5 32 GT/s channel values. No KiCad or measured-channel
+artifact exists, so Gate R17 remains open.
 """
 
 from __future__ import annotations
@@ -37,8 +38,13 @@ def run_carrier_signoff_extract() -> dict[str, Any]:
         "chapter": "0068-pcie-gen5-carrier-board-signoff",
         "gate": "R17",
         "work_package": "WP17.3",
-        "status": "PASSED" if report.is_carrier_ready else "FAILED",
-        "claim_level": "physical/carrier-pcb-signoff",
+        "status": "PARTIAL" if report.is_carrier_ready else "FAILED",
+        "claim_level": "ANALYTICAL_CARRIER_MODEL",
+        "hardware_evidence": {
+            "kicad_project_present": False,
+            "fabricated_board_present": False,
+            "measured_channel_data_present": False,
+        },
         "carrier_board_summary": {
             "is_carrier_ready": report.is_carrier_ready,
             "form_factor": report.metadata["form_factor"],
@@ -87,7 +93,7 @@ def run_carrier_signoff_extract() -> dict[str, Any]:
 def main() -> None:
     results = run_carrier_signoff_extract()
     print("=" * 95)
-    print("CHAPTER 0068: PCIE GEN5 CARRIER BOARD & FINAL GATE R17 CLOSURE (CURRICULUM COMPLETE)")
+    print("CHAPTER 0068: ANALYTICAL PCIE GEN5 CARRIER MODEL (GATE R17 PARTIAL)")
     print("=" * 95)
     print(f"Status: {results['status']} | Claim Level: {results['claim_level']}\n")
     c = results["carrier_board_summary"]
@@ -105,7 +111,7 @@ def main() -> None:
     print(f"  • Eye Height: {s['eye_height_mv']:.1f} mV (Min: ≥ {s['eye_height_min_mv']:.1f} mV | Margin: +{s['eye_height_margin_mv']:.1f} mV)")
     print(f"  • Eye Width: {s['eye_width_ui']:.2f} UI ({s['eye_width_ps']:.2f} ps | Margin: +{s['eye_width_margin_ui']:.2f} UI)")
     print("=" * 95)
-    print("ALL 18 EVIDENCE GATES (R0 THROUGH R17) ARE FULLY VERIFIED AND CLOSED.")
+    print("KICAD, FABRICATION, AND MEASURED CHANNEL EVIDENCE REMAIN PENDING.")
     print(f"Extracted artifact saved to: {RESULT_PATH}\n")
 
 

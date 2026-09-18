@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "module_type": "carrier",
+  "hardware_revision": "pager-carrier-rev-a",
+  "claim_level": "KICAD_DESIGN_ERC_DRC_VERIFIED",
+  "board": {
+    "width_mm": 70.0,
+    "height_mm": 52.0,
+    "thickness_mm": 1.2,
+    "layer_count": 4,
+    "copper_layers": ["F.Cu", "In1.Cu", "In2.Cu", "B.Cu"],
+    "stackup": [
+      {"layer": "F.Cu", "role": "components and signals"},
+      {"layer": "In1.Cu", "role": "continuous ground reference"},
+      {"layer": "In2.Cu", "role": "power pours"},
+      {"layer": "B.Cu", "role": "components and signals"}
+    ],
+    "minimum_trace_width_mm": 0.127,
+    "minimum_clearance_mm": 0.127,
+    "minimum_via_drill_mm": 0.2,
+    "preliminary_impedance": {
+      "target_ohm": 50.0,
+      "trace_width_mm": 0.32,
+      "evidence_class": "assumed",
+      "qualification": "Requires the selected fabricator stackup or a measured coupon"
+    }
+  },
+  "host": {
+    "part_number": "STM32U575VGT6",
+    "package": "LQFP100_14x14mm_P0.5mm",
+    "flash_mb": 1,
+    "sram_kb": 786,
+    "external_qspi_flash": "W25Q128JVSIQ",
+    "external_flash_mb": 16,
+    "accelerator_bus_frequency_mhz": 24.0
+  },
+  "power": {
+    "battery": "protected 1S Li-Po, 1200 mAh nominal",
+    "charger_pmic": "BQ25120AYFPR",
+    "startup_sys_voltage_v": 1.8,
+    "runtime_sys_voltage_v": 3.3,
+    "rails": ["VBUS_5V", "VBAT", "+3V3", "+2V5_SW", "+1V0_SW", "+5V_LCD", "GND"],
+    "sequence": [
+      "BQ25120A starts SYS at its 1.8 V default",
+      "STM32U575 boots from internal flash and programs SYS to 3.3 V over I2C",
+      "Firmware enables +2V5_SW, +1V0_SW, and +5V_LCD only after rail checks",
+      "Accelerator reset remains asserted until all enabled rails are in tolerance"
+    ],
+    "safe_default_off_rails": ["+2V5_SW", "+1V0_SW", "+5V_LCD"]
+  },
+  "assemblies": {
+    "display": "Sharp LS027B7DH01 via 10-pin 0.5 mm FPC",
+    "keypad": "external 5x7 matrix via 12-pin 0.5 mm FPC",
+    "accelerator": "external daughterboard; not part of Rev A carrier",
+    "battery": "external protected pouch cell with 10 kOhm NTC"
+  },
+  "mezzanine": {
+    "reference": "J5",
+    "part_number": "DF40C-40DP-0.4V(51)",
+    "pin_count": 40,
+    "power_pin_count": 8,
+    "ground_pin_count": 8,
+    "signal_pin_count": 24,
+    "pins": [
+      {"pin": 1, "net": "+3V3", "role": "power"},
+      {"pin": 2, "net": "+3V3", "role": "power"},
+      {"pin": 3, "net": "+3V3", "role": "power"},
+      {"pin": 4, "net": "+3V3", "role": "power"},
+      {"pin": 5, "net": "+2V5_SW", "role": "power"},
+      {"pin": 6, "net": "+2V5_SW", "role": "power"},
+      {"pin": 7, "net": "+1V0_SW", "role": "power"},
+      {"pin": 8, "net": "+1V0_SW", "role": "power"},
+      {"pin": 9, "net": "GND", "role": "ground"},
+      {"pin": 10, "net": "GND", "role": "ground"},
+      {"pin": 11, "net": "GND", "role": "ground"},
+      {"pin": 12, "net": "GND", "role": "ground"},
+      {"pin": 13, "net": "GND", "role": "ground"},
+      {"pin": 14, "net": "GND", "role": "ground"},
+      {"pin": 15, "net": "GND", "role": "ground"},
+      {"pin": 16, "net": "GND", "role": "ground"},
+      {"pin": 17, "net": "ACCEL_QSPI_SCK", "role": "signal"},
+      {"pin": 18, "net": "ACCEL_QSPI_NCS", "role": "signal"},
+      {"pin": 19, "net": "ACCEL_QSPI_IO0", "role": "signal"},
+      {"pin": 20, "net": "ACCEL_QSPI_IO1", "role": "signal"},
+      {"pin": 21, "net": "ACCEL_QSPI_IO2", "role": "signal"},
+      {"pin": 22, "net": "ACCEL_QSPI_IO3", "role": "signal"},
+      {"pin": 23, "net": "ACCEL_RESET_N", "role": "signal"},
+      {"pin": 24, "net": "ACCEL_IRQ_N", "role": "signal"},
+      {"pin": 25, "net": "ACCEL_READY", "role": "signal"},
+      {"pin": 26, "net": "ACCEL_WAKE", "role": "signal"},
+      {"pin": 27, "net": "ACCEL_I2C_SCL", "role": "signal"},
+      {"pin": 28, "net": "ACCEL_I2C_SDA", "role": "signal"},
+      {"pin": 29, "net": "ACCEL_UART_TX", "role": "signal"},
+      {"pin": 30, "net": "ACCEL_UART_RX", "role": "signal"},
+      {"pin": 31, "net": "ACCEL_SWDIO", "role": "signal"},
+      {"pin": 32, "net": "ACCEL_SWCLK", "role": "signal"},
+      {"pin": 33, "net": "TEST_ONLY_VREF_SENSE", "role": "test_only"},
+      {"pin": 34, "net": "TEST_ONLY_VCORE_SENSE", "role": "test_only"},
+      {"pin": 35, "net": "TEST_ONLY_IOUT_P", "role": "test_only"},
+      {"pin": 36, "net": "TEST_ONLY_IOUT_N", "role": "test_only"},
+      {"pin": 37, "net": "NC_RESERVED_37", "role": "reserved"},
+      {"pin": 38, "net": "NC_RESERVED_38", "role": "reserved"},
+      {"pin": 39, "net": "NC_RESERVED_39", "role": "reserved"},
+      {"pin": 40, "net": "NC_RESERVED_40", "role": "reserved"}
+    ]
+  },
+  "required_testpoints": ["VBUS_5V", "VBAT", "+3V3", "+2V5_SW", "+1V0_SW", "+5V_LCD", "GND"],
+  "design_checks": {
+    "usb_input": {
+      "connector": "J1",
+      "esd_protection": "D1 USBLC6-2SC6",
+      "type_c_sink_pull_downs": ["R1", "R2"],
+      "protected_nets": ["USB_DP", "USB_DM", "VBUS_5V"]
+    },
+    "battery": {
+      "connector": "J6",
+      "pin_order": ["VBAT", "GND", "NTC"],
+      "reverse_polarity_note": "Use only a protected pack wired to the documented J6 polarity"
+    },
+    "display": {
+      "connector": "J2",
+      "boost_rail": "+5V_LCD",
+      "translator": "U8 SN74AHCT125PWR",
+      "translated_controls": ["LCD_SCLK", "LCD_SI", "LCD_SCS", "LCD_DISP"],
+      "periodic_control": "LCD_EXTCOMIN"
+    },
+    "rail_enables": {
+      "+2V5_SW": {"source": "BQ25120A LS/LDO", "default": "off", "pulldown": "R5"},
+      "+1V0_SW": {"source": "U7 TLV75510", "default": "off", "pulldown": "R6"},
+      "+5V_LCD": {"source": "U6 TPS61099", "default": "off", "pulldown": "R4"}
+    }
+  },
+  "bom": [
+    {"reference": "U1", "value": "STM32U575VGT6", "footprint": "Package_QFP:LQFP-100_14x14mm_P0.5mm", "manufacturer": "STMicroelectronics", "mpn": "STM32U575VGT6"},
+    {"reference": "U2", "value": "BQ25120A", "footprint": "Package_BGA:Texas_DSBGA-25_2.5x2.5mm_Layout5x5_P0.5mm", "manufacturer": "Texas Instruments", "mpn": "BQ25120AYFPR"},
+    {"reference": "U3", "value": "W25Q128JVS", "footprint": "Package_SO:SOIC-8_5.23x5.23mm_P1.27mm", "manufacturer": "Winbond", "mpn": "W25Q128JVSIQ"},
+    {"reference": "U4", "value": "TCA8418", "footprint": "Package_DFN_QFN:WQFN-24-1EP_4x4mm_P0.5mm_EP2.7x2.7mm", "manufacturer": "Texas Instruments", "mpn": "TCA8418RTWR"},
+    {"reference": "U5", "value": "DRV2605L", "footprint": "Package_SO:VSSOP-10_3x3mm_P0.5mm", "manufacturer": "Texas Instruments", "mpn": "DRV2605LDGSR"},
+    {"reference": "U6", "value": "TPS61099", "footprint": "Package_SON:WSON-6_2x2mm_P0.65mm", "manufacturer": "Texas Instruments", "mpn": "TPS61099DRVR"},
+    {"reference": "U7", "value": "TLV75510", "footprint": "Package_TO_SOT_SMD:SOT-23-5", "manufacturer": "Texas Instruments", "mpn": "TLV75510PDBVR"},
+    {"reference": "U8", "value": "SN74AHCT125", "footprint": "Package_SO:TSSOP-14_4.4x5mm_P0.65mm", "manufacturer": "Texas Instruments", "mpn": "SN74AHCT125PWR"},
+    {"reference": "D1", "value": "USBLC6-2SC6", "footprint": "Package_TO_SOT_SMD:SOT-23-6", "manufacturer": "STMicroelectronics", "mpn": "USBLC6-2SC6"},
+    {"reference": "R1", "value": "5.1k", "footprint": "Resistor_SMD:R_0402_1005Metric", "manufacturer": "Yageo", "mpn": "RC0402FR-075K1L"},
+    {"reference": "R2", "value": "5.1k", "footprint": "Resistor_SMD:R_0402_1005Metric", "manufacturer": "Yageo", "mpn": "RC0402FR-075K1L"},
+    {"reference": "R3", "value": "2.0k", "footprint": "Resistor_SMD:R_0402_1005Metric", "manufacturer": "Yageo", "mpn": "RC0402FR-072KL"},
+    {"reference": "R4", "value": "100k", "footprint": "Resistor_SMD:R_0402_1005Metric", "manufacturer": "Yageo", "mpn": "RC0402FR-07100KL"},
+    {"reference": "R5", "value": "100k", "footprint": "Resistor_SMD:R_0402_1005Metric", "manufacturer": "Yageo", "mpn": "RC0402FR-07100KL"},
+    {"reference": "R6", "value": "100k", "footprint": "Resistor_SMD:R_0402_1005Metric", "manufacturer": "Yageo", "mpn": "RC0402FR-07100KL"},
+    {"reference": "J1", "value": "USB_C_USB2.0", "footprint": "Connector_USB:USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal", "manufacturer": "GCT", "mpn": "USB4105-GF-A"},
+    {"reference": "J2", "value": "LS027B7DH01_FPC", "footprint": "Connector_FFC-FPC:Hirose_FH12-10S-0.5SH_1x10-1MP_P0.50mm_Horizontal", "manufacturer": "Hirose", "mpn": "FH12-10S-0.5SH(55)"},
+    {"reference": "J3", "value": "KEYPAD_5X7_FPC", "footprint": "Connector_FFC-FPC:Hirose_FH12-12S-0.5SH_1x12-1MP_P0.50mm_Horizontal", "manufacturer": "Hirose", "mpn": "FH12-12S-0.5SH(55)"},
+    {"reference": "J4", "value": "SWD", "footprint": "Connector_PinHeader_1.27mm:PinHeader_2x05_P1.27mm_Vertical", "manufacturer": "Samtec", "mpn": "FTSH-105-01-L-DV-K"},
+    {"reference": "J5", "value": "DF40C-40DP-0.4V", "footprint": "Pager:DF40C-40DP-0.4V", "manufacturer": "Hirose", "mpn": "DF40C-40DP-0.4V(51)"},
+    {"reference": "J6", "value": "LIPO_NTC", "footprint": "Connector_JST:JST_PH_S3B-PH-K_1x03_P2.00mm_Horizontal", "manufacturer": "JST", "mpn": "S3B-PH-K-S"}
+  ]
+}

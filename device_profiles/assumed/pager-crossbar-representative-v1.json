@@ -1,0 +1,16 @@
+{
+  "name": "pager-crossbar-representative-v1",
+  "version": "1.0.0",
+  "evidence_class": "assumed",
+  "dataset_kind": "deterministic representative transfer sweep",
+  "r_squared": 0.99998,
+  "rmse_volts": 0.0014,
+  "max_delta_volts": 0.0019,
+  "sample_count": 10,
+  "status": "SENSITIVITY_ONLY",
+  "limitations": [
+    "Values are synthetic and were not acquired from hardware.",
+    "No raw measurement file or instrument metadata exists.",
+    "This profile must not support a measured claim."
+  ]
+}

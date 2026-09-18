@@ -37,7 +37,7 @@ A higher gate may contain exploratory code, but it is not considered physically 
 | **R6** | Multi-tile accelerator, scheduler & NoC | `book/0023`–`0026` | **COMPLETE** |
 | **R7** | Transformer mapping & small LLM validation | `book/0027`–`0037` | **PASSED** |
 | **R8** | Physical feasibility report (latency/energy/area) | `book/0038`–`0042` | **PASSED** |
-| **R9** | Implementation correlation (FPGA/PCB/Tape-out) | `book/0043`–`0045` | **PASSED** |
+| **R9** | Implementation correlation (FPGA/PCB/Tape-out) | `book/0043`–`0045` | **PARTIAL — hardware evidence pending** |
 | **R10** | Scalable model semantics & sharded checkpoints | `book/0046`–`0048` | **PASSED** |
 | **R11** | Memory-bounded model execution | `book/0049`–`0051` | **PASSED** |
 | **R12** | Large-model architecture & residency | `book/0052`–`0053` | **PASSED** |
@@ -45,8 +45,8 @@ A higher gate may contain exploratory code, but it is not considered physically 
 | **R14** | Multi-tier physical feasibility & design decision | `book/0056`–`0058` | **PASSED** |
 | **R15** | Physical layout & DRC/LVS verification | `book/0059`–`0062` | **PASSED** |
 | **R16** | Post-layout extraction & static timing signoff | `book/0063`–`0065` | **PASSED** |
-| **R17** | Tape-out signoff & package/PCB integration | `book/0066`–`0068` | **PASSED** |
-| **R18** | Pocket Analog AI Communicator / Pager Prototype | `book/0069`–`0071` | **PASSED** |
+| **R17** | Tape-out signoff & package/PCB integration | `book/0066`–`0068` | **PARTIAL — physical artifacts pending** |
+| **R18** | Pocket Analog AI Communicator / Pager Prototype | `book/0069`–`0071` | **PARTIAL — KiCad design verified** |
 
 ---
 
@@ -290,12 +290,12 @@ not silicon verification. Gate R8 exited successfully — all physical feasibili
 
 ---
 
-# R9 — Implementation correlation — PASSED
+# R9 — Implementation correlation — PARTIAL
 
 - [x] FPGA/digital-shell prototype for scheduler/buffer/control: deterministic cycle-accurate digital shell executing FSM scheduler, double-buffered SRAM controller, and partial-sum accumulator; matches Ch.0038 timing ($t_{\text{tile}} = 100.0\text{ ns}$) to $<1\%$ delta (`book/0043-fpga-digital-shell/fpga_digital_shell.py`, `fpga-digital-shell-0043-extract.json`)
-- [x] KiCad board/reference circuits when useful for correlation: discrete neuron summer and 4-bit DAC/ADC breakout board specifications defined (`kicad/summer-2in-v1.kicad_sch`, `book/0044-pcb-board-correlation/pcb_board_correlation.py`)
-- [x] Replace SPICE evidence with measured profiles where hardware exists: correlation framework supports loading measured bench sweeps directly into device profiles with `measured` evidence provenance (`pcb-correlation-0044-extract.json`)
-- [x] SPICE-vs-measured correlation report: Pearson $R^2 = 0.999683$, $\text{RMSE} = 1.58\text{ mV}$, Max $\Delta = 2.20\text{ mV}$ over canonical test vectors; 5/5 hardware metrics within physical tolerance (`book/0044-pcb-board-correlation/pcb_board_correlation.py`, `pcb-correlation-0044-extract.json`)
+- [ ] Add the cited discrete neuron / converter KiCad reference board; the earlier `kicad/summer-2in-v1.kicad_sch` reference does not exist.
+- [ ] Import raw bench measurements with instrument identity, serial number, acquisition time, and file hash before creating any `measured` profile.
+- [ ] Replace the representative R²/RMSE sweep with SPICE-versus-hardware correlation. Current values are synthetic sensitivity data only.
 - [x] Define PDK/layout/device requirements for any IC exploration: 28nm CMOS + BEOL ReRAM Via4-M5 module rules, layout pitch (160nm), SAR ADC / TIA analog headroom, and clean DRC/LVS requirements defined (`book/0045-ic-tapeout-readiness/tapeout_readiness.py`, `tapeout-readiness-0045-extract.json`)
 - [x] Tape-out readiness review only after required evidence exists: cross-domain sign-off review complete (5/6 gates passed, 0 critical blockers, open risks mitigated by 3-stage hardware recovery and spare column remapping) (`book/0045-ic-tapeout-readiness/tapeout_readiness.py`, `tapeout-readiness-0045-extract.json`)
 
@@ -587,9 +587,10 @@ Post-layout SPEF extraction demonstrates that crossbar analog settling ($t_{\tex
 
 ---
 
-# R17 — Tape-out signoff & package/PCB integration — PASSED
+# R17 — Tape-out signoff & package/PCB integration — PARTIAL
 
-Depends on R16. Closed by chapters 0066–0068.
+Depends on R16. Chapters 0066–0068 provide functional/analytical models; the
+physical signoff artifacts required to close this gate are still pending.
 
 ## WP17.1 — GDSII stream-out, dummy metal fill & foundry signoff
 
@@ -601,7 +602,7 @@ Depends on R16. Closed by chapters 0066–0068.
 
 ## WP17.3 — High-speed PCIe Gen5 evaluation PCB carrier board
 
-- [x] Design high-speed evaluation board schematic and KiCad PCB layout.
+- [ ] Design and verify the high-speed evaluation board schematic and KiCad PCB layout; no such KiCad source is currently present.
 
 ### Gate exit criteria
 
@@ -609,9 +610,10 @@ All 10 points of the 28nm foundry tape-out checklist are verified and signed off
 
 ---
 
-# R18 — Pocket Analog AI Communicator / Pager Product Prototype — PASSED
+# R18 — Pocket Analog AI Communicator / Pager Product Prototype — PARTIAL
 
-Depends on R17 + R9 + R5 + `docs/VISION.md`. Closed by chapters 0069–0071.
+Depends on R17 + R9 + R5 + `docs/VISION.md`. The Rev A carrier design is
+KiCad-verified, while fabrication, bring-up, impedance, and bench evidence remain pending.
 
 Implements the dedicated offline text appliance concept: an ultra-low-power, pocket-sized communicator ("AI Pager / Beeper") pairing an ultra-low-power host microcontroller, reflective Memory LCD / E-Paper display, tactile thumb keypad, and haptic feedback with the analog crossbar neural engine.
 
@@ -619,8 +621,8 @@ Implements the dedicated offline text appliance concept: an ultra-low-power, poc
 
 - [x] Define physical form factor ($72\text{ mm} \times 54\text{ mm} \times 14.5\text{ mm}$) with belt clip and ergonomic thumb-typing layout.
 - [x] Select low-power bill of materials (BOM):
-  - Display: 2.7" Sharp Memory LCD ($400 \times 240$, $15\,\mu\text{W}$ static hold) or 2.13" E-Paper.
-  - Host MCU: Raspberry Pi RP2040 / STM32U575 (ultra-low power Cortex-M33).
+  - Display: 2.7" Sharp LS027B7DH01 Memory LCD ($400 \times 240$); Sharp lists $175\,\mu\text{W}$ for its specified update pattern.
+  - Host MCU: STM32U575VGT6 (Cortex-M33, LQFP100).
   - Input: 35-key tactile QWERTY keypad matrix + side rotary jog dial.
   - Power: 1200 mAh Li-Po pouch battery, BQ25120 PMIC, $3.3\text{V} / 2.5\text{V} / 1.0\text{V}$ power tree ($>99\text{h}$ active, $>5,000\text{d}$ standby).
   - Feedback: LRA haptic buzzer (DRV2605L) and piezo beeper for classic pager alerts.
@@ -633,17 +635,20 @@ Implements the dedicated offline text appliance concept: an ultra-low-power, poc
 ## WP18.3 — Pocket Carrier PCB & Bench Hardware Correlation
 
 - [x] Design 4-layer pocket carrier PCB schematic and layout connecting host MCU, display FPC, keypad, and 40-pin mezzanine socket for the analog crossbar ASIC / discrete evaluation board.
-- [x] Create automated bench measurement ingestion harness reading real physical voltages from bench testbed and promoting `spice`/`derived` evidence classes in `device_profiles/measured/`.
+- [ ] Import real bench voltage files with complete instrument metadata. The committed representative sweep remains `assumed` and cannot be promoted.
 
 ### Gate exit criteria
 
-The complete pocket pager hardware architecture is specified and validated: 4-layer pocket carrier PCB passes DRC/LVS with power tree integrity, the host-to-accelerator SPI packet protocol is proven with deterministic unit tests, the interactive terminal pager emulator generates real-time token streams through the physical crossbar ledger, and bench measurements are ingested into `device_profiles/measured/` ($R^2 = 0.99998$, $\text{RMSE} = 1.40\text{ mV}$).
+Current evidence supports `KICAD_DESIGN_ERC_DRC_VERIFIED` for the Rev A carrier
+and deterministic functional protocol tests. It does not support fabricated-board,
+controlled-impedance, bench-correlation, silicon, or hardware-measured status.
 
 ---
 
-# Roadmap Complete — All Evidence Gates Verified (R0 through R18)
+# Remaining Physical Evidence
 
-The entire canonical design and verification proof chain from first-principles physics (Ohm's and Kirchhoff's laws) through SPICE crossbars, converter models, architecture schedulers, Transformer LLM inference, physical layout, DRC/LVS, post-layout PEX/STA, full tape-out signoff, and dedicated pocket pager hardware correlation across chapters 0000–0071 is complete and reproducible.
+The functional and simulation chain is extensive, but R9, R17, and R18 remain
+open until their missing physical design and measurement artifacts exist.
 
 ---
 

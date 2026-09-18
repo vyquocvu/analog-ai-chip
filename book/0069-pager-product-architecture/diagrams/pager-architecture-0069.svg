@@ -74,15 +74,15 @@
   <rect x="420" y="225" width="500" height="135" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
   <text x="440" y="255" fill="#0f172a" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15" font-weight="700">2. ULTRA-LOW-POWER SCREEN &amp; CONTROLLER</text>
   <text x="440" y="280" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12">• Display: Sharp LS027B7DH01 Memory LCD (400x240 pixels)</text>
-  <text x="440" y="302" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12">• Static Hold: 15.0 µW | Active Streaming: 120.0 µW @ 10 Hz</text>
-  <text x="440" y="324" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12">• Host MCU: STM32U575 / RP2040 (Cortex-M33, 520 KB SRAM, 16 MB Flash)</text>
+  <text x="440" y="302" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12">• Sharp listed update pattern: 175.0 µW; standby assumed</text>
+  <text x="440" y="324" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12">• Host MCU: STM32U575VGT6 (Cortex-M33, 786 KB SRAM, 16 MB QSPI)</text>
   <text x="440" y="346" fill="#0284c7" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="600">✓ Instant-on reflective sunlight readability with microamp standby</text>
 
   <!-- Card 3: Energy Budget & Battery Autonomy -->
   <rect x="420" y="375" width="500" height="130" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
   <text x="440" y="405" fill="#0f172a" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15" font-weight="700">3. BATTERY AUTONOMY &amp; POWER TREE</text>
-  <text x="440" y="430" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12">• Battery: 1200 mAh Li-Po (4.44 Wh) | Standby Power: 33.1 µW</text>
-  <text x="440" y="452" fill="#16a34a" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="700">★ Standby Life: 5589.1 Days (Target ≥ 30.0d) — PASSED</text>
-  <text x="440" y="474" fill="#16a34a" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="700">★ Continuous Active Life: 99.9 Hours (Target ≥ 40.0h) — PASSED</text>
+  <text x="440" y="430" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12">• Battery: 1200 mAh Li-Po (4.44 Wh) | Standby Power: 193.1 µW</text>
+  <text x="440" y="452" fill="#16a34a" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="700">★ Standby Life: 958.1 Days (Target ≥ 30.0d) — PASSED</text>
+  <text x="440" y="474" fill="#16a34a" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="700">★ Continuous Active Life: 99.8 Hours (Target ≥ 40.0h) — PASSED</text>
   <text x="440" y="494" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="11">• Surface Temp: 25.4°C at 25°C ambient (Natural Convection)</text>
 </svg>

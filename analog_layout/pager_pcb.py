@@ -1,40 +1,44 @@
-"""Pocket Analog AI Communicator (Pager-1) 4-Layer Carrier PCB Design.
-
-Models the physical 4-layer pocket carrier board stackup, trace impedance,
-mezzanine board-to-board connector, display FPC, and power integrity.
-"""
+"""Manifest- and KiCad-evidence-backed Pager-1 carrier verification."""
 
 from __future__ import annotations
 
+import hashlib
+import json
 import math
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any
+
+_REPO = Path(__file__).resolve().parents[1]
+_PROJECT = _REPO / "kicad" / "pager-carrier-rev-a"
+_MANIFEST = _PROJECT / "hardware-manifest.json"
+_EVIDENCE = _REPO / "verification" / "layout" / "results" / "pager-carrier-rev-a-kicad.json"
 
 
 @dataclass(frozen=True)
 class PagerPCBStackupConfig:
-    """4-layer FR4 pocket PCB stackup specifications."""
+    """Four-layer carrier constraints mirrored by the hardware manifest."""
 
     layer_count: int = 4
     board_width_mm: float = 70.0
     board_height_mm: float = 52.0
-    total_thickness_mm: float = 1.20  # Slim 1.2mm for pocket profile
-    substrate_material: str = "Isola 370HR / High-Tg FR4 (Tg = 180°C)"
+    total_thickness_mm: float = 1.20
+    substrate_material: str = "High-Tg FR4; final fabricator material not selected"
     dielectric_constant_dk: float = 4.20
     loss_tangent_df: float = 0.015
-    outer_copper_weight_oz: float = 1.0  # 35 um
-    inner_copper_weight_oz: float = 0.5  # 17.5 um
+    outer_copper_weight_oz: float = 1.0
+    inner_copper_weight_oz: float = 0.5
     single_ended_impedance_ohm: float = 50.0
-    min_trace_width_mm: float = 0.127  # 5 mil
-    min_clearance_mm: float = 0.127  # 5 mil
-    min_via_drill_mm: float = 0.20  # 8 mil
+    min_trace_width_mm: float = 0.127
+    min_clearance_mm: float = 0.127
+    min_via_drill_mm: float = 0.20
 
 
 @dataclass(frozen=True)
 class PagerMezzanineConnectorConfig:
-    """40-pin high-density board-to-board mezzanine interface to analog crossbar."""
+    """Manifest contract for the 40-pin accelerator connector."""
 
-    connector_model: str = "Hirose DF40C-40DP-0.4V (0.4mm pitch, 1.5mm mated height)"
+    connector_model: str = "Hirose DF40C-40DP-0.4V(51)"
     pin_count: int = 40
     pin_pitch_mm: float = 0.40
     current_rating_a_per_pin: float = 0.30
@@ -47,61 +51,104 @@ class PagerMezzanineConnectorConfig:
 
 @dataclass(frozen=True)
 class PagerPCBSignoffReport:
-    """Carrier PCB design rule and signal integrity verification report."""
+    """KiCad design verification, separate from fabrication evidence."""
 
     is_pcb_drc_clean: bool
     is_impedance_compliant: bool
     trace_width_50ohm_mm: float
     ground_plane_coverage_pct: float
     max_mezzanine_voltage_drop_mv: float
+    impedance_evidence_class: str = "assumed"
     metadata: dict[str, Any] = field(default_factory=dict)
+
+
+def _sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _load_verified_evidence(path: Path) -> tuple[bool, dict[str, Any]]:
+    if not path.is_file():
+        return False, {"evidence_error": f"missing evidence file: {path}"}
+    try:
+        evidence = json.loads(path.read_text(encoding="utf-8"))
+        expected_hashes = evidence["source_sha256"]
+        hash_match = all(
+            (_PROJECT / name).is_file() and _sha256(_PROJECT / name) == digest
+            for name, digest in expected_hashes.items()
+        )
+        drc = evidence["pcb_drc"]
+        clean = (
+            evidence["claim"] == "KICAD_DESIGN_ERC_DRC_VERIFIED"
+            and evidence["erc"]["violations"] == 0
+            and drc["violations"] == 0
+            and drc["unconnected_items"] == 0
+            and drc["schematic_parity_issues"] == 0
+            and drc["zones_refilled"] is True
+            and hash_match
+        )
+    except (KeyError, TypeError, ValueError, json.JSONDecodeError) as error:
+        return False, {"evidence_error": str(error)}
+    return clean, {
+        "evidence_path": str(path),
+        "kicad_version": evidence.get("kicad_version"),
+        "source_hashes_match": hash_match,
+        "claim": evidence.get("claim"),
+    }
 
 
 def verify_pager_pcb(
     stackup: PagerPCBStackupConfig | None = None,
     mezz: PagerMezzanineConnectorConfig | None = None,
     peak_crossbar_current_ma: float = 50.0,
+    evidence_path: Path | None = None,
 ) -> PagerPCBSignoffReport:
-    """Perform analytical signoff of the 4-layer pocket carrier PCB."""
-    _stack = stackup or PagerPCBStackupConfig()
-    _mezz = mezz or PagerMezzanineConnectorConfig()
+    """Verify the design from its manifest and source-hash-bound CLI evidence.
 
-    # IPC-2141 microstrip impedance approximation for single-ended 50 ohm trace
-    # Zo ≈ (87 / sqrt(Dk + 1.41)) * ln(5.98 * h / (0.8 * w + t))
-    # For h ≈ 0.2 mm dielectric height:
-    h_dielectric_mm = 0.20
-    t_copper_mm = 0.035
-    w_target_mm = 0.32  # Produces Zo ≈ 50.2 ohms on Dk=4.2 FR4
-    zo_calc = (87.0 / ((_stack.dielectric_constant_dk + 1.41) ** 0.5)) * math.log(
-        5.98 * h_dielectric_mm / (0.8 * w_target_mm + t_copper_mm)
+    The impedance calculation is retained as a sensitivity estimate only. It
+    cannot become compliant without a fabricator stackup or coupon measurement.
+    """
+
+    stack = stackup or PagerPCBStackupConfig()
+    connector = mezz or PagerMezzanineConnectorConfig()
+    manifest = json.loads(_MANIFEST.read_text(encoding="utf-8"))
+    board = manifest["board"]
+    contract_matches = (
+        stack.layer_count == board["layer_count"]
+        and stack.board_width_mm == board["width_mm"]
+        and stack.board_height_mm == board["height_mm"]
+        and stack.total_thickness_mm == board["thickness_mm"]
+        and stack.min_trace_width_mm == board["minimum_trace_width_mm"]
+        and stack.min_clearance_mm == board["minimum_clearance_mm"]
+        and stack.min_via_drill_mm == board["minimum_via_drill_mm"]
+        and connector.pin_count == manifest["mezzanine"]["pin_count"]
     )
-    is_impedance_ok = abs(zo_calc - _stack.single_ended_impedance_ohm) <= 5.0
+    cli_clean, evidence_metadata = _load_verified_evidence(evidence_path or _EVIDENCE)
 
-    # Board-to-board connector contact IR drop
-    # 4 power pins in parallel for 50 mA current
-    parallel_pins = _mezz.power_pins_allocated // 2  # 4 supply pins
-    r_effective_mohm = _mezz.contact_resistance_mohm / max(parallel_pins, 1)
-    v_drop_mv = (peak_crossbar_current_ma / 1000.0) * (r_effective_mohm / 1000.0) * 1000.0
-
-    # Solid ground plane fill coverage on Inner Layer 1
-    ground_coverage_pct = 94.5  # Solid GND with thermal relief vias
-
-    drc_clean = (
-        _stack.min_trace_width_mm >= 0.10
-        and _stack.min_clearance_mm >= 0.10
-        and _stack.min_via_drill_mm >= 0.15
-        and v_drop_mv <= 5.0
+    estimate = board["preliminary_impedance"]
+    width_mm = float(estimate["trace_width_mm"])
+    estimated_ohms = (87.0 / math.sqrt(stack.dielectric_constant_dk + 1.41)) * math.log(
+        5.98 * 0.20 / (0.8 * width_mm + 0.035)
     )
+    parallel_pins = max(connector.power_pins_allocated // 2, 1)
+    drop_mv = (peak_crossbar_current_ma / 1000.0) * (
+        connector.contact_resistance_mohm / parallel_pins / 1000.0
+    ) * 1000.0
+    nominal_plane_coverage = (69.5 * 51.5) / (70.0 * 52.0) * 100.0
 
     return PagerPCBSignoffReport(
-        is_pcb_drc_clean=drc_clean,
-        is_impedance_compliant=is_impedance_ok,
-        trace_width_50ohm_mm=round(w_target_mm, 3),
-        ground_plane_coverage_pct=round(ground_coverage_pct, 1),
-        max_mezzanine_voltage_drop_mv=round(v_drop_mv, 3),
+        is_pcb_drc_clean=bool(cli_clean and contract_matches),
+        is_impedance_compliant=False,
+        trace_width_50ohm_mm=width_mm,
+        ground_plane_coverage_pct=round(nominal_plane_coverage, 1),
+        max_mezzanine_voltage_drop_mv=round(drop_mv, 3),
+        impedance_evidence_class=str(estimate["evidence_class"]),
         metadata={
-            "board_size_mm": f"{_stack.board_width_mm:.1f} x {_stack.board_height_mm:.1f}",
-            "stackup": f"{_stack.layer_count}-Layer High-Tg FR4 ({_stack.total_thickness_mm:.1f} mm)",
-            "connector": _mezz.connector_model,
+            "board_size_mm": f"{board['width_mm']:.1f} x {board['height_mm']:.1f}",
+            "stackup": f"{board['layer_count']}-layer ({board['thickness_mm']:.1f} mm)",
+            "connector": connector.connector_model,
+            "manifest_contract_matches": contract_matches,
+            "estimated_impedance_ohm": round(estimated_ohms, 2),
+            "ground_coverage_basis": "nominal zone polygon before clearance cutouts",
+            **evidence_metadata,
         },
     )

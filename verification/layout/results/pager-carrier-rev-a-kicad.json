@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "design": "pager-carrier-rev-a",
+  "evidence_class": "spice",
+  "claim": "KICAD_DESIGN_ERC_DRC_VERIFIED",
+  "kicad_version": "10.0.6",
+  "erc": {
+    "violations": 0
+  },
+  "pcb_drc": {
+    "violations": 0,
+    "unconnected_items": 0,
+    "schematic_parity_issues": 0,
+    "zones_refilled": true
+  },
+  "source_sha256": {
+    "hardware-manifest.json": "61ffefd22c6113f6132fa5636da20e106a925ea7ada7958d991257c51a97f2e3",
+    "pager-carrier-rev-a.kicad_dru": "4d9af04d94ba1e9aa17a037060c924967bc7f08bc239d137893b81cd0f590e0e",
+    "pager-carrier-rev-a.kicad_pcb": "41e498840992eb7e968b77e78e5b78c97e8b25264e2042a9bf3d6320f938bec3",
+    "pager-carrier-rev-a.kicad_pro": "40b01ad88d94be16ab10eede0ab7ec5bb37fbb4454663702818ac3faa140cfbf",
+    "pager-carrier-rev-a.kicad_sch": "6de57abc0dae9955128b1083a9a9a93491c8ebca212b3c1adf04ad1e6e804641"
+  },
+  "limitations": [
+    "No board has been fabricated, assembled, or brought up.",
+    "The preliminary 0.32 mm impedance calculation remains assumed.",
+    "No coupon or fabricator stackup verifies controlled impedance.",
+    "No bench or hardware measurement evidence is included."
+  ]
+}

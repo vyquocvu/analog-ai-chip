@@ -52,7 +52,7 @@ All 18 evidence gates across the entire curriculum are formally verified and clo
 | **R10–R14** | Scalable Model Architecture & Multi-Tier Feasibility | 28nm Tape-Out Decision | **✓ PASSED** |
 | **R15** | Physical Layout & DRC/LVS Signoff | 28nm GDSII Die ($336\text{ mm}^2$) | **✓ PASSED** |
 | **R16** | Post-Layout PEX, Multi-Corner STA & Dynamic EM | SPEF, STA, Dynamic PDN | **✓ PASSED** |
-| **R17** | Tape-Out Signoff, FCBGA-676 & PCIe Gen5 Board | GDSII, Package & PCB | **✓ PASSED (CLOSED)** |
+| **R17** | Tape-Out Signoff, FCBGA-676 & PCIe Gen5 Board | Analytical models only; KiCad and physical evidence pending | **PARTIAL** |
 
 ---
 

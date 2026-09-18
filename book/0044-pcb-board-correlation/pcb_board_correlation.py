@@ -1,17 +1,15 @@
 r"""Chapter 0044 — PCB / Board Correlation (Gate R9, WP9.2 & WP9.3).
 
-Establishes the correlation methodology and framework for comparing SPICE
-simulation predictions against physical discrete PCB/breadboard testbench
-measurements.
+Establishes a correlation methodology using representative values. Physical
+PCB/breadboard measurements and the cited reference boards are still pending.
 
 This chapter:
   1. Defines the discrete PCB reference testbench (discrete op-amp summer &
      R-2R DAC / ADC testbed from Chapter 0005 & 0009).
-  2. Implements a deterministic correlation pipeline evaluating SPICE vs
-     Measured metrics (Gain error, Offset, Linearity INL/DNL, Bandwidth/Settling).
+  2. Implements a deterministic representative comparison pipeline.
   3. Supports replacing `spice` evidence with `measured` device profiles
      once laboratory hardware measurements are loaded.
-  4. Produces an auditable correlation report with correlation coefficient (R²),
+  4. Produces a numerical sensitivity report with correlation coefficient (R²),
      root-mean-square error (RMSE), and residual error distribution.
 """
 
@@ -70,32 +68,32 @@ def build_pcb_specifications() -> list[PCBSpecification]:
     return [
         PCBSpecification(
             board_name="Discrete Neuron Summer PCB (Rev A)",
-            schematic_ref="kicad/summer-2in-v1.kicad_sch",
+            schematic_ref="PENDING: kicad/summer-2in-v1.kicad_sch",
             supply_voltage_v=5.0,
             reference_voltage_v=2.5,
             opamp_part_number="OPA2350 (Rail-to-Rail, 38 MHz)",
             resistor_tolerance_pct=0.1,  # 0.1% precision thin-film resistors
             target_bandwidth_mhz=10.0,
-            evidence_class="derived",
+            evidence_class="assumed",
             description="2-input differential summing amplifier board with buffered VREF",
         ),
         PCBSpecification(
             board_name="4-bit R-2R DAC & SAR ADC Breakout (Rev A)",
-            schematic_ref="kicad/dac-adc-4bit-v1.kicad_sch",
+            schematic_ref="PENDING: kicad/dac-adc-4bit-v1.kicad_sch",
             supply_voltage_v=5.0,
             reference_voltage_v=2.5,
             opamp_part_number="TLV3501 (Fast Comparator, 4.5 ns)",
             resistor_tolerance_pct=0.1,
             target_bandwidth_mhz=25.0,
-            evidence_class="derived",
+            evidence_class="assumed",
             description="4-bit discrete R-2R ladder with SAR comparator and sample-and-hold",
         ),
     ]
 
 
 def evaluate_summer_correlation() -> tuple[list[TestbenchCase], dict[str, float]]:
-    """Evaluate SPICE vs Measured correlation across 6 canonical test vectors (Ch. 0005)."""
-    # 6 deterministic cases from Ch. 0005 with real measured values (with small physical offsets)
+    """Evaluate SPICE versus representative values across six test vectors."""
+    # Hand-authored offsets for sensitivity testing; not hardware observations.
     cases_data = [
         ("case_1", [0.50, 1.00], 0.5000, 0.4985),
         ("case_2", [0.20, 0.80], 0.3000, 0.3012),
@@ -157,8 +155,8 @@ def build_correlation_metrics() -> list[CorrelationMetric]:
             rel_error_pct=0.28,
             tolerance_threshold_pct=1.0,
             within_tolerance=True,
-            evidence_class="measured",
-            notes="0.28% gain error due to 0.1% resistor tolerances and op-amp open-loop gain rolloff",
+            evidence_class="assumed",
+            notes="Representative 0.28% gain error for a tolerance sensitivity study",
         ),
         CorrelationMetric(
             metric_name="Output DC Offset Voltage",
@@ -169,8 +167,8 @@ def build_correlation_metrics() -> list[CorrelationMetric]:
             rel_error_pct=0.07,  # % of 2.5V FS
             tolerance_threshold_pct=0.5,
             within_tolerance=True,
-            evidence_class="measured",
-            notes="1.8 mV input-offset voltage matches OPA2350 datasheet specs (max 2.5 mV)",
+            evidence_class="assumed",
+            notes="Representative 1.8 mV offset within the selected design envelope",
         ),
         CorrelationMetric(
             metric_name="DAC Full-Scale INL",
@@ -181,7 +179,7 @@ def build_correlation_metrics() -> list[CorrelationMetric]:
             rel_error_pct=0.27,  # % of 2.34V FS
             tolerance_threshold_pct=1.0,
             within_tolerance=True,
-            evidence_class="measured",
+            evidence_class="assumed",
             notes="0.04 LSB maximum INL with 0.1% thin-film ladder resistors",
         ),
         CorrelationMetric(
@@ -193,8 +191,8 @@ def build_correlation_metrics() -> list[CorrelationMetric]:
             rel_error_pct=4.27,
             tolerance_threshold_pct=10.0,
             within_tolerance=True,
-            evidence_class="measured",
-            notes="Measured across 4 SAR trials using high-speed logic analyzer on breadboard breakout",
+            evidence_class="assumed",
+            notes="Representative SAR latency; no logic-analyzer capture is present",
         ),
         CorrelationMetric(
             metric_name="Small-Signal -3dB Bandwidth",
@@ -205,8 +203,8 @@ def build_correlation_metrics() -> list[CorrelationMetric]:
             rel_error_pct=5.60,
             tolerance_threshold_pct=15.0,
             within_tolerance=True,
-            evidence_class="measured",
-            notes="PCB parasitic trace capacitance (~2.5 pF) slightly reduces closed-loop bandwidth",
+            evidence_class="assumed",
+            notes="Representative parasitic sensitivity; no PCB sweep is present",
         ),
     ]
 
@@ -224,11 +222,12 @@ def generate_pcb_correlation_extract() -> dict[str, Any]:
         "chapter": "0044-pcb-board-correlation",
         "title": "PCB / Board Correlation Report",
         "gate": "R9 — Implementation correlation",
-        "claim_level": "HARDWARE_CORRELATED",
+        "claim_level": "REPRESENTATIVE_ONLY",
         "provenance": {
             "testbench_source": "Chapter 0005 Discrete Neuron Summer + Chapter 0009 R-2R Breakout",
             "simulation_source": "PySpice / ngspice DC OP & Transient extraction",
-            "measurement_hardware": "Keysight DSOX1204G Oscilloscope + Rigol DP832 DC Supply",
+            "measurement_hardware": None,
+            "measurement_status": "pending raw files and instrument metadata",
         },
         "pcb_specifications": [asdict(p) for p in pcb_specs],
         "testbench_cases": [asdict(t) for t in test_cases],
@@ -241,8 +240,8 @@ def generate_pcb_correlation_extract() -> dict[str, Any]:
             "rmse_volts": stats["rmse_v"],
             "max_delta_volts": stats["max_delta_v"],
             "pearson_r_squared": stats["r_squared"],
-            "correlation_status": "EXCELLENT (R² &gt; 0.999, Max error &lt; 0.5% FS)",
-            "evidence_class": "measured",
+            "correlation_status": "NUMERICAL FIT ONLY — HARDWARE CORRELATION PENDING",
+            "evidence_class": "assumed",
         },
     }
 
@@ -285,12 +284,12 @@ text {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; 
 </style>
 <rect width="960" height="540" fill="white"/>
 <text x="480" y="35" text-anchor="middle" class="title">Chapter 0044 — PCB / Board Correlation Report</text>
-<text x="480" y="55" text-anchor="middle" class="sub">SPICE Simulation vs Discrete Hardware Breadboard/PCB Measurements (Gate R9)</text>
+<text x="480" y="55" text-anchor="middle" class="sub">SPICE vs representative assumed values; hardware evidence pending (Gate R9)</text>
 
 <!-- Top Status Banner -->
 <rect x="50" y="75" width="860" height="55" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
 <text x="480" y="100" text-anchor="middle" class="box-title" fill="#15803d">Correlation Status: {sm["correlation_status"]} (Gate R9 WP9.2 &amp; WP9.3)</text>
-<text x="480" y="118" text-anchor="middle" class="box-text">Verified against Keysight DSOX1204G + Rigol DP832 bench testbench — Evidence Class: MEASURED</text>
+<text x="480" y="118" text-anchor="middle" class="box-text">No raw captures or instrument metadata — Evidence Class: ASSUMED</text>
 
 <!-- 4 Key Stat Cards -->
 <rect x="50" y="145" width="200" height="130" rx="8" fill="#eff6ff" stroke="#3b82f6"/>
@@ -320,12 +319,12 @@ text {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; 
 <!-- Bottom Summary Box -->
 <rect x="50" y="295" width="860" height="215" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
 <text x="70" y="325" class="box-title">Key Correlation Conclusions</text>
-<text x="70" y="350" class="box-text">★ SPICE closed-loop transfer curves correlate with measured PCB outputs to within 0.08% RMS error.</text>
+<text x="70" y="350" class="box-text">★ Representative values fit SPICE outputs numerically; this is not hardware correlation.</text>
 <text x="70" y="375" class="box-text">★ Discrete component mismatches (0.1% thin-film resistors) cause a predictable 0.28% gain shift, easily calibrated.</text>
 <text x="70" y="400" class="box-text">★ Op-amp DC input offset voltage (+1.8 mV) is bounded within OPA2350 limits (&lt; 2.5 mV max).</text>
-<text x="70" y="425" class="box-text">★ Measured ADC conversion latency (78.2 ns) is within 4.3% of the 75 ns SPICE simulation model.</text>
-<text x="70" y="450" class="box-text">★ Proves that SPICE circuit evidence is representative of physical hardware behavior for Gate R9.</text>
-<text x="70" y="485" class="formula" fill="#15803d">Evidence upgrade: Gate R9 enables promotion of simulation parameters to MEASURED profile status.</text>
+<text x="70" y="425" class="box-text">★ Assumed ADC latency is 78.2 ns versus the 75 ns SPICE design point.</text>
+<text x="70" y="450" class="box-text">★ Fabricated boards and imported captures are required before Gate R9 can close.</text>
+<text x="70" y="485" class="formula" fill="#b45309">No evidence promotion: representative values remain ASSUMED.</text>
 </svg>
 """
 
@@ -355,7 +354,7 @@ text {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; 
 .box-text {{ font-size: 11px; fill: #334155; }}
 </style>
 <rect width="960" height="540" fill="white"/>
-<text x="480" y="35" text-anchor="middle" class="title">SPICE vs Measured Voltage Output Comparison</text>
+<text x="480" y="35" text-anchor="middle" class="title">SPICE vs Representative Voltage Output Comparison</text>
 <text x="480" y="55" text-anchor="middle" class="sub">6 Canonical Test Vectors from Chapter 0005 Discrete Summer Circuit</text>
 
 <rect x="60" y="80" width="840" height="430" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
@@ -363,7 +362,7 @@ text {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; 
 <text x="130" y="122" class="box-title" fill="white">Test Vector</text>
 <text x="260" y="122" class="box-title" fill="white">Input Voltages</text>
 <text x="450" y="122" class="box-title" fill="white">SPICE Vout</text>
-<text x="600" y="122" class="box-title" fill="white">Measured Vout</text>
+<text x="600" y="122" class="box-title" fill="white">Representative Vout</text>
 <text x="730" y="122" class="box-title" fill="white">Difference</text>
 <text x="830" y="122" class="box-title" fill="white">Status</text>
 {rows}
@@ -404,7 +403,7 @@ text {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; 
 .box-text {{ font-size: 11px; fill: #334155; }}
 </style>
 <rect width="960" height="540" fill="white"/>
-<text x="480" y="35" text-anchor="middle" class="title">Measurement Residual Distribution (V_meas − V_SPICE)</text>
+<text x="480" y="35" text-anchor="middle" class="title">Representative Residual Distribution (V_repr − V_SPICE)</text>
 <text x="480" y="55" text-anchor="middle" class="sub">Tight error bounds confirm Gaussian noise + small deterministic resistor mismatch</text>
 
 <rect x="60" y="80" width="840" height="430" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
@@ -427,7 +426,7 @@ def render_metrics_svg(extract: dict[str, Any]) -> str:
         rows += f"""
 <rect x="80" y="{y}" width="800" height="60" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
 <text x="100" y="{y+22}" class="box-title" fill="#1e40af">{m["metric_name"]}</text>
-<text x="100" y="{y+42}" class="box-text">SPICE: {m["spice_value"]} {m["unit"]} | Measured: {m["measured_value"]} {m["unit"]} | Δ = {m["abs_delta"]} ({m["rel_error_pct"]}%)</text>
+<text x="100" y="{y+42}" class="box-text">SPICE: {m["spice_value"]} {m["unit"]} | Representative: {m["measured_value"]} {m["unit"]} | Δ = {m["abs_delta"]} ({m["rel_error_pct"]}%)</text>
 <text x="750" y="{y+25}" class="box-title" fill="#15803d">✓ PASS</text>
 <text x="750" y="{y+45}" class="box-text">Tol: &lt; {m["tolerance_threshold_pct"]}%</text>
 """
@@ -443,11 +442,11 @@ text {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; 
 </style>
 <rect width="960" height="540" fill="white"/>
 <text x="480" y="35" text-anchor="middle" class="title">PCB vs SPICE Correlation Metrics &amp; Tolerances</text>
-<text x="480" y="55" text-anchor="middle" class="sub">Hardware Parameter Validation across Gain, Offset, Linearity, Latency, and Bandwidth</text>
+<text x="480" y="55" text-anchor="middle" class="sub">Assumed sensitivity values across gain, offset, linearity, latency, and bandwidth</text>
 
 <rect x="60" y="80" width="840" height="440" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
 {rows}
-<text x="480" y="505" text-anchor="middle" class="box-title" fill="#15803d">★ All hardware performance metrics pass strict physical correlation tolerance thresholds.</text>
+<text x="480" y="505" text-anchor="middle" class="box-title" fill="#b45309">★ Numerical thresholds pass; physical correlation remains pending.</text>
 </svg>
 """
 

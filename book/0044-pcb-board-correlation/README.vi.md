@@ -13,7 +13,7 @@ Chương này chuẩn hóa **phương pháp đối chiếu giữa phần cứng 
 - **Hệ Số Tương Quan Pearson**: $R^2 = \mathbf{0.999683}$ (vượt ngưỡng $>0.999$).
 - **Sai Số Hiệu Dụng Điện Áp (RMSE)**: $\mathbf{1.58\text{ mV}}$ ($<0.08\%$ toàn dải $2.5\text{ V}$).
 - **Sai Số Cực Đại**: $\mathbf{2.20\text{ mV}}$ (thấp hơn nhiều so với ngân sách $10\text{ mV}$).
-- **Nâng Cấp Bằng Chứng**: Chứng minh rằng mô hình SPICE đại diện trung thực cho hành vi phần cứng thực, cho phép thăng hạng các tham số mô phỏng lên trạng thái `measured` cho Gate R9.
+- **Ranh giới bằng chứng**: Không được nâng cấp lên `measured` cho đến khi có dữ liệu đo thô và metadata thiết bị.
 
 ---
 
