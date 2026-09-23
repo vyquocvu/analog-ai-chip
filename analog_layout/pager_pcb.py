@@ -72,9 +72,22 @@ def _load_verified_evidence(path: Path) -> tuple[bool, dict[str, Any]]:
     try:
         evidence = json.loads(path.read_text(encoding="utf-8"))
         expected_hashes = evidence["source_sha256"]
-        hash_match = all(
-            (_PROJECT / name).is_file() and _sha256(_PROJECT / name) == digest
-            for name, digest in expected_hashes.items()
+        required_sources = {
+            source.relative_to(_PROJECT).as_posix()
+            for source in _PROJECT.rglob("*")
+            if source.is_file() and (
+                source.suffix in {".kicad_sch", ".kicad_pcb", ".kicad_pro", ".kicad_dru", ".kicad_sym", ".kicad_mod"}
+                or source.name in {"hardware-manifest.json", "fp-lib-table", "sym-lib-table"}
+            )
+        }
+        hash_match = (
+            isinstance(expected_hashes, dict)
+            and bool(required_sources)
+            and set(expected_hashes) == required_sources
+            and all(
+                _sha256(_PROJECT / name) == digest
+                for name, digest in expected_hashes.items()
+            )
         )
         drc = evidence["pcb_drc"]
         clean = (

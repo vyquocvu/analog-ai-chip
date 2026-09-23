@@ -60,6 +60,8 @@ def validate_bom(path: Path) -> None:
             item = expected[ref]
             if not item["mpn"] or not item["footprint"]:
                 raise ValueError(f"manifest BOM metadata incomplete for {ref}")
+            if row.get("Footprint") != item["footprint"]:
+                raise ValueError(f"exported footprint differs for {ref}")
             if row.get("MPN") != item["mpn"] or row.get("Manufacturer") != item["manufacturer"]:
                 raise ValueError(f"exported manufacturer metadata differs for {ref}")
         if row.get("DNP", "").strip().lower() in {"1", "true", "yes"}:

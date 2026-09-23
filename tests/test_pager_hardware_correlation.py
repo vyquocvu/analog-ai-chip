@@ -47,7 +47,7 @@ def test_pager_correlation_extract_matches_committed() -> None:
     committed = json.loads(mod.RESULT_PATH.read_text(encoding="utf-8"))
     assert payload == committed
     assert payload["status"] == "PARTIAL"
-    assert payload["claim_level"] == "KICAD_DESIGN_ERC_DRC_VERIFIED"
+    assert payload["claim_level"] == "INCOMPLETE_CARRIER_DESIGN"
     assert payload["gate"] == "R18"
     assert payload["work_package"] == "WP18.3"
 
@@ -60,7 +60,7 @@ def test_carrier_pcb_stackup_and_drc() -> None:
 
     assert stackup.board_width_mm <= 70.0
     assert stackup.board_height_mm <= 52.0
-    assert report.is_pcb_drc_clean is True
+    assert report.is_pcb_drc_clean is False
     assert report.is_impedance_compliant is False
     assert report.impedance_evidence_class == "assumed"
     assert report.ground_plane_coverage_pct >= 90.0

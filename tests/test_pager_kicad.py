@@ -2,10 +2,14 @@
 
 from __future__ import annotations
 
+import csv
+import hashlib
 import importlib.util
 import json
 import re
 from pathlib import Path
+
+import pytest
 
 from analog_layout.pager_pcb import verify_pager_pcb
 
@@ -90,6 +94,58 @@ def test_generated_primary_sources_are_deterministic() -> None:
 
 def test_cli_evidence_is_hash_bound_and_fails_closed(tmp_path: Path) -> None:
     report = verify_pager_pcb()
-    assert report.is_pcb_drc_clean is True
-    assert report.metadata["source_hashes_match"] is True
+    assert report.is_pcb_drc_clean is False
+    assert report.metadata["source_hashes_match"] is False
     assert verify_pager_pcb(evidence_path=tmp_path / "missing.json").is_pcb_drc_clean is False
+
+
+def test_complete_source_inventory_binds_subsheets_and_libraries(tmp_path: Path) -> None:
+    evidence = json.loads((REPO / "verification/layout/results/pager-carrier-rev-a-kicad.json").read_text())
+    sources = [path for path in PROJECT.rglob("*") if path.is_file() and (
+        path.suffix in {".kicad_sch", ".kicad_pcb", ".kicad_pro", ".kicad_dru", ".kicad_sym", ".kicad_mod"}
+        or path.name in {"hardware-manifest.json", "fp-lib-table", "sym-lib-table"}
+    )]
+    evidence["source_sha256"] = {
+        path.relative_to(PROJECT).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
+        for path in sources
+    }
+    path = tmp_path / "complete.json"
+    path.write_text(json.dumps(evidence))
+    assert verify_pager_pcb(evidence_path=path).is_pcb_drc_clean is True
+    del evidence["source_sha256"]["power.kicad_sch"]
+    path.write_text(json.dumps(evidence))
+    assert verify_pager_pcb(evidence_path=path).is_pcb_drc_clean is False
+
+
+@pytest.mark.parametrize("hashes", [{}, {"hardware-manifest.json": "0" * 64}, [], None])
+def test_evidence_rejects_incomplete_source_hashes(tmp_path: Path, hashes) -> None:
+    evidence = json.loads((REPO / "verification/layout/results/pager-carrier-rev-a-kicad.json").read_text())
+    evidence["source_sha256"] = hashes
+    path = tmp_path / "invalid.json"
+    path.write_text(json.dumps(evidence))
+    assert verify_pager_pcb(evidence_path=path).is_pcb_drc_clean is False
+
+
+@pytest.mark.parametrize("footprint", [None, "", "wrong:Footprint"])
+def test_exported_bom_footprints_must_match_manifest(tmp_path: Path, footprint) -> None:
+    spec = importlib.util.spec_from_file_location("pager_build", REPO / "scripts/build_pager_kicad.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    path = tmp_path / "bom.csv"
+    with path.open("w", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=["Reference", "Value", "Footprint", "Manufacturer", "MPN", "DNP"])
+        writer.writeheader()
+        for item in _manifest()["bom"]:
+            writer.writerow({
+                "Reference": item["reference"],
+                "Value": item["value"],
+                "Footprint": item["footprint"] if footprint is None else footprint,
+                "Manufacturer": item["manufacturer"],
+                "MPN": item["mpn"],
+                "DNP": "",
+            })
+    if footprint is None:
+        module.validate_bom(path)
+    else:
+        with pytest.raises(ValueError, match="footprint"):
+            module.validate_bom(path)

@@ -6,11 +6,17 @@ analog accelerator are external assemblies.
 
 ## Evidence boundary
 
-The board is a design artifact. ERC/DRC and manufacturing-export checks support
-the status `KICAD_DESIGN_ERC_DRC_VERIFIED`; they do not prove fabrication,
-controlled impedance, electrical performance, or bench correlation. The
-preliminary 0.32 mm / 50 ohm routing estimate remains `assumed` until a board
-fabricator supplies a stackup or a coupon is measured.
+Status: `INCOMPLETE_CARRIER_DESIGN`. Do not fabricate this placeholder as a
+working product. Subsystem sheets contain text only, most components are
+unconnected, and generated footprints do not implement the declared packages.
+The BOM lacks the PMIC inductor and capacitors. Clean ERC/DRC on passive,
+no-connect symbols does not establish electrical completeness.
+
+The historical evidence record omits subsheets and local libraries and is now
+rejected by the source-inventory check. Manufacturing export is also blocked by
+BOM footprint mismatches. The preliminary impedance estimate remains `assumed`.
+See `SOURCE_NOTES.md` for manufacturer references; startup and pin assignments
+still require circuit implementation and verification.
 
 The authoritative electrical/mechanical contract is
 `hardware-manifest.json`. In particular, pins named `NC_RESERVED_*` must not be
@@ -23,8 +29,8 @@ interfaces.
 - `pager-carrier-rev-a.kicad_sch`: hierarchy overview.
 - `power.kicad_sch`, `host.kicad_sch`, `display.kicad_sch`,
   `input-haptics.kicad_sch`, `accelerator-mezzanine.kicad_sch`: subsystem
-  design sheets.
-- `pager-carrier-rev-a.kicad_pcb`: routed four-layer layout.
+  text-only placeholder sheets.
+- `pager-carrier-rev-a.kicad_pcb`: partially routed placeholder layout.
 - `pager-carrier-rev-a.kicad_dru`: project design rules.
 - `Pager.kicad_sym`, `Pager.pretty/`, and the library tables: project-local
   source for the custom connector symbol and land pattern. Project schematics

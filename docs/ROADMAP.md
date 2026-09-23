@@ -530,7 +530,7 @@ infeasibility follows from bounded resources and evidence-tagged assumptions.
 
 ---
 
-# R15 — Physical layout & DRC/LVS verification — PASSED
+# R15 — Physical layout & DRC/LVS verification — PARTIAL
 
 Depends on R14 + R9 + R5.
 
@@ -543,8 +543,8 @@ Depends on R14 + R9 + R5.
 ## WP15.2 — Mixed-signal SAR ADC / DAC layout & LVS
 
 - [x] Implement common-centroid binary-weighted CDAC capacitor array layout for parasitic matching.
-- [x] Perform Layout-Versus-Schematic (LVS) matching against SPICE netlists with pin/port extraction.
-- [x] Report zero topological discrepancies in LVS signoff.
+- [ ] Perform connectivity-based Layout-Versus-Schematic (LVS) matching against SPICE netlists.
+- [ ] Report zero topological discrepancies using actual extracted connectivity.
 
 ## WP15.3 — Core tile floorplanning & power grid IR drop
 
@@ -558,32 +558,38 @@ Depends on R14 + R9 + R5.
 
 ### Gate R15 exit
 
-The physical implementation of the primary tape-out target (`T0_GPT2_124M`) is
-fully synthesized and signed off with zero DRC violations, zero LVS discrepancies,
-proven IR drop margins ($\Delta V_{\text{IR}} \le 0.51\text{ mV}$), ESD clamp
-protection ($> 2\text{ kV}$ HBM), and balanced clock skew ($11.4\text{ ps}$).
+The repository provides geometric and analytical models, not physical signoff.
+The current LVS comparison does not compare device terminal connectivity and
+can accept a shorted schematic. Connectivity extraction, process-qualified
+checks, and evidence for power integrity, ESD and clock distribution remain
+pending; the earlier signed-off claim is withdrawn.
 
 ---
 
-# R16 — Post-layout parasitic extraction & static timing signoff — PASSED
+# R16 — Post-layout parasitic extraction & static timing signoff — PARTIAL
 
-Depends on R15. Closed by chapters 0063–0065.
+Depends on R15. Chapters 0063–0065 provide analytical models, not closure.
 
 ## WP16.1 — Parasitic extraction (PEX/SPEF) & crossbar settling
 
-- [x] Extract full RC parasitic SPEF netlist and re-simulate crossbar settling time in ngspice.
+- [ ] Extract full RC parasitic SPEF netlist and re-simulate crossbar settling time in ngspice.
 
 ## WP16.2 — Multi-corner PVT static timing analysis (STA)
 
-- [x] Perform multi-corner PVT STA signoff (TT/FF/SS, -40°C to 125°C) across tile and NoC clock domains.
+- [ ] Perform characterized multi-corner PVT STA signoff (TT/FF/SS, -40°C to 125°C) across tile and NoC clock domains.
 
 ## WP16.3 — Power grid resonance & electromigration (EM)
 
-- [x] Sign off dynamic power grid integrity, simultaneous switching noise (SSN), and electromigration rules.
+- [ ] Sign off dynamic power grid integrity, simultaneous switching noise (SSN), and electromigration rules with validated physical evidence.
 
 ### Gate exit criteria
 
-Post-layout SPEF extraction demonstrates that crossbar analog settling ($t_{\text{settle}} = 2.45\text{ ns}$) is within the $5.0\text{ ns}$ SAR ADC aperture ($2.04\times$ margin), multi-corner PVT static timing analysis achieves $\text{WNS} = 0.0\text{ ps}$ and $\text{TNS} = 0.0\text{ ps}$ across all NoC ($1\text{ GHz}$) and IMC ($50\text{ MHz}$) domains, and dynamic power grid integrity verifies harmonic resonance isolation ($f_{\text{res}} = 3.66\text{ GHz} \gg 1.0\text{ GHz}$), safe SSN noise ($\Delta V = 12.51\text{ mV} \le 50.0\text{ mV}$), and copper EM reliability ($\text{MTTF} = 25.5\text{ Years} \ge 10.0\text{ Years}$).
+The corrected single-pole model uses t = -tau ln(1-f). For the 16×16 example,
+99.9% settling is approximately 10.915 ns, exceeding the 5.0 ns aperture
+(margin approximately 0.458×). Its baseline and added delay remain `assumed`;
+it is not an ngspice transient simulation or process-qualified extraction.
+Actual extracted-circuit settling, characterized timing analysis, and validated
+power-grid/EM evidence are required before signoff.
 
 ---
 
@@ -612,8 +618,10 @@ All 10 points of the 28nm foundry tape-out checklist are verified and signed off
 
 # R18 — Pocket Analog AI Communicator / Pager Product Prototype — PARTIAL
 
-Depends on R17 + R9 + R5 + `docs/VISION.md`. The Rev A carrier design is
-KiCad-verified, while fabrication, bring-up, impedance, and bench evidence remain pending.
+Depends on R17 + R9 + R5 + `docs/VISION.md`. The Rev A carrier is an incomplete
+placeholder: subsystem sheets are text-only, major components are unconnected,
+and generated footprints do not match the declared packages. Electrical design,
+fabrication, bring-up, impedance, and bench evidence remain pending.
 
 Implements the dedicated offline text appliance concept: an ultra-low-power, pocket-sized communicator ("AI Pager / Beeper") pairing an ultra-low-power host microcontroller, reflective Memory LCD / E-Paper display, tactile thumb keypad, and haptic feedback with the analog crossbar neural engine.
 
@@ -634,14 +642,15 @@ Implements the dedicated offline text appliance concept: an ultra-low-power, poc
 
 ## WP18.3 — Pocket Carrier PCB & Bench Hardware Correlation
 
-- [x] Design 4-layer pocket carrier PCB schematic and layout connecting host MCU, display FPC, keypad, and 40-pin mezzanine socket for the analog crossbar ASIC / discrete evaluation board.
+- [ ] Implement electrically complete carrier schematics and manufacturer-compatible footprints, then route and verify the PCB. Existing generated sources are placeholders.
 - [ ] Import real bench voltage files with complete instrument metadata. The committed representative sweep remains `assumed` and cannot be promoted.
 
 ### Gate exit criteria
 
-Current evidence supports `KICAD_DESIGN_ERC_DRC_VERIFIED` for the Rev A carrier
-and deterministic functional protocol tests. It does not support fabricated-board,
-controlled-impedance, bench-correlation, silicon, or hardware-measured status.
+Current carrier status is `INCOMPLETE_CARRIER_DESIGN`. Deterministic functional
+protocol tests do not establish circuit completeness. Historical KiCad evidence
+omits source dependencies and is rejected by the complete-inventory validator;
+BOM footprint mismatches also block manufacturing export.
 
 ---
 

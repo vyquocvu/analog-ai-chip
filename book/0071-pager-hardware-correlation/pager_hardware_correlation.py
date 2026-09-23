@@ -48,7 +48,7 @@ def run_pager_correlation_extract() -> dict[str, Any]:
         "gate": "R18",
         "work_package": "WP18.3",
         "status": "PARTIAL",
-        "claim_level": "KICAD_DESIGN_ERC_DRC_VERIFIED",
+        "claim_level": "INCOMPLETE_CARRIER_DESIGN",
         "carrier_pcb_signoff": {
             "board_size_mm": pcb_report.metadata["board_size_mm"],
             "stackup": pcb_report.metadata["stackup"],

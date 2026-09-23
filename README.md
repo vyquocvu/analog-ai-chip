@@ -53,10 +53,10 @@ R11 memory-bounded simulator       ── PASSED    (block streaming, sampled/su
 R12 large-model architecture       ── PASSED    (residency, 2.5D multi-die, prefill/decode, KV hierarchy)
 R13 large-model validation         ── PASSED    (frozen corpus eval, error attribution, scalable recovery suite)
 R14 multi-tier feasibility         ── PASSED    (parametric ledger, Pareto sweeps, 28nm tape-out decision)
-R15 physical layout & DRC/LVS      ── PASSED    (28nm BEOL ReRAM, common-centroid CDAC, tile floorplan, full-chip 336mm²)
-R16 post-layout PEX & STA signoff  ── PASSED    (SPEF extraction, multi-corner STA, dynamic EM signoff)
+R15 physical layout & DRC/LVS      ── PARTIAL   (geometric models; connectivity LVS and physical signoff pending)
+R16 post-layout PEX & STA signoff  ── PARTIAL   (assumed analytical models; corrected settling misses aperture)
 R17 tape-out & package/PCB signoff ── PARTIAL   (analytical models; physical artifacts pending)
-R18 pocket AI communicator / pager ── PARTIAL   (KiCad design ERC/DRC verified; hardware pending)
+R18 pocket AI communicator / pager ── PARTIAL   (placeholder carrier; electrical implementation incomplete)
 ```
 
 The strongest claims and their remaining evidence gaps are tracked in
